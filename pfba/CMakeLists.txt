@@ -18,8 +18,6 @@ option(BUILD_PNES "Build pNES (nestopia)" OFF)
 
 option(UPDATE_CONFIG "Force config file updating" OFF)
 
-execute_process(COMMAND "date" "+%Y.%m.%d" OUTPUT_VARIABLE BUILD_DATE OUTPUT_STRIP_TRAILING_WHITESPACE)
-
 project(pfba)
 
 # handle m68k
@@ -433,7 +431,7 @@ if (BUILD_PSP2)
             COMMAND ${VITASDK}/bin/vita-mksfoex -s TITLE_ID="VITAFBA01" "${PROJECT_NAME}" vpk/sce_sys/param.sfo
             COMMAND cp -r ${CMAKE_SOURCE_DIR}/pfba/data/skin vpk/
             COMMAND cp -r ${CMAKE_SOURCE_DIR}/pfba/data/psp2/* vpk
-            COMMAND cd vpk && zip -r ../${PROJECT_NAME}-${BUILD_DATE}.vpk . && cd ..
+            COMMAND cd vpk && zip -r ../${PROJECT_NAME}-${PFBA_VERSION_MAJOR}.${PFBA_VERSION_MINOR}_vita.vpk . && cd ..
             )
 endif (BUILD_PSP2)
 

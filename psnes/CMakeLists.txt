@@ -18,8 +18,6 @@ option(BUILD_PNES "Build pNES (nestopia)" OFF)
 
 option(UPDATE_CONFIG "Force config file updating" OFF)
 
-execute_process(COMMAND "date" "+%Y.%m.%d" OUTPUT_VARIABLE BUILD_DATE OUTPUT_STRIP_TRAILING_WHITESPACE)
-
 project(psnes)
 
 ##############

@@ -18,13 +18,6 @@ option(BUILD_PNES "Build pNES (nestopia)" OFF)
 
 option(UPDATE_CONFIG "Force config file updating" OFF)
 
-execute_process(COMMAND "date" "+%Y.%m.%d" OUTPUT_VARIABLE BUILD_DATE OUTPUT_STRIP_TRAILING_WHITESPACE)
-
-# add libcross2d/libcross2dui library. If you want to port pfba to another platform,
-# you should (may) only need to port libcross2d library.
-#include(${CMAKE_SOURCE_DIR}/libcross2dui/libcross2d/Toolchain.cmake)
-#add_subdirectory(libcross2dui)
-
 project(pnes)
 
 ##############
