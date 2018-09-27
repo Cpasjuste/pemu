@@ -1,23 +1,6 @@
 cmake_minimum_required(VERSION 3.0)
 #set(CMAKE_VERBOSE_MAKEFILE ON)
 
-# delete cmake cache folder before changing this options
-option(BUILD_SFML "Build with SFML support (hardware rendering, fast)" OFF)
-option(BUILD_SDL1 "Build with SDL1 support (software, osmesa) support" OFF)
-option(BUILD_SDL1_GL "Build with SDL1 support (hardware rendering, fast, needs BUILD_SDL1=ON)" OFF)
-option(BUILD_SDL2 "Build with SDL2 support (software)" OFF)
-option(BUILD_SDL2_GL "Build with SDL2 support (hardware rendering, fast, needs BUILD_SDL2=ON)" OFF)
-option(BUILD_PSP2 "Build with PSP2 support (hardware rendering, fast)" OFF)
-option(BUILD_PS3 "Build with PS3 support (hardware rendering, fast)" OFF)
-option(BUILD_3DS "Build with 3DS support" OFF)
-option(BUILD_NX "Build with NX (SWITCH) support" OFF)
-
-option(BUILD_PFBA "Build pFBA (fba)" OFF)
-option(BUILD_PSNES "Build pSNES (snes9x)" OFF)
-option(BUILD_PNES "Build pNES (nestopia)" OFF)
-
-option(UPDATE_CONFIG "Force config file updating" OFF)
-
 project(pnes)
 
 ##############

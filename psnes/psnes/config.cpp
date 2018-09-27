@@ -22,7 +22,7 @@ PSNESConfig::PSNESConfig(Renderer *renderer, const std::string &home, int versio
         hardware_names.emplace_back(i.name);
     }
 
-    std::vector<C2DUIOption> *ui_options = getOptions();
+    std::vector<C2DUIOption> *ui_options = get();
 
     // main/gui config
     ui_options->emplace_back(

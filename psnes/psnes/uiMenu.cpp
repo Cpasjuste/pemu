@@ -15,7 +15,7 @@ PSNESGuiMenu::PSNESGuiMenu(c2dui::C2DUIGuiMain *ui) : C2DUIGuiMenu(ui) {
 
 bool PSNESGuiMenu::isOptionHidden(c2dui::C2DUIOption *option) {
 
-    if (!isRom() && option->index == C2DUIOption::Index::ROM_HIGH_RES) {
+    if (!isRom() && option->id == C2DUIOption::Index::ROM_HIGH_RES) {
         return true;
     }
 
