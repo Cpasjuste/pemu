@@ -25,6 +25,7 @@
 #include "uiMenu.h"
 #include "config.h"
 #include "romlist.h"
+#include "uiStateMenu.h"
 
 using namespace c2d;
 using namespace c2dui;
@@ -58,12 +59,12 @@ Io *io;
 PFBAGui *ui;
 PFBAGuiMenu *uiMenu;
 PFBAGuiEmu *uiEmu;
+PFBAUIStateMenu *uiState;
 PFBAConfig *config;
 PFBARomList *romList;
 
 Skin *skin;
 UIRomList *uiRomList;
-UIStateMenu *uiState;
 
 int main(int argc, char **argv) {
 
@@ -135,7 +136,7 @@ int main(int argc, char **argv) {
     uiRomList = new UIRomList(ui, romList, renderer->getSize());
     uiMenu = new PFBAGuiMenu(ui);
     uiEmu = new PFBAGuiEmu(ui);
-    uiState = new UIStateMenu(ui);
+    uiState = new PFBAUIStateMenu(ui);
     ui->init(uiRomList, uiMenu, uiEmu, uiState);
     ui->run();
 

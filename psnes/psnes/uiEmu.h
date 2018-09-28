@@ -7,11 +7,11 @@
 
 #include <string>
 
-class PSNESGuiEmu : public c2dui::UIEmu {
+class PSNESUIEmu : public c2dui::UIEmu {
 
 public:
 
-    PSNESGuiEmu(c2dui::UIMain *ui);
+    PSNESUIEmu(c2dui::UIMain *ui);
 
     int run(c2dui::RomList::Rom *rom);
 

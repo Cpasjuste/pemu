@@ -115,13 +115,13 @@ std::string getButtonId(int player, const std::string &name) {
     return "Joypad" + std::to_string(player) + " " + name;
 }
 
-PSNESGuiEmu::PSNESGuiEmu(UIMain *ui) : UIEmu(ui) {
+PSNESUIEmu::PSNESUIEmu(UIMain *ui) : UIEmu(ui) {
 
-    printf("PSNESGuiEmu()\n");
+    printf("PSNESUIEmu()\n");
     _ui = ui;
 }
 
-int PSNESGuiEmu::run(RomList::Rom *rom) {
+int PSNESUIEmu::run(RomList::Rom *rom) {
 
     getUi()->getUiProgressBox()->setTitle(rom->name);
     getUi()->getUiProgressBox()->setMessage("Please wait...");
@@ -314,7 +314,7 @@ int PSNESGuiEmu::run(RomList::Rom *rom) {
     return UIEmu::run(rom);
 }
 
-void PSNESGuiEmu::stop() {
+void PSNESUIEmu::stop() {
 
     S9xSetSoundMute(TRUE);
     Settings.StopEmulation = TRUE;
@@ -344,7 +344,7 @@ void PSNESGuiEmu::stop() {
     UIEmu::stop();
 }
 
-int PSNESGuiEmu::update() {
+int PSNESUIEmu::update() {
 
     // fps
     int showFps = getUi()->getConfig()->getValue(Option::Index::ROM_SHOW_FPS, true);

@@ -20,6 +20,7 @@
 #include "c2dui.h"
 #include "uiEmu.h"
 #include "uiMenu.h"
+#include "uiStateMenu.h"
 #include "pnes_config.h"
 #include "romlist.h"
 
@@ -60,11 +61,11 @@ PNESGuiMenu *uiMenu;
 PNESGuiEmu *uiEmu;
 PNESConfig *config;
 PNESRomList *romList;
+PNESUIStateMenu *uiState;
 
 UIMain *ui;
 Skin *skin;
 UIRomList *uiRomList;
-UIStateMenu *uiState;
 
 int main(int argc, char **argv) {
 
@@ -135,7 +136,7 @@ int main(int argc, char **argv) {
     uiRomList = new UIRomList(ui, romList, renderer->getSize());
     uiMenu = new PNESGuiMenu(ui);
     uiEmu = new PNESGuiEmu(ui);
-    uiState = new UIStateMenu(ui);
+    uiState = new PNESUIStateMenu(ui);
     ui->init(uiRomList, uiMenu, uiEmu, uiState);
     ui->run();
 

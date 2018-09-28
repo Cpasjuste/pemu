@@ -22,6 +22,7 @@
 #include "c2dui.h"
 #include "uiEmu.h"
 #include "uiMenu.h"
+#include "uiStateMenu.h"
 #include "config.h"
 #include "romlist.h"
 
@@ -57,15 +58,15 @@ Renderer *renderer;
 Input *inp;
 Io *io;
 
-PSNESGuiMenu *uiMenu;
-PSNESGuiEmu *uiEmu;
+PSNESUIMenu *uiMenu;
+PSNESUIEmu *uiEmu;
 PSNESConfig *config;
 PSNESRomList *romList;
+PSNESUIStateMenu *uiState;
 
 UIMain *ui;
 Skin *skin;
 UIRomList *uiRomList;
-UIStateMenu *uiState;
 
 int main(int argc, char **argv) {
 
@@ -152,11 +153,11 @@ int main(int argc, char **argv) {
     // rom list ui
     uiRomList = new UIRomList(ui, romList, renderer->getSize());
     // menu ui
-    uiMenu = new PSNESGuiMenu(ui);
+    uiMenu = new PSNESUIMenu(ui);
     // in game emu ui
-    uiEmu = new PSNESGuiEmu(ui);
+    uiEmu = new PSNESUIEmu(ui);
     // states menu ui
-    uiState = new UIStateMenu(ui);
+    uiState = new PSNESUIStateMenu(ui);
     // run that crap
     ui->init(uiRomList, uiMenu, uiEmu, uiState);
     ui->run();
