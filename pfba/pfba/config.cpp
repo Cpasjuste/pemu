@@ -74,6 +74,12 @@ PFBAConfig::PFBAConfig(const std::string &home, int version)
 
     hide(Option::GUI_USE_DATABASE);
 
+    // add "WORKING" to "SHOW_ALL" option
+    std::vector<std::string> *values = get(Option::Index::GUI_SHOW_ALL)->getValues();
+    values->insert(values->begin() + 1, "WORKING");
+
+    add(Option::Index::GUI_SHOW_CLONES, "SHOW_HARDWARE",
+        hardware_names, 0, Option::Index::GUI_SHOW_HARDWARE);
 #ifdef __PSP2__
     add(Option::Index::ROM_SHADER, "ROTATION",
         {"OFF", "ON", "FLIP", "CAB MODE"}, 0, Option::Index::ROM_ROTATION);
