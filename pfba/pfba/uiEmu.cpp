@@ -6,6 +6,7 @@
 
 #include "c2dui.h"
 #include "uiEmu.h"
+#include "video.h"
 
 using namespace c2d;
 using namespace c2dui;
@@ -88,7 +89,8 @@ int PFBAGuiEmu::run(RomList::Rom *rom) {
     nBurnBpp = 2;
     BurnHighCol = myHighCol16;
     BurnRecalcPal();
-    addVideo(getUi(), (void **) &pBurnDraw, &nBurnPitch, Vector2f(w, h));
+    PFBAVideo *v = new PFBAVideo(getUi(), (void **) &pBurnDraw, &nBurnPitch, Vector2f(w, h));
+    addVideo(v);
     //////////
     // VIDEO
     //////////

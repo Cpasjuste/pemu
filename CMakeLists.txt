@@ -12,10 +12,6 @@ set(BUILD_PS3 OFF CACHE BOOL "Build with PS3 support")
 set(BUILD_3DS OFF CACHE BOOL "Build with 3DS support")
 set(BUILD_NX OFF CACHE BOOL "Build with NX (SWITCH) support")
 
-set(BUILD_PFBA OFF CACHE BOOL "Build pFBA (fba)")
-set(BUILD_PSNES OFF CACHE BOOL "Build pSNES (snes9x)")
-set(BUILD_PNES ON CACHE BOOL "Build pNES (nestopia)")
-
 set(UPDATE_CONFIG OFF CACHE BOOL "Force config file updating")
 
 if (BUILD_SDL2)

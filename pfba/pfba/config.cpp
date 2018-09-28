@@ -17,6 +17,8 @@ using namespace c2dui;
 PFBAConfig::PFBAConfig(const std::string &home, int version)
         : Config(home, version) {
 
+    printf("PFBAConfig(%s, v%i)\n", home.c_str(), version);
+
     // add fba default roms paths
     getRomPaths()->emplace_back(home + "coleco/");
     getRomPaths()->emplace_back(home + "gamegear/");
@@ -27,7 +29,7 @@ PFBAConfig::PFBAConfig(const std::string &home, int version)
     getRomPaths()->emplace_back(home + "sgx/");
     getRomPaths()->emplace_back(home + "sms/");
     getRomPaths()->emplace_back(home + "tg16/");
-    for (size_t i = getRomPaths()->size(); i < C2DUI_ROMS_PATHS_MAX; i++) {
+    for (size_t i = getRomPaths()->size(); i < 20; i++) {
         getRomPaths()->emplace_back(std::string());
     }
 
@@ -67,13 +69,13 @@ PFBAConfig::PFBAConfig(const std::string &home, int version)
     }
 
     ////////////////////////////////////////////////////////////
-    /// main/gui config
+    /// pfba custom config
     ////////////////////////////////////////////////////////////
 
     hide(Option::GUI_USE_DATABASE);
 
 #ifdef __PSP2__
-    add(Option::Index::ROM_SHOW_FPS, "ROTATION",
+    add(Option::Index::ROM_SHADER, "ROTATION",
         {"OFF", "ON", "FLIP", "CAB MODE"}, 0, Option::Index::ROM_ROTATION);
 #else
     add(Option::Index::ROM_SHADER, "ROTATION",

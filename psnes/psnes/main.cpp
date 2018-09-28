@@ -32,10 +32,9 @@ using namespace c2d;
 using namespace c2dui;
 
 #ifdef __PSP2__
-
 #include <psp2/power.h>
 #include <psp2/io/dirent.h>
-
+#define C2DUI_HOME_PATH "ux0:/data/psnes/"
 #define mkdir(x, y) sceIoMkdir(x, 0777)
 int _newlib_heap_size_user = 192 * 1024 * 1024;
 #define SCR_W   960
@@ -50,6 +49,7 @@ int _newlib_heap_size_user = 192 * 1024 * 1024;
 #define SCR_W   1280
 #define SCR_H   720
 #else
+#define C2DUI_HOME_PATH "./"
 #define SCR_W   1280
 #define SCR_H   720
 #endif
