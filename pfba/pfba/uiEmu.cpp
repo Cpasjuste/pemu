@@ -34,21 +34,18 @@ int PFBAGuiEmu::run(RomList::Rom *rom) {
     ///////////
     // AUDIO
     //////////
-    int use_audio = getUi()->getConfig()->getValue(Option::Index::ROM_AUDIO, true);
-    if (use_audio) {
-        printf("Init audio device...");
-        addAudio(48000);
-        if (getAudio()->isAvailable()) {
-            // disable interpolation as it produce "cracking" sound
-            // on some games (cps1 (SF2), cave ...)
-            nInterpolation = 1;
-            nFMInterpolation = 0;
-            nBurnSoundRate = getAudio()->getSampleRate();
-            nBurnSoundLen = getAudio()->getBufferLen();
-            pBurnSoundOut = getAudio()->getBuffer();
-        }
-        printf("done\n");
+    printf("Init audio device...");
+    addAudio(48000);
+    if (getAudio()->isAvailable()) {
+        // disable interpolation as it produce "cracking" sound
+        // on some games (cps1 (SF2), cave ...)
+        nInterpolation = 1;
+        nFMInterpolation = 0;
+        nBurnSoundRate = getAudio()->getSampleRate();
+        nBurnSoundLen = getAudio()->getBufferLen();
+        pBurnSoundOut = getAudio()->getBuffer();
     }
+    printf("done\n");
     ///////////
     // AUDIO
     //////////
