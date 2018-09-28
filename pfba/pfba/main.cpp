@@ -38,12 +38,15 @@ int _newlib_heap_size_user = 192 * 1024 * 1024;
 #define SCR_W   960
 #define SCR_H   544
 #elif __PS3__
+#define C2DUI_HOME_PATH "./"
 #define SCR_W   1280
 #define SCR_H   720
 #elif __3DS__
+#define C2DUI_HOME_PATH "./"
 #define SCR_W   400
 #define SCR_H   240
 #elif __SWITCH__
+#define C2DUI_HOME_PATH "./"
 #define SCR_W   1280
 #define SCR_H   720
 #else
