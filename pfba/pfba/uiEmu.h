@@ -7,13 +7,13 @@
 
 #include <string>
 
-class PFBAGuiEmu : public c2dui::C2DUIGuiEmu {
+class PFBAGuiEmu : public c2dui::UIEmu {
 
 public:
 
-    PFBAGuiEmu(c2dui::C2DUIGuiMain *ui);
+    PFBAGuiEmu(c2dui::UIMain *ui);
 
-    int run(c2dui::C2DUIRomList::Rom *rom);
+    int run(c2dui::RomList::Rom *rom);
 
     void stop();
 

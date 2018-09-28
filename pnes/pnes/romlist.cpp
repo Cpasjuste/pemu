@@ -8,11 +8,11 @@
 using namespace c2d;
 using namespace c2dui;
 
-static bool sortByName(const C2DUIRomList::Rom *ra, const C2DUIRomList::Rom *rb) {
+static bool sortByName(const RomList::Rom *ra, const RomList::Rom *rb) {
     return strcasecmp(ra->name, rb->name) <= 0;
 }
 
-PNESRomList::PNESRomList(C2DUIGuiMain *ui, const std::string &emuVersion) : C2DUIRomList(ui, emuVersion) {
+PNESRomList::PNESRomList(UIMain *ui, const std::string &emuVersion) : RomList(ui, emuVersion) {
     printf("PSNESRomList::PSNESRomList()\n");
 }
 
@@ -20,7 +20,7 @@ void PNESRomList::build() {
 
     printf("PSNESRomList::build()\n");
 
-    bool use_icons = ui->getConfig()->getValue(C2DUIOption::Index::GUI_SHOW_ICONS) == 1;
+    bool use_icons = ui->getConfig()->getValue(Option::Index::GUI_SHOW_ICONS) == 1;
 
     for (auto &fileList : files) {
 
@@ -65,7 +65,7 @@ void PNESRomList::build() {
     std::sort(list.begin(), list.end(), sortByName);
 
     // cleanup
-    C2DUIRomList::build();
+    RomList::build();
 }
 
 PNESRomList::~PNESRomList() {

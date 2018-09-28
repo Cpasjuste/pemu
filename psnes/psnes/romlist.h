@@ -7,11 +7,11 @@
 
 #include <string>
 
-class PSNESRomList : public c2dui::C2DUIRomList {
+class PSNESRomList : public c2dui::RomList {
 
 public:
 
-    PSNESRomList(c2dui::C2DUIGuiMain *ui, const std::string &emuVersion);
+    PSNESRomList(c2dui::UIMain *ui, const std::string &emuVersion);
 
     ~PSNESRomList();
 

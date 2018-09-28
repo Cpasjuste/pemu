@@ -31,22 +31,16 @@ add_subdirectory(libcross2dui)
 project(pemu)
 
 # pnes
-if (BUILD_PNES)
-    set(PNES_VERSION_MAJOR 3)
-    set(PNES_VERSION_MINOR 0)
-    add_subdirectory(pnes)
-endif (BUILD_PNES)
+set(PNES_VERSION_MAJOR 3)
+set(PNES_VERSION_MINOR 0)
+add_subdirectory(pnes)
 
 # psnes
-if (BUILD_PNES)
-    set(PSNES_VERSION_MAJOR 3)
-    set(PSNES_VERSION_MINOR 0)
-    add_subdirectory(psnes)
-endif (BUILD_PNES)
+set(PSNES_VERSION_MAJOR 3)
+set(PSNES_VERSION_MINOR 0)
+add_subdirectory(psnes)
 
 # pfba
-if (BUILD_PNES)
-    set(PFBA_VERSION_MAJOR 3)
-    set(PFBA_VERSION_MINOR 0)
-    add_subdirectory(pfba)
-endif (BUILD_PNES)
+set(PFBA_VERSION_MAJOR 3)
+set(PFBA_VERSION_MINOR 0)
+add_subdirectory(pfba)

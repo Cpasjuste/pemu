@@ -8,12 +8,12 @@
 using namespace c2d;
 using namespace c2dui;
 
-PNESGuiMenu::PNESGuiMenu(c2dui::C2DUIGuiMain *ui) : C2DUIGuiMenu(ui) {
+PNESGuiMenu::PNESGuiMenu(c2dui::UIMain *ui) : UIMenu(ui) {
 
     printf("PNESGuiMenu()\n");
 }
 
-bool PNESGuiMenu::isOptionHidden(c2dui::C2DUIOption *option) {
+bool PNESGuiMenu::isOptionHidden(c2dui::Option *option) {
 
-    return C2DUIGuiMenu::isOptionHidden(option);
+    return UIMenu::isOptionHidden(option);
 }

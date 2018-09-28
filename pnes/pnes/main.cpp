@@ -61,10 +61,10 @@ PNESGuiEmu *uiEmu;
 PNESConfig *config;
 PNESRomList *romList;
 
-C2DUIGuiMain *ui;
-C2DUISkin *skin;
-C2DUIGuiRomList *uiRomList;
-C2DUIGuiState *uiState;
+UIMain *ui;
+Skin *skin;
+UIRomList *uiRomList;
+UIStateMenu *uiState;
 
 int main(int argc, char **argv) {
 
@@ -80,7 +80,7 @@ int main(int argc, char **argv) {
 
     // skin
     // buttons used for ui config menu
-    std::vector<C2DUISkin::Button> buttons;
+    std::vector<Skin::Button> buttons;
 #ifdef __PSP2__
     // set max cpu speed
     scePowerSetArmClockFrequency(444);
@@ -122,20 +122,20 @@ int main(int argc, char **argv) {
 #endif
 
 #ifdef __PSP2__
-    skin = new C2DUISkin("app0:/", buttons);
+    skin = new Skin("app0:/", buttons);
 #else
-    skin = new C2DUISkin(C2DUI_HOME_PATH, buttons);
+    skin = new Skin(C2DUI_HOME_PATH, buttons);
 #endif
 
     // gui
-    ui = new C2DUIGuiMain(renderer, io, inp, config, skin);
+    ui = new UIMain(renderer, io, inp, config, skin);
     std::string nestopia_version = "Nestopia 1.0";
     romList = new PNESRomList(ui, nestopia_version);
     romList->build();
-    uiRomList = new C2DUIGuiRomList(ui, romList, renderer->getSize());
+    uiRomList = new UIRomList(ui, romList, renderer->getSize());
     uiMenu = new PNESGuiMenu(ui);
     uiEmu = new PNESGuiEmu(ui);
-    uiState = new C2DUIGuiState(ui);
+    uiState = new UIStateMenu(ui);
     ui->init(uiRomList, uiMenu, uiEmu, uiState);
     ui->run();
 

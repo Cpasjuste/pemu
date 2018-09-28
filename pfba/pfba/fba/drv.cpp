@@ -6,7 +6,7 @@
 using namespace c2d;
 using namespace c2dui;
 
-extern C2DUIGuiMain *ui;
+extern UIMain *ui;
 extern UINT8 NeoSystem;
 int bDrvOkay = 0;                        // 1 if the Driver has been initted okay, and it's okay to use the BurnDrv functions
 int kNetGame = 0;
@@ -30,7 +30,7 @@ static int DoLibInit()                    // Do Init of Burn library driver
     }
 
     NeoSystem &= ~(UINT8) 0x1f;
-    NeoSystem |= NeoSystemList[ui->getConfig()->getValue(C2DUIOption::Index::ROM_NEOBIOS, true)];
+    NeoSystem |= NeoSystemList[ui->getConfig()->getValue(Option::Index::ROM_NEOBIOS, true)];
 
     nRet = BurnDrvInit();
     printf("DoLibInit: BurnDrvInit = %i\n", nRet);

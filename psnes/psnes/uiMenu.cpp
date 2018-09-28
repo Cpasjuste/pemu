@@ -8,16 +8,16 @@
 using namespace c2d;
 using namespace c2dui;
 
-PSNESGuiMenu::PSNESGuiMenu(c2dui::C2DUIGuiMain *ui) : C2DUIGuiMenu(ui) {
+PSNESGuiMenu::PSNESGuiMenu(c2dui::UIMain *ui) : UIMenu(ui) {
 
     printf("PSNESGuiMenu()\n");
 }
 
-bool PSNESGuiMenu::isOptionHidden(c2dui::C2DUIOption *option) {
+bool PSNESGuiMenu::isOptionHidden(c2dui::Option *option) {
 
-    if (!isRom() && option->id == C2DUIOption::Index::ROM_HIGH_RES) {
+    if (!isRom() && option->id == Option::Index::ROM_HIGH_RES) {
         return true;
     }
 
-    return C2DUIGuiMenu::isOptionHidden(option);
+    return UIMenu::isOptionHidden(option);
 }

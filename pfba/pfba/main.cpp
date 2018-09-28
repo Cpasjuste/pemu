@@ -61,9 +61,9 @@ PFBAGuiEmu *uiEmu;
 PFBAConfig *config;
 PFBARomList *romList;
 
-C2DUISkin *skin;
-C2DUIGuiRomList *uiRomList;
-C2DUIGuiState *uiState;
+Skin *skin;
+UIRomList *uiRomList;
+UIStateMenu *uiState;
 
 int main(int argc, char **argv) {
 
@@ -80,7 +80,7 @@ int main(int argc, char **argv) {
 
     // skin
     // buttons used for ui config menu
-    std::vector<C2DUISkin::Button> buttons;
+    std::vector<Skin::Button> buttons;
 
 #ifdef __PSP2__
     // set max cpu speed
@@ -101,7 +101,7 @@ int main(int argc, char **argv) {
     buttons.emplace_back(KEY_JOY_FIRE6_DEFAULT, "R");
     buttons.emplace_back(KEY_JOY_COIN1_DEFAULT, "SELECT");
     buttons.emplace_back(KEY_JOY_START1_DEFAULT, "START");
-    skin = new C2DUISkin("app0:/", buttons);
+    skin = new Skin("app0:/", buttons);
 #elif __SWITCH__
     // see c2d.h for key id
     buttons.emplace_back(KEY_JOY_UP_DEFAULT, "UP");
@@ -121,9 +121,9 @@ int main(int argc, char **argv) {
     buttons.emplace_back(KEY_JOY_ZR_DEFAULT, "ZR");
     buttons.emplace_back(KEY_JOY_LSTICK_DEFAULT, "LSTICK");
     buttons.emplace_back(KEY_JOY_RSTICK_DEFAULT, "RSTICK");
-    skin = new C2DUISkin(C2DUI_HOME_PATH, buttons);
+    skin = new Skin(C2DUI_HOME_PATH, buttons);
 #else
-    skin = new C2DUISkin(C2DUI_HOME_PATH, buttons);
+    skin = new Skin(C2DUI_HOME_PATH, buttons);
 #endif
 
     // gui
@@ -132,10 +132,10 @@ int main(int argc, char **argv) {
     fba_version += szAppBurnVer;
     romList = new PFBARomList(ui, fba_version);
     romList->build();
-    uiRomList = new C2DUIGuiRomList(ui, romList, renderer->getSize());
+    uiRomList = new UIRomList(ui, romList, renderer->getSize());
     uiMenu = new PFBAGuiMenu(ui);
     uiEmu = new PFBAGuiEmu(ui);
-    uiState = new C2DUIGuiState(ui);
+    uiState = new UIStateMenu(ui);
     ui->init(uiRomList, uiMenu, uiEmu, uiState);
     ui->run();
 

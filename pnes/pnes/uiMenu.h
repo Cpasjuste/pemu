@@ -5,13 +5,13 @@
 #ifndef PNES_UIMENU_H
 #define PNES_UIMENU_H
 
-class PNESGuiMenu : public c2dui::C2DUIGuiMenu {
+class PNESGuiMenu : public c2dui::UIMenu {
 
 public:
 
-    PNESGuiMenu(c2dui::C2DUIGuiMain *ui);
+    PNESGuiMenu(c2dui::UIMain *ui);
 
-    bool isOptionHidden(c2dui::C2DUIOption *option);
+    bool isOptionHidden(c2dui::Option *option);
 
 };
 

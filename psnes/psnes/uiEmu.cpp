@@ -37,7 +37,7 @@ using namespace c2dui;
 C2DClock timer;
 #endif
 
-static C2DUIGuiMain *_ui;
+static UIMain *_ui;
 
 typedef void (*Blitter)(uint8 *, int, uint8 *, int, int, int);
 
@@ -115,13 +115,13 @@ std::string getButtonId(int player, const std::string &name) {
     return "Joypad" + std::to_string(player) + " " + name;
 }
 
-PSNESGuiEmu::PSNESGuiEmu(C2DUIGuiMain *ui) : C2DUIGuiEmu(ui) {
+PSNESGuiEmu::PSNESGuiEmu(UIMain *ui) : UIEmu(ui) {
 
     printf("PSNESGuiEmu()\n");
     _ui = ui;
 }
 
-int PSNESGuiEmu::run(C2DUIRomList::Rom *rom) {
+int PSNESGuiEmu::run(RomList::Rom *rom) {
 
     getUi()->getUiProgressBox()->setTitle(rom->name);
     getUi()->getUiProgressBox()->setMessage("Please wait...");
@@ -172,7 +172,7 @@ int PSNESGuiEmu::run(C2DUIRomList::Rom *rom) {
     Settings.CartBName[0] = 0;
 
     // big boost when SupportHiRes disabled
-    Settings.SupportHiRes = (bool8) getUi()->getConfig()->getValue(C2DUIOption::ROM_HIGH_RES, true);
+    Settings.SupportHiRes = (bool8) getUi()->getConfig()->getValue(Option::ROM_HIGH_RES, true);
     printf("Settings.SupportHiRes: %i\n", Settings.SupportHiRes);
 
     CPU.Flags = 0;
@@ -257,7 +257,7 @@ int PSNESGuiEmu::run(C2DUIRomList::Rom *rom) {
     Memory.LoadSRAM(S9xGetFilename(".srm", SRAM_DIR));
 
     Settings.ApplyCheats = FALSE;
-    if (getUi()->getConfig()->getValue(C2DUIOption::ROM_CHEATS, true)) {
+    if (getUi()->getConfig()->getValue(Option::ROM_CHEATS, true)) {
         printf("Settings.ApplyCheats = TRUE\n");
         Settings.ApplyCheats = TRUE;
     }
@@ -311,7 +311,7 @@ int PSNESGuiEmu::run(C2DUIRomList::Rom *rom) {
     getUi()->getRenderer()->delay(500);
     getUi()->getUiProgressBox()->setVisibility(c2d::C2DObject::Hidden);
 
-    return C2DUIGuiEmu::run(rom);
+    return UIEmu::run(rom);
 }
 
 void PSNESGuiEmu::stop() {
@@ -341,13 +341,13 @@ void PSNESGuiEmu::stop() {
     snes9x_prev_height = 0;
     snes9x_height_extended = false;
 
-    C2DUIGuiEmu::stop();
+    UIEmu::stop();
 }
 
 int PSNESGuiEmu::update() {
 
     // fps
-    int showFps = getUi()->getConfig()->getValue(C2DUIOption::Index::ROM_SHOW_FPS, true);
+    int showFps = getUi()->getConfig()->getValue(Option::Index::ROM_SHOW_FPS, true);
     getFpsText()->setVisibility(showFps ? Visible : Hidden);
     if (showFps) {
         sprintf(getFpsString(), "FPS: %.2g/%2d", getUi()->getRenderer()->getFps(), (int) Memory.ROMFramesPerSecond);
@@ -443,7 +443,7 @@ bool8 S9xDeinitUpdate(int width, int height) {
 #ifndef __PSP2__
     Blitter blit = nullptr;
 #ifdef __SOFT_SCALERS__
-    int effect = _ui->getConfig()->getValue(C2DUIOption::ROM_SHADER, true);
+    int effect = _ui->getConfig()->getValue(Option::ROM_SHADER, true);
 #else
     int effect = 0;
 #endif

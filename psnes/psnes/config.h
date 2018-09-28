@@ -7,7 +7,7 @@
 
 #include "c2dui_config.h"
 
-class PSNESConfig : public c2dui::C2DUIConfig {
+class PSNESConfig : public c2dui::Config {
 
 public:
 

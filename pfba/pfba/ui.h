@@ -5,14 +5,14 @@
 #ifndef PFBA_UI_H
 #define PFBA_UI_H
 
-class PFBAGui : public c2dui::C2DUIGuiMain {
+class PFBAGui : public c2dui::UIMain {
 
 public:
 
     PFBAGui(c2d::Renderer *renderer, c2d::Io *io, c2d::Input *input,
-            c2dui::C2DUIConfig *config, c2dui::C2DUISkin *skin);
+            c2dui::Config *config, c2dui::Skin *skin);
 
-    void runRom(c2dui::C2DUIRomList::Rom *rom) override;
+    void runRom(c2dui::RomList::Rom *rom) override;
 };
 
 #endif //PFBA_UI_H

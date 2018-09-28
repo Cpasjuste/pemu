@@ -12,11 +12,11 @@ using namespace tinyxml2;
 
 static XMLDocument doc;
 
-static bool sortByName(const C2DUIRomList::Rom *ra, const C2DUIRomList::Rom *rb) {
+static bool sortByName(const RomList::Rom *ra, const RomList::Rom *rb) {
     return strcasecmp(ra->name, rb->name) <= 0;
 }
 
-PSNESRomList::PSNESRomList(C2DUIGuiMain *ui, const std::string &emuVersion) : C2DUIRomList(ui, emuVersion) {
+PSNESRomList::PSNESRomList(UIMain *ui, const std::string &emuVersion) : RomList(ui, emuVersion) {
     printf("PSNESRomList::PSNESRomList()\n");
 }
 
@@ -77,16 +77,16 @@ void PSNESRomList::buildNoDb(bool use_icons) {
     std::sort(list.begin(), list.end(), sortByName);
 
     // cleanup
-    C2DUIRomList::build();
+    RomList::build();
 }
 
 void PSNESRomList::build() {
 
     printf("PSNESRomList::build()\n");
 
-    bool use_icons = ui->getConfig()->getValue(C2DUIOption::Index::GUI_SHOW_ICONS) == 1;
+    bool use_icons = ui->getConfig()->getValue(Option::Index::GUI_SHOW_ICONS) == 1;
 
-    if (!ui->getConfig()->getValue(C2DUIOption::Index::GUI_USE_DATABASE)) {
+    if (!ui->getConfig()->getValue(Option::Index::GUI_USE_DATABASE)) {
         buildNoDb(use_icons);
         return;
     }
@@ -195,9 +195,9 @@ void PSNESRomList::build() {
 
         // set "Io::File"" color for ui
         rom->color = COL_RED;
-        if (rom->state == C2DUIRomList::RomState::NOT_WORKING) {
+        if (rom->state == RomList::RomState::NOT_WORKING) {
             rom->color = COL_ORANGE;
-        } else if (rom->state == C2DUIRomList::RomState::WORKING) {
+        } else if (rom->state == RomList::RomState::WORKING) {
             rom->color = rom->parent ? COL_YELLOW : COL_GREEN;
         }
 
@@ -239,7 +239,7 @@ void PSNESRomList::build() {
     }
 
     // cleanup
-    C2DUIRomList::build();
+    RomList::build();
 }
 
 PSNESRomList::~PSNESRomList() {

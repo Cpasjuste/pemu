@@ -15,7 +15,7 @@
 
 using namespace c2dui;
 
-C2DUIGuiMain *uiMain = nullptr;
+UIMain *uiMain = nullptr;
 extern PNESGuiEmu *uiEmu;
 
 /// NESTOPIA
@@ -30,13 +30,13 @@ extern Input::Controllers *cNstPads;
 extern Emulator emulator;
 /// NESTOPIA
 
-PNESGuiEmu::PNESGuiEmu(C2DUIGuiMain *ui) : C2DUIGuiEmu(ui) {
+PNESGuiEmu::PNESGuiEmu(UIMain *ui) : UIEmu(ui) {
 
     printf("PNESGuiEmu()\n");
     uiMain = getUi();
 }
 
-int PNESGuiEmu::run(C2DUIRomList::Rom *rom) {
+int PNESGuiEmu::run(RomList::Rom *rom) {
 
     getUi()->getUiProgressBox()->setTitle(rom->name);
     getUi()->getUiProgressBox()->setMessage("Please wait...");
@@ -60,7 +60,7 @@ int PNESGuiEmu::run(C2DUIRomList::Rom *rom) {
     getUi()->getRenderer()->delay(500);
     getUi()->getUiProgressBox()->setVisibility(c2d::C2DObject::Hidden);
 
-    return C2DUIGuiEmu::run(rom);
+    return UIEmu::run(rom);
 }
 
 void PNESGuiEmu::stop() {
@@ -73,13 +73,13 @@ void PNESGuiEmu::stop() {
     nst_fds_bios_unload();
     nst_palette_unload();
 
-    C2DUIGuiEmu::stop();
+    UIEmu::stop();
 }
 
 int PNESGuiEmu::update() {
 
     // fps
-    int showFps = getUi()->getConfig()->getValue(C2DUIOption::Index::ROM_SHOW_FPS, true);
+    int showFps = getUi()->getConfig()->getValue(Option::Index::ROM_SHOW_FPS, true);
     getFpsText()->setVisibility(showFps ? Visible : Hidden);
     if (showFps) {
         sprintf(getFpsString(), "FPS: %.2g/%2d", getUi()->getRenderer()->getFps(), 60);

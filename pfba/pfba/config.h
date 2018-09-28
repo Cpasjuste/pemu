@@ -7,7 +7,7 @@
 
 #include "c2dui_config.h"
 
-class PFBAConfig : public c2dui::C2DUIConfig {
+class PFBAConfig : public c2dui::Config {
 
 public:
 

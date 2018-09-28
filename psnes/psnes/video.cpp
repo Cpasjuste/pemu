@@ -10,15 +10,15 @@ using namespace c2dui;
 
 extern bool snes9x_height_extended;
 
-PSNESVideo::PSNESVideo(C2DUIGuiMain *gui, void **_pixels, int *_pitch, const c2d::Vector2f &size)
+PSNESVideo::PSNESVideo(UIMain *gui, void **_pixels, int *_pitch, const c2d::Vector2f &size)
         : C2DUIVideo(gui, _pixels, _pitch, size) {
     ui = gui;
 }
 
 void PSNESVideo::updateScaling() {
 
-    int high_res = ui->getConfig()->getValue(C2DUIOption::ROM_HIGH_RES, true);
-    int scale_mode = ui->getConfig()->getValue(C2DUIOption::ROM_SCALING, true);
+    int high_res = ui->getConfig()->getValue(Option::ROM_HIGH_RES, true);
+    int scale_mode = ui->getConfig()->getValue(Option::ROM_SCALING, true);
     Vector2f screen = ui->getRenderer()->getSize();
     Vector2f scale_max;
     float sx = 1, sy = 1, factor;

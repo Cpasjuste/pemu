@@ -22,7 +22,7 @@ static std::string str_toupper(std::string s) {
     return s;
 }
 
-PFBARomList::PFBARomList(C2DUIGuiMain *ui, const std::string &emuVersion) : C2DUIRomList(ui, emuVersion) {
+PFBARomList::PFBARomList(UIMain *ui, const std::string &emuVersion) : RomList(ui, emuVersion) {
 
     printf("PFBARomList::PFBARomList()\n");
 }
@@ -33,7 +33,7 @@ void PFBARomList::build() {
 
     char path[MAX_PATH];
     const char *pathUppercase; // sometimes on FAT32 short files appear as all uppercase
-    bool use_icons = ui->getConfig()->getValue(C2DUIOption::Index::GUI_SHOW_ICONS) == 1;
+    bool use_icons = ui->getConfig()->getValue(Option::Index::GUI_SHOW_ICONS) == 1;
 
     for (unsigned int i = 0; i < nBurnDrvCount; i++) {
 
@@ -192,9 +192,9 @@ void PFBARomList::build() {
 
         // set "Io::File"" color for ui
         rom->color = COL_RED;
-        if (rom->state == C2DUIRomList::RomState::NOT_WORKING) {
+        if (rom->state == RomList::RomState::NOT_WORKING) {
             rom->color = COL_ORANGE;
-        } else if (rom->state == C2DUIRomList::RomState::WORKING) {
+        } else if (rom->state == RomList::RomState::WORKING) {
             rom->color = rom->parent == nullptr ? COL_GREEN : COL_YELLOW;
         }
 
@@ -238,5 +238,5 @@ void PFBARomList::build() {
     }
 
     // cleanup
-    C2DUIRomList::build();
+    RomList::build();
 }

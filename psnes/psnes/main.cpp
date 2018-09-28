@@ -62,10 +62,10 @@ PSNESGuiEmu *uiEmu;
 PSNESConfig *config;
 PSNESRomList *romList;
 
-C2DUIGuiMain *ui;
-C2DUISkin *skin;
-C2DUIGuiRomList *uiRomList;
-C2DUIGuiState *uiState;
+UIMain *ui;
+Skin *skin;
+UIRomList *uiRomList;
+UIStateMenu *uiState;
 
 int main(int argc, char **argv) {
 
@@ -95,7 +95,7 @@ int main(int argc, char **argv) {
     mkdir(configs_path.c_str(), 0755);
 
     // buttons used for ui config menu
-    std::vector<C2DUISkin::Button> buttons;
+    std::vector<Skin::Button> buttons;
 #ifdef __PSP2__
     // set max cpu speed
     scePowerSetArmClockFrequency(444);
@@ -137,26 +137,26 @@ int main(int argc, char **argv) {
 #endif
     // skin
 #ifdef __PSP2__
-    skin = new C2DUISkin("app0:/", buttons);
+    skin = new Skin("app0:/", buttons);
 #else
-    skin = new C2DUISkin(C2DUI_HOME_PATH, buttons);
+    skin = new Skin(C2DUI_HOME_PATH, buttons);
 #endif
 
     // gui
-    ui = new C2DUIGuiMain(renderer, io, inp, config, skin);
+    ui = new UIMain(renderer, io, inp, config, skin);
     // build rom list
     std::string snes9x_version = "snes9x ";
     snes9x_version += VERSION;
     romList = new PSNESRomList(ui, snes9x_version);
     romList->build();
     // rom list ui
-    uiRomList = new C2DUIGuiRomList(ui, romList, renderer->getSize());
+    uiRomList = new UIRomList(ui, romList, renderer->getSize());
     // menu ui
     uiMenu = new PSNESGuiMenu(ui);
     // in game emu ui
     uiEmu = new PSNESGuiEmu(ui);
     // states menu ui
-    uiState = new C2DUIGuiState(ui);
+    uiState = new UIStateMenu(ui);
     // run that crap
     ui->init(uiRomList, uiMenu, uiEmu, uiState);
     ui->run();

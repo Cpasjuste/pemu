@@ -25,7 +25,7 @@ static int nZipsFound = 0;
 StringSet BzipText;                                                // Text which describes any problems with loading the zip
 StringSet BzipDetail;                                            // Text which describes in detail any problems with loading the zip
 
-extern c2dui::C2DUIGuiMain *ui;
+extern c2dui::UIMain *ui;
 
 static inline bool endsWith(std::string const &value, std::string const &ending) {
     if (ending.size() > value.size()) return false;

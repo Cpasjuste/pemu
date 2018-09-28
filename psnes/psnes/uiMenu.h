@@ -5,13 +5,13 @@
 #ifndef PSNES_UIMENU_H
 #define PSNES_UIMENU_H
 
-class PSNESGuiMenu : public c2dui::C2DUIGuiMenu {
+class PSNESGuiMenu : public c2dui::UIMenu {
 
 public:
 
-    PSNESGuiMenu(c2dui::C2DUIGuiMain *ui);
+    PSNESGuiMenu(c2dui::UIMain *ui);
 
-    bool isOptionHidden(c2dui::C2DUIOption *option);
+    bool isOptionHidden(c2dui::Option *option);
 
 };
 

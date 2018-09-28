@@ -7,13 +7,13 @@
 
 #include <string>
 
-class PSNESGuiEmu : public c2dui::C2DUIGuiEmu {
+class PSNESGuiEmu : public c2dui::UIEmu {
 
 public:
 
-    PSNESGuiEmu(c2dui::C2DUIGuiMain *ui);
+    PSNESGuiEmu(c2dui::UIMain *ui);
 
-    int run(c2dui::C2DUIRomList::Rom *rom);
+    int run(c2dui::RomList::Rom *rom);
 
     void stop();
 

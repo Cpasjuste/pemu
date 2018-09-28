@@ -13,16 +13,13 @@ namespace c2dui {
 
     public:
 
-        PSNESVideo(C2DUIGuiMain *ui, void **pixels, int *pitch, const c2d::Vector2f &size);
+        PSNESVideo(UIMain *ui, void **pixels, int *pitch, const c2d::Vector2f &size);
 
         void updateScaling();
-//#ifdef __SWITCH__
-//        void unlock();
-//#endif
 
     private:
 
-        C2DUIGuiMain *ui;
+        UIMain *ui;
     };
 }
 

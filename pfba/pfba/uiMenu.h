@@ -5,13 +5,13 @@
 #ifndef PFBA_UIMENU_H
 #define PFBA_UIMENU_H
 
-class PFBAGuiMenu : public c2dui::C2DUIGuiMenu {
+class PFBAGuiMenu : public c2dui::UIMenu {
 
 public:
 
-    PFBAGuiMenu(c2dui::C2DUIGuiMain *ui);
+    PFBAGuiMenu(c2dui::UIMain *ui);
 
-    bool isOptionHidden(c2dui::C2DUIOption *option);
+    bool isOptionHidden(c2dui::Option *option);
 
 };
 

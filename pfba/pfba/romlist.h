@@ -7,11 +7,11 @@
 
 #include <string>
 
-class PFBARomList : public c2dui::C2DUIRomList {
+class PFBARomList : public c2dui::RomList {
 
 public:
 
-    PFBARomList(c2dui::C2DUIGuiMain *ui, const std::string &emuVersion);
+    PFBARomList(c2dui::UIMain *ui, const std::string &emuVersion);
 
     void build() override;
 

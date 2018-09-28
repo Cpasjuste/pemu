@@ -7,7 +7,7 @@
 
 #include "c2dui_config.h"
 
-class PNESConfig : public c2dui::C2DUIConfig {
+class PNESConfig : public c2dui::Config {
 
 public:
 

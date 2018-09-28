@@ -23,17 +23,17 @@ static unsigned int myHighCol16(int r, int g, int b, int /* i */) {
     return t;
 }
 
-PFBAGuiEmu::PFBAGuiEmu(C2DUIGuiMain *ui) : C2DUIGuiEmu(ui) {
+PFBAGuiEmu::PFBAGuiEmu(UIMain *ui) : UIEmu(ui) {
 
     printf("PFBAGuiEmu()\n");
 }
 
-int PFBAGuiEmu::run(C2DUIRomList::Rom *rom) {
+int PFBAGuiEmu::run(RomList::Rom *rom) {
 
     ///////////
     // AUDIO
     //////////
-    int use_audio = getUi()->getConfig()->getValue(C2DUIOption::Index::ROM_AUDIO, true);
+    int use_audio = getUi()->getConfig()->getValue(Option::Index::ROM_AUDIO, true);
     if (use_audio) {
         printf("Init audio device...");
         addAudio(48000);
@@ -93,7 +93,7 @@ int PFBAGuiEmu::run(C2DUIRomList::Rom *rom) {
     // VIDEO
     //////////
 
-    return C2DUIGuiEmu::run(rom);
+    return UIEmu::run(rom);
 }
 
 void PFBAGuiEmu::stop() {
@@ -101,7 +101,7 @@ void PFBAGuiEmu::stop() {
     DrvExit();
     InpExit();
 
-    C2DUIGuiEmu::stop();
+    UIEmu::stop();
 }
 
 void PFBAGuiEmu::updateFb() {
@@ -149,8 +149,8 @@ void PFBAGuiEmu::renderFrame(bool draw, int drawFps, float fps) {
 
 void PFBAGuiEmu::updateFrame() {
 
-    int showFps = getUi()->getConfig()->getValue(C2DUIOption::Index::ROM_SHOW_FPS, true);
-    int frameSkip = getUi()->getConfig()->getValue(C2DUIOption::Index::ROM_FRAMESKIP, true);
+    int showFps = getUi()->getConfig()->getValue(Option::Index::ROM_SHOW_FPS, true);
+    int frameSkip = getUi()->getConfig()->getValue(Option::Index::ROM_FRAMESKIP, true);
 
     if (frameSkip) {
         bool draw = nFramesEmulated % (frameSkip + 1) == 0;
@@ -180,7 +180,7 @@ int PFBAGuiEmu::update() {
 
     bool combo = false;
     int rotation_config =
-            getUi()->getConfig()->getValue(C2DUIOption::Index::ROM_ROTATION, true);
+            getUi()->getConfig()->getValue(Option::Index::ROM_ROTATION, true);
     int rotate_input = 0;
 #ifdef __PSP2__
     // TODO: find a way to unify platforms,

@@ -11,13 +11,13 @@ using namespace c2d;
 using namespace c2dui;
 
 PFBAGui::PFBAGui(Renderer *renderer, Io *io, Input *input,
-                 C2DUIConfig *config, C2DUISkin *skin)
-        : C2DUIGuiMain(renderer, io, input, config, skin) {
+                 Config *config, Skin *skin)
+        : UIMain(renderer, io, input, config, skin) {
 
     printf("PFBAGui\n");
 }
 
-void PFBAGui::runRom(C2DUIRomList::Rom *rom) {
+void PFBAGui::runRom(RomList::Rom *rom) {
 
     if (!rom) {
         return;
@@ -29,5 +29,5 @@ void PFBAGui::runRom(C2DUIRomList::Rom *rom) {
         return;
     }
 
-    C2DUIGuiMain::runRom(rom);
+    UIMain::runRom(rom);
 }
