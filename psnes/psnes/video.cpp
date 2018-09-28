@@ -30,6 +30,10 @@ void PSNESVideo::updateScaling(bool vertical, bool flip) {
     switch (scale_mode) {
 
         default:
+            integer_scaling = true;
+            break;
+
+        case 1:
             // 2x in non "high res" mode (2x software scaling already applied in high res mode)
             if (!high_res) {
                 sx = sy = std::min(scale_max.x, 2.0f);
@@ -40,7 +44,7 @@ void PSNESVideo::updateScaling(bool vertical, bool flip) {
             integer_scaling = true;
             break;
 
-        case 1:
+        case 2:
             // 3x (2x software scaling already applied in high res mode)
             factor = high_res ? 1.5f : 3.0f;
             sx = sy = std::min(scale_max.x, factor);
@@ -50,19 +54,19 @@ void PSNESVideo::updateScaling(bool vertical, bool flip) {
             integer_scaling = true;
             break;
 
-        case 2: // fit
+        case 3: // fit
             sx = sy = scale_max.y;
             if (sx > scale_max.x) {
                 sx = sy = scale_max.x;
             }
             break;
 
-        case 3: // fit 4:3
+        case 4: // fit 4:3
             sy = scale_max.y;
             sx = std::min(scale_max.x, (sy * getTextureRect().height * 1.33f) / getTextureRect().width);
             break;
 
-        case 4: // fullscreen
+        case 5: // fullscreen
             sx = scale_max.x;
             sy = scale_max.y;
             break;
