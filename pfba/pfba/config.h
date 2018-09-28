@@ -11,7 +11,7 @@ class PFBAConfig : public c2dui::Config {
 
 public:
 
-    PFBAConfig(c2d::Renderer *renderer, const std::string &home, int version);
+    PFBAConfig(const std::string &home, int version);
 
 };
 

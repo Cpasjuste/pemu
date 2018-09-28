@@ -76,7 +76,7 @@ int main(int argc, char **argv) {
 
     // load configuration
     int version = (__PFBA_VERSION_MAJOR__ * 100) + __PFBA_VERSION_MINOR__;
-    config = new PFBAConfig(renderer, C2DUI_HOME_PATH, version);
+    config = new PFBAConfig(C2DUI_HOME_PATH, version);
 
     // skin
     // buttons used for ui config menu

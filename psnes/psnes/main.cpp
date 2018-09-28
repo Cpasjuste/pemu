@@ -90,7 +90,7 @@ int main(int argc, char **argv) {
 
     // load configuration
     int psnes_version = (__PSNES_VERSION_MAJOR__ * 100) + __PSNES_VERSION_MINOR__;
-    config = new PSNESConfig(renderer, C2DUI_HOME_PATH, psnes_version);
+    config = new PSNESConfig(C2DUI_HOME_PATH, psnes_version);
     std::string configs_path = *config->getHomePath() + "configs";
     mkdir(configs_path.c_str(), 0755);
 

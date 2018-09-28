@@ -11,7 +11,7 @@ class PSNESConfig : public c2dui::Config {
 
 public:
 
-    PSNESConfig(c2d::Renderer *renderer, const std::string &home, int version);
+    PSNESConfig(const std::string &home, int version);
 
 };
 

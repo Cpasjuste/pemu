@@ -74,7 +74,7 @@ int main(int argc, char **argv) {
 
     // load configuration
     int psnes_version = (__PNES_VERSION_MAJOR__ * 100) + __PNES_VERSION_MINOR__;
-    config = new PNESConfig(renderer, C2DUI_HOME_PATH, psnes_version);
+    config = new PNESConfig(C2DUI_HOME_PATH, psnes_version);
     io->createDir(*config->getHomePath() + "configs");
     io->createDir(*config->getHomePath() + "saves");
 
