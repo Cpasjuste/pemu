@@ -344,7 +344,7 @@ void PSNESUIEmu::stop() {
     UIEmu::stop();
 }
 
-int PSNESUIEmu::update() {
+int PSNESUIEmu::loop() {
 
     // fps
     int showFps = getUi()->getConfig()->getValue(Option::Index::ROM_SHOW_FPS, true);

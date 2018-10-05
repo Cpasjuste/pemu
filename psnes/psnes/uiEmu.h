@@ -17,7 +17,7 @@ public:
 
     void stop();
 
-    int update();
+    int loop();
 };
 
 #endif //PSNES_UIEMU_H

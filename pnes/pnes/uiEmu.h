@@ -17,7 +17,7 @@ public:
 
     void stop();
 
-    int update();
+    int loop();
 
     void nestopia_config_init();
 

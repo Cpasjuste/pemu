@@ -76,7 +76,7 @@ void PNESGuiEmu::stop() {
     UIEmu::stop();
 }
 
-int PNESGuiEmu::update() {
+int PNESGuiEmu::loop() {
 
     // fps
     int showFps = getUi()->getConfig()->getValue(Option::Index::ROM_SHOW_FPS, true);

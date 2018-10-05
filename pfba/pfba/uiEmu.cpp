@@ -175,7 +175,7 @@ void PFBAGuiEmu::updateFrame() {
     }
 }
 
-int PFBAGuiEmu::update() {
+int PFBAGuiEmu::loop() {
 
     bool combo = false;
     int rotation_config =
