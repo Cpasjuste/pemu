@@ -62,21 +62,21 @@ file(GLOB PNES_SRC pnes/*.c*)
 #####################
 # PLATORM SPECIFIC
 #####################
-if (BUILD_PSP2)
+if (BUILD_VITA)
     #####################
-    # PSP2 PLATORM
+    # PS VITA PLATORM
     #####################
     list(APPEND NESTOPIA_LDFLAGS ScePower_stub)
-elseif (BUILD_NX)
+elseif (BUILD_SWITCH)
     #####################
-    # NX PLATORM
+    # SWITCH PLATORM
     #####################
     list(APPEND NESTOPIA_SRC pnes/switch/port.c)
-elseif (BUILD_SDL2)
+elseif (BUILD_LINUX)
     #####################
     # SDL2 PLATORM
     #####################
-endif (BUILD_PSP2)
+endif (BUILD_VITA)
 
 #####################
 # pnes executable
@@ -91,10 +91,11 @@ target_compile_options(${PROJECT_NAME}.elf PRIVATE $<$<COMPILE_LANGUAGE:CXX>:-st
 target_link_libraries(${PROJECT_NAME}.elf cross2dui ${NESTOPIA_LDFLAGS})
 add_dependencies(${PROJECT_NAME}.elf ${PROJECT_NAME}.data)
 
+## TODO: use cross2d targets
 #####################
 # PSP2 (vita) target
 #####################
-if (BUILD_PSP2)
+if (BUILD_VITA)
     vita_create_self(${PROJECT_NAME}.self ${PROJECT_NAME}.elf)
     add_custom_target(${PROJECT_NAME}_vita_release.zip
             DEPENDS ${PROJECT_NAME}.self
@@ -106,12 +107,12 @@ if (BUILD_PSP2)
             COMMAND cp -r ${CMAKE_CURRENT_SOURCE_DIR}/pnes/data/psp2/skin ${CMAKE_BINARY_DIR}/release/pnes/
             COMMAND cd ${CMAKE_BINARY_DIR}/release/pnes && zip -r ../../${PROJECT_NAME}-${PNES_VERSION_MAJOR}.${PNES_VERSION_MINOR}_vita.vpk . && cd ${CMAKE_BINARY_DIR}
             )
-endif (BUILD_PSP2)
+endif ()
 
 #####################
-# NX (SWITCH) target
+# SWITCH target
 #####################
-if (BUILD_NX)
+if (BUILD_SWITCH)
     set_target_properties(${PROJECT_NAME}.elf PROPERTIES LINK_FLAGS "-specs=${DEVKITPRO}/libnx/switch.specs")
     add_custom_target(${PROJECT_NAME}.nro
             DEPENDS ${PROJECT_NAME}.elf
@@ -131,4 +132,4 @@ if (BUILD_NX)
             COMMAND cd ${CMAKE_BINARY_DIR}/release && zip -r ../${PROJECT_NAME}-${PNES_VERSION_MAJOR}.${PNES_VERSION_MINOR}_switch.zip pnes
             COMMAND cd ${CMAKE_CURRENT_BINARY_DIR}
             )
-endif (BUILD_NX)
+endif ()
