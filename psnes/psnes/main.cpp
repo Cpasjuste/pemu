@@ -63,7 +63,7 @@ Io *io;
 
 PSNESUIMenu *uiMenu;
 PSNESUIEmu *uiEmu;
-PSNESConfig *config;
+PSNESConfig *cfg;
 PSNESRomList *romList;
 PSNESUIStateMenu *uiState;
 
@@ -94,8 +94,8 @@ int main(int argc, char **argv) {
 
     // load configuration
     int psnes_version = (__PSNES_VERSION_MAJOR__ * 100) + __PSNES_VERSION_MINOR__;
-    config = new PSNESConfig(C2DUI_HOME_PATH, psnes_version);
-    std::string configs_path = *config->getHomePath() + "configs";
+    cfg = new PSNESConfig(C2DUI_HOME_PATH, psnes_version);
+    std::string configs_path = *cfg->getHomePath() + "configs";
     mkdir(configs_path.c_str(), 0755);
 
     // buttons used for ui config menu
@@ -147,7 +147,7 @@ int main(int argc, char **argv) {
 #endif
 
     // gui
-    ui = new UIMain(renderer, io, inp, config, skin);
+    ui = new UIMain(renderer, io, inp, cfg, skin);
     // build rom list
     std::string snes9x_version = "snes9x ";
     snes9x_version += VERSION;
@@ -168,7 +168,7 @@ int main(int argc, char **argv) {
     // cleanup
     delete (ui);
     delete (skin);
-    delete (config);
+    delete (cfg);
     delete (io);
     delete (inp);
     delete (renderer);

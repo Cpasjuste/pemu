@@ -215,7 +215,9 @@ int PFBAGuiEmu::loop() {
     inputServiceSwitch = 0;
     inputP1P2Switch = 0;
 
-    Input::Player *players = getUi()->getInput()->update(rotate_input);
+    // TODO: control rotation
+    //Input::Player *players = getUi()->getInput()->update(rotate_input);
+    Input::Player *players = getUi()->getInput()->getPlayers();
 
     // look for player 1 menu combo
     if (((players[0].state & Input::Key::KEY_START) && (players[0].state & Input::Key::KEY_FIRE5))

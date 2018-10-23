@@ -9,7 +9,7 @@ using namespace c2d;
 using namespace c2dui;
 
 static bool sortByName(const RomList::Rom *ra, const RomList::Rom *rb) {
-    return strcasecmp(ra->name, rb->name) <= 0;
+    return strcasecmp(ra->name.c_str(), rb->name.c_str()) <= 0;
 }
 
 PNESRomList::PNESRomList(UIMain *ui, const std::string &emuVersion) : RomList(ui, emuVersion) {
@@ -29,13 +29,14 @@ void PNESRomList::build() {
         }
 
         for (auto &file : fileList) {
-            if (!Utility::endsWith(file, ".zip")
-                && !Utility::endsWith(file, ".nes")) {
+            if (!Utility::endsWith(file.name, ".zip")
+                && !Utility::endsWith(file.name, ".nes")) {
                 continue;
             }
             auto *rom = new Rom();
-            rom->name = rom->drv_name = file.c_str();
-            rom->path = file.c_str();
+            rom->name = file.name;
+            rom->drv_name = file.name.c_str();
+            rom->path = file.path;
             rom->state = RomState::WORKING;
             hardwareList->at(0).supported_count++;
             hardwareList->at(0).available_count++;
@@ -49,7 +50,7 @@ void PNESRomList::build() {
                              ui->getConfig()->getHomePath()->c_str(), drv_name_no_ext);
                     if (ui->getIo()->exist(icon_path)) {
                         rom->icon = new C2DTexture(icon_path);
-                        rom->icon->setDeleteMode(C2DObject::DeleteMode::Manual);
+                        rom->icon->setDeleteMode(DeleteMode::Manual);
                         if (!rom->icon->available) {
                             delete (rom->icon);
                             rom->icon = nullptr;

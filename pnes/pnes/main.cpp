@@ -54,12 +54,10 @@ int _newlib_heap_size_user = 192 * 1024 * 1024;
 #endif
 
 Renderer *renderer;
-Input *inp;
-Io *io;
 
 PNESGuiMenu *uiMenu;
 PNESGuiEmu *uiEmu;
-PNESConfig *config;
+PNESConfig *cfg;
 PNESRomList *romList;
 PNESUIStateMenu *uiState;
 
@@ -70,14 +68,12 @@ UIRomList *uiRomList;
 int main(int argc, char **argv) {
 
     renderer = new C2DRenderer(Vector2f(SCR_W, SCR_H));
-    inp = new C2DInput();
-    io = new C2DIo();
 
     // load configuration
     int psnes_version = (__PNES_VERSION_MAJOR__ * 100) + __PNES_VERSION_MINOR__;
-    config = new PNESConfig(C2DUI_HOME_PATH, psnes_version);
-    io->createDir(*config->getHomePath() + "configs");
-    io->createDir(*config->getHomePath() + "saves");
+    cfg = new PNESConfig(C2DUI_HOME_PATH, psnes_version);
+    renderer->getIo()->create(*cfg->getHomePath() + "configs");
+    renderer->getIo()->create(*cfg->getHomePath() + "saves");
 
     // skin
     // buttons used for ui config menu
@@ -129,7 +125,7 @@ int main(int argc, char **argv) {
 #endif
 
     // gui
-    ui = new UIMain(renderer, io, inp, config, skin);
+    ui = new UIMain(renderer, renderer->getIo(), renderer->getInput(), cfg, skin);
     std::string nestopia_version = "Nestopia 1.0";
     romList = new PNESRomList(ui, nestopia_version);
     romList->build();
@@ -143,9 +139,7 @@ int main(int argc, char **argv) {
     // quit
     delete (ui);
     delete (skin);
-    delete (config);
-    delete (io);
-    delete (inp);
+    delete (cfg);
     delete (renderer);
 
 #ifdef __PSP2__

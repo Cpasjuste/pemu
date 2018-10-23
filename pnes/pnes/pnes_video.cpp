@@ -61,9 +61,9 @@ extern PNESGuiEmu *uiEmu;
 void nst_ogl_init() {
 
     uiEmu->addVideo(uiEmu->getUi(), nullptr, nullptr,
-                    {basesize.w, basesize.h}, C2D_TEXTURE_FMT_RGB565);
-    uiEmu->getVideo()->setFiltering(
-            conf.video_linear_filter ? C2D_TEXTURE_FILTER_LINEAR : C2D_TEXTURE_FILTER_POINT);
+                    {basesize.w, basesize.h}, Texture::Format::RGB565);
+    uiEmu->getVideo()->setFilter(
+            conf.video_linear_filter ? Texture::Filter::Linear : Texture::Filter::Point);
 }
 
 void nst_ogl_deinit() {
@@ -489,7 +489,7 @@ void nst_video_print(const char *text, int xpos, int ypos, int seconds, bool bg)
     snprintf(osdtext.textbuf, sizeof(osdtext.textbuf), "%s", text);
     osdtext.xpos = xpos;
     osdtext.ypos = ypos;
-    osdtext.drawtext = seconds * nst_pal() ? 50 : 60;
+    osdtext.drawtext = (seconds * nst_pal()) > 0 ? 50 : 60;
     osdtext.bg = bg;
 }
 

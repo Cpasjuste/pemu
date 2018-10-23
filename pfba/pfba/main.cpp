@@ -63,7 +63,7 @@ PFBAGui *ui;
 PFBAGuiMenu *uiMenu;
 PFBAGuiEmu *uiEmu;
 PFBAUIStateMenu *uiState;
-PFBAConfig *config;
+PFBAConfig *cfg;
 PFBARomList *romList;
 
 Skin *skin;
@@ -80,7 +80,7 @@ int main(int argc, char **argv) {
 
     // load configuration
     int version = (__PFBA_VERSION_MAJOR__ * 100) + __PFBA_VERSION_MINOR__;
-    config = new PFBAConfig(C2DUI_HOME_PATH, version);
+    cfg = new PFBAConfig(C2DUI_HOME_PATH, version);
 
     // skin
     // buttons used for ui config menu
@@ -131,7 +131,7 @@ int main(int argc, char **argv) {
 #endif
 
     // gui
-    ui = new PFBAGui(renderer, io, inp, config, skin);
+    ui = new PFBAGui(renderer, io, inp, cfg, skin);
     std::string fba_version = "fba: ";
     fba_version += szAppBurnVer;
     romList = new PFBARomList(ui, fba_version);
@@ -148,7 +148,7 @@ int main(int argc, char **argv) {
 
     delete (ui);
     delete (skin);
-    delete (config);
+    delete (cfg);
     delete (io);
     delete (inp);
     delete (renderer);

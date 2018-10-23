@@ -133,3 +133,4 @@ if (BUILD_SWITCH)
             COMMAND cd ${CMAKE_CURRENT_BINARY_DIR}
             )
 endif ()
+
