@@ -70,8 +70,8 @@ int main(int argc, char **argv) {
     renderer = new C2DRenderer(Vector2f(SCR_W, SCR_H));
 
     // load configuration
-    int psnes_version = (__PNES_VERSION_MAJOR__ * 100) + __PNES_VERSION_MINOR__;
-    cfg = new PNESConfig(C2DUI_HOME_PATH, psnes_version);
+    int pnes_version = (__PNES_VERSION_MAJOR__ * 100) + __PNES_VERSION_MINOR__;
+    cfg = new PNESConfig(C2DUI_HOME_PATH, pnes_version);
     renderer->getIo()->create(*cfg->getHomePath() + "configs");
     renderer->getIo()->create(*cfg->getHomePath() + "saves");
 
@@ -125,7 +125,7 @@ int main(int argc, char **argv) {
 #endif
 
     // gui
-    ui = new UIMain(renderer, renderer->getIo(), renderer->getInput(), cfg, skin);
+    ui = new UIMain(renderer, cfg, skin);
     std::string nestopia_version = "Nestopia 1.0";
     romList = new PNESRomList(ui, nestopia_version);
     romList->build();
