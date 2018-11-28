@@ -10,11 +10,6 @@
 using namespace c2d;
 using namespace c2dui;
 
-static inline bool endsWith(std::string const &value, std::string const &ending) {
-    if (ending.size() > value.size()) return false;
-    return std::equal(ending.rbegin(), ending.rend(), value.rbegin());
-}
-
 static std::string str_toupper(std::string s) {
     std::transform(s.begin(), s.end(), s.begin(),
                    [](unsigned char c) { return std::toupper(c); }
@@ -113,49 +108,49 @@ void PFBARomList::build() {
 
                 switch (prefix) {
                     case HARDWARE_PREFIX_COLECO:
-                        if (!endsWith(paths->at(j), "coleco/")) {
+                        if (!Utility::endsWith(paths->at(j), "coleco/")) {
                             continue;
                         }
                         break;
                     case HARDWARE_PREFIX_SEGA_GAME_GEAR:
-                        if (!endsWith(paths->at(j), "gamegear/")) {
+                        if (!Utility::endsWith(paths->at(j), "gamegear/")) {
                             continue;
                         }
                         break;
                     case HARDWARE_PREFIX_SEGA_MEGADRIVE:
-                        if (!endsWith(paths->at(j), "megadriv/")) {
+                        if (!Utility::endsWith(paths->at(j), "megadriv/")) {
                             continue;
                         }
                         break;
                     case HARDWARE_PREFIX_MSX:
-                        if (!endsWith(paths->at(j), "msx/")) {
+                        if (!Utility::endsWith(paths->at(j), "msx/")) {
                             continue;
                         }
                         break;
                     case HARDWARE_PREFIX_SEGA_SG1000:
-                        if (!endsWith(paths->at(j), "sg1000/")) {
+                        if (!Utility::endsWith(paths->at(j), "sg1000/")) {
                             continue;
                         }
                         break;
                     case HARDWARE_PREFIX_SEGA_MASTER_SYSTEM:
-                        if (!endsWith(paths->at(j), "sms/")) {
+                        if (!Utility::endsWith(paths->at(j), "sms/")) {
                             continue;
                         }
                         break;
                     case HARDWARE_PREFIX_PCENGINE:
                         switch (rom->hardware) {
                             case HARDWARE_PCENGINE_PCENGINE:
-                                if (!endsWith(paths->at(j), "pce/")) {
+                                if (!Utility::endsWith(paths->at(j), "pce/")) {
                                     continue;
                                 }
                                 break;
                             case HARDWARE_PCENGINE_TG16:
-                                if (!endsWith(paths->at(j), "tg16/")) {
+                                if (!Utility::endsWith(paths->at(j), "tg16/")) {
                                     continue;
                                 }
                                 break;
                             case HARDWARE_PCENGINE_SGX:
-                                if (!endsWith(paths->at(j), "sgx/")) {
+                                if (!Utility::endsWith(paths->at(j), "sgx/")) {
                                     continue;
                                 }
                                 break;
@@ -164,15 +159,15 @@ void PFBARomList::build() {
                         }
                         break;
                     default:
-                        if (endsWith(paths->at(j), "coleco/")
-                            || endsWith(paths->at(j), "gamegear/")
-                            || endsWith(paths->at(j), "megadriv/")
-                            || endsWith(paths->at(j), "msx/")
-                            || endsWith(paths->at(j), "sg1000/")
-                            || endsWith(paths->at(j), "sms/")
-                            || endsWith(paths->at(j), "pce/")
-                            || endsWith(paths->at(j), "sgx/")
-                            || endsWith(paths->at(j), "tg16/")) {
+                        if (Utility::endsWith(paths->at(j), "coleco/")
+                            || Utility::endsWith(paths->at(j), "gamegear/")
+                            || Utility::endsWith(paths->at(j), "megadriv/")
+                            || Utility::endsWith(paths->at(j), "msx/")
+                            || Utility::endsWith(paths->at(j), "sg1000/")
+                            || Utility::endsWith(paths->at(j), "sms/")
+                            || Utility::endsWith(paths->at(j), "pce/")
+                            || Utility::endsWith(paths->at(j), "sgx/")
+                            || Utility::endsWith(paths->at(j), "tg16/")) {
                             continue;
                         }
                         break;
