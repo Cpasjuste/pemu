@@ -1,4 +1,4 @@
-#include <skeleton/input.h>
+#include "cross2d/skeleton/input.h"
 #include "burner.h"
 
 using namespace c2d;

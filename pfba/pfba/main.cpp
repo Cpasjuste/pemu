@@ -56,8 +56,6 @@ int _newlib_heap_size_user = 192 * 1024 * 1024;
 #endif
 
 Renderer *renderer;
-Input *inp;
-Io *io;
 
 PFBAGui *ui;
 PFBAGuiMenu *uiMenu;
@@ -75,8 +73,6 @@ int main(int argc, char **argv) {
     BurnLibInit();
 
     renderer = new C2DRenderer(Vector2f(SCR_W, SCR_H));
-    inp = new C2DInput();
-    io = new C2DIo();
 
     // load configuration
     int version = (__PFBA_VERSION_MAJOR__ * 100) + __PFBA_VERSION_MINOR__;
@@ -131,7 +127,7 @@ int main(int argc, char **argv) {
 #endif
 
     // gui
-    ui = new PFBAGui(renderer, io, inp, cfg, skin);
+    ui = new PFBAGui(renderer, cfg, skin);
     std::string fba_version = "fba: ";
     fba_version += szAppBurnVer;
     romList = new PFBARomList(ui, fba_version);
@@ -149,8 +145,6 @@ int main(int argc, char **argv) {
     delete (ui);
     delete (skin);
     delete (cfg);
-    delete (io);
-    delete (inp);
     delete (renderer);
 
 #ifdef __PSP2__

@@ -129,7 +129,7 @@ static double nProgressPosBurn = 0;
 
 static int ProgressCreate() {
     nProgressPosBurn = 0;
-    ui->getUiProgressBox()->setVisibility(c2d::C2DObject::Visible);
+    ui->getUiProgressBox()->setVisibility(Visibility::Visible);
     ui->getUiProgressBox()->setLayer(1000);
     return 0;
 }

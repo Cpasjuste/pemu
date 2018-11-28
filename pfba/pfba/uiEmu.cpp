@@ -63,7 +63,7 @@ int PFBAGuiEmu::run(RomList::Rom *rom) {
                "- Corrupt/Missing ROM(s)\n"
                "- I/O Error\n"
                "- Memory error\n\n");
-        getUi()->getUiProgressBox()->setVisibility(Hidden);
+        getUi()->getUiProgressBox()->setVisibility(Visibility::Hidden);
         getUi()->getUiMessageBox()->show("ERROR", "DRIVER INIT FAILED", "OK");
         stop();
         return -1;
@@ -118,7 +118,7 @@ void PFBAGuiEmu::updateFb() {
 void PFBAGuiEmu::renderFrame(bool draw, int drawFps, float fps) {
 
     getFpsText()->setVisibility(
-            drawFps ? Visible : Hidden);
+            drawFps ? Visibility::Visible : Visibility::Hidden);
 
     if (!isPaused()) {
 

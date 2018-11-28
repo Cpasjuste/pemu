@@ -10,9 +10,8 @@
 using namespace c2d;
 using namespace c2dui;
 
-PFBAGui::PFBAGui(Renderer *renderer, Io *io, Input *input,
-                 Config *config, Skin *skin)
-        : UIMain(renderer, io, input, config, skin) {
+PFBAGui::PFBAGui(Renderer *renderer, Config *config, Skin *skin)
+        : UIMain(renderer, config, skin) {
 
     printf("PFBAGui\n");
 }

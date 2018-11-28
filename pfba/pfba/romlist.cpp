@@ -41,7 +41,8 @@ void PFBARomList::build() {
 
         auto *rom = new Rom();
         rom->drv = i;
-        rom->drv_name = rom->path = BurnDrvGetTextA(DRV_NAME);
+        rom->drv_name = BurnDrvGetTextA(DRV_NAME);
+        rom->path = BurnDrvGetTextA(DRV_NAME);
         rom->parent = BurnDrvGetTextA(DRV_PARENT);
         rom->name = BurnDrvGetTextA(DRV_FULLNAME);
         rom->year = BurnDrvGetTextA(DRV_DATE);
@@ -57,7 +58,7 @@ void PFBARomList::build() {
             snprintf(icon_path, 1023, "%sicons/%s.png", ui->getConfig()->getHomePath()->c_str(), rom->drv_name);
             if (ui->getIo()->exist(icon_path)) {
                 rom->icon = new C2DTexture(icon_path);
-                rom->icon->setDeleteMode(C2DObject::DeleteMode::Manual);
+                rom->icon->setDeleteMode(DeleteMode::Manual);
                 if (!rom->icon->available) {
                     delete (rom->icon);
                     rom->icon = nullptr;
@@ -96,12 +97,17 @@ void PFBARomList::build() {
                 continue;
             }
 
-            auto file = std::find(files.at(j).begin(), files.at(j).end(), path);
-            if (file == files.at(j).end()) {
-                file = std::find(files.at(j).begin(), files.at(j).end(), pathUppercase);
+            std::vector<std::string> fileList;
+            for(auto &f : files.at(j)) {
+                fileList.emplace_back(f.name);
             }
 
-            if (file != files.at(j).end()) {
+            auto file = std::find(fileList.begin(), fileList.end(), path);
+            if (file == fileList.end()) {
+                file = std::find(fileList.begin(), fileList.end(), pathUppercase);
+            }
+
+            if (file != fileList.end()) {
 
                 int prefix = (((rom->hardware | HARDWARE_PREFIX_CARTRIDGE) ^ HARDWARE_PREFIX_CARTRIDGE) & 0xff000000);
 
@@ -172,7 +178,7 @@ void PFBARomList::build() {
                         break;
                 }
 
-                rom->path = file->c_str();
+                rom->path = paths->at(j) + file->c_str();
                 rom->state = BurnDrvIsWorking() ? RomState::WORKING : RomState::NOT_WORKING;
                 hardwareList->at(0).available_count++;
 
