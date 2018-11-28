@@ -339,7 +339,7 @@ elseif (BUILD_3DS)
             ${DEVKITPRO}/libctru/lib/libcitro3d.a
             ${DEVKITPRO}/libctru/lib/libctru.a
             m)
-elseif (BUILD_NX)
+elseif (BUILD_SWITCH)
     ##############
     # NX (SWITCH)
     ##############
@@ -441,7 +441,7 @@ endif (BUILD_3DS)
 #####################
 # NX (SWITCH) target
 #####################
-if (BUILD_NX)
+if (BUILD_SWITCH)
     set_target_properties(${PROJECT_NAME}.elf PROPERTIES LINK_FLAGS "-specs=${DEVKITPRO}/libnx/switch.specs")
     add_custom_target(${PROJECT_NAME}.nro
             DEPENDS ${PROJECT_NAME}.elf
@@ -463,4 +463,4 @@ if (BUILD_NX)
             COMMAND cp -f ${CMAKE_CURRENT_SOURCE_DIR}/pfba/data/hiscore.dat ${CMAKE_BINARY_DIR}/release/pfba/hiscores
             COMMAND cd ${CMAKE_BINARY_DIR}/release && zip -r ../${PROJECT_NAME}-${PFBA_VERSION_MAJOR}.${PFBA_VERSION_MINOR}_switch.zip pfba && cd ${CMAKE_BINARY_DIR}
             )
-endif (BUILD_NX)
+endif (BUILD_SWITCH)

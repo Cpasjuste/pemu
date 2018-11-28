@@ -50,8 +50,8 @@ void PFBARomList::build() {
         rom->system = BurnDrvGetTextA(DRV_SYSTEM);
         rom->genre = BurnDrvGetGenreFlags();
         rom->flags = (unsigned int) BurnDrvGetFlags();
+        rom->hardware = (unsigned int) BurnDrvGetHardwareCode();
         rom->state = RomState::MISSING;
-        rom->hardware = BurnDrvGetHardwareCode();
 
         // load icon if needed, only for parent roms
         if (use_icons && !rom->parent) {
