@@ -126,7 +126,7 @@ int PSNESUIEmu::run(RomList::Rom *rom) {
     getUi()->getUiProgressBox()->setTitle(rom->name);
     getUi()->getUiProgressBox()->setMessage("Please wait...");
     getUi()->getUiProgressBox()->setProgress(0);
-    getUi()->getUiProgressBox()->setVisibility(c2d::C2DObject::Visible);
+    getUi()->getUiProgressBox()->setVisibility(Visibility::Visible);
     getUi()->getUiProgressBox()->setLayer(1000);
     getUi()->getRenderer()->flip();
 
@@ -183,14 +183,14 @@ int PSNESUIEmu::run(RomList::Rom *rom) {
 
     if (!Memory.Init() || !S9xInitAPU()) {
         printf("Could not initialize Snes9x Memory.\n");
-        getUi()->getUiProgressBox()->setVisibility(c2d::C2DObject::Hidden);
+        getUi()->getUiProgressBox()->setVisibility(Visibility::Hidden);
         stop();
         return -1;
     }
 
     if (!S9xInitSound(100, 0)) {
         printf("Could not initialize Snes9x Sound.\n");
-        getUi()->getUiProgressBox()->setVisibility(c2d::C2DObject::Hidden);
+        getUi()->getUiProgressBox()->setVisibility(Visibility::Hidden);
         stop();
         return -1;
     }
@@ -221,7 +221,7 @@ int PSNESUIEmu::run(RomList::Rom *rom) {
     S9xSetRenderPixelFormat(RGB565);
 #endif
 
-    std::string file = std::string(*getUi()->getConfig()->getRomPath(0) + rom->path);
+    std::string file = std::string(rom->path);
 #ifdef __SWITCH__
     // can't find a memory leak on switch... seems located in zip loading code...
     // unzip and cache the rom for now...
@@ -241,7 +241,7 @@ int PSNESUIEmu::run(RomList::Rom *rom) {
             unlink(file.c_str());
         }
 #endif
-        getUi()->getUiProgressBox()->setVisibility(c2d::C2DObject::Hidden);
+        getUi()->getUiProgressBox()->setVisibility(Visibility::Hidden);
         getUi()->getUiMessageBox()->show("ERROR", "INVALID ROM", "OK");
         stop();
         return -1;
@@ -309,7 +309,7 @@ int PSNESUIEmu::run(RomList::Rom *rom) {
     getUi()->getUiProgressBox()->setProgress(1);
     getUi()->getRenderer()->flip();
     getUi()->getRenderer()->delay(500);
-    getUi()->getUiProgressBox()->setVisibility(c2d::C2DObject::Hidden);
+    getUi()->getUiProgressBox()->setVisibility(Visibility::Hidden);
 
     return UIEmu::run(rom);
 }
@@ -348,7 +348,7 @@ int PSNESUIEmu::loop() {
 
     // fps
     int showFps = getUi()->getConfig()->getValue(Option::Index::ROM_SHOW_FPS, true);
-    getFpsText()->setVisibility(showFps ? Visible : Hidden);
+    getFpsText()->setVisibility(showFps ? Visibility::Visible : Visibility::Hidden);
     if (showFps) {
         sprintf(getFpsString(), "FPS: %.2g/%2d", getUi()->getRenderer()->getFps(), (int) Memory.ROMFramesPerSecond);
         getFpsText()->setString(getFpsString());

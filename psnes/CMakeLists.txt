@@ -111,7 +111,7 @@ if (BUILD_PSP2)
     # PSP2 PLATORM
     #####################
     list(APPEND SNES9X_LDFLAGS ScePower_stub)
-elseif (BUILD_NX)
+elseif (BUILD_SWITCH)
     #####################
     # NX PLATORM
     #####################
@@ -155,7 +155,7 @@ endif (BUILD_PSP2)
 #####################
 # NX (SWITCH) target
 #####################
-if (BUILD_NX)
+if (BUILD_SWITCH)
     set_target_properties(${PROJECT_NAME}.elf PROPERTIES LINK_FLAGS "-specs=${DEVKITPRO}/libnx/switch.specs")
     add_custom_target(${PROJECT_NAME}.nro
             DEPENDS ${PROJECT_NAME}.elf
@@ -175,4 +175,4 @@ if (BUILD_NX)
             COMMAND cp -f ${CMAKE_CURRENT_SOURCE_DIR}/psnes/data/databases/Super_Nintendo_Entertainment_System_Parent-Clone_20180601-221617_dat-o-matic.xml ${CMAKE_BINARY_DIR}/release/psnes/db.xml
             COMMAND cd ${CMAKE_BINARY_DIR}/release && zip -r ../${PROJECT_NAME}-${PSNES_VERSION_MAJOR}.${PSNES_VERSION_MINOR}_switch.zip psnes && cd ${CMAKE_BINARY_DIR}
             )
-endif (BUILD_NX)
+endif (BUILD_SWITCH)

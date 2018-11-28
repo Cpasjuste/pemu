@@ -72,7 +72,7 @@ void PSNESVideo::updateScaling(bool vertical, bool flip) {
             break;
     }
 
-    setOriginCenter();
+    setOrigin(Origin::Center);
     // remove snes9x border if needed
     float posY = snes9x_height_extended ? screen.y / 2 : (screen.y / 2) * 1.065f;
     float scaleY = snes9x_height_extended || integer_scaling ? sy : sy * 1.065f;

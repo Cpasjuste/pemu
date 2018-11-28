@@ -58,8 +58,6 @@ int _newlib_heap_size_user = 192 * 1024 * 1024;
 #endif
 
 Renderer *renderer;
-Input *inp;
-Io *io;
 
 PSNESUIMenu *uiMenu;
 PSNESUIEmu *uiEmu;
@@ -87,10 +85,6 @@ int main(int argc, char **argv) {
     renderer->getShaderList()->add("HQ2X", nullptr);
 #endif
 #endif
-
-    // create inputs, io
-    inp = new C2DInput();
-    io = new C2DIo();
 
     // load configuration
     int psnes_version = (__PSNES_VERSION_MAJOR__ * 100) + __PSNES_VERSION_MINOR__;
@@ -147,7 +141,7 @@ int main(int argc, char **argv) {
 #endif
 
     // gui
-    ui = new UIMain(renderer, io, inp, cfg, skin);
+    ui = new UIMain(renderer, cfg, skin);
     // build rom list
     std::string snes9x_version = "snes9x ";
     snes9x_version += VERSION;
@@ -169,8 +163,6 @@ int main(int argc, char **argv) {
     delete (ui);
     delete (skin);
     delete (cfg);
-    delete (io);
-    delete (inp);
     delete (renderer);
 
 #ifdef __PSP2__
