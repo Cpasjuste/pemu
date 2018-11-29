@@ -16,12 +16,6 @@
 #include "uiEmu.h"
 #include "video.h"
 
-#ifdef __SWITCH__
-
-#include "unzip_rom.h"
-
-#endif
-
 #ifdef __PSP2__
 
 #include <psp2/io/dirent.h>
@@ -221,38 +215,13 @@ int PSNESUIEmu::run(RomList::Rom *rom) {
     S9xSetRenderPixelFormat(RGB565);
 #endif
 
-    std::string file = std::string(rom->path);
-#ifdef __SWITCH__
-    // can't find a memory leak on switch... seems located in zip loading code...
-    // unzip and cache the rom for now...
-    bool is_zip = Utility::endsWith(file, ".zip");
-    if (is_zip) {
-        std::string sfc_cache = file.substr(0, file.find_last_of('.')) + ".sfc";
-        Unzip::extract(file, sfc_cache);
-        file = sfc_cache;
-    }
-    getUi()->getUiProgressBox()->setProgress(0.5f);
-#endif
-    if (!Memory.LoadROM(file.c_str())) {
-        printf("Could not open ROM: %s\n", file.c_str());
-#ifdef __SWITCH__
-        if (is_zip) {
-            // delete cached file
-            unlink(file.c_str());
-        }
-#endif
+    if (!Memory.LoadROM(rom->path.c_str())) {
+        printf("Could not open ROM: %s\n", rom->path.c_str());
         getUi()->getUiProgressBox()->setVisibility(Visibility::Hidden);
         getUi()->getUiMessageBox()->show("ERROR", "INVALID ROM", "OK");
         stop();
         return -1;
     }
-
-#ifdef __SWITCH__
-    // delete cached file has it's now loaded in memory
-    if (is_zip) {
-        unlink(file.c_str());
-    }
-#endif
 
     Memory.LoadSRAM(S9xGetFilename(".srm", SRAM_DIR));
 
@@ -361,7 +330,7 @@ int PSNESUIEmu::loop() {
         S9xSetSoundMute(TRUE);
     }
 
-    Input::Player *players = getUi()->getInput()->update();
+    Input::Player *players = getUi()->getInput()->getPlayers();
 
     // look for player 1 menu combo
     if (((players[0].state & Input::Key::KEY_START) && (players[0].state & Input::Key::KEY_COIN))) {

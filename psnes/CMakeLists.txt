@@ -84,8 +84,6 @@ if (BUILD_GZIP)
 endif (BUILD_GZIP)
 if (BUILD_ZIP)
     # use libminizip
-    #set(UNZIP_INC snes9x/unzip)
-    #set(UNZIP_SRC snes9x/unzip/ioapi.c snes9x/unzip/unzip.c)
     list(APPEND SNES9X_LDFLAGS minizip)
     list(APPEND SNES9X_CFLAGS -DUNZIP_SUPPORT -DSYSTEM_ZIP)
 endif (BUILD_ZIP)
