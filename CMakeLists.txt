@@ -2,11 +2,11 @@ cmake_minimum_required(VERSION 3.0)
 #set(CMAKE_VERBOSE_MAKEFILE ON)
 
 # delete cmake cache folder before changing a build setting/option
-set(BUILD_LINUX OFF CACHE BOOL "Build with Linux support")
+set(BUILD_LINUX ON CACHE BOOL "Build with Linux support")
 set(BUILD_WINDOWS OFF CACHE BOOL "Build with Windows support")
 set(BUILD_VITA OFF CACHE BOOL "Build with PSP2 support")
 set(BUILD_3DS OFF CACHE BOOL "Build with 3DS support")
-set(BUILD_SWITCH ON CACHE BOOL "Build with Nintendo Switch support")
+set(BUILD_SWITCH OFF CACHE BOOL "Build with Nintendo Switch support")
 
 set(UPDATE_CONFIG OFF CACHE BOOL "Force config file updating")
 

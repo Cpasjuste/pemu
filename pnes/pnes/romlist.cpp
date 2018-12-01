@@ -44,19 +44,16 @@ void PNESRomList::build() {
             // load icon if needed, only for parent roms
             if (use_icons && !rom->parent) {
                 // try removing the extension (drv_name has extension (.zip, .smc) with psnes and no db.xml)
-                char *drv_name_no_ext = Utility::removeExt(rom->drv_name, '/');
-                if (drv_name_no_ext) {
-                    snprintf(icon_path, 1023, "%sicons/%s.png",
-                             ui->getConfig()->getHomePath()->c_str(), drv_name_no_ext);
-                    if (ui->getIo()->exist(icon_path)) {
-                        rom->icon = new C2DTexture(icon_path);
-                        rom->icon->setDeleteMode(DeleteMode::Manual);
-                        if (!rom->icon->available) {
-                            delete (rom->icon);
-                            rom->icon = nullptr;
-                        }
+                std::string name = Utility::removeExt(rom->drv_name);
+                snprintf(icon_path, 1023, "%sicons/%s.png",
+                         ui->getConfig()->getHomePath()->c_str(), name.c_str());
+                if (ui->getIo()->exist(icon_path)) {
+                    rom->icon = new C2DTexture(icon_path);
+                    rom->icon->setDeleteMode(DeleteMode::Manual);
+                    if (!rom->icon->available) {
+                        delete (rom->icon);
+                        rom->icon = nullptr;
                     }
-                    free(drv_name_no_ext);
                 }
             }
             list.push_back(rom);
