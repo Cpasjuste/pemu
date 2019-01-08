@@ -15,7 +15,6 @@
 
 using namespace c2dui;
 
-UIMain *uiMain = nullptr;
 extern PNESGuiEmu *uiEmu;
 
 /// NESTOPIA
@@ -33,7 +32,6 @@ extern Emulator emulator;
 PNESGuiEmu::PNESGuiEmu(UIMain *ui) : UIEmu(ui) {
 
     printf("PNESGuiEmu()\n");
-    uiMain = getUi();
 }
 
 int PNESGuiEmu::run(RomList::Rom *rom) {
@@ -89,13 +87,13 @@ int PNESGuiEmu::loop() {
     c2d::Input::Player *players = getUi()->getInput()->update();
 
     // look for player 1 menu combo
-    if (((players[0].state & c2d::Input::Key::KEY_START) && (players[0].state & c2d::Input::Key::KEY_COIN))) {
+    if (((players[0].keys & c2d::Input::Key::Start) && (players[0].keys & c2d::Input::Key::Select))) {
         pause();
         return UI_KEY_SHOW_MEMU_ROM;
-    } else if (((players[0].state & c2d::Input::Key::KEY_START) && (players[0].state & c2d::Input::Key::KEY_FIRE5))
-               || ((players[0].state & c2d::Input::Key::KEY_COIN) && (players[0].state & c2d::Input::Key::KEY_FIRE5))
-               || ((players[0].state & c2d::Input::Key::KEY_START) && (players[0].state & c2d::Input::Key::KEY_FIRE6))
-               || ((players[0].state & c2d::Input::Key::KEY_COIN) && (players[0].state & c2d::Input::Key::KEY_FIRE6))) {
+    } else if (((players[0].keys & c2d::Input::Key::Start) && (players[0].keys & c2d::Input::Key::Fire5))
+               || ((players[0].keys & c2d::Input::Key::Select) && (players[0].keys & c2d::Input::Key::Fire5))
+               || ((players[0].keys & c2d::Input::Key::Start) && (players[0].keys & c2d::Input::Key::Fire6))
+               || ((players[0].keys & c2d::Input::Key::Select) && (players[0].keys & c2d::Input::Key::Fire6))) {
         pause();
         return UI_KEY_SHOW_MEMU_ROM;
     }
@@ -117,7 +115,7 @@ int PNESGuiEmu::loop() {
     */
 
     // look for window resize event
-    if (players[0].state & EV_RESIZE) {
+    if (players[0].keys & EV_RESIZE) {
         // useful for sdl resize event
         getVideo()->updateScaling();
     }
@@ -129,29 +127,29 @@ int PNESGuiEmu::loop() {
 
             cNstPads->pad[i].buttons = 0;
 
-            cNstPads->pad[i].buttons |= (players[i].state & c2d::Input::Key::KEY_START) > 0 ?
+            cNstPads->pad[i].buttons |= (players[i].keys & c2d::Input::Key::Start) > 0 ?
                                         Input::Controllers::Pad::START : 0;
-            cNstPads->pad[i].buttons |= (players[i].state & c2d::Input::Key::KEY_COIN) > 0 ?
+            cNstPads->pad[i].buttons |= (players[i].keys & c2d::Input::Key::Select) > 0 ?
                                         Input::Controllers::Pad::SELECT : 0;
-            cNstPads->pad[i].buttons |= (players[i].state & c2d::Input::Key::KEY_UP) > 0 ?
+            cNstPads->pad[i].buttons |= (players[i].keys & c2d::Input::Key::Up) > 0 ?
                                         Input::Controllers::Pad::UP : 0;
-            cNstPads->pad[i].buttons |= (players[i].state & c2d::Input::Key::KEY_DOWN) > 0 ?
+            cNstPads->pad[i].buttons |= (players[i].keys & c2d::Input::Key::Down) > 0 ?
                                         Input::Controllers::Pad::DOWN : 0;
-            cNstPads->pad[i].buttons |= (players[i].state & c2d::Input::Key::KEY_LEFT) > 0 ?
+            cNstPads->pad[i].buttons |= (players[i].keys & c2d::Input::Key::Left) > 0 ?
                                         Input::Controllers::Pad::LEFT : 0;
-            cNstPads->pad[i].buttons |= (players[i].state & c2d::Input::Key::KEY_RIGHT) > 0 ?
+            cNstPads->pad[i].buttons |= (players[i].keys & c2d::Input::Key::Right) > 0 ?
                                         Input::Controllers::Pad::RIGHT : 0;
-            cNstPads->pad[i].buttons |= (players[i].state & c2d::Input::Key::KEY_FIRE1) > 0 ?
+            cNstPads->pad[i].buttons |= (players[i].keys & c2d::Input::Key::Fire1) > 0 ?
                                         Input::Controllers::Pad::B : 0;
-            cNstPads->pad[i].buttons |= (players[i].state & c2d::Input::Key::KEY_FIRE2) > 0 ?
+            cNstPads->pad[i].buttons |= (players[i].keys & c2d::Input::Key::Fire2) > 0 ?
                                         Input::Controllers::Pad::A : 0;
-            cNstPads->pad[i].buttons |= (players[i].state & c2d::Input::Key::KEY_FIRE4) > 0 ?
+            cNstPads->pad[i].buttons |= (players[i].keys & c2d::Input::Key::Fire4) > 0 ?
                                         Input::Controllers::Pad::B : 0;
-            cNstPads->pad[i].buttons |= (players[i].state & c2d::Input::Key::KEY_FIRE5) > 0 ?
+            cNstPads->pad[i].buttons |= (players[i].keys & c2d::Input::Key::Fire5) > 0 ?
                                         Input::Controllers::Pad::A : 0;
         }
 
-        if (players[0].state & c2d::Input::Key::KEY_FIRE3) {
+        if (players[0].keys & c2d::Input::Key::Fire3) {
             nst_set_rewind(0);
         } else if (Rewinder(emulator).GetDirection() == Rewinder::BACKWARD) {
             nst_set_rewind(1);
