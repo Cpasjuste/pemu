@@ -7,3 +7,6 @@
 [submodule "cores/fba"]
 	path = cores/fba
 	url = git@gitlab.com:cpasjuste/fba.git
+[submodule "libcross2dui"]
+	path = libcross2dui
+	url = git@github.com:Cpasjuste/libcross2dui.git
