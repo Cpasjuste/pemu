@@ -220,41 +220,41 @@ int PFBAGuiEmu::loop() {
     Input::Player *players = getUi()->getInput()->getPlayers();
 
     // look for player 1 menu combo
-    if (((players[0].state & Input::Key::KEY_START) && (players[0].state & Input::Key::KEY_FIRE5))
-        || ((players[0].state & Input::Key::KEY_COIN) && (players[0].state & Input::Key::KEY_FIRE5))
-        || ((players[0].state & Input::Key::KEY_START) && (players[0].state & Input::Key::KEY_FIRE6))
-        || ((players[0].state & Input::Key::KEY_COIN) && (players[0].state & Input::Key::KEY_FIRE6))) {
+    if (((players[0].keys & Input::Key::Start) && (players[0].keys & Input::Key::Fire5))
+        || ((players[0].keys & Input::Key::Select) && (players[0].keys & Input::Key::Fire5))
+        || ((players[0].keys & Input::Key::Start) && (players[0].keys & Input::Key::Fire6))
+        || ((players[0].keys & Input::Key::Select) && (players[0].keys & Input::Key::Fire6))) {
         pause();
         return UI_KEY_SHOW_MEMU_ROM;
     }
 
     // look each players for combos keys
-    for (int i = 0; i < PLAYER_COUNT; i++) {
+    for (int i = 0; i < PLAYER_MAX; i++) {
         // allow devices with single select/start button to send start/coins (nsw in single joycon mode)
-        if (((players[i].state & Input::Key::KEY_START) && (players[i].state & Input::Key::KEY_FIRE1))
-            || ((players[i].state & Input::Key::KEY_COIN) && (players[i].state & Input::Key::KEY_FIRE1))) {
-            players[i].state = Input::Key::KEY_START;
+        if (((players[i].keys & Input::Key::Start) && (players[i].keys & Input::Key::Fire1))
+            || ((players[i].keys & Input::Key::Select) && (players[i].keys & Input::Key::Fire1))) {
+            players[i].keys = Input::Key::Start;
             combo = true;
-        } else if (((players[i].state & Input::Key::KEY_START) && (players[i].state & Input::Key::KEY_FIRE2))
-                   || ((players[i].state & Input::Key::KEY_COIN) && (players[i].state & Input::Key::KEY_FIRE2))) {
-            players[i].state = Input::Key::KEY_COIN;
+        } else if (((players[i].keys & Input::Key::Start) && (players[i].keys & Input::Key::Fire2))
+                   || ((players[i].keys & Input::Key::Select) && (players[i].keys & Input::Key::Fire2))) {
+            players[i].keys = Input::Key::Select;
             combo = true;
         }
     }
 
     // look for player 1 combos key
     if (!combo) {
-        if (((players[0].state & Input::Key::KEY_START) && (players[0].state & Input::Key::KEY_FIRE3))
-            || ((players[0].state & Input::Key::KEY_COIN) && (players[0].state & Input::Key::KEY_FIRE3))) {
+        if (((players[0].keys & Input::Key::Start) && (players[0].keys & Input::Key::Fire3))
+            || ((players[0].keys & Input::Key::Select) && (players[0].keys & Input::Key::Fire3))) {
             inputServiceSwitch = 1;
-        } else if (((players[0].state & Input::Key::KEY_START) && (players[0].state & Input::Key::KEY_FIRE4))
-                   || ((players[0].state & Input::Key::KEY_COIN) && (players[0].state & Input::Key::KEY_FIRE4))) {
+        } else if (((players[0].keys & Input::Key::Start) && (players[0].keys & Input::Key::Fire4))
+                   || ((players[0].keys & Input::Key::Select) && (players[0].keys & Input::Key::Fire4))) {
             inputP1P2Switch = 1;
         }
     }
 
     // look for window resize event
-    if (players[0].state & EV_RESIZE) {
+    if (players[0].keys & EV_RESIZE) {
         // useful for sdl resize event
         getVideo()->updateScaling();
     }

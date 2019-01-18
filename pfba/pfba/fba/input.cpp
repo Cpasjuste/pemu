@@ -69,8 +69,7 @@ int DoInputBlank(int /*bDipSwitch*/) {
         if ((bii.szInfo[0] == 'p') || (bii.szInfo[0] == 'm')) {
             if (bii.szInfo[0] == 'm') iJoyNum = 0; else iJoyNum = bii.szInfo[1] - '1';
             ///if (iJoyNum > 3)	iJoyNum = 3;	// Sperimental fix
-        }
-        else {
+        } else {
             if (strcmp(bii.szInfo, "diag") == 0 || strcmp(bii.szInfo, "test") == 0) {
                 ServiceDip = bii.pVal;
             }
@@ -290,7 +289,7 @@ int InpMake(Input::Player *players) {
         *(ServiceDip) = inputServiceSwitch;
     }
 
-    for (short joyNum = 0; joyNum < PLAYER_COUNT; joyNum++) {
+    for (short joyNum = 0; joyNum < PLAYER_MAX; joyNum++) {
 
         if (!players[joyNum].enabled) {
             continue;
@@ -303,7 +302,7 @@ int InpMake(Input::Player *players) {
 
             if (GameInput[joyNum][i].nBit >= 0) {
 
-                down = players[joyNum].state & (1U << GameInput[joyNum][i].nBit);
+                down = players[joyNum].keys & (1U << GameInput[joyNum][i].nBit);
 
                 if (GameInput[joyNum][i].nType != 1) {
 
