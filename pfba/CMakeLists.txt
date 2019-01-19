@@ -282,7 +282,7 @@ set(FLAGS
 #################
 # PSP2 (ps vita)
 #################
-if (BUILD_PSP2)
+if (BUILD_VITA)
     #list(APPEND INC pfba/cpu/cyclone)
     #list(APPEND SRC_PFBA pfba/cpu/cyclone/Cyclone.s)
     list(APPEND FLAGS -DNO_KEYBOARD -DBUILD_C68K -DUSE_FILE32API -DLSB_FIRST)
@@ -346,11 +346,12 @@ elseif (BUILD_SWITCH)
     list(APPEND FLAGS
             -DNO_KEYBOARD -DUSE_FILE32API -DLSB_FIRST
             -ffunction-sections -fomit-frame-pointer)
-elseif (BUILD_SDL2)
+elseif (BUILD_LINUX)
     ##############
     # SDL2
     ##############
     list(APPEND FLAGS -DLSB_FIRST)
+ #[[
 elseif (BUILD_SDL1)
     ##############
     # SDL1
@@ -361,7 +362,8 @@ elseif (BUILD_SFML)
     # SFML
     ##############
     list(APPEND FLAGS -DLSB_FIRST)
-endif (BUILD_PSP2)
+]]
+endif (BUILD_VITA)
 
 # source files
 set(SRC ${SRC_PFBA} ${SRC_CPU} ${SRC_DRV} ${SRC_BURN} ${SRC_BURNER} ${SRC_INTF} ${SRC_7Z})
@@ -405,7 +407,7 @@ add_dependencies(${PROJECT_NAME}.elf ${PROJECT_NAME}.data)
 #####################
 # PSP2 (vita) vpk
 #####################
-if (BUILD_PSP2)
+if (BUILD_VITA)
     add_custom_target(${PROJECT_NAME}.vpk
             DEPENDS ${PROJECT_NAME}.elf
             COMMAND rm -rf vpk && mkdir -p vpk/sce_sys
@@ -416,7 +418,7 @@ if (BUILD_PSP2)
             COMMAND cp -r ${CMAKE_SOURCE_DIR}/pfba/data/psp2/* vpk
             COMMAND cd vpk && zip -r ../${PROJECT_NAME}-${PFBA_VERSION_MAJOR}.${PFBA_VERSION_MINOR}_vita.vpk . && cd ..
             )
-endif (BUILD_PSP2)
+endif (BUILD_VITA)
 
 #####################
 # PS3
