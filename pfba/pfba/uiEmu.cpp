@@ -109,9 +109,9 @@ void PFBAGuiEmu::updateFb() {
         nFramesEmulated++;
         nCurrentFrame++;
         nFramesRendered++;
-        getVideo()->lock(nullptr, (void **) &pBurnDraw, &nBurnPitch);
+        getVideo()->getTexture()->lock(nullptr, (void **) &pBurnDraw, &nBurnPitch);
         BurnDrvFrame();
-        getVideo()->unlock();
+        getVideo()->getTexture()->unlock();
     }
 }
 
@@ -128,11 +128,11 @@ void PFBAGuiEmu::renderFrame(bool draw, int drawFps, float fps) {
         pBurnDraw = nullptr;
         if (draw) {
             nFramesRendered++;
-            getVideo()->lock(nullptr, (void **) &pBurnDraw, &nBurnPitch);
+            getVideo()->getTexture()->lock(nullptr, (void **) &pBurnDraw, &nBurnPitch);
         }
         BurnDrvFrame();
         if (draw) {
-            getVideo()->unlock();
+            getVideo()->getTexture()->unlock();
         }
 
         if (drawFps) {

@@ -62,7 +62,7 @@ void nst_ogl_init() {
 
     uiEmu->addVideo(uiEmu->getUi(), nullptr, nullptr,
                     {basesize.w, basesize.h}, Texture::Format::RGB565);
-    uiEmu->getVideo()->setFilter(
+    uiEmu->getVideo()->getTexture()->setFilter(
             conf.video_linear_filter ? Texture::Filter::Linear : Texture::Filter::Point);
 }
 
@@ -407,8 +407,8 @@ void video_set_dimensions() {
 
 long video_lock_screen(void *&ptr) {
 
-    uiEmu->getVideo()->lock(nullptr, &ptr, nullptr);
-    return basesize.w * uiEmu->getVideo()->bpp;
+    uiEmu->getVideo()->getTexture()->lock(nullptr, &ptr, nullptr);
+    return basesize.w * uiEmu->getVideo()->getTexture()->bpp;
 }
 
 void video_unlock_screen(void *) {
@@ -425,7 +425,7 @@ void video_unlock_screen(void *) {
         nst_video_text_draw(osdtext.timebuf, 208 * xscale, 218 * yscale, false);
     }
 
-    uiEmu->getVideo()->unlock();
+    uiEmu->getVideo()->getTexture()->unlock();
 }
 
 void video_screenshot_flip(unsigned char *pixels, int width, int height, int bytes) {
@@ -450,9 +450,9 @@ void video_screenshot(const char *filename) {
         char sshotpath[512];
         snprintf(sshotpath, sizeof(sshotpath), "%sscreenshots/%s-%ld-%d.png", nstpaths.nstdir, nstpaths.gamename,
                  time(nullptr), rand() % 899 + 100);
-        uiEmu->getVideo()->save(sshotpath);
+        uiEmu->getVideo()->getTexture()->save(sshotpath);
     } else {
-        uiEmu->getVideo()->save(filename);
+        uiEmu->getVideo()->getTexture()->save(filename);
     }
 }
 
@@ -461,7 +461,7 @@ void video_clear_buffer() {
     void *ptr;
     int pitch;
 
-    uiEmu->getVideo()->lock(nullptr, &ptr, &pitch);
+    uiEmu->getVideo()->getTexture()->lock(nullptr, &ptr, &pitch);
     memset(ptr, 0x00000000, (size_t) uiEmu->getVideo()->getTextureRect().height * pitch);
 }
 
@@ -515,7 +515,7 @@ void nst_video_text_draw(const char *text, int xpos, int ypos, bool bg) {
 
     uint32_t *videobuf;
 
-    uiEmu->getVideo()->lock(nullptr, (void **) &videobuf, nullptr);
+    uiEmu->getVideo()->getTexture()->lock(nullptr, (void **) &videobuf, nullptr);
 
     if (bg) { // Draw background borders
         for (int i = 0; i < numchars * 8; i++) { // Rows above and below
