@@ -134,10 +134,12 @@ int main(int argc, char **argv) {
     uiEmu = new PNESGuiEmu(ui);
     uiState = new PNESUIStateMenu(ui);
     ui->init(uiRomList, uiMenu, uiEmu, uiState);
-    ui->run();
+    renderer->add(ui);
 
-    // quit
-    delete (ui);
+    while (!ui->done) {
+        renderer->flip();
+    }
+
     delete (skin);
     delete (cfg);
     delete (renderer);

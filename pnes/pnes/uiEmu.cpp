@@ -74,17 +74,7 @@ void PNESGuiEmu::stop() {
     UIEmu::stop();
 }
 
-int PNESGuiEmu::loop() {
-
-    // fps
-    int showFps = getUi()->getConfig()->getValue(Option::Index::ROM_SHOW_FPS, true);
-    getFpsText()->setVisibility(showFps ? c2d::Visibility::Visible : c2d::Visibility::Hidden);
-    if (showFps) {
-        sprintf(getFpsString(), "FPS: %.2g/%2d", getUi()->getRenderer()->getFps(), 60);
-        getFpsText()->setString(getFpsString());
-    }
-
-    c2d::Input::Player *players = getUi()->getInput()->update();
+bool PNESGuiEmu::onInput(c2d::Input::Player *players) {
 
     // look for player 1 menu combo
     if (((players[0].keys & c2d::Input::Key::Start) && (players[0].keys & c2d::Input::Key::Select))) {
@@ -154,13 +144,28 @@ int PNESGuiEmu::loop() {
         } else if (Rewinder(emulator).GetDirection() == Rewinder::BACKWARD) {
             nst_set_rewind(1);
         }
+    }
+
+    return true;
+}
+
+void PNESGuiEmu::onDraw(c2d::Transform &transform) {
+
+    if (!isPaused()) {
+
+        // fps
+        int showFps = getUi()->getConfig()->getValue(Option::Index::ROM_SHOW_FPS, true);
+        getFpsText()->setVisibility(showFps ? c2d::Visibility::Visible : c2d::Visibility::Hidden);
+        if (showFps) {
+            sprintf(getFpsString(), "FPS: %.2g/%2d", getUi()->getRenderer()->getFps(),
+                    nst_pal() ? (conf.timing_speed / 6) * 5 : conf.timing_speed);
+            getFpsText()->setString(getFpsString());
+        }
 
         nst_emuloop();
     }
 
-    getUi()->getRenderer()->flip();
-
-    return 0;
+    UIEmu::onDraw(transform);
 }
 
 /// NESTOPIA
@@ -171,12 +176,12 @@ void (*audio_deinit)();
 void audio_deinit_dummy() {}
 
 void audio_init() {
-    uiEmu->addAudio(48000, nst_pal() ? (conf.timing_speed / 6) * 5 : conf.timing_speed);
+    uiEmu->addAudio(conf.audio_sample_rate, nst_pal() ? (conf.timing_speed / 6) * 5 : conf.timing_speed);
 }
 
 void audio_play() {
     if (uiEmu->getAudio()) {
-        uiEmu->getAudio()->play();
+        uiEmu->getAudio()->play(true);
     }
 }
 
@@ -200,7 +205,7 @@ void audio_set_params(Sound::Output *soundoutput) {
         // Set audio parameters
         Sound sound(emulator);
         sound.SetSampleBits(16);
-        sound.SetSampleRate(48000);
+        sound.SetSampleRate((ulong) conf.audio_sample_rate);
         sound.SetSpeaker(Sound::SPEAKER_STEREO);
         sound.SetSpeed(Sound::DEFAULT_SPEED);
         //audio_adj_volume();
@@ -240,7 +245,7 @@ void PNESGuiEmu::nestopia_config_init() {
 
     // Audio
     conf.audio_api = 0;
-    conf.audio_stereo = true;
+    conf.audio_stereo = false;
     conf.audio_sample_rate = 48000;
     conf.audio_volume = 85;
     conf.audio_vol_sq1 = 85;
@@ -260,7 +265,7 @@ void PNESGuiEmu::nestopia_config_init() {
     conf.timing_ffspeed = 3;
     conf.timing_turbopulse = 3;
     conf.timing_vsync = true;
-    conf.timing_limiter = false;
+    conf.timing_limiter = true;
 
     // Misc
     conf.misc_default_system = 0;
