@@ -30,11 +30,10 @@ extern Emulator emulator;
 /// NESTOPIA
 
 PNESGuiEmu::PNESGuiEmu(UIMain *ui) : UIEmu(ui) {
-
     printf("PNESGuiEmu()\n");
 }
 
-int PNESGuiEmu::run(RomList::Rom *rom) {
+int PNESGuiEmu::load(RomList::Rom *rom) {
 
     getUi()->getUiProgressBox()->setTitle(rom->name);
     getUi()->getUiProgressBox()->setMessage("Please wait...");
@@ -58,7 +57,7 @@ int PNESGuiEmu::run(RomList::Rom *rom) {
     getUi()->delay(500);
     getUi()->getUiProgressBox()->setVisibility(c2d::Visibility::Hidden);
 
-    return UIEmu::run(rom);
+    return UIEmu::load(rom);
 }
 
 void PNESGuiEmu::stop() {
@@ -76,16 +75,25 @@ void PNESGuiEmu::stop() {
 
 bool PNESGuiEmu::onInput(c2d::Input::Player *players) {
 
+    if (getUi()->getUiMenu()->isVisible()
+        || getUi()->getUiStateMenu()->isVisible()) {
+        return UIEmu::onInput(players);
+    }
+
     // look for player 1 menu combo
     if (((players[0].keys & c2d::Input::Key::Start) && (players[0].keys & c2d::Input::Key::Select))) {
         pause();
-        return UI_KEY_SHOW_MEMU_ROM;
+        getUi()->getConfig()->load(getUi()->getUiRomList()->getSelection());
+        getUi()->getUiMenu()->load(true);
+        return true;
     } else if (((players[0].keys & c2d::Input::Key::Start) && (players[0].keys & c2d::Input::Key::Fire5))
                || ((players[0].keys & c2d::Input::Key::Select) && (players[0].keys & c2d::Input::Key::Fire5))
                || ((players[0].keys & c2d::Input::Key::Start) && (players[0].keys & c2d::Input::Key::Fire6))
                || ((players[0].keys & c2d::Input::Key::Select) && (players[0].keys & c2d::Input::Key::Fire6))) {
         pause();
-        return UI_KEY_SHOW_MEMU_ROM;
+        getUi()->getConfig()->load(getUi()->getUiRomList()->getSelection());
+        getUi()->getUiMenu()->load(true);
+        return true;
     }
 
     // TODO: this cause some problem where we can't send start or select on handled mode
@@ -110,11 +118,31 @@ bool PNESGuiEmu::onInput(c2d::Input::Player *players) {
         getVideo()->updateScaling();
     }
 
+    return true;
+}
+
+void PNESGuiEmu::onDraw(c2d::Transform &transform) {
+
     if (!isPaused()) {
+        // fps
+        int showFps = getUi()->getConfig()->getValue(Option::Index::ROM_SHOW_FPS, true);
+        getFpsText()->setVisibility(showFps ? c2d::Visibility::Visible : c2d::Visibility::Hidden);
+        if (showFps) {
+            sprintf(getFpsString(), "FPS: %.2g/%2d", getUi()->getFps(),
+                    nst_pal() ? (conf.timing_speed / 6) * 5 : conf.timing_speed);
+            getFpsText()->setString(getFpsString());
+        }
 
         // update nestopia buttons
-        for (int i = 0; i < NUMGAMEPADS; i++) {
+        auto players = getUi()->getInput()->getPlayers();
 
+        if (players[0].keys & c2d::Input::Key::Fire3) {
+            nst_set_rewind(0);
+        } else if (Rewinder(emulator).GetDirection() == Rewinder::BACKWARD) {
+            nst_set_rewind(1);
+        }
+
+        for (int i = 0; i < NUMGAMEPADS; i++) {
             cNstPads->pad[i].buttons = 0;
 
             cNstPads->pad[i].buttons |= (players[i].keys & c2d::Input::Key::Start) > 0 ?
@@ -139,29 +167,7 @@ bool PNESGuiEmu::onInput(c2d::Input::Player *players) {
                                         Input::Controllers::Pad::A : 0;
         }
 
-        if (players[0].keys & c2d::Input::Key::Fire3) {
-            nst_set_rewind(0);
-        } else if (Rewinder(emulator).GetDirection() == Rewinder::BACKWARD) {
-            nst_set_rewind(1);
-        }
-    }
-
-    return true;
-}
-
-void PNESGuiEmu::onDraw(c2d::Transform &transform) {
-
-    if (!isPaused()) {
-
-        // fps
-        int showFps = getUi()->getConfig()->getValue(Option::Index::ROM_SHOW_FPS, true);
-        getFpsText()->setVisibility(showFps ? c2d::Visibility::Visible : c2d::Visibility::Hidden);
-        if (showFps) {
-            sprintf(getFpsString(), "FPS: %.2g/%2d", getUi()->getFps(),
-                    nst_pal() ? (conf.timing_speed / 6) * 5 : conf.timing_speed);
-            getFpsText()->setString(getFpsString());
-        }
-
+        // step nestopia core
         nst_emuloop();
     }
 

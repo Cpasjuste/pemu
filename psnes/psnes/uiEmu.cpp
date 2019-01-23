@@ -115,7 +115,7 @@ PSNESUIEmu::PSNESUIEmu(UIMain *ui) : UIEmu(ui) {
     _ui = ui;
 }
 
-int PSNESUIEmu::run(RomList::Rom *rom) {
+int PSNESUIEmu::load(RomList::Rom *rom) {
 
     getUi()->getUiProgressBox()->setTitle(rom->name);
     getUi()->getUiProgressBox()->setMessage("Please wait...");
@@ -280,7 +280,7 @@ int PSNESUIEmu::run(RomList::Rom *rom) {
     getUi()->getRenderer()->delay(500);
     getUi()->getUiProgressBox()->setVisibility(Visibility::Hidden);
 
-    return UIEmu::run(rom);
+    return UIEmu::load(rom);
 }
 
 void PSNESUIEmu::stop() {

@@ -29,7 +29,7 @@ PFBAGuiEmu::PFBAGuiEmu(UIMain *ui) : UIEmu(ui) {
     printf("PFBAGuiEmu()\n");
 }
 
-int PFBAGuiEmu::run(RomList::Rom *rom) {
+int PFBAGuiEmu::load(RomList::Rom *rom) {
 
     ///////////
     // AUDIO
@@ -92,7 +92,7 @@ int PFBAGuiEmu::run(RomList::Rom *rom) {
     // VIDEO
     //////////
 
-    return UIEmu::run(rom);
+    return UIEmu::load(rom);
 }
 
 void PFBAGuiEmu::stop() {

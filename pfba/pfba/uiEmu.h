@@ -13,7 +13,7 @@ public:
 
     PFBAGuiEmu(c2dui::UIMain *ui);
 
-    int run(c2dui::RomList::Rom *rom);
+    int load(c2dui::RomList::Rom *rom);
 
     void stop();
 

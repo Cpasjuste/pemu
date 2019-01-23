@@ -17,7 +17,7 @@ public:
 
     void onDraw(c2d::Transform &transform) override;
 
-    int run(c2dui::RomList::Rom *rom) override;
+    int load(c2dui::RomList::Rom *rom) override;
 
     void stop() override;
 
