@@ -11,21 +11,23 @@ class PFBAGuiEmu : public c2dui::UIEmu {
 
 public:
 
-    PFBAGuiEmu(c2dui::UIMain *ui);
+    explicit PFBAGuiEmu(c2dui::UIMain *ui);
+
+    int load(c2dui::RomList::Rom *rom) override;
+
+    void stop() override;
+
+    void updateFb() override;
+
+private:
 
     bool onInput(c2d::Input::Player *players) override;
 
     void onDraw(c2d::Transform &transform) override;
 
-    int load(c2dui::RomList::Rom *rom);
+    void updateFrame() override;
 
-    void stop();
-
-    void updateFb();
-
-    void updateFrame();
-
-    void renderFrame(bool draw = true, int drawFps = false, float fps = 0);
+    void renderFrame(bool draw = true);
 };
 
 #endif //PFBA_UIEMU_H

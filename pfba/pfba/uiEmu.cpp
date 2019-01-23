@@ -120,10 +120,7 @@ void PFBAGuiEmu::updateFb() {
     }
 }
 
-void PFBAGuiEmu::renderFrame(bool draw, int drawFps, float fps) {
-
-    getFpsText()->setVisibility(
-            drawFps ? Visibility::Visible : Visibility::Hidden);
+void PFBAGuiEmu::renderFrame(bool draw) {
 
     if (!isPaused()) {
 
@@ -140,11 +137,6 @@ void PFBAGuiEmu::renderFrame(bool draw, int drawFps, float fps) {
             getVideo()->getTexture()->unlock();
         }
 
-        if (drawFps) {
-            sprintf(getFpsString(), "FPS: %.2g/%2d", fps, (nBurnFPS / 100));
-            getFpsText()->setString(getFpsString());
-        }
-
         if (getAudio() && getAudio()->isAvailable()) {
             getAudio()->play();
         }
@@ -153,31 +145,18 @@ void PFBAGuiEmu::renderFrame(bool draw, int drawFps, float fps) {
 
 void PFBAGuiEmu::updateFrame() {
 
-    int showFps = getUi()->getConfig()->getValue(Option::Index::ROM_SHOW_FPS, true);
-    int frameSkip = getUi()->getConfig()->getValue(Option::Index::ROM_FRAMESKIP, true);
+    // TODO
+    //int frameSkip = getUi()->getConfig()->getValue(Option::Index::ROM_FRAMESKIP, true);
 
-    if (frameSkip) {
-        bool draw = nFramesEmulated % (frameSkip + 1) == 0;
-        renderFrame(draw, showFps, getUi()->getFps());
-        //getUi()->flip(draw);
-        float delta = getUi()->getDeltaTime().asSeconds();
-        if (delta < getFrameDuration()) { // limit fps
-            //printf("f: %f | d: %f | m: %f | s: %i\n", frame_duration, delta, frame_duration - delta,
-            //       (unsigned int) ((frame_duration - delta) * 1000));
-            getUi()->delay((unsigned int) ((getFrameDuration() - delta) * 1000));
-        }
-    } else {
-        renderFrame(true, showFps, getUi()->getFps());
-        //getUi()->flip();
-        /*
-        timer += getUi()->getDeltaTime().asSeconds();
-        if (timer >= 1) {
-            timer = 0;
-            printf("fps: %.2g/%2d, delta: %f\n", getUi()->getFps(), (nBurnFPS / 100),
-                   getUi()->getDeltaTime().asSeconds());
-        }
-        */
+    renderFrame();
+    /*
+    timer += getUi()->getDeltaTime().asSeconds();
+    if (timer >= 1) {
+        timer = 0;
+        printf("fps: %.2g/%2d, delta: %f\n", getUi()->getFps(), (nBurnFPS / 100),
+               getUi()->getDeltaTime().asSeconds());
     }
+    */
 }
 
 bool PFBAGuiEmu::onInput(c2d::Input::Player *players) {
@@ -188,6 +167,7 @@ bool PFBAGuiEmu::onInput(c2d::Input::Player *players) {
     }
 
     bool combo = false;
+    // TODO: control rotation
     int rotation_config =
             getUi()->getConfig()->getValue(Option::Index::ROM_ROTATION, true);
     int rotate_input = 0;
@@ -224,8 +204,6 @@ bool PFBAGuiEmu::onInput(c2d::Input::Player *players) {
 
     inputServiceSwitch = 0;
     inputP1P2Switch = 0;
-
-    // TODO: control rotation
 
     // look for player 1 menu combo
     if (((players[0].keys & Input::Key::Start) && (players[0].keys & Input::Key::Fire5))
@@ -275,6 +253,15 @@ bool PFBAGuiEmu::onInput(c2d::Input::Player *players) {
 void PFBAGuiEmu::onDraw(c2d::Transform &transform) {
 
     if (!isPaused()) {
+
+        // fps
+        int showFps = getUi()->getConfig()->getValue(Option::Index::ROM_SHOW_FPS, true);
+        getFpsText()->setVisibility(showFps ? c2d::Visibility::Visible : c2d::Visibility::Hidden);
+        if (showFps) {
+            sprintf(getFpsString(), "FPS: %.2g/%2d", getUi()->getFps(), nBurnFPS / 100);
+            getFpsText()->setString(getFpsString());
+        }
+
         auto players = getUi()->getInput()->getPlayers();
         InpMake(players);
         updateFrame();
