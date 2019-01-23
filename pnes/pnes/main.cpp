@@ -30,30 +30,9 @@ using namespace c2dui;
 #ifdef __PSP2__
 #include <psp2/power.h>
 #include <psp2/io/dirent.h>
-#define C2DUI_HOME_PATH "ux0:/data/pnes/"
 #define mkdir(x, y) sceIoMkdir(x, 0777)
 int _newlib_heap_size_user = 192 * 1024 * 1024;
-#define SCR_W   960
-#define SCR_H   544
-#elif __PS3__
-#define C2DUI_HOME_PATH "./"
-#define SCR_W   1280
-#define SCR_H   720
-#elif __3DS__
-#define C2DUI_HOME_PATH "./"
-#define SCR_W   400
-#define SCR_H   240
-#elif __SWITCH__
-#define C2DUI_HOME_PATH "./"
-#define SCR_W   1280
-#define SCR_H   720
-#else
-#define C2DUI_HOME_PATH "./"
-#define SCR_W   1280
-#define SCR_H   720
 #endif
-
-Renderer *renderer;
 
 PNESGuiMenu *uiMenu;
 PNESGuiEmu *uiEmu;
@@ -67,13 +46,14 @@ UIRomList *uiRomList;
 
 int main(int argc, char **argv) {
 
-    renderer = new C2DRenderer(Vector2f(SCR_W, SCR_H));
+    ui = new UIMain(Vector2f(C2D_SCREEN_WIDTH, C2D_SCREEN_HEIGHT));
 
     // load configuration
     int pnes_version = (__PNES_VERSION_MAJOR__ * 100) + __PNES_VERSION_MINOR__;
-    cfg = new PNESConfig(C2DUI_HOME_PATH, pnes_version);
-    renderer->getIo()->create(*cfg->getHomePath() + "configs");
-    renderer->getIo()->create(*cfg->getHomePath() + "saves");
+    cfg = new PNESConfig(ui->getIo()->getDataWritePath(), pnes_version);
+    ui->getIo()->create(*cfg->getHomePath() + "configs");
+    ui->getIo()->create(*cfg->getHomePath() + "saves");
+    ui->setConfig(cfg);
 
     // skin
     // buttons used for ui config menu
@@ -121,28 +101,27 @@ int main(int argc, char **argv) {
 #ifdef __PSP2__
     skin = new Skin("app0:/", buttons);
 #else
-    skin = new Skin(C2DUI_HOME_PATH, buttons);
+    skin = new Skin(ui->getIo()->getDataWritePath(), buttons);
 #endif
+    ui->setSkin(skin);
 
-    // gui
-    ui = new UIMain(renderer, cfg, skin);
+    // ui
     std::string nestopia_version = "Nestopia 1.0";
     romList = new PNESRomList(ui, nestopia_version);
     romList->build();
-    uiRomList = new UIRomList(ui, romList, renderer->getSize());
+    uiRomList = new UIRomList(ui, romList, ui->getSize());
     uiMenu = new PNESGuiMenu(ui);
     uiEmu = new PNESGuiEmu(ui);
     uiState = new PNESUIStateMenu(ui);
     ui->init(uiRomList, uiMenu, uiEmu, uiState);
-    renderer->add(ui);
 
     while (!ui->done) {
-        renderer->flip();
+        ui->flip();
     }
 
     delete (skin);
     delete (cfg);
-    delete (renderer);
+    delete (ui);
 
 #ifdef __PSP2__
     scePowerSetArmClockFrequency(266);

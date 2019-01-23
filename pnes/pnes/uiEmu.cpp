@@ -41,7 +41,7 @@ int PNESGuiEmu::run(RomList::Rom *rom) {
     getUi()->getUiProgressBox()->setProgress(0);
     getUi()->getUiProgressBox()->setVisibility(c2d::Visibility::Visible);
     getUi()->getUiProgressBox()->setLayer(1000);
-    getUi()->getRenderer()->flip();
+    getUi()->flip();
 
     nestopia_config_init();
 
@@ -54,8 +54,8 @@ int PNESGuiEmu::run(RomList::Rom *rom) {
     }
 
     getUi()->getUiProgressBox()->setProgress(1);
-    getUi()->getRenderer()->flip();
-    getUi()->getRenderer()->delay(500);
+    getUi()->flip();
+    getUi()->delay(500);
     getUi()->getUiProgressBox()->setVisibility(c2d::Visibility::Hidden);
 
     return UIEmu::run(rom);
@@ -157,7 +157,7 @@ void PNESGuiEmu::onDraw(c2d::Transform &transform) {
         int showFps = getUi()->getConfig()->getValue(Option::Index::ROM_SHOW_FPS, true);
         getFpsText()->setVisibility(showFps ? c2d::Visibility::Visible : c2d::Visibility::Hidden);
         if (showFps) {
-            sprintf(getFpsString(), "FPS: %.2g/%2d", getUi()->getRenderer()->getFps(),
+            sprintf(getFpsString(), "FPS: %.2g/%2d", getUi()->getFps(),
                     nst_pal() ? (conf.timing_speed / 6) * 5 : conf.timing_speed);
             getFpsText()->setString(getFpsString());
         }
