@@ -219,7 +219,7 @@ void PFBARomList::build() {
             sprintf(text_str, "Scanning... %i%% - ROMS : %i / %i",
                     (i * 100) / nBurnDrvCount, hardwareList->at(0).supported_count, nBurnDrvCount);
             text->setString(text_str);
-            ui->getRenderer()->flip();
+            ui->flip();
         }
         // UI
     }

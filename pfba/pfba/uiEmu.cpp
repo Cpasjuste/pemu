@@ -53,6 +53,11 @@ int PFBAGuiEmu::load(RomList::Rom *rom) {
     ///////////////
     // FBA DRIVER
     ///////////////
+    nBurnDrvActive = rom->drv;
+    if (nBurnDrvActive >= nBurnDrvCount) {
+        printf("PFBAGui::runRom: driver not found\n");
+        return -1;
+    }
     bForce60Hz = true;
     EnableHiscores = 1;
     InpInit();
@@ -153,29 +158,34 @@ void PFBAGuiEmu::updateFrame() {
 
     if (frameSkip) {
         bool draw = nFramesEmulated % (frameSkip + 1) == 0;
-        renderFrame(draw, showFps, getUi()->getRenderer()->getFps());
-        getUi()->getRenderer()->flip(draw);
-        float delta = getUi()->getRenderer()->getDeltaTime().asSeconds();
+        renderFrame(draw, showFps, getUi()->getFps());
+        //getUi()->flip(draw);
+        float delta = getUi()->getDeltaTime().asSeconds();
         if (delta < getFrameDuration()) { // limit fps
             //printf("f: %f | d: %f | m: %f | s: %i\n", frame_duration, delta, frame_duration - delta,
             //       (unsigned int) ((frame_duration - delta) * 1000));
-            getUi()->getRenderer()->delay((unsigned int) ((getFrameDuration() - delta) * 1000));
+            getUi()->delay((unsigned int) ((getFrameDuration() - delta) * 1000));
         }
     } else {
-        renderFrame(true, showFps, getUi()->getRenderer()->getFps());
-        getUi()->getRenderer()->flip();
+        renderFrame(true, showFps, getUi()->getFps());
+        //getUi()->flip();
         /*
-        timer += getUi()->getRenderer()->getDeltaTime().asSeconds();
+        timer += getUi()->getDeltaTime().asSeconds();
         if (timer >= 1) {
             timer = 0;
-            printf("fps: %.2g/%2d, delta: %f\n", getUi()->getRenderer()->getFps(), (nBurnFPS / 100),
-                   getUi()->getRenderer()->getDeltaTime().asSeconds());
+            printf("fps: %.2g/%2d, delta: %f\n", getUi()->getFps(), (nBurnFPS / 100),
+                   getUi()->getDeltaTime().asSeconds());
         }
         */
     }
 }
 
-int PFBAGuiEmu::loop() {
+bool PFBAGuiEmu::onInput(c2d::Input::Player *players) {
+
+    if (getUi()->getUiMenu()->isVisible()
+        || getUi()->getUiStateMenu()->isVisible()) {
+        return UIEmu::onInput(players);
+    }
 
     bool combo = false;
     int rotation_config =
@@ -216,8 +226,6 @@ int PFBAGuiEmu::loop() {
     inputP1P2Switch = 0;
 
     // TODO: control rotation
-    //Input::Player *players = getUi()->getInput()->update(rotate_input);
-    Input::Player *players = getUi()->getInput()->getPlayers();
 
     // look for player 1 menu combo
     if (((players[0].keys & Input::Key::Start) && (players[0].keys & Input::Key::Fire5))
@@ -225,7 +233,9 @@ int PFBAGuiEmu::loop() {
         || ((players[0].keys & Input::Key::Start) && (players[0].keys & Input::Key::Fire6))
         || ((players[0].keys & Input::Key::Select) && (players[0].keys & Input::Key::Fire6))) {
         pause();
-        return UI_KEY_SHOW_MEMU_ROM;
+        getUi()->getConfig()->load(getUi()->getUiRomList()->getSelection());
+        getUi()->getUiMenu()->load(true);
+        return true;
     }
 
     // look each players for combos keys
@@ -259,8 +269,16 @@ int PFBAGuiEmu::loop() {
         getVideo()->updateScaling();
     }
 
-    InpMake(players);
-    updateFrame();
+    return true;
+}
 
-    return 0;
+void PFBAGuiEmu::onDraw(c2d::Transform &transform) {
+
+    if (!isPaused()) {
+        auto players = getUi()->getInput()->getPlayers();
+        InpMake(players);
+        updateFrame();
+    }
+
+    UIEmu::onDraw(transform);
 }

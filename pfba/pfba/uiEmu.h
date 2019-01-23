@@ -13,11 +13,13 @@ public:
 
     PFBAGuiEmu(c2dui::UIMain *ui);
 
+    bool onInput(c2d::Input::Player *players) override;
+
+    void onDraw(c2d::Transform &transform) override;
+
     int load(c2dui::RomList::Rom *rom);
 
     void stop();
-
-    int loop();
 
     void updateFb();
 

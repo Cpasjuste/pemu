@@ -146,7 +146,7 @@ int ProgressUpdateBurner(double dProgress, const TCHAR *pszText, bool bAbs) {
         ui->getUiProgressBox()->setMessage("Please wait...");
     }
 
-    ui->getRenderer()->flip();
+    ui->flip();
 
     return 0;
 }
