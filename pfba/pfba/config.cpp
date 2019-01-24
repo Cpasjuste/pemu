@@ -72,6 +72,7 @@ PFBAConfig::PFBAConfig(const std::string &home, int version)
     /// pfba custom config
     ////////////////////////////////////////////////////////////
 
+    /// UI OPTIONS
     hide(Option::GUI_USE_DATABASE);
 
     // add "WORKING" to "SHOW_ALL" option
@@ -80,11 +81,19 @@ PFBAConfig::PFBAConfig(const std::string &home, int version)
 
     add(Option::Index::GUI_SHOW_CLONES, "SHOW_HARDWARE",
         hardware_names, 0, Option::Index::GUI_SHOW_HARDWARE);
+
+    /// ROMS OPTIONS
+    add(Option::Index::ROM_SHADER, "FORCE_60HZ",
+        {"OFF", "ON"}, 1, Option::Index::ROM_FORCE_60HZ);
+
+    add(Option::Index::ROM_FORCE_60HZ, "FORCE_AUDIO_SYNC",
+        {"OFF", "ON"}, 0, Option::Index::ROM_AUDIO_SYNC);
+
 #ifdef __PSP2__
-    add(Option::Index::ROM_SHADER, "ROTATION",
+    add(Option::Index::ROM_AUDIO_SYNC, "ROTATION",
         {"OFF", "ON", "FLIP", "CAB MODE"}, 0, Option::Index::ROM_ROTATION);
 #else
-    add(Option::Index::ROM_SHADER, "ROTATION",
+    add(Option::Index::ROM_AUDIO_SYNC, "ROTATION",
         {"OFF", "ON", "FLIP"}, 0, Option::Index::ROM_ROTATION);
 #endif
     add(Option::Index::ROM_ROTATION, "NEOBIOS",

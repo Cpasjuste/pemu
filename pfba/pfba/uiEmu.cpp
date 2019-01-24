@@ -45,6 +45,8 @@ int PFBAGuiEmu::load(RomList::Rom *rom) {
         nBurnSoundLen = getAudio()->getBufferLen();
         pBurnSoundOut = getAudio()->getBuffer();
     }
+    force_audio_sync = getUi()->getConfig()->getValue(Option::Index::ROM_AUDIO_SYNC, true) == 1;
+    printf("force_audio_sync: %i\n", force_audio_sync);
     printf("done\n");
     ///////////
     // AUDIO
@@ -58,7 +60,8 @@ int PFBAGuiEmu::load(RomList::Rom *rom) {
         printf("PFBAGui::runRom: driver not found\n");
         return -1;
     }
-    bForce60Hz = true;
+    bForce60Hz = getUi()->getConfig()->getValue(Option::Index::ROM_FORCE_60HZ, true) == 1;
+    printf("bForce60Hz: %i\n", bForce60Hz);
     EnableHiscores = 1;
     InpInit();
     InpDIP();
@@ -138,7 +141,7 @@ void PFBAGuiEmu::renderFrame(bool draw) {
         }
 
         if (getAudio() && getAudio()->isAvailable()) {
-            getAudio()->play();
+            getAudio()->play(force_audio_sync);
         }
     }
 }

@@ -28,6 +28,8 @@ private:
     void updateFrame() override;
 
     void renderFrame(bool draw = true);
+
+    bool force_audio_sync = false;
 };
 
 #endif //PFBA_UIEMU_H
