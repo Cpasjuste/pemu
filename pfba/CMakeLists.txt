@@ -49,6 +49,7 @@ list(REMOVE_ITEM SRC_BURNER
 ##############
 set(DRV_DIRS
         ${CMAKE_SOURCE_DIR}/cores/fba/src/burn/drv
+        ${CMAKE_SOURCE_DIR}/cores/fba/src/burn/drv/atari
         ${CMAKE_SOURCE_DIR}/cores/fba/src/burn/drv/capcom
         ${CMAKE_SOURCE_DIR}/cores/fba/src/burn/drv/cave
         ${CMAKE_SOURCE_DIR}/cores/fba/src/burn/drv/coleco
@@ -70,6 +71,7 @@ set(DRV_DIRS
         ${CMAKE_SOURCE_DIR}/cores/fba/src/burn/drv/sg1000
         ${CMAKE_SOURCE_DIR}/cores/fba/src/burn/drv/sms
         ${CMAKE_SOURCE_DIR}/cores/fba/src/burn/drv/snes
+        ${CMAKE_SOURCE_DIR}/cores/fba/src/burn/drv/spectrum
         ${CMAKE_SOURCE_DIR}/cores/fba/src/burn/drv/taito
         ${CMAKE_SOURCE_DIR}/cores/fba/src/burn/drv/toaplan
         )
@@ -77,6 +79,7 @@ file(GLOB_RECURSE SRC_DRV
         ${CMAKE_SOURCE_DIR}/cores/fba/src/burn/drv/*.cpp
         )
 list(REMOVE_ITEM SRC_DRV
+        ${CMAKE_SOURCE_DIR}/cores/fba/src/burn/drv/atari/WHATSNEW.txt.cpp
         ${CMAKE_SOURCE_DIR}/cores/fba/src/burn/drv/capcom/ctv_make.cpp
         ${CMAKE_SOURCE_DIR}/cores/fba/src/burn/drv/pgm/pgm_sprite_create.cpp
         )
@@ -272,8 +275,10 @@ set(FLAGS
         -D__PFBA_VERSION_MINOR__=${PFBA_VERSION_MINOR}
         -DINCLUDE_7Z_SUPPORT
         -DUSE_SPEEDHACKS -DBUILD_SDL -DBUILD_M68K
+        -Dstricmp=strcmp
         -Wno-write-strings -Wno-narrowing -fforce-addr -finline-limit=1200 -Wno-sign-compare
-        -DFASTCALL -U__fastcall -D_fastcall= -D__fastcall= -D__fastcall__=
+        #-DFASTCALL
+        -U__fastcall -D_fastcall= -D__fastcall= -D__fastcall__=
         #"-DINLINE=static inline" "-DSH2_INLINE=static inline"
         -Wno-unused-variable -Wno-unused-but-set-variable -Wno-sequence-point
         #-fcheck-new
@@ -351,18 +356,18 @@ elseif (BUILD_LINUX)
     # SDL2
     ##############
     list(APPEND FLAGS -DLSB_FIRST)
- #[[
-elseif (BUILD_SDL1)
-    ##############
-    # SDL1
-    ##############
-    list(APPEND FLAGS -DLSB_FIRST)
-elseif (BUILD_SFML)
-    ##############
-    # SFML
-    ##############
-    list(APPEND FLAGS -DLSB_FIRST)
-]]
+    #[[
+   elseif (BUILD_SDL1)
+       ##############
+       # SDL1
+       ##############
+       list(APPEND FLAGS -DLSB_FIRST)
+   elseif (BUILD_SFML)
+       ##############
+       # SFML
+       ##############
+       list(APPEND FLAGS -DLSB_FIRST)
+   ]]
 endif (BUILD_VITA)
 
 # source files
