@@ -35,6 +35,8 @@ int PFBAGuiEmu::load(RomList::Rom *rom) {
     // AUDIO
     //////////
     printf("Init audio device...");
+    //TODO: add audio freq option
+    //addAudio(32000, nBurnFPS / 100);
     addAudio(48000);
     if (getAudio()->isAvailable()) {
         // disable interpolation as it produce "cracking" sound
