@@ -53,8 +53,8 @@ int PFBAGuiEmu::load(RomList::Rom *rom) {
     if (getAudio()->isAvailable()) {
         // disable interpolation as it produce "cracking" sound
         // on some games (cps1 (SF2), cave ...)
-        nInterpolation = 1;
-        nFMInterpolation = 0;
+        nInterpolation = getUi()->getConfig()->get(Option::Index::ROM_AUDIO_INTERPOLATION)->getValueBool();
+        nFMInterpolation = getUi()->getConfig()->get(Option::Index::ROM_AUDIO_FMINTERPOLATION)->getValueBool();
         nBurnSoundRate = getAudio()->getSampleRate();
         nBurnSoundLen = getAudio()->getBufferLen();
         pBurnSoundOut = getAudio()->getBuffer();
@@ -69,7 +69,6 @@ int PFBAGuiEmu::load(RomList::Rom *rom) {
     // FBA DRIVER
     ///////////////
     bForce60Hz = getUi()->getConfig()->get(Option::Index::ROM_FORCE_60HZ, true)->getValueBool();
-    printf("bForce60Hz: %i\n", bForce60Hz);
     EnableHiscores = 1;
     InpInit();
     InpDIP();

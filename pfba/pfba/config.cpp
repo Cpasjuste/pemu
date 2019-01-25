@@ -86,16 +86,20 @@ PFBAConfig::PFBAConfig(const std::string &home, int version)
     add(Option::Index::ROM_SHADER, "FORCE_60HZ",
         {"OFF", "ON"}, 0, Option::Index::ROM_FORCE_60HZ);
 
+    // audio
     add(Option::Index::ROM_FORCE_60HZ, "FORCE_AUDIO_SYNC",
         {"OFF", "ON"}, 1, Option::Index::ROM_AUDIO_SYNC);
-
     add(Option::Index::ROM_AUDIO_SYNC, "AUDIO_FREQUENCY",
         {"11025", "22050", "32000", "44100", "48000"}, 3, Option::Index::ROM_AUDIO_FREQ);
+    add(Option::Index::ROM_AUDIO_SYNC, "AUDIO_INTERPOLATION",
+        {"OFF", "ON"}, 1, Option::Index::ROM_AUDIO_INTERPOLATION);
+    add(Option::Index::ROM_AUDIO_INTERPOLATION, "AUDIO_FM_INTERPOLATION",
+        {"OFF", "ON"}, 0, Option::Index::ROM_AUDIO_FMINTERPOLATION);
 #ifdef __PSP2__
-    add(Option::Index::ROM_AUDIO_SYNC, "ROTATION",
+    add(Option::Index::ROM_AUDIO_FMINTERPOLATION, "ROTATION",
         {"OFF", "ON", "FLIP", "CAB MODE"}, 0, Option::Index::ROM_ROTATION);
 #else
-    add(Option::Index::ROM_AUDIO_SYNC, "ROTATION",
+    add(Option::Index::ROM_AUDIO_FMINTERPOLATION, "ROTATION",
         {"OFF", "ON", "FLIP"}, 0, Option::Index::ROM_ROTATION);
 #endif
     add(Option::Index::ROM_ROTATION, "NEOBIOS",
