@@ -9,4 +9,4 @@
 	url = git@github.com:Cpasjuste/libcross2dui.git
 [submodule "cores/fba"]
 	path = cores/fba
-	url = https://github.com/barry65536/FBAlpha
+	url = git@github.com:Cpasjuste/FBAlpha.git

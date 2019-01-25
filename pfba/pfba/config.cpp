@@ -84,11 +84,13 @@ PFBAConfig::PFBAConfig(const std::string &home, int version)
 
     /// ROMS OPTIONS
     add(Option::Index::ROM_SHADER, "FORCE_60HZ",
-        {"OFF", "ON"}, 1, Option::Index::ROM_FORCE_60HZ);
+        {"OFF", "ON"}, 0, Option::Index::ROM_FORCE_60HZ);
 
     add(Option::Index::ROM_FORCE_60HZ, "FORCE_AUDIO_SYNC",
-        {"OFF", "ON"}, 0, Option::Index::ROM_AUDIO_SYNC);
+        {"OFF", "ON"}, 1, Option::Index::ROM_AUDIO_SYNC);
 
+    add(Option::Index::ROM_AUDIO_SYNC, "AUDIO_FREQUENCY",
+        {"11025", "22050", "32000", "44100", "48000"}, 3, Option::Index::ROM_AUDIO_FREQ);
 #ifdef __PSP2__
     add(Option::Index::ROM_AUDIO_SYNC, "ROTATION",
         {"OFF", "ON", "FLIP", "CAB MODE"}, 0, Option::Index::ROM_ROTATION);

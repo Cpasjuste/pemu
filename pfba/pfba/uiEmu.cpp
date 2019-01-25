@@ -35,9 +35,8 @@ int PFBAGuiEmu::load(RomList::Rom *rom) {
     // AUDIO
     //////////
     printf("Init audio device...");
-    //TODO: add audio freq option
-    //addAudio(32000, nBurnFPS / 100);
-    addAudio(48000);
+    int freq = getUi()->getConfig()->get(Option::Index::ROM_AUDIO_FREQ)->getValueInt();
+    addAudio(freq, nBurnFPS / 100);
     if (getAudio()->isAvailable()) {
         // disable interpolation as it produce "cracking" sound
         // on some games (cps1 (SF2), cave ...)
@@ -47,7 +46,7 @@ int PFBAGuiEmu::load(RomList::Rom *rom) {
         nBurnSoundLen = getAudio()->getBufferLen();
         pBurnSoundOut = getAudio()->getBuffer();
     }
-    force_audio_sync = getUi()->getConfig()->getValue(Option::Index::ROM_AUDIO_SYNC, true) == 1;
+    force_audio_sync = getUi()->getConfig()->get(Option::Index::ROM_AUDIO_SYNC, true)->getValueBool();
     printf("force_audio_sync: %i\n", force_audio_sync);
     printf("done\n");
     ///////////
@@ -62,7 +61,7 @@ int PFBAGuiEmu::load(RomList::Rom *rom) {
         printf("PFBAGui::runRom: driver not found\n");
         return -1;
     }
-    bForce60Hz = getUi()->getConfig()->getValue(Option::Index::ROM_FORCE_60HZ, true) == 1;
+    bForce60Hz = getUi()->getConfig()->get(Option::Index::ROM_FORCE_60HZ, true)->getValueBool();
     printf("bForce60Hz: %i\n", bForce60Hz);
     EnableHiscores = 1;
     InpInit();
@@ -174,7 +173,7 @@ bool PFBAGuiEmu::onInput(c2d::Input::Player *players) {
     bool combo = false;
     // TODO: control rotation
     int rotation_config =
-            getUi()->getConfig()->getValue(Option::Index::ROM_ROTATION, true);
+            getUi()->getConfig()->get(Option::Index::ROM_ROTATION, true)->getValueBool();
     int rotate_input = 0;
 #ifdef __PSP2__
     // TODO: find a way to unify platforms,
@@ -260,7 +259,7 @@ void PFBAGuiEmu::onDraw(c2d::Transform &transform) {
     if (!isPaused()) {
 
         // fps
-        int showFps = getUi()->getConfig()->getValue(Option::Index::ROM_SHOW_FPS, true);
+        int showFps = getUi()->getConfig()->get(Option::Index::ROM_SHOW_FPS, true)->getValueBool();
         getFpsText()->setVisibility(showFps ? c2d::Visibility::Visible : c2d::Visibility::Hidden);
         if (showFps) {
             sprintf(getFpsString(), "FPS: %.2g/%2d", getUi()->getFps(), nBurnFPS / 100);

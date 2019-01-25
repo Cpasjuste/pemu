@@ -30,7 +30,7 @@ static int DoLibInit()                    // Do Init of Burn library driver
     }
 
     NeoSystem &= ~(UINT8) 0x1f;
-    NeoSystem |= NeoSystemList[ui->getConfig()->getValue(Option::Index::ROM_NEOBIOS, true)];
+    NeoSystem |= NeoSystemList[ui->getConfig()->get(Option::Index::ROM_NEOBIOS, true)->getIndex()];
 
     nRet = BurnDrvInit();
     printf("DoLibInit: BurnDrvInit = %i\n", nRet);
