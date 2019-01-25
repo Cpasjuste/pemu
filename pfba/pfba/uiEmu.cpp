@@ -3,6 +3,8 @@
 //
 
 #include "burner.h"
+#include "burnint.h"
+#include "driverlist.h"
 
 #include "c2dui.h"
 #include "uiEmu.h"
@@ -31,12 +33,23 @@ PFBAGuiEmu::PFBAGuiEmu(UIMain *ui) : UIEmu(ui) {
 
 int PFBAGuiEmu::load(RomList::Rom *rom) {
 
+    nBurnDrvActive = rom->drv;
+    if (nBurnDrvActive >= nBurnDrvCount) {
+        printf("PFBAGui::runRom: driver not found\n");
+        return -1;
+    }
+
     ///////////
     // AUDIO
     //////////
+    // get fps?
+    pDriver[nBurnDrvActive]->Init();
+    int fps = nBurnFPS;
+    pDriver[nBurnDrvActive]->Exit();
+
     printf("Init audio device...");
     int freq = getUi()->getConfig()->get(Option::Index::ROM_AUDIO_FREQ)->getValueInt();
-    addAudio(freq, nBurnFPS / 100);
+    addAudio(freq, (float) fps / 100);
     if (getAudio()->isAvailable()) {
         // disable interpolation as it produce "cracking" sound
         // on some games (cps1 (SF2), cave ...)
@@ -46,8 +59,7 @@ int PFBAGuiEmu::load(RomList::Rom *rom) {
         nBurnSoundLen = getAudio()->getBufferLen();
         pBurnSoundOut = getAudio()->getBuffer();
     }
-    force_audio_sync = getUi()->getConfig()->get(Option::Index::ROM_AUDIO_SYNC, true)->getValueBool();
-    printf("force_audio_sync: %i\n", force_audio_sync);
+    audio_sync = getUi()->getConfig()->get(Option::Index::ROM_AUDIO_SYNC, true)->getValueBool();
     printf("done\n");
     ///////////
     // AUDIO
@@ -56,11 +68,6 @@ int PFBAGuiEmu::load(RomList::Rom *rom) {
     ///////////////
     // FBA DRIVER
     ///////////////
-    nBurnDrvActive = rom->drv;
-    if (nBurnDrvActive >= nBurnDrvCount) {
-        printf("PFBAGui::runRom: driver not found\n");
-        return -1;
-    }
     bForce60Hz = getUi()->getConfig()->get(Option::Index::ROM_FORCE_60HZ, true)->getValueBool();
     printf("bForce60Hz: %i\n", bForce60Hz);
     EnableHiscores = 1;
@@ -68,10 +75,7 @@ int PFBAGuiEmu::load(RomList::Rom *rom) {
     InpDIP();
     printf("Initialize driver...\n");
     if (DrvInit(rom->drv, false) != 0) {
-        printf("\nDriver initialisation failed! Likely causes are:\n"
-               "- Corrupt/Missing ROM(s)\n"
-               "- I/O Error\n"
-               "- Memory error\n\n");
+        printf("\nDriver initialisation failed\n");
         getUi()->getUiProgressBox()->setVisibility(Visibility::Hidden);
         getUi()->getUiMessageBox()->show("ERROR", "DRIVER INIT FAILED", "OK");
         stop();
@@ -142,7 +146,7 @@ void PFBAGuiEmu::renderFrame(bool draw) {
         }
 
         if (getAudio() && getAudio()->isAvailable()) {
-            getAudio()->play(force_audio_sync);
+            getAudio()->play(audio_sync);
         }
     }
 }
