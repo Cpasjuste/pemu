@@ -121,7 +121,7 @@ bool PNESGuiEmu::onInput(c2d::Input::Player *players) {
     return true;
 }
 
-void PNESGuiEmu::onDraw(c2d::Transform &transform) {
+void PNESGuiEmu::onDraw(c2d::Transform &transform, bool draw) {
 
     if (!isPaused()) {
         // fps
@@ -171,7 +171,7 @@ void PNESGuiEmu::onDraw(c2d::Transform &transform) {
         nst_emuloop();
     }
 
-    UIEmu::onDraw(transform);
+    UIEmu::onDraw(transform, draw);
 }
 
 /// NESTOPIA

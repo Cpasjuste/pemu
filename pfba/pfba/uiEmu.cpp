@@ -257,7 +257,7 @@ bool PFBAGuiEmu::onInput(c2d::Input::Player *players) {
     return true;
 }
 
-void PFBAGuiEmu::onDraw(c2d::Transform &transform) {
+void PFBAGuiEmu::onDraw(c2d::Transform &transform, bool draw) {
 
     if (!isPaused()) {
 
@@ -274,5 +274,5 @@ void PFBAGuiEmu::onDraw(c2d::Transform &transform) {
         updateFrame();
     }
 
-    UIEmu::onDraw(transform);
+    UIEmu::onDraw(transform, draw);
 }
