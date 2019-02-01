@@ -101,7 +101,7 @@ int main(int argc, char **argv) {
 #ifdef __PSP2__
     skin = new Skin("app0:/", buttons);
 #else
-    skin = new Skin(ui->getIo()->getDataWritePath(), buttons);
+    skin = new Skin(ui, buttons);
 #endif
     ui->setSkin(skin);
 

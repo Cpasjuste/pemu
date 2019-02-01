@@ -102,7 +102,7 @@ int main(int argc, char **argv) {
     buttons.emplace_back(KEY_JOY_RSTICK_DEFAULT, "RSTICK");
     skin = new Skin(C2DUI_HOME_PATH, buttons);
 #else
-    skin = new Skin(ui->getIo()->getDataWritePath(), buttons);
+    skin = new Skin(ui, buttons);
 #endif
     ui->setSkin(skin);
 
