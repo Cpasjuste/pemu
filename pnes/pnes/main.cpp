@@ -42,7 +42,7 @@ PNESUIStateMenu *uiState;
 
 UIMain *ui;
 Skin *skin;
-UIRomListNew *uiRomList;
+UIRomList *uiRomList;
 
 int main(int argc, char **argv) {
 
