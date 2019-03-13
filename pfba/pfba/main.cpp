@@ -111,7 +111,7 @@ int main(int argc, char **argv) {
     fba_version += szAppBurnVer;
     romList = new PFBARomList(ui, fba_version);
     romList->build();
-    uiRomList = new UIRomList(ui, romList, ui->getSize());
+    uiRomList = new UIRomListClassic(ui, romList, ui->getSize());
     uiMenu = new PFBAGuiMenu(ui);
     uiEmu = new PFBAGuiEmu(ui);
     uiState = new PFBAUIStateMenu(ui);
