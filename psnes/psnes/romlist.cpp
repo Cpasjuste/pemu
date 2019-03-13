@@ -65,7 +65,7 @@ void PSNESRomList::buildNoDb(bool use_icons) {
                 snprintf(text_str, 511, "Scanning... %i / %i",
                          hardwareList->at(0).available_count, (int) list.size());
                 text->setString(text_str);
-                ui->getRenderer()->flip();
+                ui->flip();
             }
             // UI
         }
@@ -81,9 +81,9 @@ void PSNESRomList::build() {
 
     printf("PSNESRomList::build()\n");
 
-    bool use_icons = ui->getConfig()->getValue(Option::Index::GUI_SHOW_ICONS) == 1;
+    bool use_icons = ui->getConfig()->get(Option::Index::GUI_SHOW_ICONS)->getIndex() == 0;
 
-    if (!ui->getConfig()->getValue(Option::Index::GUI_USE_DATABASE)) {
+    if (ui->getConfig()->get(Option::Index::GUI_USE_DATABASE)->getIndex() == 0) {
         buildNoDb(use_icons);
         return;
     }
@@ -180,7 +180,7 @@ void PSNESRomList::build() {
             }
 
             std::vector<std::string> fileListNames;
-            for(auto &f : fileList) {
+            for (auto &f : fileList) {
                 fileListNames.emplace_back(f.name);
             }
 
@@ -224,7 +224,7 @@ void PSNESRomList::build() {
             snprintf(text_str, 511, "Scanning... %i / %i",
                      hardwareList->at(0).available_count, (int) list.size());
             text->setString(text_str);
-            ui->getRenderer()->flip();
+            ui->flip();
         }
         // UI
     }
