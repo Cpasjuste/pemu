@@ -100,7 +100,7 @@ int main(int argc, char **argv) {
     buttons.emplace_back(KEY_JOY_ZR_DEFAULT, "ZR");
     buttons.emplace_back(KEY_JOY_LSTICK_DEFAULT, "LSTICK");
     buttons.emplace_back(KEY_JOY_RSTICK_DEFAULT, "RSTICK");
-    skin = new Skin(C2DUI_HOME_PATH, buttons);
+    skin = new Skin(ui, buttons);
 #else
     skin = new Skin(ui, buttons);
 #endif

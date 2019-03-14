@@ -29,7 +29,7 @@ bool PFBAGuiMenu::isOptionHidden(c2dui::Option *option) {
     }
 
 #ifdef __SWITCH__
-    if (option->id == Option::Index::ROM_FRAMESKIP) {
+    if (option->getId() == Option::Index::ROM_FRAMESKIP) {
         return true;
     }
 #endif
