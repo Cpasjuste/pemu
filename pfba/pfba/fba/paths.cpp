@@ -105,8 +105,6 @@ void BurnPathsInit() {
     //printf("szAppSkinPath: %s\n", szAppSkinPath);
 #endif
 
-    snprintf(szAppEEPROMPath, MAX_PATH - 1, "%sconfig", szAppHomePath);
-    mkdir(szAppEEPROMPath, 0777);
-    strncat(szAppEEPROMPath, "/games/", MAX_PATH - 1);
+    snprintf(szAppEEPROMPath, MAX_PATH - 1, "%seeproms/", szAppHomePath);
     mkdir(szAppEEPROMPath, 0777);
 }
