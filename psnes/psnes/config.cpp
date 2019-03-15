@@ -15,14 +15,6 @@ using namespace c2dui;
 PSNESConfig::PSNESConfig(const std::string &home, int version)
         : Config(home, version) {
 
-    if (!get(Option::GUI_USE_DATABASE)->getValueBool()) {
-        hide(Option::GUI_SHOW_CLONES);
-    } else {
-        // add "WORKING" to "SHOW_ALL" option
-        std::vector<std::string> *values = get(Option::Index::GUI_SHOW_ALL)->getValues();
-        values->insert(values->begin() + 1, "WORKING");
-    }
-
     add(Option::Index::ROM_SHOW_FPS, "HIGH_RES", {"OFF", "ON"}, 0, Option::Index::ROM_HIGH_RES);
     get()->at(get()->size() - 1).setInfo(
             "Only enable high resolution mode for games which can use it,\n"
@@ -37,4 +29,13 @@ PSNESConfig::PSNESConfig(const std::string &home, int version)
 
     // load/overwrite configuration from file
     load();
+
+    if (!get(Option::GUI_USE_DATABASE)->getValueBool()) {
+        printf("get(Option::GUI_USE_DATABASE)->getValueBool(): %i\n", get(Option::GUI_USE_DATABASE)->getValueBool());
+        hide(Option::GUI_SHOW_CLONES);
+    } else {
+        // add "WORKING" to "SHOW_ALL" option
+        std::vector<std::string> *values = get(Option::Index::GUI_SHOW_ALL)->getValues();
+        values->insert(values->begin() + 1, "WORKING");
+    }
 }

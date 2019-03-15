@@ -126,7 +126,7 @@ endif (BUILD_PSP2)
 #####################
 add_custom_target(${PROJECT_NAME}.data
         COMMAND cp -rf ${CMAKE_CURRENT_SOURCE_DIR}/psnes/data/skin ${CMAKE_CURRENT_BINARY_DIR}
-        COMMAND cp -rf ${CMAKE_CURRENT_SOURCE_DIR}/psnes/data/databases/Super_Nintendo_Entertainment_System_Parent-Clone_20180601-221617_dat-o-matic.xml ${CMAKE_CURRENT_BINARY_DIR}/db.xml
+        COMMAND cp -rf ${CMAKE_CURRENT_SOURCE_DIR}/psnes/data/databases/Super_Nintendo_Entertainment_System-hyperspin.xml ${CMAKE_CURRENT_BINARY_DIR}/db.xml
         )
 add_executable(${PROJECT_NAME}.elf ${PSNES_SRC} ${SNES9X_SRC} ${UNZIP_SRC} ${JMA_SRC})
 target_include_directories(${PROJECT_NAME}.elf PRIVATE ${PSNES_INC} ${SNES9X_INC} ${UNZIP_INC} ${JMA_INC})
@@ -148,7 +148,7 @@ if (BUILD_PSP2)
             COMMAND cp -f ${CMAKE_BINARY_DIR}/${PROJECT_NAME}.self ${CMAKE_BINARY_DIR}/release/psnes/eboot.bin
             COMMAND cp -r ${CMAKE_SOURCE_DIR}/psnes/data/skin ${CMAKE_BINARY_DIR}/release/psnes/
             COMMAND cp -r ${CMAKE_SOURCE_DIR}/psnes/data/psp2/skin ${CMAKE_BINARY_DIR}/release/psnes/
-            #COMMAND cp -f ${CMAKE_SOURCE_DIR}/psnes/data/databases/Super_Nintendo_Entertainment_System_Parent-Clone_20180601-221617_dat-o-matic.xml ${CMAKE_BINARY_DIR}/release/psnes/db.xml
+            #COMMAND cp -f ${CMAKE_SOURCE_DIR}/psnes/data/databases/Super_Nintendo_Entertainment_System-hyperspin.xml ${CMAKE_BINARY_DIR}/release/psnes/db.xml
             COMMAND cd ${CMAKE_BINARY_DIR}/release/psnes && zip -r ../../${PROJECT_NAME}-${PSNES_VERSION_MAJOR}.${PSNES_VERSION_MINOR}_vita.vpk . && cd ${CMAKE_BINARY_DIR}
             )
 endif (BUILD_PSP2)
@@ -173,7 +173,7 @@ if (BUILD_SWITCH)
             COMMAND cp -f ${CMAKE_CURRENT_BINARY_DIR}/psnes.nro ${CMAKE_BINARY_DIR}/release/psnes/psnes.nro
             COMMAND cp -r ${CMAKE_CURRENT_SOURCE_DIR}/psnes/data/skin ${CMAKE_BINARY_DIR}/release/psnes/
             COMMAND cp -r ${CMAKE_CURRENT_SOURCE_DIR}/psnes/data/nx/skin ${CMAKE_BINARY_DIR}/release/psnes/
-            COMMAND cp -f ${CMAKE_CURRENT_SOURCE_DIR}/psnes/data/databases/Super_Nintendo_Entertainment_System_Parent-Clone_20180601-221617_dat-o-matic.xml ${CMAKE_BINARY_DIR}/release/psnes/db.xml
+            COMMAND cp -f ${CMAKE_CURRENT_SOURCE_DIR}/psnes/data/databases/Super_Nintendo_Entertainment_System-hyperspin.xml ${CMAKE_BINARY_DIR}/release/psnes/db.xml
             COMMAND cd ${CMAKE_BINARY_DIR}/release && zip -r ../${PROJECT_NAME}-${PSNES_VERSION_MAJOR}.${PSNES_VERSION_MINOR}_switch.zip psnes && cd ${CMAKE_BINARY_DIR}
             )
 endif (BUILD_SWITCH)
