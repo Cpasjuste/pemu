@@ -1,4 +1,4 @@
-pNES: Portable Snes9x
+pNES: Portable NES
 ===========================
 
 ![](https://github.com/Cpasjuste/pemu/raw/master/pnes/pnes/data/screenshot.png)
@@ -19,8 +19,7 @@ pNES: Portable Snes9x
 
 ### Capabilities
 - Support save states
-- Support cheats (put a "rom_name.cht"  file with game genie codes in cheat folder)
-- Support 2x, 3x, fit, fit 4/3 and fullscreen hardware linear scaling
+- Support 2x, 3x, fit, fit 4/3 and fullscreen hardware scaling
 - Support hardware filtering (shaders)
 - Support titles, previews, and icons images (png), named as the rom name with png extension instead zip/sfc, in their respective directory (to be created if needed).
 
