@@ -127,10 +127,10 @@ if (BUILD_SWITCH)
             COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/pnes/previews
             COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/pnes/icons
             COMMAND cp -f ${CMAKE_CURRENT_BINARY_DIR}/pnes.nro ${CMAKE_BINARY_DIR}/release/pnes/pnes.nro
+            COMMAND cp -r ${CMAKE_SOURCE_DIR}/cores/nestopia/NstDatabase.xml ${CMAKE_BINARY_DIR}/release/pnes/
             COMMAND cp -r ${CMAKE_CURRENT_SOURCE_DIR}/pnes/data/skin ${CMAKE_BINARY_DIR}/release/pnes/
             COMMAND cp -r ${CMAKE_CURRENT_SOURCE_DIR}/pnes/data/nx/skin ${CMAKE_BINARY_DIR}/release/pnes/
             COMMAND cd ${CMAKE_BINARY_DIR}/release && zip -r ../${PROJECT_NAME}-${PNES_VERSION_MAJOR}.${PNES_VERSION_MINOR}_switch.zip pnes
             COMMAND cd ${CMAKE_CURRENT_BINARY_DIR}
             )
 endif ()
-

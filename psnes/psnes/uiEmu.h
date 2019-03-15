@@ -17,7 +17,9 @@ public:
 
     void stop();
 
-    int loop();
+    bool onInput(c2d::Input::Player *players) override;
+
+    void onDraw(c2d::Transform &transform, bool draw = true) override;
 };
 
 #endif //PSNES_UIEMU_H

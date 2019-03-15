@@ -39,8 +39,6 @@ using namespace c2dui;
 int _newlib_heap_size_user = 192 * 1024 * 1024;
 #endif
 
-Renderer *renderer;
-
 PSNESUIMenu *uiMenu;
 PSNESUIEmu *uiEmu;
 PSNESConfig *cfg;
@@ -54,17 +52,17 @@ UIRomList *uiRomList;
 int main(int argc, char **argv) {
 
     // create renderer
-    renderer = new C2DRenderer(Vector2f(C2D_SCREEN_WIDTH, C2D_SCREEN_HEIGHT));
+    ui = new UIMain(Vector2f(C2D_SCREEN_WIDTH, C2D_SCREEN_HEIGHT));
 #ifndef __PSP2__
 #ifndef __GL__
-    renderer->setShaderList(new ShaderList());
-    renderer->getShaderList()->add("TV2X", nullptr);
-    renderer->getShaderList()->add("SMOOTH", nullptr);
-    renderer->getShaderList()->add("SUPEREAGLE", nullptr);
-    renderer->getShaderList()->add("2XSAI", nullptr);
-    renderer->getShaderList()->add("SUPER2XSAI", nullptr);
-    renderer->getShaderList()->add("EPX", nullptr);
-    renderer->getShaderList()->add("HQ2X", nullptr);
+    ui->setShaderList(new ShaderList());
+    ui->getShaderList()->add("TV2X", nullptr);
+    ui->getShaderList()->add("SMOOTH", nullptr);
+    ui->getShaderList()->add("SUPEREAGLE", nullptr);
+    ui->getShaderList()->add("2XSAI", nullptr);
+    ui->getShaderList()->add("SUPER2XSAI", nullptr);
+    ui->getShaderList()->add("EPX", nullptr);
+    ui->getShaderList()->add("HQ2X", nullptr);
 #endif
 #endif
 
@@ -73,6 +71,7 @@ int main(int argc, char **argv) {
     cfg = new PSNESConfig(ui->getIo()->getDataWritePath(), psnes_version);
     std::string configs_path = *cfg->getHomePath() + "configs";
     mkdir(configs_path.c_str(), 0755);
+    ui->setConfig(cfg);
 
     // buttons used for ui config menu
     std::vector<Skin::Button> buttons;
@@ -115,7 +114,7 @@ int main(int argc, char **argv) {
     buttons.emplace_back(KEY_JOY_LSTICK_DEFAULT, "LSTICK");
     buttons.emplace_back(KEY_JOY_RSTICK_DEFAULT, "RSTICK");
 #endif
-    // skin
+
 #ifdef __PSP2__
     skin = new Skin("app0:/", buttons);
 #else
@@ -139,9 +138,9 @@ int main(int argc, char **argv) {
     }
 
     // cleanup
-    delete (ui);
     delete (skin);
     delete (cfg);
+    delete (ui);
 
 #ifdef __PSP2__
     scePowerSetArmClockFrequency(266);

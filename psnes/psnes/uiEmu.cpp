@@ -313,35 +313,27 @@ void PSNESUIEmu::stop() {
     UIEmu::stop();
 }
 
-int PSNESUIEmu::loop() {
+bool PSNESUIEmu::onInput(c2d::Input::Player *players) {
 
-    // fps
-    int showFps = getUi()->getConfig()->get(Option::Index::ROM_SHOW_FPS, true)->getIndex();
-    getFpsText()->setVisibility(showFps ? Visibility::Visible : Visibility::Hidden);
-    if (showFps) {
-        sprintf(getFpsString(), "FPS: %.2g/%2d", getUi()->getFps(), (int) Memory.ROMFramesPerSecond);
-        getFpsText()->setString(getFpsString());
+    if (getUi()->getUiMenu()->isVisible()
+        || getUi()->getUiStateMenu()->isVisible()) {
+        return UIEmu::onInput(players);
     }
-
-    if (!isPaused()) {
-        S9xMainLoop();
-        S9xSetSoundMute(FALSE);
-    } else {
-        S9xSetSoundMute(TRUE);
-    }
-
-    Input::Player *players = getUi()->getInput()->getPlayers();
 
     // look for player 1 menu combo
     if (((players[0].keys & Input::Key::Start) && (players[0].keys & Input::Key::Select))) {
         pause();
-        return UI_KEY_SHOW_MEMU_ROM;
+        getUi()->getConfig()->load(getUi()->getUiRomList()->getSelection());
+        getUi()->getUiMenu()->load(true);
+        return true;
     } else if (((players[0].keys & Input::Key::Start) && (players[0].keys & Input::Key::Fire5))
                || ((players[0].keys & Input::Key::Select) && (players[0].keys & Input::Key::Fire5))
                || ((players[0].keys & Input::Key::Start) && (players[0].keys & Input::Key::Fire6))
                || ((players[0].keys & Input::Key::Select) && (players[0].keys & Input::Key::Fire6))) {
         pause();
-        return UI_KEY_SHOW_MEMU_ROM;
+        getUi()->getConfig()->load(getUi()->getUiRomList()->getSelection());
+        getUi()->getUiMenu()->load(true);
+        return true;
     }
 
     // look each players for combos keys
@@ -362,31 +354,53 @@ int PSNESUIEmu::loop() {
         getVideo()->updateScaling();
     }
 
-    // update snes9x buttons
-    for (uint32 i = 0; i < 4; i++) {
-        S9xReportButton(0 + (i * 12), (players[i].keys & Input::Key::Up) > 0);
-        S9xReportButton(1 + (i * 12), (players[i].keys & Input::Key::Down) > 0);
-        S9xReportButton(2 + (i * 12), (players[i].keys & Input::Key::Left) > 0);
-        S9xReportButton(3 + (i * 12), (players[i].keys & Input::Key::Right) > 0);
-        S9xReportButton(4 + (i * 12), (players[i].keys & Input::Key::Fire1) > 0);
-        S9xReportButton(5 + (i * 12), (players[i].keys & Input::Key::Fire2) > 0);
-        S9xReportButton(6 + (i * 12), (players[i].keys & Input::Key::Fire3) > 0);
-        S9xReportButton(7 + (i * 12), (players[i].keys & Input::Key::Fire4) > 0);
-        S9xReportButton(8 + (i * 12), (players[i].keys & Input::Key::Fire5) > 0);
-        S9xReportButton(9 + (i * 12), (players[i].keys & Input::Key::Fire6) > 0);
-        S9xReportButton(10 + (i * 12), (players[i].keys & Input::Key::Start) > 0);
-        S9xReportButton(11 + (i * 12), (players[i].keys & Input::Key::Select) > 0);
-    }
+    return true;
+}
+
+void PSNESUIEmu::onDraw(c2d::Transform &transform, bool draw) {
+
+    if (!isPaused()) {
+        // fps
+        int showFps = getUi()->getConfig()->get(Option::Index::ROM_SHOW_FPS, true)->getIndex();
+        getFpsText()->setVisibility(showFps ? Visibility::Visible : Visibility::Hidden);
+        if (showFps) {
+            sprintf(getFpsString(), "FPS: %.2g/%2d", getUi()->getFps(), (int) Memory.ROMFramesPerSecond);
+            getFpsText()->setString(getFpsString());
+        }
+
+        S9xMainLoop();
+        S9xSetSoundMute(FALSE);
+
+        auto players = getUi()->getInput()->getPlayers();
+
+        // update snes9x buttons
+        for (uint32 i = 0; i < 4; i++) {
+            S9xReportButton(0 + (i * 12), (players[i].keys & Input::Key::Up) > 0);
+            S9xReportButton(1 + (i * 12), (players[i].keys & Input::Key::Down) > 0);
+            S9xReportButton(2 + (i * 12), (players[i].keys & Input::Key::Left) > 0);
+            S9xReportButton(3 + (i * 12), (players[i].keys & Input::Key::Right) > 0);
+            S9xReportButton(4 + (i * 12), (players[i].keys & Input::Key::Fire1) > 0);
+            S9xReportButton(5 + (i * 12), (players[i].keys & Input::Key::Fire2) > 0);
+            S9xReportButton(6 + (i * 12), (players[i].keys & Input::Key::Fire3) > 0);
+            S9xReportButton(7 + (i * 12), (players[i].keys & Input::Key::Fire4) > 0);
+            S9xReportButton(8 + (i * 12), (players[i].keys & Input::Key::Fire5) > 0);
+            S9xReportButton(9 + (i * 12), (players[i].keys & Input::Key::Fire6) > 0);
+            S9xReportButton(10 + (i * 12), (players[i].keys & Input::Key::Start) > 0);
+            S9xReportButton(11 + (i * 12), (players[i].keys & Input::Key::Select) > 0);
+        }
 
 #ifndef NDEBUG
-    float elapsed = timer.getElapsedTime().asSeconds();
-    if (elapsed >= 0.5f) {
-        printf("delta: %f\n", _ui->getDeltaTime().asSeconds());
-        timer.restart();
-    }
+        float elapsed = timer.getElapsedTime().asSeconds();
+        if (elapsed >= 0.5f) {
+            printf("delta: %f\n", _ui->getDeltaTime().asSeconds());
+            timer.restart();
+        }
 #endif
+    } else {
+        S9xSetSoundMute(TRUE);
+    }
 
-    return 0;
+    UIEmu::onDraw(transform, draw);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -510,7 +524,6 @@ bool8 S9xDeinitUpdate(int width, int height) {
 
     video->getTexture()->unlock();
 #endif
-    _ui->flip();
 
     return TRUE;
 }

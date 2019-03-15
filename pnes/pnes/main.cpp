@@ -106,7 +106,7 @@ int main(int argc, char **argv) {
     ui->setSkin(skin);
 
     // ui
-    std::string nestopia_version = "Nestopia 1.0";
+    std::string nestopia_version = "Nestopia 1.50";
     romList = new PNESRomList(ui, nestopia_version);
     romList->build();
     uiRomList = new UIRomListClassic(ui, romList, ui->getSize());
