@@ -174,23 +174,25 @@ void PSNESRomList::build() {
             pathUppercase[k] = (char) toupper(path[k]);
         }
 
-        for (auto &fileList : files) {
-            if (fileList.empty()) {
+        for (unsigned int j = 0; j < files.size(); j++) {
+
+            if (files.at(j).empty()) {
                 continue;
             }
 
-            std::vector<std::string> fileListNames;
-            for (auto &f : fileList) {
-                fileListNames.emplace_back(f.name);
+            std::vector<std::string> fileList;
+            for (auto &f : files.at(j)) {
+                fileList.emplace_back(f.name);
             }
 
-            auto file = std::find(fileListNames.begin(), fileListNames.end(), path);
-            if (file == fileListNames.end()) {
-                file = std::find(fileListNames.begin(), fileListNames.end(), pathUppercase);
+            auto file = std::find(fileList.begin(), fileList.end(), path);
+            if (file == fileList.end()) {
+                file = std::find(fileList.begin(), fileList.end(), pathUppercase);
             }
-            if (file != fileListNames.end()) {
-                rom->path = path;
-                rom->path += file->c_str();
+
+            if (file != fileList.end()) {
+
+                rom->path = paths->at(j) + file->c_str();
                 rom->state = RomState::WORKING;
                 hardwareList->at(0).available_count++;
                 if (rom->parent) {

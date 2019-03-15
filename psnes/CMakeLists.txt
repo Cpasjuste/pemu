@@ -125,7 +125,9 @@ endif (BUILD_PSP2)
 # snes9x executable
 #####################
 add_custom_target(${PROJECT_NAME}.data
-        COMMAND cp -rf ${CMAKE_CURRENT_SOURCE_DIR}/psnes/data/skin ${CMAKE_CURRENT_BINARY_DIR})
+        COMMAND cp -rf ${CMAKE_CURRENT_SOURCE_DIR}/psnes/data/skin ${CMAKE_CURRENT_BINARY_DIR}
+        COMMAND cp -rf ${CMAKE_CURRENT_SOURCE_DIR}/psnes/data/databases/Super_Nintendo_Entertainment_System_Parent-Clone_20180601-221617_dat-o-matic.xml ${CMAKE_CURRENT_BINARY_DIR}/db.xml
+        )
 add_executable(${PROJECT_NAME}.elf ${PSNES_SRC} ${SNES9X_SRC} ${UNZIP_SRC} ${JMA_SRC})
 target_include_directories(${PROJECT_NAME}.elf PRIVATE ${PSNES_INC} ${SNES9X_INC} ${UNZIP_INC} ${JMA_INC})
 target_compile_options(${PROJECT_NAME}.elf PRIVATE ${SNES9X_CFLAGS})

@@ -15,8 +15,12 @@ using namespace c2dui;
 PSNESConfig::PSNESConfig(const std::string &home, int version)
         : Config(home, version) {
 
-    if (get(Option::GUI_USE_DATABASE)->getIndex() == 0) {
+    if (get(Option::GUI_USE_DATABASE)->getValueBool()) {
         hide(Option::GUI_SHOW_CLONES);
+    } else {
+        // add "WORKING" to "SHOW_ALL" option
+        std::vector<std::string> *values = get(Option::Index::GUI_SHOW_ALL)->getValues();
+        values->insert(values->begin() + 1, "WORKING");
     }
 
     add(Option::Index::ROM_SHOW_FPS, "HIGH_RES", {"OFF", "ON"}, 0, Option::Index::ROM_HIGH_RES);

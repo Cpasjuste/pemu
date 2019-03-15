@@ -100,13 +100,6 @@ static void S9xAudioCallback(void *data, Uint8 *stream, int len) {
     S9xMixSamples(stream, len >> (Settings.SixteenBitSound ? 1 : 0));
 }
 
-/*
-static void S9xSamplesAvailable(void *data) {
-
-    S9xFinalizeSamples();
-}
-*/
-
 std::string getButtonId(int player, const std::string &name) {
     return "Joypad" + std::to_string(player) + " " + name;
 }
