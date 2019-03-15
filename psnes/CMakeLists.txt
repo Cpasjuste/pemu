@@ -49,6 +49,7 @@ set(SNES9X_CFLAGS
         -DHAVE_MKSTEMP -DHAVE_STRINGS_H
         -DHAVE_SYS_IOCTL_H -DHAVE_STDINT_H -DRIGHTSHIFT_IS_SAR
         -DGFX_MULTI_FORMAT
+        -D__BYTE_ORDER__=__ORDER_LITTLE_ENDIAN__
         -D__PSNES__
         -D__PSNES_VERSION_MAJOR__=${PSNES_VERSION_MAJOR}
         -D__PSNES_VERSION_MINOR__=${PSNES_VERSION_MINOR}
@@ -124,7 +125,9 @@ endif (BUILD_PSP2)
 # snes9x executable
 #####################
 add_custom_target(${PROJECT_NAME}.data
-        COMMAND cp -rf ${CMAKE_CURRENT_SOURCE_DIR}/psnes/data/skin ${CMAKE_CURRENT_BINARY_DIR})
+        COMMAND cp -rf ${CMAKE_CURRENT_SOURCE_DIR}/psnes/data/skin ${CMAKE_CURRENT_BINARY_DIR}
+        COMMAND cp -rf ${CMAKE_CURRENT_SOURCE_DIR}/psnes/data/databases/Super_Nintendo_Entertainment_System_Parent-Clone_20180601-221617_dat-o-matic.xml ${CMAKE_CURRENT_BINARY_DIR}/db.xml
+        )
 add_executable(${PROJECT_NAME}.elf ${PSNES_SRC} ${SNES9X_SRC} ${UNZIP_SRC} ${JMA_SRC})
 target_include_directories(${PROJECT_NAME}.elf PRIVATE ${PSNES_INC} ${SNES9X_INC} ${UNZIP_INC} ${JMA_INC})
 target_compile_options(${PROJECT_NAME}.elf PRIVATE ${SNES9X_CFLAGS})

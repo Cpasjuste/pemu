@@ -3,6 +3,8 @@
 //
 
 #include "burner.h"
+#include "burnint.h"
+#include "driverlist.h"
 
 #include "c2dui.h"
 #include "uiEmu.h"
@@ -29,22 +31,44 @@ PFBAGuiEmu::PFBAGuiEmu(UIMain *ui) : UIEmu(ui) {
     printf("PFBAGuiEmu()\n");
 }
 
-int PFBAGuiEmu::run(RomList::Rom *rom) {
+int PFBAGuiEmu::load(RomList::Rom *rom) {
+
+    int fps;
+
+    nBurnDrvActive = rom->drv;
+    if (nBurnDrvActive >= nBurnDrvCount) {
+        printf("PFBAGui::runRom: driver not found\n");
+        return -1;
+    }
 
     ///////////
     // AUDIO
     //////////
+    // get fps
+    bForce60Hz = getUi()->getConfig()->get(Option::Index::ROM_FORCE_60HZ, true)->getValueBool();
+    bForce50Hz = getUi()->getConfig()->get(Option::Index::ROM_FORCE_50HZ, true)->getValueBool();
+    if (bForce60Hz) {
+        fps = 6000;
+    } else if (bForce50Hz) {
+        fps = 5000;
+    } else {
+        pDriver[nBurnDrvActive]->Init();
+        fps = nBurnFPS;
+        pDriver[nBurnDrvActive]->Exit();
+    }
+    printf("Emulation rate: %f hz\n", (float) fps / 100);
+
     printf("Init audio device...");
-    addAudio(48000);
+    int freq = getUi()->getConfig()->get(Option::Index::ROM_AUDIO_FREQ)->getValueInt();
+    addAudio(freq, (float) fps / 100);
     if (getAudio()->isAvailable()) {
-        // disable interpolation as it produce "cracking" sound
-        // on some games (cps1 (SF2), cave ...)
-        nInterpolation = 1;
-        nFMInterpolation = 0;
+        nInterpolation = getUi()->getConfig()->get(Option::Index::ROM_AUDIO_INTERPOLATION)->getValueBool();
+        nFMInterpolation = getUi()->getConfig()->get(Option::Index::ROM_AUDIO_FMINTERPOLATION)->getValueBool();
         nBurnSoundRate = getAudio()->getSampleRate();
         nBurnSoundLen = getAudio()->getBufferLen();
         pBurnSoundOut = getAudio()->getBuffer();
     }
+    audio_sync = getUi()->getConfig()->get(Option::Index::ROM_AUDIO_SYNC, true)->getValueBool();
     printf("done\n");
     ///////////
     // AUDIO
@@ -53,16 +77,12 @@ int PFBAGuiEmu::run(RomList::Rom *rom) {
     ///////////////
     // FBA DRIVER
     ///////////////
-    bForce60Hz = true;
     EnableHiscores = 1;
     InpInit();
     InpDIP();
     printf("Initialize driver...\n");
     if (DrvInit(rom->drv, false) != 0) {
-        printf("\nDriver initialisation failed! Likely causes are:\n"
-               "- Corrupt/Missing ROM(s)\n"
-               "- I/O Error\n"
-               "- Memory error\n\n");
+        printf("\nDriver initialisation failed\n");
         getUi()->getUiProgressBox()->setVisibility(Visibility::Hidden);
         getUi()->getUiMessageBox()->show("ERROR", "DRIVER INIT FAILED", "OK");
         stop();
@@ -92,7 +112,7 @@ int PFBAGuiEmu::run(RomList::Rom *rom) {
     // VIDEO
     //////////
 
-    return UIEmu::run(rom);
+    return UIEmu::load(rom);
 }
 
 void PFBAGuiEmu::stop() {
@@ -115,10 +135,7 @@ void PFBAGuiEmu::updateFb() {
     }
 }
 
-void PFBAGuiEmu::renderFrame(bool draw, int drawFps, float fps) {
-
-    getFpsText()->setVisibility(
-            drawFps ? Visibility::Visible : Visibility::Hidden);
+void PFBAGuiEmu::renderFrame(bool draw) {
 
     if (!isPaused()) {
 
@@ -135,51 +152,39 @@ void PFBAGuiEmu::renderFrame(bool draw, int drawFps, float fps) {
             getVideo()->getTexture()->unlock();
         }
 
-        if (drawFps) {
-            sprintf(getFpsString(), "FPS: %.2g/%2d", fps, (nBurnFPS / 100));
-            getFpsText()->setString(getFpsString());
-        }
-
         if (getAudio() && getAudio()->isAvailable()) {
-            getAudio()->play();
+            getAudio()->play(audio_sync);
         }
     }
 }
 
 void PFBAGuiEmu::updateFrame() {
 
-    int showFps = getUi()->getConfig()->getValue(Option::Index::ROM_SHOW_FPS, true);
-    int frameSkip = getUi()->getConfig()->getValue(Option::Index::ROM_FRAMESKIP, true);
+    // TODO
+    //int frameSkip = getUi()->getConfig()->getValue(Option::Index::ROM_FRAMESKIP, true);
 
-    if (frameSkip) {
-        bool draw = nFramesEmulated % (frameSkip + 1) == 0;
-        renderFrame(draw, showFps, getUi()->getRenderer()->getFps());
-        getUi()->getRenderer()->flip(draw);
-        float delta = getUi()->getRenderer()->getDeltaTime().asSeconds();
-        if (delta < getFrameDuration()) { // limit fps
-            //printf("f: %f | d: %f | m: %f | s: %i\n", frame_duration, delta, frame_duration - delta,
-            //       (unsigned int) ((frame_duration - delta) * 1000));
-            getUi()->getRenderer()->delay((unsigned int) ((getFrameDuration() - delta) * 1000));
-        }
-    } else {
-        renderFrame(true, showFps, getUi()->getRenderer()->getFps());
-        getUi()->getRenderer()->flip();
-        /*
-        timer += getUi()->getRenderer()->getDeltaTime().asSeconds();
-        if (timer >= 1) {
-            timer = 0;
-            printf("fps: %.2g/%2d, delta: %f\n", getUi()->getRenderer()->getFps(), (nBurnFPS / 100),
-                   getUi()->getRenderer()->getDeltaTime().asSeconds());
-        }
-        */
+    renderFrame();
+    /*
+    timer += getUi()->getDeltaTime().asSeconds();
+    if (timer >= 1) {
+        timer = 0;
+        printf("fps: %.2g/%2d, delta: %f\n", getUi()->getFps(), (nBurnFPS / 100),
+               getUi()->getDeltaTime().asSeconds());
     }
+    */
 }
 
-int PFBAGuiEmu::loop() {
+bool PFBAGuiEmu::onInput(c2d::Input::Player *players) {
+
+    if (getUi()->getUiMenu()->isVisible()
+        || getUi()->getUiStateMenu()->isVisible()) {
+        return UIEmu::onInput(players);
+    }
 
     bool combo = false;
+    // TODO: control rotation
     int rotation_config =
-            getUi()->getConfig()->getValue(Option::Index::ROM_ROTATION, true);
+            getUi()->getConfig()->get(Option::Index::ROM_ROTATION, true)->getValueBool();
     int rotate_input = 0;
 #ifdef __PSP2__
     // TODO: find a way to unify platforms,
@@ -215,17 +220,15 @@ int PFBAGuiEmu::loop() {
     inputServiceSwitch = 0;
     inputP1P2Switch = 0;
 
-    // TODO: control rotation
-    //Input::Player *players = getUi()->getInput()->update(rotate_input);
-    Input::Player *players = getUi()->getInput()->getPlayers();
-
     // look for player 1 menu combo
     if (((players[0].keys & Input::Key::Start) && (players[0].keys & Input::Key::Fire5))
         || ((players[0].keys & Input::Key::Select) && (players[0].keys & Input::Key::Fire5))
         || ((players[0].keys & Input::Key::Start) && (players[0].keys & Input::Key::Fire6))
         || ((players[0].keys & Input::Key::Select) && (players[0].keys & Input::Key::Fire6))) {
         pause();
-        return UI_KEY_SHOW_MEMU_ROM;
+        getUi()->getConfig()->load(getUi()->getUiRomList()->getSelection());
+        getUi()->getUiMenu()->load(true);
+        return true;
     }
 
     // look each players for combos keys
@@ -259,8 +262,25 @@ int PFBAGuiEmu::loop() {
         getVideo()->updateScaling();
     }
 
-    InpMake(players);
-    updateFrame();
+    return true;
+}
 
-    return 0;
+void PFBAGuiEmu::onDraw(c2d::Transform &transform, bool draw) {
+
+    if (!isPaused()) {
+
+        // fps
+        int showFps = getUi()->getConfig()->get(Option::Index::ROM_SHOW_FPS, true)->getValueBool();
+        getFpsText()->setVisibility(showFps ? c2d::Visibility::Visible : c2d::Visibility::Hidden);
+        if (showFps) {
+            sprintf(getFpsString(), "FPS: %.2g/%2d", getUi()->getFps(), nBurnFPS / 100);
+            getFpsText()->setString(getFpsString());
+        }
+
+        auto players = getUi()->getInput()->getPlayers();
+        InpMake(players);
+        updateFrame();
+    }
+
+    UIEmu::onDraw(transform, draw);
 }

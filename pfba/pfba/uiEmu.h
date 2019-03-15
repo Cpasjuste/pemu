@@ -11,19 +11,26 @@ class PFBAGuiEmu : public c2dui::UIEmu {
 
 public:
 
-    PFBAGuiEmu(c2dui::UIMain *ui);
+    explicit PFBAGuiEmu(c2dui::UIMain *ui);
 
-    int run(c2dui::RomList::Rom *rom);
+    int load(c2dui::RomList::Rom *rom) override;
 
-    void stop();
+    void stop() override;
 
-    int loop();
+    void updateFb() override;
 
-    void updateFb();
+private:
 
-    void updateFrame();
+    bool onInput(c2d::Input::Player *players) override;
 
-    void renderFrame(bool draw = true, int drawFps = false, float fps = 0);
+    void onDraw(c2d::Transform &transform, bool draw = true) override;
+
+    void updateFrame() override;
+
+    void renderFrame(bool draw = true);
+
+    bool audio_sync = false;
+    bool bForce50Hz = false;
 };
 
 #endif //PFBA_UIEMU_H

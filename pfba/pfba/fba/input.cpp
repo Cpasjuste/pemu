@@ -78,13 +78,13 @@ int DoInputBlank(int /*bDipSwitch*/) {
 
         sprintf(controlName, "p%i coin", iJoyNum + 1);
         if (strcmp(bii.szInfo, controlName) == 0) {
-            GameInput[iJoyNum][0].nBit = 4;
+            GameInput[iJoyNum][0].nBit = 7;
             GameInput[iJoyNum][0].pVal = bii.pVal;
             GameInput[iJoyNum][0].nType = bii.nType;
         } else {
             sprintf(controlName, "p%i start", iJoyNum + 1);
             if (strcmp(bii.szInfo, controlName) == 0) {
-                GameInput[iJoyNum][1].nBit = 5;
+                GameInput[iJoyNum][1].nBit = 8;
                 GameInput[iJoyNum][1].pVal = bii.pVal;
                 GameInput[iJoyNum][1].nType = bii.nType;
                 switch (iJoyNum) {
@@ -98,110 +98,110 @@ int DoInputBlank(int /*bDipSwitch*/) {
             } else {
                 sprintf(controlName, "p%i up", iJoyNum + 1);
                 if (strcmp(bii.szInfo, controlName) == 0) {
-                    GameInput[iJoyNum][2].nBit = 0;
+                    GameInput[iJoyNum][2].nBit = 3;
                     GameInput[iJoyNum][2].pVal = bii.pVal;
                     GameInput[iJoyNum][2].nType = bii.nType;
                 } else {
                     sprintf(controlName, "p%i down", iJoyNum + 1);
                     if (strcmp(bii.szInfo, controlName) == 0) {
-                        GameInput[iJoyNum][3].nBit = 1;
+                        GameInput[iJoyNum][3].nBit = 4;
                         GameInput[iJoyNum][3].pVal = bii.pVal;
                         GameInput[iJoyNum][3].nType = bii.nType;
                     } else {
                         sprintf(controlName, "p%i left", iJoyNum + 1);
                         if (strcmp(bii.szInfo, controlName) == 0) {
-                            GameInput[iJoyNum][4].nBit = 2;
+                            GameInput[iJoyNum][4].nBit = 5;
                             GameInput[iJoyNum][4].pVal = bii.pVal;
                             GameInput[iJoyNum][4].nType = bii.nType;
                         } else {
                             sprintf(controlName, "p%i right", iJoyNum + 1);
                             if (strcmp(bii.szInfo, controlName) == 0) {
-                                GameInput[iJoyNum][5].nBit = 3;
+                                GameInput[iJoyNum][5].nBit = 6;
                                 GameInput[iJoyNum][5].pVal = bii.pVal;
                                 GameInput[iJoyNum][5].nType = bii.nType;
                             } else {
                                 sprintf(controlName, "p%i x-axis", iJoyNum + 1);
                                 if (strcmp(bii.szInfo, controlName) == 0) {
-                                    GameInput[iJoyNum][12].nBit = 2;
+                                    GameInput[iJoyNum][12].nBit = 5;
                                     GameInput[iJoyNum][12].pShortVal = bii.pShortVal;
                                     GameInput[iJoyNum][12].nType = bii.nType;
-                                    GameInput[iJoyNum][13].nBit = 3;
+                                    GameInput[iJoyNum][13].nBit = 6;
                                     GameInput[iJoyNum][13].pShortVal = bii.pShortVal;
                                     GameInput[iJoyNum][13].nType = bii.nType;
                                 } else {
                                     sprintf(controlName, "mouse x-axis");
                                     if (strcmp(bii.szInfo, controlName) == 0) {
-                                        GameInput[iJoyNum][12].nBit = 2;
+                                        GameInput[iJoyNum][12].nBit = 5;
                                         GameInput[iJoyNum][12].pShortVal = bii.pShortVal;
                                         GameInput[iJoyNum][12].nType = bii.nType;
-                                        GameInput[iJoyNum][13].nBit = 3;
+                                        GameInput[iJoyNum][13].nBit = 6;
                                         GameInput[iJoyNum][13].pShortVal = bii.pShortVal;
                                         GameInput[iJoyNum][13].nType = bii.nType;
                                     } else {
                                         sprintf(controlName, "p%i y-axis", iJoyNum + 1);
                                         if (strcmp(bii.szInfo, controlName) == 0) {
-                                            GameInput[iJoyNum][14].nBit = 0;
+                                            GameInput[iJoyNum][14].nBit = 3;
                                             GameInput[iJoyNum][14].pShortVal = bii.pShortVal;
                                             GameInput[iJoyNum][14].nType = bii.nType;
-                                            GameInput[iJoyNum][15].nBit = 1;
+                                            GameInput[iJoyNum][15].nBit = 4;
                                             GameInput[iJoyNum][15].pShortVal = bii.pShortVal;
                                             GameInput[iJoyNum][15].nType = bii.nType;
                                         } else {
                                             sprintf(controlName, "mouse y-axis");
                                             if (strcmp(bii.szInfo, controlName) == 0) {
-                                                GameInput[iJoyNum][14].nBit = 0;
+                                                GameInput[iJoyNum][14].nBit = 3;
                                                 GameInput[iJoyNum][14].pShortVal = bii.pShortVal;
                                                 GameInput[iJoyNum][14].nType = bii.nType;
-                                                GameInput[iJoyNum][15].nBit = 1;
+                                                GameInput[iJoyNum][15].nBit = 4;
                                                 GameInput[iJoyNum][15].pShortVal = bii.pShortVal;
                                                 GameInput[iJoyNum][15].nType = bii.nType;
                                             } else {
                                                 sprintf(controlName, "p%i z-axis", iJoyNum + 1);
                                                 if (strcmp(bii.szInfo, controlName) == 0) {
-                                                    GameInput[iJoyNum][16].nBit = 11;
+                                                    GameInput[iJoyNum][16].nBit = 14;
                                                     GameInput[iJoyNum][16].pShortVal = bii.pShortVal;
                                                     GameInput[iJoyNum][16].nType = bii.nType;
                                                 } else {
                                                     sprintf(controlName, "p%i fire 1", iJoyNum + 1);
                                                     if (strcmp(bii.szInfo, controlName) == 0) {
-                                                        GameInput[iJoyNum][6].nBit = 6;
+                                                        GameInput[iJoyNum][6].nBit = 9;
                                                         GameInput[iJoyNum][6].pVal = bii.pVal;
                                                         GameInput[iJoyNum][6].nType = bii.nType;
                                                     } else {
                                                         sprintf(controlName, "p%i fire 2", iJoyNum + 1);
                                                         if (strcmp(bii.szInfo, controlName) == 0) {
-                                                            GameInput[iJoyNum][7].nBit = 7;
+                                                            GameInput[iJoyNum][7].nBit = 10;
                                                             GameInput[iJoyNum][7].pVal = bii.pVal;
                                                             GameInput[iJoyNum][7].nType = bii.nType;
                                                         } else {
                                                             sprintf(controlName, "mouse button 1");
                                                             if (strcmp(bii.szInfo, controlName) == 0) {
-                                                                GameInput[iJoyNum][6].nBit = 6;
+                                                                GameInput[iJoyNum][6].nBit = 9;
                                                                 GameInput[iJoyNum][6].pVal = bii.pVal;
                                                                 GameInput[iJoyNum][6].nType = bii.nType;
                                                             } else {
                                                                 sprintf(controlName, "mouse button 2");
                                                                 if (strcmp(bii.szInfo, controlName) == 0) {
-                                                                    GameInput[iJoyNum][7].nBit = 7;
+                                                                    GameInput[iJoyNum][7].nBit = 10;
                                                                     GameInput[iJoyNum][7].pVal = bii.pVal;
                                                                     GameInput[iJoyNum][7].nType = bii.nType;
                                                                 } else {
                                                                     sprintf(controlName, "p%i fire 3", iJoyNum + 1);
                                                                     if (strcmp(bii.szInfo, controlName) == 0) {
-                                                                        GameInput[iJoyNum][8].nBit = 8;
+                                                                        GameInput[iJoyNum][8].nBit = 11;
                                                                         GameInput[iJoyNum][8].pVal = bii.pVal;
                                                                         GameInput[iJoyNum][8].nType = bii.nType;
                                                                     } else {
                                                                         sprintf(controlName, "p%i fire 4", iJoyNum + 1);
                                                                         if (strcmp(bii.szInfo, controlName) == 0) {
-                                                                            GameInput[iJoyNum][9].nBit = 9;
+                                                                            GameInput[iJoyNum][9].nBit = 12;
                                                                             GameInput[iJoyNum][9].pVal = bii.pVal;
                                                                             GameInput[iJoyNum][9].nType = bii.nType;
                                                                         } else {
                                                                             sprintf(controlName, "p%i fire 5",
                                                                                     iJoyNum + 1);
                                                                             if (strcmp(bii.szInfo, controlName) == 0) {
-                                                                                GameInput[iJoyNum][10].nBit = 10;
+                                                                                GameInput[iJoyNum][10].nBit = 13;
                                                                                 GameInput[iJoyNum][10].pVal = bii.pVal;
                                                                                 GameInput[iJoyNum][10].nType = bii.nType;
                                                                             } else {
@@ -209,7 +209,7 @@ int DoInputBlank(int /*bDipSwitch*/) {
                                                                                         iJoyNum + 1);
                                                                                 if (strcmp(bii.szInfo, controlName) ==
                                                                                     0) {
-                                                                                    GameInput[iJoyNum][11].nBit = 11;
+                                                                                    GameInput[iJoyNum][11].nBit = 14;
                                                                                     GameInput[iJoyNum][11].pVal = bii.pVal;
                                                                                     GameInput[iJoyNum][11].nType = bii.nType;
                                                                                 }
@@ -233,7 +233,7 @@ int DoInputBlank(int /*bDipSwitch*/) {
         }
 
 #if 0
-        if (pgi->pVal != NULL)
+        if (pgi->pVal != nullptr)
     printf("GI(%02d): %-12s 0x%02x 0x%02x %-12s, [%d]\n", i, bii.szName, bii.nType, *(pgi->pVal), bii.szInfo, pgi->nBit );
 else
     printf("GI(%02d): %-12s 0x%02x N/A  %-12s, [%d]\n", i, bii.szName, bii.nType, bii.szInfo, pgi->nBit );
@@ -251,7 +251,7 @@ int InpInit() {
     // Count the number of inputs
     nGameInpCount = 0;
     for (i = 0; i < 0x1000; i++) {
-        nRet = BurnDrvGetInputInfo(NULL, i);
+        nRet = BurnDrvGetInputInfo(nullptr, i);
         if (nRet != 0) {   // end of input list
             nGameInpCount = i;
             break;
@@ -297,10 +297,10 @@ int InpMake(Input::Player *players) {
 
         for (i = 0; i < MAX_INPUT_inp; i++) {
 
-            if (GameInput[joyNum][i].pVal == NULL)
+            if (GameInput[joyNum][i].pVal == nullptr)
                 continue;
 
-            if (GameInput[joyNum][i].nBit >= 0) {
+            if (GameInput[joyNum][i].nBit > 0) {
 
                 down = players[joyNum].keys & (1U << GameInput[joyNum][i].nBit);
 
@@ -333,7 +333,7 @@ int InpMake(Input::Player *players) {
     }
 
     for (i = 0; i < (int) DIPInfo.nDIP; i++) {
-        if (DIPInfo.DIPData[i].pVal == NULL)
+        if (DIPInfo.DIPData[i].pVal == nullptr)
             continue;
         *(DIPInfo.DIPData[i].pVal) = DIPInfo.DIPData[i].nConst;
     }
@@ -396,7 +396,7 @@ void InpDIP() {
         i++;
     }
     for (i = 0, pgi = DIPInfo.DIPData; i < (int) DIPInfo.nDIP; i++, pgi++) {
-        if (pgi->pVal == NULL)
+        if (pgi->pVal == nullptr)
             continue;
         *(pgi->pVal) = pgi->nConst;
     }

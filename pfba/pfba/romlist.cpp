@@ -28,7 +28,7 @@ void PFBARomList::build() {
 
     char path[MAX_PATH];
     const char *pathUppercase; // sometimes on FAT32 short files appear as all uppercase
-    bool use_icons = ui->getConfig()->getValue(Option::Index::GUI_SHOW_ICONS) == 1;
+    bool use_icons = ui->getConfig()->get(Option::Index::GUI_SHOW_ICONS)->getIndex() == 1;
 
     for (unsigned int i = 0; i < nBurnDrvCount; i++) {
 
@@ -219,7 +219,7 @@ void PFBARomList::build() {
             sprintf(text_str, "Scanning... %i%% - ROMS : %i / %i",
                     (i * 100) / nBurnDrvCount, hardwareList->at(0).supported_count, nBurnDrvCount);
             text->setString(text_str);
-            ui->getRenderer()->flip();
+            ui->flip();
         }
         // UI
     }

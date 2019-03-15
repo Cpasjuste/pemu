@@ -40,6 +40,7 @@ char szAppTitlePath[MAX_PATH];
 char szAppIconPath[MAX_PATH];
 char szAppBlendPath[MAX_PATH];
 char szAppEEPROMPath[MAX_PATH];
+char szAppHDDPath[MAX_PATH];
 char szAppSkinPath[MAX_PATH];
 
 void BurnPathsInit() {
@@ -94,14 +95,16 @@ void BurnPathsInit() {
     mkdir(szAppBlendPath, 0777);
     //printf("szAppBlendPath: %s\n", szAppBlendPath);
 
+    snprintf(szAppHDDPath, MAX_PATH - 1, "%s%s/", szAppHomePath, "hdd");
+    mkdir(szAppHDDPath, 0777);
+    //printf("szAppHDDPath: %s\n", szAppHDDPath);
+
 #ifndef __PSP2__
     snprintf(szAppSkinPath, MAX_PATH - 1, "%s%s", szAppHomePath, "skin");
     mkdir(szAppSkinPath, 0777);
     //printf("szAppSkinPath: %s\n", szAppSkinPath);
 #endif
 
-    snprintf(szAppEEPROMPath, MAX_PATH - 1, "%sconfig", szAppHomePath);
-    mkdir(szAppEEPROMPath, 0777);
-    strncat(szAppEEPROMPath, "/games/", MAX_PATH - 1);
+    snprintf(szAppEEPROMPath, MAX_PATH - 1, "%seeproms/", szAppHomePath);
     mkdir(szAppEEPROMPath, 0777);
 }

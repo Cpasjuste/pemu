@@ -65,7 +65,7 @@ void PSNESRomList::buildNoDb(bool use_icons) {
                 snprintf(text_str, 511, "Scanning... %i / %i",
                          hardwareList->at(0).available_count, (int) list.size());
                 text->setString(text_str);
-                ui->getRenderer()->flip();
+                ui->flip();
             }
             // UI
         }
@@ -81,9 +81,9 @@ void PSNESRomList::build() {
 
     printf("PSNESRomList::build()\n");
 
-    bool use_icons = ui->getConfig()->getValue(Option::Index::GUI_SHOW_ICONS) == 1;
+    bool use_icons = ui->getConfig()->get(Option::Index::GUI_SHOW_ICONS)->getIndex() == 0;
 
-    if (!ui->getConfig()->getValue(Option::Index::GUI_USE_DATABASE)) {
+    if (ui->getConfig()->get(Option::Index::GUI_USE_DATABASE)->getIndex() == 0) {
         buildNoDb(use_icons);
         return;
     }
@@ -174,23 +174,25 @@ void PSNESRomList::build() {
             pathUppercase[k] = (char) toupper(path[k]);
         }
 
-        for (auto &fileList : files) {
-            if (fileList.empty()) {
+        for (unsigned int j = 0; j < files.size(); j++) {
+
+            if (files.at(j).empty()) {
                 continue;
             }
 
-            std::vector<std::string> fileListNames;
-            for(auto &f : fileList) {
-                fileListNames.emplace_back(f.name);
+            std::vector<std::string> fileList;
+            for (auto &f : files.at(j)) {
+                fileList.emplace_back(f.name);
             }
 
-            auto file = std::find(fileListNames.begin(), fileListNames.end(), path);
-            if (file == fileListNames.end()) {
-                file = std::find(fileListNames.begin(), fileListNames.end(), pathUppercase);
+            auto file = std::find(fileList.begin(), fileList.end(), path);
+            if (file == fileList.end()) {
+                file = std::find(fileList.begin(), fileList.end(), pathUppercase);
             }
-            if (file != fileListNames.end()) {
-                rom->path = path;
-                rom->path += file->c_str();
+
+            if (file != fileList.end()) {
+
+                rom->path = paths->at(j) + file->c_str();
                 rom->state = RomState::WORKING;
                 hardwareList->at(0).available_count++;
                 if (rom->parent) {
@@ -224,7 +226,7 @@ void PSNESRomList::build() {
             snprintf(text_str, 511, "Scanning... %i / %i",
                      hardwareList->at(0).available_count, (int) list.size());
             text->setString(text_str);
-            ui->getRenderer()->flip();
+            ui->flip();
         }
         // UI
     }

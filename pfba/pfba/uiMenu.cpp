@@ -18,18 +18,18 @@ bool PFBAGuiMenu::isOptionHidden(c2dui::Option *option) {
 
     RomList::Rom *rom = getUi()->getUiRomList()->getSelection();
 
-    if (isRom() && option->id == Option::Index::ROM_ROTATION
+    if (isRom() && option->getId() == Option::Index::ROM_ROTATION
         && rom != nullptr && !(rom->flags & BDF_ORIENTATION_VERTICAL)) {
         return true;
     }
 
-    if (isRom() && option->id == Option::Index::ROM_NEOBIOS
+    if (isRom() && option->getId() == Option::Index::ROM_NEOBIOS
         && rom != nullptr && !(getUi()->getUiRomList()->getRomList()->isHardware(rom->hardware, HARDWARE_PREFIX_SNK))) {
         return true;
     }
 
 #ifdef __SWITCH__
-    if (option->id == Option::Index::ROM_FRAMESKIP) {
+    if (option->getId() == Option::Index::ROM_FRAMESKIP) {
         return true;
     }
 #endif

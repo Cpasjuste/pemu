@@ -20,7 +20,6 @@
 #include "burner.h"
 
 #include "c2dui.h"
-#include "ui.h"
 #include "uiEmu.h"
 #include "uiMenu.h"
 #include "config.h"
@@ -33,31 +32,10 @@ using namespace c2dui;
 #ifdef __PSP2__
 #include <psp2/power.h>
 #include <psp2/io/dirent.h>
-#define C2DUI_HOME_PATH "ux0:/data/psnes/"
 int _newlib_heap_size_user = 192 * 1024 * 1024;
-#define SCR_W   960
-#define SCR_H   544
-#elif __PS3__
-#define C2DUI_HOME_PATH "./"
-#define SCR_W   1280
-#define SCR_H   720
-#elif __3DS__
-#define C2DUI_HOME_PATH "./"
-#define SCR_W   400
-#define SCR_H   240
-#elif __SWITCH__
-#define C2DUI_HOME_PATH "./"
-#define SCR_W   1280
-#define SCR_H   720
-#else
-#define C2DUI_HOME_PATH "./"
-#define SCR_W   1280
-#define SCR_H   720
 #endif
 
-Renderer *renderer;
-
-PFBAGui *ui;
+UIMain *ui;
 PFBAGuiMenu *uiMenu;
 PFBAGuiEmu *uiEmu;
 PFBAUIStateMenu *uiState;
@@ -72,11 +50,12 @@ int main(int argc, char **argv) {
     BurnPathsInit();
     BurnLibInit();
 
-    renderer = new C2DRenderer(Vector2f(SCR_W, SCR_H));
+    ui = new UIMain(Vector2f(C2D_SCREEN_WIDTH, C2D_SCREEN_HEIGHT));
 
     // load configuration
     int version = (__PFBA_VERSION_MAJOR__ * 100) + __PFBA_VERSION_MINOR__;
-    cfg = new PFBAConfig(C2DUI_HOME_PATH, version);
+    cfg = new PFBAConfig(ui->getIo()->getDataWritePath(), version);
+    ui->setConfig(cfg);
 
     // skin
     // buttons used for ui config menu
@@ -121,31 +100,33 @@ int main(int argc, char **argv) {
     buttons.emplace_back(KEY_JOY_ZR_DEFAULT, "ZR");
     buttons.emplace_back(KEY_JOY_LSTICK_DEFAULT, "LSTICK");
     buttons.emplace_back(KEY_JOY_RSTICK_DEFAULT, "RSTICK");
-    skin = new Skin(C2DUI_HOME_PATH, buttons);
+    skin = new Skin(ui, buttons);
 #else
-    skin = new Skin(C2DUI_HOME_PATH, buttons);
+    skin = new Skin(ui, buttons);
 #endif
+    ui->setSkin(skin);
 
-    // gui
-    ui = new PFBAGui(renderer, cfg, skin);
+    // ui
     std::string fba_version = "fba: ";
     fba_version += szAppBurnVer;
     romList = new PFBARomList(ui, fba_version);
     romList->build();
-    uiRomList = new UIRomList(ui, romList, renderer->getSize());
+    uiRomList = new UIRomListClassic(ui, romList, ui->getSize());
     uiMenu = new PFBAGuiMenu(ui);
     uiEmu = new PFBAGuiEmu(ui);
     uiState = new PFBAUIStateMenu(ui);
     ui->init(uiRomList, uiMenu, uiEmu, uiState);
-    ui->run();
+
+    while (!ui->done) {
+        ui->flip();
+    }
 
     // quit
     BurnLibExit();
 
-    delete (ui);
     delete (skin);
     delete (cfg);
-    delete (renderer);
+    delete (ui);
 
 #ifdef __PSP2__
     scePowerSetArmClockFrequency(266);

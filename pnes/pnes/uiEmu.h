@@ -13,11 +13,13 @@ public:
 
     explicit PNESGuiEmu(c2dui::UIMain *ui);
 
-    int run(c2dui::RomList::Rom *rom);
+    bool onInput(c2d::Input::Player *players) override;
 
-    void stop();
+    void onDraw(c2d::Transform &transform, bool draw = true) override;
 
-    int loop();
+    int load(c2dui::RomList::Rom *rom) override;
+
+    void stop() override;
 
     void nestopia_config_init();
 

@@ -20,7 +20,7 @@ void PNESRomList::build() {
 
     printf("PSNESRomList::build()\n");
 
-    bool use_icons = ui->getConfig()->getValue(Option::Index::GUI_SHOW_ICONS) == 1;
+    bool use_icons = ui->getConfig()->get(Option::Index::GUI_SHOW_ICONS)->getValueBool();
 
     for (auto &fileList : files) {
 
