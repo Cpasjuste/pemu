@@ -15,7 +15,7 @@ using namespace c2dui;
 PSNESConfig::PSNESConfig(const std::string &home, int version)
         : Config(home, version) {
 
-    if (get(Option::GUI_USE_DATABASE)->getValueBool()) {
+    if (!get(Option::GUI_USE_DATABASE)->getValueBool()) {
         hide(Option::GUI_SHOW_CLONES);
     } else {
         // add "WORKING" to "SHOW_ALL" option
