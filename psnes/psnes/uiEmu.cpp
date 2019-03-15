@@ -100,10 +100,12 @@ static void S9xAudioCallback(void *data, Uint8 *stream, int len) {
     S9xMixSamples(stream, len >> (Settings.SixteenBitSound ? 1 : 0));
 }
 
+/*
 static void S9xSamplesAvailable(void *data) {
 
     S9xFinalizeSamples();
 }
+*/
 
 std::string getButtonId(int player, const std::string &name) {
     return "Joypad" + std::to_string(player) + " " + name;
@@ -139,11 +141,7 @@ int PSNESUIEmu::load(RomList::Rom *rom) {
     Settings.FrameTimeNTSC = 16667;
     Settings.SixteenBitSound = TRUE;
     Settings.Stereo = TRUE;
-#ifdef __SWITCH__
-    Settings.SoundPlaybackRate = 48000;
-#else
-    Settings.SoundPlaybackRate = 48000;
-#endif
+    Settings.SoundPlaybackRate = 32000;
     Settings.SoundInputRate = 32000;
     Settings.Transparency = TRUE;
     Settings.AutoDisplayMessages = TRUE;
@@ -182,7 +180,7 @@ int PSNESUIEmu::load(RomList::Rom *rom) {
         return -1;
     }
 
-    if (!S9xInitSound(100, 0)) {
+    if (!S9xInitSound(100)) {
         printf("Could not initialize Snes9x Sound.\n");
         getUi()->getUiProgressBox()->setVisibility(Visibility::Hidden);
         stop();
@@ -210,10 +208,6 @@ int PSNESUIEmu::load(RomList::Rom *rom) {
     S9xReportControllers();
 
     uint32 saved_flags = CPU.Flags;
-
-#ifdef GFX_MULTI_FORMAT
-    S9xSetRenderPixelFormat(RGB565);
-#endif
 
     if (!Memory.LoadROM(rom->path.c_str())) {
         printf("Could not open ROM: %s\n", rom->path.c_str());
@@ -920,12 +914,6 @@ void S9xHandlePortCommand(s9xcommand_t cmd, int16 data1, int16 data2) {
 bool8 S9xOpenSoundDevice(void) {
 
     printf("S9xOpenSoundDevice\n");
-    //Audio *audio = new C2DAudio(Settings.SoundPlaybackRate, 60, S9xAudioCallback);
-    //_ui->addAudio(audio);
-    //_ui->getUiEmu()->addAudio(Settings.SoundPlaybackRate,
-    //                          (int) Memory.ROMFramesPerSecond, S9xAudioCallback);
-    S9xSetSamplesAvailableCallback(S9xSamplesAvailable, nullptr);
-
     return TRUE;
 }
 
