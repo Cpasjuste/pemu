@@ -33,6 +33,8 @@ PFBAGuiEmu::PFBAGuiEmu(UIMain *ui) : UIEmu(ui) {
 
 int PFBAGuiEmu::load(RomList::Rom *rom) {
 
+    int fps;
+
     nBurnDrvActive = rom->drv;
     if (nBurnDrvActive >= nBurnDrvCount) {
         printf("PFBAGui::runRom: driver not found\n");
@@ -42,17 +44,24 @@ int PFBAGuiEmu::load(RomList::Rom *rom) {
     ///////////
     // AUDIO
     //////////
-    // get fps?
-    pDriver[nBurnDrvActive]->Init();
-    int fps = nBurnFPS;
-    pDriver[nBurnDrvActive]->Exit();
+    // get fps
+    bForce60Hz = getUi()->getConfig()->get(Option::Index::ROM_FORCE_60HZ, true)->getValueBool();
+    bForce50Hz = getUi()->getConfig()->get(Option::Index::ROM_FORCE_50HZ, true)->getValueBool();
+    if (bForce60Hz) {
+        fps = 6000;
+    } else if (bForce50Hz) {
+        fps = 5000;
+    } else {
+        pDriver[nBurnDrvActive]->Init();
+        fps = nBurnFPS;
+        pDriver[nBurnDrvActive]->Exit();
+    }
+    printf("Emulation rate: %f hz\n", (float) fps / 100);
 
     printf("Init audio device...");
     int freq = getUi()->getConfig()->get(Option::Index::ROM_AUDIO_FREQ)->getValueInt();
     addAudio(freq, (float) fps / 100);
     if (getAudio()->isAvailable()) {
-        // disable interpolation as it produce "cracking" sound
-        // on some games (cps1 (SF2), cave ...)
         nInterpolation = getUi()->getConfig()->get(Option::Index::ROM_AUDIO_INTERPOLATION)->getValueBool();
         nFMInterpolation = getUi()->getConfig()->get(Option::Index::ROM_AUDIO_FMINTERPOLATION)->getValueBool();
         nBurnSoundRate = getAudio()->getSampleRate();
@@ -68,7 +77,6 @@ int PFBAGuiEmu::load(RomList::Rom *rom) {
     ///////////////
     // FBA DRIVER
     ///////////////
-    bForce60Hz = getUi()->getConfig()->get(Option::Index::ROM_FORCE_60HZ, true)->getValueBool();
     EnableHiscores = 1;
     InpInit();
     InpDIP();
