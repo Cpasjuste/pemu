@@ -15,14 +15,14 @@ using namespace c2dui;
 PSNESConfig::PSNESConfig(const std::string &home, int version)
         : Config(home, version) {
 
-    add(Option::Index::ROM_SHOW_FPS, "HIGH_RES", {"OFF", "ON"}, 0, Option::Index::ROM_HIGH_RES);
+    add(Option::Id::ROM_SHOW_FPS, "HIGH_RES", {"OFF", "ON"}, 0, Option::Id::ROM_HIGH_RES);
     get()->at(get()->size() - 1).setInfo(
             "Only enable high resolution mode for games which can use it,\n"
             "for example \"Secret Of Mana\".\n"
             "It does have some performance impact.\n\n"
             "Need a restart...");
 
-    add(Option::Index::ROM_HIGH_RES, "CHEATS", {"OFF", "ON"}, 1, Option::Index::ROM_CHEATS);
+    add(Option::Id::ROM_HIGH_RES, "CHEATS", {"OFF", "ON"}, 1, Option::Id::ROM_CHEATS);
 
     // set default rom options
     reset();
@@ -35,7 +35,7 @@ PSNESConfig::PSNESConfig(const std::string &home, int version)
         hide(Option::GUI_SHOW_CLONES);
     } else {
         // add "WORKING" to "SHOW_ALL" option
-        std::vector<std::string> *values = get(Option::Index::GUI_SHOW_ALL)->getValues();
+        std::vector<std::string> *values = get(Option::Id::GUI_SHOW_ALL)->getValues();
         values->insert(values->begin() + 1, "WORKING");
     }
 }

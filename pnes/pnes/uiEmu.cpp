@@ -80,7 +80,7 @@ void PNESGuiEmu::onDraw(c2d::Transform &transform, bool draw) {
 
     if (!isPaused()) {
         // fps
-        int showFps = getUi()->getConfig()->get(Option::Index::ROM_SHOW_FPS, true)->getValueBool();
+        int showFps = getUi()->getConfig()->get(Option::Id::ROM_SHOW_FPS, true)->getValueBool();
         getFpsText()->setVisibility(showFps ? c2d::Visibility::Visible : c2d::Visibility::Hidden);
         if (showFps) {
             sprintf(getFpsString(), "FPS: %.2g/%2d", getUi()->getFps(),

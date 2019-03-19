@@ -45,8 +45,8 @@ int PFBAGuiEmu::load(RomList::Rom *rom) {
     // AUDIO
     //////////
     // get fps
-    bForce60Hz = getUi()->getConfig()->get(Option::Index::ROM_FORCE_60HZ, true)->getValueBool();
-    bForce50Hz = getUi()->getConfig()->get(Option::Index::ROM_FORCE_50HZ, true)->getValueBool();
+    bForce60Hz = getUi()->getConfig()->get(Option::Id::ROM_FORCE_60HZ, true)->getValueBool();
+    bForce50Hz = getUi()->getConfig()->get(Option::Id::ROM_FORCE_50HZ, true)->getValueBool();
     if (bForce60Hz) {
         fps = 6000;
     } else if (bForce50Hz) {
@@ -59,16 +59,16 @@ int PFBAGuiEmu::load(RomList::Rom *rom) {
     printf("Emulation rate: %f hz\n", (float) fps / 100);
 
     printf("Init audio device...");
-    int freq = getUi()->getConfig()->get(Option::Index::ROM_AUDIO_FREQ)->getValueInt();
+    int freq = getUi()->getConfig()->get(Option::Id::ROM_AUDIO_FREQ)->getValueInt();
     addAudio(freq, (float) fps / 100);
     if (getAudio()->isAvailable()) {
-        nInterpolation = getUi()->getConfig()->get(Option::Index::ROM_AUDIO_INTERPOLATION)->getValueBool();
-        nFMInterpolation = getUi()->getConfig()->get(Option::Index::ROM_AUDIO_FMINTERPOLATION)->getValueBool();
+        nInterpolation = getUi()->getConfig()->get(Option::Id::ROM_AUDIO_INTERPOLATION)->getValueBool();
+        nFMInterpolation = getUi()->getConfig()->get(Option::Id::ROM_AUDIO_FMINTERPOLATION)->getValueBool();
         nBurnSoundRate = getAudio()->getSampleRate();
         nBurnSoundLen = getAudio()->getBufferLen();
         pBurnSoundOut = getAudio()->getBuffer();
     }
-    audio_sync = getUi()->getConfig()->get(Option::Index::ROM_AUDIO_SYNC, true)->getValueBool();
+    audio_sync = getUi()->getConfig()->get(Option::Id::ROM_AUDIO_SYNC, true)->getValueBool();
     printf("done\n");
     ///////////
     // AUDIO
@@ -238,7 +238,7 @@ void PFBAGuiEmu::onDraw(c2d::Transform &transform, bool draw) {
     if (!isPaused()) {
 
         // fps
-        int showFps = getUi()->getConfig()->get(Option::Index::ROM_SHOW_FPS, true)->getValueBool();
+        int showFps = getUi()->getConfig()->get(Option::Id::ROM_SHOW_FPS, true)->getValueBool();
         getFpsText()->setVisibility(showFps ? c2d::Visibility::Visible : c2d::Visibility::Hidden);
         if (showFps) {
             sprintf(getFpsString(), "FPS: %.2g/%2d", getUi()->getFps(), nBurnFPS / 100);

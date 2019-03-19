@@ -76,40 +76,40 @@ PFBAConfig::PFBAConfig(const std::string &home, int version)
     hide(Option::GUI_USE_DATABASE);
 
     // add "WORKING" to "SHOW_ALL" option
-    std::vector<std::string> *values = get(Option::Index::GUI_SHOW_ALL)->getValues();
+    std::vector<std::string> *values = get(Option::Id::GUI_SHOW_ALL)->getValues();
     values->insert(values->begin() + 1, "WORKING");
 
-    add(Option::Index::GUI_SHOW_CLONES, "SHOW_HARDWARE",
-        hardware_names, 0, Option::Index::GUI_SHOW_HARDWARE);
+    add(Option::Id::GUI_SHOW_CLONES, "SHOW_HARDWARE",
+        hardware_names, 0, Option::Id::GUI_SHOW_HARDWARE);
 
     /// ROMS OPTIONS
-    add(Option::Index::ROM_SHADER, "FORCE_60HZ",
-        {"OFF", "ON"}, 0, Option::Index::ROM_FORCE_60HZ);
-    add(Option::Index::ROM_FORCE_60HZ, "FORCE_50HZ",
-        {"OFF", "ON"}, 0, Option::Index::ROM_FORCE_50HZ);
+    add(Option::Id::ROM_SHADER, "FORCE_60HZ",
+        {"OFF", "ON"}, 0, Option::Id::ROM_FORCE_60HZ);
+    add(Option::Id::ROM_FORCE_60HZ, "FORCE_50HZ",
+        {"OFF", "ON"}, 0, Option::Id::ROM_FORCE_50HZ);
 
     // audio
-    add(Option::Index::ROM_FORCE_50HZ, "FORCE_AUDIO_SYNC",
-        {"OFF", "ON"}, 1, Option::Index::ROM_AUDIO_SYNC);
-    add(Option::Index::ROM_AUDIO_SYNC, "AUDIO_FREQUENCY",
-        {"11025", "22050", "32000", "44100", "48000"}, 3, Option::Index::ROM_AUDIO_FREQ);
-    add(Option::Index::ROM_AUDIO_SYNC, "AUDIO_INTERPOLATION",
-        {"OFF", "ON"}, 1, Option::Index::ROM_AUDIO_INTERPOLATION);
-    add(Option::Index::ROM_AUDIO_INTERPOLATION, "AUDIO_FM_INTERPOLATION",
-        {"OFF", "ON"}, 0, Option::Index::ROM_AUDIO_FMINTERPOLATION);
+    add(Option::Id::ROM_FORCE_50HZ, "FORCE_AUDIO_SYNC",
+        {"OFF", "ON"}, 1, Option::Id::ROM_AUDIO_SYNC);
+    add(Option::Id::ROM_AUDIO_SYNC, "AUDIO_FREQUENCY",
+        {"11025", "22050", "32000", "44100", "48000"}, 3, Option::Id::ROM_AUDIO_FREQ);
+    add(Option::Id::ROM_AUDIO_SYNC, "AUDIO_INTERPOLATION",
+        {"OFF", "ON"}, 1, Option::Id::ROM_AUDIO_INTERPOLATION);
+    add(Option::Id::ROM_AUDIO_INTERPOLATION, "AUDIO_FM_INTERPOLATION",
+        {"OFF", "ON"}, 0, Option::Id::ROM_AUDIO_FMINTERPOLATION);
 #ifdef __PSP2__
     add(Option::Index::ROM_AUDIO_FMINTERPOLATION, "ROTATION",
         {"OFF", "ON", "FLIP", "CAB MODE"}, 0, Option::Index::ROM_ROTATION);
 #else
-    add(Option::Index::ROM_AUDIO_FMINTERPOLATION, "ROTATION",
-        {"OFF", "ON", "FLIP"}, 0, Option::Index::ROM_ROTATION);
+    add(Option::Id::ROM_AUDIO_FMINTERPOLATION, "ROTATION",
+        {"OFF", "ON", "FLIP"}, 0, Option::Id::ROM_ROTATION);
 #endif
-    add(Option::Index::ROM_ROTATION, "NEOBIOS",
+    add(Option::Id::ROM_ROTATION, "NEOBIOS",
         {"UNIBIOS_3_2", "AES_ASIA", "AES_JPN", "DEVKIT", "MVS_ASIA_EUR_V6S1",
          "MVS_ASIA_EUR_V5S1", "MVS_ASIA_EUR_V3S4", "MVS_USA_V5S2",
          "MVS_USA_V5S4", "MVS_USA_V5S6", "MVS_JPN_V6", "MVS_JPN_V5",
          "MVS_JPN_V3S4", "NEO_MVH_MV1C", "MVS_JPN_J3", "DECK_V6"},
-        0, Option::Index::ROM_NEOBIOS);
+        0, Option::Id::ROM_NEOBIOS);
 
     // set default rom options
     reset();

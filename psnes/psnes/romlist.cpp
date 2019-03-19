@@ -81,9 +81,9 @@ void PSNESRomList::build() {
 
     printf("PSNESRomList::build()\n");
 
-    bool use_icons = ui->getConfig()->get(Option::Index::GUI_SHOW_ICONS)->getIndex() == 0;
+    bool use_icons = ui->getConfig()->get(Option::Id::GUI_SHOW_ICONS)->getIndex() == 0;
 
-    if (ui->getConfig()->get(Option::Index::GUI_USE_DATABASE)->getIndex() == 0) {
+    if (ui->getConfig()->get(Option::Id::GUI_USE_DATABASE)->getIndex() == 0) {
         buildNoDb(use_icons);
         return;
     }
