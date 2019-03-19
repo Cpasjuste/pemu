@@ -1,6 +1,3 @@
-[submodule "cores/nestopia"]
-	path = cores/nestopia
-	url = git@gitlab.com:cpasjuste/nestopia.git
 [submodule "libcross2dui"]
 	path = libcross2dui
 	url = git@github.com:Cpasjuste/libcross2dui.git
