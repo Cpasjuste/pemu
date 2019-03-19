@@ -82,7 +82,8 @@ endif (BUILD_VITA)
 # pnes executable
 #####################
 add_custom_target(${PROJECT_NAME}.data
-        COMMAND cp -rf ${CMAKE_CURRENT_SOURCE_DIR}/pnes/data/skin ${CMAKE_CURRENT_BINARY_DIR}
+        COMMAND mkdir -p ${CMAKE_CURRENT_BINARY_DIR}/skins
+        COMMAND zip -j ${CMAKE_CURRENT_BINARY_DIR}/skins/default.zip ${CMAKE_CURRENT_SOURCE_DIR}/pnes/data/skin/*
         COMMAND cp -f ${CMAKE_SOURCE_DIR}/cores/nestopia/NstDatabase.xml ${CMAKE_CURRENT_BINARY_DIR})
 add_executable(${PROJECT_NAME}.elf ${PNES_SRC} ${NESTOPIA_SRC})
 target_include_directories(${PROJECT_NAME}.elf PRIVATE ${PNES_INC} ${NESTOPIA_INC})
@@ -122,14 +123,16 @@ if (BUILD_SWITCH)
             DEPENDS ${PROJECT_NAME}.nro
             COMMAND rm -rf ${CMAKE_BINARY_DIR}/release/pnes
             COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/pnes
+            COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/pnes/skins
             COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/pnes/roms
             COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/pnes/titles
             COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/pnes/previews
             COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/pnes/icons
             COMMAND cp -f ${CMAKE_CURRENT_BINARY_DIR}/pnes.nro ${CMAKE_BINARY_DIR}/release/pnes/pnes.nro
-            COMMAND cp -r ${CMAKE_SOURCE_DIR}/cores/nestopia/NstDatabase.xml ${CMAKE_BINARY_DIR}/release/pnes/
-            COMMAND cp -r ${CMAKE_CURRENT_SOURCE_DIR}/pnes/data/skin ${CMAKE_BINARY_DIR}/release/pnes/
+            COMMAND cp -f ${CMAKE_SOURCE_DIR}/cores/nestopia/NstDatabase.xml ${CMAKE_BINARY_DIR}/release/pnes/
+            #TODO: buttons
             COMMAND cp -r ${CMAKE_CURRENT_SOURCE_DIR}/pnes/data/nx/skin ${CMAKE_BINARY_DIR}/release/pnes/
+            COMMAND zip -j ${CMAKE_BINARY_DIR}/release/pnes/skins/default.zip ${CMAKE_CURRENT_SOURCE_DIR}/pnes/data/skin/*
             COMMAND cd ${CMAKE_BINARY_DIR}/release && zip -r ../${PROJECT_NAME}-${PNES_VERSION_MAJOR}.${PNES_VERSION_MINOR}_switch.zip pnes
             COMMAND cd ${CMAKE_CURRENT_BINARY_DIR}
             )

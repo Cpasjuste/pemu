@@ -398,7 +398,8 @@ add_custom_target(${PROJECT_NAME}.deps
 # main target
 ##########################
 add_custom_target(${PROJECT_NAME}.data
-        COMMAND cp -rf ${CMAKE_CURRENT_SOURCE_DIR}/pfba/data/skin ${CMAKE_CURRENT_BINARY_DIR}
+        COMMAND mkdir -p ${CMAKE_CURRENT_BINARY_DIR}/skins
+        COMMAND zip -j ${CMAKE_CURRENT_BINARY_DIR}/skins/default.zip ${CMAKE_CURRENT_SOURCE_DIR}/pfba/data/skin/*
         COMMAND mkdir -p ${CMAKE_CURRENT_BINARY_DIR}/hiscores
         COMMAND cp -f ${CMAKE_CURRENT_SOURCE_DIR}/pfba/data/hiscore.dat ${CMAKE_CURRENT_BINARY_DIR}/hiscores
         )
@@ -459,14 +460,16 @@ if (BUILD_SWITCH)
             DEPENDS ${PROJECT_NAME}.nro
             COMMAND rm -rf ${CMAKE_BINARY_DIR}/release/pfba
             COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/pfba
+            COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/pfba/skins
             COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/pfba/roms
             COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/pfba/hiscores
             COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/pfba/titles
             COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/pfba/previews
             COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/pfba/icons
             COMMAND cp -f ${CMAKE_CURRENT_BINARY_DIR}/pfba.nro ${CMAKE_BINARY_DIR}/release/pfba/pfba.nro
-            COMMAND cp -r ${CMAKE_CURRENT_SOURCE_DIR}/pfba/data/skin ${CMAKE_BINARY_DIR}/release/pfba/
+            #TODO: buttons
             COMMAND cp -r ${CMAKE_CURRENT_SOURCE_DIR}/pfba/data/nx/skin ${CMAKE_BINARY_DIR}/release/pfba/
+            COMMAND zip -j ${CMAKE_BINARY_DIR}/release/pfba/skins/default.zip ${CMAKE_CURRENT_SOURCE_DIR}/pfba/data/skin/*
             COMMAND cp -f ${CMAKE_CURRENT_SOURCE_DIR}/pfba/data/hiscore.dat ${CMAKE_BINARY_DIR}/release/pfba/hiscores
             COMMAND cd ${CMAKE_BINARY_DIR}/release && zip -r ../${PROJECT_NAME}-${PFBA_VERSION_MAJOR}.${PFBA_VERSION_MINOR}_switch.zip pfba && cd ${CMAKE_BINARY_DIR}
             )
