@@ -44,8 +44,7 @@ int PNESGuiEmu::load(RomList::Rom *rom) {
 
     nestopia_config_init();
 
-    std::string file = std::string(*getUi()->getConfig()->getRomPath(0) + rom->name);
-    if (nestopia_core_init(file.c_str()) != 0) {
+    if (nestopia_core_init(rom->path.c_str()) != 0) {
         getUi()->getUiProgressBox()->setVisibility(c2d::Visibility::Hidden);
         getUi()->getUiMessageBox()->show("ERROR", "INVALID FILE", "OK");
         stop();
