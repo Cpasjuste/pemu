@@ -83,7 +83,9 @@ endif (BUILD_VITA)
 #####################
 add_custom_target(${PROJECT_NAME}.data
         COMMAND mkdir -p ${CMAKE_CURRENT_BINARY_DIR}/skins
+        COMMAND rm -rf ${CMAKE_CURRENT_BINARY_DIR}/skins/default.zip
         COMMAND zip -j ${CMAKE_CURRENT_BINARY_DIR}/skins/default.zip ${CMAKE_CURRENT_SOURCE_DIR}/pnes/data/skin/*
+        COMMAND cd ${CMAKE_CURRENT_SOURCE_DIR}/pnes/data/nx/skin/ && zip -ru ${CMAKE_CURRENT_BINARY_DIR}/skins/default.zip .
         COMMAND cp -f ${CMAKE_SOURCE_DIR}/cores/nestopia/NstDatabase.xml ${CMAKE_CURRENT_BINARY_DIR})
 add_executable(${PROJECT_NAME}.elf ${PNES_SRC} ${NESTOPIA_SRC})
 target_include_directories(${PROJECT_NAME}.elf PRIVATE ${PNES_INC} ${NESTOPIA_INC})
@@ -130,9 +132,11 @@ if (BUILD_SWITCH)
             COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/pnes/icons
             COMMAND cp -f ${CMAKE_CURRENT_BINARY_DIR}/pnes.nro ${CMAKE_BINARY_DIR}/release/pnes/pnes.nro
             COMMAND cp -f ${CMAKE_SOURCE_DIR}/cores/nestopia/NstDatabase.xml ${CMAKE_BINARY_DIR}/release/pnes/
-            #TODO: buttons
-            COMMAND cp -r ${CMAKE_CURRENT_SOURCE_DIR}/pnes/data/nx/skin/* ${CMAKE_BINARY_DIR}/release/pnes/skins/
+            # zip skin
+            COMMAND rm -rf ${CMAKE_BINARY_DIR}/release/pnes/skins/default.zip
             COMMAND zip -j ${CMAKE_BINARY_DIR}/release/pnes/skins/default.zip ${CMAKE_CURRENT_SOURCE_DIR}/pnes/data/skin/*
+            COMMAND cd ${CMAKE_CURRENT_SOURCE_DIR}/pnes/data/nx/skin/ && zip -ru ${CMAKE_BINARY_DIR}/release/pnes/skins/default.zip .
+            # zip release
             COMMAND cd ${CMAKE_BINARY_DIR}/release && zip -r ../${PROJECT_NAME}-${PNES_VERSION_MAJOR}.${PNES_VERSION_MINOR}_switch.zip pnes
             COMMAND cd ${CMAKE_CURRENT_BINARY_DIR}
             )

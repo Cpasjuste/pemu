@@ -126,7 +126,9 @@ endif (BUILD_PSP2)
 #####################
 add_custom_target(${PROJECT_NAME}.data
         COMMAND mkdir -p ${CMAKE_CURRENT_BINARY_DIR}/skins
+        COMMAND rm -rf ${CMAKE_CURRENT_BINARY_DIR}/skins/default.zip
         COMMAND zip -j ${CMAKE_CURRENT_BINARY_DIR}/skins/default.zip ${CMAKE_CURRENT_SOURCE_DIR}/psnes/data/skin/*
+        COMMAND cd ${CMAKE_CURRENT_SOURCE_DIR}/psnes/data/nx/skin/ && zip -ru ${CMAKE_CURRENT_BINARY_DIR}/skins/default.zip .
         COMMAND cp -rf ${CMAKE_CURRENT_SOURCE_DIR}/psnes/data/databases/Super_Nintendo_Entertainment_System-hyperspin.xml ${CMAKE_CURRENT_BINARY_DIR}/db.xml
         )
 add_executable(${PROJECT_NAME}.elf ${PSNES_SRC} ${SNES9X_SRC} ${UNZIP_SRC} ${JMA_SRC})
@@ -173,10 +175,12 @@ if (BUILD_SWITCH)
             COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/psnes/previews
             COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/psnes/icons
             COMMAND cp -f ${CMAKE_CURRENT_BINARY_DIR}/psnes.nro ${CMAKE_BINARY_DIR}/release/psnes/psnes.nro
-            #TODO: buttons
-            COMMAND cp -r ${CMAKE_CURRENT_SOURCE_DIR}/psnes/data/nx/skin/* ${CMAKE_BINARY_DIR}/release/psnes/skins/
-            COMMAND zip -j ${CMAKE_BINARY_DIR}/release/psnes/skins/default.zip ${CMAKE_CURRENT_SOURCE_DIR}/psnes/data/skin/*
             COMMAND cp -f ${CMAKE_CURRENT_SOURCE_DIR}/psnes/data/databases/Super_Nintendo_Entertainment_System-hyperspin.xml ${CMAKE_BINARY_DIR}/release/psnes/db.xml
+            # zip skin
+            COMMAND rm -rf ${CMAKE_BINARY_DIR}/release/psnes/skins/default.zip
+            COMMAND zip -j ${CMAKE_BINARY_DIR}/release/psnes/skins/default.zip ${CMAKE_CURRENT_SOURCE_DIR}/psnes/data/skin/*
+            COMMAND cd ${CMAKE_CURRENT_SOURCE_DIR}/psnes/data/nx/skin/ && zip -ru ${CMAKE_BINARY_DIR}/release/psnes/skins/default.zip .
+            # zip release
             COMMAND cd ${CMAKE_BINARY_DIR}/release && zip -r ../${PROJECT_NAME}-${PSNES_VERSION_MAJOR}.${PSNES_VERSION_MINOR}_switch.zip psnes && cd ${CMAKE_BINARY_DIR}
             )
 endif (BUILD_SWITCH)
