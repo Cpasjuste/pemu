@@ -468,7 +468,7 @@ if (BUILD_SWITCH)
             COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/pfba/icons
             COMMAND cp -f ${CMAKE_CURRENT_BINARY_DIR}/pfba.nro ${CMAKE_BINARY_DIR}/release/pfba/pfba.nro
             #TODO: buttons
-            COMMAND cp -r ${CMAKE_CURRENT_SOURCE_DIR}/pfba/data/nx/skin ${CMAKE_BINARY_DIR}/release/pfba/
+            COMMAND cp -r ${CMAKE_CURRENT_SOURCE_DIR}/pfba/data/nx/skin/* ${CMAKE_BINARY_DIR}/release/pfba/skins/
             COMMAND zip -j ${CMAKE_BINARY_DIR}/release/pfba/skins/default.zip ${CMAKE_CURRENT_SOURCE_DIR}/pfba/data/skin/*
             COMMAND cp -f ${CMAKE_CURRENT_SOURCE_DIR}/pfba/data/hiscore.dat ${CMAKE_BINARY_DIR}/release/pfba/hiscores
             COMMAND cd ${CMAKE_BINARY_DIR}/release && zip -r ../${PROJECT_NAME}-${PFBA_VERSION_MAJOR}.${PFBA_VERSION_MINOR}_switch.zip pfba && cd ${CMAKE_BINARY_DIR}

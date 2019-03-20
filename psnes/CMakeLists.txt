@@ -174,7 +174,7 @@ if (BUILD_SWITCH)
             COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/psnes/icons
             COMMAND cp -f ${CMAKE_CURRENT_BINARY_DIR}/psnes.nro ${CMAKE_BINARY_DIR}/release/psnes/psnes.nro
             #TODO: buttons
-            COMMAND cp -r ${CMAKE_CURRENT_SOURCE_DIR}/psnes/data/nx/skin ${CMAKE_BINARY_DIR}/release/psnes/
+            COMMAND cp -r ${CMAKE_CURRENT_SOURCE_DIR}/psnes/data/nx/skin/* ${CMAKE_BINARY_DIR}/release/psnes/skins/
             COMMAND zip -j ${CMAKE_BINARY_DIR}/release/psnes/skins/default.zip ${CMAKE_CURRENT_SOURCE_DIR}/psnes/data/skin/*
             COMMAND cp -f ${CMAKE_CURRENT_SOURCE_DIR}/psnes/data/databases/Super_Nintendo_Entertainment_System-hyperspin.xml ${CMAKE_BINARY_DIR}/release/psnes/db.xml
             COMMAND cd ${CMAKE_BINARY_DIR}/release && zip -r ../${PROJECT_NAME}-${PSNES_VERSION_MAJOR}.${PSNES_VERSION_MINOR}_switch.zip psnes && cd ${CMAKE_BINARY_DIR}

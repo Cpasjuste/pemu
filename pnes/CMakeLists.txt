@@ -131,7 +131,7 @@ if (BUILD_SWITCH)
             COMMAND cp -f ${CMAKE_CURRENT_BINARY_DIR}/pnes.nro ${CMAKE_BINARY_DIR}/release/pnes/pnes.nro
             COMMAND cp -f ${CMAKE_SOURCE_DIR}/cores/nestopia/NstDatabase.xml ${CMAKE_BINARY_DIR}/release/pnes/
             #TODO: buttons
-            COMMAND cp -r ${CMAKE_CURRENT_SOURCE_DIR}/pnes/data/nx/skin ${CMAKE_BINARY_DIR}/release/pnes/
+            COMMAND cp -r ${CMAKE_CURRENT_SOURCE_DIR}/pnes/data/nx/skin/* ${CMAKE_BINARY_DIR}/release/pnes/skins/
             COMMAND zip -j ${CMAKE_BINARY_DIR}/release/pnes/skins/default.zip ${CMAKE_CURRENT_SOURCE_DIR}/pnes/data/skin/*
             COMMAND cd ${CMAKE_BINARY_DIR}/release && zip -r ../${PROJECT_NAME}-${PNES_VERSION_MAJOR}.${PNES_VERSION_MINOR}_switch.zip pnes
             COMMAND cd ${CMAKE_CURRENT_BINARY_DIR}
