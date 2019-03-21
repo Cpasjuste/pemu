@@ -13,8 +13,26 @@ int kNetGame = 0;
 
 static int ProgressCreate();
 
-static UINT8 NeoSystemList[] = {0x0f, 0x0c, 0x0b, 0x0d, 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09,
-                                0x0a, 0x0e};
+static UINT8 NeoSystemList[] = {
+        0x13, // "Universe BIOS ver. 3.3"
+        0x14, // "Universe BIOS ver. 3.2"
+        0x15, // "Universe BIOS ver. 3.1"
+        0x00, // "MVS Asia/Europe ver. 6 (1 slot)"
+        0x01, // "MVS Asia/Europe ver. 5 (1 slot)"
+        0x02, // "MVS Asia/Europe ver. 3 (4 slot)"
+        0x03, // "MVS USA ver. 5 (2 slot)"
+        0x04, // "MVS USA ver. 5 (4 slot)"
+        0x05, // "MVS USA ver. 5 (6 slot)"
+        0x08, // "MVS Japan ver. 6 (? slot)"
+        0x09, // "MVS Japan ver. 5 (? slot)"
+        0x0a, // "MVS Japan ver. 6 (4 slot)"
+        0x10, // "AES Asia"
+        0x0f, // "AES Japan"
+        0x0b, // "NEO-MVH MV1C (Asia)"
+        0x0c, // "NEO-MVH MV1C (Japan)"
+        0x12, // "Deck ver. 6 (Git Ver 1.3)"
+        0x11, // "Development Kit"
+};
 
 static int DoLibInit()                    // Do Init of Burn library driver
 {
@@ -29,8 +47,7 @@ static int DoLibInit()                    // Do Init of Burn library driver
         return 1;
     }
 
-    NeoSystem &= ~(UINT8) 0x1f;
-    NeoSystem |= NeoSystemList[ui->getConfig()->get(Option::Id::ROM_NEOBIOS, true)->getIndex()];
+    NeoSystem = NeoSystemList[ui->getConfig()->get(Option::Id::ROM_NEOBIOS, true)->getIndex()];
 
     nRet = BurnDrvInit();
     printf("DoLibInit: BurnDrvInit = %i\n", nRet);

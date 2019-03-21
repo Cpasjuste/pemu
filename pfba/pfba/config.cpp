@@ -105,11 +105,14 @@ PFBAConfig::PFBAConfig(const std::string &home, int version)
         {"OFF", "ON", "FLIP"}, 0, Option::Id::ROM_ROTATION);
 #endif
     add(Option::Id::ROM_ROTATION, "NEOBIOS",
-        {"UNIBIOS_3_2", "AES_ASIA", "AES_JPN", "DEVKIT", "MVS_ASIA_EUR_V6S1",
-         "MVS_ASIA_EUR_V5S1", "MVS_ASIA_EUR_V3S4", "MVS_USA_V5S2",
-         "MVS_USA_V5S4", "MVS_USA_V5S6", "MVS_JPN_V6", "MVS_JPN_V5",
-         "MVS_JPN_V3S4", "NEO_MVH_MV1C", "MVS_JPN_J3", "DECK_V6"},
-        0, Option::Id::ROM_NEOBIOS);
+        {"UNIBIOS_3_3", "UNIBIOS_3_2", "UNIBIOS_3_1",
+         "MVS_ASIA_EUR_V6S1", "MVS_ASIA_EUR_V5S1", "MVS_ASIA_EUR_V3S4",
+         "MVS_USA_V5S2", "MVS_USA_V5S4", "MVS_USA_V5S6",
+         "MVS_JPN_V6", "MVS_JPN_V5", "MVS_JPN_V3S4", "MVS_JPN_J3",
+         "AES_ASIA", "AES_JAPAN",
+         "NEO_MVH_MV1CA", "NEO_MVH_MV1CJ",
+         "DECK_V6", "DEVKIT"},
+        2, Option::Id::ROM_NEOBIOS);
 
     // set default rom options
     reset();
