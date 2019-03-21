@@ -34,5 +34,5 @@ add_subdirectory(psnes)
 
 # pfba
 set(PFBA_VERSION_MAJOR 3)
-set(PFBA_VERSION_MINOR 1)
+set(PFBA_VERSION_MINOR 3)
 add_subdirectory(pfba)

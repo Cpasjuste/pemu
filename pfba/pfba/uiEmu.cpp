@@ -48,19 +48,17 @@ int PFBAGuiEmu::load(RomList::Rom *rom) {
     bForce60Hz = getUi()->getConfig()->get(Option::Id::ROM_FORCE_60HZ, true)->getValueBool();
     bForce50Hz = getUi()->getConfig()->get(Option::Id::ROM_FORCE_50HZ, true)->getValueBool();
     if (bForce60Hz) {
-        fps = 6000;
+        nBurnFPS = fps = 6000;
     } else if (bForce50Hz) {
-        fps = 5000;
+        nBurnFPS = fps = 5000;
     } else {
         pDriver[nBurnDrvActive]->Init();
         fps = nBurnFPS;
         pDriver[nBurnDrvActive]->Exit();
     }
-    printf("Emulation rate: %f hz\n", (float) fps / 100);
 
-    printf("Init audio device...");
     int freq = getUi()->getConfig()->get(Option::Id::ROM_AUDIO_FREQ)->getValueInt();
-    addAudio(freq, (float) fps / 100);
+    addAudio(freq, (float) fps / 100.0f);
     if (getAudio()->isAvailable()) {
         nInterpolation = getUi()->getConfig()->get(Option::Id::ROM_AUDIO_INTERPOLATION)->getValueInt();
         nFMInterpolation = getUi()->getConfig()->get(Option::Id::ROM_AUDIO_FMINTERPOLATION)->getValueInt();
@@ -69,7 +67,6 @@ int PFBAGuiEmu::load(RomList::Rom *rom) {
         pBurnSoundOut = getAudio()->getBuffer();
     }
     audio_sync = getUi()->getConfig()->get(Option::Id::ROM_AUDIO_SYNC, true)->getValueBool();
-    printf("done\n");
     ///////////
     // AUDIO
     //////////
@@ -93,7 +90,8 @@ int PFBAGuiEmu::load(RomList::Rom *rom) {
     nCurrentFrame = 0;
     setFrameDuration(1.0f / ((float) nBurnFPS / 100.0f));
     //printf("frame_duration: %f\n", getFrameDuration());
-    printf("done\n");
+    printf("FORCE_60HZ: %i, FORCE_50HZ: %i, AUDIO_SYNC: %i, FPS: %f (BURNFPS: %f)\n",
+           bForce60Hz, bForce50Hz, audio_sync, (float) fps / 100.0f, (float) nBurnFPS / 100.0f);
     ///////////////
     // FBA DRIVER
     ///////////////
