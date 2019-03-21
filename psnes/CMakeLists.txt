@@ -138,6 +138,30 @@ target_compile_options(${PROJECT_NAME}.elf PRIVATE $<$<COMPILE_LANGUAGE:CXX>:-fn
 target_link_libraries(${PROJECT_NAME}.elf cross2dui ${SNES9X_LDFLAGS})
 add_dependencies(${PROJECT_NAME}.elf ${PROJECT_NAME}.data)
 
+###########################
+# LINUX (ubuntu, release)
+###########################
+if (BUILD_LINUX)
+    add_custom_target(${PROJECT_NAME}_linux_release.zip
+            DEPENDS ${PROJECT_NAME}.elf
+            COMMAND rm -rf ${CMAKE_BINARY_DIR}/release/psnes
+            COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/psnes
+            COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/psnes/skins
+            COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/psnes/roms
+            COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/psnes/titles
+            COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/psnes/previews
+            COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/psnes/icons
+            COMMAND cp -f ${CMAKE_CURRENT_BINARY_DIR}/psnes.elf ${CMAKE_BINARY_DIR}/release/psnes/psnes
+            COMMAND cp -f ${CMAKE_CURRENT_SOURCE_DIR}/psnes/data/databases/Super_Nintendo_Entertainment_System-hyperspin.xml ${CMAKE_BINARY_DIR}/release/psnes/db.xml
+            # zip skin
+            COMMAND rm -rf ${CMAKE_BINARY_DIR}/release/psnes/skins/default.zip
+            COMMAND zip -j ${CMAKE_BINARY_DIR}/release/psnes/skins/default.zip ${CMAKE_CURRENT_SOURCE_DIR}/psnes/data/skin/*
+            # zip release
+            COMMAND rm -rf ${CMAKE_BINARY_DIR}/${PROJECT_NAME}-${PSNES_VERSION_MAJOR}.${PSNES_VERSION_MINOR}_linux.zip
+            COMMAND cd ${CMAKE_BINARY_DIR}/release && zip -r ../${PROJECT_NAME}-${PSNES_VERSION_MAJOR}.${PSNES_VERSION_MINOR}_linux.zip psnes && cd ${CMAKE_BINARY_DIR}
+            )
+endif (BUILD_LINUX)
+
 #####################
 # PSP2 (vita) target
 #####################

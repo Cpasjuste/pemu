@@ -412,6 +412,31 @@ target_include_directories(${PROJECT_NAME}.elf PRIVATE ${INC})
 target_link_libraries(${PROJECT_NAME}.elf cross2dui ${LDFLAGS})
 add_dependencies(${PROJECT_NAME}.elf ${PROJECT_NAME}.data)
 
+###########################
+# LINUX (ubuntu, release)
+###########################
+if (BUILD_LINUX)
+    add_custom_target(${PROJECT_NAME}_release_linux.zip
+            DEPENDS ${PROJECT_NAME}.elf
+            COMMAND rm -rf ${CMAKE_BINARY_DIR}/release/pfba
+            COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/pfba
+            COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/pfba/skins
+            COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/pfba/roms
+            COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/pfba/hiscores
+            COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/pfba/titles
+            COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/pfba/previews
+            COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/pfba/icons
+            COMMAND cp -f ${CMAKE_CURRENT_BINARY_DIR}/pfba.elf ${CMAKE_BINARY_DIR}/release/pfba/pfba
+            COMMAND cp -f ${CMAKE_CURRENT_SOURCE_DIR}/pfba/data/hiscore.dat ${CMAKE_BINARY_DIR}/release/pfba/hiscores
+            # zip skin
+            COMMAND rm -rf ${CMAKE_BINARY_DIR}/release/pfba/skins/default.zip
+            COMMAND zip -j ${CMAKE_BINARY_DIR}/release/pfba/skins/default.zip ${CMAKE_CURRENT_SOURCE_DIR}/pfba/data/skin/*
+            # zip release
+            COMMAND rm -rf ${CMAKE_BINARY_DIR}/${PROJECT_NAME}-${PFBA_VERSION_MAJOR}.${PFBA_VERSION_MINOR}_linux.zip
+            COMMAND cd ${CMAKE_BINARY_DIR}/release && zip -r ../${PROJECT_NAME}-${PFBA_VERSION_MAJOR}.${PFBA_VERSION_MINOR}_linux.zip pfba && cd ${CMAKE_BINARY_DIR}
+            )
+endif (BUILD_LINUX)
+
 #####################
 # PSP2 (vita) vpk
 #####################

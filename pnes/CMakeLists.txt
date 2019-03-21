@@ -94,7 +94,31 @@ target_compile_options(${PROJECT_NAME}.elf PRIVATE $<$<COMPILE_LANGUAGE:CXX>:-st
 target_link_libraries(${PROJECT_NAME}.elf cross2dui ${NESTOPIA_LDFLAGS})
 add_dependencies(${PROJECT_NAME}.elf ${PROJECT_NAME}.data)
 
-## TODO: use cross2d targets
+###########################
+# LINUX (ubuntu, release)
+###########################
+if (BUILD_LINUX)
+    add_custom_target(${PROJECT_NAME}_linux_release.zip
+            DEPENDS ${PROJECT_NAME}.elf
+            COMMAND rm -rf ${CMAKE_BINARY_DIR}/release/pnes
+            COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/pnes
+            COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/pnes/skins
+            COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/pnes/roms
+            COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/pnes/titles
+            COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/pnes/previews
+            COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/pnes/icons
+            COMMAND cp -f ${CMAKE_CURRENT_BINARY_DIR}/pnes.elf ${CMAKE_BINARY_DIR}/release/pnes/pnes
+            COMMAND cp -f ${CMAKE_SOURCE_DIR}/cores/nestopia/NstDatabase.xml ${CMAKE_BINARY_DIR}/release/pnes/
+            # zip skin
+            COMMAND rm -rf ${CMAKE_BINARY_DIR}/release/pnes/skins/default.zip
+            COMMAND zip -j ${CMAKE_BINARY_DIR}/release/pnes/skins/default.zip ${CMAKE_CURRENT_SOURCE_DIR}/pnes/data/skin/*
+            # zip release
+            COMMAND rm -rf ${CMAKE_BINARY_DIR}/${PROJECT_NAME}-${PNES_VERSION_MAJOR}.${PNES_VERSION_MINOR}_linux.zip
+            COMMAND cd ${CMAKE_BINARY_DIR}/release && zip -r ../${PROJECT_NAME}-${PNES_VERSION_MAJOR}.${PNES_VERSION_MINOR}_linux.zip pnes
+            COMMAND cd ${CMAKE_CURRENT_BINARY_DIR}
+            )
+endif (BUILD_LINUX)
+
 #####################
 # PSP2 (vita) target
 #####################

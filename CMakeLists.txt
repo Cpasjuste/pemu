@@ -23,7 +23,7 @@ add_subdirectory(libcross2dui)
 project(pemu)
 
 # pnes
-set(PNES_VERSION_MAJOR 1)
+set(PNES_VERSION_MAJOR 3)
 set(PNES_VERSION_MINOR 1)
 add_subdirectory(pnes)
 
