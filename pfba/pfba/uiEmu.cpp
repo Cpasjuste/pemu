@@ -62,8 +62,8 @@ int PFBAGuiEmu::load(RomList::Rom *rom) {
     int freq = getUi()->getConfig()->get(Option::Id::ROM_AUDIO_FREQ)->getValueInt();
     addAudio(freq, (float) fps / 100);
     if (getAudio()->isAvailable()) {
-        nInterpolation = getUi()->getConfig()->get(Option::Id::ROM_AUDIO_INTERPOLATION)->getValueBool();
-        nFMInterpolation = getUi()->getConfig()->get(Option::Id::ROM_AUDIO_FMINTERPOLATION)->getValueBool();
+        nInterpolation = getUi()->getConfig()->get(Option::Id::ROM_AUDIO_INTERPOLATION)->getValueInt();
+        nFMInterpolation = getUi()->getConfig()->get(Option::Id::ROM_AUDIO_FMINTERPOLATION)->getValueInt();
         nBurnSoundRate = getAudio()->getSampleRate();
         nBurnSoundLen = getAudio()->getBufferLen();
         pBurnSoundOut = getAudio()->getBuffer();
