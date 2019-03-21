@@ -222,11 +222,9 @@ bool PFBAGuiEmu::onInput(c2d::Input::Player *players) {
     inputP1P2Switch = 0;
 
     // look for player 1 combos key
-    if (((players[0].keys & Input::Key::Start) && (players[0].keys & Input::Key::Fire3))
-        || ((players[0].keys & Input::Key::Select) && (players[0].keys & Input::Key::Fire3))) {
+    if ((players[0].keys & Input::Key::Select) && (players[0].keys & Input::Key::Fire3)) {
         inputServiceSwitch = 1;
-    } else if (((players[0].keys & Input::Key::Start) && (players[0].keys & Input::Key::Fire4))
-               || ((players[0].keys & Input::Key::Select) && (players[0].keys & Input::Key::Fire4))) {
+    } else if ((players[0].keys & Input::Key::Select) && (players[0].keys & Input::Key::Fire4)) {
         inputP1P2Switch = 1;
     }
 
