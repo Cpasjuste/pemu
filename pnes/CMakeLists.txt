@@ -137,6 +137,7 @@ if (BUILD_SWITCH)
             COMMAND zip -j ${CMAKE_BINARY_DIR}/release/pnes/skins/default.zip ${CMAKE_CURRENT_SOURCE_DIR}/pnes/data/skin/*
             COMMAND cd ${CMAKE_CURRENT_SOURCE_DIR}/pnes/data/nx/skin/ && zip -ru ${CMAKE_BINARY_DIR}/release/pnes/skins/default.zip .
             # zip release
+            COMMAND rm -rf ${CMAKE_BINARY_DIR}/${PROJECT_NAME}-${PNES_VERSION_MAJOR}.${PNES_VERSION_MINOR}_switch.zip
             COMMAND cd ${CMAKE_BINARY_DIR}/release && zip -r ../${PROJECT_NAME}-${PNES_VERSION_MAJOR}.${PNES_VERSION_MINOR}_switch.zip pnes
             COMMAND cd ${CMAKE_CURRENT_BINARY_DIR}
             )

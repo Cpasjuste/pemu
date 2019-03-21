@@ -475,6 +475,7 @@ if (BUILD_SWITCH)
             COMMAND zip -j ${CMAKE_BINARY_DIR}/release/pfba/skins/default.zip ${CMAKE_CURRENT_SOURCE_DIR}/pfba/data/skin/*
             COMMAND cd ${CMAKE_CURRENT_SOURCE_DIR}/pfba/data/nx/skin/ && zip -ru ${CMAKE_BINARY_DIR}/release/pfba/skins/default.zip .
             # zip release
+            COMMAND rm -rf ${CMAKE_BINARY_DIR}/${PROJECT_NAME}-${PFBA_VERSION_MAJOR}.${PFBA_VERSION_MINOR}_switch.zip
             COMMAND cd ${CMAKE_BINARY_DIR}/release && zip -r ../${PROJECT_NAME}-${PFBA_VERSION_MAJOR}.${PFBA_VERSION_MINOR}_switch.zip pfba && cd ${CMAKE_BINARY_DIR}
             )
 endif (BUILD_SWITCH)
