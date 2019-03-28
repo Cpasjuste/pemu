@@ -63,6 +63,7 @@ PFBAConfig::PFBAConfig(const std::string &home, int version)
     getHardwareList()->emplace_back(HARDWARE_PREFIX_COLECO, "Coleco");
     getHardwareList()->emplace_back(HARDWARE_PREFIX_MIDWAY, "Midway");
     getHardwareList()->emplace_back(HARDWARE_PREFIX_MSX, "MSX");
+    getHardwareList()->emplace_back(HARDWARE_PREFIX_SPECTRUM, "Spectrum");
     std::vector<std::string> hardware_names;
     for (auto &i : *getHardwareList()) {
         hardware_names.emplace_back(i.name);
