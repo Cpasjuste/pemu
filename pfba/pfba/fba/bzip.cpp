@@ -27,11 +27,6 @@ StringSet BzipDetail;                                            // Text which d
 
 extern c2dui::UIMain *ui;
 
-static inline bool endsWith(std::string const &value, std::string const &ending) {
-    if (ending.size() > value.size()) return false;
-    return std::equal(ending.rbegin(), ending.rend(), value.rbegin());
-}
-
 void BzipListFree() {
     if (List) {
         for (int i = 0; i < nListCount; i++) {
@@ -376,55 +371,58 @@ int BzipOpen(bool bootApp) {
             const char *rom_path = ui->getConfig()->getRomPath(d)->c_str();
             _stprintf(szBzipName[z], _T("%s%s"), rom_path, szName);
 
-            int prefix = (((BurnDrvGetHardwareCode() | HARDWARE_PREFIX_CARTRIDGE) ^ HARDWARE_PREFIX_CARTRIDGE) &
-                          0xff000000);
+            int prefix =
+                    (((BurnDrvGetHardwareCode() | HARDWARE_PREFIX_CARTRIDGE) ^ HARDWARE_PREFIX_CARTRIDGE) & 0xff000000);
             switch (prefix) {
                 case HARDWARE_PREFIX_COLECO:
-                    if (!endsWith(rom_path, "coleco/")) {
+                    if (!c2d::Utility::endsWith(rom_path, "coleco/")) {
                         continue;
                     }
                     break;
                 case HARDWARE_PREFIX_SEGA_GAME_GEAR:
-                    if (!endsWith(rom_path, "gamegear/")) {
+                    if (!c2d::Utility::endsWith(rom_path, "gamegear/")) {
                         continue;
                     }
                     break;
                 case HARDWARE_PREFIX_SEGA_MEGADRIVE:
-                    if (!endsWith(rom_path, "megadriv/")) {
+                    if (!c2d::Utility::endsWith(rom_path, "megadriv/")) {
                         continue;
-                    } else {
-                        printf("found megadrive rom\n");
                     }
                     break;
                 case HARDWARE_PREFIX_MSX:
-                    if (!endsWith(rom_path, "msx/")) {
+                    if (!c2d::Utility::endsWith(rom_path, "msx/")) {
+                        continue;
+                    }
+                    break;
+                case HARDWARE_PREFIX_SPECTRUM:
+                    if (!c2d::Utility::endsWith(rom_path, "spectrum/")) {
                         continue;
                     }
                     break;
                 case HARDWARE_PREFIX_SEGA_SG1000:
-                    if (!endsWith(rom_path, "sg1000/")) {
+                    if (!c2d::Utility::endsWith(rom_path, "sg1000/")) {
                         continue;
                     }
                     break;
                 case HARDWARE_PREFIX_SEGA_MASTER_SYSTEM:
-                    if (!endsWith(rom_path, "sms/")) {
+                    if (!c2d::Utility::endsWith(rom_path, "sms/")) {
                         continue;
                     }
                     break;
                 case HARDWARE_PREFIX_PCENGINE:
                     switch (BurnDrvGetHardwareCode()) {
                         case HARDWARE_PCENGINE_PCENGINE:
-                            if (!endsWith(rom_path, "pce/")) {
+                            if (!c2d::Utility::endsWith(rom_path, "pce/")) {
                                 continue;
                             }
                             break;
                         case HARDWARE_PCENGINE_TG16:
-                            if (!endsWith(rom_path, "tg16/")) {
+                            if (!c2d::Utility::endsWith(rom_path, "tg16/")) {
                                 continue;
                             }
                             break;
                         case HARDWARE_PCENGINE_SGX:
-                            if (!endsWith(rom_path, "sgx/")) {
+                            if (!c2d::Utility::endsWith(rom_path, "sgx/")) {
                                 continue;
                             }
                             break;
@@ -433,15 +431,16 @@ int BzipOpen(bool bootApp) {
                     }
                     break;
                 default:
-                    if (endsWith(rom_path, "coleco/")
-                        || endsWith(rom_path, "gamegear/")
-                        || endsWith(rom_path, "megadriv/")
-                        || endsWith(rom_path, "msx/")
-                        || endsWith(rom_path, "sg1000/")
-                        || endsWith(rom_path, "sms/")
-                        || endsWith(rom_path, "pce/")
-                        || endsWith(rom_path, "sgx/")
-                        || endsWith(rom_path, "tg16/")) {
+                    if (c2d::Utility::endsWith(rom_path, "coleco/")
+                        || c2d::Utility::endsWith(rom_path, "gamegear/")
+                        || c2d::Utility::endsWith(rom_path, "megadriv/")
+                        || c2d::Utility::endsWith(rom_path, "msx/")
+                        || c2d::Utility::endsWith(rom_path, "spectrum/")
+                        || c2d::Utility::endsWith(rom_path, "sg1000/")
+                        || c2d::Utility::endsWith(rom_path, "sms/")
+                        || c2d::Utility::endsWith(rom_path, "pce/")
+                        || c2d::Utility::endsWith(rom_path, "sgx/")
+                        || c2d::Utility::endsWith(rom_path, "tg16/")) {
                         continue;
                     }
                     break;

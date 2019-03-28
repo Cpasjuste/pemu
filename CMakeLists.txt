@@ -8,7 +8,7 @@ set(BUILD_VITA OFF CACHE BOOL "Build with PSP2 support")
 set(BUILD_3DS OFF CACHE BOOL "Build with 3DS support")
 set(BUILD_SWITCH OFF CACHE BOOL "Build with Nintendo Switch support")
 
-set(UPDATE_CONFIG OFF CACHE BOOL "Force config file updating")
+set(UPDATE_CONFIG ON CACHE BOOL "Force config file updating")
 
 if (BUILD_LINUX)
     set(OPTION_RESOLUTION ON CACHE BOOL "Add screen resolution option")

@@ -36,6 +36,7 @@ pFBA: Portable Final Burn Alpha
     Coleco              : "coleco"
     SG-1000             : "sg1000"
     MSX                 : "msx"
+    Spectrum            : "spectrum"
     ```
 - pFBA support title, preview, and icon images in "png" format. Titles goes in the "titles" folder, previews in the "previews" folder, and icons in the "icons" folder. They must have the same filename as the zipped rom, but with a ".png" extension instead ".zip". For consoles images, you need to add the console driver prefix to the image filename ("sonic.zip" image for Sega MegaDrive would be "md_sonic.png").
 - You can enable or disable icon images from the pFBA main menu. A restart is required to enable the changes.

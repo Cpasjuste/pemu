@@ -29,6 +29,7 @@ PFBAConfig::PFBAConfig(const std::string &home, int version)
     getRomPaths()->emplace_back(home + "sgx/");
     getRomPaths()->emplace_back(home + "sms/");
     getRomPaths()->emplace_back(home + "tg16/");
+    getRomPaths()->emplace_back(home + "spectrum/");
     for (size_t i = getRomPaths()->size(); i < 20; i++) {
         getRomPaths()->emplace_back(std::string());
     }

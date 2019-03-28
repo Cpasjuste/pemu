@@ -93,7 +93,7 @@ void PFBARomList::build() {
             }
 
             std::vector<std::string> fileList;
-            for(auto &f : files.at(j)) {
+            for (auto &f : files.at(j)) {
                 fileList.emplace_back(f.name);
             }
 
@@ -124,6 +124,11 @@ void PFBARomList::build() {
                         break;
                     case HARDWARE_PREFIX_MSX:
                         if (!Utility::endsWith(paths->at(j), "msx/")) {
+                            continue;
+                        }
+                        break;
+                    case HARDWARE_PREFIX_SPECTRUM:
+                        if (!Utility::endsWith(paths->at(j), "spectrum/")) {
                             continue;
                         }
                         break;
@@ -163,6 +168,7 @@ void PFBARomList::build() {
                             || Utility::endsWith(paths->at(j), "gamegear/")
                             || Utility::endsWith(paths->at(j), "megadriv/")
                             || Utility::endsWith(paths->at(j), "msx/")
+                            || Utility::endsWith(paths->at(j), "spectrum/")
                             || Utility::endsWith(paths->at(j), "sg1000/")
                             || Utility::endsWith(paths->at(j), "sms/")
                             || Utility::endsWith(paths->at(j), "pce/")
