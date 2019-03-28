@@ -17,15 +17,15 @@ public:
 
     void stop() override;
 
-    void updateFb() override;
-
 private:
 
     bool onInput(c2d::Input::Player *players) override;
 
     void onDraw(c2d::Transform &transform, bool draw = true) override;
 
-    void updateFrame() override;
+    void updateFb();
+
+    void updateFrame();
 
     void renderFrame(bool draw = true);
 
