@@ -87,11 +87,8 @@ PFBAConfig::PFBAConfig(const std::string &home, int version)
     /// ROMS OPTIONS
     add(Option::Id::ROM_SHADER, "FORCE_60HZ",
         {"OFF", "ON"}, 0, Option::Id::ROM_FORCE_60HZ);
-    add(Option::Id::ROM_FORCE_60HZ, "FORCE_50HZ",
-        {"OFF", "ON"}, 0, Option::Id::ROM_FORCE_50HZ);
-
     // audio
-    add(Option::Id::ROM_FORCE_50HZ, "FORCE_AUDIO_SYNC",
+    add(Option::Id::ROM_FORCE_60HZ, "FORCE_AUDIO_SYNC",
         {"OFF", "ON"}, 1, Option::Id::ROM_AUDIO_SYNC);
     add(Option::Id::ROM_AUDIO_SYNC, "AUDIO_FREQUENCY",
         {"11025", "22050", "32000", "44100", "48000"}, 3, Option::Id::ROM_AUDIO_FREQ);

@@ -33,43 +33,19 @@ PFBAGuiEmu::PFBAGuiEmu(UIMain *ui) : UIEmu(ui) {
 
 int PFBAGuiEmu::load(RomList::Rom *rom) {
 
-    int fps;
-
     nBurnDrvActive = rom->drv;
     if (nBurnDrvActive >= nBurnDrvCount) {
         printf("PFBAGui::runRom: driver not found\n");
         return -1;
     }
 
-    ///////////
-    // AUDIO
-    //////////
-    // get fps
+    int audio_freq = getUi()->getConfig()->get(Option::Id::ROM_AUDIO_FREQ)->getValueInt();
+    nInterpolation = getUi()->getConfig()->get(Option::Id::ROM_AUDIO_INTERPOLATION)->getValueInt();
+    nFMInterpolation = getUi()->getConfig()->get(Option::Id::ROM_AUDIO_FMINTERPOLATION)->getValueInt();
     bForce60Hz = getUi()->getConfig()->get(Option::Id::ROM_FORCE_60HZ, true)->getValueBool();
-    bForce50Hz = getUi()->getConfig()->get(Option::Id::ROM_FORCE_50HZ, true)->getValueBool();
     if (bForce60Hz) {
-        nBurnFPS = fps = 6000;
-    } else if (bForce50Hz) {
-        nBurnFPS = fps = 5000;
-    } else {
-        pDriver[nBurnDrvActive]->Init();
-        fps = nBurnFPS;
-        pDriver[nBurnDrvActive]->Exit();
+        nBurnFPS = 6000;
     }
-
-    int freq = getUi()->getConfig()->get(Option::Id::ROM_AUDIO_FREQ)->getValueInt();
-    addAudio(freq, (float) fps / 100.0f);
-    if (getAudio()->isAvailable()) {
-        nInterpolation = getUi()->getConfig()->get(Option::Id::ROM_AUDIO_INTERPOLATION)->getValueInt();
-        nFMInterpolation = getUi()->getConfig()->get(Option::Id::ROM_AUDIO_FMINTERPOLATION)->getValueInt();
-        nBurnSoundRate = getAudio()->getSampleRate();
-        nBurnSoundLen = getAudio()->getBufferLen();
-        pBurnSoundOut = getAudio()->getBuffer();
-    }
-    audio_sync = getUi()->getConfig()->get(Option::Id::ROM_AUDIO_SYNC, true)->getValueBool();
-    ///////////
-    // AUDIO
-    //////////
 
     ///////////////
     // FBA DRIVER
@@ -78,23 +54,44 @@ int PFBAGuiEmu::load(RomList::Rom *rom) {
     InpInit();
     InpDIP();
     printf("Initialize driver...\n");
+    // some drivers require audio buffer to be allocated, add a "dummy" one...
+    auto *aud = new Audio(audio_freq);
+    nBurnSoundRate = aud->getSampleRate();
+    nBurnSoundLen = aud->getBufferLen();
+    pBurnSoundOut = aud->getBuffer();
     if (DrvInit(rom->drv, false) != 0) {
         printf("\nDriver initialisation failed\n");
+        delete (aud);
         getUi()->getUiProgressBox()->setVisibility(Visibility::Hidden);
         getUi()->getUiMessageBox()->show("ERROR", "DRIVER INIT FAILED", "OK");
         stop();
         return -1;
     }
+    delete (aud);
     nFramesEmulated = 0;
     nFramesRendered = 0;
     nCurrentFrame = 0;
     setFrameDuration(1.0f / ((float) nBurnFPS / 100.0f));
     //printf("frame_duration: %f\n", getFrameDuration());
-    printf("FORCE_60HZ: %i, FORCE_50HZ: %i, AUDIO_SYNC: %i, FPS: %f (BURNFPS: %f)\n",
-           bForce60Hz, bForce50Hz, audio_sync, (float) fps / 100.0f, (float) nBurnFPS / 100.0f);
     ///////////////
     // FBA DRIVER
     ///////////////
+
+    ///////////
+    // AUDIO
+    //////////
+    addAudio(audio_freq, (float) nBurnFPS / 100.0f);
+    if (getAudio()->isAvailable()) {
+        nBurnSoundRate = getAudio()->getSampleRate();
+        nBurnSoundLen = getAudio()->getBufferLen();
+        pBurnSoundOut = getAudio()->getBuffer();
+    }
+    audio_sync = getUi()->getConfig()->get(Option::Id::ROM_AUDIO_SYNC, true)->getValueBool();
+    printf("FORCE_60HZ: %i, FORCE_50HZ: %i, AUDIO_SYNC: %i, FPS: %f (BURNFPS: %f)\n",
+           bForce60Hz, bForce50Hz, audio_sync, (float) nBurnFPS / 100.0f, (float) nBurnFPS / 100.0f);
+    ///////////
+    // AUDIO
+    //////////
 
     //////////
     // VIDEO
