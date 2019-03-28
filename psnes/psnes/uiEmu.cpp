@@ -146,6 +146,7 @@ int PSNESUIEmu::load(RomList::Rom *rom) {
     Settings.DumpStreamsMaxFrames = -1;
     Settings.StretchScreenshots = 1;
     Settings.SnapshotScreenshots = TRUE;
+    Settings.FastSavestates = TRUE;
 #ifdef __PSP2__
     Settings.SkipFrames = AUTO_FRAMERATE;
     Settings.TurboSkipFrames = 15;
