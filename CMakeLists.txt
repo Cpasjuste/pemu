@@ -8,7 +8,7 @@ set(BUILD_VITA OFF CACHE BOOL "Build with PSP2 support")
 set(BUILD_3DS OFF CACHE BOOL "Build with 3DS support")
 set(BUILD_SWITCH OFF CACHE BOOL "Build with Nintendo Switch support")
 
-set(UPDATE_CONFIG ON CACHE BOOL "Force config file updating")
+set(UPDATE_CONFIG OFF CACHE BOOL "Force config file updating")
 
 if (BUILD_LINUX)
     set(OPTION_RESOLUTION ON CACHE BOOL "Add screen resolution option")
@@ -24,15 +24,15 @@ project(pemu)
 
 # pnes
 set(PNES_VERSION_MAJOR 3)
-set(PNES_VERSION_MINOR 1)
+set(PNES_VERSION_MINOR 4)
 add_subdirectory(pnes)
 
 # psnes
 set(PSNES_VERSION_MAJOR 3)
-set(PSNES_VERSION_MINOR 1)
+set(PSNES_VERSION_MINOR 4)
 add_subdirectory(psnes)
 
 # pfba
 set(PFBA_VERSION_MAJOR 3)
-set(PFBA_VERSION_MINOR 3)
+set(PFBA_VERSION_MINOR 4)
 add_subdirectory(pfba)
