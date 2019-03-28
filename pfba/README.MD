@@ -1,7 +1,7 @@
 pFBA: Portable Final Burn Alpha
 ===============================
 
-![](https://github.com/Cpasjuste/pfba/raw/master/pfba/data/screenshot.png)
+![](https://github.com/Cpasjuste/pemu/raw/master/pfba/pfba/data/screenshot.png)
 
 -----
 
