@@ -29,8 +29,8 @@ void PNESRomList::build() {
         }
 
         for (auto &file : fileList) {
-            if (!Utility::endsWith(file.name, ".zip")
-                && !Utility::endsWith(file.name, ".nes")) {
+            if (!Utility::endsWith(file.name, ".zip", false)
+                && !Utility::endsWith(file.name, ".nes", false)) {
                 continue;
             }
             auto *rom = new Rom();
