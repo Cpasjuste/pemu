@@ -460,7 +460,7 @@ bool8 S9xDeinitUpdate(int width, int height) {
         if (height < snes9x_prev_height) {
             int p = video->getTexture()->pitch >> 2;
             for (int y = SNES_HEIGHT; y < SNES_HEIGHT_EXTENDED; y++) {
-                auto *d = (uint32 *) (gfx_video_buffer + y * video->getTexture()->pitch);
+                auto *d = (uint32 *) (GFX.Screen + y * video->getTexture()->pitch);
                 for (int x = 0; x < p; x++)
                     *d++ = 0;
             }
