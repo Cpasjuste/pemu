@@ -10,3 +10,6 @@
 [submodule "cores/nestopia"]
 	path = cores/nestopia
 	url = git@github.com:Cpasjuste/nestopia.git
+[submodule "ssscrap"]
+	path = ssscrap
+	url = git@github.com:Cpasjuste/ssscrap.git
