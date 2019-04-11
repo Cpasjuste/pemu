@@ -2,6 +2,10 @@
 // Created by cpasjuste on 01/06/18.
 //
 
+#include "c2dui.h"
+#include "uiEmu.h"
+#include "video.h"
+
 #include <snes9x.h>
 #include <memmap.h>
 #include <apu/apu.h>
@@ -11,10 +15,6 @@
 #include <display.h>
 #include <sys/stat.h>
 #include <cheats.h>
-
-#include "c2dui.h"
-#include "uiEmu.h"
-#include "video.h"
 
 #ifdef __PSP2__
 

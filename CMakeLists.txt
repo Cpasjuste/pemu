@@ -15,12 +15,12 @@ if (BUILD_LINUX)
     set(OPTION_FULLSCREEN ON CACHE BOOL "Add switch to fullscreen option")
 endif (BUILD_LINUX)
 
+# add ssscrap (screenscrapper scrapper!) library
+add_subdirectory(ssscrap)
+
 # add libcross2d/libcross2dui library. If you want to port pfba to another platform,
 # you should (may) only need to port libcross2d library.
 add_subdirectory(libcross2dui)
-
-# add ssscrap (screenscrapper scrapper!) library
-add_subdirectory(ssscrap)
 
 # required for cmake toolchain setup
 project(pemu)
