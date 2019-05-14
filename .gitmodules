@@ -1,15 +1,15 @@
 [submodule "libcross2dui"]
 	path = libcross2dui
-	url = git@github.com:Cpasjuste/libcross2dui.git
+	url = https://github.com/Cpasjuste/libcross2dui.git
 [submodule "cores/fba"]
 	path = cores/fba
-	url = git@github.com:Cpasjuste/FBAlpha.git
+	url = https://github.com/Cpasjuste/FBAlpha.git
 [submodule "cores/snes9x"]
 	path = cores/snes9x
-	url = git@github.com:Cpasjuste/snes9x.git
+	url = https://github.com/Cpasjuste/snes9x.git
 [submodule "cores/nestopia"]
 	path = cores/nestopia
-	url = git@github.com:Cpasjuste/nestopia.git
+	url = https://github.com/Cpasjuste/nestopia.git
 [submodule "ssscrap"]
 	path = ssscrap
-	url = git@github.com:Cpasjuste/ssscrap.git
+	url = https://github.com/Cpasjuste/ssscrap.git
