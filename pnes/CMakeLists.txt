@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.2)
 #set(CMAKE_VERBOSE_MAKEFILE ON)
 
 project(pnes)
@@ -84,12 +84,15 @@ endif (BUILD_VITA)
 #####################
 # pnes executable
 #####################
+message(FATAL_ERROR "TODO")
 add_custom_target(${PROJECT_NAME}.data
-        COMMAND mkdir -p ${CMAKE_CURRENT_BINARY_DIR}/skins
-        COMMAND rm -rf ${CMAKE_CURRENT_BINARY_DIR}/skins/default.zip
-        COMMAND zip -j ${CMAKE_CURRENT_BINARY_DIR}/skins/default.zip ${CMAKE_CURRENT_SOURCE_DIR}/pnes/data/skin/*
-        COMMAND cd ${CMAKE_CURRENT_SOURCE_DIR}/pnes/data/nx/skin/ && zip -ru ${CMAKE_CURRENT_BINARY_DIR}/skins/default.zip .
-        COMMAND cp -f ${CMAKE_SOURCE_DIR}/cores/nestopia/NstDatabase.xml ${CMAKE_CURRENT_BINARY_DIR})
+        COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_CURRENT_BINARY_DIR}/skins
+        COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/skins
+        COMMAND ${CMAKE_COMMAND} -E tar cf ${CMAKE_CURRENT_BINARY_DIR}/skins/default.zip --format=zip -- .
+        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/pnes/data/skin)
+        #COMMAND zip -j ${CMAKE_CURRENT_BINARY_DIR}/skins/default.zip ${CMAKE_CURRENT_SOURCE_DIR}/pnes/data/skin/*
+        #COMMAND cd ${CMAKE_CURRENT_SOURCE_DIR}/pnes/data/nx/skin/ && zip -ru ${CMAKE_CURRENT_BINARY_DIR}/skins/default.zip .
+        #COMMAND cp -f ${CMAKE_SOURCE_DIR}/cores/nestopia/NstDatabase.xml ${CMAKE_CURRENT_BINARY_DIR})
 add_executable(${PROJECT_NAME}.elf ${PNES_SRC} ${NESTOPIA_SRC})
 target_include_directories(${PROJECT_NAME}.elf PRIVATE ${PNES_INC} ${NESTOPIA_INC})
 target_compile_options(${PROJECT_NAME}.elf PRIVATE ${NESTOPIA_CFLAGS})

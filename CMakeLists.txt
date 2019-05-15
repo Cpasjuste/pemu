@@ -1,19 +1,23 @@
-cmake_minimum_required(VERSION 3.0)
-#set(CMAKE_VERBOSE_MAKEFILE ON)
+cmake_minimum_required(VERSION 3.2)
+set(CMAKE_VERBOSE_MAKEFILE ON)
 
 # delete cmake cache folder before changing a build setting/option
-set(BUILD_LINUX ON CACHE BOOL "Build with Linux support")
-set(BUILD_WINDOWS OFF CACHE BOOL "Build with Windows support")
+set(BUILD_LINUX OFF CACHE BOOL "Build with Linux support")
+set(BUILD_WINDOWS ON CACHE BOOL "Build with Windows support")
 set(BUILD_VITA OFF CACHE BOOL "Build with PSP2 support")
 set(BUILD_3DS OFF CACHE BOOL "Build with 3DS support")
 set(BUILD_SWITCH OFF CACHE BOOL "Build with Nintendo Switch support")
 
-set(UPDATE_CONFIG ON CACHE BOOL "Force config file updating")
+if (BUILD_WINDOWS)
+    set(BUILD_LINUX ON)
+endif(BUILD_WINDOWS)
 
 if (BUILD_LINUX)
     set(OPTION_RESOLUTION ON CACHE BOOL "Add screen resolution option")
     set(OPTION_FULLSCREEN ON CACHE BOOL "Add switch to fullscreen option")
 endif (BUILD_LINUX)
+
+set(UPDATE_CONFIG ON CACHE BOOL "Force config file updating")
 
 # add ssscrap (screenscrapper scrapper!) library
 add_subdirectory(ssscrap)
