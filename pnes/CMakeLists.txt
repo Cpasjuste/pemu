@@ -76,6 +76,9 @@ elseif (BUILD_LINUX)
     #####################
     # SDL2 PLATORM
     #####################
+	if(BUILD_WINDOWS)
+		#list(APPEND NESTOPIA_CFLAGS -D_MINGW)
+	endif(BUILD_WINDOWS)
 endif (BUILD_VITA)
 
 #####################

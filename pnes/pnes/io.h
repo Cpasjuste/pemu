@@ -6,7 +6,6 @@
 #define PNES_IO_H
 
 #include <strings.h>
-
-#define mkdir(x) mkdir (x, 0777)
+//#define mkdir(x) mkdir (x, 0777)
 
 #endif //PNES_IO_H

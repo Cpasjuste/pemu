@@ -278,7 +278,7 @@ set(FLAGS
         -Dstricmp=strcmp
         -Wno-write-strings -Wno-narrowing -fforce-addr -finline-limit=1200 -Wno-sign-compare
         #-DFASTCALL
-        -U__fastcall -D_fastcall= -D__fastcall= -D__fastcall__=
+        #-U__fastcall -D_fastcall= -D__fastcall= -D__fastcall__=
         #"-DINLINE=static inline" "-DSH2_INLINE=static inline"
         -Wno-unused-variable -Wno-unused-but-set-variable -Wno-sequence-point
         #-fcheck-new
@@ -356,6 +356,12 @@ elseif (BUILD_LINUX)
     # SDL2
     ##############
     list(APPEND FLAGS -DLSB_FIRST)
+	if(BUILD_WINDOWS)
+		list(REMOVE_ITEM SRC_BURNER ${CMAKE_SOURCE_DIR}/cores/fba/src/burner/unzip.c)
+		list(REMOVE_ITEM SRC_BURNER ${CMAKE_SOURCE_DIR}/cores/fba/src/burner/zipfn.cpp)
+		list(APPEND FLAGS -DMINIZIP_LIB)
+		set(LDFLAGS -lminizip)
+	endif(BUILD_WINDOWS)
     #[[
    elseif (BUILD_SDL1)
        ##############

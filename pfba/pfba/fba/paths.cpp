@@ -27,6 +27,8 @@ int bRunPause;
 #ifdef __PSP2__
 #include <psp2/io/stat.h>
 #define mkdir sceIoMkdir
+#elif __WINDOWS__
+#define mkdir(x, y) mkdir(x)
 #endif
 
 char szAppHomePath[MAX_PATH];
