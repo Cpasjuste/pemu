@@ -76,52 +76,50 @@ elseif (BUILD_LINUX)
     #####################
     # SDL2 PLATORM
     #####################
-	if(BUILD_WINDOWS)
-		#list(APPEND NESTOPIA_CFLAGS -D_MINGW)
-	endif(BUILD_WINDOWS)
+    if (BUILD_WINDOWS)
+        #list(APPEND NESTOPIA_CFLAGS -D_MINGW)
+    endif (BUILD_WINDOWS)
 endif (BUILD_VITA)
 
 #####################
 # pnes executable
 #####################
-message(FATAL_ERROR "TODO")
 add_custom_target(${PROJECT_NAME}.data
         COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_CURRENT_BINARY_DIR}/skins
         COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/skins
-        COMMAND ${CMAKE_COMMAND} -E tar cf ${CMAKE_CURRENT_BINARY_DIR}/skins/default.zip --format=zip -- .
-        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/pnes/data/skin)
-        #COMMAND zip -j ${CMAKE_CURRENT_BINARY_DIR}/skins/default.zip ${CMAKE_CURRENT_SOURCE_DIR}/pnes/data/skin/*
-        #COMMAND cd ${CMAKE_CURRENT_SOURCE_DIR}/pnes/data/nx/skin/ && zip -ru ${CMAKE_CURRENT_BINARY_DIR}/skins/default.zip .
-        #COMMAND cp -f ${CMAKE_SOURCE_DIR}/cores/nestopia/NstDatabase.xml ${CMAKE_CURRENT_BINARY_DIR})
-add_executable(${PROJECT_NAME}.elf ${PNES_SRC} ${NESTOPIA_SRC})
-target_include_directories(${PROJECT_NAME}.elf PRIVATE ${PNES_INC} ${NESTOPIA_INC})
-target_compile_options(${PROJECT_NAME}.elf PRIVATE ${NESTOPIA_CFLAGS})
-target_compile_options(${PROJECT_NAME}.elf PRIVATE $<$<COMPILE_LANGUAGE:CXX>:-std=c++14 -fexceptions>)
-target_link_libraries(${PROJECT_NAME}.elf cross2dui ${NESTOPIA_LDFLAGS})
-add_dependencies(${PROJECT_NAME}.elf ${PROJECT_NAME}.data)
+        COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/cores/nestopia/NstDatabase.xml ${CMAKE_CURRENT_BINARY_DIR}
+        COMMAND ${ZIP} -j ${CMAKE_CURRENT_BINARY_DIR}/skins/default.zip ${CMAKE_CURRENT_SOURCE_DIR}/pnes/data/skin/*
+        COMMAND cd ${CMAKE_CURRENT_SOURCE_DIR}/pnes/data/nx/skin/ && ${ZIP} -ru ${CMAKE_CURRENT_BINARY_DIR}/skins/default.zip .
+        )
+add_executable(${PROJECT_NAME} ${PNES_SRC} ${NESTOPIA_SRC})
+target_include_directories(${PROJECT_NAME} PRIVATE ${PNES_INC} ${NESTOPIA_INC})
+target_compile_options(${PROJECT_NAME} PRIVATE ${NESTOPIA_CFLAGS})
+target_compile_options(${PROJECT_NAME} PRIVATE $<$<COMPILE_LANGUAGE:CXX>:-std=c++14 -fexceptions>)
+target_link_libraries(${PROJECT_NAME} cross2dui ${NESTOPIA_LDFLAGS})
+add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}.data)
 
 ###########################
-# LINUX (ubuntu, release)
+# LINUX/WINDOWS (release)
 ###########################
+set(TARGET_PLATFORM linux)
+if (BUILD_WINDOWS)
+    set(EXE_SUFFIX .exe)
+    set(TARGET_PLATFORM windows)
+endif ()
 if (BUILD_LINUX)
-    add_custom_target(${PROJECT_NAME}_linux_release.zip
-            DEPENDS ${PROJECT_NAME}.elf
-            COMMAND rm -rf ${CMAKE_BINARY_DIR}/release/pnes
-            COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/pnes
-            COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/pnes/skins
-            COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/pnes/roms
-            COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/pnes/titles
-            COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/pnes/previews
-            COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/pnes/icons
-            COMMAND cp -f ${CMAKE_CURRENT_BINARY_DIR}/pnes.elf ${CMAKE_BINARY_DIR}/release/pnes/pnes
-            COMMAND cp -f ${CMAKE_SOURCE_DIR}/cores/nestopia/NstDatabase.xml ${CMAKE_BINARY_DIR}/release/pnes/
-            # zip skin
-            COMMAND rm -rf ${CMAKE_BINARY_DIR}/release/pnes/skins/default.zip
-            COMMAND zip -j ${CMAKE_BINARY_DIR}/release/pnes/skins/default.zip ${CMAKE_CURRENT_SOURCE_DIR}/pnes/data/skin/*
-            # zip release
-            COMMAND rm -rf ${CMAKE_BINARY_DIR}/${PROJECT_NAME}-${PNES_VERSION_MAJOR}.${PNES_VERSION_MINOR}_linux.zip
-            COMMAND cd ${CMAKE_BINARY_DIR}/release && zip -r ../${PROJECT_NAME}-${PNES_VERSION_MAJOR}.${PNES_VERSION_MINOR}_linux.zip pnes
-            COMMAND cd ${CMAKE_CURRENT_BINARY_DIR}
+    add_custom_target(${PROJECT_NAME}_${TARGET_PLATFORM}_release.zip
+            DEPENDS ${PROJECT_NAME}
+            COMMAND ${CMAKE_COMMAND} -E remove -f ${CMAKE_BINARY_DIR}/${PROJECT_NAME}-${PNES_VERSION_MAJOR}.${PNES_VERSION_MINOR}_${TARGET_PLATFORM}.zip
+            COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_BINARY_DIR}/release/pnes
+            COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/release/pnes/skins
+            COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/release/pnes/roms
+            COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/release/pnes/titles
+            COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/release/pnes/previews
+            COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/release/pnes/icons
+            COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}${EXE_SUFFIX} ${CMAKE_BINARY_DIR}/release/pnes/
+            COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_BINARY_DIR}/NstDatabase.xml ${CMAKE_BINARY_DIR}/release/pnes/
+            COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_BINARY_DIR}/skins/default.zip ${CMAKE_BINARY_DIR}/release/pnes/skins/
+            COMMAND cd ${CMAKE_BINARY_DIR}/release && ${ZIP} -r ../${PROJECT_NAME}-${PNES_VERSION_MAJOR}.${PNES_VERSION_MINOR}_${TARGET_PLATFORM}.zip pnes
             )
 endif (BUILD_LINUX)
 
@@ -129,7 +127,7 @@ endif (BUILD_LINUX)
 # PSP2 (vita) target
 #####################
 if (BUILD_VITA)
-    vita_create_self(${PROJECT_NAME}.self ${PROJECT_NAME}.elf)
+    vita_create_self(${PROJECT_NAME}.self ${PROJECT_NAME})
     add_custom_target(${PROJECT_NAME}_vita_release.zip
             DEPENDS ${PROJECT_NAME}.self
             COMMAND rm -rf ${CMAKE_BINARY_DIR}/release/pnes
@@ -146,11 +144,11 @@ endif ()
 # SWITCH target
 #####################
 if (BUILD_SWITCH)
-    set_target_properties(${PROJECT_NAME}.elf PROPERTIES LINK_FLAGS "-specs=${DEVKITPRO}/libnx/switch.specs")
+    set_target_properties(${PROJECT_NAME} PROPERTIES LINK_FLAGS "-specs=${DEVKITPRO}/libnx/switch.specs")
     add_custom_target(${PROJECT_NAME}.nro
-            DEPENDS ${PROJECT_NAME}.elf
+            DEPENDS ${PROJECT_NAME}
             COMMAND nacptool --create "pNES" "Cpasjuste" "${PNES_VERSION_MAJOR}.${PNES_VERSION_MINOR}" pnes.nacp
-            COMMAND elf2nro ${PROJECT_NAME}.elf ${PROJECT_NAME}.nro --icon=${CMAKE_CURRENT_SOURCE_DIR}/pnes/data/nx/icon.jpg --nacp=pnes.nacp)
+            COMMAND elf2nro ${PROJECT_NAME} ${PROJECT_NAME}.nro --icon=${CMAKE_CURRENT_SOURCE_DIR}/pnes/data/nx/icon.jpg --nacp=pnes.nacp)
     add_custom_target(${PROJECT_NAME}_switch_release.zip
             DEPENDS ${PROJECT_NAME}.nro
             COMMAND rm -rf ${CMAKE_BINARY_DIR}/release/pnes
