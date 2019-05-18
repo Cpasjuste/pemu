@@ -54,7 +54,7 @@ int main(int argc, char **argv) {
 
     // load configuration
     int version = (__PFBA_VERSION_MAJOR__ * 100) + __PFBA_VERSION_MINOR__;
-    cfg = new PFBAConfig(ui->getIo()->getDataWritePath(), version);
+    cfg = new PFBAConfig(ui->getIo()->getHomePath(), version);
     ui->setConfig(cfg);
 
     // skin

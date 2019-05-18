@@ -68,7 +68,7 @@ int main(int argc, char **argv) {
 
     // load configuration
     int psnes_version = (__PSNES_VERSION_MAJOR__ * 100) + __PSNES_VERSION_MINOR__;
-    cfg = new PSNESConfig(ui->getIo()->getDataWritePath(), psnes_version);
+    cfg = new PSNESConfig(ui->getIo()->getHomePath(), psnes_version);
     std::string configs_path = *cfg->getHomePath() + "configs";
     mkdir(configs_path.c_str(), 0755);
     ui->setConfig(cfg);

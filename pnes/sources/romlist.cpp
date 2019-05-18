@@ -46,7 +46,7 @@ void PNESRomList::build() {
                 // try removing the extension (drv_name has extension (.zip, .smc) with psnes and no db.xml)
                 std::string name = Utility::removeExt(rom->drv_name);
                 snprintf(icon_path, 1023, "%sicons/%s.png",
-                         ui->getConfig()->getHomePath()->c_str(), name.c_str());
+                         ui->getConfig()->getHomePath().c_str(), name.c_str());
                 if (ui->getIo()->exist(icon_path)) {
                     rom->icon = new C2DTexture(icon_path);
                     rom->icon->setDeleteMode(DeleteMode::Manual);

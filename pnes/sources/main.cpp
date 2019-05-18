@@ -50,9 +50,9 @@ int main(int argc, char **argv) {
 
     // load configuration
     int pnes_version = (__PNES_VERSION_MAJOR__ * 100) + __PNES_VERSION_MINOR__;
-    cfg = new PNESConfig(ui->getIo()->getDataWritePath(), pnes_version);
-    ui->getIo()->create(*cfg->getHomePath() + "configs");
-    ui->getIo()->create(*cfg->getHomePath() + "saves");
+    cfg = new PNESConfig(ui->getIo()->getHomePath(), pnes_version);
+    ui->getIo()->create(cfg->getHomePath() + "configs");
+    ui->getIo()->create(cfg->getHomePath() + "saves");
     ui->setConfig(cfg);
 
     // skin
