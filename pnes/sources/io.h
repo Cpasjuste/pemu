@@ -12,7 +12,9 @@
 
 // TODO: fix this on windows (nstcommon.cpp => ifdef _MINGW)
 #ifdef __WINDOWS__
-#include <io.h>
+extern "C" {
+int __cdecl mkdir(const char *) __MINGW_ATTRIB_DEPRECATED_MSVC2005;
+}
 #else
 #define mkdir(x) mkdir(x, 0777)
 #endif
