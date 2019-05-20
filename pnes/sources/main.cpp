@@ -53,6 +53,9 @@ int main(int argc, char **argv) {
     cfg = new PNESConfig(ui->getIo()->getHomePath(), pnes_version);
     ui->getIo()->create(cfg->getHomePath() + "configs");
     ui->getIo()->create(cfg->getHomePath() + "saves");
+    ui->getIo()->create(cfg->getHomePath() + "cache");
+    ui->getIo()->create(cfg->getHomePath() + "titles");
+    ui->getIo()->create(cfg->getHomePath() + "previews");
     ui->setConfig(cfg);
 
     // skin
