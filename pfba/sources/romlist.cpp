@@ -50,7 +50,7 @@ void PFBARomList::build() {
 
         // load icon if needed, only for parent roms
         if (use_icons && !rom->parent) {
-            snprintf(icon_path, 1023, "%sicons/%s.png", ui->getConfig()->getHomePath()->c_str(), rom->drv_name);
+            snprintf(icon_path, 1023, "%sicons/%s.png", ui->getConfig()->getHomePath().c_str(), rom->drv_name);
             if (ui->getIo()->exist(icon_path)) {
                 rom->icon = new C2DTexture(icon_path);
                 rom->icon->setDeleteMode(DeleteMode::Manual);

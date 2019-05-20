@@ -23,7 +23,6 @@ file(GLOB SRC_BURN
         ${CMAKE_SOURCE_DIR}/cores/fba/src/burn/devices/*.c*
         ${CMAKE_SOURCE_DIR}/cores/fba/src/burn/snd/*.c*
         )
-
 ##############
 # burner
 ##############
@@ -43,6 +42,8 @@ list(REMOVE_ITEM SRC_BURNER
         ${CMAKE_SOURCE_DIR}/cores/fba/src/burner/misc.cpp
         ${CMAKE_SOURCE_DIR}/cores/fba/src/burner/sshot.cpp
         ${CMAKE_SOURCE_DIR}/cores/fba/src/burner/state.cpp
+		${CMAKE_SOURCE_DIR}/cores/fba/src/burner/unzip.c
+		${CMAKE_SOURCE_DIR}/cores/fba/src/burner/zipfn.cpp
         )
 ##############
 # drivers
@@ -271,17 +272,13 @@ set(INC ${PFBA_DIRS}
 # flags
 set(FLAGS
         -D__PFBA__
-        -D__PFBA_VERSION_MAJOR__=${PFBA_VERSION_MAJOR}
-        -D__PFBA_VERSION_MINOR__=${PFBA_VERSION_MINOR}
-        -DINCLUDE_7Z_SUPPORT
+		-D__PFBA_VERSION_MAJOR__=${VERSION_MAJOR}
+        -D__PFBA_VERSION_MINOR__=${VERSION_MINOR}
+        -DINCLUDE_7Z_SUPPORT -DMINIZIP_LIB
         -DUSE_SPEEDHACKS -DBUILD_SDL -DBUILD_M68K
         -Dstricmp=strcmp
         -Wno-write-strings -Wno-narrowing -fforce-addr -finline-limit=1200 -Wno-sign-compare
-        #-DFASTCALL
-        #-U__fastcall -D_fastcall= -D__fastcall= -D__fastcall__=
-        #"-DINLINE=static inline" "-DSH2_INLINE=static inline"
         -Wno-unused-variable -Wno-unused-but-set-variable -Wno-sequence-point
-        #-fcheck-new
         )
 
 #################
@@ -357,11 +354,11 @@ elseif (BUILD_LINUX)
     ##############
     list(APPEND FLAGS -DLSB_FIRST)
     if (BUILD_WINDOWS)
-        list(REMOVE_ITEM SRC_BURNER ${CMAKE_SOURCE_DIR}/cores/fba/src/burner/unzip.c)
-        list(REMOVE_ITEM SRC_BURNER ${CMAKE_SOURCE_DIR}/cores/fba/src/burner/zipfn.cpp)
-        list(APPEND FLAGS -DMINIZIP_LIB)
-        set(LDFLAGS -lminizip)
-    endif (BUILD_WINDOWS)
+        #list(APPEND FLAGS -DMINIZIP_LIB)
+        #set(LDFLAGS -lminizip)
+	else()
+		list(APPEND FLAGS -D__fastcall=)
+    endif ()
     #[[
    elseif (BUILD_SDL1)
        ##############
@@ -397,7 +394,7 @@ add_executable(${PROJECT_NAME} ${SRC} ${CMAKE_CURRENT_BINARY_DIR}/deps/m68kops.c
 target_compile_options(${PROJECT_NAME} PRIVATE ${FLAGS})
 target_compile_options(${PROJECT_NAME} PRIVATE $<$<COMPILE_LANGUAGE:CXX>:-std=gnu++11 -fpermissive>)
 target_include_directories(${PROJECT_NAME} PRIVATE ${INC})
-target_link_libraries(${PROJECT_NAME} cross2dui ${LDFLAGS})
+target_link_libraries(${PROJECT_NAME} cross2dui ${LDFLAGS} minizip)
 # include libcross2d targets
 include(${CMAKE_SOURCE_DIR}/libcross2dui/libcross2d/Targets.cmake)
 
