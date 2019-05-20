@@ -10,7 +10,7 @@ set(BUILD_3DS OFF CACHE BOOL "Build with 3DS support")
 
 if (BUILD_WINDOWS)
     set(BUILD_LINUX ON)
-endif(BUILD_WINDOWS)
+endif (BUILD_WINDOWS)
 
 if (BUILD_LINUX)
     set(OPTION_RESOLUTION ON CACHE BOOL "Add screen resolution option")

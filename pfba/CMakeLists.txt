@@ -42,8 +42,8 @@ list(REMOVE_ITEM SRC_BURNER
         ${CMAKE_SOURCE_DIR}/cores/fba/src/burner/misc.cpp
         ${CMAKE_SOURCE_DIR}/cores/fba/src/burner/sshot.cpp
         ${CMAKE_SOURCE_DIR}/cores/fba/src/burner/state.cpp
-		${CMAKE_SOURCE_DIR}/cores/fba/src/burner/unzip.c
-		${CMAKE_SOURCE_DIR}/cores/fba/src/burner/zipfn.cpp
+        ${CMAKE_SOURCE_DIR}/cores/fba/src/burner/unzip.c
+        ${CMAKE_SOURCE_DIR}/cores/fba/src/burner/zipfn.cpp
         )
 ##############
 # drivers
@@ -272,7 +272,7 @@ set(INC ${PFBA_DIRS}
 # flags
 set(FLAGS
         -D__PFBA__
-		-D__PFBA_VERSION_MAJOR__=${VERSION_MAJOR}
+        -D__PFBA_VERSION_MAJOR__=${VERSION_MAJOR}
         -D__PFBA_VERSION_MINOR__=${VERSION_MINOR}
         -DINCLUDE_7Z_SUPPORT -DMINIZIP_LIB
         -DUSE_SPEEDHACKS -DBUILD_SDL -DBUILD_M68K
@@ -354,42 +354,17 @@ elseif (BUILD_LINUX)
     ##############
     list(APPEND FLAGS -DLSB_FIRST)
     if (BUILD_WINDOWS)
-        #list(APPEND FLAGS -DMINIZIP_LIB)
-        #set(LDFLAGS -lminizip)
-	else()
-		list(APPEND FLAGS -D__fastcall=)
+    else ()
+        list(APPEND FLAGS -D__fastcall=)
     endif ()
-    #[[
-   elseif (BUILD_SDL1)
-       ##############
-       # SDL1
-       ##############
-       list(APPEND FLAGS -DLSB_FIRST)
-   elseif (BUILD_SFML)
-       ##############
-       # SFML
-       ##############
-       list(APPEND FLAGS -DLSB_FIRST)
-   ]]
 endif (BUILD_VITA)
 
 # source files
 set(SRC ${SRC_PFBA} ${SRC_CPU} ${SRC_DRV} ${SRC_BURN} ${SRC_BURNER} ${SRC_INTF} ${SRC_7Z})
 
-##########################
-# main target
-##########################
-#[[
-add_custom_target(${PROJECT_NAME}.data
-        COMMAND mkdir -p ${CMAKE_CURRENT_BINARY_DIR}/skins
-        COMMAND rm -rf ${CMAKE_CURRENT_BINARY_DIR}/skins/default.zip
-        COMMAND zip -j ${CMAKE_CURRENT_BINARY_DIR}/skins/default.zip ${CMAKE_CURRENT_SOURCE_DIR}/pfba/data/skin/*
-        COMMAND cd ${CMAKE_CURRENT_SOURCE_DIR}/pfba/data/nx/skin/ && zip -ru ${CMAKE_CURRENT_BINARY_DIR}/skins/default.zip .
-        COMMAND mkdir -p ${CMAKE_CURRENT_BINARY_DIR}/hiscores
-        COMMAND cp -f ${CMAKE_CURRENT_SOURCE_DIR}/pfba/data/hiscore.dat ${CMAKE_CURRENT_BINARY_DIR}/hiscores
-        )
-]]
-
+#####################
+# pfba executable
+#####################
 add_executable(${PROJECT_NAME} ${SRC} ${CMAKE_CURRENT_BINARY_DIR}/deps/m68kops.c)
 target_compile_options(${PROJECT_NAME} PRIVATE ${FLAGS})
 target_compile_options(${PROJECT_NAME} PRIVATE $<$<COMPILE_LANGUAGE:CXX>:-std=gnu++11 -fpermissive>)
@@ -400,8 +375,6 @@ include(${CMAKE_SOURCE_DIR}/libcross2dui/libcross2d/Targets.cmake)
 
 # fba deps
 find_package(Perl REQUIRED)
-message(STATUS "PERL_EXECUTABLE: ${PERL_EXECUTABLE}")
-
 add_custom_target(${PROJECT_NAME}.deps
         COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_CURRENT_BINARY_DIR}/deps
         COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/deps
@@ -462,98 +435,3 @@ if (BUILD_WINDOWS)
             )
     add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}.data.extra.win64)
 endif ()
-
-#[[
-###########################
-# LINUX (ubuntu, release)
-###########################
-if (BUILD_LINUX)
-    add_custom_target(${PROJECT_NAME}_release_linux.zip
-            DEPENDS ${PROJECT_NAME}.elf
-            COMMAND rm -rf ${CMAKE_BINARY_DIR}/release/pfba
-            COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/pfba
-            COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/pfba/skins
-            COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/pfba/roms
-            COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/pfba/hiscores
-            COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/pfba/titles
-            COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/pfba/previews
-            COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/pfba/icons
-            COMMAND cp -f ${CMAKE_CURRENT_BINARY_DIR}/pfba.elf ${CMAKE_BINARY_DIR}/release/pfba/pfba
-            COMMAND cp -f ${CMAKE_CURRENT_SOURCE_DIR}/pfba/data/hiscore.dat ${CMAKE_BINARY_DIR}/release/pfba/hiscores
-            # zip skin
-            COMMAND rm -rf ${CMAKE_BINARY_DIR}/release/pfba/skins/default.zip
-            COMMAND zip -j ${CMAKE_BINARY_DIR}/release/pfba/skins/default.zip ${CMAKE_CURRENT_SOURCE_DIR}/pfba/data/skin/*
-            # zip release
-            COMMAND rm -rf ${CMAKE_BINARY_DIR}/${PROJECT_NAME}-${PFBA_VERSION_MAJOR}.${PFBA_VERSION_MINOR}_linux.zip
-            COMMAND cd ${CMAKE_BINARY_DIR}/release && zip -r ../${PROJECT_NAME}-${PFBA_VERSION_MAJOR}.${PFBA_VERSION_MINOR}_linux.zip pfba && cd ${CMAKE_BINARY_DIR}
-            )
-endif (BUILD_LINUX)
-
-#####################
-# PSP2 (vita) vpk
-#####################
-if (BUILD_VITA)
-    add_custom_target(${PROJECT_NAME}.vpk
-            DEPENDS ${PROJECT_NAME}.elf
-            COMMAND rm -rf vpk && mkdir -p vpk/sce_sys
-            COMMAND ${VITASDK}/bin/vita-elf-create ${PROJECT_NAME}.elf ${PROJECT_NAME}.velf
-            COMMAND ${VITASDK}/bin/vita-make-fself -s -c ${PROJECT_NAME}.velf vpk/eboot.bin
-            COMMAND ${VITASDK}/bin/vita-mksfoex -s TITLE_ID="VITAFBA01" "${PROJECT_NAME}" vpk/sce_sys/param.sfo
-            COMMAND cp -r ${CMAKE_SOURCE_DIR}/pfba/data/skin vpk/
-            COMMAND cp -r ${CMAKE_SOURCE_DIR}/pfba/data/psp2/* vpk
-            COMMAND cd vpk && zip -r ../${PROJECT_NAME}-${PFBA_VERSION_MAJOR}.${PFBA_VERSION_MINOR}_vita.vpk . && cd ..
-            )
-endif (BUILD_VITA)
-
-#####################
-# PS3
-#####################
-if (BUILD_PS3)
-    add_custom_target(${PROJECT_NAME}.ps3
-            DEPENDS ${PROJECT_NAME}.elf
-            COMMAND ${PSL1GHT}/bin/sprxlinker ${PROJECT_NAME}.elf
-            COMMAND ${PSL1GHT}/bin/make_self ${PROJECT_NAME}.elf ${PROJECT_NAME}.ps3
-            )
-endif (BUILD_PS3)
-
-#####################
-# CTR (3DS) target
-#####################
-if (BUILD_3DS)
-    set_target_properties(${PROJECT_NAME}.elf PROPERTIES LINK_FLAGS "-specs=3dsx.specs")
-    add_3dsx_target(${PROJECT_NAME}.3ds "pFBA" "FBA 3DS" "Cpasjuste" pfba/data/3ds/icon.png)
-    #add_cia_target(${PROJECT_NAME}.3ds pfba/data/3ds/app.rsf pfba/data/3ds/banner.png pfba/data/3ds/audio.wav "pFBA" "FBA 3DS" "Cpasjuste" pfba/data/3ds/icon.png)
-endif (BUILD_3DS)
-
-#####################
-# NX (SWITCH) target
-#####################
-if (BUILD_SWITCH)
-    set_target_properties(${PROJECT_NAME}.elf PROPERTIES LINK_FLAGS "-specs=${DEVKITPRO}/libnx/switch.specs")
-    add_custom_target(${PROJECT_NAME}.nro
-            DEPENDS ${PROJECT_NAME}.elf
-            COMMAND nacptool --create "pFBA" "Cpasjuste" "${PFBA_VERSION_MAJOR}.${PFBA_VERSION_MINOR}" pfba.nacp
-            COMMAND elf2nro ${PROJECT_NAME}.elf ${PROJECT_NAME}.nro --icon=${CMAKE_CURRENT_SOURCE_DIR}/pfba/data/nx/icon.jpg --nacp=pfba.nacp
-            )
-    add_custom_target(${PROJECT_NAME}_release_switch.zip
-            DEPENDS ${PROJECT_NAME}.nro
-            COMMAND rm -rf ${CMAKE_BINARY_DIR}/release/pfba
-            COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/pfba
-            COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/pfba/skins
-            COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/pfba/roms
-            COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/pfba/hiscores
-            COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/pfba/titles
-            COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/pfba/previews
-            COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/pfba/icons
-            COMMAND cp -f ${CMAKE_CURRENT_BINARY_DIR}/pfba.nro ${CMAKE_BINARY_DIR}/release/pfba/pfba.nro
-            COMMAND cp -f ${CMAKE_CURRENT_SOURCE_DIR}/pfba/data/hiscore.dat ${CMAKE_BINARY_DIR}/release/pfba/hiscores
-            # zip skin
-            COMMAND rm -rf ${CMAKE_BINARY_DIR}/release/pfba/skins/default.zip
-            COMMAND zip -j ${CMAKE_BINARY_DIR}/release/pfba/skins/default.zip ${CMAKE_CURRENT_SOURCE_DIR}/pfba/data/skin/*
-            COMMAND cd ${CMAKE_CURRENT_SOURCE_DIR}/pfba/data/nx/skin/ && zip -ru ${CMAKE_BINARY_DIR}/release/pfba/skins/default.zip .
-            # zip release
-            COMMAND rm -rf ${CMAKE_BINARY_DIR}/${PROJECT_NAME}-${PFBA_VERSION_MAJOR}.${PFBA_VERSION_MINOR}_switch.zip
-            COMMAND cd ${CMAKE_BINARY_DIR}/release && zip -r ../${PROJECT_NAME}-${PFBA_VERSION_MAJOR}.${PFBA_VERSION_MINOR}_switch.zip pfba && cd ${CMAKE_BINARY_DIR}
-            )
-endif (BUILD_SWITCH)
-]]
