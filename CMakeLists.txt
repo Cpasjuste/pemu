@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0)
-#set(CMAKE_VERBOSE_MAKEFILE ON)
+set(CMAKE_VERBOSE_MAKEFILE ON)
 
 # delete cmake cache folder before changing a build setting/option
 set(BUILD_LINUX OFF CACHE BOOL "Build with Linux support")
@@ -34,10 +34,10 @@ set(VERSION_MAJOR 3)
 set(VERSION_MINOR 4)
 
 # pnes
-add_subdirectory(pnes)
+#add_subdirectory(pnes)
 
 # psnes
 #add_subdirectory(psnes)
 
 # pfba
-#add_subdirectory(pfba)
+add_subdirectory(pfba)

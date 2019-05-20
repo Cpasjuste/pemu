@@ -254,8 +254,8 @@ file(GLOB SRC_7Z
 ##############
 # pfba
 ##############
-set(PFBA_DIRS pfba pfba/fba)
-file(GLOB SRC_PFBA pfba/*.c* pfba/fba/*.c*)
+set(PFBA_DIRS sources sources/fba)
+file(GLOB SRC_PFBA sources/*.c* sources/fba/*.c*)
 
 # includes
 set(INC ${PFBA_DIRS}
@@ -356,12 +356,12 @@ elseif (BUILD_LINUX)
     # SDL2
     ##############
     list(APPEND FLAGS -DLSB_FIRST)
-	if(BUILD_WINDOWS)
-		list(REMOVE_ITEM SRC_BURNER ${CMAKE_SOURCE_DIR}/cores/fba/src/burner/unzip.c)
-		list(REMOVE_ITEM SRC_BURNER ${CMAKE_SOURCE_DIR}/cores/fba/src/burner/zipfn.cpp)
-		list(APPEND FLAGS -DMINIZIP_LIB)
-		set(LDFLAGS -lminizip)
-	endif(BUILD_WINDOWS)
+    if (BUILD_WINDOWS)
+        list(REMOVE_ITEM SRC_BURNER ${CMAKE_SOURCE_DIR}/cores/fba/src/burner/unzip.c)
+        list(REMOVE_ITEM SRC_BURNER ${CMAKE_SOURCE_DIR}/cores/fba/src/burner/zipfn.cpp)
+        list(APPEND FLAGS -DMINIZIP_LIB)
+        set(LDFLAGS -lminizip)
+    endif (BUILD_WINDOWS)
     #[[
    elseif (BUILD_SDL1)
        ##############
@@ -379,30 +379,10 @@ endif (BUILD_VITA)
 # source files
 set(SRC ${SRC_PFBA} ${SRC_CPU} ${SRC_DRV} ${SRC_BURN} ${SRC_BURNER} ${SRC_INTF} ${SRC_7Z})
 
-############
-# FBA deps
-############
-add_custom_target(${PROJECT_NAME}.deps
-        COMMAND rm -rf ${CMAKE_CURRENT_BINARY_DIR}/deps && mkdir ${CMAKE_CURRENT_BINARY_DIR}/deps
-        # driverlist.h
-        COMMAND perl ${CMAKE_SOURCE_DIR}/cores/fba/src/dep/scripts/gamelist.pl -o ${CMAKE_CURRENT_BINARY_DIR}/deps/driverlist.h -l ${CMAKE_CURRENT_BINARY_DIR}/deps/gamelist.txt ${SRC_DRV}
-        # ctv.h
-        COMMAND g++ ${CMAKE_SOURCE_DIR}/cores/fba/src/burn/drv/capcom/ctv_make.cpp -o ${CMAKE_CURRENT_BINARY_DIR}/deps/ctv_make
-        COMMAND ${CMAKE_CURRENT_BINARY_DIR}/deps/ctv_make > ${CMAKE_CURRENT_BINARY_DIR}/deps/ctv.h
-        # pgm sprite
-        COMMAND g++ ${CMAKE_SOURCE_DIR}/cores/fba/src/burn/drv/pgm/pgm_sprite_create.cpp -o ${CMAKE_CURRENT_BINARY_DIR}/deps/pgm_sprite_create
-        COMMAND ${CMAKE_CURRENT_BINARY_DIR}/deps/pgm_sprite_create > ${CMAKE_CURRENT_BINARY_DIR}/deps/pgm_sprite.h
-        # func headers
-        COMMAND perl ${CMAKE_SOURCE_DIR}/cores/fba/src/dep/scripts/toa_gp9001_func.pl -o ${CMAKE_CURRENT_BINARY_DIR}/deps/toa_gp9001_func.h
-        COMMAND perl ${CMAKE_SOURCE_DIR}/cores/fba/src/dep/scripts/neo_sprite_func.pl -o ${CMAKE_CURRENT_BINARY_DIR}/deps/neo_sprite_func.h
-        COMMAND perl ${CMAKE_SOURCE_DIR}/cores/fba/src/dep/scripts/cave_tile_func.pl -o ${CMAKE_CURRENT_BINARY_DIR}/deps/cave_tile_func.h
-        COMMAND perl ${CMAKE_SOURCE_DIR}/cores/fba/src/dep/scripts/cave_sprite_func.pl -o ${CMAKE_CURRENT_BINARY_DIR}/deps/cave_sprite_func.h
-        COMMAND perl ${CMAKE_SOURCE_DIR}/cores/fba/src/dep/scripts/psikyo_tile_func.pl -o ${CMAKE_CURRENT_BINARY_DIR}/deps/psikyo_tile_func.h
-        )
-
 ##########################
 # main target
 ##########################
+#[[
 add_custom_target(${PROJECT_NAME}.data
         COMMAND mkdir -p ${CMAKE_CURRENT_BINARY_DIR}/skins
         COMMAND rm -rf ${CMAKE_CURRENT_BINARY_DIR}/skins/default.zip
@@ -411,13 +391,82 @@ add_custom_target(${PROJECT_NAME}.data
         COMMAND mkdir -p ${CMAKE_CURRENT_BINARY_DIR}/hiscores
         COMMAND cp -f ${CMAKE_CURRENT_SOURCE_DIR}/pfba/data/hiscore.dat ${CMAKE_CURRENT_BINARY_DIR}/hiscores
         )
-add_executable(${PROJECT_NAME}.elf ${SRC} ${CMAKE_CURRENT_BINARY_DIR}/deps/m68kops.c)
-target_compile_options(${PROJECT_NAME}.elf PRIVATE ${FLAGS})
-target_compile_options(${PROJECT_NAME}.elf PRIVATE $<$<COMPILE_LANGUAGE:CXX>:-std=gnu++11 -fpermissive>)
-target_include_directories(${PROJECT_NAME}.elf PRIVATE ${INC})
-target_link_libraries(${PROJECT_NAME}.elf cross2dui ${LDFLAGS})
-add_dependencies(${PROJECT_NAME}.elf ${PROJECT_NAME}.data)
+]]
 
+add_executable(${PROJECT_NAME} ${SRC} ${CMAKE_CURRENT_BINARY_DIR}/deps/m68kops.c)
+target_compile_options(${PROJECT_NAME} PRIVATE ${FLAGS})
+target_compile_options(${PROJECT_NAME} PRIVATE $<$<COMPILE_LANGUAGE:CXX>:-std=gnu++11 -fpermissive>)
+target_include_directories(${PROJECT_NAME} PRIVATE ${INC})
+target_link_libraries(${PROJECT_NAME} cross2dui ${LDFLAGS})
+# include libcross2d targets
+include(${CMAKE_SOURCE_DIR}/libcross2dui/libcross2d/Targets.cmake)
+
+# fba deps
+find_package(Perl REQUIRED)
+message(STATUS "PERL_EXECUTABLE: ${PERL_EXECUTABLE}")
+
+add_custom_target(${PROJECT_NAME}.deps
+        COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_CURRENT_BINARY_DIR}/deps
+        COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/deps
+        # driverlist.h
+        COMMAND ${PERL_EXECUTABLE} ${CMAKE_SOURCE_DIR}/cores/fba/src/dep/scripts/gamelist.pl -o ${CMAKE_CURRENT_BINARY_DIR}/deps/driverlist.h -l ${CMAKE_CURRENT_BINARY_DIR}/deps/gamelist.txt ${SRC_DRV}
+        # ctv.h
+        COMMAND ${CMAKE_CXX_COMPILER} ${CMAKE_SOURCE_DIR}/cores/fba/src/burn/drv/capcom/ctv_make.cpp -o ${CMAKE_CURRENT_BINARY_DIR}/deps/ctv_make
+        COMMAND ${CMAKE_CURRENT_BINARY_DIR}/deps/ctv_make > ${CMAKE_CURRENT_BINARY_DIR}/deps/ctv.h
+        # pgm sprite
+        COMMAND ${CMAKE_CXX_COMPILER} ${CMAKE_SOURCE_DIR}/cores/fba/src/burn/drv/pgm/pgm_sprite_create.cpp -o ${CMAKE_CURRENT_BINARY_DIR}/deps/pgm_sprite_create
+        COMMAND ${CMAKE_CURRENT_BINARY_DIR}/deps/pgm_sprite_create > ${CMAKE_CURRENT_BINARY_DIR}/deps/pgm_sprite.h
+        # func headers
+        COMMAND perl ${CMAKE_SOURCE_DIR}/cores/fba/src/dep/scripts/toa_gp9001_func.pl -o ${CMAKE_CURRENT_BINARY_DIR}/deps/toa_gp9001_func.h
+        COMMAND perl ${CMAKE_SOURCE_DIR}/cores/fba/src/dep/scripts/neo_sprite_func.pl -o ${CMAKE_CURRENT_BINARY_DIR}/deps/neo_sprite_func.h
+        COMMAND perl ${CMAKE_SOURCE_DIR}/cores/fba/src/dep/scripts/cave_tile_func.pl -o ${CMAKE_CURRENT_BINARY_DIR}/deps/cave_tile_func.h
+        COMMAND perl ${CMAKE_SOURCE_DIR}/cores/fba/src/dep/scripts/cave_sprite_func.pl -o ${CMAKE_CURRENT_BINARY_DIR}/deps/cave_sprite_func.h
+        COMMAND perl ${CMAKE_SOURCE_DIR}/cores/fba/src/dep/scripts/psikyo_tile_func.pl -o ${CMAKE_CURRENT_BINARY_DIR}/deps/psikyo_tile_func.h
+        )
+add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}.deps)
+
+# add extra data to libcross2d default targets data (nestopia database and zipped skin)
+add_custom_target(${PROJECT_NAME}.data.extra
+        DEPENDS ${PROJECT_NAME}.data
+        # make dummy directory for user files
+        COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/data_read_write/roms
+        COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/data_read_write/titles
+        COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/data_read_write/previews
+        COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/data_read_write/icons
+        COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/data_read_write/hiscores
+        COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/hiscores
+        # copy hiscore database from pfba
+        COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/pfba/data/hiscore.dat ${CMAKE_CURRENT_BINARY_DIR}/hiscores/
+        COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/pfba/data/hiscore.dat ${CMAKE_CURRENT_BINARY_DIR}/data_read_write/hiscores/
+        # compress skin
+        COMMAND cd ${CMAKE_CURRENT_BINARY_DIR}/data_read_write/skins/default && ${ZIP} -ru ${CMAKE_CURRENT_BINARY_DIR}/data_read_write/skins/default.zip .
+        COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_BINARY_DIR}/data_read_write/skins/default.zip ${CMAKE_CURRENT_BINARY_DIR}/skins/
+        # remove non-zipped skin from data directory (used for program execution from cmake build) before zipping it for release
+        COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_CURRENT_BINARY_DIR}/data_read_write/skins/default
+        )
+add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}.data.extra)
+
+if (BUILD_WINDOWS)
+    # TODO: fix curl/nghttp2 static linking...
+    add_custom_target(${PROJECT_NAME}.data.extra.win64
+            DEPENDS ${PROJECT_NAME}.data.extra
+            COMMAND ${CMAKE_COMMAND} -E copy "/msys64/mingw64/bin/libwinpthread-1.dll" ${CMAKE_CURRENT_BINARY_DIR}/
+            COMMAND ${CMAKE_COMMAND} -E copy "/msys64/mingw64/bin/libnghttp2-14.dll" ${CMAKE_CURRENT_BINARY_DIR}/
+            COMMAND ${CMAKE_COMMAND} -E copy "/msys64/mingw64/bin/libunistring-2.dll" ${CMAKE_CURRENT_BINARY_DIR}/
+            COMMAND ${CMAKE_COMMAND} -E copy "/msys64/mingw64/bin/libstdc++-6.dll" ${CMAKE_CURRENT_BINARY_DIR}/
+            COMMAND ${CMAKE_COMMAND} -E copy "/msys64/mingw64/bin/libiconv-2.dll" ${CMAKE_CURRENT_BINARY_DIR}/
+            COMMAND ${CMAKE_COMMAND} -E copy "/msys64/mingw64/bin/libgcc_s_seh-1.dll" ${CMAKE_CURRENT_BINARY_DIR}/
+            COMMAND ${CMAKE_COMMAND} -E copy "/msys64/mingw64/bin/libwinpthread-1.dll" ${CMAKE_CURRENT_BINARY_DIR}/data_read_write/
+            COMMAND ${CMAKE_COMMAND} -E copy "/msys64/mingw64/bin/libnghttp2-14.dll" ${CMAKE_CURRENT_BINARY_DIR}/data_read_write/
+            COMMAND ${CMAKE_COMMAND} -E copy "/msys64/mingw64/bin/libunistring-2.dll" ${CMAKE_CURRENT_BINARY_DIR}/data_read_write/
+            COMMAND ${CMAKE_COMMAND} -E copy "/msys64/mingw64/bin/libstdc++-6.dll" ${CMAKE_CURRENT_BINARY_DIR}/data_read_write/
+            COMMAND ${CMAKE_COMMAND} -E copy "/msys64/mingw64/bin/libiconv-2.dll" ${CMAKE_CURRENT_BINARY_DIR}/data_read_write/
+            COMMAND ${CMAKE_COMMAND} -E copy "/msys64/mingw64/bin/libgcc_s_seh-1.dll" ${CMAKE_CURRENT_BINARY_DIR}/data_read_write/
+            )
+    add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}.data.extra.win64)
+endif ()
+
+#[[
 ###########################
 # LINUX (ubuntu, release)
 ###########################
@@ -510,3 +559,4 @@ if (BUILD_SWITCH)
             COMMAND cd ${CMAKE_BINARY_DIR}/release && zip -r ../${PROJECT_NAME}-${PFBA_VERSION_MAJOR}.${PFBA_VERSION_MINOR}_switch.zip pfba && cd ${CMAKE_BINARY_DIR}
             )
 endif (BUILD_SWITCH)
+]]
