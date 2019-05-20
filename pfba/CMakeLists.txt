@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.3)
 #set(CMAKE_VERBOSE_MAKEFILE ON)
 
 project(pfba)
@@ -354,6 +354,8 @@ elseif (BUILD_LINUX)
     ##############
     list(APPEND FLAGS -DLSB_FIRST)
     if (BUILD_WINDOWS)
+        list(REMOVE_ITEM SRC_BURNER ${CMAKE_SOURCE_DIR}/cores/fba/src/burner/ioapi.c)
+        list(APPEND LDFLAGS z)
     else ()
         list(APPEND FLAGS -D__fastcall=)
     endif ()
@@ -378,8 +380,6 @@ find_package(Perl REQUIRED)
 add_custom_target(${PROJECT_NAME}.deps
         COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_CURRENT_BINARY_DIR}/deps
         COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/deps
-        # driverlist.h
-        COMMAND ${PERL_EXECUTABLE} ${CMAKE_SOURCE_DIR}/cores/fba/src/dep/scripts/gamelist.pl -o ${CMAKE_CURRENT_BINARY_DIR}/deps/driverlist.h -l ${CMAKE_CURRENT_BINARY_DIR}/deps/gamelist.txt ${SRC_DRV}
         # ctv.h
         COMMAND ${CMAKE_CXX_COMPILER} ${CMAKE_SOURCE_DIR}/cores/fba/src/burn/drv/capcom/ctv_make.cpp -o ${CMAKE_CURRENT_BINARY_DIR}/deps/ctv_make
         COMMAND ${CMAKE_CURRENT_BINARY_DIR}/deps/ctv_make > ${CMAKE_CURRENT_BINARY_DIR}/deps/ctv.h
@@ -394,6 +394,16 @@ add_custom_target(${PROJECT_NAME}.deps
         COMMAND perl ${CMAKE_SOURCE_DIR}/cores/fba/src/dep/scripts/psikyo_tile_func.pl -o ${CMAKE_CURRENT_BINARY_DIR}/deps/psikyo_tile_func.h
         )
 add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}.deps)
+# driverlist.h
+# TODO: crap, mingw64 perl can't process this on windows...
+if (BUILD_WINDOWS)
+    target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/pfba/data/windows)
+else ()
+    add_custom_target(${PROJECT_NAME}.deps.gamelist
+            COMMAND ${PERL_EXECUTABLE} ${CMAKE_SOURCE_DIR}/cores/fba/src/dep/scripts/gamelist.pl -o ${CMAKE_CURRENT_BINARY_DIR}/deps/driverlist.h -l ${CMAKE_CURRENT_BINARY_DIR}/deps/gamelist.txt ${SRC_DRV}
+            )
+    add_dependencies(${PROJECT_NAME}.deps ${PROJECT_NAME}.deps.gamelist)
+endif ()
 
 # add extra data to libcross2d default targets data (nestopia database and zipped skin)
 add_custom_target(${PROJECT_NAME}.data.extra
