@@ -56,6 +56,7 @@ int main(int argc, char **argv) {
     ui->getIo()->create(cfg->getHomePath() + "cache");
     ui->getIo()->create(cfg->getHomePath() + "titles");
     ui->getIo()->create(cfg->getHomePath() + "previews");
+    ui->getIo()->create(cfg->getHomePath() + "mixes");
     ui->setConfig(cfg);
 
     // skin
