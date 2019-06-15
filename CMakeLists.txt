@@ -8,6 +8,8 @@ set(BUILD_SWITCH OFF CACHE BOOL "Build with Nintendo Switch support")
 set(BUILD_VITA OFF CACHE BOOL "Build with PSP2 support")
 set(BUILD_3DS OFF CACHE BOOL "Build with 3DS support")
 
+set(OPTION_SSCRAP OFF CACHE BOOL "Build with screenscrapper support")
+
 if (BUILD_WINDOWS)
     set(BUILD_LINUX ON)
 endif (BUILD_WINDOWS)
@@ -17,10 +19,14 @@ if (BUILD_LINUX)
     set(OPTION_FULLSCREEN ON CACHE BOOL "Add switch to fullscreen option")
 endif (BUILD_LINUX)
 
+include(libcross2dui/libcross2d/Toolchain.cmake)
+
 set(UPDATE_CONFIG ON CACHE BOOL "Force config file updating")
 
-# add ssscrap (screenscrapper scrapper!) library
-add_subdirectory(ssscrap)
+if (OPTION_SSCRAP)
+    # add ssscrap (screenscrapper scrapper!) library
+    add_subdirectory(ssscrap)
+endif ()
 
 # add libcross2d/libcross2dui library. If you want to port pfba to another platform,
 # you should (may) only need to port libcross2d library.

@@ -72,6 +72,11 @@ elseif (BUILD_SWITCH)
     # SWITCH PLATORM
     #####################
     list(APPEND NESTOPIA_SRC sources/switch/port.c)
+elseif (BUILD_3DS)
+    #####################
+    # 3DS PLATORM
+    #####################
+    list(APPEND NESTOPIA_SRC sources/3ds/port.c)
 elseif (BUILD_LINUX)
     #####################
     # SDL2 PLATORM

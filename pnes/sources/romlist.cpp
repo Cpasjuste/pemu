@@ -2,6 +2,7 @@
 // Created by cpasjuste on 29/05/18.
 //
 
+#include <strings.h>
 #include "c2dui.h"
 #include "romlist.h"
 
