@@ -281,6 +281,8 @@ set(FLAGS
         -Wno-unused-variable -Wno-unused-but-set-variable -Wno-sequence-point
         )
 
+set(LDFLAGS minizip)
+
 #################
 # PSP2 (ps vita)
 #################
@@ -303,7 +305,7 @@ if (BUILD_VITA)
                 -fsingle-precision-constant
                 )
     endif (BUILD_DEBUG)
-    set(LDFLAGS ScePower_stub)
+    list(APPEND LDFLAGS ScePower_stub)
 elseif (BUILD_PS3)
     ##############
     # PS3
@@ -312,7 +314,7 @@ elseif (BUILD_PS3)
             -D__PS3__
             -DNO_KEYBOARD -D__CELLOS_LV2__ -DUSE_FILE32API
             -mhard-float -ffunction-sections -fdata-sections)
-    set(LDFLAGS
+    list(APPEND LDFLAGS
             ${PSL1GHT}/ppu/lib/libpngdec.a
             ${PSL1GHT}/portlibs/ppu/lib/libfreetype.a
             ${PSL1GHT}/portlibs/ppu/lib/libpng.a
@@ -335,7 +337,7 @@ elseif (BUILD_3DS)
     list(APPEND FLAGS -DARM11 -D_3DS -D__3DS__
             -DNO_KEYBOARD -D__PFBA_ARM__ -DUSE_FILE32API -DLSB_FIRST
             -ffunction-sections -fomit-frame-pointer)
-    set(LDFLAGS
+    list(APPEND LDFLAGS
             ${DEVKITPRO}/portlibs/armv6k/lib/libpng.a
             ${DEVKITPRO}/portlibs/armv6k/lib/libz.a
             ${DEVKITPRO}/libctru/lib/libcitro3d.a
@@ -359,6 +361,21 @@ elseif (BUILD_LINUX)
     else ()
         list(APPEND FLAGS -D__fastcall=)
     endif ()
+    if (BUILD_MIPS)
+        list(REMOVE_ITEM LDFLAGS minizip)
+        list(REMOVE_ITEM DRV_DIRS ${CMAKE_SOURCE_DIR}/cores/fba/src/burn/drv/midway)
+        list(REMOVE_ITEM SRC_DRV
+                ${CMAKE_SOURCE_DIR}/cores/fba/src/burn/drv/midway/d_kinst.cpp
+                ${CMAKE_SOURCE_DIR}/cores/fba/src/burn/drv/midway/d_wunit.cpp
+                ${CMAKE_SOURCE_DIR}/cores/fba/src/burn/drv/midway/midwunit.cpp
+                )
+        list(REMOVE_ITEM SRC_CPU
+                ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/mips3/mips3.cpp
+                ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/mips3/cop0.cpp
+                ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/mips3/cop1.cpp
+                ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/mips3_intf.cpp
+                )
+    endif ()
 endif (BUILD_VITA)
 
 # source files
@@ -371,20 +388,20 @@ add_executable(${PROJECT_NAME} ${SRC} ${CMAKE_CURRENT_BINARY_DIR}/deps/m68kops.c
 target_compile_options(${PROJECT_NAME} PRIVATE ${FLAGS})
 target_compile_options(${PROJECT_NAME} PRIVATE $<$<COMPILE_LANGUAGE:CXX>:-std=gnu++11 -fpermissive>)
 target_include_directories(${PROJECT_NAME} PRIVATE ${INC})
-target_link_libraries(${PROJECT_NAME} cross2dui ${LDFLAGS} minizip)
+target_link_libraries(${PROJECT_NAME} cross2dui ${LDFLAGS})
 # include libcross2d targets
 include(${CMAKE_SOURCE_DIR}/libcross2dui/libcross2d/Targets.cmake)
 
 # fba deps
 find_package(Perl REQUIRED)
 add_custom_target(${PROJECT_NAME}.deps
-        COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_CURRENT_BINARY_DIR}/deps
+        #COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_CURRENT_BINARY_DIR}/deps
         COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/deps
         # ctv.h
-        COMMAND ${CMAKE_CXX_COMPILER} ${CMAKE_SOURCE_DIR}/cores/fba/src/burn/drv/capcom/ctv_make.cpp -o ${CMAKE_CURRENT_BINARY_DIR}/deps/ctv_make
+        COMMAND g++ ${CMAKE_SOURCE_DIR}/cores/fba/src/burn/drv/capcom/ctv_make.cpp -o ${CMAKE_CURRENT_BINARY_DIR}/deps/ctv_make
         COMMAND ${CMAKE_CURRENT_BINARY_DIR}/deps/ctv_make > ${CMAKE_CURRENT_BINARY_DIR}/deps/ctv.h
         # pgm sprite
-        COMMAND ${CMAKE_CXX_COMPILER} ${CMAKE_SOURCE_DIR}/cores/fba/src/burn/drv/pgm/pgm_sprite_create.cpp -o ${CMAKE_CURRENT_BINARY_DIR}/deps/pgm_sprite_create
+        COMMAND g++ ${CMAKE_SOURCE_DIR}/cores/fba/src/burn/drv/pgm/pgm_sprite_create.cpp -o ${CMAKE_CURRENT_BINARY_DIR}/deps/pgm_sprite_create
         COMMAND ${CMAKE_CURRENT_BINARY_DIR}/deps/pgm_sprite_create > ${CMAKE_CURRENT_BINARY_DIR}/deps/pgm_sprite.h
         # func headers
         COMMAND perl ${CMAKE_SOURCE_DIR}/cores/fba/src/dep/scripts/toa_gp9001_func.pl -o ${CMAKE_CURRENT_BINARY_DIR}/deps/toa_gp9001_func.h
@@ -423,6 +440,12 @@ add_custom_target(${PROJECT_NAME}.data.extra
         COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_BINARY_DIR}/data_read_write/skins/default.zip ${CMAKE_CURRENT_BINARY_DIR}/skins/
         # remove non-zipped skin from data directory (used for program execution from cmake build) before zipping it for release
         COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_CURRENT_BINARY_DIR}/data_read_write/skins/default
+
+        # compress default_320x240 skin
+        COMMAND cd ${CMAKE_CURRENT_BINARY_DIR}/data_read_write/skins/default_320x240 && ${ZIP} -ru ${CMAKE_CURRENT_BINARY_DIR}/data_read_write/skins/default_320x240.zip .
+        COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_BINARY_DIR}/data_read_write/skins/default_320x240.zip ${CMAKE_CURRENT_BINARY_DIR}/skins/
+        # remove non-zipped skin from data directory (used for program execution from cmake build) before zipping it for release
+        COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_CURRENT_BINARY_DIR}/data_read_write/skins/default_320x240
         )
 add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}.data.extra)
 

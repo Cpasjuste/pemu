@@ -81,6 +81,9 @@ elseif (BUILD_LINUX)
     #####################
     # SDL2 PLATORM
     #####################
+    if (BUILD_MIPS)
+        list(REMOVE_ITEM NESTOPIA_LDFLAGS minizip)
+    endif ()
     if (BUILD_WINDOWS)
         #list(APPEND NESTOPIA_CFLAGS -D_MINGW)
     endif (BUILD_WINDOWS)

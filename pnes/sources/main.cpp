@@ -46,7 +46,7 @@ UIRomList *uiRomList;
 
 int main(int argc, char **argv) {
 
-    ui = new UIMain(Vector2f(320, 240));
+    ui = new UIMain(Vector2f(C2D_SCREEN_WIDTH, C2D_SCREEN_HEIGHT));
 
     // load configuration
     int pnes_version = (__PNES_VERSION_MAJOR__ * 100) + __PNES_VERSION_MINOR__;
