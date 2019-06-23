@@ -286,7 +286,7 @@ set(LDFLAGS minizip)
 #################
 # PSP2 (ps vita)
 #################
-if (BUILD_VITA)
+if (PLATFORM_VITA)
     #list(APPEND INC pfba/cpu/cyclone)
     #list(APPEND SRC_PFBA pfba/cpu/cyclone/Cyclone.s)
     list(APPEND FLAGS -DNO_KEYBOARD -DBUILD_C68K -DUSE_FILE32API -DLSB_FIRST)
@@ -306,7 +306,7 @@ if (BUILD_VITA)
                 )
     endif (BUILD_DEBUG)
     list(APPEND LDFLAGS ScePower_stub)
-elseif (BUILD_PS3)
+elseif (PLATFORM_PS3)
     ##############
     # PS3
     ##############
@@ -327,7 +327,7 @@ elseif (BUILD_PS3)
             ${PSL1GHT}/ppu/lib/libio.a
             ${PSL1GHT}/ppu/lib/libaudio.a
             ${PSL1GHT}/portlibs/ppu/lib/libz.a)
-elseif (BUILD_3DS)
+elseif (PLATFORM_3DS)
     ##############
     # 3DS
     ##############
@@ -343,25 +343,25 @@ elseif (BUILD_3DS)
             ${DEVKITPRO}/libctru/lib/libcitro3d.a
             ${DEVKITPRO}/libctru/lib/libctru.a
             m)
-elseif (BUILD_SWITCH)
+elseif (PLATFORM_SWITCH)
     ##############
     # NX (SWITCH)
     ##############
     list(APPEND FLAGS
             -DNO_KEYBOARD -DUSE_FILE32API -DLSB_FIRST
             -ffunction-sections -fomit-frame-pointer)
-elseif (BUILD_LINUX)
+elseif (PLATFORM_LINUX)
     ##############
     # SDL2
     ##############
     list(APPEND FLAGS -DLSB_FIRST)
-    if (BUILD_WINDOWS)
+    if (PLATFORM_WINDOWS)
         list(REMOVE_ITEM SRC_BURNER ${CMAKE_SOURCE_DIR}/cores/fba/src/burner/ioapi.c)
         list(APPEND LDFLAGS z)
     else ()
         list(APPEND FLAGS -D__fastcall=)
     endif ()
-    if (BUILD_MIPS)
+    if (PLATFORM_LDK)
         list(REMOVE_ITEM LDFLAGS minizip)
         list(REMOVE_ITEM DRV_DIRS ${CMAKE_SOURCE_DIR}/cores/fba/src/burn/drv/midway)
         list(REMOVE_ITEM SRC_DRV
@@ -376,7 +376,7 @@ elseif (BUILD_LINUX)
                 ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/mips3_intf.cpp
                 )
     endif ()
-endif (BUILD_VITA)
+endif (PLATFORM_VITA)
 
 # source files
 set(SRC ${SRC_PFBA} ${SRC_CPU} ${SRC_DRV} ${SRC_BURN} ${SRC_BURNER} ${SRC_INTF} ${SRC_7Z})
@@ -413,7 +413,7 @@ add_custom_target(${PROJECT_NAME}.deps
 add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}.deps)
 # driverlist.h
 # TODO: crap, mingw64 perl can't process this on windows...
-if (BUILD_WINDOWS)
+if (PLATFORM_WINDOWS)
     target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/pfba/data/windows)
 else ()
     add_custom_target(${PROJECT_NAME}.deps.gamelist
@@ -449,7 +449,7 @@ add_custom_target(${PROJECT_NAME}.data.extra
         )
 add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}.data.extra)
 
-if (BUILD_WINDOWS)
+if (PLATFORM_WINDOWS)
     # TODO: fix curl/nghttp2 static linking...
     add_custom_target(${PROJECT_NAME}.data.extra.win64
             DEPENDS ${PROJECT_NAME}.data.extra
