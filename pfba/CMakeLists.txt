@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.3)
+cmake_minimum_required(VERSION 3.0)
 #set(CMAKE_VERBOSE_MAKEFILE ON)
 
 project(pfba)
@@ -281,7 +281,9 @@ set(FLAGS
         -Wno-unused-variable -Wno-unused-but-set-variable -Wno-sequence-point
         )
 
-set(LDFLAGS minizip)
+if (NOT OPTION_BUILTIN_MINIZIP)
+    set(LDFLAGS minizip)
+endif ()
 
 #################
 # PSP2 (ps vita)
@@ -354,6 +356,7 @@ elseif (PLATFORM_LINUX)
     ##############
     # SDL2
     ##############
+    #message(FATAL_ERROR "NOO")
     list(APPEND FLAGS -DLSB_FIRST)
     if (PLATFORM_WINDOWS)
         list(REMOVE_ITEM SRC_BURNER ${CMAKE_SOURCE_DIR}/cores/fba/src/burner/ioapi.c)
@@ -362,7 +365,6 @@ elseif (PLATFORM_LINUX)
         list(APPEND FLAGS -D__fastcall=)
     endif ()
     if (PLATFORM_LDK)
-        list(REMOVE_ITEM LDFLAGS minizip)
         list(REMOVE_ITEM DRV_DIRS ${CMAKE_SOURCE_DIR}/cores/fba/src/burn/drv/midway)
         list(REMOVE_ITEM SRC_DRV
                 ${CMAKE_SOURCE_DIR}/cores/fba/src/burn/drv/midway/d_kinst.cpp
