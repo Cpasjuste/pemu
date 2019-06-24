@@ -6,7 +6,7 @@ cmake_minimum_required(VERSION 3.0)
 ####################
 set(PLATFORM_LINUX OFF CACHE BOOL "Linux platform target")
 set(PLATFORM_WINDOWS OFF CACHE BOOL "Windows platform target (msys/mingw64)")
-set(PLATFORM_RPI3 ON CACHE BOOL "RIP3 platform target")
+set(PLATFORM_RPI3 OFF CACHE BOOL "RIP3 platform target")
 set(PLATFORM_SWITCH OFF CACHE BOOL "Nintendo Switch platform target")
 set(PLATFORM_3DS OFF CACHE BOOL "Nintendo 3DS platform target")
 set(PLATFORM_VITA OFF CACHE BOOL "Sony PS Vita platform target")
@@ -22,7 +22,7 @@ set(OPTION_SDL2_GL OFF CACHE BOOL "SDL2 support (OpenGL 3.3)")
 set(OPTION_SDL2_GLES2 OFF CACHE BOOL "SDL2 support (OpenGLES 2.0)")
 set(OPTION_SDL2_SOFT OFF CACHE BOOL "SDL2 support (software renderer)")
 set(OPTION_BUILTIN_LIBCONFIG OFF CACHE BOOL "Build libconfig from sources")
-set(OPTION_BUILTIN_MINIZIP ON CACHE BOOL "Build libconfig from sources")
+set(OPTION_BUILTIN_MINIZIP OFF CACHE BOOL "Build libconfig from sources")
 set(OPTION_RECALBOX OFF CACHE BOOL "Build from recalbox buildroot")
 ####################
 # BUILD OPTIONS
@@ -31,10 +31,6 @@ set(OPTION_RECALBOX OFF CACHE BOOL "Build from recalbox buildroot")
 # add libcross2d/libcross2dui library. If you want to port pfba to another platform,
 # you should (may) only need to port libcross2d library.
 add_subdirectory(libcross2dui)
-
-if (PLATFORM_LINUX)
-    message(FATAL_ERROR "pemu cmake: LINUX")
-endif ()
 
 set(OPTION_SSCRAP OFF CACHE BOOL "Build with screenscrapper support")
 set(UPDATE_CONFIG ON CACHE BOOL "Force config file updating")

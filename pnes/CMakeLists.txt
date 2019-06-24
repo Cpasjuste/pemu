@@ -62,32 +62,32 @@ file(GLOB PNES_SRC sources/*.c*)
 #####################
 # PLATORM SPECIFIC
 #####################
-if (BUILD_VITA)
+if (PLATFORM_VITA)
     #####################
     # PS VITA PLATORM
     #####################
     list(APPEND NESTOPIA_LDFLAGS ScePower_stub)
-elseif (BUILD_SWITCH)
+elseif (PLATFORM_SWITCH)
     #####################
     # SWITCH PLATORM
     #####################
     list(APPEND NESTOPIA_SRC sources/switch/port.c)
-elseif (BUILD_3DS)
+elseif (PLATFORM_3DS)
     #####################
     # 3DS PLATORM
     #####################
     list(APPEND NESTOPIA_SRC sources/3ds/port.c)
-elseif (BUILD_LINUX)
+elseif (PLATFORM_LINUX)
     #####################
     # SDL2 PLATORM
     #####################
-    if (BUILD_MIPS)
+    if (PLATFORM_LDK)
         list(REMOVE_ITEM NESTOPIA_LDFLAGS minizip)
     endif ()
-    if (BUILD_WINDOWS)
+    if (PLATFORM_WINDOWS)
         #list(APPEND NESTOPIA_CFLAGS -D_MINGW)
-    endif (BUILD_WINDOWS)
-endif (BUILD_VITA)
+    endif (PLATFORM_WINDOWS)
+endif (PLATFORM_VITA)
 
 #####################
 # pnes executable
@@ -126,7 +126,7 @@ add_custom_target(${PROJECT_NAME}.data.extra
         )
 add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}.data.extra)
 
-if (BUILD_WINDOWS)
+if (PLATFORM_WINDOWS)
     # TODO: fix curl/nghttp2 static linking...
     add_custom_target(${PROJECT_NAME}.data.extra.win64
             DEPENDS ${PROJECT_NAME}.data.extra

@@ -6,15 +6,15 @@ project(psnes)
 ##############
 # SNES9X
 ##############
-set(BUILD_SOFT_SCALERS OFF CACHE BOOL "Build with software scalers support")
-set(BUILD_SOUND ON CACHE BOOL "Build with audio support")
-set(BUILD_SCREENSHOT ON CACHE BOOL "Build with screenshot support")
-set(BUILD_NETPLAY OFF CACHE BOOL "Build with screenshot support")
-set(BUILD_GAMEPAD ON CACHE BOOL "Build with gamepad support")
-set(BUILD_GZIP ON CACHE BOOL "Build with gzip support")
-set(BUILD_ZIP ON CACHE BOOL "Build with zip support")
-set(BUILD_JMA OFF CACHE BOOL "Build with jma support")
-set(BUILD_DEBUGGER OFF CACHE BOOL "Build with debugger support")
+set(OPTION_SOFT_SCALERS OFF CACHE BOOL "Build with software scalers support")
+set(OPTION_SOUND ON CACHE BOOL "Build with audio support")
+set(OPTION_SCREENSHOT ON CACHE BOOL "Build with screenshot support")
+set(OPTION_NETPLAY OFF CACHE BOOL "Build with screenshot support")
+set(OPTION_GAMEPAD ON CACHE BOOL "Build with gamepad support")
+set(OPTION_GZIP ON CACHE BOOL "Build with gzip support")
+set(OPTION_ZIP ON CACHE BOOL "Build with zip support")
+set(OPTION_JMA OFF CACHE BOOL "Build with jma support")
+set(OPTION_DEBUGGER OFF CACHE BOOL "Build with debugger support")
 
 set(SNES9X_INC
         ${CMAKE_SOURCE_DIR}/cores/snes9x
@@ -64,37 +64,37 @@ set(SNES9X_LDFLAGS m z)
 #####################
 # OPTIONS
 #####################
-if (BUILD_SOFT_SCALERS)
+if (OPTION_SOFT_SCALERS)
     file(GLOB SNES9X_SCALERS_SRC ${CMAKE_SOURCE_DIR}/cores/snes9x/filter/*.c*)
     list(APPEND SNES9X_SRC ${SNES9X_SCALERS_SRC})
     list(APPEND SNES9X_CFLAGS -D__SOFT_SCALERS__)
-endif (BUILD_SOFT_SCALERS)
-if (BUILD_SOUND)
+endif (OPTION_SOFT_SCALERS)
+if (OPTION_SOUND)
 else ()
     list(APPEND SNES9X_CFLAGS -DNOSOUND)
-endif (BUILD_SOUND)
-if (BUILD_SCREENSHOT)
-endif (BUILD_SCREENSHOT)
-if (BUILD_NETPLAY)
-endif (BUILD_NETPLAY)
-if (BUILD_GAMEPAD)
+endif (OPTION_SOUND)
+if (OPTION_SCREENSHOT)
+endif (OPTION_SCREENSHOT)
+if (OPTION_NETPLAY)
+endif (OPTION_NETPLAY)
+if (OPTION_GAMEPAD)
     list(APPEND SNES9X_CFLAGS -DJOYSTICK_SUPPORT)
-endif (BUILD_GAMEPAD)
-if (BUILD_GZIP)
+endif (OPTION_GAMEPAD)
+if (OPTION_GZIP)
     list(APPEND SNES9X_CFLAGS -DZLIB)
-endif (BUILD_GZIP)
-if (BUILD_ZIP)
+endif (OPTION_GZIP)
+if (OPTION_ZIP)
     # use libminizip
     list(APPEND SNES9X_LDFLAGS minizip)
     list(APPEND SNES9X_CFLAGS -DUNZIP_SUPPORT -DSYSTEM_ZIP)
-endif (BUILD_ZIP)
-if (BUILD_JMA)
+endif (OPTION_ZIP)
+if (OPTION_JMA)
     set(JMA_INC ${CMAKE_SOURCE_DIR}/cores/snes9x/jma)
     file(GLOB JMA_SRC ${CMAKE_SOURCE_DIR}/cores/snes9x/jma/*.c*)
     list(APPEND SNES9X_CFLAGS -DJMA_SUPPORT)
-endif (BUILD_JMA)
-if (BUILD_DEBUGGER)
-endif (BUILD_DEBUGGER)
+endif (OPTION_JMA)
+if (OPTION_DEBUGGER)
+endif (OPTION_DEBUGGER)
 
 ##############
 # psnes
@@ -105,21 +105,17 @@ file(GLOB PSNES_SRC psnes/*.c*)
 #####################
 # PLATORM SPECIFIC
 #####################
-if (BUILD_PSP2)
+if (PLATFORM_PSP2)
     #####################
     # PSP2 PLATORM
     #####################
     list(APPEND SNES9X_LDFLAGS ScePower_stub)
-elseif (BUILD_SWITCH)
+elseif (PLATFORM_SWITCH)
     #####################
     # NX PLATORM
     #####################
     list(APPEND SNES9X_CFLAGS -Wno-pedantic -Wno-missing-field-initializers -Wno-format-truncation)
-elseif (BUILD_SDL2)
-    #####################
-    # SDL2 PLATORM
-    #####################
-endif (BUILD_PSP2)
+endif ()
 
 #####################
 # snes9x executable
@@ -141,7 +137,7 @@ add_dependencies(${PROJECT_NAME}.elf ${PROJECT_NAME}.data)
 ###########################
 # LINUX (ubuntu, release)
 ###########################
-if (BUILD_LINUX)
+if (PLATFORM_LINUX)
     add_custom_target(${PROJECT_NAME}_linux_release.zip
             DEPENDS ${PROJECT_NAME}.elf
             COMMAND rm -rf ${CMAKE_BINARY_DIR}/release/psnes
@@ -160,12 +156,12 @@ if (BUILD_LINUX)
             COMMAND rm -rf ${CMAKE_BINARY_DIR}/${PROJECT_NAME}-${PSNES_VERSION_MAJOR}.${PSNES_VERSION_MINOR}_linux.zip
             COMMAND cd ${CMAKE_BINARY_DIR}/release && zip -r ../${PROJECT_NAME}-${PSNES_VERSION_MAJOR}.${PSNES_VERSION_MINOR}_linux.zip psnes && cd ${CMAKE_BINARY_DIR}
             )
-endif (BUILD_LINUX)
+endif (PLATFORM_LINUX)
 
 #####################
 # PSP2 (vita) target
 #####################
-if (BUILD_PSP2)
+if (PLATFORM_PSP2)
     vita_create_self(${PROJECT_NAME}.self ${PROJECT_NAME}.elf)
     add_custom_target(${PROJECT_NAME}_vita_release.zip
             DEPENDS ${PROJECT_NAME}.self
@@ -178,12 +174,12 @@ if (BUILD_PSP2)
             #COMMAND cp -f ${CMAKE_SOURCE_DIR}/psnes/data/databases/Super_Nintendo_Entertainment_System-hyperspin.xml ${CMAKE_BINARY_DIR}/release/psnes/db.xml
             COMMAND cd ${CMAKE_BINARY_DIR}/release/psnes && zip -r ../../${PROJECT_NAME}-${PSNES_VERSION_MAJOR}.${PSNES_VERSION_MINOR}_vita.vpk . && cd ${CMAKE_BINARY_DIR}
             )
-endif (BUILD_PSP2)
+endif (PLATFORM_PSP2)
 
 #####################
 # NX (SWITCH) target
 #####################
-if (BUILD_SWITCH)
+if (PLATFORM_SWITCH)
     set_target_properties(${PROJECT_NAME}.elf PROPERTIES LINK_FLAGS "-specs=${DEVKITPRO}/libnx/switch.specs")
     add_custom_target(${PROJECT_NAME}.nro
             DEPENDS ${PROJECT_NAME}.elf
@@ -208,4 +204,4 @@ if (BUILD_SWITCH)
             COMMAND rm -rf ${CMAKE_BINARY_DIR}/${PROJECT_NAME}-${PSNES_VERSION_MAJOR}.${PSNES_VERSION_MINOR}_switch.zip
             COMMAND cd ${CMAKE_BINARY_DIR}/release && zip -r ../${PROJECT_NAME}-${PSNES_VERSION_MAJOR}.${PSNES_VERSION_MINOR}_switch.zip psnes && cd ${CMAKE_BINARY_DIR}
             )
-endif (BUILD_SWITCH)
+endif (PLATFORM_SWITCH)
