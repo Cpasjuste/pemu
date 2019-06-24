@@ -124,9 +124,9 @@ void PFBAGuiEmu::updateFb() {
         nFramesEmulated++;
         nCurrentFrame++;
         nFramesRendered++;
-        getVideo()->getTexture()->lock(nullptr, (void **) &pBurnDraw, &nBurnPitch);
+        getVideo()->lock(nullptr, (void **) &pBurnDraw, &nBurnPitch);
         BurnDrvFrame();
-        getVideo()->getTexture()->unlock();
+        getVideo()->unlock();
     }
 }
 
@@ -140,11 +140,11 @@ void PFBAGuiEmu::renderFrame(bool draw) {
         pBurnDraw = nullptr;
         if (draw) {
             nFramesRendered++;
-            getVideo()->getTexture()->lock(nullptr, (void **) &pBurnDraw, &nBurnPitch);
+            getVideo()->lock(nullptr, (void **) &pBurnDraw, &nBurnPitch);
         }
         BurnDrvFrame();
         if (draw) {
-            getVideo()->getTexture()->unlock();
+            getVideo()->unlock();
         }
 
         if (getAudio() && getAudio()->isAvailable()) {
