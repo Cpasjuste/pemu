@@ -25,6 +25,7 @@
 #include "config.h"
 #include "romlist.h"
 #include "uiStateMenu.h"
+#include "pfbaIo.h"
 
 using namespace c2d;
 using namespace c2dui;
@@ -51,6 +52,9 @@ int main(int argc, char **argv) {
     BurnLibInit();
 
     ui = new UIMain(Vector2f(C2D_SCREEN_WIDTH, C2D_SCREEN_HEIGHT));
+    // need custom io for vita and recalbox
+    auto io = new PFBAIo();
+    ui->setIo(io);
 
     // load configuration
     int version = (__PFBA_VERSION_MAJOR__ * 100) + __PFBA_VERSION_MINOR__;
@@ -80,7 +84,7 @@ int main(int argc, char **argv) {
     buttons.emplace_back(KEY_JOY_FIRE6_DEFAULT, "R");
     buttons.emplace_back(KEY_JOY_COIN1_DEFAULT, "SELECT");
     buttons.emplace_back(KEY_JOY_START1_DEFAULT, "START");
-    skin = new Skin("app0:/", buttons);
+    skin = new Skin(ui, buttons);
 #elif __SWITCH__
     // see c2d.h for key id
     buttons.emplace_back(KEY_JOY_UP_DEFAULT, "UP");

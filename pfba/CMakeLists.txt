@@ -289,16 +289,18 @@ endif ()
 # PSP2 (ps vita)
 #################
 if (PLATFORM_VITA)
+    set(TITLE_ID "PFBA00001" CACHE STRING "" FORCE)
     #list(APPEND INC pfba/cpu/cyclone)
     #list(APPEND SRC_PFBA pfba/cpu/cyclone/Cyclone.s)
     list(APPEND FLAGS -DNO_KEYBOARD -DBUILD_C68K -DUSE_FILE32API -DLSB_FIRST)
     #-D__PFBA_ARM__
     if (BUILD_DEBUG)
         list(APPEND FLAGS
-                -D__PSP2_DEBUG__ -g # TODO: cyclone arm asm core not working without O2/O3
+                -D__fastcall= -D__PSP2_DEBUG__ -g # TODO: cyclone arm asm core not working without O2/O3
                 )
     else ()
         list(APPEND FLAGS
+                -D__fastcall=
                 -mfpu=neon -mcpu=cortex-a9 -march=armv7-a -mfloat-abi=hard -ffast-math
                 -fno-asynchronous-unwind-tables -funroll-loops
                 -mword-relocations -fno-unwind-tables -fno-optimize-sibling-calls

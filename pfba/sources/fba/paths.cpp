@@ -101,12 +101,6 @@ void BurnPathsInit() {
     mkdir(szAppHDDPath, 0777);
     //printf("szAppHDDPath: %s\n", szAppHDDPath);
 
-#ifndef __PSP2__
-    snprintf(szAppSkinPath, MAX_PATH - 1, "%s%s", szAppHomePath, "skin");
-    mkdir(szAppSkinPath, 0777);
-    //printf("szAppSkinPath: %s\n", szAppSkinPath);
-#endif
-
     snprintf(szAppEEPROMPath, MAX_PATH - 1, "%seeproms/", szAppHomePath);
     mkdir(szAppEEPROMPath, 0777);
 }

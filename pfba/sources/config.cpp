@@ -97,8 +97,8 @@ PFBAConfig::PFBAConfig(const std::string &home, int version)
     add(Option::Id::ROM_AUDIO_INTERPOLATION, "AUDIO_FM_INTERPOLATION",
         {"0", "1", "3"}, 2, Option::Id::ROM_AUDIO_FMINTERPOLATION);
 #ifdef __PSP2__
-    add(Option::Index::ROM_AUDIO_FMINTERPOLATION, "ROTATION",
-        {"OFF", "ON", "FLIP", "CAB MODE"}, 0, Option::Index::ROM_ROTATION);
+    add(Option::Id::ROM_AUDIO_FMINTERPOLATION, "ROTATION",
+        {"OFF", "ON", "FLIP", "CAB MODE"}, 0, Option::Id::ROM_ROTATION);
 #else
     add(Option::Id::ROM_AUDIO_FMINTERPOLATION, "ROTATION",
         {"OFF", "ON", "FLIP"}, 0, Option::Id::ROM_ROTATION);
