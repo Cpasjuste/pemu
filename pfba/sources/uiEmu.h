@@ -21,7 +21,7 @@ private:
 
     bool onInput(c2d::Input::Player *players) override;
 
-    void onDraw(c2d::Transform &transform, bool draw = true) override;
+    void onUpdate() override;
 
     void updateFb();
 

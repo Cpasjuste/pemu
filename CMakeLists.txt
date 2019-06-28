@@ -22,7 +22,7 @@ set(OPTION_SDL2_GL OFF CACHE BOOL "SDL2 support (OpenGL 3.3)")
 set(OPTION_SDL2_GLES2 OFF CACHE BOOL "SDL2 support (OpenGLES 2.0)")
 set(OPTION_SDL2_SOFT OFF CACHE BOOL "SDL2 support (software renderer)")
 set(OPTION_BUILTIN_LIBCONFIG OFF CACHE BOOL "Build libconfig from sources")
-set(OPTION_BUILTIN_MINIZIP ON CACHE BOOL "Build libconfig from sources")
+set(OPTION_BUILTIN_MINIZIP OFF CACHE BOOL "Build libconfig from sources")
 set(OPTION_RECALBOX_BUILDROOT OFF CACHE BOOL "Build from recalbox buildroot")
 ####################
 # BUILD OPTIONS

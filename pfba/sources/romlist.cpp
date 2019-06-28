@@ -28,7 +28,9 @@ void PFBARomList::build() {
 
     char path[MAX_PATH];
     const char *pathUppercase; // sometimes on FAT32 short files appear as all uppercase
-    bool use_icons = ui->getConfig()->get(Option::Id::GUI_SHOW_ICONS)->getIndex() == 1;
+#ifndef __PSP2__ // two slow on vita
+    bool use_icons = ui->getConfig()->get(Option::Id::GUI_SHOW_ICONS)->getValueBool();
+#endif
 
     for (unsigned int i = 0; i < nBurnDrvCount; i++) {
 
@@ -48,6 +50,7 @@ void PFBARomList::build() {
         rom->hardware = (unsigned int) BurnDrvGetHardwareCode();
         rom->state = RomState::MISSING;
 
+#if !(defined(__PSP2__) || defined(__3DS__))
         // load icon if needed, only for parent roms
         if (use_icons && !rom->parent) {
             snprintf(icon_path, 1023, "%sicons/%s.png", ui->getConfig()->getHomePath().c_str(), rom->drv_name);
@@ -60,7 +63,7 @@ void PFBARomList::build() {
                 }
             }
         }
-
+#endif
         // add rom to "ALL" game list
         hardwareList->at(0).supported_count++;
         if (rom->parent) {
@@ -230,6 +233,7 @@ void PFBARomList::build() {
         // UI
     }
 
+#if !(defined(__PSP2__) || defined(__3DS__))
     if (use_icons) {
         // set childs with no icon to parent icon
         for (auto rom : list) {
@@ -243,6 +247,7 @@ void PFBARomList::build() {
             }
         }
     }
+#endif
 
     // cleanup
     RomList::build();
