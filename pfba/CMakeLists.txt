@@ -296,12 +296,10 @@ if (PLATFORM_VITA)
     #-D__PFBA_ARM__
     if (BUILD_DEBUG)
         list(APPEND FLAGS
-                -D__fastcall= -D__PSP2_DEBUG__ -g # TODO: cyclone arm asm core not working without O2/O3
+                -D__PSP2_DEBUG__ -g # TODO: cyclone arm asm core not working without O2/O3
                 )
     else ()
         list(APPEND FLAGS
-                -D__fastcall=
-                -mfpu=neon -mcpu=cortex-a9 -march=armv7-a -mfloat-abi=hard -ffast-math
                 -fno-asynchronous-unwind-tables -funroll-loops
                 -mword-relocations -fno-unwind-tables -fno-optimize-sibling-calls
                 -mvectorize-with-neon-quad -funsafe-math-optimizations
@@ -358,7 +356,6 @@ elseif (PLATFORM_LINUX)
     ##############
     # SDL2
     ##############
-    #message(FATAL_ERROR "NOO")
     list(APPEND FLAGS -DLSB_FIRST)
     if (PLATFORM_WINDOWS)
         list(REMOVE_ITEM SRC_BURNER ${CMAKE_SOURCE_DIR}/cores/fba/src/burner/ioapi.c)
