@@ -51,7 +51,9 @@ set(NESTOPIA_LDFLAGS minizip)
 
 if (BUILD_DEBUG)
     list(APPEND NESTOPIA_CFLAGS -g -O0)
-endif (BUILD_DEBUG)
+else ()
+    list(APPEND NESTOPIA_CFLAGS -g -O3)
+endif()
 
 ##############
 # pnes

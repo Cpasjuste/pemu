@@ -281,6 +281,10 @@ set(FLAGS
         -Wno-unused-variable -Wno-unused-but-set-variable -Wno-sequence-point
         )
 
+if (NOT BUILD_DEBUG)
+    list(APPEND FLAGS -O3)
+endif ()
+
 if (NOT OPTION_BUILTIN_MINIZIP)
     set(LDFLAGS minizip)
 endif ()
@@ -469,3 +473,14 @@ if (PLATFORM_WINDOWS)
             )
     add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}.data.extra.win64)
 endif ()
+
+#############
+# install
+#############
+install(
+        FILES ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}
+        PERMISSIONS OWNER_EXECUTE OWNER_READ
+        DESTINATION bin
+)
+install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/data_read_only/ DESTINATION share/pfba)
+install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/data_read_write/ DESTINATION share/pfba)

@@ -57,7 +57,9 @@ set(SNES9X_CFLAGS
 
 if (BUILD_DEBUG)
     list(APPEND SNES9X_CFLAGS -g -O0)
-endif (BUILD_DEBUG)
+else ()
+    list(APPEND SNES9X_CFLAGS -g -O3)
+endif()
 
 set(SNES9X_LDFLAGS m z)
 

@@ -21,6 +21,16 @@ namespace c2d {
             return "ux0:/data/pfba/";
         }
 
+#elif __FREEPLAY__
+
+        std::string getHomePath() const override {
+            return "/data/pfba/";
+        }
+
+        std::string getDataWritePath() const override {
+            return "/data/pfba/";
+        }
+
 #endif
 
     };
