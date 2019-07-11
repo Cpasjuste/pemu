@@ -18,12 +18,16 @@ set(PLATFORM_LDK OFF CACHE BOOL "LDK Handheld platform target (mips: LDK, RS-97.
 ####################
 # BUILD OPTIONS
 ####################
+set(OPTION_SDL1 OFF CACHE BOOL "SDL1 support (software, slow, unsupported)")
 set(OPTION_SDL2_GL OFF CACHE BOOL "SDL2 support (OpenGL 3.3)")
 set(OPTION_SDL2_GLES2 OFF CACHE BOOL "SDL2 support (OpenGLES 2.0)")
 set(OPTION_SDL2_SOFT OFF CACHE BOOL "SDL2 support (software renderer)")
 set(OPTION_BUILTIN_LIBCONFIG OFF CACHE BOOL "Build libconfig from sources")
 set(OPTION_BUILTIN_MINIZIP OFF CACHE BOOL "Build libconfig from sources")
+set(OPTION_FREEPLAY OFF CACHE BOOL "Build with FreePlay (CM3/ZERO) support")
 set(OPTION_RECALBOX_BUILDROOT OFF CACHE BOOL "Build from recalbox buildroot")
+set(OPTION_SCREEN_WIDTH 1280 CACHE STRING "Custom screen width")
+set(OPTION_SCREEN_HEIGHT 720 CACHE STRING "Custom screen height")
 ####################
 # BUILD OPTIONS
 ####################
