@@ -52,7 +52,7 @@ int main(int argc, char **argv) {
     BurnLibInit();
 
     ui = new UIMain(Vector2f(C2D_SCREEN_WIDTH, C2D_SCREEN_HEIGHT));
-    // need custom io for vita and recalbox
+    // need custom io for some devices
     auto io = new PFBAIo();
     ui->setIo(io);
 
