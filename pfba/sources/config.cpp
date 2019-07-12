@@ -85,6 +85,15 @@ PFBAConfig::PFBAConfig(const std::string &home, int version)
         hardware_names, 0, Option::Id::GUI_SHOW_HARDWARE);
 
     /// ROMS OPTIONS
+#ifdef __FREEPLAY__
+    add(Option::Id::ROM_SHADER, "FORCE_60HZ",
+        {"OFF", "ON"}, 1, Option::Id::ROM_FORCE_60HZ, Option::HIDDEN);
+    // audio
+    add(Option::Id::ROM_FORCE_60HZ, "FORCE_AUDIO_SYNC",
+        {"OFF", "ON"}, 0, Option::Id::ROM_AUDIO_SYNC, Option::HIDDEN);
+    add(Option::Id::ROM_AUDIO_SYNC, "AUDIO_FREQUENCY",
+        {"11025", "22050", "32000", "44100", "48000"}, 3, Option::Id::ROM_AUDIO_FREQ, Option::HIDDEN);
+#else
     add(Option::Id::ROM_SHADER, "FORCE_60HZ",
         {"OFF", "ON"}, 0, Option::Id::ROM_FORCE_60HZ);
     // audio
@@ -92,6 +101,7 @@ PFBAConfig::PFBAConfig(const std::string &home, int version)
         {"OFF", "ON"}, 1, Option::Id::ROM_AUDIO_SYNC);
     add(Option::Id::ROM_AUDIO_SYNC, "AUDIO_FREQUENCY",
         {"11025", "22050", "32000", "44100", "48000"}, 3, Option::Id::ROM_AUDIO_FREQ);
+#endif
     add(Option::Id::ROM_AUDIO_SYNC, "AUDIO_INTERPOLATION",
         {"0", "1", "3"}, 2, Option::Id::ROM_AUDIO_INTERPOLATION);
     add(Option::Id::ROM_AUDIO_INTERPOLATION, "AUDIO_FM_INTERPOLATION",

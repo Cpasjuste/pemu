@@ -87,8 +87,8 @@ int PFBAGuiEmu::load(RomList::Rom *rom) {
         pBurnSoundOut = getAudio()->getBuffer();
     }
     audio_sync = getUi()->getConfig()->get(Option::Id::ROM_AUDIO_SYNC, true)->getValueBool();
-    printf("FORCE_60HZ: %i, FORCE_50HZ: %i, AUDIO_SYNC: %i, FPS: %f (BURNFPS: %f)\n",
-           bForce60Hz, bForce50Hz, audio_sync, (float) nBurnFPS / 100.0f, (float) nBurnFPS / 100.0f);
+    printf("FORCE_60HZ: %i, AUDIO_SYNC: %i, FPS: %f (BURNFPS: %f)\n",
+           bForce60Hz, audio_sync, (float) nBurnFPS / 100.0f, (float) nBurnFPS / 100.0f);
     ///////////
     // AUDIO
     //////////

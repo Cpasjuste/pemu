@@ -30,7 +30,6 @@ private:
     void renderFrame(bool draw = true);
 
     bool audio_sync = false;
-    bool bForce50Hz = false;
 };
 
 #endif //PFBA_UIEMU_H
