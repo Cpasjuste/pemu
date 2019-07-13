@@ -14,22 +14,21 @@
 using namespace c2d;
 using namespace c2dui;
 
-PFBAConfig::PFBAConfig(const std::string &home, int version)
-        : Config(home, version) {
+PFBAConfig::PFBAConfig(c2d::Io *io, int version) : Config(io, version) {
 
-    printf("PFBAConfig(%s, v%i)\n", home.c_str(), version);
+    printf("PFBAConfig(%s, v%i)\n", io->getDataWritePath().c_str(), version);
 
     // add fba default roms paths
-    getRomPaths()->emplace_back(home + "coleco/");
-    getRomPaths()->emplace_back(home + "gamegear/");
-    getRomPaths()->emplace_back(home + "megadriv/");
-    getRomPaths()->emplace_back(home + "msx/");
-    getRomPaths()->emplace_back(home + "pce/");
-    getRomPaths()->emplace_back(home + "sg1000/");
-    getRomPaths()->emplace_back(home + "sgx/");
-    getRomPaths()->emplace_back(home + "sms/");
-    getRomPaths()->emplace_back(home + "tg16/");
-    getRomPaths()->emplace_back(home + "spectrum/");
+    getRomPaths()->emplace_back(io->getDataWritePath() + "coleco/");
+    getRomPaths()->emplace_back(io->getDataWritePath() + "gamegear/");
+    getRomPaths()->emplace_back(io->getDataWritePath() + "megadriv/");
+    getRomPaths()->emplace_back(io->getDataWritePath() + "msx/");
+    getRomPaths()->emplace_back(io->getDataWritePath() + "pce/");
+    getRomPaths()->emplace_back(io->getDataWritePath() + "sg1000/");
+    getRomPaths()->emplace_back(io->getDataWritePath() + "sgx/");
+    getRomPaths()->emplace_back(io->getDataWritePath() + "sms/");
+    getRomPaths()->emplace_back(io->getDataWritePath() + "tg16/");
+    getRomPaths()->emplace_back(io->getDataWritePath() + "spectrum/");
     for (size_t i = getRomPaths()->size(); i < 20; i++) {
         getRomPaths()->emplace_back(std::string());
     }
@@ -86,7 +85,7 @@ PFBAConfig::PFBAConfig(const std::string &home, int version)
 
     /// ROMS OPTIONS
 #ifdef __FREEPLAY__
-    add(Option::Id::ROM_SHADER, "FORCE_60HZ",
+    add(Option::Id::ROM_FILTER, "FORCE_60HZ",
         {"OFF", "ON"}, 1, Option::Id::ROM_FORCE_60HZ, Option::HIDDEN | Option::Flags::BOOLEAN);
     // audio
     add(Option::Id::ROM_FORCE_60HZ, "FORCE_AUDIO_SYNC",
@@ -94,7 +93,7 @@ PFBAConfig::PFBAConfig(const std::string &home, int version)
     add(Option::Id::ROM_AUDIO_SYNC, "AUDIO_FREQUENCY",
         {"11025", "22050", "32000", "44100", "48000"}, 3, Option::Id::ROM_AUDIO_FREQ, Option::HIDDEN | Option::Flags::INTEGER);
 #else
-    add(Option::Id::ROM_SHADER, "FORCE_60HZ",
+    add(Option::Id::ROM_FILTER, "FORCE_60HZ",
         {"OFF", "ON"}, 0, Option::Id::ROM_FORCE_60HZ, Option::Flags::BOOLEAN);
     // audio
     add(Option::Id::ROM_FORCE_60HZ, "FORCE_AUDIO_SYNC",

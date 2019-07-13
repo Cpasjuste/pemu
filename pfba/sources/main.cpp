@@ -51,15 +51,39 @@ int main(int argc, char **argv) {
     BurnPathsInit();
     BurnLibInit();
 
-    ui = new UIMain(Vector2f(C2D_SCREEN_WIDTH, C2D_SCREEN_HEIGHT));
     // need custom io for some devices
     auto io = new PFBAIo();
-    ui->setIo(io);
-
     // load configuration
     int version = (__PFBA_VERSION_MAJOR__ * 100) + __PFBA_VERSION_MINOR__;
-    cfg = new PFBAConfig(ui->getIo()->getHomePath(), version);
+    cfg = new PFBAConfig(io, version);
+
+    Vector2f screen_size = {
+            cfg->get(Option::Id::GUI_SCREEN_WIDTH)->getValueInt(),
+            cfg->get(Option::Id::GUI_SCREEN_HEIGHT)->getValueInt()
+    };
+    FloatRect windows_size = {
+            cfg->get(Option::Id::GUI_WINDOW_LEFT)->getValueInt(),
+            cfg->get(Option::Id::GUI_WINDOW_TOP)->getValueInt(),
+            cfg->get(Option::Id::GUI_WINDOW_WIDTH)->getValueInt(),
+            cfg->get(Option::Id::GUI_WINDOW_HEIGHT)->getValueInt()
+    };
+    // we need to create a renderer with real screen size
+    printf("screen size: %i x %i, windows: x = %i, y = %i, w = %i, h = %i\n",
+           (int) screen_size.x, (int) screen_size.y,
+           (int) windows_size.left, (int) windows_size.top, (int) windows_size.width, (int) windows_size.height);
+    ui = new UIMain(screen_size);
+    if (ui->getShaderList() != nullptr) {
+        cfg->add(Option::Id::ROM_FILTER, "EFFECT", ui->getShaderList()->getNames(), 0,
+                 Option::Id::ROM_SHADER, Option::Flags::STRING);
+    } else {
+        cfg->add(Option::Id::ROM_FILTER, "EFFECT", {"NONE"}, 0,
+                 Option::Id::ROM_SHADER, Option::Flags::STRING | Option::Flags::HIDDEN);
+    }
+    ui->setIo(io);
     ui->setConfig(cfg);
+    // now set window size, usefull when screen is "cropped" (freeplay zero/cm3)
+    ui->setSize(windows_size.width, windows_size.height);
+    ui->setPosition(windows_size.left, windows_size.top);
 
     // skin
     // buttons used for ui config menu
