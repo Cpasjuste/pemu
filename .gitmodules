@@ -10,3 +10,6 @@
 [submodule "ssscrap"]
 	path = ssscrap
 	url = https://github.com/Cpasjuste/ssscrap.git
+[submodule "cores/fba"]
+	path = cores/fba
+	url = https://github.com/Cpasjuste/FBNeo.git
