@@ -415,7 +415,7 @@ add_custom_target(${PROJECT_NAME}.deps
         COMMAND perl ${CMAKE_SOURCE_DIR}/cores/fba/src/dep/scripts/cave_sprite_func.pl -o ${CMAKE_CURRENT_BINARY_DIR}/deps/cave_sprite_func.h
         COMMAND perl ${CMAKE_SOURCE_DIR}/cores/fba/src/dep/scripts/psikyo_tile_func.pl -o ${CMAKE_CURRENT_BINARY_DIR}/deps/psikyo_tile_func.h
         )
-#add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}.deps)
+add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}.deps)
 # driverlist.h
 # TODO: crap, mingw64 perl can't process this on windows...
 if (PLATFORM_WINDOWS)
