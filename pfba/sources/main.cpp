@@ -79,6 +79,9 @@ int main(int argc, char **argv) {
         cfg->add(Option::Id::ROM_FILTER, "EFFECT", {"NONE"}, 0,
                  Option::Id::ROM_SHADER, Option::Flags::STRING | Option::Flags::HIDDEN);
     }
+    cfg->reset();
+    cfg->load();
+
     ui->setIo(io);
     ui->setConfig(cfg);
     // now set window size, usefull when screen is "cropped" (freeplay zero/cm3)
