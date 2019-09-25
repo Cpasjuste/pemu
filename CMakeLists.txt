@@ -43,8 +43,8 @@ if (PLATFORM_LINUX)
     set(OPTION_FULLSCREEN ON CACHE BOOL "Add switch to fullscreen option")
 endif (PLATFORM_LINUX)
 if (OPTION_SSCRAP)
-    # add ssscrap (screenscrapper scrapper!) library
-    add_subdirectory(ssscrap)
+    # add sscrap (screenscrapper scrapper!) library
+    add_subdirectory(sscrap)
 endif ()
 
 # required for cmake toolchain setup
