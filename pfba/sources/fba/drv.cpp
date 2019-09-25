@@ -3,7 +3,6 @@
 #include "c2dui.h"
 #include "burner.h"
 
-using namespace c2d;
 using namespace c2dui;
 
 extern UIMain *ui;
@@ -11,7 +10,20 @@ extern UINT8 NeoSystem;
 int bDrvOkay = 0;                        // 1 if the Driver has been initted okay, and it's okay to use the BurnDrv functions
 int kNetGame = 0;
 int nIpsMaxFileLen = 0;
+
 static int ProgressCreate();
+
+bool is_netgame_or_recording() {
+    return false;
+}
+
+struct MovieExtInfo {
+    // date & time
+    UINT32 year, month, day;
+    UINT32 hour, minute, second;
+};
+
+struct MovieExtInfo MovieInfo; // from replay.cpp
 
 static UINT8 NeoSystemList[] = {
         0x13, // "Universe BIOS ver. 3.3"
@@ -146,7 +158,7 @@ static double nProgressPosBurn = 0;
 
 static int ProgressCreate() {
     nProgressPosBurn = 0;
-    ui->getUiProgressBox()->setVisibility(Visibility::Visible);
+    ui->getUiProgressBox()->setVisibility(c2d::Visibility::Visible);
     ui->getUiProgressBox()->setLayer(1000);
     return 0;
 }
