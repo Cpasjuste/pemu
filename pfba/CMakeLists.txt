@@ -453,6 +453,7 @@ add_custom_target(${PROJECT_NAME}.data.extra
         COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/skins/default_320x240
         )
 add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}.data.extra)
+add_dependencies(${PROJECT_NAME}_${TARGET_PLATFORM}_release ${PROJECT_NAME}.data.extra)
 
 if (PLATFORM_WINDOWS)
     # TODO: fix curl/nghttp2 static linking...
