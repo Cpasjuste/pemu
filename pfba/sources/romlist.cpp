@@ -1,7 +1,7 @@
 //
 // Created by cpasjuste on 29/05/18.
 //
-
+#if 0
 #include "burner.h"
 
 #include "c2dui.h"
@@ -252,3 +252,4 @@ void PFBARomList::build() {
     // cleanup
     RomList::build();
 }
+#endif

@@ -16,17 +16,17 @@ PFBAGuiMenu::PFBAGuiMenu(c2dui::UIMain *ui) : UIMenu(ui) {
 
 bool PFBAGuiMenu::isOptionHidden(c2dui::Option *option) {
 
-    RomList::Rom *rom = getUi()->getUiRomList()->getSelection();
+    ss_api::Game game = getUi()->getUiRomList()->getSelection();
 
-    if (isRom() && option->getId() == Option::Id::ROM_ROTATION
-        && rom != nullptr && !(rom->flags & BDF_ORIENTATION_VERTICAL)) {
+    if (isRom() && option->getId() == Option::Id::ROM_ROTATION && !game.id.empty() && !(game.rotation == "0")) {
         return true;
     }
 
-    if (isRom() && option->getId() == Option::Id::ROM_NEOBIOS
-        && rom != nullptr && !(getUi()->getUiRomList()->getRomList()->isHardware(rom->hardware, HARDWARE_PREFIX_SNK))) {
-        return true;
-    }
+    // TODO: sscrap - add hardware filtering
+    //if (isRom() && option->getId() == Option::Id::ROM_NEOBIOS
+    //    && rom != nullptr && !(getUi()->getUiRomList()->getRomList()->isHardware(rom->hardware, HARDWARE_PREFIX_SNK))) {
+    //    return true;
+    //}
 
 #ifdef __SWITCH__
     if (option->getId() == Option::Id::ROM_FRAMESKIP) {

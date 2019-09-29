@@ -127,5 +127,5 @@ PFBAConfig::PFBAConfig(c2d::Io *io, int version) : Config(io, version) {
     reset();
 
     // load/overwrite configuration from file
-    load();
+    load(ss_api::Game());
 }

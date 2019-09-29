@@ -41,7 +41,7 @@ PFBAGuiMenu *uiMenu;
 PFBAGuiEmu *uiEmu;
 PFBAUIStateMenu *uiState;
 PFBAConfig *cfg;
-PFBARomList *romList;
+RomList *romList;
 
 Skin *skin;
 UIRomList *uiRomList;
@@ -80,7 +80,7 @@ int main(int argc, char **argv) {
                  Option::Id::ROM_SHADER, Option::Flags::STRING | Option::Flags::HIDDEN);
     }
     cfg->reset();
-    cfg->load();
+    cfg->load(ss_api::Game());
 
     ui->setIo(io);
     ui->setConfig(cfg);
@@ -140,7 +140,7 @@ int main(int argc, char **argv) {
     // ui
     std::string fba_version = "fba: ";
     fba_version += szAppBurnVer;
-    romList = new PFBARomList(ui, fba_version);
+    romList = new RomList(ui, fba_version);
     romList->build();
     uiRomList = new UIRomListClassic(ui, romList, ui->getSize());
     uiMenu = new PFBAGuiMenu(ui);

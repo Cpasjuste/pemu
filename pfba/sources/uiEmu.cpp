@@ -31,9 +31,18 @@ PFBAGuiEmu::PFBAGuiEmu(UIMain *ui) : UIEmu(ui) {
     printf("PFBAGuiEmu()\n");
 }
 
-int PFBAGuiEmu::load(RomList::Rom *rom) {
+int PFBAGuiEmu::load(const ss_api::Game &game) {
 
-    nBurnDrvActive = rom->drv;
+    std::string zipName = Utility::removeExt(game.path);
+    for (unsigned int i = 0; i < nBurnDrvCount; i++) {
+        nBurnDrvActive = i;
+        char *z_name = nullptr;
+        BurnDrvGetZipName(&z_name, 0);
+        if (z_name && zipName == z_name) {
+            break;
+        }
+    }
+
     if (nBurnDrvActive >= nBurnDrvCount) {
         printf("PFBAGui::runRom: driver not found\n");
         return -1;
@@ -59,7 +68,7 @@ int PFBAGuiEmu::load(RomList::Rom *rom) {
     nBurnSoundRate = aud->getSampleRate();
     nBurnSoundLen = aud->getBufferLen();
     pBurnSoundOut = aud->getBuffer();
-    if (DrvInit(rom->drv, false) != 0) {
+    if (DrvInit(nBurnDrvActive, false) != 0) {
         printf("\nDriver initialisation failed\n");
         delete (aud);
         getUi()->getUiProgressBox()->setVisibility(Visibility::Hidden);
@@ -101,13 +110,13 @@ int PFBAGuiEmu::load(RomList::Rom *rom) {
     nBurnBpp = 2;
     BurnHighCol = myHighCol16;
     BurnRecalcPal();
-    PFBAVideo *v = new PFBAVideo(getUi(), (void **) &pBurnDraw, &nBurnPitch, Vector2f(w, h));
+    auto v = new PFBAVideo(getUi(), (void **) &pBurnDraw, &nBurnPitch, Vector2f(w, h));
     addVideo(v);
     //////////
     // VIDEO
     //////////
 
-    return UIEmu::load(rom);
+    return UIEmu::load(game);
 }
 
 void PFBAGuiEmu::stop() {

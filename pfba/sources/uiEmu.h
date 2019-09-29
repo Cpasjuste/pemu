@@ -13,7 +13,7 @@ public:
 
     explicit PFBAGuiEmu(c2dui::UIMain *ui);
 
-    int load(c2dui::RomList::Rom *rom) override;
+    int load(const ss_api::Game &game) override;
 
     void stop() override;
 
