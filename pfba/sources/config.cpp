@@ -33,6 +33,7 @@ PFBAConfig::PFBAConfig(c2d::Io *io, int version) : Config(io, version) {
         getRomPaths()->emplace_back(std::string());
     }
 
+    /*
     // add fba hardware list
     getHardwareList()->emplace_back(HARDWARE_PREFIX_SNK, "Neo Geo");
     getHardwareList()->emplace_back(HARDWARE_PREFIX_CAPCOM, "CPS-1");
@@ -68,6 +69,7 @@ PFBAConfig::PFBAConfig(c2d::Io *io, int version) : Config(io, version) {
     for (auto &i : *getHardwareList()) {
         hardware_names.emplace_back(i.name);
     }
+    */
 
     ////////////////////////////////////////////////////////////
     /// pfba custom config
@@ -80,8 +82,8 @@ PFBAConfig::PFBAConfig(c2d::Io *io, int version) : Config(io, version) {
     std::vector<std::string> *values = get(Option::Id::GUI_SHOW_ALL)->getValues();
     values->insert(values->begin() + 1, "WORKING");
 
-    add(Option::Id::GUI_SHOW_CLONES, "SHOW_HARDWARE",
-        hardware_names, 0, Option::Id::GUI_SHOW_HARDWARE, Option::Flags::STRING);
+    //add(Option::Id::GUI_SHOW_CLONES, "SHOW_HARDWARE",
+    //    hardware_names, 0, Option::Id::GUI_SHOW_HARDWARE, Option::Flags::STRING);
 
     /// ROMS OPTIONS
 #ifdef __FREEPLAY__
