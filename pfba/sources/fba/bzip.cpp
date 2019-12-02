@@ -368,8 +368,8 @@ int BzipOpen(bool bootApp) {
             free(szBzipName[z]);
             szBzipName[z] = (TCHAR *) malloc(MAX_PATH * sizeof(TCHAR));
 
-            const char *rom_path = ui->getConfig()->getRomPath(d)->c_str();
-            _stprintf(szBzipName[z], _T("%s%s"), rom_path, szName);
+            std::string rom_path = ui->getConfig()->getRomPath(d);
+            _stprintf(szBzipName[z], _T("%s%s"), rom_path.c_str(), szName);
 
             int prefix =
                     (((BurnDrvGetHardwareCode() | HARDWARE_PREFIX_CARTRIDGE) ^ HARDWARE_PREFIX_CARTRIDGE) & 0xff000000);

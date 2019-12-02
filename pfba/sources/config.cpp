@@ -16,21 +16,21 @@ using namespace c2dui;
 
 PFBAConfig::PFBAConfig(c2d::Io *io, int version) : Config(io, version) {
 
-    printf("PFBAConfig(%s, v%i)\n", io->getDataPath().c_str(), version);
+    printf("PFBAConfig(%s, v%i)\n", getConfigPath().c_str(), version);
 
     // add fba default roms paths
-    getRomPaths()->emplace_back(io->getDataPath() + "coleco/");
-    getRomPaths()->emplace_back(io->getDataPath() + "gamegear/");
-    getRomPaths()->emplace_back(io->getDataPath() + "megadriv/");
-    getRomPaths()->emplace_back(io->getDataPath() + "msx/");
-    getRomPaths()->emplace_back(io->getDataPath() + "pce/");
-    getRomPaths()->emplace_back(io->getDataPath() + "sg1000/");
-    getRomPaths()->emplace_back(io->getDataPath() + "sgx/");
-    getRomPaths()->emplace_back(io->getDataPath() + "sms/");
-    getRomPaths()->emplace_back(io->getDataPath() + "tg16/");
-    getRomPaths()->emplace_back(io->getDataPath() + "spectrum/");
-    for (size_t i = getRomPaths()->size(); i < 20; i++) {
-        getRomPaths()->emplace_back(std::string());
+    getRomPaths().emplace_back(io->getDataPath() + "coleco/");
+    getRomPaths().emplace_back(io->getDataPath() + "gamegear/");
+    getRomPaths().emplace_back(io->getDataPath() + "megadriv/");
+    getRomPaths().emplace_back(io->getDataPath() + "msx/");
+    getRomPaths().emplace_back(io->getDataPath() + "pce/");
+    getRomPaths().emplace_back(io->getDataPath() + "sg1000/");
+    getRomPaths().emplace_back(io->getDataPath() + "sgx/");
+    getRomPaths().emplace_back(io->getDataPath() + "sms/");
+    getRomPaths().emplace_back(io->getDataPath() + "tg16/");
+    getRomPaths().emplace_back(io->getDataPath() + "spectrum/");
+    for (size_t i = getRomPaths().size(); i < 20; i++) {
+        getRomPaths().emplace_back(std::string());
     }
 
     ////////////////////////////////////////////////////////////
