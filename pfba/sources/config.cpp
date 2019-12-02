@@ -33,57 +33,12 @@ PFBAConfig::PFBAConfig(c2d::Io *io, int version) : Config(io, version) {
         getRomPaths()->emplace_back(std::string());
     }
 
-    /*
-    // add fba hardware list
-    getHardwareList()->emplace_back(HARDWARE_PREFIX_SNK, "Neo Geo");
-    getHardwareList()->emplace_back(HARDWARE_PREFIX_CAPCOM, "CPS-1");
-    getHardwareList()->emplace_back(HARDWARE_PREFIX_CPS2, "CPS-2");
-    getHardwareList()->emplace_back(HARDWARE_PREFIX_CPS3, "CPS-3");
-    getHardwareList()->emplace_back(HARDWARE_PREFIX_IGS_PGM, "PGM");
-    getHardwareList()->emplace_back(HARDWARE_PREFIX_PSIKYO, "Psikyo");
-    getHardwareList()->emplace_back(HARDWARE_PREFIX_CAVE, "Cave");
-    getHardwareList()->emplace_back(HARDWARE_PREFIX_SEGA, "Sega");
-    getHardwareList()->emplace_back(HARDWARE_PREFIX_CAPCOM_MISC, "Capcom (Other)");
-    getHardwareList()->emplace_back(HARDWARE_PREFIX_DATAEAST, "Data East");
-    getHardwareList()->emplace_back(HARDWARE_PREFIX_GALAXIAN, "Galaxian");
-    getHardwareList()->emplace_back(HARDWARE_PREFIX_IREM, "Irem");
-    getHardwareList()->emplace_back(HARDWARE_PREFIX_KANEKO, "Kaneko");
-    getHardwareList()->emplace_back(HARDWARE_PREFIX_KONAMI, "Konami");
-    getHardwareList()->emplace_back(HARDWARE_PREFIX_MISC_PRE90S, "Misc (pre 90s)");
-    getHardwareList()->emplace_back(HARDWARE_PREFIX_MISC_POST90S, "Misc (post 90s)");
-    getHardwareList()->emplace_back(HARDWARE_PREFIX_PACMAN, "Pacman");
-    getHardwareList()->emplace_back(HARDWARE_PREFIX_SETA, "Seta");
-    getHardwareList()->emplace_back(HARDWARE_PREFIX_TAITO, "Taito");
-    getHardwareList()->emplace_back(HARDWARE_PREFIX_TECHNOS, "Technos");
-    getHardwareList()->emplace_back(HARDWARE_PREFIX_TOAPLAN, "Toaplan");
-    getHardwareList()->emplace_back(HARDWARE_PREFIX_SEGA_MEGADRIVE, "Sega MegaDrive");
-    getHardwareList()->emplace_back(HARDWARE_PREFIX_SEGA_MASTER_SYSTEM, "Sega MasterSystem");
-    getHardwareList()->emplace_back(HARDWARE_PREFIX_SEGA_SG1000, "Sega SG1000");
-    getHardwareList()->emplace_back(HARDWARE_PREFIX_SEGA_GAME_GEAR, "Sega GameGear");
-    getHardwareList()->emplace_back(HARDWARE_PREFIX_PCENGINE, "PC-Engine");
-    getHardwareList()->emplace_back(HARDWARE_PREFIX_COLECO, "Coleco");
-    getHardwareList()->emplace_back(HARDWARE_PREFIX_MIDWAY, "Midway");
-    getHardwareList()->emplace_back(HARDWARE_PREFIX_MSX, "MSX");
-    getHardwareList()->emplace_back(HARDWARE_PREFIX_SPECTRUM, "Spectrum");
-    std::vector<std::string> hardware_names;
-    for (auto &i : *getHardwareList()) {
-        hardware_names.emplace_back(i.name);
-    }
-    */
-
     ////////////////////////////////////////////////////////////
     /// pfba custom config
     ////////////////////////////////////////////////////////////
 
     /// UI OPTIONS
     hide(Option::GUI_USE_DATABASE);
-
-    // add "WORKING" to "SHOW_ALL" option
-    std::vector<std::string> *values = get(Option::Id::GUI_SHOW_ALL)->getValues();
-    values->insert(values->begin() + 1, "WORKING");
-
-    //add(Option::Id::GUI_SHOW_CLONES, "SHOW_HARDWARE",
-    //    hardware_names, 0, Option::Id::GUI_SHOW_HARDWARE, Option::Flags::STRING);
 
     /// ROMS OPTIONS
 #ifdef __FREEPLAY__
