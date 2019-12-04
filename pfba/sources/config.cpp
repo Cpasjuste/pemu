@@ -63,7 +63,7 @@ PFBAConfig::PFBAConfig(c2d::Io *io, int version) : Config(io, version) {
         {"OFF", "ON", "FLIP", "CAB MODE"}, 0, Option::Id::ROM_ROTATION, Option::Flags::STRING);
 #else
     add(Option::Id::ROM_AUDIO_FMINTERPOLATION, "ROTATION",
-        {"OFF", "ON", "FLIP"}, 0, Option::Id::ROM_ROTATION, Option::Flags::STRING);
+        {"OFF", "ON", "FLIP"}, 1, Option::Id::ROM_ROTATION, Option::Flags::STRING);
 #endif
     add(Option::Id::ROM_ROTATION, "NEOBIOS",
         {"UNIBIOS_3_3", "UNIBIOS_3_2", "UNIBIOS_3_1",
