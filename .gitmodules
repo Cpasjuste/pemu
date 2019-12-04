@@ -10,3 +10,6 @@
 [submodule "sscrap"]
 	path = sscrap
 	url = https://github.com/Cpasjuste/sscrap.git
+[submodule "libcross2d"]
+	path = libcross2d
+	url = https://github.com/Cpasjuste/libcross2d.git

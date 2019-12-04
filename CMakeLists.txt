@@ -32,11 +32,6 @@ set(OPTION_SCREEN_HEIGHT 720 CACHE STRING "Custom screen height")
 # BUILD OPTIONS
 ####################
 
-# add libcross2d/libcross2dui library. If you want to port pfba to another platform,
-# you should (may) only need to port libcross2d library.
-add_subdirectory(libcross2dui)
-
-set(OPTION_SSCRAP OFF CACHE BOOL "Build with screenscrapper support")
 set(UPDATE_CONFIG ON CACHE BOOL "Force config file updating")
 if (PLATFORM_LINUX)
     set(OPTION_RESOLUTION ON CACHE BOOL "Add screen resolution option")
@@ -46,6 +41,13 @@ if (OPTION_SSCRAP)
     # add sscrap (screenscrapper scrapper!) library
     add_subdirectory(sscrap)
 endif ()
+
+# add libcross2d library. If you want to port pfba to another platform,
+# you should (may) only need to port libcross2d library.
+add_subdirectory(libcross2d)
+
+# add ui library
+add_subdirectory(ui)
 
 # required for cmake toolchain setup
 project(pemu)

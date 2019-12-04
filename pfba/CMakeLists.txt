@@ -395,7 +395,7 @@ target_compile_options(${PROJECT_NAME} PRIVATE $<$<COMPILE_LANGUAGE:CXX>:-std=gn
 target_include_directories(${PROJECT_NAME} PRIVATE ${INC})
 target_link_libraries(${PROJECT_NAME} cross2dui ${LDFLAGS})
 # include libcross2d targets
-include(${CMAKE_SOURCE_DIR}/libcross2dui/libcross2d/cmake/targets.cmake)
+include(${CMAKE_SOURCE_DIR}/libcross2d/cmake/targets.cmake)
 
 # fba deps
 find_package(Perl REQUIRED)
