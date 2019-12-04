@@ -60,7 +60,7 @@ PFBAConfig::PFBAConfig(c2d::Io *io, int version) : Config(io, version) {
         {"0", "1", "3"}, 2, Option::Id::ROM_AUDIO_FMINTERPOLATION, Option::Flags::INTEGER);
 #ifdef __PSP2__
     add(Option::Id::ROM_AUDIO_FMINTERPOLATION, "ROTATION",
-        {"OFF", "ON", "FLIP", "CAB MODE"}, 0, Option::Id::ROM_ROTATION, Option::Flags::STRING);
+        {"OFF", "ON", "FLIP", "CAB MODE"}, 1, Option::Id::ROM_ROTATION, Option::Flags::STRING);
 #else
     add(Option::Id::ROM_AUDIO_FMINTERPOLATION, "ROTATION",
         {"OFF", "ON", "FLIP"}, 1, Option::Id::ROM_ROTATION, Option::Flags::STRING);
