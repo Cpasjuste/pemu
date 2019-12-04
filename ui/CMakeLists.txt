@@ -13,6 +13,11 @@ if (UPDATE_CONFIG)
     list(APPEND FLAGS -D__UPDATE_CONFIG__ -D__SSCRAP__)
 endif ()
 
+if (MPV_PLAYER)
+    list(APPEND FLAGS -D__MPV__)
+    list(APPEND LDFLAGS mpv)
+endif ()
+
 if (OPTION_BUILTIN_MINIZIP)
     list(APPEND CROSS2DUI_INCLUDE source)
     list(APPEND CROSS2DUI_SOURCE

@@ -36,7 +36,7 @@ RomList::RomList(UIMain *_ui, const std::string &emuVersion) {
     title->setScale(scaling, scaling);
     rect->add(title);
 
-    strcpy(text_str, "Roms found: 0/0");
+    strcpy(text_str, "Games: 0/0");
     //auto font_size = (unsigned int) ((float) C2D_DEFAULT_CHAR_SIZE * ((float) C2D_SCREEN_HEIGHT / 720.0f));
     text = new Text(text_str, C2D_DEFAULT_CHAR_SIZE, ui->getSkin()->font);
     ui->getSkin()->loadText(text, {"ROM_LIST", "TEXT"});
@@ -66,6 +66,10 @@ void RomList::build() {
 
     gameList = GameList("gamelist.xml", ui->getConfig()->getRomPaths().at(0));
     printf("RomList::build: %zu roms\n", gameList.games.size());
+    sprintf(text_str, "Games: %i / %zu", gameList.getAvailableCount(), gameList.games.size());
+    text->setString(text_str);
+    ui->flip();
+    ui->delay(1000);
 
     ui->getConfig()->add(
             Option::Id::GUI_FILTER_CLONES, "FILTER_SYSTEM",

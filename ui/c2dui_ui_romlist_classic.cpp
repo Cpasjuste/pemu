@@ -2,12 +2,15 @@
 // Created by cpasjuste on 22/11/16.
 //
 #include <algorithm>
-
 #include "c2dui.h"
-
-#ifdef __SSCRAP__
-
 #include "ss_api.h"
+
+#ifdef __MPV__
+
+#include "mpv.h"
+#include "mpv_texture.h"
+#include "c2dui_ui_romlist_classic.h"
+
 
 #endif
 
@@ -17,9 +20,7 @@
 
 using namespace c2d;
 using namespace c2dui;
-#ifdef __SSCRAP__
 using namespace ss_api;
-#endif
 
 #ifdef __WINDOWS__
 #undef MessageBox
@@ -73,31 +74,21 @@ public:
         ui->getSkin()->loadText(previewText, {"MAIN", "ROM_IMAGE", "TEXT"});
         previewBox->add(previewText);
         add(previewBox);
+
+#ifdef __MPV__
+        mpv = new Mpv(ui->getIo()->getDataPath() + "mpv", true);
+        mpvTexture = new MpvTexture(previewBox->getSize(), mpv);
+        mpvTexture->setOrigin(previewBox->getOrigin());
+        mpvTexture->setPosition(previewBox->getPosition());
+        add(mpvTexture);
+#endif
     }
 
     ~UIRomInfo() override {
         printf("~UIRomInfo\n");
-    }
-
-    bool loadTexture(const Game &game) {
-
-        texture = (C2DTexture *) uiRomList->getPreviewTexture(game);
-        // set image
-        if ((texture != nullptr) && texture->available) {
-            previewText->setVisibility(Visibility::Hidden);
-            texture->setOrigin(Origin::Center);
-            texture->setPosition(Vector2f(previewBox->getSize().x / 2, previewBox->getSize().y / 2));
-            float tex_scaling = std::min(
-                    previewBox->getSize().x / texture->getTextureRect().width,
-                    previewBox->getSize().y / texture->getTextureRect().height);
-            texture->setScale(tex_scaling, tex_scaling);
-            previewBox->add(texture);
-        } else {
-            previewText->setVisibility(Visibility::Visible);
-            return false;
-        }
-
-        return true;
+#ifdef __MPV__
+        delete (mpv);
+#endif
     }
 
     Text *addInfoBoxText(const std::vector<std::string> &tree) {
@@ -117,7 +108,38 @@ public:
         text->setString("");
     }
 
-    void load(const Game &game) {
+    bool loadVideo(const Game &game) {
+#ifdef __MPV__
+        std::string romPath = ui->getConfig()->getRomPath(0);
+        std::string path = romPath + game.getMedia("video").url;
+        mpv->load(path, Mpv::LoadType::Replace, "loop=yes");
+        mpvTexture->setLayer(1);
+        mpvTexture->setVisibility(Visibility::Visible, false);
+#endif
+        return true;
+    }
+
+    bool loadTexture(const Game &game) {
+        texture = (C2DTexture *) uiRomList->getPreviewTexture(game);
+        // set image
+        if ((texture != nullptr) && texture->available) {
+            previewText->setVisibility(Visibility::Hidden);
+            texture->setOrigin(Origin::Center);
+            texture->setPosition(Vector2f(previewBox->getSize().x / 2, previewBox->getSize().y / 2));
+            float tex_scaling = std::min(
+                    previewBox->getSize().x / texture->getTextureRect().width,
+                    previewBox->getSize().y / texture->getTextureRect().height);
+            texture->setScale(tex_scaling, tex_scaling);
+            previewBox->add(texture);
+        } else {
+            previewText->setVisibility(Visibility::Visible);
+            return false;
+        }
+
+        return true;
+    }
+
+    void load(const Game &game = Game()) {
 
         if (texture != nullptr) {
             delete (texture);
@@ -139,6 +161,10 @@ public:
             hideText(cloneofText);
             hideText(filenameText);
             hideText(synoText);
+#if __MPV__
+            mpvTexture->setVisibility(Visibility::Hidden);
+            mpv->stop();
+#endif
         } else {
             printf("load(%s)\n", game.getName().text.c_str());
             // load title/preview texture
@@ -187,6 +213,10 @@ public:
     Text *classificationText = nullptr;
     Text *cloneofText = nullptr;
     Text *filenameText = nullptr;
+#ifdef __MPV__
+    Mpv *mpv = nullptr;
+    MpvTexture *mpvTexture = nullptr;
+#endif
 };
 
 UIRomListClassic::UIRomListClassic(UIMain *u, RomList *romList, const c2d::Vector2f &size)
@@ -263,9 +293,25 @@ void UIRomListClassic::updateRomList() {
 
     if (rom_info != nullptr) {
         rom_info->load(Game());
-        title_loaded = 0;
-        timer_load.restart();
+        timer_load_info_done = 0;
+        timer_load_info.restart();
+        timer_load_video_done = 0;
+        timer_load_video.restart();
     }
+}
+
+void UIRomListClassic::setVisibility(c2d::Visibility visibility, bool tweenPlay) {
+
+    if (visibility == c2d::Visibility::Hidden) {
+        rom_info->load();
+        timer_load_info_done = 0;
+        timer_load_video_done = 0;
+    } else {
+        timer_load_info.restart();
+        timer_load_video.restart();
+    }
+
+    UIRomList::setVisibility(visibility, tweenPlay);
 }
 
 bool UIRomListClassic::onInput(c2d::Input::Player *players) {
@@ -282,37 +328,40 @@ bool UIRomListClassic::onInput(c2d::Input::Player *players) {
         if (rom_index < 0)
             rom_index = (int) (gameList.games.size() - 1);
         list_box->up();
-        show_preview = false;
-        rom_info->load(Game());
-        title_loaded = 0;
+        rom_info->load();
+        timer_load_info_done = 0;
+        timer_load_video_done = 0;
     } else if (keys & Input::Key::Down) {
         rom_index++;
         if ((unsigned int) rom_index >= gameList.games.size())
             rom_index = 0;
         list_box->down();
-        show_preview = false;
-        rom_info->load(Game());
-        title_loaded = 0;
+        rom_info->load();
+        timer_load_info_done = 0;
+        timer_load_video_done = 0;
     } else if (keys & Input::Key::Right) {
         rom_index += list_box->getMaxLines();
         if ((unsigned int) rom_index >= gameList.games.size())
             rom_index = (int) (gameList.games.size() - 1);
         list_box->setSelection(rom_index);
-        show_preview = false;
-        rom_info->load(Game());
-        title_loaded = 0;
+        rom_info->load();
+        timer_load_info_done = 0;
+        timer_load_video_done = 0;
     } else if (keys & Input::Key::Left) {
         rom_index -= list_box->getMaxLines();
         if (rom_index < 0)
             rom_index = 0;
         list_box->setSelection(rom_index);
-        show_preview = false;
-        rom_info->load(Game());
-        title_loaded = 0;
+        rom_info->load();
+        timer_load_info_done = 0;
+        timer_load_video_done = 0;
     } else if (keys & Input::Key::Fire1) {
         Game game = getSelection();
         if (game.available) {
-            show_preview = false;
+#ifdef __MPV__
+            rom_info->mpvTexture->setVisibility(c2d::Visibility::Hidden);
+            rom_info->mpv->stop();
+#endif
             ui->getConfig()->load(game);
             ui->getUiEmu()->load(game);
             return true;
@@ -367,17 +416,28 @@ bool UIRomListClassic::onInput(c2d::Input::Player *players) {
 
 void UIRomListClassic::onUpdate() {
 
+    if (!isVisible() || ui->getUiProgressBox()->isVisible()) {
+        return;
+    }
+
     RectangleShape::onUpdate();
 
     unsigned int keys = ui->getInput()->getKeys();
 
     if (keys > 0 && keys != Input::Delay) {
-        timer_load.restart();
+        timer_load_info.restart();
+        timer_load_video.restart();
     } else if (keys == 0) {
-        if ((title_loaded == 0) && timer_load.getElapsedTime().asMilliseconds() > load_delay) {
+        if ((timer_load_info_done == 0) && timer_load_info.getElapsedTime().asMilliseconds() > timer_load_info_delay) {
             rom_info->load(gameList.games.size() > (unsigned int) rom_index ?
                            gameList.games[rom_index] : Game());
-            title_loaded = 1;
+            timer_load_info_done = 1;
+        }
+        if ((timer_load_video_done == 0) &&
+            timer_load_video.getElapsedTime().asMilliseconds() > timer_load_video_delay) {
+            rom_info->loadVideo(gameList.games.size() > (unsigned int) rom_index ?
+                                gameList.games[rom_index] : Game());
+            timer_load_video_done = 1;
         }
     }
 }
@@ -385,3 +445,4 @@ void UIRomListClassic::onUpdate() {
 UIRomListClassic::~UIRomListClassic() {
     printf("~UIRomListClassic\n");
 }
+

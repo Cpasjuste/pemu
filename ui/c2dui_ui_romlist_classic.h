@@ -24,6 +24,8 @@ namespace c2dui {
 
         void onUpdate() override;
 
+        void setVisibility(c2d::Visibility visibility, bool tweenPlay = false) override ;
+
         void updateRomList() override;
 
         ss_api::Game getSelection() override;
@@ -33,10 +35,14 @@ namespace c2dui {
         UIRomInfo *rom_info = nullptr;
         UIListBox *list_box = nullptr;
         int rom_index = 0;
-        bool show_preview = false;
-        int title_loaded = 0;
-        int load_delay = 500;
-        c2d::C2DClock timer_load;
+
+        c2d::C2DClock timer_load_info;
+        int timer_load_info_delay = 500;
+        int timer_load_info_done = 0;
+
+        c2d::C2DClock timer_load_video;
+        int timer_load_video_delay = 5000;
+        int timer_load_video_done = 0;
     };
 }
 

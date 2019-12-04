@@ -32,19 +32,27 @@ set(OPTION_SCREEN_HEIGHT 720 CACHE STRING "Custom screen height")
 # BUILD OPTIONS
 ####################
 
+####################
+# PEMU OPTIONS
+####################
+set(MPV_PLAYER ON CACHE BOOL "Add support for video snaps (mpv)")
 set(UPDATE_CONFIG ON CACHE BOOL "Force config file updating")
+
 if (PLATFORM_LINUX)
     set(OPTION_RESOLUTION ON CACHE BOOL "Add screen resolution option")
     set(OPTION_FULLSCREEN ON CACHE BOOL "Add switch to fullscreen option")
 endif (PLATFORM_LINUX)
-if (OPTION_SSCRAP)
-    # add sscrap (screenscrapper scrapper!) library
-    add_subdirectory(sscrap)
+
+if (MPV_PLAYER)
+    add_subdirectory(mpv)
 endif ()
 
 # add libcross2d library. If you want to port pfba to another platform,
 # you should (may) only need to port libcross2d library.
 add_subdirectory(libcross2d)
+
+# add sscrap (screenscrapper scrapper!) library
+add_subdirectory(sscrap)
 
 # add ui library
 add_subdirectory(ui)
@@ -53,8 +61,8 @@ add_subdirectory(ui)
 project(pemu)
 
 set(PROJECT_AUTHOR Cpasjuste)
-set(VERSION_MAJOR 3)
-set(VERSION_MINOR 4)
+set(VERSION_MAJOR 4)
+set(VERSION_MINOR 0)
 
 # pnes
 #add_subdirectory(pnes)
