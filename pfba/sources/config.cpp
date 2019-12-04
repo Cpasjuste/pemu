@@ -73,7 +73,7 @@ PFBAConfig::PFBAConfig(c2d::Io *io, int version) : Config(io, version) {
          "AES_ASIA", "AES_JAPAN",
          "NEO_MVH_MV1CA", "NEO_MVH_MV1CJ",
          "DECK_V6", "DEVKIT"},
-        2, Option::Id::ROM_NEOBIOS, Option::Flags::STRING);
+        0, Option::Id::ROM_NEOBIOS, Option::Flags::STRING);
 
     // "c2dui_romlist" will also reload config, but we need new roms paths
     reset();
