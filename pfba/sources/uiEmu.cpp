@@ -4,7 +4,6 @@
 
 #include "burner.h"
 #include "burnint.h"
-#include "driverlist.h"
 
 #include "c2dui.h"
 #include "uiEmu.h"
@@ -36,9 +35,7 @@ int PFBAGuiEmu::load(const ss_api::Game &game) {
     std::string zipName = Utility::removeExt(game.path);
     for (unsigned int i = 0; i < nBurnDrvCount; i++) {
         nBurnDrvActive = i;
-        char *z_name = nullptr;
-        BurnDrvGetZipName(&z_name, 0);
-        if (z_name && zipName == z_name) {
+        if (zipName == BurnDrvGetTextA(DRV_NAME)) {
             break;
         }
     }
