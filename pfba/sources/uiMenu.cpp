@@ -18,15 +18,16 @@ bool PFBAGuiMenu::isOptionHidden(c2dui::Option *option) {
 
     ss_api::Game game = getUi()->getUiRomList()->getSelection();
 
-    if (isRom() && option->getId() == Option::Id::ROM_ROTATION && !game.id.empty() && !(game.rotation == "0")) {
+    if (isRom() && option->getId() == Option::Id::ROM_ROTATION
+        && !game.id.empty() && game.rotation == "0") {
         return true;
     }
 
-    // TODO: sscrap - add hardware filtering
-    //if (isRom() && option->getId() == Option::Id::ROM_NEOBIOS
-    //    && rom != nullptr && !(getUi()->getUiRomList()->getRomList()->isHardware(rom->hardware, HARDWARE_PREFIX_SNK))) {
-    //    return true;
-    //}
+    // Neo-Geo system id == 142
+    if (isRom() && option->getId() == Option::Id::ROM_NEOBIOS
+        && !game.id.empty() && game.system.id != "142") {
+        return true;
+    }
 
 #ifdef __SWITCH__
     if (option->getId() == Option::Id::ROM_FRAMESKIP) {

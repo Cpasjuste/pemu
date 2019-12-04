@@ -75,9 +75,7 @@ PFBAConfig::PFBAConfig(c2d::Io *io, int version) : Config(io, version) {
          "DECK_V6", "DEVKIT"},
         2, Option::Id::ROM_NEOBIOS, Option::Flags::STRING);
 
-    // set default rom options
+    // "c2dui_romlist" will also reload config, but we need new roms paths
     reset();
-
-    // load/overwrite configuration from file
-    load(ss_api::Game());
+    load();
 }
