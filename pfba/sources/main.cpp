@@ -23,7 +23,6 @@
 #include "uiEmu.h"
 #include "uiMenu.h"
 #include "config.h"
-#include "romlist.h"
 #include "uiStateMenu.h"
 #include "pfbaIo.h"
 

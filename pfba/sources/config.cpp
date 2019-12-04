@@ -3,13 +3,8 @@
 //
 
 #include <string>
-#include <vector>
-
-#include "burner.h"
-
 #include "c2dui.h"
 #include "config.h"
-#include "romlist.h"
 
 using namespace c2d;
 using namespace c2dui;
@@ -19,18 +14,18 @@ PFBAConfig::PFBAConfig(c2d::Io *io, int version) : Config(io, version) {
     printf("PFBAConfig(%s, v%i)\n", getConfigPath().c_str(), version);
 
     // add fba default roms paths
-    getRomPaths().emplace_back(io->getDataPath() + "coleco/");
-    getRomPaths().emplace_back(io->getDataPath() + "gamegear/");
-    getRomPaths().emplace_back(io->getDataPath() + "megadriv/");
-    getRomPaths().emplace_back(io->getDataPath() + "msx/");
-    getRomPaths().emplace_back(io->getDataPath() + "pce/");
-    getRomPaths().emplace_back(io->getDataPath() + "sg1000/");
-    getRomPaths().emplace_back(io->getDataPath() + "sgx/");
-    getRomPaths().emplace_back(io->getDataPath() + "sms/");
-    getRomPaths().emplace_back(io->getDataPath() + "tg16/");
-    getRomPaths().emplace_back(io->getDataPath() + "spectrum/");
-    for (size_t i = getRomPaths().size(); i < 20; i++) {
-        getRomPaths().emplace_back(std::string());
+    roms_paths.emplace_back(io->getDataPath() + "coleco/");
+    roms_paths.emplace_back(io->getDataPath() + "gamegear/");
+    roms_paths.emplace_back(io->getDataPath() + "megadriv/");
+    roms_paths.emplace_back(io->getDataPath() + "msx/");
+    roms_paths.emplace_back(io->getDataPath() + "pce/");
+    roms_paths.emplace_back(io->getDataPath() + "sg1000/");
+    roms_paths.emplace_back(io->getDataPath() + "sgx/");
+    roms_paths.emplace_back(io->getDataPath() + "sms/");
+    roms_paths.emplace_back(io->getDataPath() + "tg16/");
+    roms_paths.emplace_back(io->getDataPath() + "spectrum/");
+    for (size_t i = roms_paths.size(); i < 20; i++) {
+        roms_paths.emplace_back(std::string());
     }
 
     ////////////////////////////////////////////////////////////
@@ -52,10 +47,10 @@ PFBAConfig::PFBAConfig(c2d::Io *io, int version) : Config(io, version) {
         Option::Id::ROM_AUDIO_FREQ, Option::HIDDEN | Option::Flags::INTEGER);
 #else
     add(Option::Id::ROM_FILTER, "FORCE_60HZ",
-        {"OFF", "ON"}, 0, Option::Id::ROM_FORCE_60HZ, Option::Flags::BOOLEAN);
+        {"OFF", "ON"}, 1, Option::Id::ROM_FORCE_60HZ, Option::Flags::BOOLEAN);
     // audio
     add(Option::Id::ROM_FORCE_60HZ, "FORCE_AUDIO_SYNC",
-        {"OFF", "ON"}, 1, Option::Id::ROM_AUDIO_SYNC, Option::Flags::BOOLEAN);
+        {"OFF", "ON"}, 0, Option::Id::ROM_AUDIO_SYNC, Option::Flags::BOOLEAN);
     add(Option::Id::ROM_AUDIO_SYNC, "AUDIO_FREQUENCY",
         {"11025", "22050", "32000", "44100", "48000"}, 3, Option::Id::ROM_AUDIO_FREQ, Option::Flags::INTEGER);
 #endif

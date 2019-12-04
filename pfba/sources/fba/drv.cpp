@@ -23,7 +23,7 @@ struct MovieExtInfo {
     UINT32 hour, minute, second;
 };
 
-struct MovieExtInfo MovieInfo; // from replay.cpp
+//struct MovieExtInfo MovieInfo; // from replay.cpp
 
 static UINT8 NeoSystemList[] = {
         0x13, // "Universe BIOS ver. 3.3"
