@@ -255,7 +255,6 @@ Game UIRomListClassic::getSelection() {
 
 void UIRomListClassic::updateRomList() {
 
-    rom_index = 0;
     // TODO: sscrap - filterRomList
     filterRomList();
 
@@ -326,34 +325,22 @@ bool UIRomListClassic::onInput(c2d::Input::Player *players) {
 
     unsigned int keys = players[0].keys;
     if (keys & Input::Key::Up) {
-        rom_index--;
-        if (rom_index < 0)
-            rom_index = (int) (gameList.games.size() - 1);
         list_box->up();
         rom_info->load();
         timer_load_info_done = 0;
         timer_load_video_done = 0;
     } else if (keys & Input::Key::Down) {
-        rom_index++;
-        if ((unsigned int) rom_index >= gameList.games.size())
-            rom_index = 0;
         list_box->down();
         rom_info->load();
         timer_load_info_done = 0;
         timer_load_video_done = 0;
     } else if (keys & Input::Key::Right) {
-        rom_index += list_box->getMaxLines();
-        if ((unsigned int) rom_index >= gameList.games.size())
-            rom_index = (int) (gameList.games.size() - 1);
-        list_box->setSelection(rom_index);
+        list_box->setSelection(list_box->getIndex() + list_box->getMaxLines());
         rom_info->load();
         timer_load_info_done = 0;
         timer_load_video_done = 0;
     } else if (keys & Input::Key::Left) {
-        rom_index -= list_box->getMaxLines();
-        if (rom_index < 0)
-            rom_index = 0;
-        list_box->setSelection(rom_index);
+        list_box->setSelection(list_box->getIndex() - list_box->getMaxLines());
         rom_info->load();
         timer_load_info_done = 0;
         timer_load_video_done = 0;
@@ -431,14 +418,12 @@ void UIRomListClassic::onUpdate() {
         timer_load_video.restart();
     } else if (keys == 0) {
         if ((timer_load_info_done == 0) && timer_load_info.getElapsedTime().asMilliseconds() > timer_load_info_delay) {
-            rom_info->load(gameList.games.size() > (unsigned int) rom_index ?
-                           gameList.games[rom_index] : Game());
+            rom_info->load(list_box->getSelection());
             timer_load_info_done = 1;
         }
         if ((timer_load_video_done == 0) &&
             timer_load_video.getElapsedTime().asMilliseconds() > timer_load_video_delay) {
-            rom_info->loadVideo(gameList.games.size() > (unsigned int) rom_index ?
-                                gameList.games[rom_index] : Game());
+            rom_info->loadVideo(list_box->getSelection());
             timer_load_video_done = 1;
         }
     }
@@ -447,4 +432,3 @@ void UIRomListClassic::onUpdate() {
 UIRomListClassic::~UIRomListClassic() {
     printf("~UIRomListClassic\n");
 }
-

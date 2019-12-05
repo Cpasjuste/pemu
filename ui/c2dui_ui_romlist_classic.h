@@ -34,7 +34,6 @@ namespace c2dui {
 
         UIRomInfo *rom_info = nullptr;
         UIListBox *list_box = nullptr;
-        int rom_index = 0;
 
         c2d::C2DClock timer_load_info;
         int timer_load_info_delay = 500;

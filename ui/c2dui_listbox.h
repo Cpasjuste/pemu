@@ -97,7 +97,6 @@ namespace c2dui {
         float line_height;
         int max_lines;
         int file_index = 0;
-        int start_index = 0;
         int highlight_index = 0;
         bool use_icons = false;
         bool use_highlight = true;

@@ -153,11 +153,11 @@ void UIListBox::updateLines() {
 
     for (unsigned int i = 0; i < (unsigned int) max_lines; i++) {
 
-        if (start_index + i >= games.size()) {
+        if (file_index + i >= games.size()) {
             lines[i]->setVisibility(Visibility::Hidden);
         } else {
             // set file
-            Game game = games[start_index + i];
+            Game game = games[file_index + i];
             lines[i]->setVisibility(Visibility::Visible);
             lines[i]->setString(game.getName().text);
             // TODO: ICON
@@ -189,44 +189,59 @@ void UIListBox::updateLines() {
 
 void UIListBox::up() {
 
-    file_index--;
-    if (file_index < 0) {
-        file_index = (int) games.size() - 1;
-        start_index = (int) games.size() - max_lines;
-        highlight_index = max_lines - 1;
+    if (highlight_index <= max_lines / 2 && file_index > 0) {
+        file_index--;
     } else {
-        if (highlight_index <= 0) {
-            start_index--;
-        } else {
-            highlight_index--;
+        highlight_index--;
+        if (highlight_index < 0) {
+            highlight_index = max_lines / 2;
+            if (highlight_index >= (int) games.size()) {
+                highlight_index = (int) games.size() - 1;
+                file_index = 0;
+            } else {
+                file_index = ((int) games.size() - 1) - highlight_index;
+            }
         }
     }
+
     updateLines();
 }
 
 void UIListBox::down() {
 
-    file_index++;
-    if (file_index >= (int) games.size()) {
-        file_index = 0;
-        start_index = 0;
-        highlight_index = 0;
+    if (highlight_index >= max_lines / 2) {
+        file_index++;
+        if (file_index + highlight_index >= (int) games.size()) {
+            file_index = 0;
+            highlight_index = 0;
+        }
     } else {
-        if (highlight_index >= max_lines - 1) {
-            start_index++;
-        } else {
-            highlight_index++;
+        highlight_index++;
+        if (highlight_index >= (int) games.size()) {
+            highlight_index = 0;
         }
     }
+
     updateLines();
 }
 
 void UIListBox::setSelection(int new_index) {
 
-    file_index = new_index;
-    int page = file_index / max_lines;
-    start_index = page * max_lines;
-    highlight_index = file_index - start_index;
+    if (new_index < max_lines / 2) {
+        file_index = 0;
+        highlight_index = 0;
+    } else if (new_index > (int) games.size() - max_lines / 2) {
+        highlight_index = max_lines / 2;
+        file_index = (int) games.size() - 1 - highlight_index;
+        if (highlight_index >= (int) games.size()) {
+            highlight_index = (int) games.size() - 1;
+            file_index = 0;
+        }
+    } else {
+        highlight_index = max_lines / 2;
+        file_index = new_index - highlight_index;
+    }
+
     updateLines();
 }
 
@@ -256,8 +271,8 @@ std::vector<ss_api::Game> UIListBox::getGames() {
 }
 
 Game UIListBox::getSelection() {
-    if (!games.empty() && games.size() > (unsigned int) file_index) {
-        return games[file_index];
+    if (!games.empty() && games.size() > (size_t) file_index + highlight_index) {
+        return games[file_index + highlight_index];
     }
     return Game();
 }
@@ -290,7 +305,7 @@ void UIListBox::setHighlightUseFileColor(bool enable) {
 }
 
 int UIListBox::getIndex() {
-    return file_index;
+    return file_index + highlight_index;
 }
 
 int UIListBox::getMaxLines() {
