@@ -21,7 +21,7 @@ namespace c2dui {
             int filtering = 1;
             c2d::Color color;
             c2d::Color outlineColor;
-            int outlineSize;
+            float outlineSize = 0;
             c2d::Vector2f scaling = {1, 1};
             bool available = false;
         };
@@ -34,7 +34,7 @@ namespace c2dui {
             c2d::Color color;
             c2d::Color outlineColor;
             c2d::Text::Overflow overflow;
-            int outlineSize;
+            float outlineSize = 0;
             c2d::Vector2f scaling = {1, 1};
             bool available = false;
         };
@@ -50,7 +50,7 @@ namespace c2dui {
             int id = -1;
         };
 
-        Skin(UIMain *ui, const std::vector<Button> &buttons);
+        Skin(UIMain *ui, const std::vector<Button> &buttons, const c2d::Vector2f &scaling = c2d::Vector2f(1, 1));
 
         ~Skin();
 
@@ -83,7 +83,7 @@ namespace c2dui {
                                                      const c2d::Origin &origin,
                                                      const std::string &texture,
                                                      const c2d::Color &color,
-                                                     const c2d::Color &outlineColor, int outlineSize,
+                                                     const c2d::Color &outlineColor, float outlineSize = 0,
                                                      c2d::Vector2f scale = {1, 1});
 
         c2d::config::Group createTextGroup(const std::string &name,
@@ -91,7 +91,7 @@ namespace c2dui {
                                            const c2d::FloatRect &rect,
                                            const c2d::Origin &origin,
                                            const c2d::Color &color,
-                                           const c2d::Color &outlineColor, int outlineSize,
+                                           const c2d::Color &outlineColor, float outlineSize = 0,
                                            const c2d::Text::Overflow &overflow = c2d::Text::Overflow::Clamp,
                                            c2d::Vector2f scale = {1, 1});
 

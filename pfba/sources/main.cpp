@@ -66,10 +66,14 @@ int main(int argc, char **argv) {
             cfg->get(Option::Id::GUI_WINDOW_WIDTH)->getValueInt(),
             cfg->get(Option::Id::GUI_WINDOW_HEIGHT)->getValueInt()
     };
+
     // we need to create a renderer with real screen size
     printf("screen size: %i x %i, windows: x = %i, y = %i, w = %i, h = %i\n",
            (int) screen_size.x, (int) screen_size.y,
            (int) windows_size.left, (int) windows_size.top, (int) windows_size.width, (int) windows_size.height);
+    if (cfg->get(Option::Id::GUI_FULLSCREEN)->getValueBool()) {
+        screen_size = Vector2f();
+    }
     ui = new UIMain(screen_size);
     if (ui->getShaderList() != nullptr) {
         cfg->add(Option::Id::ROM_FILTER, "EFFECT", ui->getShaderList()->getNames(), 0,
@@ -81,9 +85,11 @@ int main(int argc, char **argv) {
 
     ui->setIo(io);
     ui->setConfig(cfg);
+#ifndef __FULLSCREEN__
     // now set window size, usefull when screen is "cropped" (freeplay zero/cm3)
     ui->setSize(windows_size.width, windows_size.height);
     ui->setPosition(windows_size.left, windows_size.top);
+#endif
 
     // skin
     // buttons used for ui config menu
@@ -130,7 +136,15 @@ int main(int argc, char **argv) {
     buttons.emplace_back(KEY_JOY_RSTICK_DEFAULT, "RSTICK");
     skin = new Skin(ui, buttons);
 #else
+#if __FULLSCREEN__
+    int x, y;
+    SDL_GetWindowSize(ui->getWindow(), &x, &y);
+    Vector2f scale = {(float) x / (float) C2D_SCREEN_WIDTH,
+                      (float) y / (float) C2D_SCREEN_HEIGHT};
+    skin = new Skin(ui, buttons, scale);
+#else
     skin = new Skin(ui, buttons);
+#endif
 #endif
     ui->setSkin(skin);
 

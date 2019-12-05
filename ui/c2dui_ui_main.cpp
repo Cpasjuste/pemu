@@ -58,9 +58,8 @@ void UIMain::init(UIRomList *_uiRomList, UIMenu *_uiMenu,
     add(uiState);
 
     // scaling factor mainly used for borders,
-    // based on switch resolution..
-    scaling = std::min(getSize().x / 1280, 1.0f);
-    //printf("scaling: %f\n", scaling);
+    scaling = std::min(getSize().x / C2D_SCREEN_WIDTH, 1.0f);
+    // printf("scaling: %f\n", scaling);
 
     uiMessageBox = new MessageBox(
             FloatRect(

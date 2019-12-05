@@ -56,7 +56,10 @@ Config::Config(c2d::Io *io, int ver) {
     append("WINDOW_HEIGHT", C2D_SCREEN_HEIGHT, Option::Id::GUI_WINDOW_HEIGHT,
            Option::Flags::INTEGER | Option::Flags::HIDDEN);
 #endif
-    append("FULLSCREEN", {"OFF", "ON"}, 1, Option::Id::GUI_FULLSCREEN, Option::Flags::BOOLEAN | Option::Flags::HIDDEN);
+#ifdef __FULLSCREEN__
+    append("FULLSCREEN", {"OFF", "ON"}, 0, Option::Id::GUI_FULLSCREEN, Option::Flags::BOOLEAN);
+    get()->at(get()->size() - 1).setInfo("This option needs a restart...");
+#endif
     // build zipped skin list
     std::vector<std::string> paths;
     std::vector<Io::File> files = io->getDirList(dataPath + "skins/", true);
