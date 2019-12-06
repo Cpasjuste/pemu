@@ -5,6 +5,8 @@
 #ifndef PEMU_UI_MPV_TEXTURE_H
 #define PEMU_UI_MPV_TEXTURE_H
 
+#ifdef __MPV__
+
 #include "mpv.h"
 
 class MpvTexture : public c2d::GLTextureBuffer {
@@ -21,4 +23,5 @@ private:
     Mpv *mpv = nullptr;
 };
 
+#endif // __MPV__
 #endif //PEMU_UI_MPV_TEXTURE_H

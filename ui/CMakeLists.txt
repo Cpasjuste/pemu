@@ -27,10 +27,11 @@ endif ()
 if (OPTION_BUILTIN_MINIZIP)
     list(APPEND CROSS2DUI_INCLUDE source)
     list(APPEND CROSS2DUI_SOURCE
-            minizip/ioapi.c
-            minizip/miniunz.c
-            minizip/minizip.c
-            minizip/unzip.c)
+            ${CMAKE_CURRENT_SOURCE_DIR}/minizip/ioapi.c
+            ${CMAKE_CURRENT_SOURCE_DIR}/minizip/unzip.c)
+	if (PLATFORM_WINDOWS)
+		list(APPEND CROSS2DUI_SOURCE  ${CMAKE_CURRENT_SOURCE_DIR}/minizip/iowin32.c)
+	endif ()
 endif ()
 
 ##########################

@@ -285,7 +285,9 @@ if (NOT BUILD_DEBUG)
     list(APPEND FLAGS -O3)
 endif ()
 
-if (NOT OPTION_BUILTIN_MINIZIP)
+if (OPTION_BUILTIN_MINIZIP)
+    list(REMOVE_ITEM SRC_BURNER ${CMAKE_SOURCE_DIR}/cores/fba/src/burner/ioapi.c)
+else ()
     set(LDFLAGS minizip)
 endif ()
 
@@ -362,7 +364,6 @@ elseif (PLATFORM_LINUX)
     ##############
     list(APPEND FLAGS -DLSB_FIRST)
     if (PLATFORM_WINDOWS)
-        list(REMOVE_ITEM SRC_BURNER ${CMAKE_SOURCE_DIR}/cores/fba/src/burner/ioapi.c)
         list(APPEND LDFLAGS z)
     else ()
         list(APPEND FLAGS -D__fastcall=)
@@ -459,18 +460,36 @@ if (PLATFORM_WINDOWS)
     # TODO: fix curl/nghttp2 static linking...
     add_custom_target(${PROJECT_NAME}.data.extra.win64
             DEPENDS ${PROJECT_NAME}.data.extra
+            COMMAND rm -f ${CMAKE_CURRENT_BINARY_DIR}/*.dll
+            COMMAND rm -f ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/*.dll
             COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/libwinpthread-1.dll" ${CMAKE_CURRENT_BINARY_DIR}/
             COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/libnghttp2-14.dll" ${CMAKE_CURRENT_BINARY_DIR}/
             COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/libunistring-2.dll" ${CMAKE_CURRENT_BINARY_DIR}/
             COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/libstdc++-6.dll" ${CMAKE_CURRENT_BINARY_DIR}/
             COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/libiconv-2.dll" ${CMAKE_CURRENT_BINARY_DIR}/
             COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/libgcc_s_seh-1.dll" ${CMAKE_CURRENT_BINARY_DIR}/
+            COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/libass-9.dll" ${CMAKE_CURRENT_BINARY_DIR}/
+            COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/avcodec-58.dll" ${CMAKE_CURRENT_BINARY_DIR}/
+            COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/avfilter-7.dll" ${CMAKE_CURRENT_BINARY_DIR}/
+            COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/avformat-58.dll" ${CMAKE_CURRENT_BINARY_DIR}/
+            COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/avutil-56.dll" ${CMAKE_CURRENT_BINARY_DIR}/
+            COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/swresample-3.dll" ${CMAKE_CURRENT_BINARY_DIR}/
+            COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/swscale-5.dll" ${CMAKE_CURRENT_BINARY_DIR}/
+            COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/SDL2.dll" ${CMAKE_CURRENT_BINARY_DIR}/
             COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/libwinpthread-1.dll" ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/
             COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/libnghttp2-14.dll" ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/
             COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/libunistring-2.dll" ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/
             COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/libstdc++-6.dll" ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/
             COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/libiconv-2.dll" ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/
             COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/libgcc_s_seh-1.dll" ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/
+            COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/libass-9.dll" ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/
+            COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/avcodec-58.dll" ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/
+            COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/avfilter-7.dll" ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/
+            COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/avformat-58.dll" ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/
+            COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/avutil-56.dll" ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/
+            COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/swresample-3.dll" ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/
+            COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/swscale-5.dll" ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/
+            COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/SDL2.dll" ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/
             )
     add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}.data.extra.win64)
 endif ()

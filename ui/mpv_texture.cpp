@@ -2,6 +2,8 @@
 // Created by cpasjuste on 09/12/18.
 //
 
+#ifdef __MPV__
+
 #include "cross2d/c2d.h"
 #include "mpv_texture.h"
 
@@ -38,3 +40,5 @@ void MpvTexture::onDraw(c2d::Transform &transform, bool draw) {
 
     GLTextureBuffer::onDraw(transform, draw);
 }
+
+#endif // __MPV__
