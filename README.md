@@ -10,7 +10,7 @@
 	- `mkdir cmake-build && cd cmake-build`
 	- `cmake ../ -G "MSYS Makefiles" -DPLATFORM_WINDOWS=ON -DOPTION_BUILTIN_MINIZIP=ON -DCMAKE_BUILD_TYPE=Release`
 	- `make pfba.deps`
-	- `make && make pfba_windows_release`
+	- `make`
 
 **Building - Ubuntu (x64) => Ubuntu (x64)**
 - install dependencies:
@@ -21,7 +21,7 @@
 	- `mkdir cmake-build && cd cmake-build`
 	- `cmake ../ -DPLATFORM_LINUX=ON -DCMAKE_BUILD_TYPE=Release`
 	- `make pfba.deps`
-	- `make && make pfba_linux_release`
+	- `make`
 
 **Building - Ubuntu (x64) => Nintendo Switch**
 - install ubuntu build tools:
@@ -36,4 +36,4 @@
 	- `mkdir cmake-build && cd cmake-build`
 	- `cmake ../ -DPLATFORM_SWITCH=ON -DCMAKE_BUILD_TYPE=Release`
 	- `make pfba.deps`
-	- `make && make pfba_linux_release`
+	- `make`
