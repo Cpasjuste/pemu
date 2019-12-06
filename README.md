@@ -14,13 +14,15 @@
 
 **Building - Ubuntu (x64) => Ubuntu (x64)**
 - install dependencies:
-	- `sudo apt-get install git zip build-essential cmake libsdl2-dev libconfig-dev libcurl4-openssl-dev libtinyxml2-dev libconfig-dev libglm-dev libfreetype6-dev libpng-dev libminizip-dev zlib1g-dev libmpv-dev`
+	- `sudo apt-get install git zip build-essential cmake libsdl2-dev libconfig-dev libcurl4-openssl-dev libtinyxml2-dev libconfig-dev libglm-dev libfreetype6-dev libpng-dev libminizip-dev zlib1g-dev`
 - clone pemu repository:
 	- `git clone --recursive https://github.com/Cpasjuste/pemu.git`
 - build:
 	- `mkdir cmake-build && cd cmake-build`
 	- `cmake ../ -DPLATFORM_LINUX=ON -DCMAKE_BUILD_TYPE=Release`
-	
+	- `make pfba.deps`
+	- `make`
+
 **Building - Ubuntu (x64) => Nintendo Switch**
 - install ubuntu build tools:
 	- `sudo apt-get install zip git autoconf libtool automake build-essential cmake`
@@ -33,4 +35,5 @@
 - build:
 	- `mkdir cmake-build && cd cmake-build`
 	- `cmake ../ -DPLATFORM_SWITCH=ON -DCMAKE_BUILD_TYPE=Release`
-	
+	- `make pfba.deps`
+	- `make`
