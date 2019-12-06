@@ -450,9 +450,9 @@ add_dependencies(${PROJECT_NAME}_${TARGET_PLATFORM}_release ${PROJECT_NAME}.data
 
 if (PLATFORM_WINDOWS)
     add_custom_command(TARGET ${PROJECT_NAME}.data.extra POST_BUILD
-		COMMAND ${CMAKE_SOURCE_DIR}/pfba/data/windows/copy_deps.sh ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.exe ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/
-		COMMENT "Copying required mingw dependencies..."
-	)
+            COMMAND ${CMAKE_SOURCE_DIR}/pfba/data/windows/copy_deps.sh ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.exe ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/
+            COMMENT "Copying required mingw dependencies..."
+            )
 endif ()
 
 #############
