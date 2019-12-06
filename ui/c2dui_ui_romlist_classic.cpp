@@ -108,10 +108,12 @@ public:
 #ifdef __MPV__
         std::string romPath = ui->getConfig()->getRomPath(0);
         std::string path = romPath + game.getMedia("video").url;
-        int res = mpv->load(path, Mpv::LoadType::Replace, "loop=yes");
-        if (res == 0) {
-            mpvTexture->setLayer(1);
-            mpvTexture->setVisibility(Visibility::Visible, false);
+        if (ui->getIo()->exist(path)) {
+            int res = mpv->load(path, Mpv::LoadType::Replace, "loop=yes");
+            if (res == 0) {
+                mpvTexture->setLayer(1);
+                mpvTexture->setVisibility(Visibility::Visible, false);
+            }
         }
 #endif
         return true;
