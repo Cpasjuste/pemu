@@ -14,7 +14,7 @@
 
 **Building - Ubuntu (x64) => Ubuntu (x64)**
 - install dependencies:
-	- `sudo apt-get install git zip build-essential cmake libsdl2-dev libconfig-dev libcurl4-openssl-dev libtinyxml2-dev libconfig-dev libglm-dev libfreetype6-dev libpng-dev libminizip-dev zlib1g-dev`
+	- `sudo apt-get install git zip build-essential cmake libsdl2-dev libconfig-dev libcurl4-openssl-dev libtinyxml2-dev libconfig-dev libglm-dev libfreetype6-dev libpng-dev libminizip-dev zlib1g-dev libmpv-dev`
 - clone pemu repository:
 	- `git clone --recursive https://github.com/Cpasjuste/pemu.git`
 - build:
