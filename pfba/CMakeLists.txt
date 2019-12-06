@@ -417,7 +417,7 @@ add_custom_target(${PROJECT_NAME}.deps
         )
 message("-- C2D: Be sure to build \"${PROJECT_NAME}.deps\" target before \"${PROJECT_NAME}\" target")
 # driverlist.h
-# TODO: crap, mingw64 perl can't process this on windows...
+# TODO: crap, mingw64 perl can't process this on windows... ( Argument list too long)
 if (PLATFORM_WINDOWS)
     target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/pfba/data/windows)
 else ()
@@ -459,18 +459,18 @@ if (PLATFORM_WINDOWS)
     # TODO: fix curl/nghttp2 static linking...
     add_custom_target(${PROJECT_NAME}.data.extra.win64
             DEPENDS ${PROJECT_NAME}.data.extra
-            COMMAND ${CMAKE_COMMAND} -E copy "/msys64/mingw64/bin/libwinpthread-1.dll" ${CMAKE_CURRENT_BINARY_DIR}/
-            COMMAND ${CMAKE_COMMAND} -E copy "/msys64/mingw64/bin/libnghttp2-14.dll" ${CMAKE_CURRENT_BINARY_DIR}/
-            COMMAND ${CMAKE_COMMAND} -E copy "/msys64/mingw64/bin/libunistring-2.dll" ${CMAKE_CURRENT_BINARY_DIR}/
-            COMMAND ${CMAKE_COMMAND} -E copy "/msys64/mingw64/bin/libstdc++-6.dll" ${CMAKE_CURRENT_BINARY_DIR}/
-            COMMAND ${CMAKE_COMMAND} -E copy "/msys64/mingw64/bin/libiconv-2.dll" ${CMAKE_CURRENT_BINARY_DIR}/
-            COMMAND ${CMAKE_COMMAND} -E copy "/msys64/mingw64/bin/libgcc_s_seh-1.dll" ${CMAKE_CURRENT_BINARY_DIR}/
-            COMMAND ${CMAKE_COMMAND} -E copy "/msys64/mingw64/bin/libwinpthread-1.dll" ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/
-            COMMAND ${CMAKE_COMMAND} -E copy "/msys64/mingw64/bin/libnghttp2-14.dll" ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/
-            COMMAND ${CMAKE_COMMAND} -E copy "/msys64/mingw64/bin/libunistring-2.dll" ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/
-            COMMAND ${CMAKE_COMMAND} -E copy "/msys64/mingw64/bin/libstdc++-6.dll" ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/
-            COMMAND ${CMAKE_COMMAND} -E copy "/msys64/mingw64/bin/libiconv-2.dll" ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/
-            COMMAND ${CMAKE_COMMAND} -E copy "/msys64/mingw64/bin/libgcc_s_seh-1.dll" ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/
+            COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/libwinpthread-1.dll" ${CMAKE_CURRENT_BINARY_DIR}/
+            COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/libnghttp2-14.dll" ${CMAKE_CURRENT_BINARY_DIR}/
+            COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/libunistring-2.dll" ${CMAKE_CURRENT_BINARY_DIR}/
+            COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/libstdc++-6.dll" ${CMAKE_CURRENT_BINARY_DIR}/
+            COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/libiconv-2.dll" ${CMAKE_CURRENT_BINARY_DIR}/
+            COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/libgcc_s_seh-1.dll" ${CMAKE_CURRENT_BINARY_DIR}/
+            COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/libwinpthread-1.dll" ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/
+            COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/libnghttp2-14.dll" ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/
+            COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/libunistring-2.dll" ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/
+            COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/libstdc++-6.dll" ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/
+            COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/libiconv-2.dll" ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/
+            COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/libgcc_s_seh-1.dll" ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/
             )
     add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}.data.extra.win64)
 endif ()

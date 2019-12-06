@@ -62,7 +62,9 @@
 
 // ---------------------------------------------------------------------------
 // FIXME: this is needed by interface.h (eliminate later)
-#ifndef RECT
+#ifdef __WINDOWS__
+#include <windef.h>
+#else
 typedef struct tagRECT {
     int left;
     int top;

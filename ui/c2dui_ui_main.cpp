@@ -61,7 +61,7 @@ void UIMain::init(UIRomList *_uiRomList, UIMenu *_uiMenu,
     scaling = std::min(getSize().x / C2D_SCREEN_WIDTH, 1.0f);
     // printf("scaling: %f\n", scaling);
 
-    uiMessageBox = new MessageBox(
+    uiMessageBox = new c2d::MessageBox(
             FloatRect(
                     getSize().x / 2,
                     getSize().y / 2,
@@ -153,7 +153,7 @@ UIProgressBox *UIMain::getUiProgressBox() {
     return uiProgressBox;
 }
 
-MessageBox *UIMain::getUiMessageBox() {
+c2d::MessageBox *UIMain::getUiMessageBox() {
     return uiMessageBox;
 }
 
