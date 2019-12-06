@@ -35,4 +35,5 @@
 - build:
 	- `mkdir cmake-build && cd cmake-build`
 	- `cmake ../ -DPLATFORM_SWITCH=ON -DCMAKE_BUILD_TYPE=Release`
-	
+	- `make pfba.deps`
+	- `make && make pfba_linux_release`
