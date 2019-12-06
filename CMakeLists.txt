@@ -43,7 +43,9 @@ set(UPDATE_CONFIG ON CACHE BOOL "Force config file updating")
 add_subdirectory(libcross2d)
 
 if (MPV_PLAYER)
-    add_subdirectory(mpv)
+	if(PLATFORM_SWITCH)
+		add_subdirectory(mpv)
+	endif ()
 endif ()
 
 # add sscrap (screenscrapper scrapper!) library

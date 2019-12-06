@@ -12,12 +12,13 @@ static void *get_proc_address_mpv(void *unused, const char *name) {
 
 Mpv::Mpv(const std::string &configPath, bool initRender) {
 
+	printf("mpv_create\n");
     handle = mpv_create();
     if (handle == nullptr) {
         printf("Mpv::Mpv: error: mpv_create\n");
         return;
     }
-
+	printf("mpv_set_option_string\n");
     mpv_set_option_string(handle, "config-dir", configPath.c_str());
     mpv_set_option_string(handle, "terminal", "yes");
     mpv_set_option_string(handle, "msg-level", "all=v");
@@ -32,7 +33,7 @@ Mpv::Mpv(const std::string &configPath, bool initRender) {
         mpv_set_option_string(handle, "vo", "null");
         mpv_set_option_string(handle, "ao", "null");
     }
-
+	printf("mpv_initialize\n");
     int res = mpv_initialize(handle);
     if (res != 0) {
         printf("Mpv::Mpv: error: mpv_initialize: %s\n", mpv_error_string(res));

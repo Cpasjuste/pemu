@@ -364,7 +364,7 @@ elseif (PLATFORM_LINUX)
     ##############
     list(APPEND FLAGS -DLSB_FIRST)
     if (PLATFORM_WINDOWS)
-        list(APPEND LDFLAGS z)
+        list(APPEND LDFLAGS z -static)
     else ()
         list(APPEND FLAGS -D__fastcall=)
     endif ()
@@ -476,6 +476,24 @@ if (PLATFORM_WINDOWS)
             COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/swresample-3.dll" ${CMAKE_CURRENT_BINARY_DIR}/
             COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/swscale-5.dll" ${CMAKE_CURRENT_BINARY_DIR}/
             COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/SDL2.dll" ${CMAKE_CURRENT_BINARY_DIR}/
+			COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/mpv-1.dll" ${CMAKE_CURRENT_BINARY_DIR}/
+			COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/libvulkan-1.dll" ${CMAKE_CURRENT_BINARY_DIR}/
+			COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/libarchive-13.dll" ${CMAKE_CURRENT_BINARY_DIR}/
+            COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/avdevice-58.dll" ${CMAKE_CURRENT_BINARY_DIR}/
+            COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/libbluray-2.dll" ${CMAKE_CURRENT_BINARY_DIR}/
+            COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/libcaca-0.dll" ${CMAKE_CURRENT_BINARY_DIR}/
+            COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/libcdio_cdda-2.dll" ${CMAKE_CURRENT_BINARY_DIR}/
+            COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/libcdio_paranoia-2.dll" ${CMAKE_CURRENT_BINARY_DIR}/
+            COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/libcdio-19.dll" ${CMAKE_CURRENT_BINARY_DIR}/
+            COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/lua51.dll" ${CMAKE_CURRENT_BINARY_DIR}/
+            COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/liblcms2-2.dll" ${CMAKE_CURRENT_BINARY_DIR}/
+            COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/libdvdnav-4.dll" ${CMAKE_CURRENT_BINARY_DIR}/
+            COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/libplacebo-21.dll" ${CMAKE_CURRENT_BINARY_DIR}/
+            COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/librubberband-2.dll" ${CMAKE_CURRENT_BINARY_DIR}/
+            COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/libuchardet.dll" ${CMAKE_CURRENT_BINARY_DIR}/
+            COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/libvapoursynth-script-0.dll" ${CMAKE_CURRENT_BINARY_DIR}/
+            COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/libbz2-1.dll" ${CMAKE_CURRENT_BINARY_DIR}/
+            COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/liblz4.dll" ${CMAKE_CURRENT_BINARY_DIR}/
             COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/libwinpthread-1.dll" ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/
             COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/libnghttp2-14.dll" ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/
             COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/libunistring-2.dll" ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/
@@ -490,6 +508,24 @@ if (PLATFORM_WINDOWS)
             COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/swresample-3.dll" ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/
             COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/swscale-5.dll" ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/
             COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/SDL2.dll" ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/
+			COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/mpv-1.dll" ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/
+			COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/libvulkan-1.dll" ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/
+			COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/libarchive-13.dll" ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/
+            COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/avdevice-58.dll" ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/
+            COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/libbluray-2.dll" ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/
+            COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/libcaca-0.dll" ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/
+            COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/libcdio_cdda-2.dll" ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/
+            COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/libcdio_paranoia-2.dll" ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/
+            COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/libcdio-19.dll" ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/
+            COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/lua51.dll" ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/
+            COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/liblcms2-2.dll" ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/
+            COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/libdvdnav-4.dll" ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/
+            COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/libplacebo-21.dll" ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/
+            COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/librubberband-2.dll" ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/
+            COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/libuchardet.dll" ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/
+            COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/libvapoursynth-script-0.dll" ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/
+            COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/libbz2-1.dll" ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/
+            COMMAND ${CMAKE_COMMAND} -E copy "/mingw64/bin/liblz4.dll" ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/
             )
     add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}.data.extra.win64)
 endif ()
