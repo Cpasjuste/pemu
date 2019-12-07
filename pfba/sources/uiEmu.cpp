@@ -45,9 +45,9 @@ int PFBAGuiEmu::load(const ss_api::Game &game) {
         return -1;
     }
 
-    int audio_freq = getUi()->getConfig()->get(Option::Id::ROM_AUDIO_FREQ)->getValueInt();
-    nInterpolation = getUi()->getConfig()->get(Option::Id::ROM_AUDIO_INTERPOLATION)->getValueInt();
-    nFMInterpolation = getUi()->getConfig()->get(Option::Id::ROM_AUDIO_FMINTERPOLATION)->getValueInt();
+    int audio_freq = getUi()->getConfig()->get(Option::Id::ROM_AUDIO_FREQ, true)->getValueInt(44100);
+    nInterpolation = getUi()->getConfig()->get(Option::Id::ROM_AUDIO_INTERPOLATION, true)->getValueInt();
+    nFMInterpolation = getUi()->getConfig()->get(Option::Id::ROM_AUDIO_FMINTERPOLATION, true)->getValueInt();
     bForce60Hz = getUi()->getConfig()->get(Option::Id::ROM_FORCE_60HZ, true)->getValueBool();
     if (bForce60Hz) {
         nBurnFPS = 6000;
@@ -239,7 +239,7 @@ void PFBAGuiEmu::onUpdate() {
     if (!isPaused()) {
 
         // fps
-        int showFps = getUi()->getConfig()->get(Option::Id::ROM_SHOW_FPS, true)->getValueBool();
+        bool showFps = getUi()->getConfig()->get(Option::Id::ROM_SHOW_FPS, true)->getValueBool();
         getFpsText()->setVisibility(showFps ? c2d::Visibility::Visible : c2d::Visibility::Hidden);
         if (showFps) {
             sprintf(getFpsString(), "FPS: %.2g/%2d", getUi()->getFps(), nBurnFPS / 100);

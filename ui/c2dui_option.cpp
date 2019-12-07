@@ -3,6 +3,7 @@
 //
 
 #include <c2dui_option.h>
+#include <cross2d/skeleton/utility.h>
 
 #include "c2dui_option.h"
 
@@ -44,8 +45,8 @@ void Option::setValueString(const std::string &value) {
     current_option = value;
 }
 
-int Option::getValueInt() {
-    return std::stoi(current_option);
+int Option::getValueInt(int defValue) {
+    return c2d::Utility::parseInt(current_option, defValue);
 }
 
 void Option::setValueInt(int value) {

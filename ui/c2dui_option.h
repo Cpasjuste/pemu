@@ -115,7 +115,7 @@ namespace c2dui {
 
         void setValueString(const std::string &value);
 
-        int getValueInt();
+        int getValueInt(int defValue = 0);
 
         void setValueInt(int value);
 
