@@ -77,7 +77,7 @@ public:
                             ((getSize().x * 0.33f) - 32) / sprite->getTextureRect().width,
                             (getSize().y / 2 + 4) / sprite->getTextureRect().height);
                     sprite->setScale(tex_scaling, tex_scaling);
-                    sprite->setPosition((getSize().x * 0.66f) + 16, getSize().y / 2 - 3);
+                    sprite->setPosition((getSize().x * 0.67f), getSize().y / 2);
                     sprite->setOrigin(Origin::Left);
                 } else {
                     value->setVisibility(Visibility::Visible);
@@ -139,7 +139,7 @@ UIMenu::UIMenu(UIMain *ui) : RectangleShape(Vector2f(0, 0)) {
     for (int i = 0; i < max_lines; i++) {
         FloatRect rect = {textGroup.rect.left, start_y + (i * line_height), getSize().x / 2, line_height};
         if (i >= max_lines / 2) {
-#warning "todo: fix menu height on small screens"
+            //"todo: fix menu height on small screens"
             //rect.left = getSize().x / 2;
             //rect.top = start_y + ((i - ((float) max_lines / 2)) * line_height);
         }
@@ -262,7 +262,11 @@ void UIMenu::updateHighlight() {
     highlight->setOrigin(Origin::Left);
     highlight->setPosition(line->getPosition() + line->value->getPosition());
     highlight->move(-4, 0);
-    highlight->setSize(line->value->getLocalBounds().width + 8, highlight->getSize().y);
+    if (line->sprite->isVisible()) {
+        highlight->setSize(line->value->getLocalBounds().width, highlight->getSize().y);
+    } else {
+        highlight->setSize(line->value->getLocalBounds().width + 8, highlight->getSize().y);
+    }
     for (size_t i = 0; i < lines.size(); i++) {
         Color color = (int) i == optionIndex ? getOutlineColor() : textGroup.outlineColor;
         lines.at(i)->value->setOutlineColor(color);
