@@ -8,8 +8,6 @@
 #include <vector>
 #include "ss_gamelist.h"
 
-#define HARDWARE_PREFIX_ALL 0xffffffff
-
 namespace c2dui {
 
     class UIMain;
@@ -24,20 +22,15 @@ namespace c2dui {
 
         virtual void build();
 
-        void addFav(ss_api::Game *rom);
+        void addFav(const ss_api::Game &game);
 
-        void removeFav(ss_api::Game *rom);
-
-        enum RomState {
-            NOT_WORKING = 0,
-            MISSING,
-            WORKING
-        };
+        void removeFav(const ss_api::Game &game);
 
         UIMain *ui;
         c2d::RectangleShape *rect;
         c2d::Text *text;
         ss_api::GameList gameList;
+        ss_api::GameList gameListFav;
         std::vector<std::string> paths;
         char icon_path[1024];
         char text_str[512];

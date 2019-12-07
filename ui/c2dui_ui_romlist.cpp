@@ -13,13 +13,13 @@ using namespace c2d;
 using namespace c2dui;
 using namespace ss_api;
 
-UIRomList::UIRomList(UIMain *u, RomList *romList, const c2d::Vector2f &size) : RectangleShape(size) {
+UIRomList::UIRomList(UIMain *u, RomList *rList, const c2d::Vector2f &size) : RectangleShape(size) {
 
     printf("UIRomList\n");
 
     ui = u;
-    rom_list = romList;
-    gameList = rom_list->gameList;
+    romList = rList;
+    gameList = romList->gameList;
 }
 
 Game UIRomList::getSelection() {
@@ -27,7 +27,7 @@ Game UIRomList::getSelection() {
 }
 
 RomList *UIRomList::getRomList() {
-    return rom_list;
+    return romList;
 }
 
 Texture *UIRomList::getPreviewTexture(const ss_api::Game &game) {
@@ -68,21 +68,40 @@ Texture *UIRomList::getPreviewTexture(const ss_api::Game &game) {
 
 void UIRomList::filterRomList() {
 
-    gameList = rom_list->gameList.filter(
-            ui->getConfig()->get(Option::Id::GUI_SHOW_ALL)->getValueString() == "AVAILABLE",
-            ui->getConfig()->get(Option::Id::GUI_FILTER_CLONES)->getValueBool(),
-            ui->getConfig()->get(Option::Id::GUI_FILTER_SYSTEM)->getValueString(),
-            ui->getConfig()->get(Option::Id::GUI_FILTER_EDITOR)->getValueString(),
-            ui->getConfig()->get(Option::Id::GUI_FILTER_DEVELOPER)->getValueString(),
+    Option *opt = ui->getConfig()->get(Option::Id::GUI_SHOW_ALL);
+    if (opt->getValueString() == "FAVORITES") {
+        gameList = romList->gameListFav.filter(
+                false,
+                ui->getConfig()->get(Option::Id::GUI_FILTER_CLONES)->getValueBool(),
+                ui->getConfig()->get(Option::Id::GUI_FILTER_SYSTEM)->getValueString(),
+                ui->getConfig()->get(Option::Id::GUI_FILTER_EDITOR)->getValueString(),
+                ui->getConfig()->get(Option::Id::GUI_FILTER_DEVELOPER)->getValueString(),
 
-            ui->getConfig()->get(Option::Id::GUI_FILTER_PLAYERS)->getValueString(),
-            ui->getConfig()->get(Option::Id::GUI_FILTER_RATING)->getValueString(),
-            "All",
-            ui->getConfig()->get(Option::Id::GUI_FILTER_ROTATION)->getValueString(),
-            ui->getConfig()->get(Option::Id::GUI_FILTER_RESOLUTION)->getValueString(),
-            ui->getConfig()->get(Option::Id::GUI_FILTER_DATE)->getValueString(),
-            ui->getConfig()->get(Option::Id::GUI_FILTER_GENRE)->getValueString()
-    );
+                ui->getConfig()->get(Option::Id::GUI_FILTER_PLAYERS)->getValueString(),
+                ui->getConfig()->get(Option::Id::GUI_FILTER_RATING)->getValueString(),
+                "All",
+                ui->getConfig()->get(Option::Id::GUI_FILTER_ROTATION)->getValueString(),
+                ui->getConfig()->get(Option::Id::GUI_FILTER_RESOLUTION)->getValueString(),
+                ui->getConfig()->get(Option::Id::GUI_FILTER_DATE)->getValueString(),
+                ui->getConfig()->get(Option::Id::GUI_FILTER_GENRE)->getValueString()
+        );
+    } else {
+        gameList = romList->gameList.filter(
+                ui->getConfig()->get(Option::Id::GUI_SHOW_ALL)->getValueString() == "AVAILABLE",
+                ui->getConfig()->get(Option::Id::GUI_FILTER_CLONES)->getValueBool(),
+                ui->getConfig()->get(Option::Id::GUI_FILTER_SYSTEM)->getValueString(),
+                ui->getConfig()->get(Option::Id::GUI_FILTER_EDITOR)->getValueString(),
+                ui->getConfig()->get(Option::Id::GUI_FILTER_DEVELOPER)->getValueString(),
+
+                ui->getConfig()->get(Option::Id::GUI_FILTER_PLAYERS)->getValueString(),
+                ui->getConfig()->get(Option::Id::GUI_FILTER_RATING)->getValueString(),
+                "All",
+                ui->getConfig()->get(Option::Id::GUI_FILTER_ROTATION)->getValueString(),
+                ui->getConfig()->get(Option::Id::GUI_FILTER_RESOLUTION)->getValueString(),
+                ui->getConfig()->get(Option::Id::GUI_FILTER_DATE)->getValueString(),
+                ui->getConfig()->get(Option::Id::GUI_FILTER_GENRE)->getValueString()
+        );
+    }
 }
 
 void UIRomList::updateRomList() {
@@ -90,5 +109,5 @@ void UIRomList::updateRomList() {
 
 UIRomList::~UIRomList() {
     printf("~UIRomList\n");
-    delete (rom_list);
+    delete (romList);
 }

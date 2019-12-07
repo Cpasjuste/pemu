@@ -242,20 +242,19 @@ UIRomListClassic::UIRomListClassic(UIMain *u, RomList *romList, const c2d::Vecto
     add(help);
 
     // add rom info ui
-    rom_info = new UIRomInfo(ui, this, skin->font, ui->getFontSize());
-    add(rom_info);
+    romInfo = new UIRomInfo(ui, this, skin->font, ui->getFontSize());
+    add(romInfo);
 
     // filter roms
     updateRomList();
 }
 
 Game UIRomListClassic::getSelection() {
-    return list_box->getSelection();
+    return listBox->getSelection();
 }
 
 void UIRomListClassic::updateRomList() {
 
-    // TODO: sscrap - filterRomList
     filterRomList();
 
     Skin::TextGroup textGroup = ui->getSkin()->getText({"MAIN", "ROM_LIST", "TEXT"});
@@ -263,37 +262,37 @@ void UIRomListClassic::updateRomList() {
     Color colorMissing = grp->getOption("color_missing")->getColor();
     bool highlightUseFileColors = grp->getOption("highlight_use_text_color")->getInteger() == 1;
 
-    if (list_box == nullptr) {
+    if (listBox == nullptr) {
         // add rom list ui
         Skin::RectangleShapeGroup romListGroup = ui->getSkin()->getRectangleShape({"MAIN", "ROM_LIST"});
         bool use_icons = false;
 #if !(defined(__PSP2__) || defined(__3DS__)) // two slow
         use_icons = ui->getConfig()->get(Option::Id::GUI_SHOW_ICONS)->getValueBool();
 #endif
-        list_box = new UIListBox(ui->getSkin()->font, (int) textGroup.size, romListGroup.rect, gameList.games,
-                                 use_icons);
-        list_box->colorMissing = colorMissing;
-        list_box->colorAvailable = textGroup.color;
-        list_box->setFillColor(romListGroup.color);
-        list_box->setOutlineColor(romListGroup.outlineColor);
-        list_box->setOutlineThickness((float) romListGroup.outlineSize);
-        list_box->setSelection(0);
+        listBox = new UIListBox(ui->getSkin()->font, (int) textGroup.size, romListGroup.rect, gameList.games,
+                                use_icons);
+        listBox->colorMissing = colorMissing;
+        listBox->colorAvailable = textGroup.color;
+        listBox->setFillColor(romListGroup.color);
+        listBox->setOutlineColor(romListGroup.outlineColor);
+        listBox->setOutlineThickness((float) romListGroup.outlineSize);
+        listBox->setSelection(0);
         // rom item
-        list_box->setTextOutlineColor(textGroup.outlineColor);
-        list_box->setTextOutlineThickness((float) textGroup.outlineSize);
+        listBox->setTextOutlineColor(textGroup.outlineColor);
+        listBox->setTextOutlineThickness((float) textGroup.outlineSize);
         // hihglight
         Skin::RectangleShapeGroup rectShape = ui->getSkin()->getRectangleShape({"SKIN_CONFIG", "HIGHLIGHT"});
-        list_box->getHighlight()->setFillColor(rectShape.color);
-        list_box->getHighlight()->setOutlineColor(rectShape.outlineColor);
-        list_box->getHighlight()->setOutlineThickness((float) rectShape.outlineSize);
-        list_box->setHighlightUseFileColor(highlightUseFileColors);
-        add(list_box);
+        listBox->getHighlight()->setFillColor(rectShape.color);
+        listBox->getHighlight()->setOutlineColor(rectShape.outlineColor);
+        listBox->getHighlight()->setOutlineThickness((float) rectShape.outlineSize);
+        listBox->setHighlightUseFileColor(highlightUseFileColors);
+        add(listBox);
     } else {
-        list_box->setGames(gameList.games);
+        listBox->setGames(gameList.games);
     }
 
-    if (rom_info != nullptr) {
-        rom_info->load(Game());
+    if (romInfo != nullptr) {
+        romInfo->load(Game());
         timer_load_info_done = 0;
         timer_load_info.restart();
         timer_load_video_done = 0;
@@ -304,7 +303,7 @@ void UIRomListClassic::updateRomList() {
 void UIRomListClassic::setVisibility(c2d::Visibility visibility, bool tweenPlay) {
 
     if (visibility == c2d::Visibility::Hidden) {
-        rom_info->load();
+        romInfo->load();
         timer_load_info_done = 0;
         timer_load_video_done = 0;
     } else {
@@ -325,69 +324,63 @@ bool UIRomListClassic::onInput(c2d::Input::Player *players) {
 
     unsigned int keys = players[0].keys;
     if (keys & Input::Key::Up) {
-        list_box->up();
-        rom_info->load();
+        listBox->up();
+        romInfo->load();
         timer_load_info_done = 0;
         timer_load_video_done = 0;
     } else if (keys & Input::Key::Down) {
-        list_box->down();
-        rom_info->load();
+        listBox->down();
+        romInfo->load();
         timer_load_info_done = 0;
         timer_load_video_done = 0;
     } else if (keys & Input::Key::Right) {
-        list_box->setSelection(list_box->getIndex() + list_box->getMaxLines());
-        rom_info->load();
+        listBox->setSelection(listBox->getIndex() + listBox->getMaxLines());
+        romInfo->load();
         timer_load_info_done = 0;
         timer_load_video_done = 0;
     } else if (keys & Input::Key::Left) {
-        list_box->setSelection(list_box->getIndex() - list_box->getMaxLines());
-        rom_info->load();
+        listBox->setSelection(listBox->getIndex() - listBox->getMaxLines());
+        romInfo->load();
         timer_load_info_done = 0;
         timer_load_video_done = 0;
     } else if (keys & Input::Key::Fire1) {
         Game game = getSelection();
         if (game.available) {
 #ifdef __MPV__
-            rom_info->mpvTexture->setVisibility(c2d::Visibility::Hidden);
-            rom_info->mpv->stop();
+            romInfo->mpvTexture->setVisibility(c2d::Visibility::Hidden);
+            romInfo->mpv->stop();
 #endif
             ui->getConfig()->load(game);
             ui->getUiEmu()->load(game);
             return true;
         }
     } else if (keys & Input::Key::Fire4) {
-        if (!getSelection().id.empty()) {
-            // remove from favorites
-            // TODO: sscrap - favs
-            /*
-            if (getSelection()->hardware & (unsigned int) HARDWARE_PREFIX_FAV) {
-                int res = ui->getUiMessageBox()->show("FAVORITES",
-                                                      "remove selection from favorites ?", "OK", "CANCEL");
-                if (res == MessageBox::LEFT) {
-                    rom_list->removeFav(getSelection());
-                    Option *opt = ui->getConfig()->get(Option::Id::GUI_SHOW_ALL);
-                    if (opt->getValueString() == "FAVORITES") {
-                        // update list if we are in favorites
-                        updateRomList();
-                    }
+        // remove from favorites
+        Game game = getSelection();
+        if (!game.id.empty() && romList->gameListFav.exist(game.romid)) {
+            int res = ui->getUiMessageBox()->show("FAVORITES",
+                                                  "Remove from favorites ?",
+                                                  "OK", "CANCEL");
+            if (res == MessageBox::LEFT) {
+                romList->removeFav(game);
+                Option *opt = ui->getConfig()->get(Option::Id::GUI_SHOW_ALL);
+                if (opt->getValueString() == "FAVORITES") {
+                    // update list if we are in favorites
+                    updateRomList();
                 }
             }
-            */
         }
     } else if (keys & Input::Key::Fire3) {
-        // TODO: sscrap - favs
-        /*
-        if (getSelection() != nullptr) {
-            // add to favorites
-            if (!(getSelection()->hardware & (unsigned int) HARDWARE_PREFIX_FAV)) {
-                int res = ui->getUiMessageBox()->show("FAVORITES",
-                                                      "add selection to favorites ?", "OK", "CANCEL");
-                if (res == MessageBox::LEFT) {
-                    rom_list->addFav(getSelection());
-                }
+        // add to favorites
+        Game game = getSelection();
+        if (!game.id.empty() && !romList->gameListFav.exist(game.romid)) {
+            int res = ui->getUiMessageBox()->show("FAVORITES",
+                                                  "Add to favorites ?",
+                                                  "OK", "CANCEL");
+            if (res == MessageBox::LEFT) {
+                romList->addFav(game);
             }
         }
-        */
     } else if (keys & Input::Key::Start) {
         ui->getUiMenu()->load();
     } else if (keys & Input::Key::Select) {
@@ -418,12 +411,12 @@ void UIRomListClassic::onUpdate() {
         timer_load_video.restart();
     } else if (keys == 0) {
         if ((timer_load_info_done == 0) && timer_load_info.getElapsedTime().asMilliseconds() > timer_load_info_delay) {
-            rom_info->load(list_box->getSelection());
+            romInfo->load(listBox->getSelection());
             timer_load_info_done = 1;
         }
         if ((timer_load_video_done == 0) &&
             timer_load_video.getElapsedTime().asMilliseconds() > timer_load_video_delay) {
-            rom_info->loadVideo(list_box->getSelection());
+            romInfo->loadVideo(listBox->getSelection());
             timer_load_video_done = 1;
         }
     }

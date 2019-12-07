@@ -111,24 +111,8 @@ void RomList::build() {
     ui->getConfig()->reset();
     ui->getConfig()->load();
 
-    /*
-     * TODO: add/fix favorites back
-    // build favorites
-    std::string favPath = ui->getConfig()->getHomePath() + "favorites.bin";
-    std::ifstream favFile(favPath);
-    if (favFile.is_open()) {
-        std::string line;
-        while (std::getline(favFile, line)) {
-            auto rom = std::find_if(list.begin(), list.end(), [line](Rom *rom) -> bool {
-                return line == rom->path;
-            });
-            if (rom != list.end()) {
-                (*rom)->hardware |= HARDWARE_PREFIX_FAV;
-            }
-        }
-        favFile.close();
-    }
-    */
+    gameListFav = GameList("favorites.xml", ui->getConfig()->getRomPaths().at(0));
+    printf("RomList::build: %zu favorites\n", gameListFav.games.size());
 
     float time_spent = ui->getElapsedTime().asSeconds() - time_start;
     printf("RomList::build(): list built in %f\n", time_spent);
@@ -138,64 +122,21 @@ void RomList::build() {
     delete (rect);
 }
 
-void RomList::addFav(Game *rom) {
+void RomList::addFav(const Game &game) {
 
-    /*
-    if (!rom || rom->hardware & HARDWARE_PREFIX_FAV) {
-        printf("RomList::addFav: already in favorites\n");
-        return;
+    if (!gameListFav.exist(game.romid)) {
+        gameListFav.games.emplace_back(game);
+        gameListFav.save("favorites.xml", Game::Language::EN, GameList::Format::ScreenScrapper);
     }
-
-    rom->hardware |= HARDWARE_PREFIX_FAV;
-
-    std::string favPath = ui->getConfig()->getHomePath() + "favorites.bin";
-    std::ofstream favFile(favPath, std::ios::app);
-    if (favFile.is_open()) {
-        favFile << rom->path;
-        favFile << "\n";
-        favFile.close();
-    }
-    */
 }
 
-void RomList::removeFav(Game *rom) {
+void RomList::removeFav(const Game &game) {
 
-    /*
-    if (!rom || !(rom->hardware & HARDWARE_PREFIX_FAV)) {
-        printf("RomList::addFav: not in favorites\n");
-        return;
+    if (gameListFav.remove(game.romid)) {
+        gameListFav.save("favorites.xml", Game::Language::EN, GameList::Format::ScreenScrapper);
     }
-
-    rom->hardware &= ~HARDWARE_PREFIX_FAV;
-
-    // TODO: only remove specific line ?
-    std::string favPath = ui->getConfig()->getHomePath() + "favorites.bin";
-    std::ofstream favFile(favPath, std::ios::trunc);
-    if (favFile.is_open()) {
-        for (auto &r : list) {
-            if (r->flags & HARDWARE_PREFIX_FAV) {
-                favFile << rom->path;
-                favFile << "\n";
-            }
-        }
-        favFile.close();
-    }
-    */
 }
 
 RomList::~RomList() {
-
     printf("~RomList()\n");
-
-    /*
-    for (auto &rom : list.games) {
-        if (rom && !rom->parent && rom->icon) {
-            delete (rom->icon);
-            rom->icon = nullptr;
-        }
-        if (rom) {
-            delete (rom);
-        }
-    }
-    */
 }

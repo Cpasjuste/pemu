@@ -31,7 +31,7 @@ namespace c2dui {
     protected:
 
         UIMain *ui = nullptr;
-        RomList *rom_list = nullptr;
+        RomList *romList = nullptr;
         ss_api::GameList gameList;
     };
 }

@@ -84,7 +84,7 @@ UIRomListNew::UIRomListNew(UIMain *u, RomList *romList, const c2d::Vector2f &siz
     printf("UIRomListNew\n");
 
     ui = u;
-    rom_list = romList;
+    romList = romList;
 
     // load bg skin
     ui->getSkin()->loadRectangleShape(this, {"MAIN"});
