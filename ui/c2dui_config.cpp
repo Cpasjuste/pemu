@@ -7,7 +7,6 @@
 
 using namespace c2d;
 using namespace c2dui;
-using namespace ss_api;
 
 Config::Config(c2d::Io *io, int ver) {
 
@@ -147,7 +146,7 @@ Config::Config(c2d::Io *io, int ver) {
 
 }
 
-void Config::load(const Game &game) {
+void Config::load(const ss_api::Game &game) {
 
     config_t cfg;
     config_init(&cfg);
@@ -237,14 +236,14 @@ void Config::load(const Game &game) {
         reset();
         // no need to save default rom config
         if (!isRomCfg) {
-            save(Game());
+            save(ss_api::Game());
         }
     }
 
     config_destroy(&cfg);
 }
 
-void Config::save(const Game &game) {
+void Config::save(const ss_api::Game &game) {
 
     config_t cfg{};
     config_init(&cfg);

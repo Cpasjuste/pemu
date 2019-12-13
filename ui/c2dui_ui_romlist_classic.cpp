@@ -181,7 +181,9 @@ public:
             showText(topstaffText, "Top Staff: " + game.topstaff);
             showText(rotationText, "Rotation: " + game.rotation);
             showText(resolutionText, "Resolution: " + game.resolution);
-            showText(classificationText, "Classification: " + game.getClassification().text);
+            // TODO:
+            //showText(classificationText, "Classification: " + game.getClassification().text);
+            showText(classificationText, "Classification: Unknown");
             showText(cloneofText, "Clone Of: " + game.cloneof);
             showText(filenameText, "File: " + game.path);
             //
