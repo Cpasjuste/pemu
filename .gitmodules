@@ -13,6 +13,3 @@
 [submodule "libcross2d"]
 	path = libcross2d
 	url = https://github.com/Cpasjuste/libcross2d.git
-[submodule "mpv"]
-	path = mpv
-	url = https://github.com/Cpasjuste/mpv.git

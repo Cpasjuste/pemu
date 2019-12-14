@@ -21,7 +21,7 @@ endif ()
 
 if (MPV_PLAYER)
     list(APPEND FLAGS -D__MPV__)
-    list(APPEND LDFLAGS mpv)
+    list(APPEND LDFLAGS mpv swscale swresample avformat avfilter avcodec avutil ass freetype png bz2 fribidi pthread m z)
 endif ()
 
 if (OPTION_BUILTIN_MINIZIP)
@@ -32,6 +32,12 @@ if (OPTION_BUILTIN_MINIZIP)
     if (PLATFORM_WINDOWS)
         list(APPEND CROSS2DUI_SOURCE ${CMAKE_CURRENT_SOURCE_DIR}/minizip/iowin32.c)
     endif ()
+endif ()
+
+if (PLATFORM_LINUX)
+    set(CMAKE_THREAD_PREFER_PTHREAD TRUE)
+    find_package(Threads REQUIRED)
+    list(APPEND LDFLAGS ${CMAKE_THREAD_LIBS_INIT} dl)
 endif ()
 
 ##########################

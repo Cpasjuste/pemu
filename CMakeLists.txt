@@ -42,10 +42,6 @@ set(UPDATE_CONFIG ON CACHE BOOL "Force config file updating")
 # you should (may) only need to port libcross2d library.
 add_subdirectory(libcross2d)
 
-if (MPV_PLAYER AND NOT PLATFORM_WINDOWS)
-    add_subdirectory(mpv)
-endif ()
-
 # add sscrap (screenscrapper scrapper!) library
 add_subdirectory(sscrap)
 

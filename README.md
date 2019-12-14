@@ -14,7 +14,12 @@
 
 **Building - Ubuntu (x64) => Ubuntu (x64)**
 - install dependencies:
-	- `sudo apt-get install git zip build-essential cmake libsdl2-dev libconfig-dev libcurl4-openssl-dev libtinyxml2-dev libconfig-dev libglm-dev libfreetype6-dev libpng-dev libminizip-dev zlib1g-dev`
+	- `sudo apt-get install git zip build-essential cmake libsdl2-dev libconfig-dev libcurl4-openssl-dev libtinyxml2-dev libconfig-dev libglm-dev libfreetype6-dev libpng-dev libminizip-dev zlib1g-dev libvdpau-dev libva-dev`
+- build and install libmpv:
+    - `git clone https://github.com/mpv-player/mpv.git && cd mpv`
+    - `./waf configure --prefix=/usr --disable-libmpv-shared --enable-libmpv-static --disable-cplayer --enable-sdl2 --enable-sdl2-audio --disable-alsa --disable-pulse --disable-x11 --disable-xv --disable-drm --disable-libavdevice`
+    - `./waf`
+    - `sudo ./waf install`
 - clone pemu repository:
 	- `git clone --recursive https://github.com/Cpasjuste/pemu.git`
 - build:
