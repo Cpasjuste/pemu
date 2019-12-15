@@ -151,7 +151,7 @@ void Config::load(const ss_api::Game &game) {
     config_t cfg;
     config_init(&cfg);
 
-    bool isRomCfg = !game.id.empty();
+    bool isRomCfg = game.id > 0;
     std::vector<Option> *options = isRomCfg ? &options_rom : &options_gui;
     std::string path = configPath;
     if (isRomCfg) {
@@ -248,7 +248,7 @@ void Config::save(const ss_api::Game &game) {
     config_t cfg{};
     config_init(&cfg);
 
-    bool isRomCfg = !game.id.empty();
+    bool isRomCfg = game.id > 0;
     std::vector<Option> *options = isRomCfg ? &options_rom : &options_gui;
     std::string path = configPath;
     if (isRomCfg) {

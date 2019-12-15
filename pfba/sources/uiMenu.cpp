@@ -19,13 +19,13 @@ bool PFBAGuiMenu::isOptionHidden(c2dui::Option *option) {
     ss_api::Game game = getUi()->getUiRomList()->getSelection();
 
     if (isRom() && option->getId() == Option::Id::ROM_ROTATION
-        && !game.id.empty() && game.rotation == "0") {
+        && game.id > 0 && game.rotation == 0) {
         return true;
     }
 
     // Neo-Geo system id == 142
     if (isRom() && option->getId() == Option::Id::ROM_NEOBIOS
-        && !game.id.empty() && game.system.id != "142") {
+        && game.id > 0 && game.system.id != 142) {
         return true;
     }
 

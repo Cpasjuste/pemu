@@ -26,6 +26,8 @@ namespace c2dui {
 
         void removeFav(const ss_api::Game &game);
 
+        void setLoadingText(const char *format, ...);
+
         UIMain *ui;
         c2d::RectangleShape *rect;
         c2d::Text *text;
@@ -33,7 +35,6 @@ namespace c2dui {
         ss_api::GameList gameListFav;
         std::vector<std::string> paths;
         char icon_path[1024];
-        char text_str[512];
         float time_start = 0;
     };
 }

@@ -23,10 +23,7 @@ PFBAConfig::PFBAConfig(c2d::Io *io, int version) : Config(io, version) {
     roms_paths.emplace_back(io->getDataPath() + "sgx/");
     roms_paths.emplace_back(io->getDataPath() + "sms/");
     roms_paths.emplace_back(io->getDataPath() + "tg16/");
-    roms_paths.emplace_back(io->getDataPath() + "spectrum/");
-    for (size_t i = roms_paths.size(); i < 20; i++) {
-        roms_paths.emplace_back(std::string());
-    }
+    roms_paths.emplace_back(io->getDataPath() + "zx3/");
 
     ////////////////////////////////////////////////////////////
     /// pfba custom config

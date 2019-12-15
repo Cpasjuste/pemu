@@ -148,7 +148,7 @@ public:
             texture = nullptr;
         }
 
-        if (game.id.empty()) {
+        if (game.id <= 0) {
             hideText(systemText);
             hideText(developerText);
             hideText(editorText);
@@ -177,14 +177,14 @@ public:
             showText(dateText, "Date: " + game.getDate().text);
             showText(genreText, "Genre: " + game.getGenre().text);
             showText(playersText, "Players: " + game.players);
-            showText(ratingText, "Rating: " + game.rating);
-            showText(topstaffText, "Top Staff: " + game.topstaff);
-            showText(rotationText, "Rotation: " + game.rotation);
+            showText(ratingText, "Rating: " + std::to_string(game.rating));
+            showText(topstaffText, "Top Staff: " + std::to_string((int) game.topStaff));
+            showText(rotationText, "Rotation: " + std::to_string(game.rotation));
             showText(resolutionText, "Resolution: " + game.resolution);
             // TODO:
             //showText(classificationText, "Classification: " + game.getClassification().text);
             showText(classificationText, "Classification: Unknown");
-            showText(cloneofText, "Clone Of: " + game.cloneof);
+            showText(cloneofText, "Clone Of: " + game.cloneOf);
             showText(filenameText, "File: " + game.path);
             //
             showText(synoText, game.getSynopsis().text);
@@ -359,7 +359,7 @@ bool UIRomListClassic::onInput(c2d::Input::Player *players) {
     } else if (keys & Input::Key::Fire4) {
         // remove from favorites
         Game game = getSelection();
-        if (!game.id.empty() && romList->gameListFav.exist(game.romid)) {
+        if (game.id > 0 && romList->gameListFav.exist(game.romId)) {
             int res = ui->getUiMessageBox()->show("FAVORITES",
                                                   "Remove from favorites ?",
                                                   "OK", "CANCEL");
@@ -375,7 +375,7 @@ bool UIRomListClassic::onInput(c2d::Input::Player *players) {
     } else if (keys & Input::Key::Fire3) {
         // add to favorites
         Game game = getSelection();
-        if (!game.id.empty() && !romList->gameListFav.exist(game.romid)) {
+        if (game.id > 0 && !romList->gameListFav.exist(game.romId)) {
             int res = ui->getUiMessageBox()->show("FAVORITES",
                                                   "Add to favorites ?",
                                                   "OK", "CANCEL");
@@ -386,7 +386,7 @@ bool UIRomListClassic::onInput(c2d::Input::Player *players) {
     } else if (keys & Input::Key::Start) {
         ui->getUiMenu()->load();
     } else if (keys & Input::Key::Select) {
-        if (!getSelection().id.empty()) {
+        if (getSelection().id > 0) {
             ui->getConfig()->load(getSelection());
             ui->getUiMenu()->load(true);
 

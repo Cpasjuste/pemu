@@ -326,11 +326,6 @@ int BzipOpen(bool bootApp) {
 
     nZipsFound = 0;                                            // Haven't found zips yet
     nTotalSize = 0;
-
-    if (szBzipName == NULL) {
-        return 1;
-    }
-
     BzipClose();                                            // Make sure nothing is open
 
     if (!bootApp) {                                            // reset information strings
@@ -340,7 +335,7 @@ int BzipOpen(bool bootApp) {
 
     // Count the number of roms needed
     for (nRomCount = 0;; nRomCount++) {
-        if (BurnDrvGetRomInfo(NULL, nRomCount)) {
+        if (BurnDrvGetRomInfo(NULL, nRomCount) != 0) {
             break;
         }
     }
@@ -357,100 +352,21 @@ int BzipOpen(bool bootApp) {
     memset(RomFind, 0, nMemLen);
 
     for (int z = 0; z < BZIP_MAX; z++) {
-        char *szName = NULL;
 
-        if (BurnDrvGetZipName(&szName, z)) {
+        char *szName = nullptr;
+        if (BurnDrvGetZipName(&szName, z) != 0) {
             break;
         }
 
-        for (int d = 0; d < DIRS_MAX; d++) {
+        free(szBzipName[z]);
+        szBzipName[z] = (TCHAR *) malloc(MAX_PATH * sizeof(TCHAR));
+        std::string rom_path = ui->getUiEmu()->getCurrentGame().romsPath;
+        _stprintf(szBzipName[z], _T("%s%s"), rom_path.c_str(), szName);
+        printf("zipOpen: %s\n", szBzipName[z]);
 
-            free(szBzipName[z]);
-            szBzipName[z] = (TCHAR *) malloc(MAX_PATH * sizeof(TCHAR));
-
-            std::string rom_path = ui->getConfig()->getRomPath(d);
-            _stprintf(szBzipName[z], _T("%s%s"), rom_path.c_str(), szName);
-
-            int prefix =
-                    (((BurnDrvGetHardwareCode() | HARDWARE_PREFIX_CARTRIDGE) ^ HARDWARE_PREFIX_CARTRIDGE) & 0xff000000);
-            switch (prefix) {
-                case HARDWARE_PREFIX_COLECO:
-                    if (!c2d::Utility::endsWith(rom_path, "coleco/")) {
-                        continue;
-                    }
-                    break;
-                case HARDWARE_PREFIX_SEGA_GAME_GEAR:
-                    if (!c2d::Utility::endsWith(rom_path, "gamegear/")) {
-                        continue;
-                    }
-                    break;
-                case HARDWARE_PREFIX_SEGA_MEGADRIVE:
-                    if (!c2d::Utility::endsWith(rom_path, "megadriv/")) {
-                        continue;
-                    }
-                    break;
-                case HARDWARE_PREFIX_MSX:
-                    if (!c2d::Utility::endsWith(rom_path, "msx/")) {
-                        continue;
-                    }
-                    break;
-                case HARDWARE_PREFIX_SPECTRUM:
-                    if (!c2d::Utility::endsWith(rom_path, "spectrum/")) {
-                        continue;
-                    }
-                    break;
-                case HARDWARE_PREFIX_SEGA_SG1000:
-                    if (!c2d::Utility::endsWith(rom_path, "sg1000/")) {
-                        continue;
-                    }
-                    break;
-                case HARDWARE_PREFIX_SEGA_MASTER_SYSTEM:
-                    if (!c2d::Utility::endsWith(rom_path, "sms/")) {
-                        continue;
-                    }
-                    break;
-                case HARDWARE_PREFIX_PCENGINE:
-                    switch (BurnDrvGetHardwareCode()) {
-                        case HARDWARE_PCENGINE_PCENGINE:
-                            if (!c2d::Utility::endsWith(rom_path, "pce/")) {
-                                continue;
-                            }
-                            break;
-                        case HARDWARE_PCENGINE_TG16:
-                            if (!c2d::Utility::endsWith(rom_path, "tg16/")) {
-                                continue;
-                            }
-                            break;
-                        case HARDWARE_PCENGINE_SGX:
-                            if (!c2d::Utility::endsWith(rom_path, "sgx/")) {
-                                continue;
-                            }
-                            break;
-                        default:
-                            continue;
-                    }
-                    break;
-                default:
-                    if (c2d::Utility::endsWith(rom_path, "coleco/")
-                        || c2d::Utility::endsWith(rom_path, "gamegear/")
-                        || c2d::Utility::endsWith(rom_path, "megadriv/")
-                        || c2d::Utility::endsWith(rom_path, "msx/")
-                        || c2d::Utility::endsWith(rom_path, "spectrum/")
-                        || c2d::Utility::endsWith(rom_path, "sg1000/")
-                        || c2d::Utility::endsWith(rom_path, "sms/")
-                        || c2d::Utility::endsWith(rom_path, "pce/")
-                        || c2d::Utility::endsWith(rom_path, "sgx/")
-                        || c2d::Utility::endsWith(rom_path, "tg16/")) {
-                        continue;
-                    }
-                    break;
-            }
-
-            if (ZipOpen(TCHARToANSI(szBzipName[z], NULL, 0)) == 0) {    // Open the rom zip file
-                nZipsFound++;
-                nCurrentZip = z;
-                break;
-            }
+        if (ZipOpen(TCHARToANSI(szBzipName[z], NULL, 0)) == 0) {    // Open the rom zip file
+            nZipsFound++;
+            nCurrentZip = z;
         }
 
         if (nCurrentZip >= 0) {

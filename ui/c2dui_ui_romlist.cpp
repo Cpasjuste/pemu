@@ -33,11 +33,10 @@ RomList *UIRomList::getRomList() {
 Texture *UIRomList::getPreviewTexture(const ss_api::Game &game) {
 
     // load image
-    // TODO: verify loading with psnes and no db.xml)
     C2DTexture *texture = nullptr;
-    std::string romPath = ui->getConfig()->getRomPath(0);
-    std::string path = romPath + game.getMedia("mixrbv2").url;
+    std::string path;
 
+    path = game.romsPath + game.getMedia("mixrbv2").url;
     printf("getPreviewTexture(%s)\n", path.c_str());
     texture = new C2DTexture(path);
 #ifndef __SWITCH__
@@ -45,13 +44,10 @@ Texture *UIRomList::getPreviewTexture(const ss_api::Game &game) {
     if (!texture->available) {
         delete (texture);
         texture = nullptr;
-        if (game.cloneof != "0") {
-            std::string parentRomId = game.cloneof;
-            auto parent = std::find_if(gameList.games.begin(), gameList.games.end(), [parentRomId](const Game &g) {
-                return parentRomId == g.romid;
-            });
-            if (parent != gameList.games.end()) {
-                path = romPath + (*parent).getMedia("mixrbv2").url;
+        if (game.isClone()) {
+            Game parentGame = gameList.findByPath(game.cloneOf);
+            if (!parentGame.path.empty()) {
+                path = game.romsPath + parentGame.getMedia("mixrbv2").url;
                 printf("getPreviewTexture(%s)\n", path.c_str());
                 texture = new C2DTexture(path);
                 if (!texture->available) {

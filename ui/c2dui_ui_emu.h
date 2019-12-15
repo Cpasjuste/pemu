@@ -5,8 +5,6 @@
 #ifndef C2DUI_UI_EMU_H
 #define C2DUI_UI_EMU_H
 
-#include <sys/time.h>
-
 namespace c2dui {
 
     class UIEmu : public c2d::RectangleShape {
@@ -49,6 +47,13 @@ namespace c2dui {
         bool isPaused();
 
         bool onInput(c2d::Input::Player *players) override;
+
+        ss_api::Game getCurrentGame() const {
+            return currentGame;
+        }
+
+    protected:
+        ss_api::Game currentGame;
 
     private:
 

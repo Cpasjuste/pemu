@@ -101,6 +101,7 @@ void UIEmu::addVideo(UIMain *ui, void **pixels, int *pitch,
 int UIEmu::load(const Game &game) {
 
     printf("UIEmu::load(%s)\n", game.path.c_str());
+    currentGame = game;
 
     // set fps text on top
     getFpsText()->setLayer(2);

@@ -38,6 +38,8 @@ if (PLATFORM_LINUX)
     set(CMAKE_THREAD_PREFER_PTHREAD TRUE)
     find_package(Threads REQUIRED)
     list(APPEND LDFLAGS ${CMAKE_THREAD_LIBS_INIT} dl)
+elseif (PLATFORM_SWITCH)
+    list(APPEND LDFLAGS lzma)
 endif ()
 
 ##########################

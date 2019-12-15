@@ -7,6 +7,18 @@
 
 #include "libconfig.h"
 
+#define FBN_PATH_ARCADE 0
+#define FBN_PATH_COLECO 1
+#define FBN_PATH_GAMEGEAR 2
+#define FBN_PATH_MEGADRIV 3
+#define FBN_PATH_MSX 4
+#define FBN_PATH_PCE 5
+#define FBN_PATH_SG1000 6
+#define FBN_PATH_SGX 7
+#define FBN_PATH_SMS 8
+#define FBN_PATH_TG16 9
+#define FBN_PATH_ZX3 10
+
 namespace c2dui {
 
     class Config {

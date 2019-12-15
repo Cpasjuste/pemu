@@ -36,9 +36,8 @@ RomList::RomList(UIMain *_ui, const std::string &emuVersion) {
     title->setScale(scaling, scaling);
     rect->add(title);
 
-    strcpy(text_str, "Games: 0/0");
     //auto font_size = (unsigned int) ((float) C2D_DEFAULT_CHAR_SIZE * ((float) C2D_SCREEN_HEIGHT / 720.0f));
-    text = new Text(text_str, C2D_DEFAULT_CHAR_SIZE, ui->getSkin()->font);
+    text = new Text("Games: 0/0", C2D_DEFAULT_CHAR_SIZE, ui->getSkin()->font);
     ui->getSkin()->loadText(text, {"ROM_LIST", "TEXT"});
     text->setOrigin(Origin::BottomLeft);
     text->setPosition(8, rect->getSize().y - ((float) text->getCharacterSize() / 2));
@@ -60,15 +59,46 @@ RomList::RomList(UIMain *_ui, const std::string &emuVersion) {
     printf("RomList()\n");
 }
 
+void RomList::setLoadingText(const char *format, ...) {
+
+    char buffer[512];
+    va_list arg;
+    va_start(arg, format);
+    vsnprintf(buffer, 512, format, arg);
+    va_end(arg);
+
+    text->setString(buffer);
+    ui->flip();
+}
+
 void RomList::build() {
 
     printf("RomList::build()\n");
 
-    gameList = GameList("gamelist.xml", ui->getConfig()->getRomPaths().at(0));
+    gameList = GameList("gamelist.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_ARCADE));
+    setLoadingText("Games: %i / %zu", gameList.getAvailableCount(), gameList.games.size());
+    gameList.append("gamelist_coleco.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_COLECO));
+    setLoadingText("Games: %i / %zu", gameList.getAvailableCount(), gameList.games.size());
+    gameList.append("gamelist_gamegear.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_GAMEGEAR));
+    setLoadingText("Games: %i / %zu", gameList.getAvailableCount(), gameList.games.size());
+    gameList.append("gamelist_megadriv.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_MEGADRIV));
+    setLoadingText("Games: %i / %zu", gameList.getAvailableCount(), gameList.games.size());
+    gameList.append("gamelist_msx.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_MSX));
+    setLoadingText("Games: %i / %zu", gameList.getAvailableCount(), gameList.games.size());
+    gameList.append("gamelist_pce.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_PCE));
+    setLoadingText("Games: %i / %zu", gameList.getAvailableCount(), gameList.games.size());
+    gameList.append("gamelist_sg1000.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_SG1000));
+    setLoadingText("Games: %i / %zu", gameList.getAvailableCount(), gameList.games.size());
+    gameList.append("gamelist_sgx.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_SGX));
+    setLoadingText("Games: %i / %zu", gameList.getAvailableCount(), gameList.games.size());
+    gameList.append("gamelist_sms.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_SMS));
+    setLoadingText("Games: %i / %zu", gameList.getAvailableCount(), gameList.games.size());
+    gameList.append("gamelist_tg16.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_TG16));
+    setLoadingText("Games: %i / %zu", gameList.getAvailableCount(), gameList.games.size());
+    gameList.append("gamelist_zx3.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_ZX3));
+    setLoadingText("Games: %i / %zu", gameList.getAvailableCount(), gameList.games.size());
     printf("RomList::build: %zu roms\n", gameList.games.size());
-    sprintf(text_str, "Games: %i / %zu", gameList.getAvailableCount(), gameList.games.size());
-    text->setString(text_str);
-    ui->flip();
+
     ui->delay(1000);
 
     ui->getConfig()->add(
@@ -124,7 +154,7 @@ void RomList::build() {
 
 void RomList::addFav(const Game &game) {
 
-    if (!gameListFav.exist(game.romid)) {
+    if (!gameListFav.exist(game.romId)) {
         gameListFav.games.emplace_back(game);
         gameListFav.save("favorites.xml", Game::Language::EN, GameList::Format::ScreenScrapper);
     }
@@ -132,7 +162,7 @@ void RomList::addFav(const Game &game) {
 
 void RomList::removeFav(const Game &game) {
 
-    if (gameListFav.remove(game.romid)) {
+    if (gameListFav.remove(game.romId)) {
         gameListFav.save("favorites.xml", Game::Language::EN, GameList::Format::ScreenScrapper);
     }
 }

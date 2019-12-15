@@ -32,7 +32,31 @@ PFBAGuiEmu::PFBAGuiEmu(UIMain *ui) : UIEmu(ui) {
 
 int PFBAGuiEmu::load(const ss_api::Game &game) {
 
+    currentGame = game;
     std::string zipName = Utility::removeExt(game.path);
+
+    if (game.system.id == SYSTEM_ID_COLECO) {
+        zipName = "cv_" + zipName;
+    } else if (game.system.id == SYSTEM_ID_GAMEGEAR) {
+        zipName = "gg_" + zipName;
+    } else if (game.system.id == SYSTEM_ID_MEGADRIVE || game.system.id == SYSTEM_ID_MEGADRIVE_HACK) {
+        zipName = "md_" + zipName;
+    } else if (game.system.id == SYSTEM_ID_MSX || game.system.id == SYSTEM_ID_MSX2) {
+        zipName = "msx_" + zipName;
+    } else if (game.system.id == SYSTEM_ID_PCE) {
+        zipName = "pce_" + zipName;
+    } else if (game.system.id == SYSTEM_ID_SG1000) {
+        zipName = "sg1k_" + zipName;
+    } else if (game.system.id == SYSTEM_ID_SGX) {
+        zipName = "sgx_" + zipName;
+    } else if (game.system.id == SYSTEM_ID_SMS) {
+        zipName = "sms_" + zipName;
+    } else if (game.system.id == SYSTEM_ID_TG16) {
+        zipName = "tg_" + zipName;
+    } else if (game.system.id == SYSTEM_ID_ZX3) {
+        zipName = "spec_" + zipName;
+    }
+
     for (unsigned int i = 0; i < nBurnDrvCount; i++) {
         nBurnDrvActive = i;
         if (zipName == BurnDrvGetTextA(DRV_NAME)) {
