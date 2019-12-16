@@ -26,8 +26,8 @@ pFBN: Portable FinalBurn Neo
 
 #### GENERAL INFORMATION'S
 
-- Preview image support (put png files in "roms/media/mixrbv2"), you can download a near fullset mixrbv2 package [here](http://files.mydedibox.fr/files/dev/pemu/pfbneo/arcade_mixrbv2.zip) or [here](https://files.coolatoms.org/arcade_mixrbv2.zip) (thanks [screencraper.fr](https://www.screenscraper.fr/))
-- Video snaps support (put mp4 files in "roms/media/video"), you can download a near fullset video package [here](http://files.mydedibox.fr/files/dev/pemu/pfbneo/arcade_video.zip) or [here](https://files.coolatoms.org/arcade_video.zip) (thanks [screencraper.fr](https://www.screenscraper.fr/))
+- Preview image support (put png files in "roms/media/mixrbv2"), you can download a near fullset mixrbv2 package [here](http://files.mydedibox.fr/files/dev/pemu/pfbneo/arcade_mixrbv2.zip) or [here](https://files.coolatoms.org/arcade_mixrbv2.zip)
+- Video snaps support (put mp4 files in "roms/media/video"), you can download a near fullset video package [here](http://files.mydedibox.fr/files/dev/pemu/pfbneo/arcade_video.zip) or [here](https://files.coolatoms.org/arcade_video.zip)
 - pFBN, as fbneo, support consoles roms. Here is the corresponding folders where roms should be located (as fbneo):
     ```
     Coleco              : "coleco"
