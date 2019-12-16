@@ -99,6 +99,17 @@ void RomList::build() {
     setLoadingText("Games: %i / %zu", gameList.getAvailableCount(), gameList.games.size());
     printf("RomList::build: %zu roms\n", gameList.games.size());
 
+    gameList.systems.insert(gameList.systems.begin(), "All");
+    gameList.editors.insert(gameList.editors.begin(), "All");
+    gameList.developers.insert(gameList.developers.begin(), "All");
+    gameList.players.insert(gameList.players.begin(), "All");
+    gameList.ratings.insert(gameList.ratings.begin(), "All");
+    gameList.topStaffs.insert(gameList.topStaffs.begin(), "All");
+    gameList.rotations.insert(gameList.rotations.begin(), "All");
+    gameList.resolutions.insert(gameList.resolutions.begin(), "All");
+    gameList.dates.insert(gameList.dates.begin(), "All");
+    gameList.genres.insert(gameList.genres.begin(), "All");
+
     ui->delay(1000);
 
     ui->getConfig()->add(
