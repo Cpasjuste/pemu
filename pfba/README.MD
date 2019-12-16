@@ -1,51 +1,51 @@
-pFBA: Portable Final Burn Alpha
+pFBN: Portable Final Burn Neo
 ===============================
 
 ![](https://github.com/Cpasjuste/pemu/raw/master/pfba/pfba/data/screenshot.png)
 
 -----
 
-#### The main goals of this [final burn alpha](http://www.fbalpha.com/) port are :
+#### The main goals of this [fbneo](https://github.com/finalburnneo/FBNeo) port are:
 
-- have a basic but user friendly user interface on non windows devices
+- have a basic but user friendly user interface
 - use a recent rendering interface for speed and effect support
 - cross-platform and code portability
-- easy updates of fba core (no modifications to the original sources)
+- easy updates of fbneo core (no modifications to the original sources)
 - use arm asm m68k ([cyclone](https://github.com/notaz/cyclone68000)) core on arm devices
 
 -----
 
 #### Supported devices
 
-- Linux (sdl1, sdl2)
-- Sony Ps Vita (vita2d)
-- Nintendo Switch (libnx, sdl2)
+- Linux
+- Windows
+- Sony Ps Vita
+- Nintendo Switch
 
 -----
 
 #### GENERAL INFORMATION'S
 
-- pFBA support console roms (Sega MegaDrive, Sega GameGear, Sega Master System, Nec PC-Engine, Nec TurboGraFX-16, Nec SuperGraFX, Coleco, SG-1000 and MSX). Here is the corresponding folders where roms should be located (as stock fba):
+- Preview image support (put png files in "roms/media/mixrbv2"), you can download a near fullset mixrbv2 package [here](http://files.mydedibox.fr/files/dev/pemu/pfbneo/arcade_mixrbv2.zip) or [here](https://files.coolatoms.org/arcade_mixrbv2.zip) (thanks [screencraper.fr](https://www.screenscraper.fr/))
+- Video snaps support (put mp4 files in "roms/media/video"), you can download a near fullset video package [here](http://files.mydedibox.fr/files/dev/pemu/pfbneo/arcade_video.zip) or [here](https://files.coolatoms.org/arcade_video.zip) (thanks [screencraper.fr](https://www.screenscraper.fr/))
+- pFBN, as fbneo, support consoles roms. Here is the corresponding folders where roms should be located (as fbneo):
     ```
-    Sega MegaDrive      : "megadriv"
-    Sega GameGear       : "gamegear"
-    Sega Master System  : "sms"
-    Nec PC-Engine       : "pce"
-    Nec TurboGraFX-16   : "tg16"
-    Nec SuperGraFX      : "sgx"
     Coleco              : "coleco"
-    SG-1000             : "sg1000"
+    Sega GameGear       : "gamegear"
+    Sega MegaDrive      : "megadriv"
     MSX                 : "msx"
-    Spectrum            : "spectrum"
+    Nec PC-Engine       : "pce"
+    SG-1000             : "sg1000"
+    Nec SuperGraFX      : "sgx"
+    Sega Master System  : "sms"
+    Nec TurboGraFX-16   : "tg16"
+    Spectrum            : "zx3"
     ```
-- pFBA support title, preview, and icon images in "png" format. Titles goes in the "titles" folder, previews in the "previews" folder, and icons in the "icons" folder. They must have the same filename as the zipped rom, but with a ".png" extension instead ".zip". For consoles images, you need to add the console driver prefix to the image filename ("sonic.zip" image for Sega MegaDrive would be "md_sonic.png").
-- You can enable or disable icon images from the pFBA main menu. A restart is required to enable the changes.
-
 -----
 
-### NINTENDO SWITCH INFORMATION'S
+### NINTENDO SWITCH INFORMATION (may be outdated)
 
-* ##### GENERAL INFORMATION'S
+* ##### GENERAL INFORMATION
     * Using icons on the Nintendo Switch will make main loading time longer if a lot of icons are detected. There's currently no plan to improve this.
     * You can enable or disable single joycon support from the pFBA main menu (+). When enabled, all detected joycons (not docked) will be handled as a single controller/player.
     * Point scaling is currently limited to 1x, 2x and 3x size. FIT, FIT 4/3 and FULL options will fallback to 3x.
@@ -72,7 +72,7 @@ pFBA: Portable Final Burn Alpha
 
 -----
 
-### PS VITA INFORMATION'S (TO BE UPDATED)
+### PS VITA INFORMATION'S ((may be outdated))
 
 - data is located at "ux0:/data/pfba"
 - default rom path is "ux0:/data/pfba/roms/"
@@ -91,46 +91,16 @@ pFBA: Portable Final Burn Alpha
 
 ### COMPILATION
 
-* ##### LINUX (SDL2)
-   ```
-   sudo apt-get install libsdl2-dev libfreetype6-dev libpng-dev zlib1g-dev
-   git clone --recursive https://github.com/Cpasjuste/pfba.git
-   cd pfba && git submodule update --init --recursive
-   mkdir cmake-build
-   cd cmake-build
-   cmake -DBUILD_SDL2=ON -DBUILD_SDL2_GL=ON -DCMAKE_BUILD_TYPE=Release ..
-   make pfba.deps
-   make pfba.elf
-   ```
-
-* ##### NINTENDO SWITCH
-   ```
-   git clone --recursive https://github.com/Cpasjuste/pfba.git
-   cd pfba && git submodule update --init --recursive
-   mkdir cmake-build
-   cd cmake-build
-   cmake -DBUILD_NX=ON -DCMAKE_BUILD_TYPE=Release ..
-   make pfba.deps
-   make pfba_release_switch.zip
-   ```
-
-* ##### PS VITA
-   ```
-   git clone --recursive https://github.com/Cpasjuste/pfba.git
-   cd pfba && git submodule update --init --recursive
-   mkdir cmake-build
-   cd cmake-build
-   cmake -DBUILD_PSP2=ON -DCMAKE_BUILD_TYPE=Release ..
-   make pfba.deps
-   make pfba.vpk
-   ```
+- see pemu [README.MD](https://github.com/Cpasjuste/pemu)
 
 -----
 
 ### Thanks
 - Xavier for the support (http://www.consolex-bordeaux.fr/)
-- ScHlAuChi for all the advices and testing
+- ScHlAuChi for all the advices, testing, and hardware support
 - fba/mame authors (http://www.fbalpha.com/, http://mamedev.org/)
 - xerpi for vita2d (https://github.com/xerpi/libvita2d)
 - frangarcj for vita2d shader support (https://github.com/frangarcj/vita2dlib)
 - people behind the vitasdk (https://github.com/vitasdk)
+- WinterMute and fincs, for their continue work on the Nintendo Switch
+- [screencraper.fr](https://www.screenscraper.fr/)
