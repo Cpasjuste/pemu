@@ -247,6 +247,9 @@ UIRomListClassic::UIRomListClassic(UIMain *u, RomList *romList, const c2d::Vecto
     romInfo = new UIRomInfo(ui, this, skin->font, ui->getFontSize());
     add(romInfo);
 
+    int delay = ui->getConfig()->get(Option::Id::GUI_VIDEO_SNAP_DELAY)->getValueInt();
+    setVideoSnapDelay(delay);
+
     // filter roms
     updateRomList();
 }
@@ -416,7 +419,7 @@ void UIRomListClassic::onUpdate() {
             romInfo->load(listBox->getSelection());
             timer_load_info_done = 1;
         }
-        if ((timer_load_video_done == 0) &&
+        if (timer_load_video_delay > 0 && timer_load_video_done == 0 &&
             timer_load_video.getElapsedTime().asMilliseconds() > timer_load_video_delay) {
             romInfo->loadVideo(listBox->getSelection());
             timer_load_video_done = 1;

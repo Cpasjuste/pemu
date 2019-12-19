@@ -24,7 +24,7 @@ namespace c2dui {
 
         void onUpdate() override;
 
-        void setVisibility(c2d::Visibility visibility, bool tweenPlay = false) override ;
+        void setVisibility(c2d::Visibility visibility, bool tweenPlay = false) override;
 
         void updateRomList() override;
 
@@ -40,7 +40,6 @@ namespace c2dui {
         int timer_load_info_done = 0;
 
         c2d::C2DClock timer_load_video;
-        int timer_load_video_delay = 5000;
         int timer_load_video_done = 0;
     };
 }

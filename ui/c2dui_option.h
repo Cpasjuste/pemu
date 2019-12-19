@@ -49,6 +49,7 @@ namespace c2dui {
             GUI_WINDOW_HEIGHT,
             GUI_FULLSCREEN,
             GUI_SKIN,
+            GUI_VIDEO_SNAP_DELAY,
 #ifdef __SWITCH__
             JOY_SINGLEJOYCON,
 #endif

@@ -381,6 +381,9 @@ bool UIMenu::onInput(c2d::Input::Player *players) {
                 case Option::Id::GUI_WINDOW_HEIGHT:
                     ui->setScale(ui->getScale().x, (float) option->getValueInt() / ui->getSize().y);
                     break;
+                case Option::Id::GUI_VIDEO_SNAP_DELAY:
+                    ui->getUiRomList()->setVideoSnapDelay(option->getValueInt());
+                    break;
 #ifdef __SWITCH__
                 case Option::Id::JOY_SINGLEJOYCON:
                     ((SWITCHInput *) ui->getInput())->setSingleJoyconMode(option->getValueBool());

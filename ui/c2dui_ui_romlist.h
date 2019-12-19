@@ -28,11 +28,14 @@ namespace c2dui {
 
         virtual c2d::Texture *getPreviewTexture(const ss_api::Game &game);
 
+        virtual void setVideoSnapDelay(int delay);
+
     protected:
 
         UIMain *ui = nullptr;
         RomList *romList = nullptr;
         ss_api::GameList gameList;
+        int timer_load_video_delay = 5000;
     };
 }
 

@@ -100,6 +100,10 @@ void UIRomList::filterRomList() {
     }
 }
 
+void UIRomList::setVideoSnapDelay(int delay) {
+    timer_load_video_delay = delay * 1000;
+}
+
 void UIRomList::updateRomList() {
 }
 

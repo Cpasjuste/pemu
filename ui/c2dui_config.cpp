@@ -82,6 +82,8 @@ Config::Config(c2d::Io *io, int ver) {
         append("SKIN", paths, 0, Option::Id::GUI_SKIN, Option::Flags::STRING);
     }
     get()->at(get()->size() - 1).setInfo("Changing skins needs a restart...");
+
+    append("VIDEO_SNAPS_DELAY", 5, Option::Id::GUI_VIDEO_SNAP_DELAY, Option::Flags::INTEGER);
 #ifdef __SWITCH__
     append("SINGLE_JOYCONS", {"OFF", "ON"}, 0, Option::Id::JOY_SINGLEJOYCON, Option::Flags::BOOLEAN);
 #endif
