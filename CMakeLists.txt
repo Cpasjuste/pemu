@@ -57,7 +57,7 @@ project(pemu)
 
 set(PROJECT_AUTHOR Cpasjuste)
 set(VERSION_MAJOR 4)
-set(VERSION_MINOR 0)
+set(VERSION_MINOR 1)
 
 # pnes
 #add_subdirectory(pnes)
