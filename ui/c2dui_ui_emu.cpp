@@ -77,8 +77,8 @@ void UIEmu::addVideo(C2DUIVideo *_video) {
     }
 
     video = _video;
-    video->setShader(ui->getConfig()->get(Option::Id::ROM_SHADER, true)->getIndex());
-    video->setFilter((Texture::Filter) ui->getConfig()->get(Option::Id::ROM_FILTER, true)->getIndex());
+    video->getTexture()->setShader(ui->getConfig()->get(Option::Id::ROM_SHADER, true)->getIndex());
+    video->getTexture()->setFilter((Texture::Filter) ui->getConfig()->get(Option::Id::ROM_FILTER, true)->getIndex());
     video->updateScaling();
     add(video);
 }
@@ -92,8 +92,8 @@ void UIEmu::addVideo(UIMain *ui, void **pixels, int *pitch,
     }
 
     auto *_video = new C2DUIVideo(ui, pixels, pitch, size, format);
-    _video->setShader(ui->getConfig()->get(Option::Id::ROM_SHADER, true)->getIndex());
-    _video->setFilter((Texture::Filter) ui->getConfig()->get(Option::Id::ROM_FILTER, true)->getIndex());
+    _video->getTexture()->setShader(ui->getConfig()->get(Option::Id::ROM_SHADER, true)->getIndex());
+    _video->getTexture()->setFilter((Texture::Filter) ui->getConfig()->get(Option::Id::ROM_FILTER, true)->getIndex());
     _video->updateScaling();
     addVideo(_video);
 }

@@ -133,6 +133,7 @@ int PFBAGuiEmu::load(const ss_api::Game &game) {
     BurnRecalcPal();
     auto v = new PFBAVideo(getUi(), (void **) &pBurnDraw, &nBurnPitch, Vector2f(w, h));
     addVideo(v);
+    textureRect = {0, 0, w, h};
     //////////
     // VIDEO
     //////////
@@ -154,9 +155,9 @@ void PFBAGuiEmu::updateFb() {
         nFramesEmulated++;
         nCurrentFrame++;
         nFramesRendered++;
-        getVideo()->lock(nullptr, (void **) &pBurnDraw, &nBurnPitch);
+        getVideo()->getTexture()->lock(nullptr, (void **) &pBurnDraw, &nBurnPitch);
         BurnDrvFrame();
-        getVideo()->unlock();
+        getVideo()->getTexture()->unlock();
     }
 }
 
@@ -170,11 +171,11 @@ void PFBAGuiEmu::renderFrame(bool draw) {
         pBurnDraw = nullptr;
         if (draw) {
             nFramesRendered++;
-            getVideo()->lock(nullptr, (void **) &pBurnDraw, &nBurnPitch);
+            getVideo()->getTexture()->lock(&textureRect, (void **) &pBurnDraw, &nBurnPitch);
         }
         BurnDrvFrame();
         if (draw) {
-            getVideo()->unlock();
+            getVideo()->getTexture()->unlock();
         }
 
         if (getAudio() && getAudio()->isAvailable()) {

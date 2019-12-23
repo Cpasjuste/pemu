@@ -30,6 +30,8 @@ private:
     void renderFrame(bool draw = true);
 
     bool audio_sync = false;
+
+    c2d::FloatRect textureRect;
 };
 
 #endif //PFBA_UIEMU_H

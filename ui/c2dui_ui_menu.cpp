@@ -361,12 +361,12 @@ bool UIMenu::onInput(c2d::Input::Player *players) {
                     break;
                 case Option::Id::ROM_FILTER:
                     if (isEmuRunning) {
-                        ui->getUiEmu()->getVideo()->setFilter((Texture::Filter) option->getIndex());
+                        ui->getUiEmu()->getVideo()->getTexture()->setFilter((Texture::Filter) option->getIndex());
                     }
                     break;
                 case Option::Id::ROM_SHADER:
                     if (isEmuRunning) {
-                        ui->getUiEmu()->getVideo()->setShader(option->getIndex());
+                        ui->getUiEmu()->getVideo()->getTexture()->setShader(option->getIndex());
                     }
                     break;
                 case Option::Id::GUI_WINDOW_LEFT:

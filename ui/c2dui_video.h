@@ -9,7 +9,7 @@
 
 namespace c2dui {
 
-    class C2DUIVideo : public c2d::C2DTexture {
+    class C2DUIVideo : public c2d::Sprite {
 
     public:
 
@@ -23,7 +23,7 @@ namespace c2dui {
     private:
 
         UIMain *ui = nullptr;
-        //c2d::Texture *texture = nullptr;
+        c2d::Texture *texture = nullptr;
     };
 }
 

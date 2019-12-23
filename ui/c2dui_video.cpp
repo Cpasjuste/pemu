@@ -7,41 +7,40 @@
 using namespace c2d;
 using namespace c2dui;
 
-/*
 static int p2(int size) {
     int p2 = 1;
     while (p2 < size)
         p2 *= 2;
     return p2;
 }
-*/
 
 C2DUIVideo::C2DUIVideo(UIMain *gui, void **_pixels, int *_pitch, const c2d::Vector2f &size, Texture::Format format)
-        : C2DTexture(size, format) {
+        : Sprite() {
 
     ui = gui;
 
-    //texture = new C2DTexture({p2((int) size.x), p2((int) size.y)}, format);
-    //setTexture(texture);
-    //setTextureRect({0, 0, (int) size.x, (int) size.y});
-    //printf("game: %ix%i, texture: %ix%i\n",
-    //       (int) size.x, (int) size.y,
-    //       (int) texture->getSize().x, (int) texture->getSize().y);
-    printf("game: %ix%i\n", (int) size.x, (int) size.y);
+    texture = new C2DTexture({p2((int) size.x), p2((int) size.y)}, format);
+    setTexture(texture, true);
+    setTextureRect({0, 0, (int) size.x, (int) size.y});
+    printf("game: %ix%i, texture: %ix%i\n",
+           (int) size.x, (int) size.y,
+           (int) texture->getSize().x, (int) texture->getSize().y);
+    //printf("game: %ix%i\n", (int) size.x, (int) size.y);
 
-    if (_pixels) {
-        lock(nullptr, _pixels, _pitch);
-        unlock();
+    if (_pixels != nullptr) {
+        FloatRect rect = {0, 0, getTextureRect().width, getTextureRect().height};
+        texture->lock(&rect, _pixels, _pitch);
+        texture->unlock();
     }
 }
 
 C2DUIVideo::~C2DUIVideo() {
-    //delete (texture);
+    delete (texture);
 }
 
 void C2DUIVideo::updateScaling(bool vertical, bool flip) {
 
-    int rotated = 0;
+    bool rotated = false;
     float rotation = 0;
     std::string scale_mode = ui->getConfig()->get(Option::Id::ROM_SCALING, true)->getValueString();
     int rotation_cfg = ui->getConfig()->get(Option::Id::ROM_ROTATION, true)->getIndex();
@@ -55,7 +54,7 @@ void C2DUIVideo::updateScaling(bool vertical, bool flip) {
         switch (rotation_cfg) {
             case 1: // ON
                 rotation = flip ? 90 : 270;
-                rotated = 1;
+                rotated = true;
                 break;
             case 2: // CAB MODE
                 rotation = flip ? 0 : 180;
