@@ -152,7 +152,14 @@ void RomList::build() {
     ui->getConfig()->reset();
     ui->getConfig()->load();
 
-    gameListFav = GameList("favorites.xml", ui->getConfig()->getRomPaths().at(0));
+    gameListFav = GameList("favorites.xml");
+    for (size_t i = 0; i < gameListFav.games.size(); i++) {
+        Game game = gameList.findByPathAndSystem(gameListFav.games[i].path, gameListFav.games[i].system.id);
+        if (!game.path.empty()) {
+            gameListFav.games[i].available = true;
+            gameListFav.games[i].romsPath = game.romsPath;
+        }
+    }
     printf("RomList::build: %zu favorites\n", gameListFav.games.size());
 
     float time_spent = ui->getElapsedTime().asSeconds() - time_start;
@@ -167,14 +174,16 @@ void RomList::addFav(const Game &game) {
 
     if (!gameListFav.exist(game.romId)) {
         gameListFav.games.emplace_back(game);
-        gameListFav.save("favorites.xml", Game::Language::EN, GameList::Format::ScreenScrapper);
+        gameListFav.save("favorites.xml", Game::Language::EN, GameList::Format::ScreenScrapper,
+                         {"mixrbv2", "video"});
     }
 }
 
 void RomList::removeFav(const Game &game) {
 
     if (gameListFav.remove(game.romId)) {
-        gameListFav.save("favorites.xml", Game::Language::EN, GameList::Format::ScreenScrapper);
+        gameListFav.save("favorites.xml", Game::Language::EN, GameList::Format::ScreenScrapper,
+                         {"mixrbv2", "video"});
     }
 }
 

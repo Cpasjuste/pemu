@@ -39,8 +39,6 @@ Texture *UIRomList::getPreviewTexture(const ss_api::Game &game) {
     path = game.romsPath + game.getMedia("mixrbv2").url;
     printf("getPreviewTexture(%s)\n", path.c_str());
     texture = new C2DTexture(path);
-#ifndef __SWITCH__
-    // TODO: fix switch stat/fopen slow on non existing files
     if (!texture->available) {
         delete (texture);
         texture = nullptr;
@@ -57,7 +55,6 @@ Texture *UIRomList::getPreviewTexture(const ss_api::Game &game) {
             }
         }
     }
-#endif
 
     return texture;
 }

@@ -18,7 +18,7 @@
 - build and install libmpv:
     - `git clone https://github.com/mpv-player/mpv.git && cd mpv`
     - `./bootstrap.py`
-    - `./waf configure --prefix=/usr --disable-libmpv-shared --enable-libmpv-static --disable-cplayer --enable-sdl2 --enable-sdl2-audio --disable-alsa --disable-pulse --disable-x11 --disable-xv --disable-drm --disable-libavdevice`
+    - `./waf configure --prefix=/usr --disable-libmpv-shared --enable-libmpv-static --disable-cplayer --enable-sdl2 --enable-sdl2-audio --disable-alsa --disable-pulse --disable-x11 --disable-xv --disable-drm --disable-libavdevice --disable-caca`
     - `./waf`
     - `sudo ./waf install`
 - clone pemu repository:
