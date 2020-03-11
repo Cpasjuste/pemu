@@ -44,10 +44,10 @@ PFBAConfig::PFBAConfig(c2d::Io *io, int version) : Config(io, version) {
         Option::Id::ROM_AUDIO_FREQ, Option::HIDDEN | Option::Flags::INTEGER);
 #else
     add(Option::Id::ROM_FILTER, "FORCE_60HZ",
-        {"OFF", "ON"}, 0, Option::Id::ROM_FORCE_60HZ, Option::Flags::BOOLEAN);
+        {"OFF", "ON"}, 1, Option::Id::ROM_FORCE_60HZ, Option::Flags::BOOLEAN);
     // audio
     add(Option::Id::ROM_FORCE_60HZ, "FORCE_AUDIO_SYNC",
-        {"OFF", "ON"}, 1, Option::Id::ROM_AUDIO_SYNC, Option::Flags::BOOLEAN);
+        {"OFF", "ON"}, 0, Option::Id::ROM_AUDIO_SYNC, Option::Flags::BOOLEAN);
     add(Option::Id::ROM_AUDIO_SYNC, "AUDIO_FREQUENCY",
         {"11025", "22050", "32000", "44100", "48000"}, 3, Option::Id::ROM_AUDIO_FREQ, Option::Flags::STRING);
 #endif
