@@ -14,13 +14,10 @@
 
 **Building - Ubuntu (x64) => Ubuntu (x64)**
 - install dependencies:
-	- `sudo apt-get install git zip build-essential cmake libsdl2-dev libconfig-dev libcurl4-openssl-dev libtinyxml2-dev libconfig-dev libglm-dev libfreetype6-dev libpng-dev libminizip-dev zlib1g-dev libvdpau-dev libva-dev libavcodec-dev libavfilter-dev libavformat-dev libavresample-dev libavutil-dev libpostproc-dev libswresample-dev libswscale-dev`
-- build and install libmpv:
-    - `git clone https://github.com/mpv-player/mpv.git && cd mpv`
-    - `./bootstrap.py`
-    - `./waf configure --prefix=/usr --disable-libmpv-shared --enable-libmpv-static --disable-cplayer --enable-sdl2 --enable-sdl2-audio --disable-alsa --disable-pulse --disable-x11 --disable-xv --disable-drm --disable-libavdevice --disable-caca`
-    - `./waf`
-    - `sudo ./waf install`
+	- `sudo apt-get install git zip build-essential cmake liblzma-dev libsdl2-dev libconfig-dev libcurl4-openssl-dev libtinyxml2-dev libconfig-dev libglm-dev libfreetype6-dev libpng-dev libminizip-dev zlib1g-dev libvdpau-dev libva-dev libavcodec-dev libavfilter-dev libavformat-dev libavresample-dev libavutil-dev libpostproc-dev libswresample-dev libswscale-dev`
+- install recent mpv library from ppa:
+    - `sudo add-apt-repository -y ppa:mc3man/bionic-media`
+    - `sudo apt-get -y install libmpv-dev`
 - clone pemu repository:
 	- `git clone --recursive https://github.com/Cpasjuste/pemu.git`
 - build:
