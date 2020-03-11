@@ -39,9 +39,7 @@ namespace c2dui {
 
         void setSkin(Skin *skin);
 
-        bool onInput(c2d::Input::Player *players) override;
-
-        void onDraw(c2d::Transform &transform, bool draw = true) override;
+        void onUpdate() override;
 
         void updateInputMapping(bool isRomCfg);
 
@@ -81,6 +79,7 @@ namespace c2dui {
         UIProgressBox *uiProgressBox = nullptr;
         c2d::MessageBox *uiMessageBox = nullptr;
         c2d::C2DClock timer;
+        unsigned int oldKeys = 0;
 
         float scaling = 1;
     };

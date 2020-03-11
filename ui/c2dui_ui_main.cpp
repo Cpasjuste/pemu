@@ -11,6 +11,8 @@ extern "C" {
 #endif
 
 #include "c2dui.h"
+#include "c2dui_ui_main.h"
+
 
 using namespace c2d;
 using namespace c2dui;
@@ -87,30 +89,29 @@ void UIMain::setSkin(Skin *s) {
     skin = s;
 }
 
-bool UIMain::onInput(c2d::Input::Player *players) {
-
-    return Renderer::onInput(players);
-}
-
-void UIMain::onDraw(c2d::Transform &transform, bool draw) {
+void UIMain::onUpdate() {
 
     if (uiEmu && !uiEmu->isVisible()) {
         unsigned int keys = getInput()->getKeys(0);
         if (keys != Input::Key::Delay) {
-            if (keys && timer.getElapsedTime().asSeconds() > 5) {
-                getInput()->setRepeatDelay(INPUT_DELAY / 12);
-            } else if (keys && timer.getElapsedTime().asSeconds() > 3) {
-                getInput()->setRepeatDelay(INPUT_DELAY / 8);
-            } else if (keys && timer.getElapsedTime().asSeconds() > 1) {
-                getInput()->setRepeatDelay(INPUT_DELAY / 4);
-            } else if (!keys) {
+            bool changed = (oldKeys ^ keys) != 0;
+            oldKeys = keys;
+            if (!changed) {
+                if (timer.getElapsedTime().asSeconds() > 7) {
+                    getInput()->setRepeatDelay(INPUT_DELAY / 20);
+                } else if (timer.getElapsedTime().asSeconds() > 5) {
+                    getInput()->setRepeatDelay(INPUT_DELAY / 8);
+                } else if (timer.getElapsedTime().asSeconds() > 2) {
+                    getInput()->setRepeatDelay(INPUT_DELAY / 4);
+                }
+            } else {
                 getInput()->setRepeatDelay(INPUT_DELAY);
                 timer.restart();
             }
         }
     }
 
-    C2DObject::onDraw(transform, draw);
+    Renderer::onUpdate();
 }
 
 float UIMain::getScaling() {
@@ -188,3 +189,4 @@ void UIMain::updateInputMapping(bool isRomConfig) {
     ((SWITCHInput *) getInput())->setSingleJoyconMode(single_joy_mode);
 #endif
 }
+
