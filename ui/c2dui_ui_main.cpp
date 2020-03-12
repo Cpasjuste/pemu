@@ -71,6 +71,10 @@ void UIMain::init(UIRomList *_uiRomList, UIMenu *_uiMenu,
                     getSize().y / 2),
             getInput(), skin->font, getFontSize());
     skin->loadRectangleShape(uiMessageBox, {"SKIN_CONFIG", "MESSAGEBOX"});
+    uiMessageBox->getTitleText()->setSize(
+            uiMessageBox->getTitleText()->getSize().x * 1.5f, uiMessageBox->getTitleText()->getSize().y * 1.5f);
+    uiMessageBox->setSelectedColor(uiMessageBox->getOutlineColor(), COL_RED);
+    uiMessageBox->setNotSelectedColor(uiMessageBox->getFillColor(), uiMessageBox->getOutlineColor());
     uiMessageBox->setOrigin(Origin::Center);
     add(uiMessageBox);
 

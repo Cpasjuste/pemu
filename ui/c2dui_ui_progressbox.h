@@ -19,6 +19,10 @@ namespace c2dui {
 
         void setProgress(float progress);
 
+        c2d::Text *getTitleText();
+
+        c2d::Text *getMessageText();
+
     private:
 
         c2d::Text *title;

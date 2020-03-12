@@ -3,6 +3,8 @@
 //
 
 #include "c2dui.h"
+#include "c2dui_ui_progressbox.h"
+
 
 using namespace c2d;
 using namespace c2dui;
@@ -54,7 +56,6 @@ UIProgressBox::UIProgressBox(UIMain *gui)
 }
 
 void UIProgressBox::setTitle(std::string title) {
-
     this->title->setString(title);
 }
 
@@ -69,4 +70,12 @@ void UIProgressBox::setProgress(float progress) {
 void UIProgressBox::setMessage(std::string message) {
 
     this->message->setString(message);
+}
+
+c2d::Text *UIProgressBox::getTitleText() {
+    return title;
+}
+
+c2d::Text *UIProgressBox::getMessageText() {
+    return message;
 }
