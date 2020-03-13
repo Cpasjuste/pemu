@@ -4,6 +4,8 @@
 #include <algorithm>
 
 #include "c2dui.h"
+#include "c2dui_ui_romlist.h"
+
 
 /// pFBA
 #define BDF_ORIENTATION_FLIPPED     (1 << 1)
@@ -59,6 +61,24 @@ Texture *UIRomList::getPreviewTexture(const ss_api::Game &game) {
     return texture;
 }
 
+std::string UIRomList::getPreviewVideo(const ss_api::Game &game) {
+
+    std::string path = game.romsPath + game.getMedia("video").url;
+    printf("getPreviewVideo(%s)\n", path.c_str());
+    if (!ui->getIo()->exist(path) && game.isClone()) {
+        Game parentGame = gameList.findByPath(game.cloneOf);
+        if (!parentGame.path.empty()) {
+            path = game.romsPath + parentGame.getMedia("video").url;
+            printf("getPreviewVideo(%s)\n", path.c_str());
+            if (!ui->getIo()->exist(path)) {
+                path = "";
+            }
+        }
+    }
+
+    return path;
+}
+
 void UIRomList::filterRomList() {
 
     Option *opt = ui->getConfig()->get(Option::Id::GUI_SHOW_ALL);
@@ -108,3 +128,4 @@ UIRomList::~UIRomList() {
     printf("~UIRomList\n");
     delete (romList);
 }
+

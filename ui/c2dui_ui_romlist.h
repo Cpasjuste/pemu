@@ -28,6 +28,8 @@ namespace c2dui {
 
         virtual c2d::Texture *getPreviewTexture(const ss_api::Game &game);
 
+        virtual std::string getPreviewVideo(const ss_api::Game &game);
+
         virtual void setVideoSnapDelay(int delay);
 
     protected:
