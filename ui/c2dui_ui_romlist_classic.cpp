@@ -356,10 +356,17 @@ bool UIRomListClassic::onInput(c2d::Input::Player *players) {
             ui->getUiEmu()->load(game);
             return true;
         }
-    } else if (keys & Input::Key::Fire4) {
-        // remove from favorites
+    } else if (keys & Input::Key::Fire3) {
+        // add to favorites
         Game game = getSelection();
-        if (game.id > 0 && romList->gameListFav.exist(game.romId)) {
+        if (game.id > 0 && !romList->gameListFav.exist(game.romId)) {
+            int res = ui->getUiMessageBox()->show("FAVORITES",
+                                                  "Add to favorites ?",
+                                                  "OK", "CANCEL");
+            if (res == MessageBox::LEFT) {
+                romList->addFav(game);
+            }
+        } else if (game.id > 0 && romList->gameListFav.exist(game.romId)) {
             int res = ui->getUiMessageBox()->show("FAVORITES",
                                                   "Remove from favorites ?",
                                                   "OK", "CANCEL");
@@ -370,17 +377,6 @@ bool UIRomListClassic::onInput(c2d::Input::Player *players) {
                     // update list if we are in favorites
                     updateRomList();
                 }
-            }
-        }
-    } else if (keys & Input::Key::Fire3) {
-        // add to favorites
-        Game game = getSelection();
-        if (game.id > 0 && !romList->gameListFav.exist(game.romId)) {
-            int res = ui->getUiMessageBox()->show("FAVORITES",
-                                                  "Add to favorites ?",
-                                                  "OK", "CANCEL");
-            if (res == MessageBox::LEFT) {
-                romList->addFav(game);
             }
         }
     } else if (keys & Input::Key::Start) {
