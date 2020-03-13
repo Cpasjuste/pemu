@@ -28,7 +28,7 @@ C2DUIVideo::C2DUIVideo(UIMain *gui, void **_pixels, int *_pitch, const c2d::Vect
     //printf("game: %ix%i\n", (int) size.x, (int) size.y);
 
     if (_pixels != nullptr) {
-        FloatRect rect = {0, 0, getTextureRect().width, getTextureRect().height};
+        FloatRect rect = (FloatRect) getTextureRect();
         texture->lock(&rect, _pixels, _pitch);
         texture->unlock();
     }

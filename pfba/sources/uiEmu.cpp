@@ -155,7 +155,7 @@ void PFBAGuiEmu::updateFb() {
         nFramesEmulated++;
         nCurrentFrame++;
         nFramesRendered++;
-        getVideo()->getTexture()->lock(nullptr, (void **) &pBurnDraw, &nBurnPitch);
+        getVideo()->getTexture()->lock(&textureRect, (void **) &pBurnDraw, &nBurnPitch);
         BurnDrvFrame();
         getVideo()->getTexture()->unlock();
     }
@@ -178,26 +178,14 @@ void PFBAGuiEmu::renderFrame(bool draw) {
             getVideo()->getTexture()->unlock();
         }
 
-        if (getAudio() && getAudio()->isAvailable()) {
+        if (getAudio() != nullptr && getAudio()->isAvailable()) {
             getAudio()->play(audio_sync);
         }
     }
 }
 
 void PFBAGuiEmu::updateFrame() {
-
-    // TODO
-    //int frameSkip = getUi()->getConfig()->getValue(Option::Index::ROM_FRAMESKIP, true);
-
     renderFrame();
-    /*
-    timer += getUi()->getDeltaTime().asSeconds();
-    if (timer >= 1) {
-        timer = 0;
-        printf("fps: %.2g/%2d, delta: %f\n", getUi()->getFps(), (nBurnFPS / 100),
-               getUi()->getDeltaTime().asSeconds());
-    }
-    */
 }
 
 bool PFBAGuiEmu::onInput(c2d::Input::Player *players) {
@@ -262,7 +250,6 @@ void PFBAGuiEmu::onUpdate() {
     UIEmu::onUpdate();
 
     if (!isPaused()) {
-
         // fps
         bool showFps = getUi()->getConfig()->get(Option::Id::ROM_SHOW_FPS, true)->getValueBool();
         getFpsText()->setVisibility(showFps ? c2d::Visibility::Visible : c2d::Visibility::Hidden);
