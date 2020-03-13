@@ -63,6 +63,7 @@ set(DRV_DIRS
         ${CMAKE_SOURCE_DIR}/cores/fba/src/burn/drv/midway
         ${CMAKE_SOURCE_DIR}/cores/fba/src/burn/drv/msx
         ${CMAKE_SOURCE_DIR}/cores/fba/src/burn/drv/neogeo
+        ${CMAKE_SOURCE_DIR}/cores/fba/src/burn/drv/nes
         ${CMAKE_SOURCE_DIR}/cores/fba/src/burn/drv/pce
         ${CMAKE_SOURCE_DIR}/cores/fba/src/burn/drv/pgm
         ${CMAKE_SOURCE_DIR}/cores/fba/src/burn/drv/pre90s
@@ -71,7 +72,6 @@ set(DRV_DIRS
         ${CMAKE_SOURCE_DIR}/cores/fba/src/burn/drv/sega
         ${CMAKE_SOURCE_DIR}/cores/fba/src/burn/drv/sg1000
         ${CMAKE_SOURCE_DIR}/cores/fba/src/burn/drv/sms
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/burn/drv/snes
         ${CMAKE_SOURCE_DIR}/cores/fba/src/burn/drv/spectrum
         ${CMAKE_SOURCE_DIR}/cores/fba/src/burn/drv/taito
         ${CMAKE_SOURCE_DIR}/cores/fba/src/burn/drv/toaplan
@@ -92,12 +92,14 @@ set(INTF_DIRS
         ${CMAKE_SOURCE_DIR}/cores/fba/src/intf
         ${CMAKE_SOURCE_DIR}/cores/fba/src/intf/input
         ${CMAKE_SOURCE_DIR}/cores/fba/src/intf/cd
+        ${CMAKE_SOURCE_DIR}/cores/fba/src/intf/cd/sdl
         ${CMAKE_SOURCE_DIR}/cores/fba/src/intf/audio
         )
 file(GLOB SRC_INTF
         ${CMAKE_SOURCE_DIR}/cores/fba/src/intf/*.cpp
         ${CMAKE_SOURCE_DIR}/cores/fba/src/intf/input/*.cpp
         ${CMAKE_SOURCE_DIR}/cores/fba/src/intf/cd/*.cpp
+        ${CMAKE_SOURCE_DIR}/cores/fba/src/intf/cd/sdl/*.cpp
         ${CMAKE_SOURCE_DIR}/cores/fba/src/intf/audio/*.cpp
         )
 list(REMOVE_ITEM SRC_INTF

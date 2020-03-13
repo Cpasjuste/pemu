@@ -101,11 +101,11 @@ void UIMain::onUpdate() {
             bool changed = (oldKeys ^ keys) != 0;
             oldKeys = keys;
             if (!changed) {
-                if (timer.getElapsedTime().asSeconds() > 7) {
+                if (timer.getElapsedTime().asSeconds() > 5) {
                     getInput()->setRepeatDelay(INPUT_DELAY / 20);
-                } else if (timer.getElapsedTime().asSeconds() > 5) {
+                } else if (timer.getElapsedTime().asSeconds() > 3) {
                     getInput()->setRepeatDelay(INPUT_DELAY / 8);
-                } else if (timer.getElapsedTime().asSeconds() > 2) {
+                } else if (timer.getElapsedTime().asSeconds() > 1) {
                     getInput()->setRepeatDelay(INPUT_DELAY / 4);
                 }
             } else {
