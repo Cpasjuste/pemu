@@ -78,7 +78,7 @@ void RomList::build() {
     std::string dataPath = ui->getIo()->getDataPath();
     gameList = GameList(dataPath + "gamelist.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_ARCADE));
     setLoadingText("Games: %i / %zu", gameList.getAvailableCount(), gameList.games.size());
-
+#ifndef __VITA__
     gameList.append(dataPath + "gamelist_coleco.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_COLECO));
     setLoadingText("Games: %i / %zu", gameList.getAvailableCount(), gameList.games.size());
 
@@ -108,7 +108,7 @@ void RomList::build() {
 
     gameList.append(dataPath + "gamelist_zx3.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_ZX3));
     setLoadingText("Games: %i / %zu", gameList.getAvailableCount(), gameList.games.size());
-
+#endif
     printf("RomList::build: %zu roms\n", gameList.games.size());
 
     gameList.systems.insert(gameList.systems.begin(), "All");

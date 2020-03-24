@@ -20,12 +20,12 @@ Skin::Skin(UIMain *u, const std::vector<Button> &btns, const Vector2f &scaling) 
     std::string skinName = ui->getConfig()->get(Option::GUI_SKIN)->getValueString() + std::string(".zip");
     int configLen = 0;
     char *configData = getZippedData(path + skinName, "config.cfg", &configLen);
-    if (!configData) {
+    if (configData == nullptr) {
         ui->getConfig()->get(Option::GUI_SKIN)->setValueString("default");
         skinName = "default.zip";
         configData = getZippedData(path + skinName, "config.cfg", &configLen);
     }
-    if (configData) {
+    if (configData != nullptr) {
         configData[configLen - 1] = '\0';
         path += skinName;
         useZippedSkin = true;
@@ -42,7 +42,7 @@ Skin::Skin(UIMain *u, const std::vector<Button> &btns, const Vector2f &scaling) 
             std::string buttonPath = "buttons/" + std::to_string(button.id) + ".png";
             int size = 0;
             char *data = getZippedData(path, buttonPath, &size);
-            if (data) {
+            if (data != nullptr) {
                 button.texture = new C2DTexture((const unsigned char *) data, size);
                 free(data);
             }
@@ -51,7 +51,7 @@ Skin::Skin(UIMain *u, const std::vector<Button> &btns, const Vector2f &scaling) 
                     ui->getIo()->getHomePath() + "skins/buttons/" + std::to_string(button.id) + ".png";
             button.texture = new C2DTexture(buttonPath);
         }
-        if (button.texture && !button.texture->available) {
+        if ((button.texture != nullptr) && !button.texture->available) {
             delete (button.texture);
         }
     }
@@ -60,6 +60,7 @@ Skin::Skin(UIMain *u, const std::vector<Button> &btns, const Vector2f &scaling) 
     /// GENERAL
     ///
     config::Group gen("GENERAL");
+    gen.addOption({"resolution", Vector2f{1280.0f, 720.0f}});
     gen.addOption({"global_scaling", Vector2f{1.0f, 1.0f}});
     config->addGroup(gen);
 
@@ -238,14 +239,21 @@ Skin::Skin(UIMain *u, const std::vector<Button> &btns, const Vector2f &scaling) 
     /// load global scaling from loaded configuration
     ///
     c2d::config::Group *genGrp = config->getGroup("GENERAL");
-    if (genGrp) {
+    if (genGrp != nullptr) {
         c2d::config::Option *opt = genGrp->getOption("global_scaling");
-        if (opt) {
+        if (opt != nullptr) {
             global_scaling = opt->getVector2f();
             global_scaling.x *= (float) ui->getConfig()->get(c2dui::Option::Id::GUI_WINDOW_WIDTH)->getValueInt()
                                 / (float) ui->getConfig()->get(c2dui::Option::Id::GUI_SCREEN_WIDTH)->getValueInt();
             global_scaling.y *= (float) ui->getConfig()->get(c2dui::Option::Id::GUI_WINDOW_HEIGHT)->getValueInt()
                                 / (float) ui->getConfig()->get(c2dui::Option::Id::GUI_SCREEN_HEIGHT)->getValueInt();
+        }
+        opt = genGrp->getOption("resolution");
+        if (opt != nullptr) {
+            Vector2f uiRes = ui->getSize();
+            Vector2f skinRes = opt->getVector2f();
+            global_scaling.x *= uiRes.x / skinRes.x;
+            global_scaling.y *= uiRes.y / skinRes.y;
         }
     }
     if (global_scaling.x == 1 && global_scaling.y == 1) {
@@ -261,7 +269,7 @@ Skin::Skin(UIMain *u, const std::vector<Button> &btns, const Vector2f &scaling) 
     if (useZippedSkin) {
         int size = 0;
         font_data = getZippedData(path, fntGroup->getOption("path")->getString(), &size);
-        if (font_data) {
+        if (font_data != nullptr) {
             if (font->loadFromMemory(font_data, (size_t) size)) {
                 font_available = true;
             }
