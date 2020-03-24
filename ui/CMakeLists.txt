@@ -29,6 +29,7 @@ if (OPTION_BUILTIN_MINIZIP)
     list(APPEND CROSS2DUI_SOURCE
             ${CMAKE_CURRENT_SOURCE_DIR}/minizip/ioapi.c
             ${CMAKE_CURRENT_SOURCE_DIR}/minizip/unzip.c)
+    list(APPEND FLAGS -DIOAPI_NO_64)
     if (PLATFORM_WINDOWS)
         list(APPEND CROSS2DUI_SOURCE ${CMAKE_CURRENT_SOURCE_DIR}/minizip/iowin32.c)
     endif ()
