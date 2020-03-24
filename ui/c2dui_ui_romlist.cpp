@@ -65,7 +65,8 @@ std::string UIRomList::getPreviewVideo(const ss_api::Game &game) {
 
     std::string path = game.romsPath + game.getMedia("video").url;
     printf("getPreviewVideo(%s)\n", path.c_str());
-    if (!ui->getIo()->exist(path) && game.isClone()) {
+    if (!ui->getIo()->exist(path)) {
+        path = "";
         Game parentGame = gameList.findByPath(game.cloneOf);
         if (!parentGame.path.empty()) {
             path = game.romsPath + parentGame.getMedia("video").url;

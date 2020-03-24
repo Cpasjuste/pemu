@@ -351,7 +351,10 @@ Skin::RectangleShapeGroup Skin::getRectangleShape(const std::vector<std::string>
     option = group->getOption("outline_size");
     if (option) {
         rectangleShapeGroup.outlineSize = option->getFloat();
-        rectangleShapeGroup.outlineSize *= global_scaling.x;
+        rectangleShapeGroup.outlineSize *= global_scaling.y;
+        if (rectangleShapeGroup.outlineSize > 0 && rectangleShapeGroup.outlineSize < 1) {
+            rectangleShapeGroup.outlineSize = 1;
+        }
     }
     option = group->getOption("scaling");
     if (option) {
@@ -486,8 +489,7 @@ Skin::TextGroup Skin::getText(const std::vector<std::string> &tree) {
     }
     option = group->getOption("size");
     if (option) {
-        textGroup.size = (unsigned int) option->getInteger();
-        textGroup.size = (unsigned int) ((float) textGroup.size * global_scaling.y);
+        textGroup.size = (unsigned int) ((float) option->getInteger() * global_scaling.y);
     }
     option = group->getOption("color");
     if (option) {
@@ -500,7 +502,10 @@ Skin::TextGroup Skin::getText(const std::vector<std::string> &tree) {
     option = group->getOption("outline_size");
     if (option) {
         textGroup.outlineSize = option->getFloat();
-        textGroup.outlineSize *= global_scaling.x;
+        textGroup.outlineSize *= global_scaling.y;
+        if (textGroup.outlineSize > 0 && textGroup.outlineSize < 1) {
+            textGroup.outlineSize = 1;
+        }
     }
     option = group->getOption("origin");
     if (option) {
