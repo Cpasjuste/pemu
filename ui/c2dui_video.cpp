@@ -18,8 +18,11 @@ C2DUIVideo::C2DUIVideo(UIMain *gui, void **_pixels, int *_pitch, const c2d::Vect
         : Sprite() {
 
     ui = gui;
-
+#ifdef __VITA__
+    texture = new C2DTexture({size.x, size.y}, format);
+#else
     texture = new C2DTexture({p2((int) size.x), p2((int) size.y)}, format);
+#endif
     setTexture(texture, true);
     setTextureRect({0, 0, (int) size.x, (int) size.y});
     printf("game: %ix%i, texture: %ix%i\n",
