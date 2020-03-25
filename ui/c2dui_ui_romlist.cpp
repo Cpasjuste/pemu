@@ -6,7 +6,6 @@
 #include "c2dui.h"
 #include "c2dui_ui_romlist.h"
 
-
 /// pFBA
 #define BDF_ORIENTATION_FLIPPED     (1 << 1)
 #define BDF_ORIENTATION_VERTICAL    (1 << 2)

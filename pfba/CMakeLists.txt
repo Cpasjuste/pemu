@@ -172,11 +172,8 @@ file(GLOB SRC_CPU
         ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/v60/*.c*
         ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/z80/*.c*
         ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/z180/*.c*
-        # PFBA
-        #pfba/cpu/c68000_intf.cpp
         )
 list(REMOVE_ITEM SRC_CPU
-        #${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/m68000_intf.cpp
         ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/adsp2100/2100ops.c
         ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/tms34010/tms34010_dasm.cpp
         ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/tms34010/tms34010_newdasm.cpp
@@ -297,11 +294,12 @@ endif ()
 # PSP2 (ps vita)
 #################
 if (PLATFORM_VITA)
+    enable_language(ASM)
     set(TITLE_ID "PFBA00001" CACHE STRING "" FORCE)
-    #list(APPEND INC pfba/cpu/cyclone)
-    #list(APPEND SRC_PFBA pfba/cpu/cyclone/Cyclone.s)
-    list(APPEND FLAGS -DNO_KEYBOARD -DBUILD_C68K -DUSE_FILE32API -DLSB_FIRST)
-    #-D__PFBA_ARM__
+    list(REMOVE_ITEM SRC_CPU ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/m68000_intf.cpp)
+    list(APPEND INC sources/cpu/cyclone)
+    list(APPEND SRC_PFBA sources/cpu/c68000_intf.cpp sources/cpu/cyclone/Cyclone.s)
+    list(APPEND FLAGS -DNO_KEYBOARD -DBUILD_C68K -DUSE_FILE32API -DLSB_FIRST -D__PFBA_ARM__)
     if (BUILD_DEBUG)
         list(APPEND FLAGS
                 -D__PSP2_DEBUG__ -g # TODO: cyclone arm asm core not working without O2/O3

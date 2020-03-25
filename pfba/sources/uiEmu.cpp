@@ -17,6 +17,16 @@ extern int InpMake(Input::Player *players);
 extern unsigned char inputServiceSwitch;
 extern unsigned char inputP1P2Switch;
 
+#ifdef __PFBA_ARM__
+extern int nSekCpuCore;
+
+static bool isHardware(int hardware, int type) {
+    return (((hardware | HARDWARE_PREFIX_CARTRIDGE) ^ HARDWARE_PREFIX_CARTRIDGE)
+            & 0xff000000) == (unsigned int) type;
+}
+
+#endif
+
 static unsigned int myHighCol16(int r, int g, int b, int /* i */) {
     unsigned int t;
     t = (unsigned int) ((r << 8) & 0xf800); // rrrr r000 0000 0000
@@ -29,6 +39,67 @@ PFBAGuiEmu::PFBAGuiEmu(UIMain *ui) : UIEmu(ui) {
 
     printf("PFBAGuiEmu()\n");
 }
+
+#ifdef __PFBA_ARM__
+
+int PFBAGuiEmu::getSekCpuCore() {
+
+    int sekCpuCore = 0; // SEK_CORE_C68K: USE CYCLONE ARM ASM M68K CORE
+
+    std::vector<std::string> zipList;
+    int hardware = BurnDrvGetHardwareCode();
+
+    std::string bios = getUi()->getConfig()->get(Option::Id::ROM_NEOBIOS, true)->getValueString();
+    if (isHardware(hardware, HARDWARE_PREFIX_SNK) && Utility::contains(bios, "UNIBIOS")) {
+        sekCpuCore = 1; // SEK_CORE_M68K: USE C M68K CORE
+        getUi()->getUiMessageBox()->show(
+                "WARNING", "UNIBIOS DOESNT SUPPORT THE M68K ASM CORE\n"
+                           "CYCLONE ASM CORE DISABLED", "OK");
+    }
+
+    if (isHardware(hardware, HARDWARE_PREFIX_SEGA)) {
+        if (hardware & HARDWARE_SEGA_FD1089A_ENC
+            || hardware & HARDWARE_SEGA_FD1089B_ENC
+            || hardware & HARDWARE_SEGA_MC8123_ENC
+            || hardware & HARDWARE_SEGA_FD1094_ENC
+            || hardware & HARDWARE_SEGA_FD1094_ENC_CPU2) {
+            sekCpuCore = 1; // SEK_CORE_M68K: USE C M68K CORE
+            getUi()->getUiMessageBox()->show(
+                    "WARNING", "ROM IS CRYPTED, USE DECRYPTED ROM (CLONE)\n"
+                               "TO ENABLE CYCLONE ASM CORE (FASTER)", "OK");
+        }
+    } else if (isHardware(hardware, HARDWARE_PREFIX_TOAPLAN)) {
+        zipList.push_back("batrider");
+        zipList.push_back("bbakraid");
+        zipList.push_back("bgaregga");
+    } else if (isHardware(hardware, HARDWARE_PREFIX_SNK)) {
+        zipList.push_back("kof97");
+        zipList.push_back("kof98");
+        zipList.push_back("kof99");
+        zipList.push_back("kof2000");
+        zipList.push_back("kof2001");
+        zipList.push_back("kof2002");
+        zipList.push_back("kf2k3pcb");
+        //zipList.push_back("kof2003"); // WORKS
+    }
+
+    std::string zip = BurnDrvGetTextA(DRV_NAME);
+    for (unsigned int i = 0; i < zipList.size(); i++) {
+        if (zipList[i].compare(0, zip.length(), zip) == 0) {
+            getUi()->getUiMessageBox()->show(
+                    "WARNING", "THIS GAME DOES NOT SUPPORT THE M68K ASM CORE\n"
+                               "CYCLONE ASM CORE DISABLED", "OK");
+            sekCpuCore = 1; // SEK_CORE_M68K: USE C M68K CORE
+            break;
+        }
+    }
+
+    zipList.clear();
+
+    return sekCpuCore;
+}
+
+#endif
 
 int PFBAGuiEmu::load(const ss_api::Game &game) {
 
@@ -68,6 +139,11 @@ int PFBAGuiEmu::load(const ss_api::Game &game) {
         printf("PFBAGui::runRom: driver not found\n");
         return -1;
     }
+
+#ifdef __PFBA_ARM__
+    nSekCpuCore = getSekCpuCore();
+    printf("nSekCpuCore: %s\n", nSekCpuCore > 0 ? "M68K" : "C68K (ASM)");
+#endif
 
     int audio_freq = getUi()->getConfig()->get(Option::Id::ROM_AUDIO_FREQ, true)->getValueInt(44100);
     nInterpolation = getUi()->getConfig()->get(Option::Id::ROM_AUDIO_INTERPOLATION, true)->getValueInt();

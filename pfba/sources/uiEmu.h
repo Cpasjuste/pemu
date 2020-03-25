@@ -19,6 +19,8 @@ public:
 
 private:
 
+    int getSekCpuCore();
+
     bool onInput(c2d::Input::Player *players) override;
 
     void onUpdate() override;
