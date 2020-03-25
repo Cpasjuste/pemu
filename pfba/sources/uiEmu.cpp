@@ -145,10 +145,10 @@ int PFBAGuiEmu::load(const ss_api::Game &game) {
     printf("nSekCpuCore: %s\n", nSekCpuCore > 0 ? "M68K" : "C68K (ASM)");
 #endif
 
-    int audio_freq = getUi()->getConfig()->get(Option::Id::ROM_AUDIO_FREQ, true)->getValueInt(44100);
-    nInterpolation = getUi()->getConfig()->get(Option::Id::ROM_AUDIO_INTERPOLATION, true)->getValueInt();
-    nFMInterpolation = getUi()->getConfig()->get(Option::Id::ROM_AUDIO_FMINTERPOLATION, true)->getValueInt();
-    bForce60Hz = getUi()->getConfig()->get(Option::Id::ROM_FORCE_60HZ, true)->getValueBool();
+    int audio_freq = ui->getConfig()->get(Option::Id::ROM_AUDIO_FREQ, true)->getValueInt(44100);
+    nInterpolation = ui->getConfig()->get(Option::Id::ROM_AUDIO_INTERPOLATION, true)->getValueInt();
+    nFMInterpolation = ui->getConfig()->get(Option::Id::ROM_AUDIO_FMINTERPOLATION, true)->getValueInt();
+    bForce60Hz = ui->getConfig()->get(Option::Id::ROM_FORCE_60HZ, true)->getValueBool();
     if (bForce60Hz) {
         nBurnFPS = 6000;
     }
@@ -168,8 +168,8 @@ int PFBAGuiEmu::load(const ss_api::Game &game) {
     if (DrvInit(nBurnDrvActive, false) != 0) {
         printf("\nDriver initialisation failed\n");
         delete (aud);
-        getUi()->getUiProgressBox()->setVisibility(Visibility::Hidden);
-        getUi()->getUiMessageBox()->show("ERROR", "DRIVER INIT FAILED", "OK");
+        ui->getUiProgressBox()->setVisibility(Visibility::Hidden);
+        ui->getUiMessageBox()->show("ERROR", "DRIVER INIT FAILED", "OK");
         stop();
         return -1;
     }
@@ -187,12 +187,12 @@ int PFBAGuiEmu::load(const ss_api::Game &game) {
     // AUDIO
     //////////
     addAudio(audio_freq, (float) nBurnFPS / 100.0f);
-    if (getAudio()->isAvailable()) {
+    if (audio->isAvailable()) {
         nBurnSoundRate = getAudio()->getSampleRate();
         nBurnSoundLen = getAudio()->getBufferLen();
         pBurnSoundOut = getAudio()->getBuffer();
     }
-    audio_sync = getUi()->getConfig()->get(Option::Id::ROM_AUDIO_SYNC, true)->getValueBool();
+    audio_sync = ui->getConfig()->get(Option::Id::ROM_AUDIO_SYNC, true)->getValueBool();
     printf("FORCE_60HZ: %i, AUDIO_SYNC: %i, FPS: %f (BURNFPS: %f)\n",
            bForce60Hz, audio_sync, (float) nBurnFPS / 100.0f, (float) nBurnFPS / 100.0f);
     ///////////
@@ -231,9 +231,9 @@ void PFBAGuiEmu::updateFb() {
         nFramesEmulated++;
         nCurrentFrame++;
         nFramesRendered++;
-        getVideo()->getTexture()->lock(&textureRect, (void **) &pBurnDraw, &nBurnPitch);
+        video->getTexture()->lock(&textureRect, (void **) &pBurnDraw, &nBurnPitch);
         BurnDrvFrame();
-        getVideo()->getTexture()->unlock();
+        video->getTexture()->unlock();
     }
 }
 
@@ -247,15 +247,15 @@ void PFBAGuiEmu::renderFrame(bool draw) {
         pBurnDraw = nullptr;
         if (draw) {
             nFramesRendered++;
-            getVideo()->getTexture()->lock(&textureRect, (void **) &pBurnDraw, &nBurnPitch);
+            video->getTexture()->lock(&textureRect, (void **) &pBurnDraw, &nBurnPitch);
         }
         BurnDrvFrame();
         if (draw) {
-            getVideo()->getTexture()->unlock();
+            video->getTexture()->unlock();
         }
 
-        if (getAudio() != nullptr && getAudio()->isAvailable()) {
-            getAudio()->play(audio_sync);
+        if (audio != nullptr && audio->isAvailable()) {
+            audio->play(audio_sync);
         }
     }
 }
@@ -266,8 +266,7 @@ void PFBAGuiEmu::updateFrame() {
 
 bool PFBAGuiEmu::onInput(c2d::Input::Player *players) {
 
-    if (getUi()->getUiMenu()->isVisible()
-        || getUi()->getUiStateMenu()->isVisible()) {
+    if (ui->getUiMenu()->isVisible() || ui->getUiStateMenu()->isVisible()) {
         return UIEmu::onInput(players);
     }
 
@@ -327,11 +326,17 @@ void PFBAGuiEmu::onUpdate() {
 
     if (!isPaused()) {
         // fps
-        bool showFps = getUi()->getConfig()->get(Option::Id::ROM_SHOW_FPS, true)->getValueBool();
-        getFpsText()->setVisibility(showFps ? c2d::Visibility::Visible : c2d::Visibility::Hidden);
+        bool showFps = ui->getConfig()->get(Option::Id::ROM_SHOW_FPS, true)->getValueBool();
         if (showFps) {
-            sprintf(getFpsString(), "FPS: %.2g/%2d", getUi()->getFps(), nBurnFPS / 100);
-            getFpsText()->setString(getFpsString());
+            if (!fpsText->isVisible()) {
+                fpsText->setVisibility(c2d::Visibility::Visible);
+            }
+            sprintf(fpsString, "FPS: %.3g/%2d", getUi()->getFps(), nBurnFPS / 100);
+            fpsText->setString(getFpsString());
+        } else {
+            if (fpsText->isVisible()) {
+                fpsText->setVisibility(c2d::Visibility::Hidden);
+            }
         }
 
         auto players = getUi()->getInput()->getPlayers();

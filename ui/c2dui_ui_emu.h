@@ -54,13 +54,10 @@ namespace c2dui {
 
     protected:
         ss_api::Game currentGame;
-
-    private:
-
+        c2d::Text *fpsText = nullptr;
         UIMain *ui = nullptr;
         C2DUIVideo *video = nullptr;
         c2d::Audio *audio = nullptr;
-        c2d::Text *fpsText = nullptr;
         char fpsString[32];
         bool paused = true;
         float frameDuration = 0;

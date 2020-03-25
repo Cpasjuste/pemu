@@ -50,7 +50,7 @@ bool UIEmu::onInput(c2d::Input::Player *players) {
 
 void UIEmu::addAudio(c2d::Audio *_audio) {
 
-    if (audio) {
+    if (audio != nullptr) {
         delete (audio);
         audio = nullptr;
     }
@@ -60,7 +60,7 @@ void UIEmu::addAudio(c2d::Audio *_audio) {
 
 void UIEmu::addAudio(int rate, float fps, Audio::C2DAudioCallback cb) {
 
-    if (audio) {
+    if (audio != nullptr) {
         delete (audio);
         audio = nullptr;
     }
@@ -71,7 +71,7 @@ void UIEmu::addAudio(int rate, float fps, Audio::C2DAudioCallback cb) {
 
 void UIEmu::addVideo(C2DUIVideo *_video) {
 
-    if (video) {
+    if (video != nullptr) {
         delete (video);
         video = nullptr;
     }
@@ -86,7 +86,7 @@ void UIEmu::addVideo(C2DUIVideo *_video) {
 void UIEmu::addVideo(UIMain *ui, void **pixels, int *pitch,
                      const c2d::Vector2f &size, Texture::Format format) {
 
-    if (video) {
+    if (video != nullptr) {
         delete (video);
         video = nullptr;
     }

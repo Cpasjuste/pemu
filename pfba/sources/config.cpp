@@ -46,8 +46,13 @@ PFBAConfig::PFBAConfig(c2d::Io *io, int version) : Config(io, version) {
     add(Option::Id::ROM_FILTER, "FORCE_60HZ",
         {"OFF", "ON"}, 1, Option::Id::ROM_FORCE_60HZ, Option::Flags::BOOLEAN);
     // audio
+#ifdef __VITA__
+    add(Option::Id::ROM_FORCE_60HZ, "FORCE_AUDIO_SYNC",
+        {"OFF", "ON"}, 1, Option::Id::ROM_AUDIO_SYNC, Option::Flags::BOOLEAN | Option::HIDDEN);
+#else
     add(Option::Id::ROM_FORCE_60HZ, "FORCE_AUDIO_SYNC",
         {"OFF", "ON"}, 0, Option::Id::ROM_AUDIO_SYNC, Option::Flags::BOOLEAN);
+#endif
     add(Option::Id::ROM_AUDIO_SYNC, "AUDIO_FREQUENCY",
         {"11025", "22050", "32000", "44100", "48000"}, 3, Option::Id::ROM_AUDIO_FREQ, Option::Flags::STRING);
 #endif
@@ -55,7 +60,7 @@ PFBAConfig::PFBAConfig(c2d::Io *io, int version) : Config(io, version) {
         {"0", "1", "3"}, 2, Option::Id::ROM_AUDIO_INTERPOLATION, Option::Flags::INTEGER);
     add(Option::Id::ROM_AUDIO_INTERPOLATION, "AUDIO_FM_INTERPOLATION",
         {"0", "1", "3"}, 2, Option::Id::ROM_AUDIO_FMINTERPOLATION, Option::Flags::INTEGER);
-#ifdef __PSP2__
+#ifdef __VITA__
     add(Option::Id::ROM_AUDIO_FMINTERPOLATION, "ROTATION",
         {"OFF", "ON", "FLIP", "CAB MODE"}, 1, Option::Id::ROM_ROTATION, Option::Flags::STRING);
 #else
