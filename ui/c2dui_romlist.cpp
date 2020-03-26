@@ -77,39 +77,39 @@ void RomList::build() {
 
     std::string dataPath = ui->getIo()->getDataPath();
     gameList = GameList(dataPath + "gamelist.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_ARCADE));
-    setLoadingText("Games: %i / %zu", gameList.getAvailableCount(), gameList.games.size());
-#ifndef __VITA__
+    setLoadingText("Games: %i / %i", gameList.getAvailableCount(), gameList.games.size());
+
     gameList.append(dataPath + "gamelist_coleco.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_COLECO));
-    setLoadingText("Games: %i / %zu", gameList.getAvailableCount(), gameList.games.size());
+    setLoadingText("Games: %i / %i", gameList.getAvailableCount(), gameList.games.size());
 
     gameList.append(dataPath + "gamelist_gamegear.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_GAMEGEAR));
-    setLoadingText("Games: %i / %zu", gameList.getAvailableCount(), gameList.games.size());
+    setLoadingText("Games: %i / %i", gameList.getAvailableCount(), gameList.games.size());
 
     gameList.append(dataPath + "gamelist_megadriv.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_MEGADRIV));
-    setLoadingText("Games: %i / %zu", gameList.getAvailableCount(), gameList.games.size());
+    setLoadingText("Games: %i / %i", gameList.getAvailableCount(), gameList.games.size());
 
     gameList.append(dataPath + "gamelist_msx.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_MSX));
-    setLoadingText("Games: %i / %zu", gameList.getAvailableCount(), gameList.games.size());
+    setLoadingText("Games: %i / %i", gameList.getAvailableCount(), gameList.games.size());
 
     gameList.append(dataPath + "gamelist_pce.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_PCE));
-    setLoadingText("Games: %i / %zu", gameList.getAvailableCount(), gameList.games.size());
+    setLoadingText("Games: %i / %i", gameList.getAvailableCount(), gameList.games.size());
 
     gameList.append(dataPath + "gamelist_sg1000.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_SG1000));
-    setLoadingText("Games: %i / %zu", gameList.getAvailableCount(), gameList.games.size());
+    setLoadingText("Games: %i / %i", gameList.getAvailableCount(), gameList.games.size());
 
     gameList.append(dataPath + "gamelist_sgx.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_SGX));
-    setLoadingText("Games: %i / %zu", gameList.getAvailableCount(), gameList.games.size());
+    setLoadingText("Games: %i / %i", gameList.getAvailableCount(), gameList.games.size());
 
     gameList.append(dataPath + "gamelist_sms.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_SMS));
-    setLoadingText("Games: %i / %zu", gameList.getAvailableCount(), gameList.games.size());
+    setLoadingText("Games: %i / %i", gameList.getAvailableCount(), gameList.games.size());
 
     gameList.append(dataPath + "gamelist_tg16.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_TG16));
-    setLoadingText("Games: %i / %zu", gameList.getAvailableCount(), gameList.games.size());
+    setLoadingText("Games: %i / %i", gameList.getAvailableCount(), gameList.games.size());
 
     gameList.append(dataPath + "gamelist_zx3.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_ZX3));
-    setLoadingText("Games: %i / %zu", gameList.getAvailableCount(), gameList.games.size());
-#endif
-    printf("RomList::build: %zu roms\n", gameList.games.size());
+    setLoadingText("Games: %i / %i", gameList.getAvailableCount(), gameList.games.size());
+
+    printf("RomList::build: %i roms\n", gameList.games.size());
 
     gameList.systems.insert(gameList.systems.begin(), "All");
     gameList.editors.insert(gameList.editors.begin(), "All");
@@ -121,8 +121,6 @@ void RomList::build() {
     gameList.resolutions.insert(gameList.resolutions.begin(), "All");
     gameList.dates.insert(gameList.dates.begin(), "All");
     gameList.genres.insert(gameList.genres.begin(), "All");
-
-    ui->delay(1000);
 
     ui->getConfig()->add(
             Option::Id::GUI_FILTER_CLONES, "FILTER_SYSTEM",
@@ -164,7 +162,7 @@ void RomList::build() {
     ui->getConfig()->reset();
     ui->getConfig()->load();
 
-    gameListFav = GameList("favorites.xml");
+    gameListFav = GameList(dataPath + "favorites.xml");
     for (size_t i = 0; i < gameListFav.games.size(); i++) {
         Game game = gameList.findByPathAndSystem(gameListFav.games[i].path, gameListFav.games[i].system.id);
         if (!game.path.empty()) {
@@ -172,7 +170,7 @@ void RomList::build() {
             gameListFav.games[i].romsPath = game.romsPath;
         }
     }
-    printf("RomList::build: %zu favorites\n", gameListFav.games.size());
+    printf("RomList::build: %i favorites\n", gameListFav.games.size());
 
     float time_spent = ui->getElapsedTime().asSeconds() - time_start;
     printf("RomList::build(): list built in %f\n", time_spent);
@@ -186,7 +184,8 @@ void RomList::addFav(const Game &game) {
 
     if (!gameListFav.exist(game.romId)) {
         gameListFav.games.emplace_back(game);
-        gameListFav.save("favorites.xml", Game::Language::EN, GameList::Format::ScreenScrapper,
+        gameListFav.save(ui->getIo()->getDataPath() + "favorites.xml",
+                         Game::Language::EN, GameList::Format::ScreenScrapper,
                          {"mixrbv2", "video"});
     }
 }
@@ -194,7 +193,8 @@ void RomList::addFav(const Game &game) {
 void RomList::removeFav(const Game &game) {
 
     if (gameListFav.remove(game.romId)) {
-        gameListFav.save("favorites.xml", Game::Language::EN, GameList::Format::ScreenScrapper,
+        gameListFav.save(ui->getIo()->getDataPath() + "favorites.xml",
+                         Game::Language::EN, GameList::Format::ScreenScrapper,
                          {"mixrbv2", "video"});
     }
 }
