@@ -57,7 +57,9 @@ int PFBAGuiEmu::getSekCpuCore() {
                            "CYCLONE ASM CORE DISABLED", "OK");
     }
 
-    if (isHardware(hardware, HARDWARE_PREFIX_SEGA)) {
+    if (isHardware(hardware, HARDWARE_PREFIX_SEGA_MEGADRIVE)) {
+        sekCpuCore = 1; // SEK_CORE_M68K: USE C M68K CORE
+    } else if (isHardware(hardware, HARDWARE_PREFIX_SEGA)) {
         if (hardware & HARDWARE_SEGA_FD1089A_ENC
             || hardware & HARDWARE_SEGA_FD1089B_ENC
             || hardware & HARDWARE_SEGA_MC8123_ENC

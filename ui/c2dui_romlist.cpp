@@ -76,6 +76,7 @@ void RomList::build() {
     printf("RomList::build(): FBN_PATH_ARCADE: %s\n", ui->getConfig()->getRomPaths().at(FBN_PATH_ARCADE).c_str());
 
     std::string dataPath = ui->getIo()->getDataPath();
+
     gameList = GameList(dataPath + "gamelist.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_ARCADE));
     setLoadingText("Games: %i / %i", gameList.getAvailableCount(), gameList.games.size());
 
