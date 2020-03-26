@@ -30,6 +30,7 @@ pFBN: Portable FinalBurn Neo
 - Video snaps support (put mp4 files in "roms/media/video"), you can download a near fullset video package [here](http://files.mydedibox.fr/files/dev/pemu/pfbneo/arcade_video.zip) or [here](https://files.coolatoms.org/arcade_video.zip)
 - pFBN, as fbneo, support consoles roms. Here is the corresponding folders where roms should be located (as fbneo):
     ```
+    Arcade              : "roms"
     Coleco              : "coleco"
     Sega GameGear       : "gamegear"
     Sega MegaDrive      : "megadriv"
