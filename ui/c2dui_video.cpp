@@ -140,5 +140,9 @@ void C2DUIVideo::updateScaling(bool vertical, bool flip) {
     setOrigin(Origin::Center);
     setPosition(screen.x / 2, screen.y / 2);
     setScale(sx, sy);
+#ifdef __VITA__
+    // needed for PSP2Texture::applyShader
+    getTexture()->setScale(sx, sy);
+#endif
     setRotation(rotation);
 }
