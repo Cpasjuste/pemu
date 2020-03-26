@@ -136,6 +136,12 @@ int Option::getIndex() {
     return 0;
 }
 
+void Option::setIndex(int index) {
+    if (index < options.size()) {
+        current_option = index;
+    }
+}
+
 int Option::size() {
     return options.size();
 }

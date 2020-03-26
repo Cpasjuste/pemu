@@ -128,6 +128,8 @@ namespace c2dui {
 
         int getIndex();
 
+        void setIndex(int index);
+
         int getId();
 
         void setId(int id);

@@ -26,9 +26,10 @@ struct MovieExtInfo {
 //struct MovieExtInfo MovieInfo; // from replay.cpp
 
 static UINT8 NeoSystemList[] = {
-        0x13, // "Universe BIOS ver. 3.3"
-        0x14, // "Universe BIOS ver. 3.2"
-        0x15, // "Universe BIOS ver. 3.1"
+        0x13, // "Universe BIOS ver. 4.0"
+        0x14, // "Universe BIOS ver. 3.3"
+        0x15, // "Universe BIOS ver. 3.2"
+        0x16, // "Universe BIOS ver. 3.1"
         0x00, // "MVS Asia/Europe ver. 6 (1 slot)"
         0x01, // "MVS Asia/Europe ver. 5 (1 slot)"
         0x02, // "MVS Asia/Europe ver. 3 (4 slot)"
