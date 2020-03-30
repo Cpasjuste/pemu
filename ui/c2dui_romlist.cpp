@@ -80,6 +80,7 @@ void RomList::build() {
     gameList = GameList(dataPath + "gamelist.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_ARCADE), false);
     setLoadingText("Games: %i / %i", gameList.getAvailableCount(), gameList.games.size());
 
+    /*
     gameList.append(dataPath + "gamelist_coleco.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_COLECO), false);
     setLoadingText("Games: %i / %i", gameList.getAvailableCount(), gameList.games.size());
 
@@ -109,6 +110,7 @@ void RomList::build() {
 
     gameList.append(dataPath + "gamelist_zx3.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_ZX3), false);
     setLoadingText("Games: %i / %i", gameList.getAvailableCount(), gameList.games.size());
+    */
 
     gameList.sortAlpha();
     printf("RomList::build: %i roms\n", gameList.games.size());

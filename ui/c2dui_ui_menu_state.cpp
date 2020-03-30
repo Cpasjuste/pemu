@@ -99,7 +99,7 @@ public:
     void save() {
         printf("StateSave: %s\n", path);
         if (ui->getUiStateMenu()->saveStateCore(path)) {
-            ui->getUiEmu()->getVideo()->getTexture()->save(shot);
+            ui->getUiEmu()->getVideo()->save(shot);
             loadTexture();
         }
     }

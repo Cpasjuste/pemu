@@ -33,7 +33,7 @@ namespace c2dui {
 
         void addVideo(C2DUIVideo *video);
 
-        void addVideo(UIMain *ui, void **pixels, int *pitch, const c2d::Vector2f &size,
+        void addVideo(void **pixels, int *pitch, const c2d::Vector2f &size,
                       c2d::Texture::Format format = c2d::Texture::Format::RGB565);
 
         float getFrameDuration();

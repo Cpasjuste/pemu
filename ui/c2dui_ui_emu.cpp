@@ -13,15 +13,15 @@ UIEmu::UIEmu(UIMain *u) : RectangleShape(u->getSize()) {
     printf("UIEmu()\n");
 
     ui = u;
-    setFillColor(Color::Transparent);
+    RectangleShape::setFillColor(Color::Transparent);
 
     fpsText = new Text("0123456789", (unsigned int) ui->getFontSize(), ui->getSkin()->font);
     fpsText->setString("FPS: 00/60");
     fpsText->setPosition(16, 16);
     fpsText->setVisibility(Visibility::Hidden);
-    add(fpsText);
+    RectangleShape::add(fpsText);
 
-    setVisibility(Visibility::Hidden);
+    RectangleShape::setVisibility(Visibility::Hidden);
 }
 
 bool UIEmu::onInput(c2d::Input::Player *players) {
@@ -77,13 +77,13 @@ void UIEmu::addVideo(C2DUIVideo *_video) {
     }
 
     video = _video;
-    video->getTexture()->setShader(ui->getConfig()->get(Option::Id::ROM_SHADER, true)->getIndex());
-    video->getTexture()->setFilter((Texture::Filter) ui->getConfig()->get(Option::Id::ROM_FILTER, true)->getIndex());
+    video->setShader(ui->getConfig()->get(Option::Id::ROM_SHADER, true)->getIndex());
+    video->setFilter((Texture::Filter) ui->getConfig()->get(Option::Id::ROM_FILTER, true)->getIndex());
     video->updateScaling();
     add(video);
 }
 
-void UIEmu::addVideo(UIMain *ui, void **pixels, int *pitch,
+void UIEmu::addVideo(void **pixels, int *pitch,
                      const c2d::Vector2f &size, Texture::Format format) {
 
     if (video != nullptr) {
@@ -92,8 +92,8 @@ void UIEmu::addVideo(UIMain *ui, void **pixels, int *pitch,
     }
 
     auto *_video = new C2DUIVideo(ui, pixels, pitch, size, format);
-    _video->getTexture()->setShader(ui->getConfig()->get(Option::Id::ROM_SHADER, true)->getIndex());
-    _video->getTexture()->setFilter((Texture::Filter) ui->getConfig()->get(Option::Id::ROM_FILTER, true)->getIndex());
+    _video->setShader(ui->getConfig()->get(Option::Id::ROM_SHADER, true)->getIndex());
+    _video->setFilter((Texture::Filter) ui->getConfig()->get(Option::Id::ROM_FILTER, true)->getIndex());
     _video->updateScaling();
     addVideo(_video);
 }
@@ -119,7 +119,7 @@ void UIEmu::pause() {
 
     printf("UIEmu::pause()\n");
 
-    if (audio) {
+    if (audio != nullptr) {
         audio->pause(1);
     }
     // set ui input configuration
@@ -139,7 +139,7 @@ void UIEmu::resume() {
     // disable auto repeat delay
     ui->getInput()->setRepeatDelay(0);
 
-    if (audio) {
+    if (audio != nullptr) {
         audio->pause(0);
     }
 
@@ -150,14 +150,14 @@ void UIEmu::stop() {
 
     printf("UIEmu::stop()\n");
 
-    if (audio) {
+    if (audio != nullptr) {
         printf("Closing audio...\n");
         audio->pause(1);
         delete (audio);
         audio = nullptr;
     }
 
-    if (video) {
+    if (video != nullptr) {
         printf("Closing video...\n");
         delete (video);
         video = nullptr;

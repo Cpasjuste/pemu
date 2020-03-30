@@ -7,38 +7,18 @@
 using namespace c2d;
 using namespace c2dui;
 
-static int p2(int size) {
-    int p2 = 1;
-    while (p2 < size)
-        p2 *= 2;
-    return p2;
-}
-
-C2DUIVideo::C2DUIVideo(UIMain *gui, void **_pixels, int *_pitch, const c2d::Vector2f &size, Texture::Format format)
-        : Sprite() {
+C2DUIVideo::C2DUIVideo(UIMain *gui, void **_pixels, int *_pitch,
+                       const c2d::Vector2f &size, Texture::Format format) : C2DTexture(size, format) {
 
     ui = gui;
-#ifdef __VITA__
-    texture = new C2DTexture({size.x, size.y}, format);
-#else
-    texture = new C2DTexture({p2((int) size.x), p2((int) size.y)}, format);
-#endif
-    setTexture(texture, true);
-    setTextureRect({0, 0, (int) size.x, (int) size.y});
-    printf("game: %ix%i, texture: %ix%i\n",
-           (int) size.x, (int) size.y,
-           (int) texture->getSize().x, (int) texture->getSize().y);
-    //printf("game: %ix%i\n", (int) size.x, (int) size.y);
+
+    printf("game: %ix%i\n", (int) size.x, (int) size.y);
 
     if (_pixels != nullptr) {
         FloatRect rect = (FloatRect) getTextureRect();
-        texture->lock(&rect, _pixels, _pitch);
-        texture->unlock();
+        C2DTexture::lock(&rect, _pixels, _pitch);
+        C2DTexture::unlock();
     }
-}
-
-C2DUIVideo::~C2DUIVideo() {
-    delete (texture);
 }
 
 void C2DUIVideo::updateScaling(bool vertical, bool flip) {
@@ -140,9 +120,5 @@ void C2DUIVideo::updateScaling(bool vertical, bool flip) {
     setOrigin(Origin::Center);
     setPosition(screen.x / 2, screen.y / 2);
     setScale(sx, sy);
-#ifdef __VITA__
-    // needed for PSP2Texture::applyShader
-    getTexture()->setScale(sx, sy);
-#endif
     setRotation(rotation);
 }
