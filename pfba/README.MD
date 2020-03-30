@@ -26,8 +26,6 @@ pFBN: Portable FinalBurn Neo
 
 #### GENERAL INFORMATION'S
 
-- Preview image support (put png files in "roms/media/mixrbv2"), you can download a near fullset mixrbv2 package [here](http://files.mydedibox.fr/files/dev/pemu/pfbneo/arcade_mixrbv2.zip) or [here](https://files.coolatoms.org/arcade_mixrbv2.zip)
-- Video snaps support (put mp4 files in "roms/media/video"), you can download a near fullset video package [here](http://files.mydedibox.fr/files/dev/pemu/pfbneo/arcade_video.zip) or [here](https://files.coolatoms.org/arcade_video.zip)
 - pFBN, as fbneo, support consoles roms. Here is the corresponding folders where roms should be located (as fbneo):
     ```
     Arcade              : "roms"
@@ -42,6 +40,21 @@ pFBN: Portable FinalBurn Neo
     Nec TurboGraFX-16   : "tg16"
     Spectrum            : "zx3"
     ```
+  
+- pFBN support preview images and videos (put files in corresponding media folder. For arcade roms, for example: png files goes in "roms/media/mixrbv2", mp4 files in "roms/media/video").
+You can download a near fullset mixrbv2 and video package for each platform here:
+    - Arcade: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/arcade_mixrbv2.zip), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/arcade_video.zip)
+    - Coleco: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/coleco_mixrbv2.zip), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/coleco_video.zip)
+    - Sega GameGear: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/gamegear_mixrbv2.zip), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/gamegear_video.zip)
+    - Sega MegaDrive: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/megadriv_mixrbv2.zip), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/megadriv_video.zip)
+    - MSX: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/msx_mixrbv2.zip), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/msx_video.zip)
+    - Nec PC-Engine: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/pce_mixrbv2.zip), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/pce_video.zip)
+    - SG-1000: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/sg1000_mixrbv2.zip), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/sg1000_video.zip)
+    - Nec SuperGraFX: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/sgx_mixrbv2.zip), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/sgx_video.zip)
+    - Sega Master System: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/sms_mixrbv2.zip), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/sms_video.zip)
+    - Nec TurboGraFX-16: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/tg16_mixrbv2.zip), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/tg16_video.zip)
+    - Spectrum: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/zx3_mixrbv2.zip), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/zx3_video.zip)
+
 -----
 
 ### NINTENDO SWITCH INFORMATION (may be outdated)
