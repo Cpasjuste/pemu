@@ -263,7 +263,7 @@ void UIMenu::updateHighlight() {
     highlight->setPosition(line->getPosition() + line->value->getPosition());
     highlight->move(-4, 0);
     if (line->sprite->isVisible()) {
-        highlight->setSize(line->value->getLocalBounds().width, highlight->getSize().y);
+        highlight->setSize(line->sprite->getLocalBounds().width, highlight->getSize().y);
     } else {
         highlight->setSize(line->value->getLocalBounds().width + 8, highlight->getSize().y);
     }
