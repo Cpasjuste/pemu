@@ -49,10 +49,10 @@ int PFBAGuiEmu::getSekCpuCore() {
     std::vector<std::string> zipList;
     int hardware = BurnDrvGetHardwareCode();
 
-    std::string bios = getUi()->getConfig()->get(Option::Id::ROM_NEOBIOS, true)->getValueString();
+    std::string bios = ui->getConfig()->get(Option::Id::ROM_NEOBIOS, true)->getValueString();
     if (isHardware(hardware, HARDWARE_PREFIX_SNK) && Utility::contains(bios, "UNIBIOS")) {
         sekCpuCore = 1; // SEK_CORE_M68K: USE C M68K CORE
-        getUi()->getUiMessageBox()->show(
+        ui->getUiMessageBox()->show(
                 "WARNING", "UNIBIOS DOESNT SUPPORT THE M68K ASM CORE\n"
                            "CYCLONE ASM CORE DISABLED", "OK");
     }
@@ -66,7 +66,7 @@ int PFBAGuiEmu::getSekCpuCore() {
             || hardware & HARDWARE_SEGA_FD1094_ENC
             || hardware & HARDWARE_SEGA_FD1094_ENC_CPU2) {
             sekCpuCore = 1; // SEK_CORE_M68K: USE C M68K CORE
-            getUi()->getUiMessageBox()->show(
+            ui->getUiMessageBox()->show(
                     "WARNING", "ROM IS CRYPTED, USE DECRYPTED ROM (CLONE)\n"
                                "TO ENABLE CYCLONE ASM CORE (FASTER)", "OK");
         }
@@ -88,7 +88,7 @@ int PFBAGuiEmu::getSekCpuCore() {
     std::string zip = BurnDrvGetTextA(DRV_NAME);
     for (unsigned int i = 0; i < zipList.size(); i++) {
         if (zipList[i].compare(0, zip.length(), zip) == 0) {
-            getUi()->getUiMessageBox()->show(
+            ui->getUiMessageBox()->show(
                     "WARNING", "THIS GAME DOES NOT SUPPORT THE M68K ASM CORE\n"
                                "CYCLONE ASM CORE DISABLED", "OK");
             sekCpuCore = 1; // SEK_CORE_M68K: USE C M68K CORE
@@ -209,7 +209,7 @@ int PFBAGuiEmu::load(const ss_api::Game &game) {
     nBurnBpp = 2;
     BurnHighCol = myHighCol16;
     BurnRecalcPal();
-    auto v = new PFBAVideo(getUi(), (void **) &pBurnDraw, &nBurnPitch, Vector2f(w, h));
+    auto v = new PFBAVideo(ui, (void **) &pBurnDraw, &nBurnPitch, Vector2f(w, h));
     addVideo(v);
     textureRect = {0, 0, w, h};
     //////////
@@ -333,7 +333,7 @@ void PFBAGuiEmu::onUpdate() {
             }
         }
 
-        auto players = getUi()->getInput()->getPlayers();
+        auto players = ui->getInput()->getPlayers();
         InpMake(players);
 
         int skip = ui->getConfig()->get(Option::Id::ROM_FRAMESKIP, true)->getIndex();
