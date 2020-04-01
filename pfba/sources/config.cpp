@@ -57,9 +57,9 @@ PFBAConfig::PFBAConfig(c2d::Io *io, int version) : Config(io, version) {
         {"11025", "22050", "32000", "44100", "48000"}, 3, Option::Id::ROM_AUDIO_FREQ, Option::Flags::STRING);
 #endif
     add(Option::Id::ROM_AUDIO_SYNC, "AUDIO_INTERPOLATION",
-        {"0", "1", "3"}, 2, Option::Id::ROM_AUDIO_INTERPOLATION, Option::Flags::INTEGER);
+        {"0", "1", "3"}, 2, Option::Id::ROM_AUDIO_INTERPOLATION, Option::Flags::STRING);
     add(Option::Id::ROM_AUDIO_INTERPOLATION, "AUDIO_FM_INTERPOLATION",
-        {"0", "1", "3"}, 2, Option::Id::ROM_AUDIO_FMINTERPOLATION, Option::Flags::INTEGER);
+        {"0", "1", "3"}, 2, Option::Id::ROM_AUDIO_FMINTERPOLATION, Option::Flags::STRING);
 #ifdef __VITA__
     add(Option::Id::ROM_AUDIO_FMINTERPOLATION, "ROTATION",
         {"OFF", "ON", "FLIP", "CAB MODE"}, 1, Option::Id::ROM_ROTATION, Option::Flags::STRING);
@@ -79,6 +79,10 @@ PFBAConfig::PFBAConfig(c2d::Io *io, int version) : Config(io, version) {
 #ifdef __VITA__
     // do not use unibios as default on vita for cyclone asm compatibility
     get(Option::Id::ROM_NEOBIOS)->setIndex(4);
+
+    add(Option::Id::ROM_NEOBIOS, "FRAMESKIP",
+        {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"},
+        0, Option::Id::ROM_FRAMESKIP, Option::Flags::STRING);
 #endif
 
     // "c2dui_romlist" will also reload config, but we need new roms paths

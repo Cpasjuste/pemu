@@ -27,13 +27,13 @@ private:
 
     void updateFb();
 
-    void updateFrame();
-
     void renderFrame(bool draw = true);
 
     bool audio_sync = false;
 
     c2d::FloatRect textureRect;
+
+    int frameskip = 0;
 };
 
 #endif //PFBA_UIEMU_H

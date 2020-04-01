@@ -230,9 +230,6 @@ void PFBAGuiEmu::stop() {
 void PFBAGuiEmu::updateFb() {
 
     if (pBurnDraw == nullptr) {
-        nFramesEmulated++;
-        nCurrentFrame++;
-        nFramesRendered++;
         video->getTexture()->lock(&textureRect, (void **) &pBurnDraw, &nBurnPitch);
         BurnDrvFrame();
         video->getTexture()->unlock();
@@ -243,15 +240,14 @@ void PFBAGuiEmu::renderFrame(bool draw) {
 
     if (!isPaused()) {
 
-        nFramesEmulated++;
-        nCurrentFrame++;
-
         pBurnDraw = nullptr;
+
         if (draw) {
-            nFramesRendered++;
             video->getTexture()->lock(&textureRect, (void **) &pBurnDraw, &nBurnPitch);
         }
+
         BurnDrvFrame();
+
         if (draw) {
             video->getTexture()->unlock();
         }
@@ -260,10 +256,6 @@ void PFBAGuiEmu::renderFrame(bool draw) {
             audio->play(audio_sync);
         }
     }
-}
-
-void PFBAGuiEmu::updateFrame() {
-    renderFrame();
 }
 
 bool PFBAGuiEmu::onInput(c2d::Input::Player *players) {
@@ -333,7 +325,7 @@ void PFBAGuiEmu::onUpdate() {
             if (!fpsText->isVisible()) {
                 fpsText->setVisibility(c2d::Visibility::Visible);
             }
-            sprintf(fpsString, "FPS: %.3g/%2d", getUi()->getFps(), nBurnFPS / 100);
+            sprintf(fpsString, "FPS: %.3g/%2d", ui->getFps(), nBurnFPS / 100);
             fpsText->setString(getFpsString());
         } else {
             if (fpsText->isVisible()) {
@@ -343,6 +335,12 @@ void PFBAGuiEmu::onUpdate() {
 
         auto players = getUi()->getInput()->getPlayers();
         InpMake(players);
-        updateFrame();
+
+        int skip = ui->getConfig()->get(Option::Id::ROM_FRAMESKIP, true)->getIndex();
+        frameskip++;
+        renderFrame(frameskip > skip);
+        if (frameskip > skip) {
+            frameskip = 0;
+        }
     }
 }
