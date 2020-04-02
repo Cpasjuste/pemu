@@ -3,6 +3,8 @@
 //
 
 #include "c2dui.h"
+#include "c2dui_ui_emu.h"
+
 
 using namespace c2d;
 using namespace c2dui;
@@ -166,6 +168,27 @@ void UIEmu::stop() {
     //ui->getUiHighlight()->setVisibility(Visibility::Visible);
     ui->updateInputMapping(false);
     setVisibility(Visibility::Hidden);
+}
+
+void UIEmu::onUpdate() {
+
+    C2DObject::onUpdate();
+
+    if (!isPaused()) {
+        // fps
+        bool showFps = ui->getConfig()->get(Option::Id::ROM_SHOW_FPS, true)->getValueBool();
+        if (showFps) {
+            if (!fpsText->isVisible()) {
+                fpsText->setVisibility(c2d::Visibility::Visible);
+            }
+            sprintf(fpsString, "FPS: %.3g/%2f", ui->getFps(), targetFps);
+            fpsText->setString(getFpsString());
+        } else {
+            if (fpsText->isVisible()) {
+                fpsText->setVisibility(c2d::Visibility::Hidden);
+            }
+        }
+    }
 }
 
 UIMain *UIEmu::getUi() {

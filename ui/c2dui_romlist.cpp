@@ -73,41 +73,10 @@ void RomList::setLoadingText(const char *format, ...) {
 
 void RomList::build() {
 
-    printf("RomList::build(): FBN_PATH_ARCADE: %s\n", ui->getConfig()->getRomPaths().at(FBN_PATH_ARCADE).c_str());
-
+    printf("RomList::build(): ROM_PATH_0: %s\n", ui->getConfig()->getRomPaths().at(FBN_PATH_ARCADE).c_str());
     std::string dataPath = ui->getIo()->getDataPath();
 
-    gameList = GameList(dataPath + "gamelist.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_ARCADE), false);
-    setLoadingText("Games: %i / %i", gameList.getAvailableCount(), gameList.games.size());
-
-    gameList.append(dataPath + "gamelist_coleco.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_COLECO), false);
-    setLoadingText("Games: %i / %i", gameList.getAvailableCount(), gameList.games.size());
-
-    gameList.append(dataPath + "gamelist_gamegear.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_GAMEGEAR), false);
-    setLoadingText("Games: %i / %i", gameList.getAvailableCount(), gameList.games.size());
-
-    gameList.append(dataPath + "gamelist_megadriv.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_MEGADRIV), false);
-    setLoadingText("Games: %i / %i", gameList.getAvailableCount(), gameList.games.size());
-
-    gameList.append(dataPath + "gamelist_msx.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_MSX), false);
-    setLoadingText("Games: %i / %i", gameList.getAvailableCount(), gameList.games.size());
-
-    gameList.append(dataPath + "gamelist_pce.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_PCE), false);
-    setLoadingText("Games: %i / %i", gameList.getAvailableCount(), gameList.games.size());
-
-    gameList.append(dataPath + "gamelist_sg1000.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_SG1000), false);
-    setLoadingText("Games: %i / %i", gameList.getAvailableCount(), gameList.games.size());
-
-    gameList.append(dataPath + "gamelist_sgx.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_SGX), false);
-    setLoadingText("Games: %i / %i", gameList.getAvailableCount(), gameList.games.size());
-
-    gameList.append(dataPath + "gamelist_sms.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_SMS), false);
-    setLoadingText("Games: %i / %i", gameList.getAvailableCount(), gameList.games.size());
-
-    gameList.append(dataPath + "gamelist_tg16.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_TG16), false);
-    setLoadingText("Games: %i / %i", gameList.getAvailableCount(), gameList.games.size());
-
-    gameList.append(dataPath + "gamelist_zx3.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_ZX3), false);
+    gameList.append(dataPath + "gamelist.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_ARCADE), false);
     setLoadingText("Games: %i / %i", gameList.getAvailableCount(), gameList.games.size());
 
     gameList.sortAlpha();

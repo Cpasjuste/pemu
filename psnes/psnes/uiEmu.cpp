@@ -110,16 +110,16 @@ PSNESUIEmu::PSNESUIEmu(UIMain *ui) : UIEmu(ui) {
     _ui = ui;
 }
 
-int PSNESUIEmu::load(RomList::Rom *rom) {
+int PSNESUIEmu::load(const ss_api::Game &game) {
 
-    getUi()->getUiProgressBox()->setTitle(rom->name);
-    getUi()->getUiProgressBox()->setMessage("Please wait...");
-    getUi()->getUiProgressBox()->setProgress(0);
-    getUi()->getUiProgressBox()->setVisibility(Visibility::Visible);
-    getUi()->getUiProgressBox()->setLayer(1000);
-    getUi()->flip();
+    ui->getUiProgressBox()->setTitle(game.getName().text);
+    ui->getUiProgressBox()->setMessage("Please wait...");
+    ui->getUiProgressBox()->setProgress(0);
+    ui->getUiProgressBox()->setVisibility(Visibility::Visible);
+    ui->getUiProgressBox()->setLayer(1000);
+    ui->flip();
 
-    strncpy(default_dir, getUi()->getConfig()->getHomePath()->c_str(), PATH_MAX);
+    strncpy(default_dir, ui->getConfig()->getHomePath().c_str(), PATH_MAX);
     s9x_base_dir = default_dir;
 
     memset(&Settings, 0, sizeof(Settings));
@@ -158,7 +158,7 @@ int PSNESUIEmu::load(RomList::Rom *rom) {
     Settings.CartBName[0] = 0;
 
     // big boost when SupportHiRes disabled
-    Settings.SupportHiRes = (bool8) getUi()->getConfig()->get(Option::ROM_HIGH_RES, true)->getIndex();
+    Settings.SupportHiRes = (bool8) ui->getConfig()->get(Option::ROM_HIGH_RES, true)->getIndex();
     printf("Settings.SupportHiRes: %i\n", Settings.SupportHiRes);
 
     CPU.Flags = 0;
@@ -169,14 +169,14 @@ int PSNESUIEmu::load(RomList::Rom *rom) {
 
     if (!Memory.Init() || !S9xInitAPU()) {
         printf("Could not initialize Snes9x Memory.\n");
-        getUi()->getUiProgressBox()->setVisibility(Visibility::Hidden);
+        ui->getUiProgressBox()->setVisibility(Visibility::Hidden);
         stop();
         return -1;
     }
 
     if (!S9xInitSound(100)) {
         printf("Could not initialize Snes9x Sound.\n");
-        getUi()->getUiProgressBox()->setVisibility(Visibility::Hidden);
+        ui->getUiProgressBox()->setVisibility(Visibility::Hidden);
         stop();
         return -1;
     }
@@ -203,10 +203,10 @@ int PSNESUIEmu::load(RomList::Rom *rom) {
 
     uint32 saved_flags = CPU.Flags;
 
-    if (!Memory.LoadROM(rom->path.c_str())) {
-        printf("Could not open ROM: %s\n", rom->path.c_str());
-        getUi()->getUiProgressBox()->setVisibility(Visibility::Hidden);
-        getUi()->getUiMessageBox()->show("ERROR", "INVALID ROM", "OK");
+    if (!Memory.LoadROM(game.path.c_str())) {
+        printf("Could not open ROM: %s\n", game.path.c_str());
+        ui->getUiProgressBox()->setVisibility(Visibility::Hidden);
+        ui->getUiMessageBox()->show("ERROR", "INVALID ROM", "OK");
         stop();
         return -1;
     }
@@ -214,7 +214,7 @@ int PSNESUIEmu::load(RomList::Rom *rom) {
     Memory.LoadSRAM(S9xGetFilename(".srm", SRAM_DIR));
 
     Settings.ApplyCheats = FALSE;
-    if (getUi()->getConfig()->get(Option::ROM_CHEATS, true)->getIndex() == 1) {
+    if (ui->getConfig()->get(Option::ROM_CHEATS, true)->getIndex() == 1) {
         printf("Settings.ApplyCheats = TRUE\n");
         Settings.ApplyCheats = TRUE;
     }
@@ -263,12 +263,14 @@ int PSNESUIEmu::load(RomList::Rom *rom) {
     S9xGraphicsInit();
     S9xSetSoundMute(FALSE);
 
-    getUi()->getUiProgressBox()->setProgress(1);
-    getUi()->flip();
-    getUi()->delay(500);
-    getUi()->getUiProgressBox()->setVisibility(Visibility::Hidden);
+    targetFps = Memory.ROMFramesPerSecond;
 
-    return UIEmu::load(rom);
+    ui->getUiProgressBox()->setProgress(1);
+    ui->flip();
+    ui->delay(500);
+    ui->getUiProgressBox()->setVisibility(Visibility::Hidden);
+
+    return UIEmu::load(game);
 }
 
 void PSNESUIEmu::stop() {
@@ -305,21 +307,16 @@ bool PSNESUIEmu::onInput(c2d::Input::Player *players) {
     return UIEmu::onInput(players);
 }
 
-void PSNESUIEmu::onDraw(c2d::Transform &transform, bool draw) {
+void PSNESUIEmu::onUpdate() {
+
+    UIEmu::onUpdate();
 
     if (!isPaused()) {
-        // fps
-        int showFps = getUi()->getConfig()->get(Option::Id::ROM_SHOW_FPS, true)->getIndex();
-        getFpsText()->setVisibility(showFps ? Visibility::Visible : Visibility::Hidden);
-        if (showFps) {
-            sprintf(getFpsString(), "FPS: %.2g/%2d", getUi()->getFps(), (int) Memory.ROMFramesPerSecond);
-            getFpsText()->setString(getFpsString());
-        }
 
         S9xMainLoop();
         S9xSetSoundMute(FALSE);
 
-        auto players = getUi()->getInput()->getPlayers();
+        auto players = ui->getInput()->getPlayers();
 
         // update snes9x buttons
         for (uint32 i = 0; i < 4; i++) {
@@ -347,8 +344,6 @@ void PSNESUIEmu::onDraw(c2d::Transform &transform, bool draw) {
     } else {
         S9xSetSoundMute(TRUE);
     }
-
-    UIEmu::onDraw(transform, draw);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

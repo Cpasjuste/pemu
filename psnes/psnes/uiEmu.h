@@ -11,15 +11,15 @@ class PSNESUIEmu : public c2dui::UIEmu {
 
 public:
 
-    PSNESUIEmu(c2dui::UIMain *ui);
+    explicit PSNESUIEmu(c2dui::UIMain *ui);
 
-    int load(c2dui::RomList::Rom *rom);
+    int load(const ss_api::Game &game) override;
 
     void stop();
 
     bool onInput(c2d::Input::Player *players) override;
 
-    void onDraw(c2d::Transform &transform, bool draw = true) override;
+    void onUpdate() override;
 };
 
 #endif //PSNES_UIEMU_H

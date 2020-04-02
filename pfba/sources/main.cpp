@@ -25,6 +25,7 @@
 #include "config.h"
 #include "uiStateMenu.h"
 #include "pfbaIo.h"
+#include "romlist.h"
 
 using namespace c2d;
 using namespace c2dui;
@@ -40,7 +41,7 @@ PFBAGuiMenu *uiMenu;
 PFBAGuiEmu *uiEmu;
 PFBAUIStateMenu *uiState;
 PFBAConfig *cfg;
-RomList *romList;
+PFBARomList *romList;
 
 Skin *skin;
 UIRomList *uiRomList;
@@ -153,7 +154,7 @@ int main(int argc, char **argv) {
     // ui
     std::string fba_version = "fbneo: ";
     fba_version += szAppBurnVer;
-    romList = new RomList(ui, fba_version);
+    romList = new PFBARomList(ui, fba_version);
     romList->build();
     uiRomList = new UIRomListClassic(ui, romList, ui->getSize());
     uiMenu = new PFBAGuiMenu(ui);

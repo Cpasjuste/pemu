@@ -195,8 +195,9 @@ int PFBAGuiEmu::load(const ss_api::Game &game) {
         pBurnSoundOut = getAudio()->getBuffer();
     }
     audio_sync = ui->getConfig()->get(Option::Id::ROM_AUDIO_SYNC, true)->getValueBool();
+    targetFps = nBurnFPS / 100;
     printf("FORCE_60HZ: %i, AUDIO_SYNC: %i, FPS: %f (BURNFPS: %f)\n",
-           bForce60Hz, audio_sync, (float) nBurnFPS / 100.0f, (float) nBurnFPS / 100.0f);
+           bForce60Hz, audio_sync, (float) nBurnFPS / 100.0f, targetFps);
     ///////////
     // AUDIO
     //////////
@@ -319,24 +320,14 @@ void PFBAGuiEmu::onUpdate() {
     UIEmu::onUpdate();
 
     if (!isPaused()) {
-        // fps
-        bool showFps = ui->getConfig()->get(Option::Id::ROM_SHOW_FPS, true)->getValueBool();
-        if (showFps) {
-            if (!fpsText->isVisible()) {
-                fpsText->setVisibility(c2d::Visibility::Visible);
-            }
-            sprintf(fpsString, "FPS: %.3g/%2d", ui->getFps(), nBurnFPS / 100);
-            fpsText->setString(getFpsString());
-        } else {
-            if (fpsText->isVisible()) {
-                fpsText->setVisibility(c2d::Visibility::Hidden);
-            }
-        }
 
         auto players = ui->getInput()->getPlayers();
         InpMake(players);
-
+#ifdef __VITA__
         int skip = ui->getConfig()->get(Option::Id::ROM_FRAMESKIP, true)->getIndex();
+#else
+        int skip = 0;
+#endif
         frameskip++;
         renderFrame(frameskip > skip);
         if (frameskip > skip) {

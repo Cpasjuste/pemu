@@ -19,7 +19,7 @@ public:
 
     void build() override;
 
-    bool isHardware(int hardware, int type) override {
+    bool isHardware(int hardware, int type) {
         return true;
     }
 };
