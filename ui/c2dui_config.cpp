@@ -165,7 +165,7 @@ void Config::load(const ss_api::Game &game) {
 
     printf("Config::load: %s ...", path.c_str());
 
-    if (config_read_file(&cfg, path.c_str()) != 0) {
+    if (config_read_file(&cfg, path.c_str()) == CONFIG_TRUE) {
 
         config_setting_t *settings_root = config_lookup(&cfg, "CONFIG");
         if (settings_root != nullptr) {
@@ -185,12 +185,12 @@ void Config::load(const ss_api::Game &game) {
             config_setting_t *settings = nullptr;
             if (!isRomCfg) {
                 settings = config_setting_lookup(settings_root, "ROMS_PATHS");
-                if (settings) {
+                if (settings != nullptr) {
                     for (size_t i = 0; i < roms_paths.size(); i++) {
                         char p[MAX_PATH];
-                        snprintf(p, MAX_PATH, "ROMS_PATH%zu", i);
+                        snprintf(p, MAX_PATH, "ROMS_PATH%i", i);
                         const char *value;
-                        if (config_setting_lookup_string(settings, p, &value)) {
+                        if (config_setting_lookup_string(settings, p, &value) != 0) {
                             roms_paths[i] = value;
                             if (!roms_paths[i].empty() && roms_paths[i].back() != '/')
                                 roms_paths[i] += '/';
@@ -208,17 +208,17 @@ void Config::load(const ss_api::Game &game) {
                 if (flags & Option::Flags::MENU) {
                     settings = config_setting_lookup(settings_root, option.getName().c_str());
                 }
-                if (settings) {
+                if (settings != nullptr) {
                     if (flags & Option::Flags::INTEGER || flags & Option::Flags::INPUT) {
                         int value = 0;
-                        if (config_setting_lookup_int(settings, option.getName().c_str(), &value)) {
+                        if (config_setting_lookup_int(settings, option.getName().c_str(), &value) != 0) {
                             option.setValueInt(value);
                             //printf("Config::load: OPTION: %s, VALUE: %i\n", option.getName().c_str(),
                             //       option.getValueInt());
                         }
                     } else {
                         const char *value;
-                        if (config_setting_lookup_string(settings, option.getName().c_str(), &value)) {
+                        if (config_setting_lookup_string(settings, option.getName().c_str(), &value) != 0) {
                             option.setValueString(value);
                             //printf("Config::load: OPTION: %s, VALUE: %s\n", option.getName().c_str(),
                             //       option.getValueString().c_str());
