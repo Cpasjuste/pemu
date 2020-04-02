@@ -58,7 +58,7 @@ public:
         value->setVisibility(Visibility::Visible);
 
         option = opt;
-        if (option) {
+        if (option != nullptr) {
             name->setString(option->getName());
         } else {
             value->setString("GO");
@@ -67,19 +67,19 @@ public:
 
         if (option->getFlags() & Option::Flags::INPUT) {
             Skin::Button *button = ui->getSkin()->getButton(option->getValueInt());
-            // don't use button textures on keyboard for now
-            if (button && option->getId() < Option::Id::JOY_DEADZONE) {
-                if (button->texture) {
-                    sprite->setTexture(button->texture);
+            if (button != nullptr && option->getId() < Option::Id::JOY_DEADZONE) {
+                if (button->texture != nullptr) {
+                    sprite->setTexture(button->texture, true);
                     sprite->setVisibility(Visibility::Visible);
                     value->setVisibility(Visibility::Hidden);
                     float tex_scaling = std::min(
-                            ((getSize().x * 0.33f) - 32) / sprite->getTextureRect().width,
-                            (getSize().y / 2 + 4) / sprite->getTextureRect().height);
+                            ((getSize().x * 0.8f)) / sprite->getTextureRect().width,
+                            ((getSize().y * 0.8f)) / sprite->getTextureRect().height);
                     sprite->setScale(tex_scaling, tex_scaling);
-                    sprite->setPosition((getSize().x * 0.67f), getSize().y / 2);
+                    sprite->setPosition((getSize().x * 0.67f), (getSize().y / 2) - 1);
                     sprite->setOrigin(Origin::Left);
                 } else {
+                    sprite->setVisibility(Visibility::Hidden);
                     value->setVisibility(Visibility::Visible);
                     value->setString(button->name);
                 }

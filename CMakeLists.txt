@@ -37,7 +37,7 @@ set(OPTION_SCREEN_HEIGHT 720 CACHE STRING "Custom screen height")
 # PEMU OPTIONS
 ####################
 set(MPV_PLAYER ON CACHE BOOL "Add support for video snaps (mpv)")
-set(UPDATE_CONFIG ON CACHE BOOL "Force config file updating")
+set(UPDATE_CONFIG OFF CACHE BOOL "Force config file updating")
 
 # add libcross2d library. If you want to port pfba to another platform,
 # you should (may) only need to port libcross2d library.
