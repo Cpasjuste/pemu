@@ -275,7 +275,7 @@ void UIMenu::updateHighlight() {
 
 bool UIMenu::onInput(c2d::Input::Player *players) {
 
-    if (getUi()->getUiStateMenu()->isVisible()) {
+    if (ui->getUiStateMenu()->isVisible()) {
         return C2DObject::onInput(players);
     }
 
