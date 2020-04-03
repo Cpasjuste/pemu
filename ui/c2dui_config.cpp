@@ -33,7 +33,7 @@ Config::Config(c2d::Io *io, int ver) {
     append("SHOW_CLONES", {"OFF", "ON"}, 0,
            Option::Id::GUI_FILTER_CLONES, Option::Flags::BOOLEAN | Option::Flags::HIDDEN);
 #endif
-    append("SHOW_ROM_NAMES", {"OFF", "ON"}, 0, Option::Id::GUI_SHOW_ROM_NAMES, Option::Flags::BOOLEAN);
+    append("SHOW_ROM_NAMES", {"OFF", "ON"}, 1, Option::Id::GUI_SHOW_ROM_NAMES, Option::Flags::BOOLEAN);
     append("SHOW_ICONS", {"OFF", "ON"}, 0, Option::Id::GUI_SHOW_ICONS, Option::Flags::BOOLEAN | Option::Flags::HIDDEN);
     get()->at(get()->size() - 1).setInfo("Enabling icons needs a restart...");
     append("USE_DATABASE", {"OFF", "ON"}, 0, Option::Id::GUI_USE_DATABASE, Option::Flags::BOOLEAN);
