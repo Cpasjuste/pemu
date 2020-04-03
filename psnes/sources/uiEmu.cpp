@@ -134,8 +134,8 @@ int PSNESUIEmu::load(const ss_api::Game &game) {
     Settings.FrameTimeNTSC = 16667;
     Settings.SixteenBitSound = TRUE;
     Settings.Stereo = TRUE;
-    Settings.SoundPlaybackRate = 32000;
-    Settings.SoundInputRate = 32000;
+    Settings.SoundPlaybackRate = 31920;
+    Settings.SoundInputRate = 31920;
     Settings.Transparency = TRUE;
     Settings.AutoDisplayMessages = TRUE;
     Settings.InitialInfoStringTimeout = 120;
