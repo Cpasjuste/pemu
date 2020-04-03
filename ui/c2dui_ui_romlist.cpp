@@ -115,6 +115,9 @@ void UIRomList::filterRomList() {
                 ui->getConfig()->get(Option::Id::GUI_FILTER_GENRE)->getValueString()
         );
     }
+
+    bool byPath = ui->getConfig()->get(Option::Id::GUI_SHOW_REAL_NAMES)->getValueBool();
+    gameList.sortAlpha(byPath);
 }
 
 void UIRomList::setVideoSnapDelay(int delay) {

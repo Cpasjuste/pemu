@@ -271,8 +271,8 @@ void UIRomListClassic::updateRomList() {
 #if !(defined(__PSP2__) || defined(__3DS__)) // two slow
         use_icons = ui->getConfig()->get(Option::Id::GUI_SHOW_ICONS)->getValueBool();
 #endif
-        listBox = new UIListBox(ui->getSkin()->font, (int) textGroup.size, romListGroup.rect, gameList.games,
-                                use_icons);
+        listBox = new UIListBox(ui, ui->getSkin()->font, (int) textGroup.size,
+                                romListGroup.rect, gameList.games, use_icons);
         listBox->colorMissing = colorMissing;
         listBox->colorAvailable = textGroup.color;
         listBox->setFillColor(romListGroup.color);

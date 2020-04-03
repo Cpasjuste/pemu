@@ -94,7 +94,7 @@ void RomList::build() {
     gameList.genres.insert(gameList.genres.begin(), "All");
 
     ui->getConfig()->add(
-            Option::Id::GUI_FILTER_CLONES, "FILTER_SYSTEM",
+            Option::Id::GUI_SHOW_REAL_NAMES, "FILTER_SYSTEM",
             gameList.systems, 0, Option::Id::GUI_FILTER_SYSTEM, Option::Flags::STRING);
 
     ui->getConfig()->add(

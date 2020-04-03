@@ -103,11 +103,12 @@ UIListBoxLine::~UIListBoxLine() {
     //printf("~ListBoxLine(%p)\n", this);
 }
 
-UIListBox::UIListBox(Font *font, int fontSize, const FloatRect &rect,
+UIListBox::UIListBox(UIMain *_ui, Font *font, int fontSize, const FloatRect &rect,
                      const std::vector<ss_api::Game> &g, bool useIcons) : RectangleShape(rect) {
 
     //printf("ListBox(%p)\n", this);
-    setGames(games);
+    ui = _ui;
+    setGames(g);
     init(font, fontSize, useIcons);
     setSelection(0);
 };
@@ -151,6 +152,8 @@ void UIListBox::init(Font *font, int fontSize, bool useIcons) {
 
 void UIListBox::updateLines() {
 
+    bool useRealName = ui->getConfig()->get(Option::Id::GUI_SHOW_REAL_NAMES)->getValueBool();
+
     for (unsigned int i = 0; i < (unsigned int) max_lines; i++) {
 
         if (file_index + i >= games.size()) {
@@ -159,7 +162,7 @@ void UIListBox::updateLines() {
             // set file
             Game game = games[file_index + i];
             lines[i]->setVisibility(Visibility::Visible);
-            lines[i]->setString(game.getName().text);
+            lines[i]->setString(useRealName ? Utility::removeExt(game.path) : game.getName().text);
             // TODO: ICON
             //lines[i]->setIcon(file->icon);
             lines[i]->setColor(game.available ? colorAvailable : colorMissing);

@@ -340,6 +340,7 @@ bool UIMenu::onInput(c2d::Input::Player *players) {
 
             switch (option->getId()) {
                 case Option::Id::GUI_SHOW_ALL:
+                case Option::Id::GUI_SHOW_REAL_NAMES:
                 case Option::Id::GUI_FILTER_CLONES:
                 case Option::Id::GUI_FILTER_SYSTEM:
                 case Option::Id::GUI_FILTER_EDITOR:

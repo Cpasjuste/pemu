@@ -45,7 +45,7 @@ namespace c2dui {
 
     public:
 
-        UIListBox(c2d::Font *font, int fontSize, const c2d::FloatRect &rect,
+        UIListBox(UIMain *ui, c2d::Font *font, int fontSize, const c2d::FloatRect &rect,
                   const std::vector<ss_api::Game> &games, bool useIcons = false);
 
         ~UIListBox() override;
@@ -91,6 +91,7 @@ namespace c2dui {
 
         void updateLines();
 
+        UIMain *ui = nullptr;
         std::vector<ss_api::Game> games;
         std::vector<UIListBoxLine *> lines;
         RectangleShape *highlight;
