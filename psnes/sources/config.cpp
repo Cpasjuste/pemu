@@ -24,15 +24,4 @@ PSNESConfig::PSNESConfig(c2d::Io *io, int version) : Config(io, version) {
     // "c2dui_romlist" will also reload config, but we need new roms paths
     reset();
     load();
-
-    /*
-    if (!get(Option::GUI_USE_DATABASE)->getValueBool()) {
-        printf("get(Option::GUI_USE_DATABASE)->getValueBool(): %i\n", get(Option::GUI_USE_DATABASE)->getValueBool());
-        hide(Option::GUI_SHOW_CLONES);
-    } else {
-        // add "WORKING" to "SHOW_ALL" option
-        std::vector<std::string> *values = get(Option::Id::GUI_SHOW_ALL)->getValues();
-        values->insert(values->begin() + 1, "WORKING");
-    }
-    */
 }

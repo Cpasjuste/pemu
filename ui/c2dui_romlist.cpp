@@ -93,9 +93,15 @@ void RomList::build() {
     gameList.dates.insert(gameList.dates.begin(), "All");
     gameList.genres.insert(gameList.genres.begin(), "All");
 
+#ifdef __PFBA__
     ui->getConfig()->add(
             Option::Id::GUI_SHOW_ROM_NAMES, "FILTER_SYSTEM",
             gameList.systems, 0, Option::Id::GUI_FILTER_SYSTEM, Option::Flags::STRING);
+#else
+    ui->getConfig()->add(
+            Option::Id::GUI_SHOW_ROM_NAMES, "FILTER_SYSTEM",
+            gameList.systems, 0, Option::Id::GUI_FILTER_SYSTEM, Option::Flags::STRING | Option::Flags::HIDDEN);
+#endif
 
     ui->getConfig()->add(
             Option::Id::GUI_FILTER_SYSTEM, "FILTER_EDITOR",
@@ -105,14 +111,21 @@ void RomList::build() {
             Option::Id::GUI_FILTER_EDITOR, "FILTER_DEVELOPER",
             gameList.developers, 0, Option::Id::GUI_FILTER_DEVELOPER, Option::Flags::STRING);
 
+#ifdef __PFBA__
     ui->getConfig()->add(
             Option::Id::GUI_FILTER_DEVELOPER, "FILTER_PLAYERS",
             gameList.players, 0, Option::Id::GUI_FILTER_PLAYERS, Option::Flags::STRING);
+#else
+    ui->getConfig()->add(
+            Option::Id::GUI_FILTER_DEVELOPER, "FILTER_PLAYERS",
+            gameList.players, 0, Option::Id::GUI_FILTER_PLAYERS, Option::Flags::STRING | Option::Flags::HIDDEN);
+#endif
 
     ui->getConfig()->add(
             Option::Id::GUI_FILTER_PLAYERS, "FILTER_RATING",
             gameList.ratings, 0, Option::Id::GUI_FILTER_RATING, Option::Flags::STRING);
 
+#ifdef __PFBA__
     ui->getConfig()->add(
             Option::Id::GUI_FILTER_RATING, "FILTER_ROTATION",
             gameList.rotations, 0, Option::Id::GUI_FILTER_ROTATION, Option::Flags::STRING);
@@ -120,6 +133,15 @@ void RomList::build() {
     ui->getConfig()->add(
             Option::Id::GUI_FILTER_ROTATION, "FILTER_RESOLUTION",
             gameList.resolutions, 0, Option::Id::GUI_FILTER_RESOLUTION, Option::Flags::STRING);
+#else
+    ui->getConfig()->add(
+            Option::Id::GUI_FILTER_RATING, "FILTER_ROTATION",
+            gameList.rotations, 0, Option::Id::GUI_FILTER_ROTATION, Option::Flags::STRING | Option::Flags::HIDDEN);
+
+    ui->getConfig()->add(
+            Option::Id::GUI_FILTER_ROTATION, "FILTER_RESOLUTION",
+            gameList.resolutions, 0, Option::Id::GUI_FILTER_RESOLUTION, Option::Flags::STRING | Option::Flags::HIDDEN);
+#endif
 
     ui->getConfig()->add(
             Option::Id::GUI_FILTER_RESOLUTION, "FILTER_DATE",
