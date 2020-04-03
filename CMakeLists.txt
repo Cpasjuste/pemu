@@ -64,7 +64,7 @@ set(VERSION_MINOR 2)
 #add_subdirectory(pnes)
 
 # psnes
-#add_subdirectory(psnes)
+add_subdirectory(psnes)
 
 # pfba
-add_subdirectory(pfba)
+#add_subdirectory(pfba)

@@ -51,15 +51,9 @@ set(SNES9X_CFLAGS
         -DGFX_MULTI_FORMAT
         -D__BYTE_ORDER__=__ORDER_LITTLE_ENDIAN__
         -D__PSNES__
-        -D__PSNES_VERSION_MAJOR__=${PSNES_VERSION_MAJOR}
-        -D__PSNES_VERSION_MINOR__=${PSNES_VERSION_MINOR}
+        -D__PSNES_VERSION_MAJOR__=${VERSION_MAJOR}
+        -D__PSNES_VERSION_MINOR__=${VERSION_MINOR}
         )
-
-if (BUILD_DEBUG)
-    list(APPEND SNES9X_CFLAGS -g -O0)
-else ()
-    list(APPEND SNES9X_CFLAGS -g -O3)
-endif()
 
 set(SNES9X_LDFLAGS m z)
 
@@ -101,13 +95,13 @@ endif (OPTION_DEBUGGER)
 ##############
 # psnes
 ##############
-set(PSNES_INC psnes)
-file(GLOB PSNES_SRC psnes/*.c*)
+set(PSNES_INC sources)
+file(GLOB PSNES_SRC sources/*.c*)
 
 #####################
 # PLATORM SPECIFIC
 #####################
-if (PLATFORM_PSP2)
+if (PLATFORM_VITA)
     #####################
     # PSP2 PLATORM
     #####################
@@ -119,91 +113,38 @@ elseif (PLATFORM_SWITCH)
     list(APPEND SNES9X_CFLAGS -Wno-pedantic -Wno-missing-field-initializers -Wno-format-truncation)
 endif ()
 
-#####################
-# snes9x executable
-#####################
-add_custom_target(${PROJECT_NAME}.data
-        COMMAND mkdir -p ${CMAKE_CURRENT_BINARY_DIR}/skins
-        COMMAND rm -rf ${CMAKE_CURRENT_BINARY_DIR}/skins/default.zip
-        COMMAND zip -j ${CMAKE_CURRENT_BINARY_DIR}/skins/default.zip ${CMAKE_CURRENT_SOURCE_DIR}/psnes/data/skin/*
-        COMMAND cd ${CMAKE_CURRENT_SOURCE_DIR}/psnes/data/nx/skin/ && zip -ru ${CMAKE_CURRENT_BINARY_DIR}/skins/default.zip .
-        COMMAND cp -rf ${CMAKE_CURRENT_SOURCE_DIR}/psnes/data/databases/Super_Nintendo_Entertainment_System-hyperspin.xml ${CMAKE_CURRENT_BINARY_DIR}/db.xml
+add_executable(${PROJECT_NAME} ${PSNES_SRC} ${SNES9X_SRC} ${UNZIP_SRC} ${JMA_SRC})
+target_compile_options(${PROJECT_NAME} PRIVATE ${SNES9X_CFLAGS})
+target_compile_options(${PROJECT_NAME} PRIVATE $<$<COMPILE_LANGUAGE:CXX>:-std=gnu++11 -fpermissive>)
+target_include_directories(${PROJECT_NAME} PRIVATE ${PSNES_INC} ${SNES9X_INC} ${UNZIP_INC} ${JMA_INC})
+target_link_libraries(${PROJECT_NAME} cross2dui ${SNES9X_LDFLAGS})
+
+# include libcross2d targets
+include(${CMAKE_SOURCE_DIR}/libcross2d/cmake/targets.cmake)
+
+# add extra data to libcross2d default targets data (zipped skin)
+add_custom_target(${PROJECT_NAME}.data.extra
+        DEPENDS ${PROJECT_NAME}.data
+        # make dummy directory for user files
+        COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/roms
+        # compress skin
+        COMMAND cd ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/skins/default && ${ZIP} -ru ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/skins/default.zip .
+        COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/skins/default.zip ${CMAKE_CURRENT_BINARY_DIR}/skins/
+        # remove non-zipped skin from data directory (used for program execution from cmake build) before zipping it for release
+        COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/skins/default
+
+        # compress default_320x240 skin
+        #COMMAND cd ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/skins/default_320x240 && ${ZIP} -ru ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/skins/default_320x240.zip .
+        #COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/skins/default_320x240.zip ${CMAKE_CURRENT_BINARY_DIR}/skins/
+        # remove non-zipped skin from data directory (used for program execution from cmake build) before zipping it for release
+        COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/skins/default_320x240
         )
-add_executable(${PROJECT_NAME}.elf ${PSNES_SRC} ${SNES9X_SRC} ${UNZIP_SRC} ${JMA_SRC})
-target_include_directories(${PROJECT_NAME}.elf PRIVATE ${PSNES_INC} ${SNES9X_INC} ${UNZIP_INC} ${JMA_INC})
-target_compile_options(${PROJECT_NAME}.elf PRIVATE ${SNES9X_CFLAGS})
-target_compile_options(${PROJECT_NAME}.elf PRIVATE $<$<COMPILE_LANGUAGE:CXX>:-fno-rtti>)
-target_link_libraries(${PROJECT_NAME}.elf cross2dui ${SNES9X_LDFLAGS})
-add_dependencies(${PROJECT_NAME}.elf ${PROJECT_NAME}.data)
+add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}.data.extra)
+add_dependencies(${PROJECT_NAME}_${TARGET_PLATFORM}_release ${PROJECT_NAME}.data.extra)
 
-###########################
-# LINUX (ubuntu, release)
-###########################
-if (PLATFORM_LINUX)
-    add_custom_target(${PROJECT_NAME}_linux_release.zip
-            DEPENDS ${PROJECT_NAME}.elf
-            COMMAND rm -rf ${CMAKE_BINARY_DIR}/release/psnes
-            COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/psnes
-            COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/psnes/skins
-            COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/psnes/roms
-            COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/psnes/titles
-            COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/psnes/previews
-            COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/psnes/icons
-            COMMAND cp -f ${CMAKE_CURRENT_BINARY_DIR}/psnes.elf ${CMAKE_BINARY_DIR}/release/psnes/psnes
-            COMMAND cp -f ${CMAKE_CURRENT_SOURCE_DIR}/psnes/data/databases/Super_Nintendo_Entertainment_System-hyperspin.xml ${CMAKE_BINARY_DIR}/release/psnes/db.xml
-            # zip skin
-            COMMAND rm -rf ${CMAKE_BINARY_DIR}/release/psnes/skins/default.zip
-            COMMAND zip -j ${CMAKE_BINARY_DIR}/release/psnes/skins/default.zip ${CMAKE_CURRENT_SOURCE_DIR}/psnes/data/skin/*
-            # zip release
-            COMMAND rm -rf ${CMAKE_BINARY_DIR}/${PROJECT_NAME}-${PSNES_VERSION_MAJOR}.${PSNES_VERSION_MINOR}_linux.zip
-            COMMAND cd ${CMAKE_BINARY_DIR}/release && zip -r ../${PROJECT_NAME}-${PSNES_VERSION_MAJOR}.${PSNES_VERSION_MINOR}_linux.zip psnes && cd ${CMAKE_BINARY_DIR}
+if (PLATFORM_WINDOWS)
+    add_custom_command(TARGET ${PROJECT_NAME}.data.extra POST_BUILD
+            COMMAND ${CMAKE_SOURCE_DIR}/pfba/data/windows/copy_deps.sh ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.exe ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/
+            COMMENT "Copying required mingw dependencies..."
             )
-endif (PLATFORM_LINUX)
-
-#####################
-# PSP2 (vita) target
-#####################
-if (PLATFORM_PSP2)
-    vita_create_self(${PROJECT_NAME}.self ${PROJECT_NAME}.elf)
-    add_custom_target(${PROJECT_NAME}_vita_release.zip
-            DEPENDS ${PROJECT_NAME}.self
-            COMMAND rm -rf ${CMAKE_BINARY_DIR}/release/psnes
-            COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/psnes/sce_sys
-            COMMAND ${VITASDK}/bin/vita-mksfoex -s TITLE_ID="PSNES0001" "pSNES" ${CMAKE_BINARY_DIR}/release/psnes/sce_sys/param.sfo
-            COMMAND cp -f ${CMAKE_BINARY_DIR}/${PROJECT_NAME}.self ${CMAKE_BINARY_DIR}/release/psnes/eboot.bin
-            COMMAND cp -r ${CMAKE_SOURCE_DIR}/psnes/data/skin ${CMAKE_BINARY_DIR}/release/psnes/
-            COMMAND cp -r ${CMAKE_SOURCE_DIR}/psnes/data/psp2/skin ${CMAKE_BINARY_DIR}/release/psnes/
-            #COMMAND cp -f ${CMAKE_SOURCE_DIR}/psnes/data/databases/Super_Nintendo_Entertainment_System-hyperspin.xml ${CMAKE_BINARY_DIR}/release/psnes/db.xml
-            COMMAND cd ${CMAKE_BINARY_DIR}/release/psnes && zip -r ../../${PROJECT_NAME}-${PSNES_VERSION_MAJOR}.${PSNES_VERSION_MINOR}_vita.vpk . && cd ${CMAKE_BINARY_DIR}
-            )
-endif (PLATFORM_PSP2)
-
-#####################
-# NX (SWITCH) target
-#####################
-if (PLATFORM_SWITCH)
-    set_target_properties(${PROJECT_NAME}.elf PROPERTIES LINK_FLAGS "-specs=${DEVKITPRO}/libnx/switch.specs")
-    add_custom_target(${PROJECT_NAME}.nro
-            DEPENDS ${PROJECT_NAME}.elf
-            COMMAND nacptool --create "pSNES" "Cpasjuste" "${PSNES_VERSION_MAJOR}.${PSNES_VERSION_MINOR}" psnes.nacp
-            COMMAND elf2nro ${PROJECT_NAME}.elf ${PROJECT_NAME}.nro --icon=${CMAKE_CURRENT_SOURCE_DIR}/psnes/data/nx/icon.jpg --nacp=psnes.nacp)
-    add_custom_target(${PROJECT_NAME}_switch_release.zip
-            DEPENDS ${PROJECT_NAME}.nro
-            COMMAND rm -rf ${CMAKE_BINARY_DIR}/release/psnes
-            COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/psnes
-            COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/psnes/skins
-            COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/psnes/roms
-            COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/psnes/titles
-            COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/psnes/previews
-            COMMAND mkdir -p ${CMAKE_BINARY_DIR}/release/psnes/icons
-            COMMAND cp -f ${CMAKE_CURRENT_BINARY_DIR}/psnes.nro ${CMAKE_BINARY_DIR}/release/psnes/psnes.nro
-            COMMAND cp -f ${CMAKE_CURRENT_SOURCE_DIR}/psnes/data/databases/Super_Nintendo_Entertainment_System-hyperspin.xml ${CMAKE_BINARY_DIR}/release/psnes/db.xml
-            # zip skin
-            COMMAND rm -rf ${CMAKE_BINARY_DIR}/release/psnes/skins/default.zip
-            COMMAND zip -j ${CMAKE_BINARY_DIR}/release/psnes/skins/default.zip ${CMAKE_CURRENT_SOURCE_DIR}/psnes/data/skin/*
-            COMMAND cd ${CMAKE_CURRENT_SOURCE_DIR}/psnes/data/nx/skin/ && zip -ru ${CMAKE_BINARY_DIR}/release/psnes/skins/default.zip .
-            # zip release
-            COMMAND rm -rf ${CMAKE_BINARY_DIR}/${PROJECT_NAME}-${PSNES_VERSION_MAJOR}.${PSNES_VERSION_MINOR}_switch.zip
-            COMMAND cd ${CMAKE_BINARY_DIR}/release && zip -r ../${PROJECT_NAME}-${PSNES_VERSION_MAJOR}.${PSNES_VERSION_MINOR}_switch.zip psnes && cd ${CMAKE_BINARY_DIR}
-            )
-endif (PLATFORM_SWITCH)
+endif ()
