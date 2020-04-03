@@ -152,7 +152,7 @@ void UIListBox::init(Font *font, int fontSize, bool useIcons) {
 
 void UIListBox::updateLines() {
 
-    bool useRealName = ui->getConfig()->get(Option::Id::GUI_SHOW_REAL_NAMES)->getValueBool();
+    bool useRealName = ui->getConfig()->get(Option::Id::GUI_SHOW_ROM_NAMES)->getValueBool();
 
     for (unsigned int i = 0; i < (unsigned int) max_lines; i++) {
 
@@ -162,7 +162,11 @@ void UIListBox::updateLines() {
             // set file
             Game game = games[file_index + i];
             lines[i]->setVisibility(Visibility::Visible);
+#ifdef __PFBA__
+            lines[i]->setString(useRealName ? game.names[0].text : game.getName().text);
+#else
             lines[i]->setString(useRealName ? Utility::removeExt(game.path) : game.getName().text);
+#endif
             // TODO: ICON
             //lines[i]->setIcon(file->icon);
             lines[i]->setColor(game.available ? colorAvailable : colorMissing);

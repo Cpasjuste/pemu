@@ -6,9 +6,12 @@
 #include "c2dui.h"
 #include "c2dui_ui_romlist.h"
 
-/// pFBA
-#define BDF_ORIENTATION_FLIPPED     (1 << 1)
-#define BDF_ORIENTATION_VERTICAL    (1 << 2)
+#ifdef __PFBA__
+
+#include "../pfba/sources/fba/tchar.h"
+#include "../cores/fba/src/burn/burn.h"
+
+#endif
 
 using namespace c2d;
 using namespace c2dui;
@@ -116,7 +119,28 @@ void UIRomList::filterRomList() {
         );
     }
 
-    bool byPath = ui->getConfig()->get(Option::Id::GUI_SHOW_REAL_NAMES)->getValueBool();
+    bool byPath = ui->getConfig()->get(Option::Id::GUI_SHOW_ROM_NAMES)->getValueBool();
+#ifdef __PFBA__
+    if (byPath) {
+        for (unsigned int i = 0; i < nBurnDrvCount; i++) {
+            nBurnDrvActive = i;
+            std::string fbnZip = std::string(BurnDrvGetTextA(DRV_NAME)) + ".zip";
+            std::string fbnName = BurnDrvGetTextA(DRV_FULLNAME);
+            char *z_name = nullptr;
+            BurnDrvGetZipName(&z_name, 0);
+            if (z_name != nullptr) {
+                fbnZip = std::string(z_name) + ".zip";
+            }
+            for (size_t j = 0; j < gameList.games.size(); j++) {
+                if (gameList.games.at(j).path == fbnZip) {
+                    gameList.games.at(j).names[0].text = fbnName;
+                    break;
+                }
+            }
+        }
+    }
+#endif
+
     gameList.sortAlpha(byPath);
 }
 

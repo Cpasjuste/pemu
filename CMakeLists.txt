@@ -51,7 +51,6 @@ if (PLATFORM_LINUX)
     set(OPTION_RESOLUTION ON CACHE BOOL "Add screen resolution option")
     set(OPTION_FULLSCREEN ON CACHE BOOL "Add switch to fullscreen option")
 endif (PLATFORM_LINUX)
-add_subdirectory(ui)
 
 # required for cmake toolchain setup
 project(pemu)
@@ -62,9 +61,15 @@ set(VERSION_MINOR 2)
 
 # pnes
 #add_subdirectory(pnes)
+#set(PNES_FLAGS -D__PNES__)
 
 # psnes
-add_subdirectory(psnes)
+#add_subdirectory(psnes)
+#set(PSNES_FLAGS -D__PSNES__)
 
 # pfba
-#add_subdirectory(pfba)
+add_subdirectory(pfba)
+set(PFBA_FLAGS -D__PFBA__)
+
+# pemu (ui)
+add_subdirectory(ui)
