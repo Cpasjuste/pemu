@@ -140,7 +140,8 @@ int PSNESUIEmu::load(const ss_api::Game &game) {
     Settings.AutoDisplayMessages = TRUE;
     Settings.InitialInfoStringTimeout = 120;
     Settings.HDMATimingHack = 100;
-    Settings.BlockInvalidVRAMAccessMaster = TRUE;
+    Settings.BlockInvalidVRAMAccessMaster =
+            ui->getConfig()->get(Option::ROM_PSNES_BLOCK_VRAM, true)->getIndex();
     Settings.StopEmulation = TRUE;
     Settings.WrongMovieStateProtection = TRUE;
     Settings.DumpStreamsMaxFrames = -1;
@@ -158,7 +159,7 @@ int PSNESUIEmu::load(const ss_api::Game &game) {
     Settings.CartBName[0] = 0;
 
     // big boost when SupportHiRes disabled
-    Settings.SupportHiRes = (bool8) ui->getConfig()->get(Option::ROM_HIGH_RES, true)->getIndex();
+    Settings.SupportHiRes = (bool8) ui->getConfig()->get(Option::ROM_PSNES_HIGH_RES, true)->getIndex();
     printf("Settings.SupportHiRes: %i\n", Settings.SupportHiRes);
 
     CPU.Flags = 0;
@@ -216,7 +217,7 @@ int PSNESUIEmu::load(const ss_api::Game &game) {
     Memory.LoadSRAM(S9xGetFilename(".srm", SRAM_DIR));
 
     Settings.ApplyCheats = FALSE;
-    if (ui->getConfig()->get(Option::ROM_CHEATS, true)->getIndex() == 1) {
+    if (ui->getConfig()->get(Option::ROM_PSNES_CHEATS, true)->getIndex() == 1) {
         printf("Settings.ApplyCheats = TRUE\n");
         Settings.ApplyCheats = TRUE;
     }

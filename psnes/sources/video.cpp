@@ -18,7 +18,7 @@ PSNESVideo::PSNESVideo(UIMain *gui, void **_pixels, int *_pitch, const c2d::Vect
 void PSNESVideo::updateScaling(bool vertical, bool flip) {
 
     // TODO: verify config
-    int high_res = ui->getConfig()->get(Option::ROM_HIGH_RES, true)->getIndex();
+    bool high_res = ui->getConfig()->get(Option::ROM_PSNES_HIGH_RES, true)->getValueBool();
     int scale_mode = ui->getConfig()->get(Option::ROM_SCALING, true)->getIndex();
     Vector2f screen = ui->getSize();
     Vector2f scale_max;
