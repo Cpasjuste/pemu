@@ -32,6 +32,18 @@ PSNESConfig::PSNESConfig(c2d::Io *io, int version) : Config(io, version) {
     add(Option::Id::ROM_PSNES_TRANSPARENCY, "DISPLAY_MESSAGES", {"OFF", "ON"}, 1,
         Option::Id::ROM_PSNES_DISPLAY_MESSAGES, Option::Flags::BOOLEAN);
 
+    add(Option::Id::ROM_PSNES_DISPLAY_MESSAGES, "FRAMESKIP",
+        {"OFF", "AUTO", "1", "2", "3", "4", "5", "6", "7", "8", "9"}, 0,
+        Option::Id::ROM_PSNES_FRAMESKIP, Option::Flags::STRING);
+
+    add(Option::Id::ROM_PSNES_FRAMESKIP, "TURBO_MODE", {"OFF", "ON"}, 0,
+        Option::Id::ROM_PSNES_TURBO_MODE, Option::Flags::BOOLEAN);
+
+    add(Option::Id::ROM_PSNES_TURBO_MODE, "TURBO_FRAMESKIP",
+        {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10",
+         "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25"}, 15,
+        Option::Id::ROM_PSNES_TURBO_FRAMESKIP, Option::Flags::STRING);
+
     // "c2dui_romlist" will also reload config, but we need new roms paths
     reset();
     load();

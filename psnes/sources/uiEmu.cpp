@@ -150,13 +150,19 @@ int PSNESUIEmu::load(const ss_api::Game &game) {
     Settings.StretchScreenshots = 1;
     Settings.SnapshotScreenshots = TRUE;
     Settings.FastSavestates = TRUE;
-#ifdef __PSP2__
-    Settings.SkipFrames = AUTO_FRAMERATE;
-    Settings.TurboSkipFrames = 15;
-#else
-    Settings.SkipFrames = 0;
-    Settings.TurboSkipFrames = 0;
-#endif
+
+    int skipFramesCfg = ui->getConfig()->get(Option::ROM_PSNES_FRAMESKIP, true)->getIndex();
+    if (skipFramesCfg == 0) {
+        Settings.SkipFrames = 0;
+    } else if (skipFramesCfg == 1) {
+        Settings.SkipFrames = AUTO_FRAMERATE;
+    } else {
+        Settings.SkipFrames = skipFramesCfg - 1;
+    }
+    printf("Settings.SkipFrames: %i\n", Settings.SkipFrames);
+    Settings.TurboMode = ui->getConfig()->get(Option::ROM_PSNES_TURBO_MODE, true)->getIndex();
+    Settings.TurboSkipFrames = ui->getConfig()->get(Option::ROM_PSNES_TURBO_FRAMESKIP, true)->getIndex();
+
     Settings.CartAName[0] = 0;
     Settings.CartBName[0] = 0;
 
