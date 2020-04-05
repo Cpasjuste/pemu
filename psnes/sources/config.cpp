@@ -35,6 +35,9 @@ PSNESConfig::PSNESConfig(c2d::Io *io, int version) : Config(io, version) {
     add(Option::Id::ROM_PSNES_DISPLAY_MESSAGES, "FRAMESKIP",
         {"OFF", "AUTO", "1", "2", "3", "4", "5", "6", "7", "8", "9"}, 0,
         Option::Id::ROM_PSNES_FRAMESKIP, Option::Flags::STRING);
+#ifdef __VITA__
+    get(Option::Id::ROM_PSNES_FRAMESKIP)->setValueString("2");
+#endif
 
     add(Option::Id::ROM_PSNES_FRAMESKIP, "TURBO_MODE", {"OFF", "ON"}, 0,
         Option::Id::ROM_PSNES_TURBO_MODE, Option::Flags::BOOLEAN);

@@ -133,8 +133,13 @@ int PSNESUIEmu::load(const ss_api::Game &game) {
     Settings.FrameTimePAL = 20000;
     Settings.FrameTimeNTSC = 16667;
     Settings.SixteenBitSound = TRUE;
+#ifdef __VITA__
+    Settings.Stereo = FALSE;
+    Settings.SoundPlaybackRate = 32000;
+#else
     Settings.Stereo = TRUE;
     Settings.SoundPlaybackRate = 31920;
+#endif
     Settings.SoundInputRate = 31920;
     Settings.Transparency =
             ui->getConfig()->get(Option::ROM_PSNES_TRANSPARENCY, true)->getIndex();
