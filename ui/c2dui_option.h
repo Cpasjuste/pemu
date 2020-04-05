@@ -68,6 +68,7 @@ namespace c2dui {
             ROM_NEOBIOS,
             ROM_PSNES_HIGH_RES,
             ROM_PSNES_BLOCK_VRAM,
+            ROM_PSNES_TRANSPARENCY,
             ROM_PSNES_CHEATS,
             MENU_JOYPAD,
             JOY_UP,

@@ -136,7 +136,8 @@ int PSNESUIEmu::load(const ss_api::Game &game) {
     Settings.Stereo = TRUE;
     Settings.SoundPlaybackRate = 31920;
     Settings.SoundInputRate = 31920;
-    Settings.Transparency = TRUE;
+    Settings.Transparency =
+            ui->getConfig()->get(Option::ROM_PSNES_TRANSPARENCY, true)->getIndex();
     Settings.AutoDisplayMessages = TRUE;
     Settings.InitialInfoStringTimeout = 120;
     Settings.HDMATimingHack = 100;
