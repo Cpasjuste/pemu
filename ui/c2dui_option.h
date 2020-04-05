@@ -41,7 +41,6 @@ namespace c2dui {
             GUI_FILTER_DATE,
             GUI_FILTER_GENRE,
             GUI_SHOW_ICONS,
-            GUI_USE_DATABASE,
             GUI_SCREEN_WIDTH,
             GUI_SCREEN_HEIGHT,
             GUI_WINDOW_TOP,
