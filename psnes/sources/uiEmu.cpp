@@ -249,8 +249,13 @@ int PSNESUIEmu::load(const ss_api::Game &game) {
     addAudio(Settings.SoundPlaybackRate, (float) Memory.ROMFramesPerSecond, S9xAudioCallback);
 
 #ifdef __PSP2__
+    //GFX.Pitch = SNES_WIDTH * 2;
+    //addVideo(getUi(), (void **) &GFX.Screen, (int *) &GFX.Pitch, Vector2f(SNES_WIDTH, SNES_HEIGHT_EXTENDED));
     GFX.Pitch = SNES_WIDTH * 2;
-    addVideo(getUi(), (void **) &GFX.Screen, (int *) &GFX.Pitch, Vector2f(SNES_WIDTH, SNES_HEIGHT_EXTENDED));
+    PSNESVideo *v = new PSNESVideo(getUi(), (void **) &GFX.Screen, (int *) &GFX.Pitch,
+                                   Vector2f(SNES_WIDTH, SNES_HEIGHT_EXTENDED));
+    addVideo(v);
+    memset(GFX.Screen, 0, (size_t) getVideo()->getTexture()->pitch * getVideo()->getTextureRect().height);
 #else
     if (Settings.SupportHiRes) {
         GFX.Pitch = SNES_WIDTH * 2 * 2;
