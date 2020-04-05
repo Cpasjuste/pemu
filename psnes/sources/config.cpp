@@ -29,6 +29,9 @@ PSNESConfig::PSNESConfig(c2d::Io *io, int version) : Config(io, version) {
     add(Option::Id::ROM_PSNES_BLOCK_VRAM, "TRANSPARENCY", {"OFF", "ON"}, 1,
         Option::Id::ROM_PSNES_TRANSPARENCY, Option::Flags::BOOLEAN);
 
+    add(Option::Id::ROM_PSNES_TRANSPARENCY, "DISPLAY_MESSAGES", {"OFF", "ON"}, 1,
+        Option::Id::ROM_PSNES_DISPLAY_MESSAGES, Option::Flags::BOOLEAN);
+
     // "c2dui_romlist" will also reload config, but we need new roms paths
     reset();
     load();

@@ -138,7 +138,8 @@ int PSNESUIEmu::load(const ss_api::Game &game) {
     Settings.SoundInputRate = 31920;
     Settings.Transparency =
             ui->getConfig()->get(Option::ROM_PSNES_TRANSPARENCY, true)->getIndex();
-    Settings.AutoDisplayMessages = TRUE;
+    Settings.AutoDisplayMessages =
+            ui->getConfig()->get(Option::ROM_PSNES_DISPLAY_MESSAGES, true)->getIndex();
     Settings.InitialInfoStringTimeout = 120;
     Settings.HDMATimingHack = 100;
     Settings.BlockInvalidVRAMAccessMaster =
