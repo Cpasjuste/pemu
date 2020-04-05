@@ -763,14 +763,6 @@ void S9xSyncSpeed() {
     if (Settings.DumpStreams)
         return;
 
-#ifdef __SWITCH__
-    IPPU.FrameSkip = 0;
-    IPPU.SkippedFrames = 0;
-    IPPU.RenderThisFrame = TRUE;
-    return;
-#endif
-
-#if !defined(__SWITCH__)
     if (Settings.HighSpeedSeek > 0)
         Settings.HighSpeedSeek--;
 
@@ -839,7 +831,6 @@ void S9xSyncSpeed() {
         next1.tv_sec += next1.tv_usec / 1000000;
         next1.tv_usec %= 1000000;
     }
-#endif
 }
 
 /**
