@@ -29,7 +29,7 @@ file(GLOB SNES9X_SRC
         ${CMAKE_SOURCE_DIR}/cores/snes9x/apu/bapu/*.c*
         ${CMAKE_SOURCE_DIR}/cores/snes9x/apu/bapu/dsp/*.c*
         ${CMAKE_SOURCE_DIR}/cores/snes9x/apu/bapu/smp/*.c*
-        ${CMAKE_SOURCE_DIR}/cores/snes9x/filter/blit.cpp
+        ${CMAKE_SOURCE_DIR}/cores/snes9x/filter/*.c*
         )
 
 list(REMOVE_ITEM SNES9X_SRC
@@ -41,6 +41,7 @@ list(REMOVE_ITEM SNES9X_SRC
         ${CMAKE_SOURCE_DIR}/cores/snes9x/apu/bapu/smp/memory.cpp
         ${CMAKE_SOURCE_DIR}/cores/snes9x/apu/bapu/smp/timing.cpp
         ${CMAKE_SOURCE_DIR}/cores/snes9x/apu/bapu/smp/iplrom.cpp
+        ${CMAKE_SOURCE_DIR}/cores/snes9x/apu/bapu/dsp/SPC_DSP.cpp
         )
 
 set(SNES9X_CFLAGS
@@ -61,8 +62,6 @@ set(SNES9X_LDFLAGS m z)
 # OPTIONS
 #####################
 if (OPTION_SOFT_SCALERS)
-    file(GLOB SNES9X_SCALERS_SRC ${CMAKE_SOURCE_DIR}/cores/snes9x/filter/*.c*)
-    list(APPEND SNES9X_SRC ${SNES9X_SCALERS_SRC})
     list(APPEND SNES9X_CFLAGS -D__SOFT_SCALERS__)
 endif (OPTION_SOFT_SCALERS)
 if (OPTION_SOUND)
