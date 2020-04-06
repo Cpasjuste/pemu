@@ -7,7 +7,7 @@
 #ifndef __GTK_SOUND_H
 #define __GTK_SOUND_H
 
-#define sound_buffer_size 100
+#define sound_buffer_size 256
 
 void S9xPortSoundInit();
 

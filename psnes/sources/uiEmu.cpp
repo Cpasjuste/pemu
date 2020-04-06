@@ -132,7 +132,7 @@ int PSNESUIEmu::load(const ss_api::Game &game) {
     // audio
     Settings.SixteenBitSound = TRUE;
     Settings.Stereo = TRUE;
-    Settings.SoundSync = FALSE;
+    Settings.SoundSync = TRUE;
     Settings.SoundInputRate = 31950;
 #ifdef __VITA__
     Settings.SoundPlaybackRate = 22050;
@@ -756,6 +756,13 @@ void S9xSyncSpeed() {
 
     if (Settings.DumpStreams)
         return;
+
+    if (Settings.SkipFrames == FALSE && Settings.TurboMode == FALSE) {
+        IPPU.FrameSkip = 0;
+        IPPU.SkippedFrames = 0;
+        IPPU.RenderThisFrame = TRUE;
+        return;
+    }
 
     if (Settings.HighSpeedSeek > 0)
         Settings.HighSpeedSeek--;
