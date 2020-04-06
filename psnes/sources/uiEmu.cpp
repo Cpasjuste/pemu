@@ -5,6 +5,7 @@
 #include "c2dui.h"
 #include "uiEmu.h"
 #include "video.h"
+#include "sound.h"
 
 #include <snes9x.h>
 #include <memmap.h>
@@ -22,6 +23,7 @@
 #include <psp2/kernel/threadmgr.h>
 
 #define mkdir(x, y) sceIoMkdir(x, 0777)
+#define usleep sceKernelDelayThread
 #endif
 
 using namespace c2d;
@@ -95,11 +97,6 @@ static const char dirNames[13][32] =
 
 static int make_snes9x_dirs(void);
 
-static void S9xAudioCallback(void *data, Uint8 *stream, int len) {
-
-    S9xMixSamples(stream, len >> (Settings.SixteenBitSound ? 1 : 0));
-}
-
 std::string getButtonId(int player, const std::string &name) {
     return "Joypad" + std::to_string(player) + " " + name;
 }
@@ -132,15 +129,17 @@ int PSNESUIEmu::load(const ss_api::Game &game) {
     Settings.MultiPlayer5Master = FALSE;
     Settings.FrameTimePAL = 20000;
     Settings.FrameTimeNTSC = 16667;
+    // audio
     Settings.SixteenBitSound = TRUE;
-#ifdef __VITA__
-    Settings.Stereo = FALSE;
-    Settings.SoundPlaybackRate = 32000;
-#else
     Settings.Stereo = TRUE;
-    Settings.SoundPlaybackRate = 31920;
+    Settings.SoundSync = FALSE;
+    Settings.SoundInputRate = 31950;
+#ifdef __VITA__
+    Settings.SoundPlaybackRate = 22050;
+#else
+    Settings.SoundPlaybackRate = 48000;
 #endif
-    Settings.SoundInputRate = 31920;
+    // audio
     Settings.Transparency =
             ui->getConfig()->get(Option::ROM_PSNES_TRANSPARENCY, true)->getIndex();
     Settings.AutoDisplayMessages =
@@ -188,13 +187,7 @@ int PSNESUIEmu::load(const ss_api::Game &game) {
         return -1;
     }
 
-    if (!S9xInitSound(100)) {
-        printf("Could not initialize Snes9x Sound.\n");
-        ui->getUiProgressBox()->setVisibility(Visibility::Hidden);
-        stop();
-        return -1;
-    }
-    S9xSetSoundMute(TRUE);
+    S9xPortSoundInit();
 
     //getButtonId
     S9xUnmapAllControls();
@@ -251,11 +244,7 @@ int PSNESUIEmu::load(const ss_api::Game &game) {
     S9xBlitHQ2xFilterInit();
 #endif
 
-    addAudio(Settings.SoundPlaybackRate, (float) Memory.ROMFramesPerSecond, S9xAudioCallback);
-
 #ifdef __PSP2__
-    //GFX.Pitch = SNES_WIDTH * 2;
-    //addVideo(getUi(), (void **) &GFX.Screen, (int *) &GFX.Pitch, Vector2f(SNES_WIDTH, SNES_HEIGHT_EXTENDED));
     GFX.Pitch = SNES_WIDTH * 2;
     PSNESVideo *v = new PSNESVideo(getUi(), (void **) &GFX.Screen, (int *) &GFX.Pitch,
                                    Vector2f(SNES_WIDTH, SNES_HEIGHT_EXTENDED));
@@ -281,7 +270,7 @@ int PSNESUIEmu::load(const ss_api::Game &game) {
 #endif
 
     S9xGraphicsInit();
-    S9xSetSoundMute(FALSE);
+    S9xSoundStart();
 
     targetFps = Memory.ROMFramesPerSecond;
 
@@ -295,7 +284,9 @@ int PSNESUIEmu::load(const ss_api::Game &game) {
 
 void PSNESUIEmu::stop() {
 
-    S9xSetSoundMute(TRUE);
+    S9xSoundStop();
+    S9xPortSoundDeinit();
+
     Settings.StopEmulation = TRUE;
 
     Memory.SaveSRAM(S9xGetFilename(".srm", SRAM_DIR));
@@ -313,7 +304,7 @@ void PSNESUIEmu::stop() {
     Memory.Deinit();
     S9xDeinitAPU();
 
-    if (gfx_snes_buffer) {
+    if (gfx_snes_buffer != nullptr) {
         free(gfx_snes_buffer);
     }
     snes9x_prev_width = 0;
@@ -334,7 +325,6 @@ void PSNESUIEmu::onUpdate() {
     if (!isPaused()) {
 
         S9xMainLoop();
-        S9xSetSoundMute(FALSE);
 
         auto players = ui->getInput()->getPlayers();
 
@@ -363,9 +353,19 @@ void PSNESUIEmu::onUpdate() {
         }
 #endif
          */
-    } else {
-        S9xSetSoundMute(TRUE);
     }
+}
+
+void PSNESUIEmu::pause() {
+    S9xSetSoundMute(TRUE);
+    S9xSoundStop();
+    UIEmu::pause();
+}
+
+void PSNESUIEmu::resume() {
+    S9xSetSoundMute(FALSE);
+    S9xSoundStart();
+    UIEmu::resume();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -730,22 +730,6 @@ void S9xCloseSnapshotFile(STREAM file) {
 }
 
 /**
- * If your port can match Snes9x's built-in SoundChannelXXX command (see controls.cpp),
- * you may choose to use this function. Otherwise return NULL.
- * Basically, turn on/off the sound channel c (0-7), and turn on all channels if c is 8.
- */
-void S9xToggleSoundChannel(int c) {
-
-    static uint8 sound_switch = 255;
-
-    if (c == 8)
-        sound_switch = 255;
-    else
-        sound_switch ^= 1 << c;
-    S9xSetSoundControl(sound_switch);
-}
-
-/**
  * If Settings.AutoSaveDelay is not zero, Snes9x calls this function when the contents of
  * the S-RAM has been changed. Typically, call Memory.SaveSRAM function from this function.
  */
@@ -760,12 +744,12 @@ void S9xAutoSaveSRAM() {
  */
 void S9xSyncSpeed() {
 
-    if (Settings.SoundSync) {
-        while (!S9xSyncSound()) {
+    if (Settings.SoundSync == TRUE) {
+        while (S9xSyncSound() == FALSE) {
 #ifdef __PSP2__
-            sceKernelDelayThread(0);
+            sceKernelDelayThread(1);
 #else
-            usleep(0);
+            usleep(1);
 #endif
         }
     }
@@ -868,15 +852,6 @@ bool S9xPollPointer(uint32 id, int16 *x, int16 *y) {
  * Handle port-specific commands (?).
  */
 void S9xHandlePortCommand(s9xcommand_t cmd, int16 data1, int16 data2) {
-}
-
-/**
- * S9xInitSound function calls this function to actually open the host sound device.
- */
-bool8 S9xOpenSoundDevice(void) {
-
-    printf("S9xOpenSoundDevice\n");
-    return TRUE;
 }
 
 /**

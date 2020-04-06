@@ -20,6 +20,10 @@ public:
     bool onInput(c2d::Input::Player *players) override;
 
     void onUpdate() override;
+
+    void pause() override;
+
+    void resume() override;
 };
 
 #endif //PSNES_UIEMU_H
