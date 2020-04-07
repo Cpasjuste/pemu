@@ -4,13 +4,16 @@
    For further information, consult the LICENSE file in the root directory.
 \*****************************************************************************/
 
+#ifndef __3DS__
 #include <SDL2/SDL.h>
+#endif
 
 #include "snes9x.h"
 #include "apu/apu.h"
 #include "apu/resampler.h"
 #include "sound.h"
 
+#ifndef __3DS__
 #ifdef __PSP2__
 
 #include <psp2/kernel/threadmgr.h>
@@ -52,15 +55,16 @@ static void samples_available(void *data) {
     buffer.push(temp, snes_samples_available);
     SDL_UnlockMutex(mutex);
 }
+#endif
 
 void
 S9xPortSoundInit() {
-
+#ifndef __3DS__
     mutex = SDL_CreateMutex();
 
     SDL_InitSubSystem(SDL_INIT_AUDIO);
     SDL_PauseAudio(1);
-
+#endif
     S9xInitSound(0);
     S9xSetSoundMute(false);
 }
@@ -69,30 +73,34 @@ void
 S9xPortSoundDeinit() {
 
     S9xSoundStop();
-
+#ifndef __3DS__
     SDL_PauseAudio(1);
     SDL_CloseAudio();
     SDL_QuitSubSystem(SDL_INIT_AUDIO);
 
     SDL_DestroyMutex(mutex);
+#endif
 }
 
 void
 S9xSoundStart() {
-
+#ifndef __3DS__
     if (Settings.Mute == FALSE) {
         SDL_PauseAudio(0);
     }
+#endif
 }
 
 void
 S9xSoundStop() {
-
+#ifndef __3DS__
     SDL_PauseAudio(1);
+#endif
 }
 
 bool8
 S9xOpenSoundDevice() {
+#ifndef __3DS__
     if (Settings.Mute == TRUE)
         return FALSE;
 
@@ -118,9 +126,8 @@ S9xOpenSoundDevice() {
     buffer.time_ratio(1.0);
 
     S9xSetSamplesAvailableCallback(samples_available, nullptr);
-
+#endif
     return TRUE;
-
 }
 
 void

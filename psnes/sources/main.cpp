@@ -68,9 +68,6 @@ int main(int argc, char **argv) {
     };
 
     // we need to create a renderer with real screen size
-    printf("screen size: %i x %i, windows: x = %i, y = %i, w = %i, h = %i\n",
-           (int) screen_size.x, (int) screen_size.y,
-           (int) windows_size.left, (int) windows_size.top, (int) windows_size.width, (int) windows_size.height);
 #ifdef __FULLSCREEN__
     if (cfg->get(Option::Id::GUI_FULLSCREEN)->getValueBool()) {
         screen_size = Vector2f();

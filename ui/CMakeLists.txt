@@ -29,7 +29,7 @@ if (OPTION_BUILTIN_MINIZIP)
     list(APPEND CROSS2DUI_SOURCE
             ${CMAKE_CURRENT_SOURCE_DIR}/minizip/ioapi.c
             ${CMAKE_CURRENT_SOURCE_DIR}/minizip/unzip.c)
-    list(APPEND FLAGS -DIOAPI_NO_64)
+    list(APPEND FLAGS -DIOAPI_NO_64 -DUSE_FILE32API)
     if (PLATFORM_WINDOWS)
         list(APPEND CROSS2DUI_SOURCE ${CMAKE_CURRENT_SOURCE_DIR}/minizip/iowin32.c)
     endif ()
@@ -41,6 +41,8 @@ if (PLATFORM_LINUX)
     list(APPEND LDFLAGS ${CMAKE_THREAD_LIBS_INIT} vdpau va va-drm va-x11 X11 lzma dl)
 elseif (PLATFORM_SWITCH)
     list(APPEND LDFLAGS lzma)
+elseif (PLATFORM_3DS)
+    #list(APPEND LDFLAGS -L${DEVKITPRO}/portlibs/3ds/lib -L${DEVKITPRO}/libctru/lib)
 endif ()
 
 ##########################

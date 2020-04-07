@@ -2,9 +2,8 @@
 // Created by cpasjuste on 23/11/16.
 //
 
-#include <minizip/unzip.h>
-
 #include "c2dui.h"
+#include <minizip/unzip.h>
 
 using namespace c2d;
 using namespace c2dui;
@@ -21,6 +20,7 @@ Skin::Skin(UIMain *u, const std::vector<Button> &btns, const Vector2f &scaling) 
     int configLen = 0;
     char *configData = getZippedData(path + skinName, "config.cfg", &configLen);
     if (configData == nullptr) {
+        printf("Skin: could not find config.cfg in zip (%s)\n", (path + skinName).c_str());
         ui->getConfig()->get(Option::GUI_SKIN)->setValueString("default");
         skinName = "default.zip";
         configData = getZippedData(path + skinName, "config.cfg", &configLen);
@@ -29,10 +29,13 @@ Skin::Skin(UIMain *u, const std::vector<Button> &btns, const Vector2f &scaling) 
         configData[configLen - 1] = '\0';
         path += skinName;
         useZippedSkin = true;
-        printf("Skin: zipped skin found: %s\n", path.c_str());
+        printf("Skin: zipped skin found: %s\n", (path + skinName).c_str());
     } else {
+        printf("Skin: zipped skin not found: %s\n", (path + skinName).c_str());
         path += "default/";
     }
+
+    printf("Skin path: %s\n", path.c_str());
 
     // TODO: cleanup this
     // load buttons textures
@@ -573,8 +576,10 @@ char *Skin::getZippedData(const std::string &p, const std::string &name, int *si
 
     char *data = nullptr;
 
+    printf("Skin::getZippedData(%s, %s)\n", p.c_str(), name.c_str());
+
     unzFile zip = unzOpen(p.c_str());
-    if (!zip) {
+    if (zip == nullptr) {
         printf("Skin::getZippedData(%s, %s): unzOpen failed\n", p.c_str(), name.c_str());
         return data;
     }
@@ -589,9 +594,10 @@ char *Skin::getZippedData(const std::string &p, const std::string &name, int *si
                     unzGetCurrentFileInfo(zip, &fileInfo, zipFileName, fileInfo.size_filename + 1,
                                           nullptr, 0, nullptr, 0);
                     zipFileName[fileInfo.size_filename] = '\0';
+                    printf("Skin::getZippedData: found file: %s\n", zipFileName);
                     if (name == zipFileName) {
                         data = (char *) malloc(fileInfo.uncompressed_size);
-                        if (size) {
+                        if (size != nullptr) {
                             *size = (int) fileInfo.uncompressed_size;
                         }
                         unzReadCurrentFile(zip, data, (unsigned int) fileInfo.uncompressed_size);
@@ -602,8 +608,12 @@ char *Skin::getZippedData(const std::string &p, const std::string &name, int *si
                     free(zipFileName);
                 }
                 unzCloseCurrentFile(zip);
+            } else {
+                printf("Skin::getZippedData(%s, %s): unzOpenCurrentFile failed\n", p.c_str(), name.c_str());
             }
         } while (unzGoToNextFile(zip) == UNZ_OK);
+    } else {
+        printf("Skin::getZippedData(%s, %s): unzGoToFirstFile failed\n", p.c_str(), name.c_str());
     }
 
     unzClose(zip);
@@ -614,22 +624,22 @@ char *Skin::getZippedData(const std::string &p, const std::string &name, int *si
 Skin::~Skin() {
 
     for (auto &button : buttons) {
-        if (button.texture) {
+        if (button.texture != nullptr) {
             delete (button.texture);
         }
     }
     buttons.clear();
 
-    if (font) {
+    if (font != nullptr) {
         delete (font);
     }
 
     // delete font data if loaded from zipped skin
-    if (font_data) {
+    if (font_data != nullptr) {
         free(font_data);
     }
 
-    if (config) {
+    if (config != nullptr) {
         delete (config);
     }
 }
