@@ -1,7 +1,7 @@
 pSNES: Portable Snes9x
 ===========================
 
-![](https://github.com/Cpasjuste/pemu/raw/master/psnes/psnes/data/screenshot.png)
+![](https://github.com/Cpasjuste/pemu/raw/master/psnes/data/screenshot.png)
 
 
 ### The main goals of this [snes9x](https://github.com/snes9xgit/snes9x) port are:
