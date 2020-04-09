@@ -106,6 +106,7 @@ if (PLATFORM_VITA)
     #####################
     # PSP2 PLATORM
     #####################
+    set(TITLE_ID "PSNE00001" CACHE STRING "" FORCE)
     list(APPEND SNES9X_LDFLAGS ScePower_stub)
 elseif (PLATFORM_SWITCH)
     #####################
