@@ -22,8 +22,13 @@ pSNES: Portable Snes9x
 - Support cheats (put a "rom_name.cht"  file with game genie codes in cheat folder)
 - Support 2x, 3x, fit, fit 4/3 and fullscreen hardware linear scaling
 - Support software filtering (tv2x, smooth, supereagle, 2xsai...)
-- Support titles, previews, and icons images (png), named as the rom name with png extension instead zip/sfc, in their respective directory (to be created if needed).
-- Support database file for rom handling. You'll need a "db.xml" file located alongside the application. The current "db.xml" file comes from dat-o-matic, and contains a complete "no-intro" romset. Your rom files must be zipped and named as per this set (http://datomatic.no-intro.org). You can enable/disable this option from the option menu (restart required).
+
+
+### Preview images and videos
+- pSNES support preview images and videos (put files in roms media folder: png files goes in "roms/media/mixrbv2", mp4 files in "roms/media/video"). Please note that the vita port doesn't support video previews.
+You can download a near fullset mixrbv2 and video package for each platform here:
+    - preview images: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/psnes/psnes_mixrbv2.zip)
+    - preview videos: [video](http://files.mydedibox.fr/files/dev/pemu/psnes/psnes_video.zip)
 
 ### Cheat format
 - Example for "Super Mario World (USA).cht" game genie codes
@@ -42,6 +47,10 @@ pSNES: Portable Snes9x
 ### Installation (switch)
 - copy "psnes" directory to "/switch/" directory on sdcard
 - copy roms to "/switch/psnes/roms/" directory on sdcard
+
+### Installation (vita)
+- copy "psnes" directory to "ux0:/data/" directory on sdcard
+- copy roms to "/ux0/data/psnes/roms/" directory on sdcard
 
 ### Usage (switch)
 - Press (+) in the rom list to configure main options and default roms options
