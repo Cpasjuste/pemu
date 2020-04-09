@@ -29,9 +29,6 @@ PFBAConfig::PFBAConfig(c2d::Io *io, int version) : Config(io, version) {
     /// pfba custom config
     ////////////////////////////////////////////////////////////
 
-    /// UI OPTIONS
-    hide(Option::GUI_USE_DATABASE);
-
     /// ROMS OPTIONS
 #ifdef __FREEPLAY__
     add(Option::Id::ROM_FILTER, "FORCE_60HZ",

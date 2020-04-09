@@ -64,12 +64,12 @@ set(VERSION_MINOR 3)
 #set(PNES_FLAGS -D__PNES__)
 
 # psnes
-add_subdirectory(psnes)
-set(PSNES_FLAGS -D__PSNES__)
+#add_subdirectory(psnes)
+#set(PSNES_FLAGS -D__PSNES__)
 
 # pfba
-#add_subdirectory(pfba)
-#set(PFBA_FLAGS -D__PFBA__)
+add_subdirectory(pfba)
+set(PFBA_FLAGS -D__PFBA__)
 
 # pemu (ui)
 add_subdirectory(ui)
