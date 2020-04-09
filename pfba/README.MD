@@ -39,6 +39,7 @@ pFBN: Portable FinalBurn Neo
     Sega Master System  : "sms"
     Nec TurboGraFX-16   : "tg16"
     Spectrum            : "zx3"
+    Nintendo NES        : "nes"
     ```
   
 - pFBN support preview images and videos (put files in corresponding media folder. For arcade roms, for example: png files goes in "roms/media/mixrbv2", mp4 files in "roms/media/video"). Please note that the vita port doesn't support video previews.
@@ -54,6 +55,7 @@ You can download a near fullset mixrbv2 and video package for each platform here
     - Sega Master System: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/sms_mixrbv2.zip), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/sms_video.zip)
     - Nec TurboGraFX-16: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/tg16_mixrbv2.zip), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/tg16_video.zip)
     - Spectrum: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/zx3_mixrbv2.zip), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/zx3_video.zip)
+    - Nintendo NES: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/nes_mixrbv2.zip), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/nes_video.zip)
 
 -----
 

@@ -44,5 +44,8 @@ void PFBARomList::build() {
     gameList.append(dataPath + "gamelist_zx3.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_ZX3), false);
     setLoadingText("Games: %i / %i", gameList.getAvailableCount(), gameList.games.size());
 
+    gameList.append(dataPath + "gamelist_nes.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_NES), false);
+    setLoadingText("Games: %i / %i", gameList.getAvailableCount(), gameList.games.size());
+
     RomList::build();
 }

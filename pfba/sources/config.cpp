@@ -24,6 +24,7 @@ PFBAConfig::PFBAConfig(c2d::Io *io, int version) : Config(io, version) {
     roms_paths.emplace_back(io->getDataPath() + "sms/");
     roms_paths.emplace_back(io->getDataPath() + "tg16/");
     roms_paths.emplace_back(io->getDataPath() + "zx3/");
+    roms_paths.emplace_back(io->getDataPath() + "nes/");
 
     ////////////////////////////////////////////////////////////
     /// pfba custom config
