@@ -38,20 +38,30 @@ Texture *UIRomList::getPreviewTexture(const ss_api::Game &game) {
 
     // load image
     C2DTexture *texture = nullptr;
-    std::string path;
+    std::string fullPath, mediaPath;
 
-    path = game.romsPath + game.getMedia("mixrbv2").url;
-    printf("getPreviewTexture(%s)\n", path.c_str());
-    texture = new C2DTexture(path);
+    // if database doesn't contains any media, just use default path
+    mediaPath = game.getMedia("mixrbv2").url;
+    if (mediaPath.empty()) {
+        mediaPath = "media/mixrbv2/" + Utility::removeExt(game.path) + ".png";
+    }
+
+    fullPath = game.romsPath + mediaPath;
+    printf("getPreviewTexture(%s)\n", fullPath.c_str());
+    texture = new C2DTexture(fullPath);
     if (!texture->available) {
         delete (texture);
         texture = nullptr;
         if (game.isClone()) {
             Game parentGame = gameList.findByPath(game.cloneOf);
             if (!parentGame.path.empty()) {
-                path = game.romsPath + parentGame.getMedia("mixrbv2").url;
-                printf("getPreviewTexture(%s)\n", path.c_str());
-                texture = new C2DTexture(path);
+                mediaPath = parentGame.getMedia("mixrbv2").url;
+                if (mediaPath.empty()) {
+                    mediaPath = "media/mixrbv2/" + Utility::removeExt(parentGame.path) + ".png";
+                }
+                fullPath = game.romsPath + mediaPath;
+                printf("getPreviewTexture(%s)\n", fullPath.c_str());
+                texture = new C2DTexture(fullPath);
                 if (!texture->available) {
                     delete (texture);
                     return nullptr;
@@ -65,21 +75,33 @@ Texture *UIRomList::getPreviewTexture(const ss_api::Game &game) {
 
 std::string UIRomList::getPreviewVideo(const ss_api::Game &game) {
 
-    std::string path = game.romsPath + game.getMedia("video").url;
-    printf("getPreviewVideo(%s)\n", path.c_str());
-    if (!ui->getIo()->exist(path)) {
-        path = "";
+    std::string fullPath, mediaPath;
+
+    // if database doesn't contains any media, just use default path
+    mediaPath = game.getMedia("video").url;
+    if (mediaPath.empty()) {
+        mediaPath = "media/video/" + Utility::removeExt(game.path) + ".mp4";
+    }
+
+    fullPath = game.romsPath + mediaPath;
+    printf("getPreviewVideo(%s)\n", fullPath.c_str());
+    if (!ui->getIo()->exist(fullPath)) {
+        fullPath = "";
         Game parentGame = gameList.findByPath(game.cloneOf);
         if (!parentGame.path.empty()) {
-            path = game.romsPath + parentGame.getMedia("video").url;
-            printf("getPreviewVideo(%s)\n", path.c_str());
-            if (!ui->getIo()->exist(path)) {
-                path = "";
+            mediaPath = parentGame.getMedia("video").url;
+            if (mediaPath.empty()) {
+                mediaPath = "media/video/" + Utility::removeExt(parentGame.path) + ".mp4";
+            }
+            fullPath = game.romsPath + mediaPath;
+            printf("getPreviewVideo(%s)\n", fullPath.c_str());
+            if (!ui->getIo()->exist(fullPath)) {
+                fullPath = "";
             }
         }
     }
 
-    return path;
+    return fullPath;
 }
 
 void UIRomList::filterRomList() {
