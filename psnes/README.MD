@@ -23,6 +23,8 @@ pSNES: Portable Snes9x
 - Support 2x, 3x, fit, fit 4/3 and fullscreen hardware linear scaling
 - Support software filtering (tv2x, smooth, supereagle, 2xsai...)
 
+### Roms
+- The pSNES database is built against the no-intro romset "Nintendo - Super Nintendo Entertainment System (2017-05-29).zip". The best is to use this romset with pSNES.
 
 ### Preview images and videos
 - pSNES support preview images and videos (put files in roms media folder: png files goes in "roms/media/mixrbv2", mp4 files in "roms/media/video"). Please note that the vita port doesn't support video previews.
