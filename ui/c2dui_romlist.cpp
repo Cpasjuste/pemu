@@ -76,7 +76,11 @@ void RomList::build() {
     printf("RomList::build(): ROM_PATH_0: %s\n", ui->getConfig()->getRomPaths().at(FBN_PATH_ARCADE).c_str());
     std::string dataPath = ui->getIo()->getDataPath();
 
+#ifdef __PFBA__
+    gameList.append(dataPath + "gamelist.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_ARCADE), false);
+#else
     gameList.append(dataPath + "gamelist.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_ARCADE), false, true);
+#endif
     setLoadingText("Games: %i / %i", gameList.getAvailableCount(), gameList.games.size());
 
     gameList.sortAlpha();
