@@ -19,6 +19,7 @@
 #define FBN_PATH_TG16 9
 #define FBN_PATH_ZX3 10
 #define FBN_PATH_NES 11
+#define FBN_PATH_NES_FDS 12
 
 namespace c2dui {
 

@@ -130,6 +130,8 @@ int PFBAGuiEmu::load(const ss_api::Game &game) {
         zipName = "spec_" + zipName;
     } else if (game.system.id == SYSTEM_ID_NES) {
         zipName = "nes_" + zipName;
+    } else if (game.system.id == SYSTEM_ID_NES_FDS) {
+        zipName = "fds_" + zipName;
     }
 
     for (unsigned int i = 0; i < nBurnDrvCount; i++) {

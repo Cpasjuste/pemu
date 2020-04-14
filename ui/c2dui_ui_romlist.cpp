@@ -155,6 +155,19 @@ void UIRomList::filterRomList() {
             }
             for (size_t j = 0; j < gameList.games.size(); j++) {
                 if (gameList.games.at(j).path == fbnZip) {
+                    // FBNEO add an header to nes and fds rom names..
+                    unsigned int hw =
+                            ((BurnDrvGetHardwareCode() | HARDWARE_PREFIX_CARTRIDGE) ^ HARDWARE_PREFIX_CARTRIDGE) &
+                            0xff000000;
+                    if (hw == HARDWARE_NES) {
+                        if (Utility::startWith(fbnName, "NES ")) {
+                            fbnName = Utility::remove(fbnName, "NES ");
+                        }
+                    } else if (hw == HARDWARE_FDS) {
+                        if (Utility::startWith(fbnName, "FDS ")) {
+                            fbnName = Utility::remove(fbnName, "FDS ");
+                        }
+                    }
                     gameList.games.at(j).names[0].text = fbnName;
                     break;
                 }
