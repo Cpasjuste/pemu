@@ -29,7 +29,7 @@ Skin::Skin(UIMain *u, const std::vector<Button> &btns, const Vector2f &scaling) 
         configData[configLen - 1] = '\0';
         path += skinName;
         useZippedSkin = true;
-        printf("Skin: zipped skin found: %s\n", (path + skinName).c_str());
+        //printf("Skin: zipped skin found: %s\n", path.c_str());
     } else {
         printf("Skin: zipped skin not found: %s\n", (path + skinName).c_str());
         path += "default/";
@@ -412,7 +412,7 @@ void Skin::loadRectangleShape(c2d::RectangleShape *shape, const std::vector<std:
             char *data = getZippedData(path, rectangleShapeGroup.texture, &size);
             printf("Skin::loadRectangleShape(%s, %s)\n",
                    path.c_str(), rectangleShapeGroup.texture.c_str());
-            if (data) {
+            if (data != nullptr) {
                 tex = new C2DTexture((const unsigned char *) data, size);
                 free(data);
             } else {
@@ -594,7 +594,7 @@ char *Skin::getZippedData(const std::string &p, const std::string &name, int *si
                     unzGetCurrentFileInfo(zip, &fileInfo, zipFileName, fileInfo.size_filename + 1,
                                           nullptr, 0, nullptr, 0);
                     zipFileName[fileInfo.size_filename] = '\0';
-                    printf("Skin::getZippedData: found file: %s\n", zipFileName);
+                    //printf("Skin::getZippedData: found file: %s\n", zipFileName);
                     if (name == zipFileName) {
                         data = (char *) malloc(fileInfo.uncompressed_size);
                         if (size != nullptr) {
