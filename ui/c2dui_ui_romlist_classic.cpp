@@ -112,14 +112,20 @@ public:
             if (res == 0) {
                 mpvTexture->setLayer(1);
                 mpvTexture->setVisibility(Visibility::Visible, false);
+            } else {
+                mpvTexture->setVisibility(Visibility::Hidden);
+                mpv->stop();
             }
+        } else {
+            mpvTexture->setVisibility(Visibility::Hidden);
+            mpv->stop();
         }
 #endif
         return true;
     }
 
     bool loadTexture(const Game &game) {
-        texture = (C2DTexture *) uiRomList->getPreviewTexture(game);
+        texture = game.path.empty() ? nullptr : (C2DTexture *) uiRomList->getPreviewTexture(game);
         // set image
         if ((texture != nullptr) && texture->available) {
             previewText->setVisibility(Visibility::Hidden);
@@ -146,6 +152,8 @@ public:
         }
 
         if (game.id <= 0) {
+            // try to load title/preview texture even if game is not in DB
+            loadTexture(game);
             hideText(systemText);
             hideText(developerText);
             hideText(editorText);

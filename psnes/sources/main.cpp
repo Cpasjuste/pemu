@@ -48,7 +48,7 @@ UIRomList *uiRomList;
 int main(int argc, char **argv) {
 
     // need custom io for some devices
-    auto io = new PSNESIo();
+    auto *io = new PSNESIo();
     // load configuration
     int version = (__PSNES_VERSION_MAJOR__ * 100) + __PSNES_VERSION_MINOR__;
     cfg = new PSNESConfig(io, version);
@@ -59,12 +59,6 @@ int main(int argc, char **argv) {
     Vector2f screen_size = {
             cfg->get(Option::Id::GUI_SCREEN_WIDTH)->getValueInt(),
             cfg->get(Option::Id::GUI_SCREEN_HEIGHT)->getValueInt()
-    };
-    FloatRect windows_size = {
-            cfg->get(Option::Id::GUI_WINDOW_LEFT)->getValueInt(),
-            cfg->get(Option::Id::GUI_WINDOW_TOP)->getValueInt(),
-            cfg->get(Option::Id::GUI_WINDOW_WIDTH)->getValueInt(),
-            cfg->get(Option::Id::GUI_WINDOW_HEIGHT)->getValueInt()
     };
 
     // we need to create a renderer with real screen size
@@ -86,6 +80,12 @@ int main(int argc, char **argv) {
     ui->setConfig(cfg);
 #ifndef __FULLSCREEN__
     // now set window size, usefull when screen is "cropped" (freeplay zero/cm3)
+    FloatRect windows_size = {
+            cfg->get(Option::Id::GUI_WINDOW_LEFT)->getValueInt(),
+            cfg->get(Option::Id::GUI_WINDOW_TOP)->getValueInt(),
+            cfg->get(Option::Id::GUI_WINDOW_WIDTH)->getValueInt(),
+            cfg->get(Option::Id::GUI_WINDOW_HEIGHT)->getValueInt()
+    };
     ui->setSize(windows_size.width, windows_size.height);
     ui->setPosition(windows_size.left, windows_size.top);
 #endif
@@ -148,7 +148,7 @@ int main(int argc, char **argv) {
     skin = new Skin(ui, buttons);
 #else
 #if __FULLSCREEN__
-    int x, y;
+    int x = 0, y = 0;
     SDL_GetWindowSize(ui->getWindow(), &x, &y);
     Vector2f scale = {(float) x / (float) C2D_SCREEN_WIDTH,
                       (float) y / (float) C2D_SCREEN_HEIGHT};
