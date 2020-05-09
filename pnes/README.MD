@@ -1,7 +1,7 @@
 pNES: Portable NES
 ===========================
 
-![](https://github.com/Cpasjuste/pemu/raw/master/pnes/pnes/data/screenshot.png)
+![](https://github.com/Cpasjuste/pemu/raw/master/pnes/data/screenshot.png)
 
 
 ### The main goals of this [nestopia](https://github.com/0ldsk00l/nestopia) port are:
@@ -21,7 +21,16 @@ pNES: Portable NES
 - Support save states
 - Support 2x, 3x, fit, fit 4/3 and fullscreen hardware scaling
 - Support hardware filtering (shaders)
-- Support titles, previews, and icons images (png), named as the rom name with png extension instead zip/sfc, in their respective directory (to be created if needed).
+- Support shaders effects
+
+### Romset
+- The pNES database is built against the no-intro romset "No-Intro - Nintendo - Nintendo Entertainment System (2017-06-18).zip".
+
+### Preview images and videos
+- pNES support preview images and videos (put files in roms media folder: png files goes in "roms/media/mixrbv2", mp4 files in "roms/media/video"). Please note that the vita port doesn't support video previews.
+You can download a near fullset mixrbv2 and video package here:
+    - preview images: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pnes/pnes_mixrbv2.zip)
+    - preview videos: [video](http://files.mydedibox.fr/files/dev/pemu/pnes/pnes_video.zip)
 
 ### Installation (switch)
 - copy "pnes" directory to "/switch/" directory on sdcard

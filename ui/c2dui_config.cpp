@@ -144,6 +144,7 @@ Config::Config(c2d::Io *io, int ver) {
     append("KEY_START1", KEY_KB_START1_DEFAULT, Option::Id::KEY_START1, Option::Flags::INPUT);// ENTER
 #endif
 
+    load(ss_api::Game());
 }
 
 void Config::load(const ss_api::Game &game) {

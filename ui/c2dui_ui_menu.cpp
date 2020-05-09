@@ -31,7 +31,7 @@ public:
         name->setOutlineColor(textGroup.outlineColor);
         name->setOrigin(Origin::Left);
         name->setPosition(0, getSize().y / 2);
-        name->setSizeMax((getSize().x * 0.50f), 0);
+        name->setSizeMax((getSize().x * 0.60f), 0);
         add(name);
 
         value = new Text("OPTION VALUE,)'", textGroup.size, font);

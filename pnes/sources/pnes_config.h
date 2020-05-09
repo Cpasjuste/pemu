@@ -11,7 +11,7 @@ class PNESConfig : public c2dui::Config {
 
 public:
 
-    PNESConfig(const std::string &home, int version);
+    PNESConfig(c2d::Io *io, int version);
 
 };
 

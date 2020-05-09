@@ -134,7 +134,6 @@ add_custom_target(${PROJECT_NAME}.data.extra
         COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/skins/default.zip ${CMAKE_CURRENT_BINARY_DIR}/skins/
         # remove non-zipped skin from data directory (used for program execution from cmake build) before zipping it for release
         COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/skins/default
-
         # compress default_320x240 skin
         #COMMAND cd ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/skins/default_320x240 && ${ZIP} -ru ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/skins/default_320x240.zip .
         #COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/skins/default_320x240.zip ${CMAKE_CURRENT_BINARY_DIR}/skins/

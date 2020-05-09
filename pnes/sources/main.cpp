@@ -22,7 +22,6 @@
 #include "uiMenu.h"
 #include "uiStateMenu.h"
 #include "pnes_config.h"
-#include "romlist.h"
 
 using namespace c2d;
 using namespace c2dui;
@@ -37,8 +36,8 @@ int _newlib_heap_size_user = 192 * 1024 * 1024;
 PNESGuiMenu *uiMenu;
 PNESGuiEmu *uiEmu;
 PNESConfig *cfg;
-PNESRomList *romList;
 PNESUIStateMenu *uiState;
+RomList *romList;
 
 UIMain *ui;
 Skin *skin;
@@ -46,18 +45,50 @@ UIRomList *uiRomList;
 
 int main(int argc, char **argv) {
 
-    ui = new UIMain(Vector2f(C2D_SCREEN_WIDTH, C2D_SCREEN_HEIGHT));
-
+    auto *io = new C2DIo();
     // load configuration
     int pnes_version = (__PNES_VERSION_MAJOR__ * 100) + __PNES_VERSION_MINOR__;
-    cfg = new PNESConfig(ui->getIo()->getHomePath(), pnes_version);
-    ui->getIo()->create(cfg->getHomePath() + "configs");
-    ui->getIo()->create(cfg->getHomePath() + "saves");
-    ui->getIo()->create(cfg->getHomePath() + "cache");
-    ui->getIo()->create(cfg->getHomePath() + "titles");
-    ui->getIo()->create(cfg->getHomePath() + "previews");
-    ui->getIo()->create(cfg->getHomePath() + "mixes");
+    cfg = new PNESConfig(io, pnes_version);
+
+    // create paths
+    io->create(cfg->getHomePath() + "configs");
+    io->create(cfg->getHomePath() + "saves");
+    io->create(cfg->getHomePath() + "cache");
+    io->create(cfg->getHomePath() + "mixes");
+
+    Vector2f screen_size = {
+            cfg->get(Option::Id::GUI_SCREEN_WIDTH)->getValueInt(),
+            cfg->get(Option::Id::GUI_SCREEN_HEIGHT)->getValueInt()
+    };
+
+    // we need to create a renderer with real screen size
+#ifdef __FULLSCREEN__
+    if (cfg->get(Option::Id::GUI_FULLSCREEN)->getValueBool()) {
+        screen_size = Vector2f();
+    }
+#endif
+    ui = new UIMain(screen_size);
+    if (ui->getShaderList() != nullptr) {
+        cfg->add(Option::Id::ROM_FILTER, "EFFECT", ui->getShaderList()->getNames(), 0,
+                 Option::Id::ROM_SHADER, Option::Flags::STRING);
+    } else {
+        cfg->add(Option::Id::ROM_FILTER, "EFFECT", {"NONE"}, 0,
+                 Option::Id::ROM_SHADER, Option::Flags::STRING | Option::Flags::HIDDEN);
+    }
+
+    ui->setIo(io);
     ui->setConfig(cfg);
+#ifndef __FULLSCREEN__
+    // now set window size, usefull when screen is "cropped" (freeplay zero/cm3)
+    FloatRect windows_size = {
+            cfg->get(Option::Id::GUI_WINDOW_LEFT)->getValueInt(),
+            cfg->get(Option::Id::GUI_WINDOW_TOP)->getValueInt(),
+            cfg->get(Option::Id::GUI_WINDOW_WIDTH)->getValueInt(),
+            cfg->get(Option::Id::GUI_WINDOW_HEIGHT)->getValueInt()
+    };
+    ui->setSize(windows_size.width, windows_size.height);
+    ui->setPosition(windows_size.left, windows_size.top);
+#endif
 
     // skin
     // buttons used for ui config menu
@@ -81,6 +112,7 @@ int main(int argc, char **argv) {
     buttons.emplace_back(KEY_JOY_FIRE6_DEFAULT, "R");
     buttons.emplace_back(KEY_JOY_COIN1_DEFAULT, "SELECT");
     buttons.emplace_back(KEY_JOY_START1_DEFAULT, "START");
+    skin = new Skin(ui, buttons);
 #elif __SWITCH__
     // see c2d.h for key id
     buttons.emplace_back(KEY_JOY_UP_DEFAULT, "UP");
@@ -100,18 +132,23 @@ int main(int argc, char **argv) {
     buttons.emplace_back(KEY_JOY_ZR_DEFAULT, "ZR");
     buttons.emplace_back(KEY_JOY_LSTICK_DEFAULT, "LSTICK");
     buttons.emplace_back(KEY_JOY_RSTICK_DEFAULT, "RSTICK");
-#endif
-
-#ifdef __PSP2__
-    skin = new Skin("app0:/", buttons);
+    skin = new Skin(ui, buttons);
+#else
+#if __FULLSCREEN__
+    int x = 0, y = 0;
+    SDL_GetWindowSize(ui->getWindow(), &x, &y);
+    Vector2f scale = {(float) x / (float) C2D_SCREEN_WIDTH,
+                      (float) y / (float) C2D_SCREEN_HEIGHT};
+    skin = new Skin(ui, buttons, scale);
 #else
     skin = new Skin(ui, buttons);
+#endif
 #endif
     ui->setSkin(skin);
 
     // ui
     std::string nestopia_version = "Nestopia 1.50";
-    romList = new PNESRomList(ui, nestopia_version);
+    romList = new RomList(ui, nestopia_version);
     romList->build();
     uiRomList = new UIRomListClassic(ui, romList, ui->getSize());
     uiMenu = new PNESGuiMenu(ui);

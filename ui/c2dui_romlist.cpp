@@ -82,20 +82,18 @@ void RomList::build() {
     gameList.append(dataPath + "gamelist.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_ARCADE), false, true);
 #endif
     setLoadingText("Games: %i / %i", gameList.getAvailableCount(), gameList.games.size());
-
-    gameList.sortAlpha();
     printf("RomList::build: %i roms\n", gameList.games.size());
 
-    gameList.systems.insert(gameList.systems.begin(), "All");
-    gameList.editors.insert(gameList.editors.begin(), "All");
-    gameList.developers.insert(gameList.developers.begin(), "All");
-    gameList.players.insert(gameList.players.begin(), "All");
-    gameList.ratings.insert(gameList.ratings.begin(), "All");
-    gameList.topStaffs.insert(gameList.topStaffs.begin(), "All");
-    gameList.rotations.insert(gameList.rotations.begin(), "All");
-    gameList.resolutions.insert(gameList.resolutions.begin(), "All");
-    gameList.dates.insert(gameList.dates.begin(), "All");
-    gameList.genres.insert(gameList.genres.begin(), "All");
+    gameList.systems.insert(gameList.systems.begin(), "ALL");
+    gameList.editors.insert(gameList.editors.begin(), "ALL");
+    gameList.developers.insert(gameList.developers.begin(), "ALL");
+    gameList.players.insert(gameList.players.begin(), "ALL");
+    gameList.ratings.insert(gameList.ratings.begin(), "ALL");
+    gameList.topStaffs.insert(gameList.topStaffs.begin(), "ALL");
+    gameList.rotations.insert(gameList.rotations.begin(), "ALL");
+    gameList.resolutions.insert(gameList.resolutions.begin(), "ALL");
+    gameList.dates.insert(gameList.dates.begin(), "ALL");
+    gameList.genres.insert(gameList.genres.begin(), "ALL");
 
 #ifdef __PFBA__
     ui->getConfig()->add(

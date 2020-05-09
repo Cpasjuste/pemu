@@ -7,20 +7,18 @@
 
 #include "c2dui.h"
 #include "pnes_config.h"
-#include "romlist.h"
 
 using namespace c2d;
 using namespace c2dui;
 
-PNESConfig::PNESConfig(const std::string &home, int version)
-        : Config(home, version) {
+PNESConfig::PNESConfig(c2d::Io *io, int version) : Config(io, version) {
 
-    hide(Option::GUI_USE_DATABASE);
-    hide(Option::GUI_SHOW_CLONES);
+    //hide(Option::GUI_USE_DATABASE);
+    //hide(Option::GUI_SHOW_CLONES);
 
     // set default rom options
-    reset();
+    //reset();
 
     // load/overwrite configuration from file
-    load();
+    //load();
 }

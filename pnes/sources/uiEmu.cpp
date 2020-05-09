@@ -33,9 +33,9 @@ PNESGuiEmu::PNESGuiEmu(UIMain *ui) : UIEmu(ui) {
     printf("PNESGuiEmu()\n");
 }
 
-int PNESGuiEmu::load(RomList::Rom *rom) {
+int PNESGuiEmu::load(const ss_api::Game &game) {
 
-    getUi()->getUiProgressBox()->setTitle(rom->name);
+    getUi()->getUiProgressBox()->setTitle(game.getName().text);
     getUi()->getUiProgressBox()->setMessage("Please wait...");
     getUi()->getUiProgressBox()->setProgress(0);
     getUi()->getUiProgressBox()->setVisibility(c2d::Visibility::Visible);
@@ -44,7 +44,8 @@ int PNESGuiEmu::load(RomList::Rom *rom) {
 
     nestopia_config_init();
 
-    if (nestopia_core_init(rom->path.c_str()) != 0) {
+    std::string fullPath = game.romsPath + game.path;
+    if (nestopia_core_init(fullPath.c_str()) != 0) {
         getUi()->getUiProgressBox()->setVisibility(c2d::Visibility::Hidden);
         getUi()->getUiMessageBox()->show("ERROR", "INVALID FILE", "OK");
         stop();
@@ -56,7 +57,7 @@ int PNESGuiEmu::load(RomList::Rom *rom) {
     getUi()->delay(500);
     getUi()->getUiProgressBox()->setVisibility(c2d::Visibility::Hidden);
 
-    return UIEmu::load(rom);
+    return UIEmu::load(game);
 }
 
 void PNESGuiEmu::stop() {
@@ -76,7 +77,7 @@ bool PNESGuiEmu::onInput(c2d::Input::Player *players) {
     return UIEmu::onInput(players);
 }
 
-void PNESGuiEmu::onDraw(c2d::Transform &transform, bool draw) {
+void PNESGuiEmu::onUpdate() {
 
     if (!isPaused()) {
         // fps
@@ -89,7 +90,7 @@ void PNESGuiEmu::onDraw(c2d::Transform &transform, bool draw) {
         }
 
         // update nestopia buttons
-        auto players = getUi()->getInput()->getPlayers();
+        auto *players = getUi()->getInput()->getPlayers();
 
         if (players[0].keys & c2d::Input::Key::Fire3) {
             nst_set_rewind(0);
@@ -126,7 +127,7 @@ void PNESGuiEmu::onDraw(c2d::Transform &transform, bool draw) {
         nst_emuloop();
     }
 
-    UIEmu::onDraw(transform, draw);
+    UIEmu::onUpdate();
 }
 
 /// NESTOPIA

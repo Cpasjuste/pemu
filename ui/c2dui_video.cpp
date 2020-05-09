@@ -25,8 +25,12 @@ void C2DUIVideo::updateScaling(bool vertical, bool flip) {
 
     bool rotated = false;
     float rotation = 0;
+    int rotation_cfg = 0;
     std::string scale_mode = ui->getConfig()->get(Option::Id::ROM_SCALING, true)->getValueString();
-    int rotation_cfg = ui->getConfig()->get(Option::Id::ROM_ROTATION, true)->getIndex();
+    Option *rotationOpt = ui->getConfig()->get(Option::Id::ROM_ROTATION, true);
+    if(rotationOpt != nullptr) {
+        rotation_cfg = rotationOpt->getIndex();
+    }
 
     Vector2f screen = ui->getSize();
     Vector2f scale_max;

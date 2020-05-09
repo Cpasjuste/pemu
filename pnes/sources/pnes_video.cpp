@@ -60,8 +60,7 @@ extern PNESGuiEmu *uiEmu;
 
 void nst_ogl_init() {
 
-    uiEmu->addVideo(uiEmu->getUi(), nullptr, nullptr,
-                    {basesize.w, basesize.h}, Texture::Format::RGB565);
+    uiEmu->addVideo(nullptr, nullptr, {basesize.w, basesize.h});
     uiEmu->getVideo()->getTexture()->setFilter(
             conf.video_linear_filter ? Texture::Filter::Linear : Texture::Filter::Point);
 }

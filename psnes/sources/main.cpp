@@ -53,7 +53,7 @@ int main(int argc, char **argv) {
     int version = (__PSNES_VERSION_MAJOR__ * 100) + __PSNES_VERSION_MINOR__;
     cfg = new PSNESConfig(io, version);
 
-    // create configs path
+    // create paths
     io->create(io->getDataPath() + "configs");
 
     Vector2f screen_size = {

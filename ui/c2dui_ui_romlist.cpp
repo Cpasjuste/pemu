@@ -64,7 +64,21 @@ Texture *UIRomList::getPreviewTexture(const ss_api::Game &game) {
                 texture = new C2DTexture(fullPath);
                 if (!texture->available) {
                     delete (texture);
-                    return nullptr;
+                    texture = nullptr;
+                }
+            }
+        } else {
+            // for non arcade game, search for a "screenscraper" game with same name
+            std::vector<Game> clones = gameList.findByName(game.getName().text);
+            for (const auto &g : clones) {
+                mediaPath = g.getMedia("mixrbv2").url;
+                fullPath = g.romsPath + mediaPath;
+                texture = new C2DTexture(fullPath);
+                if (!texture->available) {
+                    delete (texture);
+                    texture = nullptr;
+                } else {
+                    break;
                 }
             }
         }
@@ -98,6 +112,18 @@ std::string UIRomList::getPreviewVideo(const ss_api::Game &game) {
             if (!ui->getIo()->exist(fullPath)) {
                 fullPath = "";
             }
+        } else {
+            // for non arcade game, search for a "screenscraper" game with same name
+            std::vector<Game> clones = gameList.findByName(game.getName().text);
+            for (const auto &g : clones) {
+                mediaPath = g.getMedia("video").url;
+                fullPath = game.romsPath + mediaPath;
+                if (!ui->getIo()->exist(fullPath)) {
+                    fullPath = "";
+                } else {
+                    break;
+                }
+            }
         }
     }
 
@@ -117,7 +143,7 @@ void UIRomList::filterRomList() {
 
                 ui->getConfig()->get(Option::Id::GUI_FILTER_PLAYERS)->getValueString(),
                 ui->getConfig()->get(Option::Id::GUI_FILTER_RATING)->getValueString(),
-                "All",
+                "ALL",
                 ui->getConfig()->get(Option::Id::GUI_FILTER_ROTATION)->getValueString(),
                 ui->getConfig()->get(Option::Id::GUI_FILTER_RESOLUTION)->getValueString(),
                 ui->getConfig()->get(Option::Id::GUI_FILTER_DATE)->getValueString(),
@@ -133,7 +159,7 @@ void UIRomList::filterRomList() {
 
                 ui->getConfig()->get(Option::Id::GUI_FILTER_PLAYERS)->getValueString(),
                 ui->getConfig()->get(Option::Id::GUI_FILTER_RATING)->getValueString(),
-                "All",
+                "ALL",
                 ui->getConfig()->get(Option::Id::GUI_FILTER_ROTATION)->getValueString(),
                 ui->getConfig()->get(Option::Id::GUI_FILTER_RESOLUTION)->getValueString(),
                 ui->getConfig()->get(Option::Id::GUI_FILTER_DATE)->getValueString(),
