@@ -67,121 +67,59 @@ Skin::Skin(UIMain *u, const std::vector<Button> &btns, const Vector2f &scaling) 
     gen.addOption({"global_scaling", Vector2f{1.0f, 1.0f}});
     config->addGroup(gen);
 
-    ///
     /// FONT
-    ///
     config::Group font_group("FONT");
     font_group.addOption({"path", "default.ttf"});
     font_group.addOption({"offset", Vector2f{0, -3}});
     font_group.addOption({"filtering", 0});
     config->addGroup(font_group);
 
-    ///
     /// HIGHLIGHT
-    ///
-    config::Group highlight = createRectangleShapeGroup(
-            "HIGHLIGHT", {0, 0, 16, 16},
-            Origin::Left, "highlight_bg.png", {100, 255, 255, 80}, {0, 255, 255, 80}, 0);
+    config::Group highlight = createRectangleShapeGroup("HIGHLIGHT");
     config->addGroup(highlight);
 
-    ///
     /// MESSAGEBOX
-    ///
-    config::Group mbox = createRectangleShapeGroup(
-            "MESSAGEBOX", {ui->getSize().x / 2, ui->getSize().y / 2,
-                           ui->getSize().x / 2, ui->getSize().y / 2},
-            Origin::Center, "messagebox_bg.png", Color::GrayLight, Color::Red, 0);
+    config::Group mbox = createRectangleShapeGroup("MESSAGEBOX");
     config->addGroup(mbox);
 
-    ///
     /// MAIN (ROM LIST)
-    ///
-    config::Group main = createRectangleShapeGroup(
-            "MAIN", ui->getLocalBounds(), Origin::TopLeft,
-            "romlist_bg.png", Color::GrayDark, Color::Yellow, 0);
+    config::Group main = createRectangleShapeGroup("MAIN");
     // rom list title + text
-    FloatRect titleRect = {ui->getSize().x / 2, 160, ui->getSize().x / 2, 64};
-    config::Group title = createRectangleShapeGroup(
-            "TITLE", titleRect, Origin::Center,
-            "romlist_title.png", Color::GrayDark, Color::GrayLight, 0);
-    FloatRect titleTextRect = {titleRect.width / 2, titleRect.height / 2, titleRect.width - 64, 0};
-    config::Group titleText = createTextGroup(
-            "TEXT", ui->getFontSize(), titleTextRect, Origin::Center, Color::White, Color::Black, 0);
-    title.addGroup(titleText);
+    config::Group title = createRectangleShapeGroup("TITLE");
+    title.addGroup(createTextGroup("TEXT"));
     main.addGroup(title);
-    config::Group help = createRectangleShapeGroup(
-            "HELP", titleRect, Origin::Center,
-            "romlist_help.png", Color::GrayDark, Color::GrayLight, 0);
+    config::Group help = createRectangleShapeGroup("HELP");
     main.addGroup(help);
-    config::Group romList = createRectangleShapeGroup(
-            "ROM_LIST", {0, 0, 212, 240}, Origin::Left,
-            "romlist.png", {255, 255, 255, 150}, Color::GrayLight, 0);
-    config::Group romItem = createTextGroup(
-            "TEXT", ui->getFontSize(), titleTextRect, Origin::TopLeft, Color::White, Color::Black, 0);
+    config::Group romList = createRectangleShapeGroup("ROM_LIST");
+    config::Group romItem = createTextGroup("TEXT");
     romItem.addOption({"color_missing", Color::White});
     romItem.addOption({"color_not_working", Color::White});
     romItem.addOption({"highlight_use_text_color", 0});
     romList.addGroup(romItem);
     main.addGroup(romList);
     //
-    config::Group romSyno = createRectangleShapeGroup(
-            "ROM_SYNOPSIS", {654, 378, 608, 322}, Origin::Left,
-            "romlist_synopsys.png", {150, 150, 150, 255}, {220, 0, 0, 255}, 0);
-    config::Group romSynoText = createTextGroup(
-            "TEXT", ui->getFontSize(), titleTextRect, Origin::TopLeft, Color::White, Color::Black, 0);
-    romSyno.addGroup(romSynoText);
+    config::Group romSyno = createRectangleShapeGroup("ROM_SYNOPSIS");
+    romSyno.addGroup(createTextGroup("TEXT", ui->getFontSize()));
     main.addGroup(romSyno);
     //
-    config::Group romInfo = createRectangleShapeGroup(
-            "ROM_INFOS", {654, 378, 608, 322}, Origin::Left,
-            "romlist_info.png", {150, 150, 150, 255}, {220, 0, 0, 255}, 0);
-    config::Group romInfoText = createTextGroup(
-            "SYSTEM_TEXT", ui->getFontSize(), titleTextRect, Origin::TopLeft, Color::White, Color::Black, 0);
-    romInfo.addGroup(romInfoText);
-    romInfoText = createTextGroup(
-            "DEVELOPER_TEXT", ui->getFontSize(), titleTextRect, Origin::TopLeft, Color::White, Color::Black, 0);
-    romInfo.addGroup(romInfoText);
-    romInfoText = createTextGroup(
-            "EDITOR_TEXT", ui->getFontSize(), titleTextRect, Origin::TopLeft, Color::White, Color::Black, 0);
-    romInfo.addGroup(romInfoText);
-    romInfoText = createTextGroup(
-            "DATE_TEXT", ui->getFontSize(), titleTextRect, Origin::TopLeft, Color::White, Color::Black, 0);
-    romInfo.addGroup(romInfoText);
-    romInfoText = createTextGroup(
-            "GENRE_TEXT", ui->getFontSize(), titleTextRect, Origin::TopLeft, Color::White, Color::Black, 0);
-    romInfo.addGroup(romInfoText);
-    romInfoText = createTextGroup(
-            "PLAYERS_TEXT", ui->getFontSize(), titleTextRect, Origin::TopLeft, Color::White, Color::Black, 0);
-    romInfo.addGroup(romInfoText);
-    romInfoText = createTextGroup(
-            "RATING_TEXT", ui->getFontSize(), titleTextRect, Origin::TopLeft, Color::White, Color::Black, 0);
-    romInfo.addGroup(romInfoText);
-    romInfoText = createTextGroup(
-            "TOPSTAFF_TEXT", ui->getFontSize(), titleTextRect, Origin::TopLeft, Color::White, Color::Black, 0);
-    romInfo.addGroup(romInfoText);
-    romInfoText = createTextGroup(
-            "ROTATION_TEXT", ui->getFontSize(), titleTextRect, Origin::TopLeft, Color::White, Color::Black, 0);
-    romInfo.addGroup(romInfoText);
-    romInfoText = createTextGroup(
-            "RESOLUTION_TEXT", ui->getFontSize(), titleTextRect, Origin::TopLeft, Color::White, Color::Black, 0);
-    romInfo.addGroup(romInfoText);
-    romInfoText = createTextGroup(
-            "CLASSIFICATION_TEXT", ui->getFontSize(), titleTextRect, Origin::TopLeft, Color::White, Color::Black, 0);
-    romInfo.addGroup(romInfoText);
-    romInfoText = createTextGroup(
-            "CLONEOF_TEXT", ui->getFontSize(), titleTextRect, Origin::TopLeft, Color::White, Color::Black, 0);
-    romInfo.addGroup(romInfoText);
-    romInfoText = createTextGroup(
-            "FILENAME_TEXT", ui->getFontSize(), titleTextRect, Origin::TopLeft, Color::White, Color::Black, 0);
-    romInfo.addGroup(romInfoText);
+    config::Group romInfo = createRectangleShapeGroup("ROM_INFOS");
+    romInfo.addGroup(createTextGroup("SYSTEM_TEXT"));
+    romInfo.addGroup(createTextGroup("DEVELOPER_TEXT"));
+    romInfo.addGroup(createTextGroup("EDITOR_TEXT"));
+    romInfo.addGroup(createTextGroup("DATE_TEXT"));
+    romInfo.addGroup(createTextGroup("GENRE_TEXT"));
+    romInfo.addGroup(createTextGroup("PLAYERS_TEXT"));
+    romInfo.addGroup(createTextGroup("RATING_TEXT"));
+    romInfo.addGroup(createTextGroup("TOPSTAFF_TEXT"));
+    romInfo.addGroup(createTextGroup("ROTATION_TEXT"));
+    romInfo.addGroup(createTextGroup("RESOLUTION_TEXT"));
+    romInfo.addGroup(createTextGroup("CLASSIFICATION_TEXT"));
+    romInfo.addGroup(createTextGroup("CLONEOF_TEXT"));
+    romInfo.addGroup(createTextGroup("FILENAME_TEXT"));
     main.addGroup(romInfo);
     //
-    config::Group previewBox = createRectangleShapeGroup(
-            "ROM_IMAGE", {654, 378, 608, 322}, Origin::Left,
-            "romlist_image.png", {150, 150, 150, 255}, {220, 0, 0, 255}, 0);
-    config::Group previewBoxText = createTextGroup(
-            "TEXT", ui->getFontSize(), titleTextRect, Origin::Center, Color::White, Color::Black, 0);
-    previewBox.addGroup(previewBoxText);
+    config::Group previewBox = createRectangleShapeGroup("ROM_IMAGE");
+    previewBox.addGroup(createTextGroup("TEXT", ui->getFontSize()));
     main.addGroup(previewBox);
     config->addGroup(main);
     ///
@@ -191,14 +129,10 @@ Skin::Skin(UIMain *u, const std::vector<Button> &btns, const Vector2f &scaling) 
     ///
     /// OPTIONS_MENU
     ///
-    config::Group options_menu = createRectangleShapeGroup(
-            "OPTIONS_MENU", ui->getLocalBounds(), Origin::TopLeft,
-            "options_menu_bg.png", Color::GrayDark, Color::Yellow, 0);
-    config::Group options_menu_title = createTextGroup(
-            "TITLE_TEXT", ui->getFontSize(), titleTextRect, Origin::TopLeft, Color::White, Color::Black, 0);
+    config::Group options_menu = createRectangleShapeGroup("OPTIONS_MENU");
+    config::Group options_menu_title = createTextGroup("TITLE_TEXT");
     options_menu.addGroup(options_menu_title);
-    config::Group options_menu_text = createTextGroup(
-            "ITEMS_TEXT", ui->getFontSize(), titleTextRect, Origin::TopLeft, Color::White, Color::Black, 0);
+    config::Group options_menu_text = createTextGroup("ITEMS_TEXT");
     options_menu.addGroup(options_menu_text);
     config->addGroup(options_menu);
     ///
@@ -208,17 +142,11 @@ Skin::Skin(UIMain *u, const std::vector<Button> &btns, const Vector2f &scaling) 
     ///
     /// STATES_MENU
     ///
-    config::Group states_menu = createRectangleShapeGroup(
-            "STATES_MENU", ui->getLocalBounds(), Origin::TopLeft,
-            "states_menu_bg.png", Color::GrayDark, Color::Yellow, 0);
-    config::Group states_menu_title = createTextGroup(
-            "TITLE_TEXT", ui->getFontSize(), titleTextRect, Origin::TopLeft, Color::White, Color::Black, 0);
+    config::Group states_menu = createRectangleShapeGroup("STATES_MENU");
+    config::Group states_menu_title = createTextGroup("TITLE_TEXT");
     states_menu.addGroup(states_menu_title);
-    config::Group states_item = createRectangleShapeGroup(
-            "STATES_ITEM", ui->getLocalBounds(), Origin::TopLeft,
-            "states_item_bg.png", Color::GrayDark, Color::Yellow, 0);
-    config::Group states_item_text = createTextGroup(
-            "STATES_TEXT", ui->getFontSize(), titleTextRect, Origin::TopLeft, Color::White, Color::Black, 0);
+    config::Group states_item = createRectangleShapeGroup("STATES_ITEM");
+    config::Group states_item_text = createTextGroup("STATES_TEXT");
     states_item.addGroup(states_item_text);
     states_menu.addGroup(states_item);
     config->addGroup(states_menu);
@@ -316,55 +244,31 @@ config::Group Skin::createRectangleShapeGroup(const std::string &name,
 
 Skin::RectangleShapeGroup Skin::getRectangleShape(const std::vector<std::string> &tree) {
 
-    config::Option *option;
+    config::Option *option = nullptr;
     RectangleShapeGroup rectangleShapeGroup{};
 
     c2d::config::Group *group = config->getGroup(tree[0]);
-    if (!group) {
+    if (group == nullptr) {
         printf("Skin::getRectangleShape: config group not found: \"%s\"\n", tree[0].c_str());
         return rectangleShapeGroup;
     }
 
     if (tree.size() > 1) {
         for (unsigned int i = 1; i < tree.size(); i++) {
+            printf("group->getGroup(%s): %s\n", tree[0].c_str(), tree[i].c_str());
             group = group->getGroup(tree[i]);
-            if (!group) {
+            if (group == nullptr) {
                 printf("Skin::getRectangleShape: config group not found: \"%s\"\n", tree[i].c_str());
                 return rectangleShapeGroup;
             }
         }
     }
 
-    option = group->getOption("texture");
-    if (option) {
-        rectangleShapeGroup.texture = option->getString();
-    }
-    option = group->getOption("filtering");
-    if (option) {
-        rectangleShapeGroup.filtering = option->getInteger();
-    }
-    option = group->getOption("color");
-    if (option) {
-        rectangleShapeGroup.color = option->getColor();
-    }
-    option = group->getOption("outline_color");
-    if (option) {
-        rectangleShapeGroup.outlineColor = option->getColor();
-    }
-    option = group->getOption("outline_size");
-    if (option) {
-        rectangleShapeGroup.outlineSize = option->getFloat();
-        rectangleShapeGroup.outlineSize *= global_scaling.y;
-        if (rectangleShapeGroup.outlineSize > 0 && rectangleShapeGroup.outlineSize < 1) {
-            rectangleShapeGroup.outlineSize = 1;
-        }
-    }
-    option = group->getOption("scaling");
-    if (option) {
-        rectangleShapeGroup.scaling = option->getVector2f();
-    }
     option = group->getOption("rectangle");
-    if (option) {
+    if (option != nullptr) {
+        if (option->getFloatRect().width <= 0 || option->getFloatRect().height <= 0) {
+            return rectangleShapeGroup;
+        }
         rectangleShapeGroup.rect = option->getFloatRect();
         rectangleShapeGroup.rect.left *= global_scaling.x;
         rectangleShapeGroup.rect.top *= global_scaling.y;
@@ -373,8 +277,36 @@ Skin::RectangleShapeGroup Skin::getRectangleShape(const std::vector<std::string>
         rectangleShapeGroup.rect.width *= rectangleShapeGroup.scaling.x;
         rectangleShapeGroup.rect.height *= rectangleShapeGroup.scaling.y;
     }
+    option = group->getOption("texture");
+    if (option != nullptr) {
+        rectangleShapeGroup.texture = option->getString();
+    }
+    option = group->getOption("filtering");
+    if (option != nullptr) {
+        rectangleShapeGroup.filtering = option->getInteger();
+    }
+    option = group->getOption("color");
+    if (option != nullptr) {
+        rectangleShapeGroup.color = option->getColor();
+    }
+    option = group->getOption("outline_color");
+    if (option != nullptr) {
+        rectangleShapeGroup.outlineColor = option->getColor();
+    }
+    option = group->getOption("outline_size");
+    if (option != nullptr) {
+        rectangleShapeGroup.outlineSize = option->getFloat();
+        rectangleShapeGroup.outlineSize *= global_scaling.y;
+        if (rectangleShapeGroup.outlineSize > 0 && rectangleShapeGroup.outlineSize < 1) {
+            rectangleShapeGroup.outlineSize = 1;
+        }
+    }
+    option = group->getOption("scaling");
+    if (option != nullptr) {
+        rectangleShapeGroup.scaling = option->getVector2f();
+    }
     option = group->getOption("origin");
-    if (option) {
+    if (option != nullptr) {
         rectangleShapeGroup.origin = (Origin) option->getInteger();
     }
 
@@ -383,11 +315,11 @@ Skin::RectangleShapeGroup Skin::getRectangleShape(const std::vector<std::string>
     return rectangleShapeGroup;
 }
 
-void Skin::loadRectangleShape(c2d::RectangleShape *shape, const std::vector<std::string> &tree) {
+bool Skin::loadRectangleShape(c2d::RectangleShape *shape, const std::vector<std::string> &tree) {
 
     RectangleShapeGroup rectangleShapeGroup = getRectangleShape(tree);
     if (!rectangleShapeGroup.available) {
-        return;
+        return false;
     }
 
     shape->setOrigin(rectangleShapeGroup.origin);
@@ -427,7 +359,7 @@ void Skin::loadRectangleShape(c2d::RectangleShape *shape, const std::vector<std:
         }
     }
 
-    if (tex && tex->available) {
+    if (tex != nullptr && tex->available) {
         tex->setScale(rectangleShapeGroup.rect.width / tex->getSize().x,
                       rectangleShapeGroup.rect.height / tex->getSize().y);
         tex->setFillColor(rectangleShapeGroup.color);
@@ -439,13 +371,15 @@ void Skin::loadRectangleShape(c2d::RectangleShape *shape, const std::vector<std:
         shape->setOutlineThickness(0);
         shape->add(tex);
     } else {
-        if (tex) {
+        if (tex != nullptr) {
             delete (tex);
         }
         shape->setFillColor(rectangleShapeGroup.color);
         shape->setOutlineColor(rectangleShapeGroup.outlineColor);
         shape->setOutlineThickness(rectangleShapeGroup.outlineSize);
     }
+
+    return true;
 }
 
 config::Group Skin::createTextGroup(const std::string &name, int size, const c2d::FloatRect &rect,
@@ -467,11 +401,11 @@ config::Group Skin::createTextGroup(const std::string &name, int size, const c2d
 
 Skin::TextGroup Skin::getText(const std::vector<std::string> &tree) {
 
-    config::Option *option;
+    config::Option *option = nullptr;
     TextGroup textGroup{};
 
     c2d::config::Group *group = config->getGroup(tree[0]);
-    if (!group) {
+    if (group == nullptr) {
         printf("Skin::getText: config group not found: \"%s\"\n", tree[0].c_str());
         return textGroup;
     }
@@ -479,31 +413,34 @@ Skin::TextGroup Skin::getText(const std::vector<std::string> &tree) {
     if (tree.size() > 1) {
         for (unsigned int i = 1; i < tree.size(); i++) {
             group = group->getGroup(tree[i]);
-            if (!group) {
+            if (group == nullptr) {
                 printf("Skin::getText: config group not found: \"%s\"\n", tree[i].c_str());
                 return textGroup;
             }
         }
     }
 
-    option = group->getOption("string");
-    if (option) {
-        textGroup.text = option->getString();
-    }
     option = group->getOption("size");
-    if (option) {
+    if (option != nullptr) {
+        if (option->getInteger() <= 0) {
+            return textGroup;
+        }
         textGroup.size = (unsigned int) ((float) option->getInteger() * global_scaling.y);
     }
+    option = group->getOption("string");
+    if (option != nullptr) {
+        textGroup.text = option->getString();
+    }
     option = group->getOption("color");
-    if (option) {
+    if (option != nullptr) {
         textGroup.color = option->getColor();
     }
     option = group->getOption("outline_color");
-    if (option) {
+    if (option != nullptr) {
         textGroup.outlineColor = option->getColor();
     }
     option = group->getOption("outline_size");
-    if (option) {
+    if (option != nullptr) {
         textGroup.outlineSize = option->getFloat();
         textGroup.outlineSize *= global_scaling.y;
         if (textGroup.outlineSize > 0 && textGroup.outlineSize < 1) {
@@ -511,15 +448,15 @@ Skin::TextGroup Skin::getText(const std::vector<std::string> &tree) {
         }
     }
     option = group->getOption("origin");
-    if (option) {
+    if (option != nullptr) {
         textGroup.origin = (Origin) option->getInteger();
     }
     option = group->getOption("scaling");
-    if (option) {
+    if (option != nullptr) {
         textGroup.scaling = option->getVector2f();
     }
     option = group->getOption("rectangle");
-    if (option) {
+    if (option != nullptr) {
         textGroup.rect = option->getFloatRect();
         textGroup.rect.left *= global_scaling.x;
         textGroup.rect.top *= global_scaling.y;
@@ -529,7 +466,7 @@ Skin::TextGroup Skin::getText(const std::vector<std::string> &tree) {
         textGroup.rect.height *= textGroup.scaling.y;
     }
     option = group->getOption("overflow");
-    if (option) {
+    if (option != nullptr) {
         textGroup.overflow = (Text::Overflow) option->getInteger();
     }
 
@@ -538,11 +475,11 @@ Skin::TextGroup Skin::getText(const std::vector<std::string> &tree) {
     return textGroup;
 }
 
-void Skin::loadText(c2d::Text *text, const std::vector<std::string> &tree) {
+bool Skin::loadText(c2d::Text *text, const std::vector<std::string> &tree) {
 
     TextGroup textGroup = getText(tree);
     if (!textGroup.available) {
-        return;
+        return false;
     }
 
     if (!textGroup.text.empty()) {
@@ -556,6 +493,8 @@ void Skin::loadText(c2d::Text *text, const std::vector<std::string> &tree) {
     text->setPosition(textGroup.rect.left, textGroup.rect.top);
     text->setOverflow(textGroup.overflow);
     text->setSizeMax(textGroup.rect.width, textGroup.rect.height);
+
+    return true;
 }
 
 Skin::Button *Skin::getButton(int id) {

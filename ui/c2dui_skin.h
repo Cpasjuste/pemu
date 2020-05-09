@@ -56,11 +56,11 @@ namespace c2dui {
 
         c2d::config::Config *getConfig();
 
-        void loadRectangleShape(c2d::RectangleShape *shape, const std::vector<std::string> &tree);
+        bool loadRectangleShape(c2d::RectangleShape *shape, const std::vector<std::string> &tree);
 
         RectangleShapeGroup getRectangleShape(const std::vector<std::string> &tree);
 
-        void loadText(c2d::Text *text, const std::vector<std::string> &tree);
+        bool loadText(c2d::Text *text, const std::vector<std::string> &tree);
 
         TextGroup getText(const std::vector<std::string> &tree);
 
@@ -79,19 +79,21 @@ namespace c2dui {
     private:
 
         c2d::config::Group createRectangleShapeGroup(const std::string &name,
-                                                     const c2d::FloatRect &rect,
-                                                     const c2d::Origin &origin,
-                                                     const std::string &texture,
-                                                     const c2d::Color &color,
-                                                     const c2d::Color &outlineColor, float outlineSize = 0,
+                                                     const c2d::FloatRect &rect = {0, 0, 0, 0},
+                                                     const c2d::Origin &origin = {},
+                                                     const std::string &texture = {},
+                                                     const c2d::Color &color = {},
+                                                     const c2d::Color &outlineColor = {},
+                                                     float outlineSize = 0,
                                                      c2d::Vector2f scale = {1, 1});
 
         c2d::config::Group createTextGroup(const std::string &name,
-                                           int size,
-                                           const c2d::FloatRect &rect,
-                                           const c2d::Origin &origin,
-                                           const c2d::Color &color,
-                                           const c2d::Color &outlineColor, float outlineSize = 0,
+                                           int size = 0,
+                                           const c2d::FloatRect &rect = {},
+                                           const c2d::Origin &origin = {},
+                                           const c2d::Color &color = {},
+                                           const c2d::Color &outlineColor = {},
+                                           float outlineSize = 0,
                                            const c2d::Text::Overflow &overflow = c2d::Text::Overflow::Clamp,
                                            c2d::Vector2f scale = {1, 1});
 

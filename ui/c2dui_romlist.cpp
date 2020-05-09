@@ -26,15 +26,18 @@ RomList::RomList(UIMain *_ui, const std::string &emuVersion) {
             Vector2f(ui->getSize().x - 8, ui->getSize().y - 8));
     ui->getSkin()->loadRectangleShape(rect, {"MAIN"});
 
-    auto title = new RectangleShape({16, 16});
-    ui->getSkin()->loadRectangleShape(title, {"MAIN", "TITLE"});
-    title->setOrigin(Origin::Center);
-    title->setPosition(Vector2f(rect->getSize().x / 2, rect->getSize().y / 2));
-    float scaling = std::min(
-            (rect->getSize().x - 256) / title->getSize().x,
-            (rect->getSize().y - 256) / title->getSize().y);
-    title->setScale(scaling, scaling);
-    rect->add(title);
+    auto *title = new RectangleShape({16, 16});
+    if (ui->getSkin()->loadRectangleShape(title, {"MAIN", "TITLE"})) {
+        title->setOrigin(Origin::Center);
+        title->setPosition(Vector2f(rect->getSize().x / 2, rect->getSize().y / 2));
+        float scaling = std::min(
+                (rect->getSize().x - 256) / title->getSize().x,
+                (rect->getSize().y - 256) / title->getSize().y);
+        title->setScale(scaling, scaling);
+        rect->add(title);
+    } else {
+        delete (title);
+    }
 
     //auto font_size = (unsigned int) ((float) C2D_DEFAULT_CHAR_SIZE * ((float) C2D_SCREEN_HEIGHT / 720.0f));
     text = new Text("Games: 0/0", C2D_DEFAULT_CHAR_SIZE, ui->getSkin()->font);
@@ -94,6 +97,18 @@ void RomList::build() {
     gameList.resolutions.insert(gameList.resolutions.begin(), "ALL");
     gameList.dates.insert(gameList.dates.begin(), "ALL");
     gameList.genres.insert(gameList.genres.begin(), "ALL");
+
+    // sort lists
+    std::sort(gameList.systems.begin(), gameList.systems.end(), Api::sortByName);
+    std::sort(gameList.editors.begin(), gameList.editors.end(), Api::sortByName);
+    std::sort(gameList.developers.begin(), gameList.developers.end(), Api::sortByName);
+    std::sort(gameList.players.begin(), gameList.players.end(), Api::sortByName);
+    std::sort(gameList.ratings.begin(), gameList.ratings.end(), Api::sortByName);
+    std::sort(gameList.topStaffs.begin(), gameList.topStaffs.end(), Api::sortByName);
+    std::sort(gameList.rotations.begin(), gameList.rotations.end(), Api::sortByName);
+    std::sort(gameList.resolutions.begin(), gameList.resolutions.end(), Api::sortByName);
+    std::sort(gameList.dates.begin(), gameList.dates.end(), Api::sortByName);
+    std::sort(gameList.genres.begin(), gameList.genres.end(), Api::sortByName);
 
 #ifdef __PFBA__
     ui->getConfig()->add(

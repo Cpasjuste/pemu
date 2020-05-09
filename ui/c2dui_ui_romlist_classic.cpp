@@ -38,30 +38,35 @@ public:
 
         // synopsis box
         synoBox = new RectangleShape({16, 16});
-        ui->getSkin()->loadRectangleShape(synoBox, {"MAIN", "ROM_SYNOPSIS"});
-        synoText = new Text("", (unsigned int) fontSize, font);
-        ui->getSkin()->loadText(synoText, {"MAIN", "ROM_SYNOPSIS", "TEXT"});
-        synoBox->add(synoText);
-        add(synoBox);
+        if (ui->getSkin()->loadRectangleShape(synoBox, {"MAIN", "ROM_SYNOPSIS"})) {
+            synoText = new Text("", (unsigned int) fontSize, font);
+            ui->getSkin()->loadText(synoText, {"MAIN", "ROM_SYNOPSIS", "TEXT"});
+            synoBox->add(synoText);
+            Rectangle::add(synoBox);
+        } else {
+            delete (synoBox);
+        }
 
         // info box
         infoBox = new RectangleShape({16, 16});
-        ui->getSkin()->loadRectangleShape(infoBox, {"MAIN", "ROM_INFOS"});
-        // info box texts
-        systemText = addInfoBoxText({"MAIN", "ROM_INFOS", "SYSTEM_TEXT"});
-        developerText = addInfoBoxText({"MAIN", "ROM_INFOS", "DEVELOPER_TEXT"});
-        editorText = addInfoBoxText({"MAIN", "ROM_INFOS", "EDITOR_TEXT"});
-        dateText = addInfoBoxText({"MAIN", "ROM_INFOS", "DATE_TEXT"});
-        genreText = addInfoBoxText({"MAIN", "ROM_INFOS", "GENRE_TEXT"});
-        playersText = addInfoBoxText({"MAIN", "ROM_INFOS", "PLAYERS_TEXT"});
-        ratingText = addInfoBoxText({"MAIN", "ROM_INFOS", "RATING_TEXT"});
-        topstaffText = addInfoBoxText({"MAIN", "ROM_INFOS", "TOPSTAFF_TEXT"});
-        rotationText = addInfoBoxText({"MAIN", "ROM_INFOS", "ROTATION_TEXT"});
-        resolutionText = addInfoBoxText({"MAIN", "ROM_INFOS", "RESOLUTION_TEXT"});
-        classificationText = addInfoBoxText({"MAIN", "ROM_INFOS", "CLASSIFICATION_TEXT"});
-        cloneofText = addInfoBoxText({"MAIN", "ROM_INFOS", "CLONEOF_TEXT"});
-        filenameText = addInfoBoxText({"MAIN", "ROM_INFOS", "FILENAME_TEXT"});
-        add(infoBox);
+        if (ui->getSkin()->loadRectangleShape(infoBox, {"MAIN", "ROM_INFOS"})) {
+            systemText = addInfoBoxText({"MAIN", "ROM_INFOS", "SYSTEM_TEXT"});
+            developerText = addInfoBoxText({"MAIN", "ROM_INFOS", "DEVELOPER_TEXT"});
+            editorText = addInfoBoxText({"MAIN", "ROM_INFOS", "EDITOR_TEXT"});
+            dateText = addInfoBoxText({"MAIN", "ROM_INFOS", "DATE_TEXT"});
+            genreText = addInfoBoxText({"MAIN", "ROM_INFOS", "GENRE_TEXT"});
+            playersText = addInfoBoxText({"MAIN", "ROM_INFOS", "PLAYERS_TEXT"});
+            ratingText = addInfoBoxText({"MAIN", "ROM_INFOS", "RATING_TEXT"});
+            topstaffText = addInfoBoxText({"MAIN", "ROM_INFOS", "TOPSTAFF_TEXT"});
+            rotationText = addInfoBoxText({"MAIN", "ROM_INFOS", "ROTATION_TEXT"});
+            resolutionText = addInfoBoxText({"MAIN", "ROM_INFOS", "RESOLUTION_TEXT"});
+            classificationText = addInfoBoxText({"MAIN", "ROM_INFOS", "CLASSIFICATION_TEXT"});
+            cloneofText = addInfoBoxText({"MAIN", "ROM_INFOS", "CLONEOF_TEXT"});
+            filenameText = addInfoBoxText({"MAIN", "ROM_INFOS", "FILENAME_TEXT"});
+            add(infoBox);
+        } else {
+            delete (infoBox);
+        }
 
         // preview box
         previewBox = new RectangleShape(FloatRect(0, 0, getSize().x, getSize().y / 2));
@@ -89,19 +94,27 @@ public:
 
     Text *addInfoBoxText(const std::vector<std::string> &tree) {
         Text *text = new Text("", (unsigned int) fontSize, font);
-        ui->getSkin()->loadText(text, tree);
-        infoBox->add(text);
+        if (ui->getSkin()->loadText(text, tree)) {
+            infoBox->add(text);
+        } else {
+            delete text;
+            text = nullptr;
+        }
         return text;
     }
 
     void showText(Text *text, const std::string &msg) {
-        text->setString(msg);
-        text->setVisibility(Visibility::Visible);
+        if (text != nullptr) {
+            text->setString(msg);
+            text->setVisibility(Visibility::Visible);
+        }
     }
 
     void hideText(Text *text) {
-        text->setVisibility(Visibility::Hidden);
-        text->setString("");
+        if (text != nullptr) {
+            text->setVisibility(Visibility::Hidden);
+            text->setString("");
+        }
     }
 
     bool loadVideo(const Game &game) {
