@@ -36,7 +36,7 @@ namespace c2dui {
         UIListBox *listBox = nullptr;
 
         c2d::C2DClock timer_load_info;
-        int timer_load_info_delay = 500;
+        int timer_load_info_delay = 300;
         int timer_load_info_done = 0;
 
         c2d::C2DClock timer_load_video;

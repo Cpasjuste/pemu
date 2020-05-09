@@ -148,6 +148,8 @@ public:
                     previewBox->getSize().x / texture->getTextureRect().width,
                     previewBox->getSize().y / texture->getTextureRect().height);
             texture->setScale(tex_scaling, tex_scaling);
+            texture->setAlpha(0);
+            texture->add(new TweenAlpha(0, 255, 0.5f, TweenLoop::None, TweenState::Playing));
             previewBox->add(texture);
         } else {
             previewText->setVisibility(Visibility::Visible);
