@@ -255,7 +255,7 @@ Skin::RectangleShapeGroup Skin::getRectangleShape(const std::vector<std::string>
 
     if (tree.size() > 1) {
         for (unsigned int i = 1; i < tree.size(); i++) {
-            printf("group->getGroup(%s): %s\n", tree[0].c_str(), tree[i].c_str());
+            //printf("group->getGroup(%s): %s\n", tree[0].c_str(), tree[i].c_str());
             group = group->getGroup(tree[i]);
             if (group == nullptr) {
                 printf("Skin::getRectangleShape: config group not found: \"%s\"\n", tree[i].c_str());

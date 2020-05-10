@@ -87,17 +87,6 @@ void RomList::build() {
     setLoadingText("Games: %i / %i", gameList.getAvailableCount(), gameList.games.size());
     printf("RomList::build: %i roms\n", gameList.games.size());
 
-    gameList.systems.insert(gameList.systems.begin(), "ALL");
-    gameList.editors.insert(gameList.editors.begin(), "ALL");
-    gameList.developers.insert(gameList.developers.begin(), "ALL");
-    gameList.players.insert(gameList.players.begin(), "ALL");
-    gameList.ratings.insert(gameList.ratings.begin(), "ALL");
-    gameList.topStaffs.insert(gameList.topStaffs.begin(), "ALL");
-    gameList.rotations.insert(gameList.rotations.begin(), "ALL");
-    gameList.resolutions.insert(gameList.resolutions.begin(), "ALL");
-    gameList.dates.insert(gameList.dates.begin(), "ALL");
-    gameList.genres.insert(gameList.genres.begin(), "ALL");
-
     // sort lists
     std::sort(gameList.systems.begin(), gameList.systems.end(), Api::sortByName);
     std::sort(gameList.editors.begin(), gameList.editors.end(), Api::sortByName);
@@ -109,6 +98,17 @@ void RomList::build() {
     std::sort(gameList.resolutions.begin(), gameList.resolutions.end(), Api::sortByName);
     std::sort(gameList.dates.begin(), gameList.dates.end(), Api::sortByName);
     std::sort(gameList.genres.begin(), gameList.genres.end(), Api::sortByName);
+
+    gameList.systems.insert(gameList.systems.begin(), "ALL");
+    gameList.editors.insert(gameList.editors.begin(), "ALL");
+    gameList.developers.insert(gameList.developers.begin(), "ALL");
+    gameList.players.insert(gameList.players.begin(), "ALL");
+    gameList.ratings.insert(gameList.ratings.begin(), "ALL");
+    gameList.topStaffs.insert(gameList.topStaffs.begin(), "ALL");
+    gameList.rotations.insert(gameList.rotations.begin(), "ALL");
+    gameList.resolutions.insert(gameList.resolutions.begin(), "ALL");
+    gameList.dates.insert(gameList.dates.begin(), "ALL");
+    gameList.genres.insert(gameList.genres.begin(), "ALL");
 
 #ifdef __PFBA__
     ui->getConfig()->add(
