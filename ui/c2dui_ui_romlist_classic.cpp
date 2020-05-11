@@ -82,6 +82,9 @@ public:
         mpvTexture = new MpvTexture(previewBox->getSize(), mpv);
         mpvTexture->setOrigin(previewBox->getOrigin());
         mpvTexture->setPosition(previewBox->getPosition());
+        mpvTexture->setAlpha(0);
+        mpvTexture->setVisibility(Visibility::Hidden);
+        mpvTexture->add(new TweenAlpha(0, 255, 0.3f, TweenLoop::None, TweenState::Playing));
         Rectangle::add(mpvTexture);
 #endif
     }
@@ -120,18 +123,22 @@ public:
 
     bool loadVideo(const Game &game) {
 #ifdef __MPV__
+        int res = -1;
         std::string videoPath = uiRomList->getPreviewVideo(game);
         if (!videoPath.empty()) {
-            int res = mpv->load(videoPath, Mpv::LoadType::Replace, "loop=yes");
+            res = mpv->load(videoPath, Mpv::LoadType::Replace, "loop=yes");
             if (res == 0) {
                 mpvTexture->setLayer(1);
-                mpvTexture->setVisibility(Visibility::Visible, false);
-            } else {
-                mpvTexture->setVisibility(Visibility::Hidden);
-                mpv->stop();
+                mpvTexture->setVisibility(Visibility::Visible, true);
+                if (texture != nullptr) {
+                    texture->setVisibility(Visibility::Hidden, true);
+                }
             }
-        } else {
-            mpvTexture->setVisibility(Visibility::Hidden);
+        }
+        if (res != 0) {
+            if (mpvTexture->isVisible()) {
+                mpvTexture->setVisibility(Visibility::Hidden, true);
+            }
             mpv->stop();
         }
 #endif
@@ -139,10 +146,11 @@ public:
     }
 
     bool loadTexture(const Game &game) {
-        texture = game.path.empty() ? nullptr : (C2DTexture *) uiRomList->getPreviewTexture(game);
+        auto *tex = game.path.empty() ? nullptr : (C2DTexture *) uiRomList->getPreviewTexture(game);
         // set image
-        if ((texture != nullptr) && texture->available) {
+        if (tex != nullptr) {
             previewText->setVisibility(Visibility::Hidden);
+            texture = tex;
             texture->setOrigin(Origin::Center);
             texture->setPosition(Vector2f(previewBox->getSize().x / 2, previewBox->getSize().y / 2));
             float tex_scaling = std::min(
@@ -150,10 +158,17 @@ public:
                     previewBox->getSize().y / texture->getTextureRect().height);
             texture->setScale(tex_scaling, tex_scaling);
             texture->setAlpha(0);
-            texture->add(new TweenAlpha(0, 255, 0.5f, TweenLoop::None, TweenState::Playing));
+            texture->add(new TweenAlpha(0, 255, 0.3f, TweenLoop::None, TweenState::Playing));
             previewBox->add(texture);
         } else {
-            previewText->setVisibility(Visibility::Visible);
+            if (texture != nullptr) {
+                if (texture->isVisible()) {
+                    texture->setVisibility(Visibility::Hidden, true);
+                }
+            }
+            if (!previewText->isVisible()) {
+                previewText->setVisibility(Visibility::Visible);
+            }
             return false;
         }
 
@@ -161,11 +176,6 @@ public:
     }
 
     void load(const Game &game = Game()) {
-
-        if (texture != nullptr) {
-            delete (texture);
-            texture = nullptr;
-        }
 
         if (game.id <= 0) {
             // try to load title/preview texture even if game is not in DB
@@ -185,7 +195,7 @@ public:
             hideText(filenameText);
             hideText(synoText);
 #if __MPV__
-            mpvTexture->setVisibility(Visibility::Hidden);
+            mpvTexture->setVisibility(Visibility::Hidden, true);
             mpv->stop();
 #endif
         } else {
