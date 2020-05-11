@@ -63,25 +63,26 @@ public:
             classificationText = addInfoBoxText({"MAIN", "ROM_INFOS", "CLASSIFICATION_TEXT"});
             cloneofText = addInfoBoxText({"MAIN", "ROM_INFOS", "CLONEOF_TEXT"});
             filenameText = addInfoBoxText({"MAIN", "ROM_INFOS", "FILENAME_TEXT"});
-            add(infoBox);
+            Rectangle::add(infoBox);
         } else {
             delete (infoBox);
         }
 
         // preview box
-        previewBox = new RectangleShape(FloatRect(0, 0, getSize().x, getSize().y / 2));
+        previewBox = new RectangleShape(FloatRect(0, 0,
+                                                  Rectangle::getSize().x, Rectangle::getSize().y / 2));
         ui->getSkin()->loadRectangleShape(previewBox, {"MAIN", "ROM_IMAGE"});
         previewText = new Text("", (unsigned int) fontSize, font);
         ui->getSkin()->loadText(previewText, {"MAIN", "ROM_IMAGE", "TEXT"});
         previewBox->add(previewText);
-        add(previewBox);
+        Rectangle::add(previewBox);
 
 #ifdef __MPV__
         mpv = new Mpv(ui->getIo()->getDataPath() + "mpv", true);
         mpvTexture = new MpvTexture(previewBox->getSize(), mpv);
         mpvTexture->setOrigin(previewBox->getOrigin());
         mpvTexture->setPosition(previewBox->getPosition());
-        add(mpvTexture);
+        Rectangle::add(mpvTexture);
 #endif
     }
 
@@ -254,24 +255,24 @@ UIRomListClassic::UIRomListClassic(UIMain *u, RomList *romList, const c2d::Vecto
     skin->loadRectangleShape(this, {"MAIN"});
 
     // add title image if available
-    auto title = new RectangleShape({16, 16});
+    auto *title = new RectangleShape({16, 16});
     skin->loadRectangleShape(title, {"MAIN", "TITLE"});
-    add(title);
+    UIRomList::add(title);
 
     // add help image if available
-    auto help = new RectangleShape({16, 16});
+    auto *help = new RectangleShape({16, 16});
     skin->loadRectangleShape(help, {"MAIN", "HELP"});
-    add(help);
+    UIRomList::add(help);
 
     // add rom info ui
     romInfo = new UIRomInfo(ui, this, skin->font, ui->getFontSize());
-    add(romInfo);
+    UIRomList::add(romInfo);
 
     int delay = ui->getConfig()->get(Option::Id::GUI_VIDEO_SNAP_DELAY)->getValueInt();
-    setVideoSnapDelay(delay);
+    UIRomList::setVideoSnapDelay(delay);
 
     // filter roms
-    updateRomList();
+    UIRomList::updateRomList();
 }
 
 Game UIRomListClassic::getSelection() {
