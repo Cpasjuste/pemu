@@ -69,7 +69,7 @@ Texture *UIRomList::getPreviewTexture(const ss_api::Game &game) {
             }
         } else {
             // for non arcade game, search for a "screenscraper" game with same name
-            std::vector<Game> clones = gameList.findByName(game.getName().text);
+            std::vector<Game> clones = gameList.findByName(game);
             for (const auto &g : clones) {
                 mediaPath = g.getMedia("mixrbv2").url;
                 fullPath = g.romsPath + mediaPath;
@@ -114,7 +114,7 @@ std::string UIRomList::getPreviewVideo(const ss_api::Game &game) {
             }
         } else {
             // for non arcade game, search for a "screenscraper" game with same name
-            std::vector<Game> clones = gameList.findByName(game.getName().text);
+            std::vector<Game> clones = gameList.findByName(game);
             for (const auto &g : clones) {
                 mediaPath = g.getMedia("video").url;
                 fullPath = game.romsPath + mediaPath;
