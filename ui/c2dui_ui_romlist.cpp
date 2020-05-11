@@ -170,6 +170,7 @@ void UIRomList::filterRomList() {
     bool byPath = ui->getConfig()->get(Option::Id::GUI_SHOW_ROM_NAMES)->getValueBool();
 #ifdef __PFBA__
     if (byPath) {
+        byPath = false;
         for (unsigned int i = 0; i < nBurnDrvCount; i++) {
             nBurnDrvActive = i;
             std::string fbnZip = std::string(BurnDrvGetTextA(DRV_NAME)) + ".zip";
@@ -181,20 +182,10 @@ void UIRomList::filterRomList() {
             }
             for (size_t j = 0; j < gameList.games.size(); j++) {
                 if (gameList.games.at(j).path == fbnZip) {
-                    // FBNEO add an header to nes and fds rom names..
-                    unsigned int hw =
-                            ((BurnDrvGetHardwareCode() | HARDWARE_PREFIX_CARTRIDGE) ^ HARDWARE_PREFIX_CARTRIDGE) &
-                            0xff000000;
-                    if (hw == HARDWARE_NES) {
-                        if (Utility::startWith(fbnName, "NES ")) {
-                            fbnName = Utility::remove(fbnName, "NES ");
-                        }
-                    } else if (hw == HARDWARE_FDS) {
-                        if (Utility::startWith(fbnName, "FDS ")) {
-                            fbnName = Utility::remove(fbnName, "FDS ");
-                        }
+                    int count = gameList.games.at(j).names.size();
+                    for (int k = 0; k < count; k++) {
+                        gameList.games.at(j).names[k].text = fbnName;
                     }
-                    gameList.games.at(j).names[0].text = fbnName;
                     break;
                 }
             }

@@ -118,6 +118,7 @@ set(CPU_DIRS
         ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/tms34010
         ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/arm
         ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/arm7
+        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/e132xs
         ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/h6280
         ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/hd6309
         ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/i8039
@@ -149,6 +150,7 @@ file(GLOB SRC_CPU
         ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/tms34010/*.c*
         ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/arm/*.c*
         ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/arm7/*.c*
+        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/e132xs/*.c*
         ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/h6280/*.c*
         ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/hd6309/*.c*
         ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/i8039/*.c*
