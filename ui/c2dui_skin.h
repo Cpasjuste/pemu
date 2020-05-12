@@ -56,7 +56,7 @@ namespace c2dui {
 
         c2d::config::Config *getConfig();
 
-        bool loadRectangleShape(c2d::RectangleShape *shape, const std::vector<std::string> &tree);
+        bool loadRectangleShape(c2d::RectangleShape *shape, const std::vector<std::string> &tree, bool textureUseFillColors = false);
 
         RectangleShapeGroup getRectangleShape(const std::vector<std::string> &tree);
 

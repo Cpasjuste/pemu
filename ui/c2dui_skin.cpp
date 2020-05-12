@@ -255,7 +255,6 @@ Skin::RectangleShapeGroup Skin::getRectangleShape(const std::vector<std::string>
 
     if (tree.size() > 1) {
         for (unsigned int i = 1; i < tree.size(); i++) {
-            //printf("group->getGroup(%s): %s\n", tree[0].c_str(), tree[i].c_str());
             group = group->getGroup(tree[i]);
             if (group == nullptr) {
                 printf("Skin::getRectangleShape: config group not found: \"%s\"\n", tree[i].c_str());
@@ -315,7 +314,7 @@ Skin::RectangleShapeGroup Skin::getRectangleShape(const std::vector<std::string>
     return rectangleShapeGroup;
 }
 
-bool Skin::loadRectangleShape(c2d::RectangleShape *shape, const std::vector<std::string> &tree) {
+bool Skin::loadRectangleShape(c2d::RectangleShape *shape, const std::vector<std::string> &tree, bool textureUseFillColors) {
 
     RectangleShapeGroup rectangleShapeGroup = getRectangleShape(tree);
     if (!rectangleShapeGroup.available) {
@@ -366,7 +365,7 @@ bool Skin::loadRectangleShape(c2d::RectangleShape *shape, const std::vector<std:
         tex->setOutlineColor(rectangleShapeGroup.outlineColor);
         tex->setOutlineThickness(rectangleShapeGroup.outlineSize);
         tex->setFilter((Texture::Filter) rectangleShapeGroup.filtering);
-        shape->setFillColor(Color::Transparent);
+        shape->setFillColor(textureUseFillColors ? rectangleShapeGroup.color : Color::Transparent);
         shape->setOutlineColor(Color::Transparent);
         shape->setOutlineThickness(0);
         shape->add(tex);

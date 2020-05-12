@@ -11,12 +11,7 @@
 #include "mpv_texture.h"
 #include "c2dui_ui_romlist_classic.h"
 
-
 #endif
-
-/// pFBA
-#define BDF_ORIENTATION_FLIPPED     (1 << 1)
-#define BDF_ORIENTATION_VERTICAL    (1 << 2)
 
 using namespace c2d;
 using namespace c2dui;
@@ -71,10 +66,7 @@ public:
         // preview box
         previewBox = new RectangleShape(FloatRect(0, 0,
                                                   Rectangle::getSize().x, Rectangle::getSize().y / 2));
-        ui->getSkin()->loadRectangleShape(previewBox, {"MAIN", "ROM_IMAGE"});
-        previewText = new Text("", (unsigned int) fontSize, font);
-        ui->getSkin()->loadText(previewText, {"MAIN", "ROM_IMAGE", "TEXT"});
-        previewBox->add(previewText);
+        ui->getSkin()->loadRectangleShape(previewBox, {"MAIN", "ROM_IMAGE"}, true);
         Rectangle::add(previewBox);
 
 #ifdef __MPV__
@@ -149,7 +141,6 @@ public:
         auto *tex = game.path.empty() ? nullptr : (C2DTexture *) uiRomList->getPreviewTexture(game);
         // set image
         if (tex != nullptr) {
-            previewText->setVisibility(Visibility::Hidden);
             texture = tex;
             texture->setOrigin(Origin::Center);
             texture->setPosition(Vector2f(previewBox->getSize().x / 2, previewBox->getSize().y / 2));
@@ -165,9 +156,6 @@ public:
                 if (texture->isVisible()) {
                     texture->setVisibility(Visibility::Hidden, true);
                 }
-            }
-            if (!previewText->isVisible()) {
-                previewText->setVisibility(Visibility::Visible);
             }
             return false;
         }
@@ -225,6 +213,7 @@ public:
     UIMain *ui = nullptr;
     UIRomList *uiRomList = nullptr;
     C2DTexture *texture = nullptr;
+    C2DTexture *textureNoPreview = nullptr;
     Font *font;
     int fontSize;
     //
@@ -232,7 +221,6 @@ public:
     Text *synoText = nullptr;
     //
     RectangleShape *previewBox = nullptr;
-    Text *previewText = nullptr;
     //
     RectangleShape *infoBox = nullptr;
     Text *systemText = nullptr;
