@@ -23,11 +23,7 @@
 #include "uiStateMenu.h"
 #include "config.h"
 #include "psnesIo.h"
-
 #include "snes9x.h"
-
-using namespace c2d;
-using namespace c2dui;
 
 #ifdef __PSP2__
 #include <psp2/power.h>
@@ -164,7 +160,7 @@ int main(int argc, char **argv) {
     snes9x_version += VERSION;
     romList = new RomList(ui, snes9x_version);
     romList->build();
-    uiRomList = new UIRomListClassic(ui, romList, ui->getSize());
+    uiRomList = new UIRomList(ui, romList, ui->getSize());
     uiMenu = new PSNESUIMenu(ui);
     uiEmu = new PSNESUIEmu(ui);
     uiState = new PSNESUIStateMenu(ui);
