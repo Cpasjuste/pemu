@@ -54,13 +54,13 @@ UIRomInfo::UIRomInfo(UIMain *u, UIRomList *uiRList, Font *fnt, int fntSize)
 
 #ifdef __MPV__
     mpv = new Mpv(ui->getIo()->getDataPath() + "mpv", true);
-            mpvTexture = new MpvTexture(previewBox->getSize(), mpv);
-            mpvTexture->setOrigin(previewBox->getOrigin());
-            mpvTexture->setPosition(previewBox->getPosition());
-            mpvTexture->setAlpha(0);
-            mpvTexture->setVisibility(Visibility::Hidden);
-            mpvTexture->add(new TweenAlpha(0, 255, 0.3f, TweenLoop::None, TweenState::Playing));
-            Rectangle::add(mpvTexture);
+    mpvTexture = new MpvTexture(previewBox->getSize(), mpv);
+    mpvTexture->setOrigin(previewBox->getOrigin());
+    mpvTexture->setPosition(previewBox->getPosition());
+    mpvTexture->setAlpha(0);
+    mpvTexture->setVisibility(Visibility::Hidden);
+    mpvTexture->add(new TweenAlpha(0, 255, 0.3f, TweenLoop::None, TweenState::Playing));
+    Rectangle::add(mpvTexture);
 #endif
 }
 
@@ -92,23 +92,23 @@ void UIRomInfo::hideText(Text *text) {
 bool UIRomInfo::loadVideo(const Game &game) {
 #ifdef __MPV__
     int res = -1;
-        std::string videoPath = uiRomList->getPreviewVideo(game);
-        if (!videoPath.empty()) {
-            res = mpv->load(videoPath, Mpv::LoadType::Replace, "loop=yes");
-            if (res == 0) {
-                mpvTexture->setLayer(1);
-                mpvTexture->setVisibility(Visibility::Visible, true);
-                if (texture != nullptr) {
-                    texture->setVisibility(Visibility::Hidden, true);
-                }
+    std::string videoPath = uiRomList->getPreviewVideo(game);
+    if (!videoPath.empty()) {
+        res = mpv->load(videoPath, Mpv::LoadType::Replace, "loop=yes");
+        if (res == 0) {
+            mpvTexture->setLayer(1);
+            mpvTexture->setVisibility(Visibility::Visible, true);
+            if (texture != nullptr) {
+                texture->setVisibility(Visibility::Hidden, true);
             }
         }
-        if (res != 0) {
-            if (mpvTexture->isVisible()) {
-                mpvTexture->setVisibility(Visibility::Hidden, true);
-            }
-            mpv->stop();
+    }
+    if (res != 0) {
+        if (mpvTexture->isVisible()) {
+            mpvTexture->setVisibility(Visibility::Hidden, true);
         }
+        mpv->stop();
+    }
 #endif
     return true;
 }

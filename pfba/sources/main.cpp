@@ -24,8 +24,9 @@
 #include "uiMenu.h"
 #include "config.h"
 #include "uiStateMenu.h"
-#include "pfbaIo.h"
+#include "pfba_io.h"
 #include "romlist.h"
+#include "pfba_ui_romlist.h"
 
 using namespace c2d;
 using namespace c2dui;
@@ -44,7 +45,7 @@ PFBAConfig *cfg;
 PFBARomList *romList;
 
 Skin *skin;
-UIRomList *uiRomList;
+PFBAUIRomList *uiRomList;
 
 int main(int argc, char **argv) {
 
@@ -156,7 +157,7 @@ int main(int argc, char **argv) {
     fba_version += szAppBurnVer;
     romList = new PFBARomList(ui, fba_version);
     romList->build();
-    uiRomList = new UIRomListClassic(ui, romList, ui->getSize());
+    uiRomList = new PFBAUIRomList(ui, romList, ui->getSize());
     uiMenu = new PFBAGuiMenu(ui);
     uiEmu = new PFBAGuiEmu(ui);
     uiState = new PFBAUIStateMenu(ui);

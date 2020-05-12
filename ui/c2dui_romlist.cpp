@@ -6,7 +6,6 @@
 #include <string>
 #include <algorithm>
 #include <iostream>
-#include <fstream>
 #include "c2dui.h"
 
 RomList::RomList(UIMain *_ui, const std::string &emuVersion) {
@@ -74,13 +73,9 @@ void RomList::build() {
     printf("RomList::build(): ROM_PATH_0: %s\n", ui->getConfig()->getRomPaths().at(FBN_PATH_ARCADE).c_str());
     std::string dataPath = ui->getIo()->getDataPath();
 
-#ifdef __PFBA__
-    gameList.append(dataPath + "gamelist.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_ARCADE), false);
-#else
     gameList.append(dataPath + "gamelist.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_ARCADE), false, true);
-#endif
     setLoadingText("Games: %i / %i", gameList.getAvailableCount(), gameList.games.size());
-    printf("RomList::build: %i roms\n", gameList.games.size());
+    printf("RomList::build: %lu roms\n", gameList.games.size());
 
     // sort lists
     std::sort(gameList.systems.begin(), gameList.systems.end(), Api::sortByName);
@@ -105,60 +100,30 @@ void RomList::build() {
     gameList.dates.insert(gameList.dates.begin(), "ALL");
     gameList.genres.insert(gameList.genres.begin(), "ALL");
 
-#ifdef __PFBA__
-    ui->getConfig()->add(
-            Option::Id::GUI_SHOW_ROM_NAMES, "FILTER_SYSTEM",
-            gameList.systems, 0, Option::Id::GUI_FILTER_SYSTEM, Option::Flags::STRING);
-#else
     ui->getConfig()->add(
             Option::Id::GUI_SHOW_ROM_NAMES, "FILTER_SYSTEM",
             gameList.systems, 0, Option::Id::GUI_FILTER_SYSTEM, Option::Flags::STRING | Option::Flags::HIDDEN);
-#endif
-
     ui->getConfig()->add(
             Option::Id::GUI_FILTER_SYSTEM, "FILTER_EDITOR",
             gameList.editors, 0, Option::Id::GUI_FILTER_EDITOR, Option::Flags::STRING);
-
     ui->getConfig()->add(
             Option::Id::GUI_FILTER_EDITOR, "FILTER_DEVELOPER",
             gameList.developers, 0, Option::Id::GUI_FILTER_DEVELOPER, Option::Flags::STRING);
-
-#ifdef __PFBA__
     ui->getConfig()->add(
             Option::Id::GUI_FILTER_DEVELOPER, "FILTER_PLAYERS",
             gameList.players, 0, Option::Id::GUI_FILTER_PLAYERS, Option::Flags::STRING);
-#else
-    ui->getConfig()->add(
-            Option::Id::GUI_FILTER_DEVELOPER, "FILTER_PLAYERS",
-            gameList.players, 0, Option::Id::GUI_FILTER_PLAYERS, Option::Flags::STRING | Option::Flags::HIDDEN);
-#endif
-
     ui->getConfig()->add(
             Option::Id::GUI_FILTER_PLAYERS, "FILTER_RATING",
             gameList.ratings, 0, Option::Id::GUI_FILTER_RATING, Option::Flags::STRING);
-
-#ifdef __PFBA__
-    ui->getConfig()->add(
-            Option::Id::GUI_FILTER_RATING, "FILTER_ROTATION",
-            gameList.rotations, 0, Option::Id::GUI_FILTER_ROTATION, Option::Flags::STRING);
-
-    ui->getConfig()->add(
-            Option::Id::GUI_FILTER_ROTATION, "FILTER_RESOLUTION",
-            gameList.resolutions, 0, Option::Id::GUI_FILTER_RESOLUTION, Option::Flags::STRING);
-#else
     ui->getConfig()->add(
             Option::Id::GUI_FILTER_RATING, "FILTER_ROTATION",
             gameList.rotations, 0, Option::Id::GUI_FILTER_ROTATION, Option::Flags::STRING | Option::Flags::HIDDEN);
-
     ui->getConfig()->add(
             Option::Id::GUI_FILTER_ROTATION, "FILTER_RESOLUTION",
             gameList.resolutions, 0, Option::Id::GUI_FILTER_RESOLUTION, Option::Flags::STRING | Option::Flags::HIDDEN);
-#endif
-
     ui->getConfig()->add(
             Option::Id::GUI_FILTER_RESOLUTION, "FILTER_DATE",
             gameList.dates, 0, Option::Id::GUI_FILTER_DATE, Option::Flags::STRING);
-
     ui->getConfig()->add(
             Option::Id::GUI_FILTER_DATE, "FILTER_GENRE",
             gameList.genres, 0, Option::Id::GUI_FILTER_GENRE, Option::Flags::STRING);
@@ -175,7 +140,7 @@ void RomList::build() {
             gameListFav.games[i].romsPath = game.romsPath;
         }
     }
-    printf("RomList::build: %i favorites\n", gameListFav.games.size());
+    printf("RomList::build: %lu favorites\n", gameListFav.games.size());
 
     float time_spent = ui->getElapsedTime().asSeconds() - time_start;
     printf("RomList::build(): list built in %f\n", time_spent);

@@ -51,4 +51,10 @@ void PFBARomList::build() {
     setLoadingText("Games: %i / %i", gameList.getAvailableCount(), gameList.games.size());
 
     RomList::build();
+
+    // remove hidden flags for pfba
+    ui->getConfig()->get(Option::Id::GUI_FILTER_CLONES)->setFlags(Option::Flags::BOOLEAN);
+    ui->getConfig()->get(Option::Id::GUI_FILTER_SYSTEM)->setFlags(Option::Flags::STRING);
+    ui->getConfig()->get(Option::Id::GUI_FILTER_ROTATION)->setFlags(Option::Flags::STRING);
+    ui->getConfig()->get(Option::Id::GUI_FILTER_RESOLUTION)->setFlags(Option::Flags::STRING);
 }

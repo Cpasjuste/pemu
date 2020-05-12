@@ -23,12 +23,8 @@ Config::Config(c2d::Io *io, int ver) {
     append("UI_OPTIONS", {}, 0, 1000, Option::Flags::DELIMITER);
     append("MAIN", {"MAIN"}, 0, Option::Id::MENU_MAIN, Option::Flags::MENU);
     append("SHOW", {"ALL", "AVAILABLE", "FAVORITES"}, 0, Option::Id::GUI_SHOW_ALL, Option::Flags::STRING);
-#ifdef __PFBA__
-    append("SHOW_CLONES", {"OFF", "ON"}, 0, Option::Id::GUI_FILTER_CLONES, Option::Flags::BOOLEAN);
-#else
     append("SHOW_CLONES", {"OFF", "ON"}, 0,
            Option::Id::GUI_FILTER_CLONES, Option::Flags::BOOLEAN | Option::Flags::HIDDEN);
-#endif
     append("SHOW_ROM_NAMES", {"OFF", "ON"}, 1, Option::Id::GUI_SHOW_ROM_NAMES, Option::Flags::BOOLEAN);
     append("SHOW_ICONS", {"OFF", "ON"}, 0, Option::Id::GUI_SHOW_ICONS, Option::Flags::BOOLEAN | Option::Flags::HIDDEN);
     get()->at(get()->size() - 1).setInfo("Enabling icons needs a restart...");
@@ -183,8 +179,8 @@ void Config::load(const ss_api::Game &game) {
                 if (settings != nullptr) {
                     for (size_t i = 0; i < roms_paths.size(); i++) {
                         char p[MAX_PATH];
-                        snprintf(p, MAX_PATH, "ROMS_PATH%i", i);
-                        const char *value;
+                        snprintf(p, MAX_PATH, "ROMS_PATH%i", (int) i);
+                        const char *value = nullptr;
                         if (config_setting_lookup_string(settings, p, &value) != 0) {
                             roms_paths[i] = value;
                             if (!roms_paths[i].empty() && roms_paths[i].back() != '/')

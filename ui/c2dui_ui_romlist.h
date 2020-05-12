@@ -35,7 +35,7 @@ namespace c2dui {
 
         void setVisibility(c2d::Visibility visibility, bool tweenPlay = false) override;
 
-    private:
+    protected:
 
         bool onInput(c2d::Input::Player *players) override;
 

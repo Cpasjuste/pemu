@@ -20,7 +20,7 @@ UIListBoxLine::UIListBoxLine(
     text->setOutlineColor(Color::Black);
     text->setOrigin(Origin::Left);
 
-    setFillColor(Color::Transparent);
+    UIListBoxLine::setFillColor(Color::Transparent);
 
     if (use_icons) {
         // add iconRect
@@ -28,17 +28,17 @@ UIListBoxLine::UIListBoxLine(
         iconRect->setPosition(Vector2f(1, 1));
         iconRect->setFillColor(Color::Transparent);
         iconRect->setOutlineThickness(1);
-        add(iconRect);
+        UIListBoxLine::add(iconRect);
         // icon added in ListBox::setSelection (setIcon)
         // set text
-        text->setPosition(iconRect->getSize().x + 8, getSize().y / 2);
-        text->setSizeMax(getSize().x - fontSize - iconRect->getSize().x, 0);
+        text->setPosition(iconRect->getSize().x + 8, UIListBoxLine::getSize().y / 2);
+        text->setSizeMax(UIListBoxLine::getSize().x - (float) fontSize - iconRect->getSize().x, 0);
     } else {
-        text->setPosition(2, getSize().y / 2);
-        text->setSizeMax(getSize().x - (fontSize + 8), 0);
+        text->setPosition(2, UIListBoxLine::getSize().y / 2);
+        text->setSizeMax(UIListBoxLine::getSize().x - ((float) fontSize + 8), 0);
     }
 
-    add(text);
+    UIListBoxLine::add(text);
 }
 
 void UIListBoxLine::setSize(const Vector2f &size) {
@@ -57,10 +57,10 @@ void UIListBoxLine::setString(const std::string &string) {
 void UIListBoxLine::setColor(const Color &color) {
 
     text->setFillColor(color);
-    if (iconRect) {
+    if (iconRect != nullptr) {
         iconRect->setOutlineColor(color);
     }
-    if (icon) {
+    if (icon != nullptr) {
         icon->setOutlineColor(color);
     }
 }
@@ -68,11 +68,11 @@ void UIListBoxLine::setColor(const Color &color) {
 void UIListBoxLine::setIcon(Texture *i) {
 
     if (use_icons) {
-        if (icon) {
+        if (icon != nullptr) {
             remove(icon);
         }
         icon = i;
-        if (icon) {
+        if (icon != nullptr) {
             if (icon->available) {
                 icon->setOutlineThickness(1);
                 icon->setOrigin(iconRect->getOrigin());
@@ -143,7 +143,7 @@ void UIListBox::init(Font *font, int fontSize, bool useIcons) {
             icon = files.size() > i ? files[i]->icon : nullptr;
         }
         */
-        auto line = new UIListBoxLine(r, "", font, (unsigned int) fontSize, icon, use_icons);
+        auto *line = new UIListBoxLine(r, "", font, (unsigned int) fontSize, icon, use_icons);
         lines.push_back(line);
         add(line);
     }
@@ -151,7 +151,8 @@ void UIListBox::init(Font *font, int fontSize, bool useIcons) {
 
 void UIListBox::updateLines() {
 
-    bool useRealName = ui->getConfig()->get(Option::Id::GUI_SHOW_ROM_NAMES)->getValueBool();
+    bool useRomName = ui->getConfig()->get(Option::Id::GUI_SHOW_ROM_NAMES)->getValueBool();
+    bool pfbn = ui->getConfig()->get(Option::Id::ROM_NEOBIOS) != nullptr;
 
     for (unsigned int i = 0; i < (unsigned int) max_lines; i++) {
 
@@ -161,11 +162,11 @@ void UIListBox::updateLines() {
             // set file
             Game game = games[file_index + i];
             lines[i]->setVisibility(Visibility::Visible);
-#ifdef __PFBA__
-            lines[i]->setString(useRealName ? game.names[0].text : game.getName().text);
-#else
-            lines[i]->setString(useRealName ? Utility::removeExt(game.path) : game.getName().text);
-#endif
+            if (pfbn) {
+                lines[i]->setString(useRomName ? game.names[0].text : game.getName().text);
+            } else {
+                lines[i]->setString(useRomName ? Utility::removeExt(game.path) : game.getName().text);
+            }
             // TODO: ICON
             //lines[i]->setIcon(file->icon);
             lines[i]->setColor(game.available ? colorAvailable : colorMissing);

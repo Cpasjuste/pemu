@@ -2,8 +2,8 @@
 // Created by cpasjuste on 27/06/19.
 //
 
-#ifndef PEMU_PFBAIO_H
-#define PEMU_PFBAIO_H
+#ifndef PEMU_PFBA_IO_H
+#define PEMU_PFBA_IO_H
 
 namespace c2d {
 
@@ -36,4 +36,4 @@ namespace c2d {
     };
 }
 
-#endif //PEMU_PFBAIO_H
+#endif //PEMU_PFBA_IO_H

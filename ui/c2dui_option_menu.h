@@ -2,8 +2,8 @@
 // Created by cpasjuste on 16/02/17.
 //
 
-#ifndef PFBA_MENU_H
-#define PFBA_MENU_H
+#ifndef C2DUI_OPTION_MENU_H
+#define C2DUI_OPTION_MENU_H
 
 #include <vector>
 
@@ -27,4 +27,4 @@ namespace c2dui {
     };
 }
 
-#endif //PFBA_MENU_H
+#endif //C2DUI_OPTION_MENU_H
