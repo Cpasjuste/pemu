@@ -3,11 +3,6 @@
 //
 
 #include "c2dui.h"
-#include "c2dui_ui_progressbox.h"
-
-
-using namespace c2d;
-using namespace c2dui;
 
 UIProgressBox::UIProgressBox(UIMain *gui)
         : RectangleShape(Vector2f(gui->getSize().x / 2,

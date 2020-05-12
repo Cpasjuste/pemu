@@ -6,9 +6,6 @@
 
 #define STATES_COUNT 4
 
-using namespace c2d;
-using namespace c2dui;
-
 class UIState : public RectangleShape {
 
 public:

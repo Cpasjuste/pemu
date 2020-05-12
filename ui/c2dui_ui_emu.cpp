@@ -3,12 +3,6 @@
 //
 
 #include "c2dui.h"
-#include "c2dui_ui_emu.h"
-
-
-using namespace c2d;
-using namespace c2dui;
-using namespace ss_api;
 
 UIEmu::UIEmu(UIMain *u) : RectangleShape(u->getSize()) {
 

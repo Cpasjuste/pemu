@@ -7,12 +7,7 @@
 #include <algorithm>
 #include <iostream>
 #include <fstream>
-
 #include "c2dui.h"
-
-using namespace c2d;
-using namespace c2dui;
-using namespace ss_api;
 
 RomList::RomList(UIMain *_ui, const std::string &emuVersion) {
 

@@ -5,8 +5,7 @@
 #ifndef C2DUI_UI_ROMLIST_H
 #define C2DUI_UI_ROMLIST_H
 
-#include "cross2d/skeleton/sfml/RectangleShape.hpp"
-#include "cross2d/widgets/listbox.h"
+class UIRomInfo;
 
 namespace c2dui {
 
@@ -20,11 +19,13 @@ namespace c2dui {
 
         virtual void filterRomList();
 
+        virtual void sortRomList();
+
         virtual void updateRomList();
 
-        virtual RomList *getRomList();
-
         virtual ss_api::Game getSelection();
+
+        virtual RomList *getRomList();
 
         virtual c2d::Texture *getPreviewTexture(const ss_api::Game &game);
 
@@ -32,12 +33,27 @@ namespace c2dui {
 
         virtual void setVideoSnapDelay(int delay);
 
-    protected:
+        void setVisibility(c2d::Visibility visibility, bool tweenPlay = false) override;
+
+    private:
+
+        bool onInput(c2d::Input::Player *players) override;
+
+        void onUpdate() override;
 
         UIMain *ui = nullptr;
         RomList *romList = nullptr;
         ss_api::GameList gameList;
+        UIRomInfo *romInfo = nullptr;
+        UIListBox *listBox = nullptr;
+
+        c2d::C2DClock timer_load_info;
+        int timer_load_info_delay = 300;
+        int timer_load_info_done = 0;
+
+        c2d::C2DClock timer_load_video;
         int timer_load_video_delay = 5000;
+        int timer_load_video_done = 0;
     };
 }
 

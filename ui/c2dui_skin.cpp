@@ -5,9 +5,6 @@
 #include "c2dui.h"
 #include <minizip/unzip.h>
 
-using namespace c2d;
-using namespace c2dui;
-
 Skin::Skin(UIMain *u, const std::vector<Button> &btns, const Vector2f &scaling) {
 
     ui = u;

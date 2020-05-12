@@ -2,16 +2,8 @@
 // Created by cpasjuste on 22/11/16.
 //
 #include <algorithm>
-
 #include "c2dui.h"
-#include "c2dui_ui_romlist.h"
-
-#ifdef __PFBA__
-
-#include "../pfba/sources/fba/tchar.h"
-#include "../cores/fba/src/burn/burn.h"
-
-#endif
+#include "ss_api.h"
 
 using namespace c2d;
 using namespace c2dui;
@@ -24,14 +16,78 @@ UIRomList::UIRomList(UIMain *u, RomList *rList, const c2d::Vector2f &size) : Rec
     ui = u;
     romList = rList;
     gameList = romList->gameList;
+    Skin *skin = ui->getSkin();
+
+    // set gui main "window"
+    skin->loadRectangleShape(this, {"MAIN"});
+
+    // add title image if available
+    auto *title = new RectangleShape({16, 16});
+    skin->loadRectangleShape(title, {"MAIN", "TITLE"});
+    UIRomList::add(title);
+
+    // add help image if available
+    auto *help = new RectangleShape({16, 16});
+    skin->loadRectangleShape(help, {"MAIN", "HELP"});
+    UIRomList::add(help);
+
+    // add rom info ui
+    romInfo = new UIRomInfo(ui, this, skin->font, ui->getFontSize());
+    UIRomList::add(romInfo);
+
+    int delay = ui->getConfig()->get(Option::Id::GUI_VIDEO_SNAP_DELAY)->getValueInt();
+    UIRomList::setVideoSnapDelay(delay);
+
+    // filter roms
+    UIRomList::updateRomList();
 }
 
-Game UIRomList::getSelection() {
-    return Game();
-}
+void UIRomList::updateRomList() {
 
-RomList *UIRomList::getRomList() {
-    return romList;
+    filterRomList();
+    sortRomList();
+
+    Skin::TextGroup textGroup = ui->getSkin()->getText({"MAIN", "ROM_LIST", "TEXT"});
+    config::Group *grp = ui->getSkin()->getConfig()->getGroup("ROM_LIST")->getGroup("TEXT");
+    Color colorMissing = grp->getOption("color_missing")->getColor();
+    bool highlightUseFileColors = grp->getOption("highlight_use_text_color")->getInteger() == 1;
+
+    if (listBox == nullptr) {
+        // add rom list ui
+        Skin::RectangleShapeGroup romListGroup = ui->getSkin()->getRectangleShape({"MAIN", "ROM_LIST"});
+        bool use_icons = false;
+#if !(defined(__PSP2__) || defined(__3DS__)) // two slow
+        use_icons = ui->getConfig()->get(Option::Id::GUI_SHOW_ICONS)->getValueBool();
+#endif
+        listBox = new UIListBox(ui, ui->getSkin()->font, (int) textGroup.size,
+                                romListGroup.rect, gameList.games, use_icons);
+        listBox->colorMissing = colorMissing;
+        listBox->colorAvailable = textGroup.color;
+        listBox->setFillColor(romListGroup.color);
+        listBox->setOutlineColor(romListGroup.outlineColor);
+        listBox->setOutlineThickness((float) romListGroup.outlineSize);
+        listBox->setSelection(0);
+        // rom item
+        listBox->setTextOutlineColor(textGroup.outlineColor);
+        listBox->setTextOutlineThickness((float) textGroup.outlineSize);
+        // hihglight
+        Skin::RectangleShapeGroup rectShape = ui->getSkin()->getRectangleShape({"SKIN_CONFIG", "HIGHLIGHT"});
+        listBox->getHighlight()->setFillColor(rectShape.color);
+        listBox->getHighlight()->setOutlineColor(rectShape.outlineColor);
+        listBox->getHighlight()->setOutlineThickness((float) rectShape.outlineSize);
+        listBox->setHighlightUseFileColor(highlightUseFileColors);
+        add(listBox);
+    } else {
+        listBox->setGames(gameList.games);
+    }
+
+    if (romInfo != nullptr) {
+        romInfo->load(Game());
+        timer_load_info_done = 0;
+        timer_load_info.restart();
+        timer_load_video_done = 0;
+        timer_load_video.restart();
+    }
 }
 
 Texture *UIRomList::getPreviewTexture(const ss_api::Game &game) {
@@ -166,33 +222,10 @@ void UIRomList::filterRomList() {
                 ui->getConfig()->get(Option::Id::GUI_FILTER_GENRE)->getValueString()
         );
     }
+}
 
+void UIRomList::sortRomList() {
     bool byPath = ui->getConfig()->get(Option::Id::GUI_SHOW_ROM_NAMES)->getValueBool();
-#ifdef __PFBA__
-    if (byPath) {
-        byPath = false;
-        for (unsigned int i = 0; i < nBurnDrvCount; i++) {
-            nBurnDrvActive = i;
-            std::string fbnZip = std::string(BurnDrvGetTextA(DRV_NAME)) + ".zip";
-            std::string fbnName = BurnDrvGetTextA(DRV_FULLNAME);
-            char *z_name = nullptr;
-            BurnDrvGetZipName(&z_name, 0);
-            if (z_name != nullptr) {
-                fbnZip = std::string(z_name) + ".zip";
-            }
-            for (size_t j = 0; j < gameList.games.size(); j++) {
-                if (gameList.games.at(j).path == fbnZip) {
-                    int count = gameList.games.at(j).names.size();
-                    for (int k = 0; k < count; k++) {
-                        gameList.games.at(j).names[k].text = fbnName;
-                    }
-                    break;
-                }
-            }
-        }
-    }
-#endif
-
     gameList.sortAlpha(byPath);
 }
 
@@ -200,11 +233,133 @@ void UIRomList::setVideoSnapDelay(int delay) {
     timer_load_video_delay = delay * 1000;
 }
 
-void UIRomList::updateRomList() {
+Game UIRomList::getSelection() {
+    return listBox->getSelection();
+}
+
+RomList *UIRomList::getRomList() {
+    return romList;
+}
+
+void UIRomList::setVisibility(c2d::Visibility visibility, bool tweenPlay) {
+
+    if (visibility == c2d::Visibility::Hidden) {
+        romInfo->load();
+        timer_load_info_done = 0;
+        timer_load_video_done = 0;
+    } else {
+        timer_load_info.restart();
+        timer_load_video.restart();
+    }
+
+    RectangleShape::setVisibility(visibility, tweenPlay);
+}
+
+bool UIRomList::onInput(c2d::Input::Player *players) {
+
+    if (ui->getUiMenu()->isVisible()
+        || ui->getUiStateMenu()->isVisible()
+        || ui->getUiProgressBox()->isVisible()) {
+        return false;
+    }
+
+    unsigned int keys = players[0].keys;
+    if (keys & Input::Key::Up) {
+        listBox->up();
+        romInfo->load();
+        timer_load_info_done = 0;
+        timer_load_video_done = 0;
+    } else if (keys & Input::Key::Down) {
+        listBox->down();
+        romInfo->load();
+        timer_load_info_done = 0;
+        timer_load_video_done = 0;
+    } else if (keys & Input::Key::Right) {
+        listBox->setSelection(listBox->getIndex() + listBox->getMaxLines());
+        romInfo->load();
+        timer_load_info_done = 0;
+        timer_load_video_done = 0;
+    } else if (keys & Input::Key::Left) {
+        listBox->setSelection(listBox->getIndex() - listBox->getMaxLines());
+        romInfo->load();
+        timer_load_info_done = 0;
+        timer_load_video_done = 0;
+    } else if (keys & Input::Key::Fire1) {
+        Game game = getSelection();
+        if (game.available) {
+#ifdef __MPV__
+            romInfo->mpvTexture->setVisibility(c2d::Visibility::Hidden);
+            romInfo->mpv->stop();
+#endif
+            ui->getConfig()->load(game);
+            ui->getUiEmu()->load(game);
+            return true;
+        }
+    } else if (keys & Input::Key::Fire3) {
+        // add to favorites
+        Game game = getSelection();
+        if (game.id > 0 && !romList->gameListFav.exist(game.romId)) {
+            int res = ui->getUiMessageBox()->show("FAVORITES",
+                                                  "Add to favorites ?",
+                                                  "OK", "CANCEL");
+            if (res == MessageBox::LEFT) {
+                romList->addFav(game);
+            }
+        } else if (game.id > 0 && romList->gameListFav.exist(game.romId)) {
+            int res = ui->getUiMessageBox()->show("FAVORITES",
+                                                  "Remove from favorites ?",
+                                                  "OK", "CANCEL");
+            if (res == MessageBox::LEFT) {
+                romList->removeFav(game);
+                Option *opt = ui->getConfig()->get(Option::Id::GUI_SHOW_ALL);
+                if (opt->getValueString() == "FAVORITES") {
+                    // update list if we are in favorites
+                    updateRomList();
+                }
+            }
+        }
+    } else if (keys & Input::Key::Start) {
+        ui->getUiMenu()->load();
+    } else if (keys & Input::Key::Select) {
+        if (getSelection().id > 0) {
+            ui->getConfig()->load(getSelection());
+            ui->getUiMenu()->load(true);
+
+        }
+    } else if (keys & EV_QUIT) {
+        ui->done = true;
+    }
+
+    return true;
+}
+
+void UIRomList::onUpdate() {
+
+    if (!isVisible() || ui->getUiProgressBox()->isVisible()) {
+        return;
+    }
+
+    RectangleShape::onUpdate();
+
+    unsigned int keys = ui->getInput()->getKeys();
+
+    if (keys > 0 && keys != Input::Delay) {
+        timer_load_info.restart();
+        timer_load_video.restart();
+    } else if (keys == 0) {
+        if ((timer_load_info_done == 0) && timer_load_info.getElapsedTime().asMilliseconds() > timer_load_info_delay) {
+            romInfo->load(listBox->getSelection());
+            timer_load_info_done = 1;
+        }
+        if (timer_load_video_delay > 0 && timer_load_video_done == 0 &&
+            timer_load_video.getElapsedTime().asMilliseconds() > timer_load_video_delay) {
+            romInfo->loadVideo(listBox->getSelection());
+            timer_load_video_done = 1;
+        }
+    }
 }
 
 UIRomList::~UIRomList() {
-    printf("~UIRomList\n");
+    printf("~UIRomListClassic\n");
     delete (romList);
 }
-

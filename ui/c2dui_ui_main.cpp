@@ -3,19 +3,7 @@
 //
 
 #include <algorithm>
-
-#ifdef __SWITCH__
-extern "C" {
-#include <switch/services/hid.h>
-}
-#endif
-
 #include "c2dui.h"
-#include "c2dui_ui_main.h"
-
-
-using namespace c2d;
-using namespace c2dui;
 
 UIMain::UIMain(const Vector2f &size) : C2DRenderer(size) {
 

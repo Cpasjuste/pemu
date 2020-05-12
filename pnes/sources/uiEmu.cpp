@@ -4,16 +4,14 @@
 
 #include <fstream>
 
-#include "c2dui.h"
-#include "uiEmu.h"
-
 #include "common/nstcommon.h"
 #include "common/video.h"
 #include "common/config.h"
 #include "common/input.h"
 #include "audio.h"
 
-using namespace c2dui;
+#include "c2dui.h"
+#include "uiEmu.h"
 
 extern PNESGuiEmu *uiEmu;
 
@@ -24,7 +22,7 @@ extern nstpaths_t nstpaths;
 
 extern bool (*nst_archive_select)(const char *, char *, size_t);
 
-extern Input::Controllers *cNstPads;
+extern Nes::Core::Input::Controllers *cNstPads;
 
 extern Emulator emulator;
 /// NESTOPIA
@@ -38,7 +36,7 @@ int PNESGuiEmu::load(const ss_api::Game &game) {
     getUi()->getUiProgressBox()->setTitle(game.getName().text);
     getUi()->getUiProgressBox()->setMessage("Please wait...");
     getUi()->getUiProgressBox()->setProgress(0);
-    getUi()->getUiProgressBox()->setVisibility(c2d::Visibility::Visible);
+    getUi()->getUiProgressBox()->setVisibility(Visibility::Visible);
     getUi()->getUiProgressBox()->setLayer(1000);
     getUi()->flip();
 
@@ -46,7 +44,7 @@ int PNESGuiEmu::load(const ss_api::Game &game) {
 
     std::string fullPath = game.romsPath + game.path;
     if (nestopia_core_init(fullPath.c_str()) != 0) {
-        getUi()->getUiProgressBox()->setVisibility(c2d::Visibility::Hidden);
+        getUi()->getUiProgressBox()->setVisibility(Visibility::Hidden);
         getUi()->getUiMessageBox()->show("ERROR", "INVALID FILE", "OK");
         stop();
         return -1;
@@ -55,7 +53,7 @@ int PNESGuiEmu::load(const ss_api::Game &game) {
     getUi()->getUiProgressBox()->setProgress(1);
     getUi()->flip();
     getUi()->delay(500);
-    getUi()->getUiProgressBox()->setVisibility(c2d::Visibility::Hidden);
+    getUi()->getUiProgressBox()->setVisibility(Visibility::Hidden);
 
     return UIEmu::load(game);
 }
@@ -82,7 +80,7 @@ void PNESGuiEmu::onUpdate() {
     if (!isPaused()) {
         // fps
         int showFps = getUi()->getConfig()->get(Option::Id::ROM_SHOW_FPS, true)->getValueBool();
-        getFpsText()->setVisibility(showFps ? c2d::Visibility::Visible : c2d::Visibility::Hidden);
+        getFpsText()->setVisibility(showFps ? Visibility::Visible : Visibility::Hidden);
         if (showFps) {
             sprintf(getFpsString(), "FPS: %.2g/%2d", getUi()->getFps(),
                     nst_pal() ? (conf.timing_speed / 6) * 5 : conf.timing_speed);
@@ -102,25 +100,25 @@ void PNESGuiEmu::onUpdate() {
             cNstPads->pad[i].buttons = 0;
 
             cNstPads->pad[i].buttons |= (players[i].keys & c2d::Input::Key::Start) > 0 ?
-                                        Input::Controllers::Pad::START : 0;
+                                        Nes::Core::Input::Controllers::Pad::START : 0;
             cNstPads->pad[i].buttons |= (players[i].keys & c2d::Input::Key::Select) > 0 ?
-                                        Input::Controllers::Pad::SELECT : 0;
+                                        Nes::Core::Input::Controllers::Pad::SELECT : 0;
             cNstPads->pad[i].buttons |= (players[i].keys & c2d::Input::Key::Up) > 0 ?
-                                        Input::Controllers::Pad::UP : 0;
+                                        Nes::Core::Input::Controllers::Pad::UP : 0;
             cNstPads->pad[i].buttons |= (players[i].keys & c2d::Input::Key::Down) > 0 ?
-                                        Input::Controllers::Pad::DOWN : 0;
+                                        Nes::Core::Input::Controllers::Pad::DOWN : 0;
             cNstPads->pad[i].buttons |= (players[i].keys & c2d::Input::Key::Left) > 0 ?
-                                        Input::Controllers::Pad::LEFT : 0;
+                                        Nes::Core::Input::Controllers::Pad::LEFT : 0;
             cNstPads->pad[i].buttons |= (players[i].keys & c2d::Input::Key::Right) > 0 ?
-                                        Input::Controllers::Pad::RIGHT : 0;
+                                        Nes::Core::Input::Controllers::Pad::RIGHT : 0;
             cNstPads->pad[i].buttons |= (players[i].keys & c2d::Input::Key::Fire1) > 0 ?
-                                        Input::Controllers::Pad::B : 0;
+                                        Nes::Core::Input::Controllers::Pad::B : 0;
             cNstPads->pad[i].buttons |= (players[i].keys & c2d::Input::Key::Fire2) > 0 ?
-                                        Input::Controllers::Pad::A : 0;
+                                        Nes::Core::Input::Controllers::Pad::A : 0;
             cNstPads->pad[i].buttons |= (players[i].keys & c2d::Input::Key::Fire4) > 0 ?
-                                        Input::Controllers::Pad::B : 0;
+                                        Nes::Core::Input::Controllers::Pad::B : 0;
             cNstPads->pad[i].buttons |= (players[i].keys & c2d::Input::Key::Fire5) > 0 ?
-                                        Input::Controllers::Pad::A : 0;
+                                        Nes::Core::Input::Controllers::Pad::A : 0;
         }
 
         // step nestopia core
@@ -161,7 +159,7 @@ void audio_unpause() {
 
 void audio_set_params(Sound::Output *soundoutput) {
 
-    c2d::Audio *aud = uiEmu->getAudio();
+    Audio *aud = uiEmu->getAudio();
 
     if (aud) {
         // Set audio parameters

@@ -5,11 +5,6 @@
 #ifndef C2DUI_LISTBOX_H
 #define C2DUI_LISTBOX_H
 
-#include "cross2d/skeleton/sfml/RectangleShape.hpp"
-#include "cross2d/skeleton/sfml/Text.hpp"
-#include "cross2d/skeleton/io.h"
-#include "ss_api.h"
-
 namespace c2dui {
 
     class UIListBoxLine : public c2d::RectangleShape {

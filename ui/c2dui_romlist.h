@@ -6,7 +6,6 @@
 #define C2DUI_ROMLIST_H
 
 #include <vector>
-#include "ss_gamelist.h"
 
 namespace c2dui {
 

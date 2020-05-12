@@ -2,10 +2,7 @@
 // Created by cpasjuste on 16/02/17.
 //
 
-#include "c2dui_option.h"
-#include "c2dui_option_menu.h"
-
-using namespace c2dui;
+#include "c2dui.h"
 
 OptionMenu::OptionMenu(OptionMenu *parent, std::vector<Option> *options, bool isRomCfg) {
 

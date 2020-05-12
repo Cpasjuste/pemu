@@ -5,8 +5,6 @@
 #ifndef C2DUI_VIDEO_H_
 #define C2DUI_VIDEO_H_
 
-#include <cstring>
-
 namespace c2dui {
 
     class C2DUIVideo : public c2d::C2DTexture {

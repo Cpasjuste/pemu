@@ -150,7 +150,7 @@ int main(int argc, char **argv) {
     std::string nestopia_version = "Nestopia 1.50";
     romList = new RomList(ui, nestopia_version);
     romList->build();
-    uiRomList = new UIRomListClassic(ui, romList, ui->getSize());
+    uiRomList = new UIRomList(ui, romList, ui->getSize());
     uiMenu = new PNESGuiMenu(ui);
     uiEmu = new PNESGuiEmu(ui);
     uiState = new PNESUIStateMenu(ui);

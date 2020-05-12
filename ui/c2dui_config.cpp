@@ -3,10 +3,6 @@
 //
 
 #include "c2dui.h"
-#include "c2dui_config.h"
-
-using namespace c2d;
-using namespace c2dui;
 
 Config::Config(c2d::Io *io, int ver) {
 
@@ -59,7 +55,7 @@ Config::Config(c2d::Io *io, int ver) {
 #endif
     // build zipped skin list
     std::vector<std::string> paths;
-    std::vector<Io::File> files = io->getDirList(dataPath + "skins/", true);
+    std::vector<c2d::Io::File> files = io->getDirList(dataPath + "skins/", true);
     for (const auto &file : files) {
         if (file.name[0] == '.') {
             continue;

@@ -5,8 +5,6 @@
 #ifndef C2DUI_HIGHLIGHT_H
 #define C2DUI_HIGHLIGHT_H
 
-#include "cross2d/skeleton/sfml/RoundedRectangleShape.h"
-
 namespace c2dui {
 
     class UIHighlight : public c2d::RoundedRectangleShape {

@@ -4,9 +4,6 @@
 
 #include "c2dui.h"
 
-using namespace c2d;
-using namespace c2dui;
-
 UIHighlight::UIHighlight() : RoundedRectangleShape() {
 
     tweenPos = new TweenPosition({0, 0}, {0, 0}, 0.25f);

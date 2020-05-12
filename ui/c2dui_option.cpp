@@ -2,12 +2,7 @@
 // Created by cpasjuste on 05/12/16.
 //
 
-#include <c2dui_option.h>
-#include <cross2d/skeleton/utility.h>
-
-#include "c2dui_option.h"
-
-using namespace c2dui;
+#include <c2dui.h>
 
 Option::Option(const std::string &text,
                const std::vector<std::string> &options,
