@@ -50,10 +50,10 @@ Config::Config(c2d::Io *io, int ver) {
     get()->at(get()->size() - 1).setInfo("This option needs a restart...");
 #endif
     // build zipped skin list
-    std::vector<std::string> paths;
+    std::vector<std::string> paths = {"default"};
     std::vector<c2d::Io::File> files = io->getDirList(dataPath + "skins/", true);
     for (const auto &file : files) {
-        if (file.name[0] == '.') {
+        if (file.name[0] == '.' || file.name == "default.zip") {
             continue;
         }
         paths.emplace_back(Utility::removeExt(file.name));
