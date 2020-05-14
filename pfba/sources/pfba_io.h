@@ -12,7 +12,6 @@ namespace c2d {
     public:
 
 #ifdef __PSP2__
-
         std::string getHomePath() override {
             return "ux0:/data/pfba/";
         }
@@ -20,19 +19,7 @@ namespace c2d {
         std::string getDataPath() override {
             return "ux0:/data/pfba/";
         }
-
-#elif __FREEPLAY__
-
-        std::string getHomePath() const override {
-            return "/data/pfba/";
-        }
-
-        std::string getDataPath() override {
-            return "/data/pfba/";
-        }
-
 #endif
-
     };
 }
 

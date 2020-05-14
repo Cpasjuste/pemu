@@ -133,11 +133,7 @@ int Option::getIndex() {
 
 void Option::setIndex(int index) {
     if ((size_t) index < options.size()) {
-        for (size_t i = 0; i < options.size(); i++) {
-            if (current_option == options.at(i)) {
-                current_option = std::to_string(i);
-            }
-        }
+        current_option = options.at(index);
     }
 }
 

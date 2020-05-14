@@ -282,9 +282,7 @@ set(FLAGS
         -Wno-unused-variable -Wno-unused-but-set-variable -Wno-sequence-point
         )
 
-if (NOT BUILD_DEBUG)
-    list(APPEND FLAGS -O3)
-endif ()
+set(CMAKE_CXX_STANDARD 17)
 
 if (OPTION_BUILTIN_MINIZIP)
     list(REMOVE_ITEM SRC_BURNER ${CMAKE_SOURCE_DIR}/cores/fba/src/burner/ioapi.c)
@@ -301,21 +299,8 @@ if (PLATFORM_VITA)
     list(REMOVE_ITEM SRC_CPU ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/m68000_intf.cpp)
     list(APPEND INC sources/cpu/cyclone)
     list(APPEND SRC_PFBA sources/cpu/c68000_intf.cpp sources/cpu/cyclone/Cyclone.s)
-    list(APPEND FLAGS -DNO_KEYBOARD -DBUILD_C68K -DUSE_FILE32API -DLSB_FIRST -D__PFBA_ARM__)
-    if (BUILD_DEBUG)
-        list(APPEND FLAGS
-                -D__PSP2_DEBUG__ -g # TODO: cyclone arm asm core not working without O2/O3
-                )
-    else ()
-        list(APPEND FLAGS
-                -fno-asynchronous-unwind-tables -funroll-loops
-                -mword-relocations -fno-unwind-tables -fno-optimize-sibling-calls
-                -mvectorize-with-neon-quad -funsafe-math-optimizations
-                -mlittle-endian -munaligned-access
-                -fsingle-precision-constant
-                )
-    endif (BUILD_DEBUG)
-    list(APPEND LDFLAGS ScePower_stub)
+    list(APPEND FLAGS -DBUILD_C68K -DUSE_FILE32API -DLSB_FIRST -D__PFBA_ARM__)
+    list(APPEND LDFLAGS ScePower_stub pthread)
 elseif (PLATFORM_PS3)
     ##############
     # PS3
@@ -394,7 +379,7 @@ set(SRC ${SRC_PFBA} ${SRC_CPU} ${SRC_DRV} ${SRC_BURN} ${SRC_BURNER} ${SRC_INTF} 
 #####################
 add_executable(${PROJECT_NAME} ${SRC} ${CMAKE_CURRENT_BINARY_DIR}/deps/m68kops.c)
 target_compile_options(${PROJECT_NAME} PRIVATE ${FLAGS})
-target_compile_options(${PROJECT_NAME} PRIVATE $<$<COMPILE_LANGUAGE:CXX>:-std=gnu++11 -fpermissive>)
+target_compile_options(${PROJECT_NAME} PRIVATE $<$<COMPILE_LANGUAGE:CXX>:-fno-exceptions -fpermissive>)
 target_include_directories(${PROJECT_NAME} PRIVATE ${INC})
 target_link_libraries(${PROJECT_NAME} cross2dui ${LDFLAGS})
 # include libcross2d targets

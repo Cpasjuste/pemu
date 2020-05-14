@@ -10,7 +10,6 @@ set(PLATFORM_RPI3 OFF CACHE BOOL "RIP3 platform target")
 set(PLATFORM_SWITCH OFF CACHE BOOL "Nintendo Switch platform target")
 set(PLATFORM_3DS OFF CACHE BOOL "Nintendo 3DS platform target")
 set(PLATFORM_VITA OFF CACHE BOOL "Sony PS Vita platform target")
-#set(PLATFORM_LDK OFF CACHE BOOL "LDK Handheld platform target (mips: LDK, RS-97...)")
 ####################
 # TARGET PLATFORM
 ####################
