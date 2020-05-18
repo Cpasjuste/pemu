@@ -59,10 +59,10 @@ set(VERSION_MAJOR 4)
 set(VERSION_MINOR 4)
 
 # pnes
-#add_subdirectory(pnes)
+add_subdirectory(pnes)
 
 # psnes
-#add_subdirectory(psnes)
+add_subdirectory(psnes)
 
 # pfba
 add_subdirectory(pfba)
