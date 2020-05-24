@@ -33,6 +33,8 @@ if (OPTION_BUILTIN_MINIZIP)
     if (PLATFORM_WINDOWS)
         list(APPEND CROSS2DUI_SOURCE ${CMAKE_CURRENT_SOURCE_DIR}/minizip/iowin32.c)
     endif ()
+else ()
+    list(APPEND LDFLAGS minizip)
 endif ()
 
 if (PLATFORM_LINUX)

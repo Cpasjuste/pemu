@@ -29,6 +29,8 @@
 #include <psp2/power.h>
 #include <psp2/io/dirent.h>
 int _newlib_heap_size_user = 192 * 1024 * 1024;
+#elif __3DS__
+unsigned int __stacksize__ = 1024 * 1024;
 #endif
 
 PSNESUIMenu *uiMenu;

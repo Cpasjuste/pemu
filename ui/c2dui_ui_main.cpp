@@ -6,7 +6,7 @@
 #include "c2dui.h"
 
 UIMain::UIMain(const Vector2f &size) : C2DRenderer(size) {
-
+    printf("UIMain(%i, %i)\n", (int) size.x, (int) size.y);
 }
 
 UIMain::~UIMain() {

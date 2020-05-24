@@ -13,15 +13,15 @@ Skin::Skin(UIMain *u, const std::vector<Button> &btns, const Vector2f &scaling) 
     // extract config file from zipped skin but create a default one
     config = new config::Config("SKIN_CONFIG", path + "default/config.cfg");
 
-    std::string skinName = ui->getConfig()->get(Option::GUI_SKIN)->getValueString() + std::string(".zip");
     int configLen = 0;
+    std::string skinName = ui->getConfig()->get(Option::GUI_SKIN)->getValueString() + ".zip";
     char *configData = getZippedData(path + skinName, "config.cfg", &configLen);
-    if (configData == nullptr) {
-        printf("Skin: could not find config.cfg in zip (%s)\n", (path + skinName).c_str());
+    if (configData == nullptr && skinName != "default.zip") {
         ui->getConfig()->get(Option::GUI_SKIN)->setValueString("default");
         skinName = "default.zip";
         configData = getZippedData(path + skinName, "config.cfg", &configLen);
     }
+
     if (configData != nullptr) {
         configData[configLen - 1] = '\0';
         path += skinName;
@@ -311,7 +311,8 @@ Skin::RectangleShapeGroup Skin::getRectangleShape(const std::vector<std::string>
     return rectangleShapeGroup;
 }
 
-bool Skin::loadRectangleShape(c2d::RectangleShape *shape, const std::vector<std::string> &tree, bool textureUseFillColors) {
+bool
+Skin::loadRectangleShape(c2d::RectangleShape *shape, const std::vector<std::string> &tree, bool textureUseFillColors) {
 
     RectangleShapeGroup rectangleShapeGroup = getRectangleShape(tree);
     if (!rectangleShapeGroup.available) {
@@ -545,6 +546,7 @@ char *Skin::getZippedData(const std::string &p, const std::string &name, int *si
                 unzCloseCurrentFile(zip);
             } else {
                 printf("Skin::getZippedData(%s, %s): unzOpenCurrentFile failed\n", p.c_str(), name.c_str());
+                break;
             }
         } while (unzGoToNextFile(zip) == UNZ_OK);
     } else {
