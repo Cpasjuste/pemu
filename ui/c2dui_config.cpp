@@ -50,26 +50,17 @@ Config::Config(c2d::Io *io, int ver) {
     get()->at(get()->size() - 1).setInfo("This option needs a restart...");
 #endif
     // build zipped skin list
-    std::vector<std::string> paths = {"default"};
+    std::vector<std::string> skins;
     std::vector<c2d::Io::File> files = io->getDirList(dataPath + "skins/", true);
     for (const auto &file : files) {
-        if (file.type == c2d::Io::Type::Directory || file.name[0] == '.' || file.name == "default.zip") {
+        if (file.type == c2d::Io::Type::Directory || file.name[0] == '.') {
             continue;
         }
-        paths.emplace_back(Utility::removeExt(file.name));
+        skins.emplace_back(Utility::removeExt(file.name));
         printf("skin found: %s\n", Utility::removeExt(file.name).c_str());
     }
-    // set 320x240 skin by default for 320x240 screens
-    if (C2D_SCREEN_WIDTH == 320 && C2D_SCREEN_HEIGHT == 240) {
-        for (size_t i = 0; i < paths.size(); i++) {
-            if (paths.at(i) == "default_320x240") {
-                append("SKIN", paths, i, Option::Id::GUI_SKIN, Option::Flags::STRING);
-                break;
-            }
-        }
-    }
     if (get(Option::Id::GUI_SKIN) == nullptr) {
-        append("SKIN", paths, 0, Option::Id::GUI_SKIN, Option::Flags::STRING);
+        append("SKIN", skins, 0, Option::Id::GUI_SKIN, Option::Flags::STRING);
     }
     get()->at(get()->size() - 1).setInfo("Changing skins needs a restart...");
 
@@ -87,7 +78,7 @@ Config::Config(c2d::Io *io, int ver) {
         append("SCALING", {"NONE", "2X", "3X", "FIT", "FIT 4:3", "FULL"}, 2,
                Option::Id::ROM_SCALING, Option::Flags::STRING);
     } else {
-        append("SCALING", {"NONE", "FIT", "FIT 4:3", "FULL"}, 3, Option::Id::ROM_SCALING, Option::Flags::STRING);
+        append("SCALING", {"NONE", "FIT", "FIT 4:3", "FULL"}, 0, Option::Id::ROM_SCALING, Option::Flags::STRING);
     }
 #ifdef __FREEPLAY__
     append("FILTER", {"POINT", "LINEAR"}, 1, Option::Id::ROM_FILTER, Option::Flags::STRING);

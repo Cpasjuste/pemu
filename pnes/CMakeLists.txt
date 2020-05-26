@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0)
-set(CMAKE_VERBOSE_MAKEFILE ON)
+#set(CMAKE_VERBOSE_MAKEFILE ON)
 
 project(pnes)
 
@@ -49,12 +49,6 @@ set(NESTOPIA_CFLAGS
 
 set(NESTOPIA_LDFLAGS minizip)
 
-if (BUILD_DEBUG)
-    list(APPEND NESTOPIA_CFLAGS -g -O0)
-else ()
-    list(APPEND NESTOPIA_CFLAGS -g -O3)
-endif()
-
 ##############
 # pnes
 ##############
@@ -78,14 +72,12 @@ elseif (PLATFORM_3DS)
     #####################
     # 3DS PLATORM
     #####################
+    list(APPEND NESTOPIA_CFLAGS -Dstrcasecmp=strcmp)
     list(APPEND NESTOPIA_SRC sources/3ds/port.c)
 elseif (PLATFORM_LINUX)
     #####################
     # SDL2 PLATORM
     #####################
-    if (PLATFORM_LDK)
-        list(REMOVE_ITEM NESTOPIA_LDFLAGS minizip)
-    endif ()
     if (PLATFORM_WINDOWS)
         #list(APPEND NESTOPIA_CFLAGS -D_MINGW)
     endif (PLATFORM_WINDOWS)
@@ -120,6 +112,10 @@ add_custom_target(${PROJECT_NAME}.data.extra
         COMMAND cd ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/skins/big_preview && ${ZIP} -ru ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/skins/big_preview.zip .
         COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/skins/big_preview.zip ${CMAKE_CURRENT_BINARY_DIR}/skins/
         COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/skins/big_preview
+        # 400x240 skin
+        COMMAND cd ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/skins/default_400x240 && ${ZIP} -ru ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/skins/default_400x240.zip .
+        COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/skins/default_400x240.zip ${CMAKE_CURRENT_BINARY_DIR}/skins/
+        COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/skins/default_400x240
         )
 add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}.data.extra)
 
