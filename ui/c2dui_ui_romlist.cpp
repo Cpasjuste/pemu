@@ -28,8 +28,11 @@ UIRomList::UIRomList(UIMain *u, RomList *rList, const c2d::Vector2f &size) : Rec
 
     // add help image if available
     auto *help = new RectangleShape({16, 16});
-    skin->loadRectangleShape(help, {"MAIN", "HELP"});
-    UIRomList::add(help);
+    if (skin->loadRectangleShape(help, {"MAIN", "HELP"})) {
+        UIRomList::add(help);
+    } else {
+        delete (help);
+    }
 
     // add rom info ui
     romInfo = new UIRomInfo(ui, this, skin->font, ui->getFontSize());

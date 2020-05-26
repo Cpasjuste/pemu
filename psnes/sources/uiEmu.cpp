@@ -322,7 +322,7 @@ void PSNESUIEmu::onUpdate() {
 
     UIEmu::onUpdate();
 
-    if (!isPaused()) {
+    if (isVisible() && !isPaused()) {
 
         S9xMainLoop();
 
