@@ -5,7 +5,6 @@
 #include "c2dui.h"
 #include "uiEmu.h"
 #include "video.h"
-#include "sound.h"
 
 #include <snes9x.h>
 #include <memmap.h>
@@ -187,7 +186,8 @@ int PSNESUIEmu::load(const ss_api::Game &game) {
         return -1;
     }
 
-    S9xPortSoundInit();
+    S9xInitSound(0);
+    S9xSetSoundMute(FALSE);
 
     //getButtonId
     S9xUnmapAllControls();
@@ -270,7 +270,8 @@ int PSNESUIEmu::load(const ss_api::Game &game) {
 #endif
 
     S9xGraphicsInit();
-    S9xSoundStart();
+
+    addAudio(Settings.SoundPlaybackRate, (float) Memory.ROMFramesPerSecond);
 
     targetFps = Memory.ROMFramesPerSecond;
 
@@ -283,9 +284,6 @@ int PSNESUIEmu::load(const ss_api::Game &game) {
 }
 
 void PSNESUIEmu::stop() {
-
-    S9xSoundStop();
-    S9xPortSoundDeinit();
 
     Settings.StopEmulation = TRUE;
 
@@ -358,13 +356,11 @@ void PSNESUIEmu::onUpdate() {
 
 void PSNESUIEmu::pause() {
     S9xSetSoundMute(TRUE);
-    S9xSoundStop();
     UIEmu::pause();
 }
 
 void PSNESUIEmu::resume() {
     S9xSetSoundMute(FALSE);
-    S9xSoundStart();
     UIEmu::resume();
 }
 
@@ -454,9 +450,9 @@ bool8 S9xDeinitUpdate(int width, int height) {
                     blit = S9xBlitPixSimple1x2;
                     break;
 #ifdef __SOFT_SCALERS__
-                case VIDEOMODE_TV:
-                    blit = S9xBlitPixTV1x2;
-                    break;
+                    case VIDEOMODE_TV:
+                        blit = S9xBlitPixTV1x2;
+                        break;
 #endif
             }
         } else {
@@ -897,4 +893,41 @@ const char *S9xStringInput(const char *message) {
  * Otherwise let it empty.
  */
 void S9xSetPalette() {
+}
+
+static void samples_available(void *data) {
+
+    int samples_available = S9xGetSampleCount();
+    S9xMixSamples((uint8 *) _ui->getUiEmu()->getAudio()->getBuffer(), samples_available);
+
+    if (Settings.SoundSync && !Settings.TurboMode && !Settings.Mute) {
+        int queued = _ui->getUiEmu()->getAudio()->getQueuedSize();
+        int size = _ui->getUiEmu()->getAudio()->getBufferSize();
+        while (queued > size) {
+            usleep(100);
+            queued = _ui->getUiEmu()->getAudio()->getQueuedSize();
+        }
+    }
+
+    _ui->getUiEmu()->getAudio()->play(
+            _ui->getUiEmu()->getAudio()->getBuffer(), samples_available >> 1);
+}
+
+bool8
+S9xOpenSoundDevice() {
+
+    S9xSetSamplesAvailableCallback(samples_available, nullptr);
+    return TRUE;
+}
+
+void
+S9xToggleSoundChannel(int c) {
+    static int sound_switch = 255;
+
+    if (c == 8)
+        sound_switch = 255;
+    else
+        sound_switch ^= 1 << c;
+
+    S9xSetSoundControl(sound_switch);
 }

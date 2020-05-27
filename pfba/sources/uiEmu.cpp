@@ -169,7 +169,7 @@ int PFBAGuiEmu::load(const ss_api::Game &game) {
     // some drivers require audio buffer to be allocated, add a "dummy" one...
     auto *aud = new Audio(audio_freq);
     nBurnSoundRate = aud->getSampleRate();
-    nBurnSoundLen = aud->getBufferLen();
+    nBurnSoundLen = aud->getSamples();
     pBurnSoundOut = aud->getBuffer();
     if (DrvInit(nBurnDrvActive, false) != 0) {
         printf("\nDriver initialisation failed\n");
@@ -195,7 +195,7 @@ int PFBAGuiEmu::load(const ss_api::Game &game) {
     addAudio(audio_freq, (float) nBurnFPS / 100.0f);
     if (audio->isAvailable()) {
         nBurnSoundRate = getAudio()->getSampleRate();
-        nBurnSoundLen = getAudio()->getBufferLen();
+        nBurnSoundLen = getAudio()->getSamples();
         pBurnSoundOut = getAudio()->getBuffer();
     }
     audio_sync = ui->getConfig()->get(Option::Id::ROM_AUDIO_SYNC, true)->getValueBool();
