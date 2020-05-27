@@ -136,23 +136,24 @@ void (*audio_deinit)();
 void audio_deinit_dummy() {}
 
 void audio_init() {
-    uiEmu->addAudio(conf.audio_sample_rate, nst_pal() ? (conf.timing_speed / 6) * 5 : conf.timing_speed);
+    uiEmu->addAudio(conf.audio_sample_rate,
+                    nst_pal() ? ((float) conf.timing_speed / 6) * 5 : (float) conf.timing_speed);
 }
 
 void audio_play() {
-    if (uiEmu->getAudio()) {
+    if (uiEmu->getAudio() != nullptr) {
         uiEmu->getAudio()->play(true);
     }
 }
 
 void audio_pause() {
-    if (uiEmu->getAudio()) {
+    if (uiEmu->getAudio() != nullptr) {
         uiEmu->getAudio()->pause(1);
     }
 }
 
 void audio_unpause() {
-    if (uiEmu->getAudio()) {
+    if (uiEmu->getAudio() != nullptr) {
         uiEmu->getAudio()->pause(0);
     }
 }
@@ -161,7 +162,7 @@ void audio_set_params(Sound::Output *soundoutput) {
 
     Audio *aud = uiEmu->getAudio();
 
-    if (aud) {
+    if (aud != nullptr) {
         // Set audio parameters
         Sound sound(emulator);
         sound.SetSampleBits(16);
@@ -170,7 +171,7 @@ void audio_set_params(Sound::Output *soundoutput) {
         sound.SetSpeed(Sound::DEFAULT_SPEED);
         //audio_adj_volume();
         soundoutput->samples[0] = aud->getBuffer();
-        soundoutput->length[0] = (unsigned int) aud->getBufferLen();
+        soundoutput->length[0] = (unsigned int) aud->getSamples();
         soundoutput->samples[1] = nullptr;
         soundoutput->length[1] = 0;
     }
