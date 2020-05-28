@@ -10,7 +10,7 @@ public:
 
     MenuLine(UIMain *u, FloatRect &rect, Skin::TextGroup &tg) : RectangleShape(rect) {
 
-        setFillColor(Color::Transparent);
+        RectangleShape::setFillColor(Color::Transparent);
 
         ui = u;
         textGroup = tg;
@@ -21,27 +21,29 @@ public:
         name->setOutlineThickness(textGroup.outlineSize);
         name->setOutlineColor(textGroup.outlineColor);
         name->setOrigin(Origin::Left);
-        name->setPosition(0, getSize().y / 2);
-        name->setSizeMax((getSize().x * 0.60f), 0);
-        add(name);
+        name->setPosition(0, RectangleShape::getSize().y / 2);
+        name->setSizeMax((RectangleShape::getSize().x * 0.60f), 0);
+        RectangleShape::add(name);
 
         value = new Text("OPTION VALUE,)'", textGroup.size, font);
         value->setFillColor(textGroup.color);
         value->setOutlineThickness(textGroup.outlineSize);
         value->setOutlineColor(textGroup.outlineColor);
         value->setOrigin(Origin::Left);
-        value->setPosition((getSize().x * 0.67f), getSize().y / 2);
-        value->setSizeMax(getSize().x * 0.5f, 0);
-        add(value);
+        value->setPosition((RectangleShape::getSize().x * 0.60f), RectangleShape::getSize().y / 2);
+        value->setSizeMax(RectangleShape::getSize().x * 0.3f, 0);
+        RectangleShape::add(value);
 
         sprite = new Sprite();
-        add(sprite);
+        RectangleShape::add(sprite);
     }
 
     void update(Option *opt) {
 
         // always hide sprite (icon) first
-        sprite->setVisibility(Visibility::Hidden);
+        if (sprite != nullptr) {
+            sprite->setVisibility(Visibility::Hidden);
+        }
 
         // reset
         name->setOutlineColor(textGroup.outlineColor);
@@ -106,36 +108,36 @@ UIMenu::UIMenu(UIMain *ui) : RectangleShape(Vector2f(0, 0)) {
     Skin *skin = ui->getSkin();
 
     skin->loadRectangleShape(this, {"OPTIONS_MENU"});
-    alpha = getAlpha();
+    alpha = RectangleShape::getAlpha();
 
     // menu title
     title = new Text("TITLE", C2D_DEFAULT_CHAR_SIZE, ui->getSkin()->font);
     title->setStyle(Text::Underlined);
     skin->loadText(title, {"OPTIONS_MENU", "TITLE_TEXT"});
-    add(title);
+    RectangleShape::add(title);
 
     textGroup = ui->getSkin()->getText({"OPTIONS_MENU", "ITEMS_TEXT"});
     int start_y = (int) textGroup.rect.top;
     // calculate lines per menu
     float line_height = ui->getSkin()->getFont()->getLineSpacing(textGroup.size) + 4;
-    int max_lines = (int) ((getSize().y - start_y) / line_height) * 2;
+    int max_lines = (int) ((RectangleShape::getSize().y - (float) start_y) / line_height) * 2;
 
     // add selection rectangle (highlight)
     highlight = new RectangleShape({16, 16});
     ui->getSkin()->loadRectangleShape(highlight, {"SKIN_CONFIG", "HIGHLIGHT"});
-    highlight->setSize(((getSize().x / 2) * 0.5f) - 4, line_height);
-    add(highlight);
+    highlight->setSize(((RectangleShape::getSize().x / 2) * 0.5f) - 4, line_height);
+    RectangleShape::add(highlight);
 
     // add lines of text
     for (int i = 0; i < max_lines; i++) {
-        FloatRect rect = {textGroup.rect.left, start_y + (i * line_height), getSize().x / 2, line_height};
+        FloatRect rect = {textGroup.rect.left, (float) start_y + ((float) i * line_height),
+                          RectangleShape::getSize().x / 2, line_height};
         if (i >= max_lines / 2) {
-            //"todo: fix menu height on small screens"
-            //rect.left = getSize().x / 2;
-            //rect.top = start_y + ((i - ((float) max_lines / 2)) * line_height);
+            rect.left = RectangleShape::getSize().x / 2;
+            rect.top = (float) start_y + (((float) i - ((float) max_lines / 2)) * line_height);
         }
         lines.push_back(new MenuLine(ui, rect, textGroup));
-        add(lines[i]);
+        RectangleShape::add(lines[i]);
     }
 
     // build menus
@@ -146,11 +148,12 @@ UIMenu::UIMenu(UIMain *ui) : RectangleShape(Vector2f(0, 0)) {
     optionMenuRom->addChild("RETURN");
     optionMenuRom->addChild("EXIT");
 
-    tweenPosition = new TweenPosition({getPosition().x, -getSize().y}, getPosition(), 0.2f);
+    tweenPosition = new TweenPosition({RectangleShape::getPosition().x, -RectangleShape::getSize().y},
+                                      RectangleShape::getPosition(), 0.2f);
     tweenPosition->setState(TweenState::Stopped);
-    add(tweenPosition);
+    RectangleShape::add(tweenPosition);
 
-    setVisibility(Visibility::Hidden);
+    RectangleShape::setVisibility(Visibility::Hidden);
 }
 
 void UIMenu::load(bool isRom, OptionMenu *om) {
@@ -377,9 +380,9 @@ bool UIMenu::onInput(c2d::Input::Player *players) {
                     ui->getUiRomList()->setVideoSnapDelay(option->getValueInt());
                     break;
 #ifdef __SWITCH__
-                case Option::Id::JOY_SINGLEJOYCON:
-                    ((SWITCHInput *) ui->getInput())->setSingleJoyconMode(option->getValueBool());
-                    break;
+                    case Option::Id::JOY_SINGLEJOYCON:
+                        ((SWITCHInput *) ui->getInput())->setSingleJoyconMode(option->getValueBool());
+                        break;
 #endif
                 default:
                     break;

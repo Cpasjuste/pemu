@@ -48,7 +48,7 @@ void UIMain::init(UIRomList *_uiRomList, UIMenu *_uiMenu,
     add(uiState);
 
     // scaling factor mainly used for borders,
-    scaling = std::min(getSize().x / C2D_SCREEN_WIDTH, 1.0f);
+    scaling = std::min(getSize().x / 640, 1.0f);
     // printf("scaling: %f\n", scaling);
 
     uiMessageBox = new c2d::MessageBox(
@@ -66,6 +66,10 @@ void UIMain::init(UIRomList *_uiRomList, UIMenu *_uiMenu,
     c.a -= 150;
     uiMessageBox->setNotSelectedColor(uiMessageBox->getFillColor(), c);
     uiMessageBox->setOrigin(Origin::Center);
+#if C2D_SCREEN_WIDTH <= 400
+    uiMessageBox->getTitleText()->setOutlineThickness(1);
+    uiMessageBox->getMessageText()->setOutlineThickness(1);
+#endif
     add(uiMessageBox);
 
     uiProgressBox = new UIProgressBox(this);
@@ -105,7 +109,7 @@ void UIMain::onUpdate() {
         }
     }
 
-    Renderer::onUpdate();
+    C2DRenderer::onUpdate();
 }
 
 float UIMain::getScaling() {
@@ -153,7 +157,7 @@ c2d::MessageBox *UIMain::getUiMessageBox() {
 }
 
 int UIMain::getFontSize() {
-    return C2D_DEFAULT_CHAR_SIZE;
+    return (int) ((float) C2D_DEFAULT_CHAR_SIZE * scaling);
 }
 
 void UIMain::updateInputMapping(bool isRomConfig) {
