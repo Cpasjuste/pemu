@@ -35,7 +35,7 @@ UIListBoxLine::UIListBoxLine(
         text->setSizeMax(UIListBoxLine::getSize().x - (float) fontSize - iconRect->getSize().x, 0);
     } else {
         text->setPosition(2, UIListBoxLine::getSize().y / 2);
-        text->setSizeMax(UIListBoxLine::getSize().x - ((float) fontSize + 8), 0);
+        text->setSizeMax(UIListBoxLine::getSize().x - (float) fontSize, 0);
     }
 
     UIListBoxLine::add(text);
@@ -163,8 +163,10 @@ void UIListBox::updateLines() {
             Game game = games[file_index + i];
             lines[i]->setVisibility(Visibility::Visible);
             if (pfbn) {
+                //std::string upper = Utility::toUpper(useRomName ? game.names[0].text : game.getName().text);
                 lines[i]->setString(useRomName ? game.names[0].text : game.getName().text);
             } else {
+                //std::string upper = Utility::toUpper(useRomName ? Utility::removeExt(game.path) : game.getName().text);
                 lines[i]->setString(useRomName ? Utility::removeExt(game.path) : game.getName().text);
             }
             // TODO: ICON

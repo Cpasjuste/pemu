@@ -22,7 +22,7 @@ public:
         name->setOutlineColor(textGroup.outlineColor);
         name->setOrigin(Origin::Left);
         name->setPosition(0, RectangleShape::getSize().y / 2);
-        name->setSizeMax((RectangleShape::getSize().x * 0.60f), 0);
+        name->setSizeMax((RectangleShape::getSize().x * 0.6f), 0);
         RectangleShape::add(name);
 
         value = new Text("OPTION VALUE,)'", textGroup.size, font);
@@ -30,7 +30,7 @@ public:
         value->setOutlineThickness(textGroup.outlineSize);
         value->setOutlineColor(textGroup.outlineColor);
         value->setOrigin(Origin::Left);
-        value->setPosition((RectangleShape::getSize().x * 0.60f), RectangleShape::getSize().y / 2);
+        value->setPosition((RectangleShape::getSize().x * 0.6f), RectangleShape::getSize().y / 2);
         value->setSizeMax(RectangleShape::getSize().x * 0.3f, 0);
         RectangleShape::add(value);
 
