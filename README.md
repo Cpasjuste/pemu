@@ -30,7 +30,7 @@
 - install ubuntu build tools:
 	- `sudo apt-get install zip git autoconf libtool automake build-essential cmake`
 - download, install and update devkitpro-pacman:
-	- `wget https://github.com/devkitPro/pacman/releases/download/devkitpro-pacman-1.0.1/devkitpro-pacman.deb && sudo dpkg -i devkitpro-pacman.deb`
+	- `wget https://github.com/devkitPro/pacman/releases/download/v1.0.2/devkitpro-pacman.amd64.deb && sudo dpkg -i devkitpro-pacman.amd64.deb`
 	- `sudo dkp-pacman -Syu`
 	- `sudo dkp-pacman -S switch-dev switch-portlibs devkitpro-pkgbuild-helpers`
 - clone pemu repository:
