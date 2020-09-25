@@ -32,7 +32,7 @@
 - download, install and update devkitpro-pacman:
 	- `wget https://github.com/devkitPro/pacman/releases/download/v1.0.2/devkitpro-pacman.amd64.deb && sudo dpkg -i devkitpro-pacman.amd64.deb`
 	- `sudo dkp-pacman -Syu`
-	- `sudo dkp-pacman -S switch-dev switch-portlibs devkitpro-pkgbuild-helpers`
+	- `sudo dkp-pacman -S switch-dev switch-glm switch-portlibs devkitpro-pkgbuild-helpers`
 - clone pemu repository:
 	- `git clone --recursive https://github.com/Cpasjuste/pemu.git`
 - build:
@@ -40,4 +40,4 @@
 	- `mkdir cmake-build && cd cmake-build`
 	- `cmake ../ -DPLATFORM_SWITCH=ON -DCMAKE_BUILD_TYPE=Release`
 	- `make pfba.deps`
-	- `make`
+	- `make -j9 pfba_switch_release`
