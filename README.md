@@ -36,6 +36,7 @@
 - clone pemu repository:
 	- `git clone --recursive https://github.com/Cpasjuste/pemu.git`
 - build:
+	- `cd pemu`
 	- `mkdir cmake-build && cd cmake-build`
 	- `cmake ../ -DPLATFORM_SWITCH=ON -DCMAKE_BUILD_TYPE=Release`
 	- `make pfba.deps`
