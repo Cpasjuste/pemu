@@ -4,12 +4,12 @@
 
 #include "c2dui.h"
 
-UIHighlight::UIHighlight() : RoundedRectangleShape() {
+UIHighlight::UIHighlight() : RectangleShape(FloatRect{}) {
 
     tweenPos = new TweenPosition({0, 0}, {0, 0}, 0.25f);
-    add(tweenPos);
+    RectangleShape::add(tweenPos);
     tweenSize = new TweenSize({0, 0}, {0, 0}, 0.25f);
-    add(tweenSize);
+    RectangleShape::add(tweenSize);
 }
 
 void UIHighlight::tweenPosition(const c2d::FloatRect &rect, int ms) {

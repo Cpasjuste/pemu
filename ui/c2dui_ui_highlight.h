@@ -7,7 +7,7 @@
 
 namespace c2dui {
 
-    class UIHighlight : public c2d::RoundedRectangleShape {
+    class UIHighlight : public c2d::RectangleShape {
 
     public:
 

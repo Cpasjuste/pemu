@@ -29,7 +29,7 @@ namespace c2dui {
 
         void addAudio(c2d::Audio *audio);
 
-        void addAudio(int rate = 48000, float fps = 60, c2d::Audio::C2DAudioCallback cb = nullptr);
+        void addAudio(int rate = 48000, int samples = 2048, c2d::Audio::C2DAudioCallback cb = nullptr);
 
         void addVideo(C2DUIVideo *video);
 

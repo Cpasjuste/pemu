@@ -60,6 +60,8 @@ int PNESGuiEmu::load(const ss_api::Game &game) {
 
 void PNESGuiEmu::stop() {
 
+    nst_pause();
+
     // Remove the cartridge and shut down the NES
     nst_unload();
 
@@ -131,18 +133,24 @@ void PNESGuiEmu::onUpdate() {
 /// NESTOPIA
 
 /// NESTOPIA AUDIO
-void (*audio_deinit)();
+static void *audio_buffer = nullptr;
 
-void audio_deinit_dummy() {}
+void audio_deinit() {
+    if (audio_buffer) {
+        free(audio_buffer);
+        audio_buffer = nullptr;
+    }
+}
 
 void audio_init() {
-    uiEmu->addAudio(conf.audio_sample_rate,
-                    nst_pal() ? ((float) conf.timing_speed / 6) * 5 : (float) conf.timing_speed);
+    int fps = nst_pal() ? (conf.timing_speed / 6) * 5 : conf.timing_speed;
+    int samples = conf.audio_sample_rate / fps;
+    uiEmu->addAudio(conf.audio_sample_rate, samples);
 }
 
 void audio_play() {
     if (uiEmu->getAudio() != nullptr) {
-        uiEmu->getAudio()->play(true);
+        uiEmu->getAudio()->play(audio_buffer, uiEmu->getAudio()->getSamples());
     }
 }
 
@@ -169,8 +177,8 @@ void audio_set_params(Sound::Output *soundoutput) {
         sound.SetSampleRate((unsigned long) conf.audio_sample_rate);
         sound.SetSpeaker(Sound::SPEAKER_STEREO);
         sound.SetSpeed(Sound::DEFAULT_SPEED);
-        //audio_adj_volume();
-        soundoutput->samples[0] = aud->getBuffer();
+        audio_buffer = malloc(aud->getSamplesSize());
+        soundoutput->samples[0] = audio_buffer;
         soundoutput->length[0] = (unsigned int) aud->getSamples();
         soundoutput->samples[1] = nullptr;
         soundoutput->length[1] = 0;
@@ -206,7 +214,7 @@ void PNESGuiEmu::nestopia_config_init() {
 
     // Audio
     conf.audio_api = 0;
-    conf.audio_stereo = false;
+    conf.audio_stereo = true;
     conf.audio_sample_rate = 48000;
     conf.audio_volume = 85;
     conf.audio_vol_sq1 = 85;
@@ -258,9 +266,6 @@ int PNESGuiEmu::nestopia_core_init(const char *rom_path) {
 
     // Set archive handler function pointer
     nst_archive_select = &nst_archive_select_file;
-
-    // Set audio function pointers
-    audio_deinit = &audio_deinit_dummy;
 
     // Set the video dimensions
     video_set_dimensions();

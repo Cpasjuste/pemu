@@ -6,10 +6,11 @@
 
 using namespace Nes::Api;
 
-extern void (*audio_deinit)();
+//extern void (*audio_deinit)();
 
 //void audio_set_funcs();
 void audio_init();
+void audio_deinit();
 void audio_play();
 void audio_pause();
 void audio_unpause();

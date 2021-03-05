@@ -75,7 +75,7 @@ void RomList::build() {
 
     gameList.append(dataPath + "gamelist.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_ARCADE), false, true);
     setLoadingText("Games: %i / %i", gameList.getAvailableCount(), gameList.games.size());
-    printf("RomList::build: %lu roms\n", gameList.games.size());
+    printf("RomList::build: games: %i / %lu\n", gameList.getAvailableCount(), gameList.games.size());
 
     // sort lists
     std::sort(gameList.systems.begin(), gameList.systems.end(), Api::sortByName);
