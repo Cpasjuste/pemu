@@ -166,11 +166,11 @@ int PFBAGuiEmu::load(const ss_api::Game &game) {
     InpInit();
     InpDIP();
     printf("Initialize driver...\n");
-    // some drivers require audio buffer to be allocated, add a "dummy" one...
+    // some drivers require audio buffer to be allocated for DrvInit, add a "dummy" one...
     auto *aud = new Audio(audio_freq);
     nBurnSoundRate = aud->getSampleRate();
     nBurnSoundLen = aud->getSamples();
-    pBurnSoundOut = aud->getBuffer();
+    pBurnSoundOut = (INT16 *) malloc(aud->getSamplesSize());
     if (DrvInit(nBurnDrvActive, false) != 0) {
         printf("\nDriver initialisation failed\n");
         delete (aud);
@@ -180,6 +180,7 @@ int PFBAGuiEmu::load(const ss_api::Game &game) {
         return -1;
     }
     delete (aud);
+    free(pBurnSoundOut);
     nFramesEmulated = 0;
     nFramesRendered = 0;
     nCurrentFrame = 0;
@@ -192,14 +193,14 @@ int PFBAGuiEmu::load(const ss_api::Game &game) {
     ///////////
     // AUDIO
     //////////
-    addAudio(audio_freq, (float) nBurnFPS / 100.0f);
+    addAudio(audio_freq, Audio::toSamples(audio_freq, (float) nBurnFPS / 100.0f));
     if (audio->isAvailable()) {
-        nBurnSoundRate = getAudio()->getSampleRate();
-        nBurnSoundLen = getAudio()->getSamples();
-        pBurnSoundOut = getAudio()->getBuffer();
+        nBurnSoundRate = audio->getSampleRate();
+        nBurnSoundLen = audio->getSamples();
+        pBurnSoundOut = (INT16 *) malloc(audio->getSamplesSize());
     }
     audio_sync = ui->getConfig()->get(Option::Id::ROM_AUDIO_SYNC, true)->getValueBool();
-    targetFps = nBurnFPS / 100;
+    targetFps = (float) nBurnFPS / 100;
     printf("FORCE_60HZ: %i, AUDIO_SYNC: %i, FPS: %f (BURNFPS: %f)\n",
            bForce60Hz, audio_sync, (float) nBurnFPS / 100.0f, targetFps);
     ///////////
@@ -257,8 +258,8 @@ void PFBAGuiEmu::renderFrame(bool draw) {
             video->getTexture()->unlock();
         }
 
-        if (audio != nullptr && audio->isAvailable()) {
-            audio->play(audio_sync);
+        if (audio && audio->isAvailable()) {
+            audio->play(pBurnSoundOut, audio->getSamples(), audio_sync);
         }
     }
 }
