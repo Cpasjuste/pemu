@@ -80,12 +80,12 @@ bool PNESGuiEmu::onInput(c2d::Input::Player *players) {
 void PNESGuiEmu::onUpdate() {
 
     if (!isPaused()) {
+
         // fps
         int showFps = getUi()->getConfig()->get(Option::Id::ROM_SHOW_FPS, true)->getValueBool();
         getFpsText()->setVisibility(showFps ? Visibility::Visible : Visibility::Hidden);
         if (showFps) {
-            sprintf(getFpsString(), "FPS: %.2g/%2d", getUi()->getFps(),
-                    nst_pal() ? (conf.timing_speed / 6) * 5 : conf.timing_speed);
+            sprintf(getFpsString(), "FPS: %.2g/%2d", getUi()->getFps(), nst_pal() ? 50 : 60);
             getFpsText()->setString(getFpsString());
         }
 
@@ -143,14 +143,13 @@ void audio_deinit() {
 }
 
 void audio_init() {
-    int fps = nst_pal() ? (conf.timing_speed / 6) * 5 : conf.timing_speed;
-    int samples = conf.audio_sample_rate / fps;
+    int samples = conf.audio_sample_rate / (nst_pal() ? 50 : 60);
     uiEmu->addAudio(conf.audio_sample_rate, samples);
 }
 
 void audio_play() {
     if (uiEmu->getAudio() != nullptr) {
-        uiEmu->getAudio()->play(audio_buffer, uiEmu->getAudio()->getSamples());
+        uiEmu->getAudio()->play(audio_buffer, uiEmu->getAudio()->getSamples(), nst_pal());
     }
 }
 

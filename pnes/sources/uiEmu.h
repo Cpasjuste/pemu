@@ -24,9 +24,6 @@ public:
     bool onInput(c2d::Input::Player *players) override;
 
     void onUpdate() override;
-
-private:
-
 };
 
 #endif //PNES_UIEMU_H

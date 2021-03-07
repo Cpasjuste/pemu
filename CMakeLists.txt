@@ -62,10 +62,10 @@ set(VERSION_MINOR 4)
 add_subdirectory(pnes)
 
 # psnes
-add_subdirectory(psnes)
+#add_subdirectory(psnes)
 
 # pfba
-add_subdirectory(pfba)
+#add_subdirectory(pfba)
 
 # pemu (ui)
 add_subdirectory(ui)
