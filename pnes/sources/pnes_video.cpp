@@ -346,8 +346,8 @@ void video_set_dimensions() {
         case 0:    // None
             basesize.w = Video::Output::WIDTH;
             basesize.h = Video::Output::HEIGHT;
-            conf.video_tv_aspect == true ? rendersize.w = tvwidth * wscalefactor : rendersize.w =
-                                                                                           basesize.w * wscalefactor;
+            conf.video_tv_aspect ? rendersize.w = tvwidth * wscalefactor : rendersize.w =
+                                                                                   basesize.w * wscalefactor;
             rendersize.h = basesize.h * wscalefactor;
             overscan_offset = basesize.w * OVERSCAN_TOP;
             overscan_height = basesize.h - OVERSCAN_TOP - OVERSCAN_BOTTOM;
@@ -367,8 +367,8 @@ void video_set_dimensions() {
         case 5: // ScaleX
             basesize.w = Video::Output::WIDTH * scalefactor;
             basesize.h = Video::Output::HEIGHT * scalefactor;
-            conf.video_tv_aspect == true ? rendersize.w = tvwidth * wscalefactor : rendersize.w = Video::Output::WIDTH *
-                                                                                                  wscalefactor;;
+            conf.video_tv_aspect ? rendersize.w = tvwidth * wscalefactor : rendersize.w = Video::Output::WIDTH *
+                                                                                          wscalefactor;;
             rendersize.h = Video::Output::HEIGHT * wscalefactor;
             overscan_offset = basesize.w * OVERSCAN_TOP * scalefactor;
             overscan_height = basesize.h - (OVERSCAN_TOP + OVERSCAN_BOTTOM) * scalefactor;
@@ -377,8 +377,8 @@ void video_set_dimensions() {
         case 4: // 2xSaI
             basesize.w = Video::Output::WIDTH * 2;
             basesize.h = Video::Output::HEIGHT * 2;
-            conf.video_tv_aspect == true ? rendersize.w = tvwidth * wscalefactor : rendersize.w = Video::Output::WIDTH *
-                                                                                                  wscalefactor;
+            conf.video_tv_aspect ? rendersize.w = tvwidth * wscalefactor : rendersize.w = Video::Output::WIDTH *
+                                                                                          wscalefactor;
             rendersize.h = Video::Output::HEIGHT * wscalefactor;
             overscan_offset = basesize.w * OVERSCAN_TOP * 2;
             overscan_height = basesize.h - (OVERSCAN_TOP + OVERSCAN_BOTTOM) * 2;
