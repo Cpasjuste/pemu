@@ -25,18 +25,22 @@ file(GLOB NESTOPIA_SRC
         )
 
 list(REMOVE_ITEM NESTOPIA_SRC
+        ${CMAKE_SOURCE_DIR}/cores/nestopia/source/common/audio.cpp
         ${CMAKE_SOURCE_DIR}/cores/nestopia/source/common/video.cpp
         ${CMAKE_SOURCE_DIR}/cores/nestopia/source/common/config.cpp
+        ${CMAKE_SOURCE_DIR}/cores/nestopia/source/common/sdlinput.cpp
         ${CMAKE_SOURCE_DIR}/cores/nestopia/source/core/NstVideoFilter2xSaI.cpp
         ${CMAKE_SOURCE_DIR}/cores/nestopia/source/core/NstVideoFilterHqX.cpp
         ${CMAKE_SOURCE_DIR}/cores/nestopia/source/core/NstVideoFilterScaleX.cpp
-        ${CMAKE_SOURCE_DIR}/cores/nestopia/source/core/NstVideoFilterxBR
+        ${CMAKE_SOURCE_DIR}/cores/nestopia/source/core/NstVideoFilterxBR.cpp
+        ${CMAKE_SOURCE_DIR}/cores/nestopia/source/core/NstVideoFilterNtsc.cpp
         )
 
 set(NESTOPIA_CFLAGS
         -DVERSION="1.0"
         -D__LIBRETRO__ -D_MINGW -D__NST_UNZIP__
-        -D__PNES__
+        -DNST_NO_2XSAI -DNST_NO_HQ2X -DNST_NO_SCALEX -DNO_NTSC -DNST_NO_XBR
+        -D__PNES__ -DDATADIR="./"
         -D__PNES_VERSION_MAJOR__=${VERSION_MAJOR}
         -D__PNES_VERSION_MINOR__=${VERSION_MINOR}
         -Wno-unused-definition -Wno-unused-local-typedefs

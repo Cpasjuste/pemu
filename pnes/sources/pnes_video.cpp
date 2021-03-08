@@ -135,10 +135,11 @@ void video_set_filter() {
     if ((conf.video_scale_factor > 3) && (conf.video_filter == 5)) { scalefactor = 3; }
 
     switch (conf.video_filter) {
+        default:
         case 0:    // None
             filter = Video::RenderState::FILTER_NONE;
             break;
-
+#if 0
         case 1: // NTSC
             filter = Video::RenderState::FILTER_NTSC;
             break;
@@ -194,10 +195,11 @@ void video_set_filter() {
                     break;
             }
             break;
+#endif
     }
 
     // Set the sprite limit:  false = enable sprite limit, true = disable sprite limit
-    video.EnableUnlimSprites(conf.video_unlimited_sprites ? true : false);
+    video.EnableUnlimSprites(conf.video_unlimited_sprites);
 
     // Set Palette options
     switch (conf.video_palette_mode) {
@@ -243,6 +245,7 @@ void video_set_filter() {
     video.SetContrast(conf.video_contrast);
     video.SetHue(conf.video_hue);
 
+#if 0
     // Set NTSC options
     if (conf.video_filter == 1) {
         switch (conf.video_ntsc_mode) {
@@ -301,6 +304,7 @@ void video_set_filter() {
         video.SetCornerRounding(conf.video_xbr_corner_rounding);
         video.SetBlend(conf.video_xbr_pixel_blending);
     }
+#endif
 
     // Set up the render state parameters
     renderstate.filter = filter;

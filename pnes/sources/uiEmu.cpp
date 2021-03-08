@@ -135,6 +135,11 @@ void PNESGuiEmu::onUpdate() {
 /// NESTOPIA AUDIO
 static void *audio_buffer = nullptr;
 
+void audio_init() {
+    int samples = conf.audio_sample_rate / (nst_pal() ? 50 : 60);
+    uiEmu->addAudio(conf.audio_sample_rate, samples);
+}
+
 void audio_deinit() {
     if (audio_buffer) {
         free(audio_buffer);
@@ -142,12 +147,7 @@ void audio_deinit() {
     }
 }
 
-void audio_init() {
-    int samples = conf.audio_sample_rate / (nst_pal() ? 50 : 60);
-    uiEmu->addAudio(conf.audio_sample_rate, samples);
-}
-
-void audio_play() {
+void audio_queue() {
     if (uiEmu->getAudio() != nullptr) {
         uiEmu->getAudio()->play(audio_buffer, uiEmu->getAudio()->getSamples(), nst_pal());
     }
@@ -163,6 +163,11 @@ void audio_unpause() {
     if (uiEmu->getAudio() != nullptr) {
         uiEmu->getAudio()->pause(0);
     }
+}
+
+void audio_set_speed(int speed) {
+    // TODO
+    //bufsize = (channels * (conf.audio_sample_rate / framerate)) / speed;
 }
 
 void audio_set_params(Sound::Output *soundoutput) {
@@ -232,8 +237,6 @@ void PNESGuiEmu::nestopia_config_init() {
     conf.timing_speed = 60;
     conf.timing_ffspeed = 3;
     conf.timing_turbopulse = 3;
-    conf.timing_vsync = true;
-    conf.timing_limiter = true;
 
     // Misc
     conf.misc_default_system = 0;
@@ -246,7 +249,6 @@ void PNESGuiEmu::nestopia_config_init() {
     conf.misc_config_pause = false;
     conf.misc_last_folder = nullptr;
     conf.misc_power_state = 0;
-    conf.misc_overclock = false;
     conf.misc_homebrew_exit = -1;
     conf.misc_homebrew_stdout = -1;
     conf.misc_homebrew_stderr = -1;
