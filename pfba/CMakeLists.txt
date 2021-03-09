@@ -80,7 +80,6 @@ file(GLOB_RECURSE SRC_DRV
         ${CMAKE_SOURCE_DIR}/cores/fba/src/burn/drv/*.cpp
         )
 list(REMOVE_ITEM SRC_DRV
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/burn/drv/atari/WHATSNEW.txt.cpp
         ${CMAKE_SOURCE_DIR}/cores/fba/src/burn/drv/capcom/ctv_make.cpp
         ${CMAKE_SOURCE_DIR}/cores/fba/src/burn/drv/pgm/pgm_sprite_create.cpp
         )
@@ -115,17 +114,17 @@ set(CPU_DIRS
         ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu
         #${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/a68k
         ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/adsp2100
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/tms34010
         ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/arm
         ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/arm7
         ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/e132xs
         ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/h6280
         ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/hd6309
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/i8039
         ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/i8x41
+        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/i8039
         ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/i8051
         ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/konami
         ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/m68k
+        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/m377
         ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/m6502
         ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/m6800
         ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/m6805
@@ -134,8 +133,9 @@ set(CPU_DIRS
         ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/nec
         ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/pic16c5x
         ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/s2650
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/tlcs90
         ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/sh2
+        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/tlcs90
+        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/tlcs900
         ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/tms32010
         ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/upd7725
         ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/upd7810
@@ -143,91 +143,15 @@ set(CPU_DIRS
         ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/z80
         ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/z180
         )
-file(GLOB SRC_CPU
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/*.c*
-        #${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/a68k/*.c*
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/adsp2100/*.c*
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/tms34010/*.c*
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/arm/*.c*
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/arm7/*.c*
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/e132xs/*.c*
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/h6280/*.c*
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/hd6309/*.c*
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/i8039/*.c*
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/i8x41/*.c*
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/i8051/*.c*
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/konami/*.c*
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/m68k/*.c*
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/m6502/*.c*
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/m6800/*.c*
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/m6805/*.c*
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/m6809/*.c*
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/mips3/*.c*
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/nec/*.c*
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/pic16c5x/*.c*
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/s2650/*.c*
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/tlcs90/*.c*
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/sh2/*.c*
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/tms32010/*.c*
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/upd7725/*.c*
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/upd7810/*.c*
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/v60/*.c*
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/z80/*.c*
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/z180/*.c*
+file(GLOB_RECURSE SRC_CPU
+        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/*.cpp
+        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/m68k/m68kcpu.c
         )
 list(REMOVE_ITEM SRC_CPU
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/adsp2100/2100ops.c
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/tms34010/tms34010_dasm.cpp
+        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/tms34010_intf.cpp
         ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/tms34010/tms34010_newdasm.cpp
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/m68k/m68kmake.c
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/m68k/m68k_in.c
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/m68k/m68kfpu.c
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/m68k/m68kdasm.c
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/arm7/arm7core.c
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/arm7/arm7exec.c
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/hd6309/6309tbl.c
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/h6280/tblh6280.c
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/hd6309/6309ops.c
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/konami/konamops.c
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/m6502/t6502.c
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/m6502/t65c02.c
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/m6502/t65sc02.c
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/m6502/tdeco16.c
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/m6502/tn2a03.c
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/konami/konamtbl.c
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/m6800/6800ops.c
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/m6800/6800tbl.c
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/m6805/6805ops.c
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/m6809/6809ops.c
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/m6809/6809tbl.c
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/mips3/mips3_dasm.cpp
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/nec/necinstr.c
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/nec/v25sfr.c
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/nec/v25instr.c
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/i8051/mcs51ops.c
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/i8x41/8x41dasm.c
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/upd7810/7810ops.c
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/upd7810/7810tbl.c
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/v60/op12.c
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/v60/am.c
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/v60/am1.c
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/v60/am2.c
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/v60/op7a.c
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/v60/am3.c
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/v60/op2.c
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/v60/op4.c
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/v60/op6.c
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/v60/op3.c
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/v60/op5.c
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/v60/optable.c
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/v60/v60mem.c
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/v60/v60d.c
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/z180/z180cb.c
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/z180/z180dd.c
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/z180/z180ed.c
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/z180/z180fd.c
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/z180/z180op.c
-        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/z180/z180xy.c
+        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/tms34010/tms34010_dasm.cpp
+        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/mips3/x64/mips3_x64.cpp
         )
 
 ##############
