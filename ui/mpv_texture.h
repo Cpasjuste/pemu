@@ -19,7 +19,6 @@ private:
 
     void onDraw(c2d::Transform &transform, bool draw = true) override;
 
-    c2d::TweenAlpha *tweenAlpha = nullptr;
     Mpv *mpv = nullptr;
 };
 

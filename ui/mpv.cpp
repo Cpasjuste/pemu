@@ -18,6 +18,7 @@ Mpv::Mpv(const std::string &configPath, bool initRender) {
         return;
     }
 
+    mpv_set_option_string(handle, "config", "yes");
     mpv_set_option_string(handle, "config-dir", configPath.c_str());
 #ifndef NDEBUG
     mpv_set_option_string(handle, "terminal", "yes");

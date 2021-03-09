@@ -11,11 +11,6 @@ using namespace c2d;
 
 MpvTexture::MpvTexture(const c2d::Vector2f &size, Mpv *m) : GLTextureBuffer(size, Format::RGBA8) {
     mpv = m;
-    // switch doesn't like this (crash), hum hum..
-#ifndef __SWITCH__
-    tweenAlpha = new TweenAlpha(0, 255, 1);
-    add(tweenAlpha);
-#endif
 }
 
 void MpvTexture::onDraw(c2d::Transform &transform, bool draw) {
@@ -23,7 +18,7 @@ void MpvTexture::onDraw(c2d::Transform &transform, bool draw) {
     if (draw && mpv != nullptr && mpv->isAvailable()) {
         int flip_y{0};
         mpv_opengl_fbo mpv_fbo{
-                .fbo = fbo,
+                .fbo = (int) fbo,
                 .w = (int) getSize().x, .h = (int) getSize().y,
                 .internal_format = GL_RGBA8};
         mpv_render_param r_params[] = {
