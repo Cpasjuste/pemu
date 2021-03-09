@@ -114,9 +114,13 @@ bool UIRomInfo::loadVideo(const Game &game) {
 }
 
 bool UIRomInfo::loadTexture(const Game &game) {
+
     auto *tex = game.path.empty() ? nullptr : (C2DTexture *) uiRomList->getPreviewTexture(game);
     // set image
-    if (tex != nullptr) {
+    if (tex) {
+        if (texture) {
+            delete (texture);
+        }
         texture = tex;
         texture->setOrigin(Origin::Center);
         texture->setPosition(Vector2f(previewBox->getSize().x / 2, previewBox->getSize().y / 2));
@@ -128,10 +132,8 @@ bool UIRomInfo::loadTexture(const Game &game) {
         texture->add(new TweenAlpha(0, 255, 0.3f, TweenLoop::None, TweenState::Playing));
         previewBox->add(texture);
     } else {
-        if (texture != nullptr) {
-            if (texture->isVisible()) {
-                texture->setVisibility(Visibility::Hidden, true);
-            }
+        if (texture && texture->isVisible()) {
+            texture->setVisibility(Visibility::Hidden, true);
         }
         return false;
     }
