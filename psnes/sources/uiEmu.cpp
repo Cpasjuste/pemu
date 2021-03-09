@@ -49,6 +49,7 @@ enum {
 };
 #endif
 
+static void *audio_buffer = nullptr;
 static uint8 *gfx_snes_buffer = nullptr;
 static uint8 *gfx_video_buffer = nullptr;
 static int snes9x_prev_width = 0, snes9x_prev_height = 0;
@@ -256,14 +257,14 @@ int PSNESUIEmu::load(const ss_api::Game &game) {
         gfx_snes_buffer = (uint8 *) malloc(GFX.Pitch * ((SNES_HEIGHT_EXTENDED + 4) * 2));
         memset(gfx_snes_buffer, 0, GFX.Pitch * ((SNES_HEIGHT_EXTENDED + 4) * 2));
         GFX.Screen = (uint16 *) gfx_snes_buffer;
-        PSNESVideo *v = new PSNESVideo(getUi(), (void **) &gfx_video_buffer, nullptr,
-                                       Vector2f(SNES_WIDTH * 2, SNES_HEIGHT_EXTENDED * 2));
+        auto v = new PSNESVideo(getUi(), (void **) &gfx_video_buffer, nullptr,
+                                Vector2f(SNES_WIDTH * 2, SNES_HEIGHT_EXTENDED * 2));
         addVideo(v);
         memset(gfx_video_buffer, 0, (size_t) getVideo()->getTexture()->pitch * getVideo()->getTextureRect().height);
     } else {
         GFX.Pitch = SNES_WIDTH * 2;
-        PSNESVideo *v = new PSNESVideo(getUi(), (void **) &GFX.Screen, (int *) &GFX.Pitch,
-                                       Vector2f(SNES_WIDTH, SNES_HEIGHT_EXTENDED));
+        auto v = new PSNESVideo(getUi(), (void **) &GFX.Screen, (int *) &GFX.Pitch,
+                                Vector2f(SNES_WIDTH, SNES_HEIGHT_EXTENDED));
         addVideo(v);
         memset(GFX.Screen, 0, (size_t) getVideo()->getTexture()->pitch * getVideo()->getTextureRect().height);
     }
@@ -271,7 +272,9 @@ int PSNESUIEmu::load(const ss_api::Game &game) {
 
     S9xGraphicsInit();
 
-    addAudio(Settings.SoundPlaybackRate, (float) Memory.ROMFramesPerSecond);
+    int samples = Audio::toSamples(Settings.SoundPlaybackRate, Memory.ROMFramesPerSecond);
+    addAudio(Settings.SoundPlaybackRate, samples);
+    audio_buffer = malloc(getAudio()->getSamplesSize());
 
     targetFps = Memory.ROMFramesPerSecond;
 
@@ -304,10 +307,15 @@ void PSNESUIEmu::stop() {
 
     if (gfx_snes_buffer != nullptr) {
         free(gfx_snes_buffer);
+        gfx_snes_buffer = nullptr;
     }
     snes9x_prev_width = 0;
     snes9x_prev_height = 0;
     snes9x_height_extended = false;
+
+    if (audio_buffer != nullptr) {
+        free(audio_buffer);
+    }
 
     UIEmu::stop();
 }
@@ -898,8 +906,10 @@ void S9xSetPalette() {
 static void samples_available(void *data) {
 
     int samples_available = S9xGetSampleCount();
-    S9xMixSamples((uint8 *) _ui->getUiEmu()->getAudio()->getBuffer(), samples_available);
+    S9xMixSamples((uint8 *) audio_buffer, samples_available);
 
+    // TODO
+    /*
     if (Settings.SoundSync && !Settings.TurboMode && !Settings.Mute) {
         int queued = _ui->getUiEmu()->getAudio()->getQueuedSize();
         int size = _ui->getUiEmu()->getAudio()->getBufferSize();
@@ -908,9 +918,9 @@ static void samples_available(void *data) {
             queued = _ui->getUiEmu()->getAudio()->getQueuedSize();
         }
     }
+    */
 
-    _ui->getUiEmu()->getAudio()->play(
-            _ui->getUiEmu()->getAudio()->getBuffer(), samples_available >> 1);
+    _ui->getUiEmu()->getAudio()->play(audio_buffer, samples_available >> 1);
 }
 
 bool8
