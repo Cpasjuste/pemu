@@ -117,6 +117,7 @@ set(CPU_DIRS
         ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/arm
         ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/arm7
         ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/e132xs
+        ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/f8
         ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/h6280
         ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/hd6309
         ${CMAKE_SOURCE_DIR}/cores/fba/src/cpu/i8x41
@@ -305,7 +306,7 @@ add_executable(${PROJECT_NAME} ${SRC} ${CMAKE_CURRENT_BINARY_DIR}/deps/m68kops.c
 target_compile_options(${PROJECT_NAME} PRIVATE ${FLAGS})
 target_compile_options(${PROJECT_NAME} PRIVATE $<$<COMPILE_LANGUAGE:CXX>:-fno-exceptions -fpermissive>)
 target_include_directories(${PROJECT_NAME} PRIVATE ${INC})
-target_link_libraries(${PROJECT_NAME} cross2dui ${LDFLAGS})
+target_link_libraries(${PROJECT_NAME} cross2dui cross2d ${LDFLAGS})
 # include libcross2d targets
 include(${CMAKE_SOURCE_DIR}/libcross2d/cmake/targets.cmake)
 
