@@ -27,6 +27,7 @@ using namespace c2d;
 using namespace c2dui;
 
 #ifdef __PSP2__
+#include "vita/pnes_io.h"
 #include <psp2/power.h>
 #include <psp2/io/dirent.h>
 #define mkdir(x, y) sceIoMkdir(x, 0777)
@@ -45,7 +46,11 @@ UIRomList *uiRomList;
 
 int main(int argc, char **argv) {
 
+#ifdef __PSP2__
+    auto *io = new PNESIo();
+#else
     auto *io = new C2DIo();
+#endif
     // load configuration
     int pnes_version = (__PNES_VERSION_MAJOR__ * 100) + __PNES_VERSION_MINOR__;
     cfg = new PNESConfig(io, pnes_version);
