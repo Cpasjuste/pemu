@@ -68,6 +68,7 @@ if (PLATFORM_VITA)
     #####################
     # PS VITA PLATORM
     #####################
+    set(TITLE_ID "PNES00001" CACHE STRING "" FORCE)
     list(APPEND PNES_INC sources/vita)
     list(APPEND NESTOPIA_SRC sources/switch/port.c)
     list(APPEND NESTOPIA_CFLAGS -Dstrcasecmp=strcmp)
