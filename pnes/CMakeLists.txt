@@ -51,7 +51,9 @@ set(NESTOPIA_CFLAGS
         -Wno-format-zero-length
         )
 
-set(NESTOPIA_LDFLAGS minizip)
+if (NOT OPTION_BUILTIN_MINIZIP)
+    set(NESTOPIA_LDFLAGS minizip)
+endif ()
 
 ##############
 # pnes
@@ -66,6 +68,9 @@ if (PLATFORM_VITA)
     #####################
     # PS VITA PLATORM
     #####################
+    list(APPEND PNES_INC sources/vita)
+    list(APPEND NESTOPIA_SRC sources/switch/port.c)
+    list(APPEND NESTOPIA_CFLAGS -Dstrcasecmp=strcmp)
     list(APPEND NESTOPIA_LDFLAGS ScePower_stub)
 elseif (PLATFORM_SWITCH)
     #####################
