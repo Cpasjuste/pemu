@@ -28,7 +28,7 @@ bool UIEmu::onInput(c2d::Input::Player *players) {
     }
 
     // look for player 1 menu combo
-    if (((players[0].keys & Input::Key::Fire5) && (players[0].keys & Input::Key::Fire6))) {
+    if (((players[0].keys & Input::Key::Start) && (players[0].keys & Input::Key::Fire6))) {
         pause();
         getUi()->getConfig()->load(getUi()->getUiRomList()->getSelection());
         getUi()->getUiMenu()->load(true);
