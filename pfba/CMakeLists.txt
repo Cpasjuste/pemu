@@ -44,7 +44,10 @@ list(REMOVE_ITEM SRC_BURNER
         ${CMAKE_SOURCE_DIR}/cores/fba/src/burner/state.cpp
         ${CMAKE_SOURCE_DIR}/cores/fba/src/burner/unzip.c
         ${CMAKE_SOURCE_DIR}/cores/fba/src/burner/zipfn.cpp
+        ${CMAKE_SOURCE_DIR}/cores/fba/src/burner/luaengine.cpp
+        ${CMAKE_SOURCE_DIR}/cores/fba/src/burner/luasav.cpp
         )
+
 ##############
 # drivers
 ##############
