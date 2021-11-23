@@ -14,10 +14,7 @@
 
 **Building - Ubuntu (x64) => Ubuntu (x64)**
 - install dependencies:
-	- `sudo apt-get install git zip build-essential cmake liblzma-dev libsdl2-dev libconfig-dev libcurl4-openssl-dev libtinyxml2-dev libconfig-dev libglm-dev libfreetype6-dev libpng-dev libminizip-dev zlib1g-dev libvdpau-dev libva-dev libavcodec-dev libavfilter-dev libavformat-dev libavresample-dev libavutil-dev libpostproc-dev libswresample-dev libswscale-dev`
-- install recent mpv library from ppa:
-    - `sudo add-apt-repository -y ppa:mc3man/bionic-media`
-    - `sudo apt-get -y install libmpv-dev`
+	- `sudo apt-get install git zip build-essential cmake liblzma-dev libsdl2-dev libconfig-dev libcurl4-openssl-dev libtinyxml2-dev libconfig-dev libglm-dev libfreetype6-dev libpng-dev libminizip-dev zlib1g-dev libvdpau-dev libva-dev libavcodec-dev libavfilter-dev libavformat-dev libavutil-dev libpostproc-dev libswresample-dev libswscale-dev libmpv-dev libass-dev libbz2-dev libfribidi-dev`
 - clone pemu repository:
 	- `git clone --recursive https://github.com/Cpasjuste/pemu.git`
 - build:
