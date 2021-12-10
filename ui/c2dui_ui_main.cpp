@@ -17,7 +17,7 @@ UIMain::~UIMain() {
 #endif
 }
 
-void UIMain::init(UIRomList *_uiRomList, UIMenu *_uiMenu,
+void UIMain::init(UIRomList *_uiRomList, UIMenuNew *_uiMenu,
                   UIEmu *_uiEmu, UIStateMenu *_uiState) {
 #if 0
     uiHighlight = new UIHighlight();
@@ -88,23 +88,26 @@ void UIMain::setSkin(Skin *s) {
 }
 
 void UIMain::onUpdate() {
-
     if (uiEmu && !uiEmu->isVisible()) {
         unsigned int keys = getInput()->getKeys(0);
-        if (keys != Input::Key::Delay) {
-            bool changed = (oldKeys ^ keys) != 0;
-            oldKeys = keys;
-            if (!changed) {
-                if (timer.getElapsedTime().asSeconds() > 5) {
-                    getInput()->setRepeatDelay(INPUT_DELAY / 20);
-                } else if (timer.getElapsedTime().asSeconds() > 3) {
-                    getInput()->setRepeatDelay(INPUT_DELAY / 8);
-                } else if (timer.getElapsedTime().asSeconds() > 1) {
-                    getInput()->setRepeatDelay(INPUT_DELAY / 4);
+        if (keys & EV_QUIT) {
+            done = true;
+        } else {
+            if (keys != Input::Key::Delay) {
+                bool changed = (oldKeys ^ keys) != 0;
+                oldKeys = keys;
+                if (!changed) {
+                    if (timer.getElapsedTime().asSeconds() > 5) {
+                        getInput()->setRepeatDelay(INPUT_DELAY / 20);
+                    } else if (timer.getElapsedTime().asSeconds() > 3) {
+                        getInput()->setRepeatDelay(INPUT_DELAY / 8);
+                    } else if (timer.getElapsedTime().asSeconds() > 1) {
+                        getInput()->setRepeatDelay(INPUT_DELAY / 4);
+                    }
+                } else {
+                    getInput()->setRepeatDelay(INPUT_DELAY);
+                    timer.restart();
                 }
-            } else {
-                getInput()->setRepeatDelay(INPUT_DELAY);
-                timer.restart();
             }
         }
     }
@@ -140,7 +143,7 @@ UIEmu *UIMain::getUiEmu() {
     return uiEmu;
 }
 
-UIMenu *UIMain::getUiMenu() {
+UIMenuNew *UIMain::getUiMenu() {
     return uiMenu;
 }
 

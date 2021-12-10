@@ -2,8 +2,6 @@
 // Created by cpasjuste on 30/01/18.
 //
 
-#if 0
-
 #include "c2dui.h"
 
 class MenuLine : public c2d::RectangleShape {
@@ -12,64 +10,56 @@ public:
 
     MenuLine(UIMain *u, FloatRect &rect, Skin::TextGroup &tg) : RectangleShape(rect) {
 
-        RectangleShape::setFillColor(Color::Transparent);
-
         ui = u;
         textGroup = tg;
         Font *font = ui->getSkin()->font;
 
-        name = new Text("OPTION NAME,)'", textGroup.size, font);
+        name = new Text("OPTION NAME", textGroup.size, font);
         name->setFillColor(textGroup.color);
         name->setOutlineThickness(textGroup.outlineSize);
         name->setOutlineColor(textGroup.outlineColor);
         name->setOrigin(Origin::Left);
-        name->setPosition(0, RectangleShape::getSize().y / 2);
-        name->setSizeMax((RectangleShape::getSize().x * 0.6f), 0);
-        RectangleShape::add(name);
+        name->setPosition(0, MenuLine::getSize().y / 2);
+        name->setSizeMax((MenuLine::getSize().x * 0.6f), 0);
+        MenuLine::add(name);
 
-        value = new Text("OPTION VALUE,)'", textGroup.size, font);
+        value = new Text("OPTION VALUE", textGroup.size, font);
         value->setFillColor(textGroup.color);
         value->setOutlineThickness(textGroup.outlineSize);
         value->setOutlineColor(textGroup.outlineColor);
         value->setOrigin(Origin::Left);
-        value->setPosition((RectangleShape::getSize().x * 0.6f), RectangleShape::getSize().y / 2);
-        value->setSizeMax(RectangleShape::getSize().x * 0.3f, 0);
-        RectangleShape::add(value);
+        value->setPosition((MenuLine::getSize().x * 0.6f), MenuLine::getSize().y / 2);
+        value->setSizeMax(MenuLine::getSize().x * 0.3f, 0);
+        MenuLine::add(value);
 
         sprite = new Sprite();
-        RectangleShape::add(sprite);
+        MenuLine::add(sprite);
     }
 
-    void setOption(Option *opt) {
-
+    void setOption(const Option &opt) {
         // always hide sprite (icon) first
         if (sprite != nullptr) {
             sprite->setVisibility(Visibility::Hidden);
         }
 
         // reset
-        name->setOutlineColor(textGroup.outlineColor);
         name->setStyle(Text::Regular);
         value->setVisibility(Visibility::Visible);
+        MenuLine::setFillColor(Color::Transparent);
 
         option = opt;
-        if (option != nullptr) {
-            name->setString(option->getName());
-        } else {
-            value->setString("GO");
-            return;
-        }
+        name->setString(option.getName());
 
-        if (option->getFlags() & Option::Flags::INPUT) {
-            Skin::Button *button = ui->getSkin()->getButton(option->getValueInt());
-            if (button != nullptr && option->getId() < Option::Id::JOY_DEADZONE) {
+        if (option.getFlags() & Option::Flags::INPUT) {
+            Skin::Button *button = ui->getSkin()->getButton(option.getValueInt());
+            if (button != nullptr && option.getId() < Option::Id::JOY_DEADZONE) {
                 if (button->texture != nullptr) {
                     sprite->setTexture(button->texture, true);
                     sprite->setVisibility(Visibility::Visible);
                     value->setVisibility(Visibility::Hidden);
                     float tex_scaling = std::min(
-                            ((getSize().x * 0.8f)) / sprite->getTextureRect().width,
-                            ((getSize().y * 0.8f)) / sprite->getTextureRect().height);
+                            ((getSize().x * 0.8f)) / (float) sprite->getTextureRect().width,
+                            ((getSize().y * 0.8f)) / (float) sprite->getTextureRect().height);
                     sprite->setScale(tex_scaling, tex_scaling);
                     sprite->setPosition((getSize().x * 0.67f), (getSize().y / 2) - 1);
                     sprite->setOrigin(Origin::Left);
@@ -80,17 +70,17 @@ public:
                 }
             } else {
                 char btn[16];
-                snprintf(btn, 16, "%i", option->getValueInt());
+                snprintf(btn, 16, "%i", option.getValueInt());
                 value->setVisibility(Visibility::Visible);
                 value->setString(btn);
             }
-        } else if (option->getFlags() & Option::Flags::DELIMITER) {
+        } else if (option.getFlags() & Option::Flags::MENU) {
+            name->setStyle(Text::Italic);
             value->setVisibility(Visibility::Hidden);
-            name->setStyle(Text::Underlined);
-            name->setOutlineColor(ui->getUiMenu()->getOutlineColor());
+            MenuLine::setFillColor(ui->getUiMenu()->getOutlineColor());
         } else {
             value->setVisibility(Visibility::Visible);
-            value->setString(option->getValueString());
+            value->setString(option.getValueString());
         }
     }
 
@@ -99,11 +89,68 @@ public:
     Text *value = nullptr;
     Sprite *sprite = nullptr;
     Skin::TextGroup textGroup;
-    Option *option = nullptr;
+    Option option;
 };
 
-UIMenu::UIMenu(UIMain *ui) : RectangleShape(Vector2f(0, 0)) {
+UIMenuNew::UIMenuNew(UIMain *uiMain) : RectangleShape(Vector2f(0, 0)) {
 
+    ui = uiMain;
+    Skin *skin = ui->getSkin();
+
+    skin->loadRectangleShape(this, {"OPTIONS_MENU"});
+    alpha = UIMenuNew::getAlpha();
+
+    // TODO: use/update skin
+    UIMenuNew::setSize({ui->getSize().x / 3, ui->getSize().y - 128});
+    UIMenuNew::setOrigin(Origin::Left);
+    UIMenuNew::setPosition({ui->getSize().x, ui->getSize().y / 2});
+
+    // tween
+    Vector2f targetPos = {UIMenuNew::getPosition().x - UIMenuNew::getSize().x,
+                          UIMenuNew::getPosition().y};
+    tweenPosition = new TweenPosition({UIMenuNew::getPosition()}, targetPos, 0.2f);
+    tweenPosition->setState(TweenState::Stopped);
+    UIMenuNew::add(tweenPosition);
+
+    // retrieve skin config for an option item
+    textGroup = ui->getSkin()->getText({"OPTIONS_MENU", "ITEMS_TEXT"});
+
+    // calculate number of items shown
+    lineHeight = (float) (textGroup.rect.height);
+    maxLines = (int) (UIMenuNew::getSize().y / lineHeight);
+    if ((float) maxLines * lineHeight < UIMenuNew::getSize().y) {
+        lineHeight = UIMenuNew::getSize().y / (float) maxLines;
+    }
+
+    // add selection rectangle (highlight)
+    highlight = new RectangleShape({16, 16});
+    ui->getSkin()->loadRectangleShape(highlight, {"SKIN_CONFIG", "HIGHLIGHT"});
+    highlight->setSize(UIMenuNew::getSize().x, lineHeight);
+    UIMenuNew::add(highlight);
+
+    // add options items
+    for (unsigned int i = 0; i < (unsigned int) maxLines; i++) {
+        FloatRect rect = {0, (lineHeight * (float) i), UIMenuNew::getSize().x, lineHeight};
+        auto line = new MenuLine(ui, rect, textGroup);
+        line->setLayer(2);
+        lines.push_back(line);
+        UIMenuNew::add(line);
+    }
+
+    // TODO: fix bluer
+    // add blur
+    blur = new RectangleShape(ui->getLocalBounds());
+    blur->setFillColor(Color::Gray);
+    blur->setLayer(0);
+    blur->add(new TweenAlpha(0, 230, 0.3));
+    blur->setVisibility(Visibility::Hidden);
+    UIMenuNew::add(blur);
+
+    // hide by default
+    UIMenuNew::setLayer(1);
+    UIMenuNew::setVisibility(Visibility::Hidden);
+
+#if 0
     printf("GuiMenu (%p)\n", this);
     this->ui = ui;
 
@@ -157,10 +204,34 @@ UIMenu::UIMenu(UIMain *ui) : RectangleShape(Vector2f(0, 0)) {
     RectangleShape::add(tweenPosition);
 
     RectangleShape::setVisibility(Visibility::Hidden);
+#endif
 }
 
-void UIMenu::load(bool isRom, OptionMenu *om) {
+void UIMenuNew::load(bool isRom) {
 
+    isRomMenu = isRom;
+    isEmuRunning = ui->getUiEmu()->isVisible();
+
+    options.clear();
+    std::vector<Option> *opts = ui->getConfig()->get(isRomMenu);
+    remove_copy_if(opts->begin(), opts->end(),
+                   back_inserter(options), [this](Option &opt) {
+                return isOptionHidden(&opt) || opt.getFlags() & Option::Flags::HIDDEN;
+            });
+
+    setAlpha(isEmuRunning ? (uint8_t) (alpha - 50) : (uint8_t) alpha);
+
+    // update options lines/items
+    updateLines();
+
+    // finally, show me
+    if (!isVisible()) {
+        blur->setVisibility(Visibility::Visible, true);
+        setVisibility(Visibility::Visible, true);
+        setLayer(1);
+    }
+
+#if 0
     isRomMenu = isRom;
     options = isRomMenu ? ui->getConfig()->get(true)
                         : ui->getConfig()->get();
@@ -251,31 +322,82 @@ void UIMenu::load(bool isRom, OptionMenu *om) {
         setVisibility(Visibility::Visible, true);
         setLayer(1);
     }
+#endif
 }
 
-void UIMenu::updateHighlight() {
-
-    MenuLine *line = lines[optionIndex];
-    highlight->setOrigin(Origin::Left);
-    highlight->setPosition(line->getPosition() + line->value->getPosition());
-    highlight->move(-4, 0);
-    if (line->sprite->isVisible()) {
-        highlight->setSize(line->sprite->getLocalBounds().width, highlight->getSize().y);
-    } else {
-        highlight->setSize(line->value->getLocalBounds().width + 8, highlight->getSize().y);
-    }
-    for (size_t i = 0; i < lines.size(); i++) {
-        Color color = (int) i == optionIndex ? getOutlineColor() : textGroup.outlineColor;
-        lines.at(i)->value->setOutlineColor(color);
+void UIMenuNew::updateLines() {
+    for (unsigned int i = 0; i < (unsigned int) maxLines; i++) {
+        if (optionIndex + i >= options.size()) {
+            lines[i]->setVisibility(Visibility::Hidden);
+            continue;
+        }
+        const Option option = options.at(optionIndex + i);
+        // set line data
+        lines[i]->setOption(option);
+        lines[i]->setVisibility(Visibility::Visible);
+        // set highlight position and color
+        if ((int) i == highlightIndex) {
+            highlight->setPosition({highlight->getPosition().x, lines[i]->getPosition().y});
+            lines[i]->value->setOutlineColor(getOutlineColor());
+        } else {
+            lines[i]->value->setOutlineColor(textGroup.outlineColor);
+        }
     }
 }
 
-bool UIMenu::onInput(c2d::Input::Player *players) {
+bool UIMenuNew::onInput(c2d::Input::Player *players) {
+
+    unsigned int keys = players[0].keys;
 
     if (ui->getUiStateMenu()->isVisible()) {
         return C2DObject::onInput(players);
     }
 
+    // UP
+    if (keys & Input::Key::Up) {
+        if (highlightIndex <= maxLines / 2 && optionIndex > 0) {
+            optionIndex--;
+        } else {
+            highlightIndex--;
+            if (highlightIndex < 0) {
+                highlightIndex = maxLines / 2;
+                if (highlightIndex >= (int) options.size()) {
+                    highlightIndex = (int) options.size() - 1;
+                    optionIndex = 0;
+                } else {
+                    optionIndex = ((int) options.size() - 1) - highlightIndex;
+                }
+            }
+        }
+        updateLines();
+    }
+    // DOWN
+    if (keys & Input::Key::Down) {
+        if (highlightIndex >= maxLines / 2) {
+            optionIndex++;
+            if (optionIndex + highlightIndex >= (int) options.size()) {
+                optionIndex = 0;
+                highlightIndex = 0;
+            }
+        } else {
+            highlightIndex++;
+            if (highlightIndex >= (int) options.size()) {
+                highlightIndex = 0;
+            }
+        }
+        updateLines();
+    }
+    // BACK
+    if (keys & Input::Key::Start || keys & Input::Key::Select || keys & Input::Key::Fire2) {
+        setVisibility(Visibility::Hidden, true);
+        if (isEmuRunning) {
+            ui->getUiEmu()->resume();
+        } else {
+            ui->getUiRomList()->setVisibility(Visibility::Visible);
+        }
+    }
+
+#if 0
     bool option_changed = false;
     unsigned int keys = players[0].keys;
 
@@ -459,25 +581,12 @@ bool UIMenu::onInput(c2d::Input::Player *players) {
             ui->getConfig()->save(ss_api::Game());
         }
     }
-
+#endif
     return true;
 }
 
-bool UIMenu::isOptionHidden(Option *option) {
-    return false;
+UIMenuNew::~UIMenuNew() {
+    printf("~UIMenuNew\n");
+    //if (optionMenuGui) delete (optionMenuGui);
+    //if (optionMenuRom) delete (optionMenuRom);
 }
-
-bool UIMenu::isRom() {
-    return isRomMenu;
-}
-
-UIMain *UIMenu::getUi() {
-    return ui;
-}
-
-UIMenu::~UIMenu() {
-    printf("~GuiMenu\n");
-    delete (optionMenuGui);
-    delete (optionMenuRom);
-}
-#endif

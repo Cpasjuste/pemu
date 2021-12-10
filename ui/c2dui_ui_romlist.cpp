@@ -129,7 +129,7 @@ Texture *UIRomList::getPreviewTexture(const ss_api::Game &game) {
         } else {
             // for non arcade game, search for a "screenscraper" game with same name
             std::vector<Game> clones = gameList.findByName(game);
-            for (const auto &g : clones) {
+            for (const auto &g: clones) {
                 mediaPath = g.getMedia("mixrbv2").url;
                 fullPath = g.romsPath + mediaPath;
                 texture = new C2DTexture(fullPath);
@@ -174,7 +174,7 @@ std::string UIRomList::getPreviewVideo(const ss_api::Game &game) {
         } else {
             // for non arcade game, search for a "screenscraper" game with same name
             std::vector<Game> clones = gameList.findByName(game);
-            for (const auto &g : clones) {
+            for (const auto &g: clones) {
                 mediaPath = g.getMedia("video").url;
                 fullPath = game.romsPath + mediaPath;
                 if (!ui->getIo()->exist(fullPath)) {
@@ -329,8 +329,6 @@ bool UIRomList::onInput(c2d::Input::Player *players) {
             ui->getUiMenu()->load(true);
 
         }
-    } else if (keys & EV_QUIT) {
-        ui->done = true;
     }
 
     return true;

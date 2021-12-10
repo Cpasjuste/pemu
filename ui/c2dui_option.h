@@ -22,8 +22,7 @@ namespace c2dui {
             STRING = BIT(2),
             BOOLEAN = BIT(3),
             INPUT = BIT(4),
-            HIDDEN = BIT(5),
-            DELIMITER = BIT(6)
+            HIDDEN = BIT(5)
         };
 
         enum Id {
@@ -108,6 +107,8 @@ namespace c2dui {
             KEY_START1,
 #endif
         };
+
+        Option() = default;;
 
         Option(const std::string &name, const std::vector<std::string> &options,
                int defaultValueIndex, int id, unsigned int flags = INTEGER);

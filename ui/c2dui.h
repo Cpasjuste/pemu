@@ -16,7 +16,6 @@
 #endif
 
 #include "c2dui_option.h"
-#include "c2dui_option_menu.h"
 #include "c2dui_romlist.h"
 #include "c2dui_skin.h"
 #include "c2dui_video.h"
@@ -24,7 +23,7 @@
 
 #include "c2dui_ui_listbox.h"
 #include "c2dui_ui_highlight.h"
-#include "c2dui_ui_menu.h"
+#include "c2dui_ui_menu_new.h"
 #include "c2dui_ui_emu.h"
 #include "c2dui_ui_romlist.h"
 #include "c2dui_ui_romlist_rominfo.h"

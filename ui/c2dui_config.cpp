@@ -20,7 +20,6 @@ Config::Config(c2d::Io *io, int ver) {
     /////////////////////////////////////////////////
     /// main/gui config
     /////////////////////////////////////////////////
-    append("UI_OPTIONS", {}, 0, 1000, Option::Flags::DELIMITER);
     append("MAIN", {"MAIN"}, 0, Option::Id::MENU_MAIN, Option::Flags::MENU);
     append("SHOW", {"ALL", "AVAILABLE", "FAVORITES"}, 0, Option::Id::GUI_SHOW_ALL, Option::Flags::STRING);
     append("SHOW_CLONES", {"OFF", "ON"}, 0,
@@ -50,17 +49,22 @@ Config::Config(c2d::Io *io, int ver) {
     get()->at(get()->size() - 1).setInfo("This option needs a restart...");
 #endif
     // build zipped skin list
+    int skinIndexDefault = 0;
     std::vector<std::string> skins;
     std::vector<c2d::Io::File> files = io->getDirList(dataPath + "skins/", true);
-    for (const auto &file : files) {
-        if (file.type == c2d::Io::Type::Directory || file.name[0] == '.') {
+    for (size_t i = 0; i < files.size(); i++) {
+        if (files.at(i).type == c2d::Io::Type::Directory || files.at(i).name[0] == '.') {
             continue;
         }
-        skins.emplace_back(Utility::removeExt(file.name));
-        printf("skin found: %s\n", Utility::removeExt(file.name).c_str());
+        std::string skinName = Utility::removeExt(files.at(i).name);
+        skins.emplace_back(skinName);
+        if (skinName == "default") {
+            skinIndexDefault = (int) i;
+        }
+        printf("skin found: %s\n", skinName.c_str());
     }
     if (get(Option::Id::GUI_SKIN) == nullptr) {
-        append("SKIN", skins, 0, Option::Id::GUI_SKIN, Option::Flags::STRING);
+        append("SKIN", skins, skinIndexDefault, Option::Id::GUI_SKIN, Option::Flags::STRING);
     }
     get()->at(get()->size() - 1).setInfo("Changing skins needs a restart...");
 
@@ -72,7 +76,6 @@ Config::Config(c2d::Io *io, int ver) {
     /////////////////////////////////////////////////
     /// default rom config
     /////////////////////////////////////////////////
-    append("DEFAULT_ROMS_OPTIONS", {}, 0, 1001, Option::Flags::DELIMITER);
     append("EMULATION", {"EMULATION"}, 0, Option::Id::MENU_ROM_OPTIONS, Option::Flags::MENU);
     if (C2D_SCREEN_WIDTH > 400) {
         append("SCALING", {"NONE", "2X", "3X", "FIT", "FIT 4:3", "FULL"}, 2,
@@ -182,11 +185,8 @@ void Config::load(const ss_api::Game &game) {
                 }
             }
 
-            for (auto &option : *options) {
+            for (auto &option: *options) {
                 unsigned int flags = option.getFlags();
-                if (flags & Option::Flags::DELIMITER) {
-                    continue;
-                }
                 if (flags & Option::Flags::MENU) {
                     settings = config_setting_lookup(settings_root, option.getName().c_str());
                 }
@@ -265,11 +265,8 @@ void Config::save(const ss_api::Game &game) {
         }
     }
 
-    for (auto &option : *options) {
+    for (auto &option: *options) {
         unsigned int flags = option.getFlags();
-        if (flags & Option::Flags::DELIMITER) {
-            continue;
-        }
         if (flags & Option::Flags::MENU) {
             sub_setting = config_setting_add(setting_fba, option.getName().c_str(), CONFIG_TYPE_GROUP);
             continue;
@@ -333,7 +330,7 @@ Option *Config::get(int index, bool isRom) {
 
     std::vector<Option> *options = get(isRom);
 
-    for (auto &option : *options) {
+    for (auto &option: *options) {
         if (option.getId() == index) {
             return &option;
         }
@@ -369,7 +366,7 @@ bool Config::hide(int index, bool isRom) {
 
     std::vector<Option> *options = get(isRom);
 
-    for (auto &option : *options) {
+    for (auto &option: *options) {
         if (option.getId() == index) {
             unsigned int flags = option.getFlags();
             flags |= Option::HIDDEN;

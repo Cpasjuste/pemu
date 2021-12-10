@@ -7,13 +7,6 @@
 #include "c2dui.h"
 #include "uiMenu.h"
 
-using namespace c2d;
-using namespace c2dui;
-
-PFBAGuiMenu::PFBAGuiMenu(c2dui::UIMain *ui) : UIMenu(ui) {
-
-}
-
 bool PFBAGuiMenu::isOptionHidden(c2dui::Option *option) {
 
     ss_api::Game game = getUi()->getUiRomList()->getSelection();
@@ -35,5 +28,5 @@ bool PFBAGuiMenu::isOptionHidden(c2dui::Option *option) {
     }
 #endif
 
-    return UIMenu::isOptionHidden(option);
+    return UIMenuNew::isOptionHidden(option);
 }

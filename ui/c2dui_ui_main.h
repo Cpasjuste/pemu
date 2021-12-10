@@ -32,7 +32,7 @@ namespace c2dui {
 
         ~UIMain() override;
 
-        void init(UIRomList *uiRomList, UIMenu *uiMenu,
+        void init(UIRomList *uiRomList, UIMenuNew *uiMenu,
                   UIEmu *uiEmu, UIStateMenu *uiState);
 
         void setConfig(Config *cfg);
@@ -53,7 +53,7 @@ namespace c2dui {
 
         UIEmu *getUiEmu();
 
-        UIMenu *getUiMenu();
+        UIMenuNew *getUiMenu();
 
         UIStateMenu *getUiStateMenu();
 
@@ -72,7 +72,7 @@ namespace c2dui {
         Config *config = nullptr;
         Skin *skin = nullptr;
         UIHighlight *uiHighlight = nullptr;
-        UIMenu *uiMenu = nullptr;
+        UIMenuNew *uiMenu = nullptr;
         UIRomList *uiRomList = nullptr;
         UIEmu *uiEmu = nullptr;
         UIStateMenu *uiState = nullptr;
@@ -85,4 +85,4 @@ namespace c2dui {
     };
 }
 
-#endif //GUI_MAIN_H
+#endif //GUI_H
