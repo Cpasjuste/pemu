@@ -6,7 +6,6 @@ cmake_minimum_required(VERSION 3.0)
 ####################
 set(PLATFORM_LINUX OFF CACHE BOOL "Linux platform target")
 set(PLATFORM_WINDOWS OFF CACHE BOOL "Windows platform target (msys/mingw64)")
-set(PLATFORM_RPI3 OFF CACHE BOOL "RIP3 platform target")
 set(PLATFORM_SWITCH OFF CACHE BOOL "Nintendo Switch platform target")
 set(PLATFORM_3DS OFF CACHE BOOL "Nintendo 3DS platform target")
 set(PLATFORM_VITA OFF CACHE BOOL "Sony PS Vita platform target")
@@ -45,7 +44,7 @@ add_subdirectory(libcross2d)
 # add sscrap (screenscrapper scrapper!) library
 add_subdirectory(sscrap)
 
-# add ui library
+# linux/windows screen handling options
 if (PLATFORM_LINUX)
     set(OPTION_RESOLUTION ON CACHE BOOL "Add screen resolution option")
     set(OPTION_FULLSCREEN ON CACHE BOOL "Add switch to fullscreen option")
