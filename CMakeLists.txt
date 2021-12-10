@@ -64,7 +64,7 @@ add_subdirectory(pnes)
 add_subdirectory(psnes)
 
 # pfba
-add_subdirectory(pfba)
+add_subdirectory(pfbneo)
 
 # pemu (ui)
 add_subdirectory(ui)

@@ -4,12 +4,12 @@
 [submodule "cores/nestopia"]
 	path = cores/nestopia
 	url = https://github.com/Cpasjuste/nestopia.git
-[submodule "cores/fba"]
-	path = cores/fba
-	url = https://github.com/Cpasjuste/FBNeo.git
 [submodule "sscrap"]
 	path = sscrap
 	url = https://github.com/Cpasjuste/sscrap.git
 [submodule "libcross2d"]
 	path = libcross2d
 	url = https://github.com/Cpasjuste/libcross2d.git
+[submodule "cores/fbneo"]
+	path = cores/fbneo
+	url = https://github.com/finalburnneo/FBNeo.git
