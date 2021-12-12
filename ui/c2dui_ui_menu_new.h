@@ -27,6 +27,8 @@ namespace c2dui {
 
         virtual bool isOptionHidden(Option *option) { return false; };
 
+        void setVisibility(c2d::Visibility visibility, bool tweenPlay = false) override;
+
     private:
 
         void updateLines();
@@ -35,7 +37,6 @@ namespace c2dui {
         c2d::Text *title = nullptr;
         c2d::RectangleShape *highlight = nullptr;
         std::vector<MenuLine *> lines;
-        RectangleShape *blur = nullptr;
         float alpha = 230;
 
         std::vector<Option> options;

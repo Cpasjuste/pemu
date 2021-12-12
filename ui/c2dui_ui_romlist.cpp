@@ -38,6 +38,44 @@ UIRomList::UIRomList(UIMain *u, RomList *rList, const c2d::Vector2f &size) : Rec
     romInfo = new UIRomInfo(ui, this, skin->font, ui->getFontSize());
     UIRomList::add(romInfo);
 
+    // add rom listing ui
+    Skin::TextGroup textGroup = ui->getSkin()->getText({"MAIN", "ROM_LIST", "TEXT"});
+    config::Group *grp = ui->getSkin()->getConfig()->getGroup("ROM_LIST")->getGroup("TEXT");
+    Color colorMissing = grp->getOption("color_missing")->getColor();
+    bool highlightUseFileColors = grp->getOption("highlight_use_text_color")->getInteger() == 1;
+
+    // add rom list ui
+    Skin::RectangleShapeGroup romListGroup = ui->getSkin()->getRectangleShape({"MAIN", "ROM_LIST"});
+    bool use_icons = false;
+#if !(defined(__PSP2__) || defined(__3DS__)) // two slow
+    use_icons = ui->getConfig()->get(Option::Id::GUI_SHOW_ICONS)->getValueBool();
+#endif
+    listBox = new UIListBox(ui, ui->getSkin()->font, (int) textGroup.size,
+                            romListGroup.rect, gameList.games, use_icons);
+    listBox->colorMissing = colorMissing;
+    listBox->colorAvailable = textGroup.color;
+    listBox->setFillColor(romListGroup.color);
+    listBox->setOutlineColor(romListGroup.outlineColor);
+    listBox->setOutlineThickness((float) romListGroup.outlineSize);
+    listBox->setSelection(0);
+    // rom item
+    listBox->setTextOutlineColor(textGroup.outlineColor);
+    listBox->setTextOutlineThickness((float) textGroup.outlineSize);
+    // hihglight
+    Skin::RectangleShapeGroup rectShape = ui->getSkin()->getRectangleShape({"SKIN_CONFIG", "HIGHLIGHT"});
+    listBox->getHighlight()->setFillColor(rectShape.color);
+    listBox->getHighlight()->setOutlineColor(rectShape.outlineColor);
+    listBox->getHighlight()->setOutlineThickness((float) rectShape.outlineSize);
+    listBox->setHighlightUseFileColor(highlightUseFileColors);
+    UIRomList::add(listBox);
+
+    // add blur
+    blur = new RectangleShape(UIRomList::getLocalBounds());
+    blur->setFillColor(Color::Gray);
+    blur->add(new TweenAlpha(0, 230, 0.2));
+    blur->setVisibility(Visibility::Hidden);
+    UIRomList::add(blur);
+
     int delay = ui->getConfig()->get(Option::Id::GUI_VIDEO_SNAP_DELAY)->getValueInt();
     UIRomList::setVideoSnapDelay(delay);
 
@@ -50,41 +88,11 @@ void UIRomList::updateRomList() {
     filterRomList();
     sortRomList();
 
-    Skin::TextGroup textGroup = ui->getSkin()->getText({"MAIN", "ROM_LIST", "TEXT"});
-    config::Group *grp = ui->getSkin()->getConfig()->getGroup("ROM_LIST")->getGroup("TEXT");
-    Color colorMissing = grp->getOption("color_missing")->getColor();
-    bool highlightUseFileColors = grp->getOption("highlight_use_text_color")->getInteger() == 1;
-
-    if (listBox == nullptr) {
-        // add rom list ui
-        Skin::RectangleShapeGroup romListGroup = ui->getSkin()->getRectangleShape({"MAIN", "ROM_LIST"});
-        bool use_icons = false;
-#if !(defined(__PSP2__) || defined(__3DS__)) // two slow
-        use_icons = ui->getConfig()->get(Option::Id::GUI_SHOW_ICONS)->getValueBool();
-#endif
-        listBox = new UIListBox(ui, ui->getSkin()->font, (int) textGroup.size,
-                                romListGroup.rect, gameList.games, use_icons);
-        listBox->colorMissing = colorMissing;
-        listBox->colorAvailable = textGroup.color;
-        listBox->setFillColor(romListGroup.color);
-        listBox->setOutlineColor(romListGroup.outlineColor);
-        listBox->setOutlineThickness((float) romListGroup.outlineSize);
-        listBox->setSelection(0);
-        // rom item
-        listBox->setTextOutlineColor(textGroup.outlineColor);
-        listBox->setTextOutlineThickness((float) textGroup.outlineSize);
-        // hihglight
-        Skin::RectangleShapeGroup rectShape = ui->getSkin()->getRectangleShape({"SKIN_CONFIG", "HIGHLIGHT"});
-        listBox->getHighlight()->setFillColor(rectShape.color);
-        listBox->getHighlight()->setOutlineColor(rectShape.outlineColor);
-        listBox->getHighlight()->setOutlineThickness((float) rectShape.outlineSize);
-        listBox->setHighlightUseFileColor(highlightUseFileColors);
-        add(listBox);
-    } else {
+    if (listBox) {
         listBox->setGames(gameList.games);
     }
 
-    if (romInfo != nullptr) {
+    if (romInfo) {
         romInfo->load(Game());
         timer_load_info_done = 0;
         timer_load_info.restart();
@@ -340,8 +348,6 @@ void UIRomList::onUpdate() {
         return;
     }
 
-    RectangleShape::onUpdate();
-
     unsigned int keys = ui->getInput()->getKeys();
 
     if (keys > 0 && keys != Input::Delay) {
@@ -358,9 +364,11 @@ void UIRomList::onUpdate() {
             timer_load_video_done = 1;
         }
     }
+
+    RectangleShape::onUpdate();
 }
 
 UIRomList::~UIRomList() {
-    printf("~UIRomListClassic\n");
+    printf("~UIRomList\n");
     delete (romList);
 }

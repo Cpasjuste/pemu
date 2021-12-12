@@ -3,6 +3,8 @@
 //
 
 #include "c2dui.h"
+#include "c2dui_ui_menu_new.h"
+
 
 class MenuLine : public c2d::RectangleShape {
 
@@ -137,17 +139,7 @@ UIMenuNew::UIMenuNew(UIMain *uiMain) : RectangleShape(Vector2f(0, 0)) {
         UIMenuNew::add(line);
     }
 
-    // TODO: fix bluer
-    // add blur
-    blur = new RectangleShape(ui->getLocalBounds());
-    blur->setFillColor(Color::Gray);
-    blur->setLayer(0);
-    blur->add(new TweenAlpha(0, 230, 0.3));
-    blur->setVisibility(Visibility::Hidden);
-    UIMenuNew::add(blur);
-
     // hide by default
-    UIMenuNew::setLayer(1);
     UIMenuNew::setVisibility(Visibility::Hidden);
 
 #if 0
@@ -226,7 +218,6 @@ void UIMenuNew::load(bool isRom) {
 
     // finally, show me
     if (!isVisible()) {
-        blur->setVisibility(Visibility::Visible, true);
         setVisibility(Visibility::Visible, true);
         setLayer(1);
     }
@@ -392,8 +383,6 @@ bool UIMenuNew::onInput(c2d::Input::Player *players) {
         setVisibility(Visibility::Hidden, true);
         if (isEmuRunning) {
             ui->getUiEmu()->resume();
-        } else {
-            ui->getUiRomList()->setVisibility(Visibility::Visible);
         }
     }
 
@@ -585,8 +574,14 @@ bool UIMenuNew::onInput(c2d::Input::Player *players) {
     return true;
 }
 
+void UIMenuNew::setVisibility(c2d::Visibility visibility, bool tweenPlay) {
+    if (ui->getUiRomList()) {
+        ui->getUiRomList()->getBlur()->setVisibility(visibility, true);
+    }
+    RectangleShape::setVisibility(visibility, tweenPlay);
+}
+
 UIMenuNew::~UIMenuNew() {
     printf("~UIMenuNew\n");
-    //if (optionMenuGui) delete (optionMenuGui);
-    //if (optionMenuRom) delete (optionMenuRom);
 }
+
