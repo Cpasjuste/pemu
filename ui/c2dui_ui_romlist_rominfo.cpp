@@ -4,7 +4,7 @@
 
 #include "c2dui.h"
 
-UIRomInfo::UIRomInfo(UIMain *u, UIRomList *uiRList, Font *fnt, int fntSize)
+UIRomInfo::UIRomInfo(UiMain *u, UIRomList *uiRList, Font *fnt, int fntSize)
         : Rectangle(u->getSize()) {
 
     printf("UIRomInfo\n");

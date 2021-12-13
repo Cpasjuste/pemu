@@ -9,13 +9,13 @@
 
 namespace c2dui {
 
-    class UIMain;
+    class UiMain;
 
     class RomList {
 
     public:
 
-        RomList(UIMain *ui, const std::string &emuVersion);
+        RomList(UiMain *ui, const std::string &emuVersion);
 
         virtual ~RomList();
 
@@ -27,7 +27,7 @@ namespace c2dui {
 
         void setLoadingText(const char *format, ...);
 
-        UIMain *ui;
+        UiMain *ui;
         c2d::RectangleShape *rect;
         c2d::Text *text;
         ss_api::GameList gameList;

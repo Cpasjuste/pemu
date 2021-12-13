@@ -5,7 +5,7 @@
 #include "c2dui.h"
 #include "romlist.h"
 
-PFBARomList::PFBARomList(c2dui::UIMain *ui, const std::string &emuVersion)
+PFBARomList::PFBARomList(c2dui::UiMain *ui, const std::string &emuVersion)
         : RomList(ui, emuVersion) {
 
 }

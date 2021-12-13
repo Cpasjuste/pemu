@@ -11,7 +11,7 @@ class PFBAGuiEmu : public c2dui::UIEmu {
 
 public:
 
-    explicit PFBAGuiEmu(c2dui::UIMain *ui);
+    explicit PFBAGuiEmu(c2dui::UiMain *ui);
 
     int load(const ss_api::Game &game) override;
 

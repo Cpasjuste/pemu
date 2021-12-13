@@ -102,7 +102,7 @@ UIListBoxLine::~UIListBoxLine() {
     //printf("~ListBoxLine(%p)\n", this);
 }
 
-UIListBox::UIListBox(UIMain *_ui, Font *font, int fontSize, const FloatRect &rect,
+UIListBox::UIListBox(UiMain *_ui, Font *font, int fontSize, const FloatRect &rect,
                      const std::vector<ss_api::Game> &g, bool useIcons) : RectangleShape(rect) {
 
     //printf("ListBox(%p)\n", this);
@@ -198,19 +198,18 @@ void UIListBox::updateLines() {
 
 void UIListBox::up() {
 
-    if (highlight_index <= max_lines / 2 && file_index > 0) {
+    int index = file_index + highlight_index;
+    int middle = max_lines / 2;
+
+    if (highlight_index <= middle && index - middle > 0) {
         file_index--;
     } else {
         highlight_index--;
-        if (highlight_index < 0) {
-            highlight_index = max_lines / 2;
-            if (highlight_index >= (int) games.size()) {
-                highlight_index = (int) games.size() - 1;
-                file_index = 0;
-            } else {
-                file_index = ((int) games.size() - 1) - highlight_index;
-            }
-        }
+    }
+
+    if (highlight_index < 0) {
+        highlight_index = (int) games.size() < max_lines - 1 ? (int) games.size() - 1 : max_lines - 1;
+        file_index = ((int) games.size() - 1) - highlight_index;
     }
 
     updateLines();
@@ -218,17 +217,18 @@ void UIListBox::up() {
 
 void UIListBox::down() {
 
-    if (highlight_index >= max_lines / 2) {
+    int index = file_index + highlight_index;
+    int middle = max_lines / 2;
+
+    if (highlight_index >= middle && index + middle < (int) games.size()) {
         file_index++;
-        if (file_index + highlight_index >= (int) games.size()) {
-            file_index = 0;
-            highlight_index = 0;
-        }
     } else {
         highlight_index++;
-        if (highlight_index >= (int) games.size()) {
-            highlight_index = 0;
-        }
+    }
+
+    if (highlight_index >= max_lines || file_index + highlight_index >= (int) games.size()) {
+        file_index = 0;
+        highlight_index = 0;
     }
 
     updateLines();
@@ -261,7 +261,7 @@ void UIListBox::setSize(const Vector2f &size) {
 void UIListBox::setSize(float width, float height) {
     RectangleShape::setSize(width, height);
     highlight->setSize(width, highlight->getSize().y);
-    for (auto &line : lines) {
+    for (auto &line: lines) {
         line->setSize(width, line->getSize().y);
     }
 }
@@ -283,7 +283,7 @@ Game UIListBox::getSelection() {
     if (!games.empty() && games.size() > (size_t) file_index + highlight_index) {
         return games[file_index + highlight_index];
     }
-    return Game();
+    return {};
 }
 
 std::vector<UIListBoxLine *> UIListBox::getLines() {
@@ -291,13 +291,13 @@ std::vector<UIListBoxLine *> UIListBox::getLines() {
 }
 
 void UIListBox::setTextOutlineColor(const Color &color) {
-    for (auto &line : lines) {
+    for (auto &line: lines) {
         line->getText()->setOutlineColor(color);
     }
 }
 
 void UIListBox::setTextOutlineThickness(float thickness) {
-    for (auto &line : lines) {
+    for (auto &line: lines) {
         line->getText()->setOutlineThickness(thickness);
     }
 }

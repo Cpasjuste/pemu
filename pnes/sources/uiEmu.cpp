@@ -27,7 +27,7 @@ extern Nes::Core::Input::Controllers *cNstPads;
 extern Emulator emulator;
 /// NESTOPIA
 
-PNESGuiEmu::PNESGuiEmu(UIMain *ui) : UIEmu(ui) {
+PNESGuiEmu::PNESGuiEmu(UiMain *ui) : UIEmu(ui) {
     printf("PNESGuiEmu()\n");
 }
 

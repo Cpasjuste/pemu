@@ -13,7 +13,7 @@ namespace c2dui {
 
     public:
 
-        UIRomList(UIMain *ui, RomList *romList, const c2d::Vector2f &size);
+        UIRomList(UiMain *ui, RomList *romList, const c2d::Vector2f &size);
 
         ~UIRomList() override;
 
@@ -43,7 +43,7 @@ namespace c2dui {
 
         void onUpdate() override;
 
-        UIMain *ui = nullptr;
+        UiMain *ui = nullptr;
         RomList *romList = nullptr;
         ss_api::GameList gameList;
         UIRomInfo *romInfo = nullptr;

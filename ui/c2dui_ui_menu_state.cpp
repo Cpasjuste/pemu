@@ -6,29 +6,29 @@
 
 #define STATES_COUNT 4
 
-class UIState : public RectangleShape {
+class UiState : public RectangleShape {
 
 public:
 
-    UIState(UIMain *ui, const FloatRect &rect, int id) : RectangleShape(rect) {
+    UiState(UiMain *ui, const FloatRect &rect, int id) : RectangleShape(rect) {
 
         this->ui = ui;
         this->id = id;
 
         ui->getSkin()->loadRectangleShape(this, {"STATES_MENU", "STATES_ITEM"});
-        setSize(rect.width, rect.height);
-        setPosition(rect.left, rect.top);
-        outlineColor = getOutlineColor();
-        outlineTickness = getOutlineThickness();
+        UiState::setSize(rect.width, rect.height);
+        UiState::setPosition(rect.left, rect.top);
+        outlineColor = UiState::getOutlineColor();
+        outlineTickness = UiState::getOutlineThickness();
         outlineColorSelected = ui->getSkin()->getRectangleShape({"STATES_MENU"}).outlineColor;
 
         // text if no save/screenshot
         middle_text = new C2DText("NO SAVE", 26, ui->getSkin()->getFont());
         ui->getSkin()->loadText(middle_text, {"STATES_MENU", "STATES_ITEM", "STATES_TEXT"});
         middle_text->setOrigin(Origin::Center);
-        middle_text->setPosition(getLocalBounds().left + getSize().x / 2,
-                                 getLocalBounds().top + getSize().y / 2);
-        add(middle_text);
+        middle_text->setPosition(UiState::getLocalBounds().left + UiState::getSize().x / 2,
+                                 UiState::getLocalBounds().top + UiState::getSize().y / 2);
+        UiState::add(middle_text);
 
         // text for slot id
         char bottom_text_char[32];
@@ -37,9 +37,9 @@ public:
         ui->getSkin()->loadText(bottom_text, {"STATES_MENU", "STATES_ITEM", "STATES_TEXT"});
         bottom_text->setString(bottom_text_char);
         bottom_text->setOrigin(Origin::Center);
-        bottom_text->setPosition(getLocalBounds().left + getSize().x / 2,
-                                 getLocalBounds().top + getLocalBounds().height + 16);
-        add(bottom_text);
+        bottom_text->setPosition(UiState::getLocalBounds().left + UiState::getSize().x / 2,
+                                 UiState::getLocalBounds().top + UiState::getLocalBounds().height + 16);
+        UiState::add(bottom_text);
     }
 
     void loadTexture() {
@@ -55,8 +55,8 @@ public:
                 texture = new C2DTexture(shot);
                 if (texture->available) {
                     float tex_scaling = std::min(
-                            getSize().x / texture->getTextureRect().width,
-                            getSize().y / texture->getTextureRect().height);
+                            getSize().x / (float) texture->getTextureRect().width,
+                            getSize().y / (float) texture->getTextureRect().height);
                     texture->setScale(tex_scaling, tex_scaling);
                     texture->setPosition(getSize().x / 2, getSize().y / 2);
                     texture->setOrigin(Origin::Center);
@@ -101,7 +101,7 @@ public:
         }
     }
 
-    UIMain *ui;
+    UiMain *ui;
     Texture *texture = nullptr;
     Text *middle_text = nullptr;
     Text *bottom_text = nullptr;
@@ -115,33 +115,33 @@ public:
     int id = 0;
 };
 
-class UIStateList : public RectangleShape {
+class UiStateList : public RectangleShape {
 
 public:
 
-    UIStateList(UIMain *ui, const FloatRect &rect) : RectangleShape(rect) {
+    UiStateList(UiMain *ui, const FloatRect &rect) : RectangleShape(rect) {
 
-        setFillColor(Color::Transparent);
+        UiStateList::setFillColor(Color::Transparent);
 
         // add states items
-        float width = getSize().x / STATES_COUNT;
+        float width = UiStateList::getSize().x / STATES_COUNT;
         for (int i = 0; i < STATES_COUNT; i++) {
             FloatRect r = {(width * i) + (width / 2), width / 2, width, width};
-            states[i] = new UIState(ui, r, i);
+            states[i] = new UiState(ui, r, i);
             states[i]->setOrigin(Origin::Center);
-            add(states[i]);
+            UiStateList::add(states[i]);
         }
 
         setSelection(0);
     }
 
-    ~UIStateList() {
-        for (auto &state : states) {
+    ~UiStateList() {
+        for (auto &state: states) {
             delete state;
         }
     }
 
-    UIState *getSelection() {
+    UiState *getSelection() {
         return states[index];
     }
 
@@ -177,11 +177,11 @@ public:
         setSelection(index);
     }
 
-    UIState *states[STATES_COUNT];
+    UiState *states[STATES_COUNT];
     int index = 0;
 };
 
-UIStateMenu::UIStateMenu(UIMain *u) : RectangleShape(Vector2f(16, 16)) {
+UiStateMenu::UiStateMenu(UiMain *u) : RectangleShape(Vector2f(16, 16)) {
 
     printf("UIStateMenu()\n");
 
@@ -195,40 +195,41 @@ UIStateMenu::UIStateMenu(UIMain *u) : RectangleShape(Vector2f(16, 16)) {
     title = new Text("TITLE", C2D_DEFAULT_CHAR_SIZE, ui->getSkin()->font);
     title->setStyle(Text::Underlined);
     skin->loadText(title, {"STATES_MENU", "TITLE_TEXT"});
-    add(title);
+    UiStateMenu::add(title);
 
     int start_y = (int) (title->getGlobalBounds().top + title->getGlobalBounds().height + 16 * ui->getScaling());
-
-    uiStateList = new UIStateList(ui, {
-            getLocalBounds().left + getSize().x / 2, (float) start_y + 32,
-            getSize().x - 64, getSize().x / (STATES_COUNT + 1)
+    uiStateList = new UiStateList(ui, {
+            UiStateMenu::getLocalBounds().left + UiStateMenu::getSize().x / 2, (float) start_y + 32,
+            UiStateMenu::getSize().x - 64, UiStateMenu::getSize().x / (STATES_COUNT + 1)
     });
     uiStateList->setOrigin(Origin::Top);
-    add(uiStateList);
+    UiStateMenu::add(uiStateList);
 
-    auto tweenPosition = new TweenPosition({getPosition().x, getSize().y * 2}, getPosition(), 0.2f);
+    auto tweenPosition = new TweenPosition(UiStateMenu::getPosition(),
+                                           {UiStateMenu::getPosition().x, ui->getSize().y - UiStateMenu::getSize().y},
+                                           0.2f);
     tweenPosition->setState(TweenState::Stopped);
-    add(tweenPosition);
+    UiStateMenu::add(tweenPosition);
 
-    setVisibility(Visibility::Hidden);
+    UiStateMenu::setVisibility(Visibility::Hidden);
 }
 
-void UIStateMenu::setVisibility(c2d::Visibility visibility, bool tweenPlay) {
-
-    if (ui->getUiEmu()) {
-        if (visibility == Visibility::Visible) {
-            title->setString(ui->getUiRomList()->getSelection().getName().text);
-            for (auto &state : uiStateList->states) {
-                state->setRom(ui->getUiRomList()->getSelection());
-            }
-            uiStateList->setSelection(0);
+void UiStateMenu::setVisibility(c2d::Visibility visibility, bool tweenPlay) {
+    if (ui->getUiRomList() && ui->getUiRomList()->isVisible()) {
+        ui->getUiRomList()->getBlur()->setVisibility(visibility, true);
+    }
+    if (ui->getUiEmu() && visibility == Visibility::Visible) {
+        title->setString(ui->getUiRomList()->getSelection().getName().text);
+        for (auto &state: uiStateList->states) {
+            state->setRom(ui->getUiRomList()->getSelection());
         }
+        uiStateList->setSelection(0);
     }
 
     RectangleShape::setVisibility(visibility, tweenPlay);
 }
 
-bool UIStateMenu::onInput(c2d::Input::Player *players) {
+bool UiStateMenu::onInput(c2d::Input::Player *players) {
 
     unsigned int key = players[0].keys;
 
@@ -242,7 +243,7 @@ bool UIStateMenu::onInput(c2d::Input::Player *players) {
     if (key & Input::Key::Fire1) {
         isEmuRunning = ui->getUiEmu()->isVisible();
         if (isEmuRunning) {
-            UIState *state = uiStateList->getSelection();
+            UiState *state = uiStateList->getSelection();
             if (state->exist) {
                 int res = ui->getUiMessageBox()->show(
                         state->bottom_text->getString(),
@@ -264,7 +265,7 @@ bool UIStateMenu::onInput(c2d::Input::Player *players) {
         } else {
             ss_api::Game game = ui->getUiRomList()->getSelection();
             if (game.available) {
-                UIState *state = uiStateList->getSelection();
+                UiState *state = uiStateList->getSelection();
                 if (state->exist) {
                     ui->getConfig()->load(game);
                     ui->getUiEmu()->load(game);

@@ -9,7 +9,7 @@ class PSNESUIMenu : public c2dui::UIMenu {
 
 public:
 
-    PSNESUIMenu(c2dui::UIMain *ui);
+    PSNESUIMenu(c2dui::UiMain *ui);
 
     bool isOptionHidden(c2dui::Option *option);
 

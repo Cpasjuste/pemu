@@ -5,11 +5,11 @@
 #include <algorithm>
 #include "c2dui.h"
 
-UIMain::UIMain(const Vector2f &size) : C2DRenderer(size) {
+UiMain::UiMain(const Vector2f &size) : C2DRenderer(size) {
     printf("UIMain(%i, %i)\n", (int) size.x, (int) size.y);
 }
 
-UIMain::~UIMain() {
+UiMain::~UiMain() {
     // ui elements (C2DObject)
     // are deleted by the renderer
 #if 0
@@ -17,8 +17,8 @@ UIMain::~UIMain() {
 #endif
 }
 
-void UIMain::init(UIRomList *_uiRomList, UIMenuNew *_uiMenu,
-                  UIEmu *_uiEmu, UIStateMenu *_uiState) {
+void UiMain::init(UIRomList *_uiRomList, UiMenu *_uiMenu,
+                  UIEmu *_uiEmu, UiStateMenu *_uiState) {
 #if 0
     uiHighlight = new UIHighlight();
     skin->loadRectangleShape(uiHighlight, {"SKIN_CONFIG", "HIGHLIGHT"});
@@ -83,31 +83,33 @@ void UIMain::init(UIRomList *_uiRomList, UIMenuNew *_uiMenu,
 #endif
 }
 
-void UIMain::setSkin(Skin *s) {
+void UiMain::setSkin(Skin *s) {
     skin = s;
 }
 
-void UIMain::onUpdate() {
+void UiMain::onUpdate() {
+
+    unsigned int keys = getInput()->getKeys(0);
+    if (keys & EV_QUIT) {
+        done = true;
+        return C2DRenderer::onUpdate();
+    }
+
     if (uiEmu && !uiEmu->isVisible()) {
-        unsigned int keys = getInput()->getKeys(0);
-        if (keys & EV_QUIT) {
-            done = true;
-        } else {
-            if (keys != Input::Key::Delay) {
-                bool changed = (oldKeys ^ keys) != 0;
-                oldKeys = keys;
-                if (!changed) {
-                    if (timer.getElapsedTime().asSeconds() > 5) {
-                        getInput()->setRepeatDelay(INPUT_DELAY / 20);
-                    } else if (timer.getElapsedTime().asSeconds() > 3) {
-                        getInput()->setRepeatDelay(INPUT_DELAY / 8);
-                    } else if (timer.getElapsedTime().asSeconds() > 1) {
-                        getInput()->setRepeatDelay(INPUT_DELAY / 4);
-                    }
-                } else {
-                    getInput()->setRepeatDelay(INPUT_DELAY);
-                    timer.restart();
+        if (keys != Input::Key::Delay) {
+            bool changed = (oldKeys ^ keys) != 0;
+            oldKeys = keys;
+            if (!changed) {
+                if (timer.getElapsedTime().asSeconds() > 5) {
+                    getInput()->setRepeatDelay(INPUT_DELAY / 20);
+                } else if (timer.getElapsedTime().asSeconds() > 3) {
+                    getInput()->setRepeatDelay(INPUT_DELAY / 8);
+                } else if (timer.getElapsedTime().asSeconds() > 1) {
+                    getInput()->setRepeatDelay(INPUT_DELAY / 4);
                 }
+            } else {
+                getInput()->setRepeatDelay(INPUT_DELAY);
+                timer.restart();
             }
         }
     }
@@ -115,55 +117,55 @@ void UIMain::onUpdate() {
     C2DRenderer::onUpdate();
 }
 
-float UIMain::getScaling() {
+float UiMain::getScaling() {
     return scaling;
 }
 
-Skin *UIMain::getSkin() {
+Skin *UiMain::getSkin() {
     return skin;
 }
 
-void UIMain::setConfig(Config *cfg) {
+void UiMain::setConfig(Config *cfg) {
     config = cfg;
 }
 
-Config *UIMain::getConfig() {
+Config *UiMain::getConfig() {
     return config;
 }
 
-UIHighlight *UIMain::getUiHighlight() {
+UIHighlight *UiMain::getUiHighlight() {
     return uiHighlight;
 }
 
-UIRomList *UIMain::getUiRomList() {
+UIRomList *UiMain::getUiRomList() {
     return uiRomList;
 }
 
-UIEmu *UIMain::getUiEmu() {
+UIEmu *UiMain::getUiEmu() {
     return uiEmu;
 }
 
-UIMenuNew *UIMain::getUiMenu() {
+UiMenu *UiMain::getUiMenu() {
     return uiMenu;
 }
 
-UIStateMenu *UIMain::getUiStateMenu() {
+UiStateMenu *UiMain::getUiStateMenu() {
     return uiState;
 }
 
-UIProgressBox *UIMain::getUiProgressBox() {
+UIProgressBox *UiMain::getUiProgressBox() {
     return uiProgressBox;
 }
 
-c2d::MessageBox *UIMain::getUiMessageBox() {
+c2d::MessageBox *UiMain::getUiMessageBox() {
     return uiMessageBox;
 }
 
-int UIMain::getFontSize() {
+int UiMain::getFontSize() {
     return (int) ((float) C2D_DEFAULT_CHAR_SIZE * scaling);
 }
 
-void UIMain::updateInputMapping(bool isRomConfig) {
+void UiMain::updateInputMapping(bool isRomConfig) {
 
     if (isRomConfig) {
         getInput()->setKeyboardMapping(config->getPlayerInputKeys(0, true));

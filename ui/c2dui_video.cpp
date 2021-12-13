@@ -4,7 +4,7 @@
 
 #include "c2dui.h"
 
-C2DUIVideo::C2DUIVideo(UIMain *gui, void **_pixels, int *_pitch,
+C2DUIVideo::C2DUIVideo(UiMain *gui, void **_pixels, int *_pitch,
                        const c2d::Vector2f &size, Texture::Format format) : C2DTexture(size, format) {
 
     ui = gui;

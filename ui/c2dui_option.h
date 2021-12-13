@@ -149,6 +149,8 @@ namespace c2dui {
 
         void prev();
 
+        void set(const Option &option);
+
         int size();
 
     private:

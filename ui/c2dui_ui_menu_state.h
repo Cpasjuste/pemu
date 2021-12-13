@@ -5,15 +5,15 @@
 #ifndef C2DUI_MENU_STATE_H
 #define C2DUI_MENU_STATE_H
 
-class UIStateList;
+class UiStateList;
 
 namespace c2dui {
 
-    class UIStateMenu : public c2d::RectangleShape {
+    class UiStateMenu : public c2d::RectangleShape {
 
     public:
 
-        explicit UIStateMenu(UIMain *ui);
+        explicit UiStateMenu(UiMain *ui);
 
         void setVisibility(c2d::Visibility visibility, bool tweenPlay = false) override;
 
@@ -25,8 +25,8 @@ namespace c2dui {
 
     private:
 
-        UIMain *ui = nullptr;
-        UIStateList *uiStateList = nullptr;
+        UiMain *ui = nullptr;
+        UiStateList *uiStateList = nullptr;
         c2d::Text *title = nullptr;
         bool isEmuRunning = false;
     };

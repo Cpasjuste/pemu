@@ -3,6 +3,8 @@
 //
 
 #include <c2dui.h>
+#include "c2dui_option.h"
+
 
 Option::Option(const std::string &text,
                const std::vector<std::string> &options,
@@ -125,7 +127,7 @@ void Option::prev() {
 int Option::getIndex() {
     for (size_t i = 0; i < options.size(); i++) {
         if (current_option == options.at(i)) {
-            return i;
+            return (int) i;
         }
     }
     return 0;
@@ -137,6 +139,15 @@ void Option::setIndex(int index) {
     }
 }
 
+void Option::set(const Option &option) {
+    name = option.name;
+    info = option.info;
+    options = option.options;
+    current_option = option.current_option;
+    flags = option.flags;
+    id = option.id;
+}
+
 int Option::size() {
-    return options.size();
+    return (int) options.size();
 }

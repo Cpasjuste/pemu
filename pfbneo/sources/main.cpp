@@ -36,7 +36,7 @@ using namespace c2dui;
 int _newlib_heap_size_user = 192 * 1024 * 1024;
 #endif
 
-UIMain *ui;
+UiMain *ui;
 PFBAGuiMenu *uiMenu;
 PFBAGuiEmu *uiEmu;
 PFBAUIStateMenu *uiState;
@@ -77,7 +77,7 @@ int main(int argc, char **argv) {
         screen_size = Vector2f();
     }
 #endif
-    ui = new UIMain(screen_size);
+    ui = new UiMain(screen_size);
     if (ui->getShaderList() != nullptr) {
         cfg->add(Option::Id::ROM_FILTER, "EFFECT", ui->getShaderList()->getNames(), 0,
                  Option::Id::ROM_SHADER, Option::Flags::STRING);

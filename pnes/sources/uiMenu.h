@@ -9,7 +9,7 @@ class PNESGuiMenu : public c2dui::UIMenu {
 
 public:
 
-    PNESGuiMenu(c2dui::UIMain *ui);
+    PNESGuiMenu(c2dui::UiMain *ui);
 
     bool isOptionHidden(c2dui::Option *option);
 

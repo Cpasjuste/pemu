@@ -11,7 +11,7 @@ class PNESGuiEmu : public c2dui::UIEmu {
 
 public:
 
-    explicit PNESGuiEmu(c2dui::UIMain *ui);
+    explicit PNESGuiEmu(c2dui::UiMain *ui);
 
     int load(const ss_api::Game &game) override;
 

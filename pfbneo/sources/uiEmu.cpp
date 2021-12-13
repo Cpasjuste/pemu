@@ -35,7 +35,7 @@ static unsigned int myHighCol16(int r, int g, int b, int /* i */) {
     return t;
 }
 
-PFBAGuiEmu::PFBAGuiEmu(UIMain *ui) : UIEmu(ui) {
+PFBAGuiEmu::PFBAGuiEmu(UiMain *ui) : UIEmu(ui) {
 
     printf("PFBAGuiEmu()\n");
 }

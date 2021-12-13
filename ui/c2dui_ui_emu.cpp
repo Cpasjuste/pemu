@@ -4,7 +4,7 @@
 
 #include "c2dui.h"
 
-UIEmu::UIEmu(UIMain *u) : RectangleShape(u->getSize()) {
+UIEmu::UIEmu(UiMain *u) : RectangleShape(u->getSize()) {
 
     printf("UIEmu()\n");
 
@@ -22,16 +22,15 @@ UIEmu::UIEmu(UIMain *u) : RectangleShape(u->getSize()) {
 
 bool UIEmu::onInput(c2d::Input::Player *players) {
 
-    if (getUi()->getUiMenu()->isVisible()
-        || getUi()->getUiStateMenu()->isVisible()) {
+    if (ui->getUiMenu()->isVisible() || ui->getUiStateMenu()->isVisible()) {
         return C2DObject::onInput(players);
     }
 
     // look for player 1 menu combo
     if (((players[0].keys & Input::Key::Start) && (players[0].keys & Input::Key::Fire6))) {
         pause();
-        getUi()->getConfig()->load(getUi()->getUiRomList()->getSelection());
-        getUi()->getUiMenu()->load(true);
+        ui->getUiMenu()->load(true);
+        ui->getInput()->clear();
         return true;
     }
 
@@ -185,7 +184,7 @@ void UIEmu::onUpdate() {
     }
 }
 
-UIMain *UIEmu::getUi() {
+UiMain *UIEmu::getUi() {
     return ui;
 }
 

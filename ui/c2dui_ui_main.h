@@ -24,16 +24,16 @@
 
 namespace c2dui {
 
-    class UIMain : public c2d::C2DRenderer {
+    class UiMain : public c2d::C2DRenderer {
 
     public:
 
-        explicit UIMain(const c2d::Vector2f &size);
+        explicit UiMain(const c2d::Vector2f &size);
 
-        ~UIMain() override;
+        ~UiMain() override;
 
-        void init(UIRomList *uiRomList, UIMenuNew *uiMenu,
-                  UIEmu *uiEmu, UIStateMenu *uiState);
+        void init(UIRomList *uiRomList, UiMenu *uiMenu,
+                  UIEmu *uiEmu, UiStateMenu *uiState);
 
         void setConfig(Config *cfg);
 
@@ -53,9 +53,9 @@ namespace c2dui {
 
         UIEmu *getUiEmu();
 
-        UIMenuNew *getUiMenu();
+        UiMenu *getUiMenu();
 
-        UIStateMenu *getUiStateMenu();
+        UiStateMenu *getUiStateMenu();
 
         UIProgressBox *getUiProgressBox();
 
@@ -72,10 +72,10 @@ namespace c2dui {
         Config *config = nullptr;
         Skin *skin = nullptr;
         UIHighlight *uiHighlight = nullptr;
-        UIMenuNew *uiMenu = nullptr;
+        UiMenu *uiMenu = nullptr;
         UIRomList *uiRomList = nullptr;
         UIEmu *uiEmu = nullptr;
-        UIStateMenu *uiState = nullptr;
+        UiStateMenu *uiState = nullptr;
         UIProgressBox *uiProgressBox = nullptr;
         c2d::MessageBox *uiMessageBox = nullptr;
         c2d::C2DClock timer;

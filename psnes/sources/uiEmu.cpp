@@ -32,7 +32,7 @@ using namespace c2dui;
 C2DClock timer;
 #endif
 
-static UIMain *_ui;
+static UiMain *_ui;
 
 typedef void (*Blitter)(uint8 *, int, uint8 *, int, int, int);
 
@@ -101,7 +101,7 @@ std::string getButtonId(int player, const std::string &name) {
     return "Joypad" + std::to_string(player) + " " + name;
 }
 
-PSNESUIEmu::PSNESUIEmu(UIMain *ui) : UIEmu(ui) {
+PSNESUIEmu::PSNESUIEmu(UiMain *ui) : UIEmu(ui) {
 
     printf("PSNESUIEmu()\n");
     _ui = ui;

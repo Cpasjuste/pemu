@@ -49,22 +49,25 @@ Config::Config(c2d::Io *io, int ver) {
     get()->at(get()->size() - 1).setInfo("This option needs a restart...");
 #endif
     // build zipped skin list
-    int skinIndexDefault = 0;
     std::vector<std::string> skins;
     std::vector<c2d::Io::File> files = io->getDirList(dataPath + "skins/", true);
-    for (size_t i = 0; i < files.size(); i++) {
-        if (files.at(i).type == c2d::Io::Type::Directory || files.at(i).name[0] == '.') {
+    for (auto &file: files) {
+        if (file.type == c2d::Io::Type::Directory || file.name[0] == '.'
+            || !Utility::endsWith(file.name, ".zip")) {
             continue;
         }
-        std::string skinName = Utility::removeExt(files.at(i).name);
+        std::string skinName = Utility::removeExt(file.name);
         skins.emplace_back(skinName);
-        if (skinName == "default") {
-            skinIndexDefault = (int) i;
-        }
         printf("skin found: %s\n", skinName.c_str());
     }
-    if (get(Option::Id::GUI_SKIN) == nullptr) {
-        append("SKIN", skins, skinIndexDefault, Option::Id::GUI_SKIN, Option::Flags::STRING);
+    if (!get(Option::Id::GUI_SKIN)) {
+        int index = 0;
+        for (size_t i = 0; i < skins.size(); i++) {
+            if (skins.at(i) == "default") {
+                index = (int) i;
+            }
+        }
+        append("SKIN", skins, index, Option::Id::GUI_SKIN, Option::Flags::STRING);
     }
     get()->at(get()->size() - 1).setInfo("Changing skins needs a restart...");
 

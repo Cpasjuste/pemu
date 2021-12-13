@@ -13,7 +13,7 @@ using namespace c2dui;
 
 extern "C" int BurnDrvGetFlags();
 
-PFBAVideo::PFBAVideo(UIMain *gui, void **_pixels, int *_pitch, const c2d::Vector2f &size)
+PFBAVideo::PFBAVideo(UiMain *gui, void **_pixels, int *_pitch, const c2d::Vector2f &size)
         : C2DUIVideo(gui, _pixels, _pitch, size) {
 }
 

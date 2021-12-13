@@ -4,7 +4,7 @@
 
 #include "c2dui.h"
 
-UIProgressBox::UIProgressBox(UIMain *gui)
+UIProgressBox::UIProgressBox(UiMain *gui)
         : RectangleShape(Vector2f(gui->getSize().x / 2,
                                   gui->getSize().y / 2)) {
 

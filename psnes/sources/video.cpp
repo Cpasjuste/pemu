@@ -10,7 +10,7 @@ using namespace c2dui;
 
 extern bool snes9x_height_extended;
 
-PSNESVideo::PSNESVideo(UIMain *gui, void **_pixels, int *_pitch, const c2d::Vector2f &size)
+PSNESVideo::PSNESVideo(UiMain *gui, void **_pixels, int *_pitch, const c2d::Vector2f &size)
         : C2DUIVideo(gui, _pixels, _pitch, size) {
     ui = gui;
 }

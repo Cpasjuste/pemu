@@ -11,7 +11,7 @@ namespace c2dui {
 
     public:
 
-        UIEmu(UIMain *ui);
+        UIEmu(UiMain *ui);
 
         virtual int load(const ss_api::Game &game);
 
@@ -21,7 +21,7 @@ namespace c2dui {
 
         virtual void resume();
 
-        UIMain *getUi();
+        UiMain *getUi();
 
         C2DUIVideo *getVideo();
 
@@ -58,7 +58,7 @@ namespace c2dui {
 
         ss_api::Game currentGame;
         c2d::Text *fpsText = nullptr;
-        UIMain *ui = nullptr;
+        UiMain *ui = nullptr;
         C2DUIVideo *video = nullptr;
         c2d::Audio *audio = nullptr;
         char fpsString[32];

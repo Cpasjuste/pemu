@@ -9,7 +9,7 @@ using namespace c2d;
 using namespace c2dui;
 using namespace ss_api;
 
-UIRomList::UIRomList(UIMain *u, RomList *rList, const c2d::Vector2f &size) : RectangleShape(size) {
+UIRomList::UIRomList(UiMain *u, RomList *rList, const c2d::Vector2f &size) : RectangleShape(size) {
 
     printf("UIRomList\n");
 
@@ -333,7 +333,6 @@ bool UIRomList::onInput(c2d::Input::Player *players) {
         ui->getUiMenu()->load();
     } else if (keys & Input::Key::Select) {
         if (getSelection().id > 0) {
-            ui->getConfig()->load(getSelection());
             ui->getUiMenu()->load(true);
 
         }

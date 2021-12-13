@@ -8,7 +8,7 @@
 #include <iostream>
 #include "c2dui.h"
 
-RomList::RomList(UIMain *_ui, const std::string &emuVersion) {
+RomList::RomList(UiMain *_ui, const std::string &emuVersion) {
 
     printf("RomList()\n");
 

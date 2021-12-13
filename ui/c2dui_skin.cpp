@@ -5,7 +5,7 @@
 #include "c2dui.h"
 #include <minizip/unzip.h>
 
-Skin::Skin(UIMain *u, const std::vector<Button> &btns, const Vector2f &scaling) {
+Skin::Skin(UiMain *u, const std::vector<Button> &btns, const Vector2f &scaling) {
 
     ui = u;
     path = ui->getIo()->getHomePath() + "skins/";
@@ -37,7 +37,7 @@ Skin::Skin(UIMain *u, const std::vector<Button> &btns, const Vector2f &scaling) 
     // TODO: cleanup this
     // load buttons textures
     buttons = btns;
-    for (auto &button : buttons) {
+    for (auto &button: buttons) {
         if (useZippedSkin) {
             std::string buttonPath = "buttons/" + std::to_string(button.id) + ".png";
             int size = 0;
@@ -341,7 +341,7 @@ Skin::loadRectangleShape(c2d::RectangleShape *shape, const std::vector<std::stri
             char *data = getZippedData(path, rectangleShapeGroup.texture, &size);
             printf("Skin::loadRectangleShape(%s, %s)\n",
                    path.c_str(), rectangleShapeGroup.texture.c_str());
-            if (data != nullptr) {
+            if (data) {
                 tex = new C2DTexture((const unsigned char *) data, size);
                 free(data);
             } else {
@@ -356,7 +356,7 @@ Skin::loadRectangleShape(c2d::RectangleShape *shape, const std::vector<std::stri
         }
     }
 
-    if (tex != nullptr && tex->available) {
+    if (tex && tex->available) {
         tex->setScale(rectangleShapeGroup.rect.width / tex->getSize().x,
                       rectangleShapeGroup.rect.height / tex->getSize().y);
         tex->setFillColor(rectangleShapeGroup.color);
@@ -368,7 +368,7 @@ Skin::loadRectangleShape(c2d::RectangleShape *shape, const std::vector<std::stri
         shape->setOutlineThickness(0);
         shape->add(tex);
     } else {
-        if (tex != nullptr) {
+        if (tex) {
             delete (tex);
         }
         shape->setFillColor(rectangleShapeGroup.color);
@@ -479,9 +479,8 @@ bool Skin::loadText(c2d::Text *text, const std::vector<std::string> &tree) {
         return false;
     }
 
-    if (!textGroup.text.empty()) {
-        text->setString(textGroup.text);
-    }
+    text->setFont(getFont());
+    text->setString(textGroup.text);
     text->setCharacterSize(textGroup.size);
     text->setFillColor(textGroup.color);
     text->setOutlineColor(textGroup.outlineColor);
@@ -496,7 +495,7 @@ bool Skin::loadText(c2d::Text *text, const std::vector<std::string> &tree) {
 
 Skin::Button *Skin::getButton(int id) {
 
-    for (auto &button : buttons) {
+    for (auto &button: buttons) {
         if (button.id == id) {
             return &button;
         }
@@ -560,7 +559,7 @@ char *Skin::getZippedData(const std::string &p, const std::string &name, int *si
 
 Skin::~Skin() {
 
-    for (auto &button : buttons) {
+    for (auto &button: buttons) {
         if (button.texture != nullptr) {
             delete (button.texture);
         }

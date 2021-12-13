@@ -11,7 +11,7 @@ namespace c2dui {
 
     public:
 
-        PFBAUIRomList(UIMain *ui, RomList *romList, const c2d::Vector2f &size) :
+        PFBAUIRomList(UiMain *ui, RomList *romList, const c2d::Vector2f &size) :
                 UIRomList(ui, romList, size) {}
 
         void filterRomList() override;

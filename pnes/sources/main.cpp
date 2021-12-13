@@ -40,7 +40,7 @@ PNESConfig *cfg;
 PNESUIStateMenu *uiState;
 RomList *romList;
 
-UIMain *ui;
+UiMain *ui;
 Skin *skin;
 UIRomList *uiRomList;
 
@@ -72,7 +72,7 @@ int main(int argc, char **argv) {
         screen_size = Vector2f();
     }
 #endif
-    ui = new UIMain(screen_size);
+    ui = new UiMain(screen_size);
     if (ui->getShaderList() != nullptr) {
         cfg->add(Option::Id::ROM_FILTER, "EFFECT", ui->getShaderList()->getNames(), 0,
                  Option::Id::ROM_SHADER, Option::Flags::STRING);

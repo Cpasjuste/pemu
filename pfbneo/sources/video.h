@@ -13,7 +13,7 @@ namespace c2dui {
 
     public:
 
-        PFBAVideo(UIMain *ui, void **pixels, int *pitch, const c2d::Vector2f &size);
+        PFBAVideo(UiMain *ui, void **pixels, int *pitch, const c2d::Vector2f &size);
 
         void updateScaling(bool vertical = false, bool flip = false);
     };

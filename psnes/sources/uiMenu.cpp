@@ -8,7 +8,7 @@
 using namespace c2d;
 using namespace c2dui;
 
-PSNESUIMenu::PSNESUIMenu(c2dui::UIMain *ui) : UIMenu(ui) {
+PSNESUIMenu::PSNESUIMenu(c2dui::UiMain *ui) : UIMenu(ui) {
 
     printf("PSNESUIMenu()\n");
 }

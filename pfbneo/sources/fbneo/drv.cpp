@@ -5,7 +5,7 @@
 
 using namespace c2dui;
 
-extern UIMain *ui;
+extern UiMain *ui;
 extern UINT8 NeoSystem;
 int bDrvOkay = 0;                        // 1 if the Driver has been initted okay, and it's okay to use the BurnDrv functions
 int kNetGame = 0;

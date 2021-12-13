@@ -9,7 +9,7 @@ class PFBARomList : public c2dui::RomList {
 
 public:
 
-    PFBARomList(c2dui::UIMain *ui, const std::string &emuVersion);
+    PFBARomList(c2dui::UiMain *ui, const std::string &emuVersion);
 
     void build() override;
 };

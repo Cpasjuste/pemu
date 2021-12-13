@@ -2,52 +2,60 @@
 // Created by cpasjuste on 30/01/18.
 //
 
-#ifndef C2DUI_UI_MENU_H
-#define C2DUI_UI_MENU_H
+#ifndef C2DUI_UI_MENU_NEW_H
+#define C2DUI_UI_MENU_NEW_H
 
 class MenuLine;
 
 namespace c2dui {
 
-    class UIMenu : public c2d::RectangleShape {
+    class UiMenu : public SkinnedRectangle {
 
     public:
 
-        UIMenu(UIMain *ui);
+        explicit UiMenu(UiMain *uiMain);
 
-        ~UIMenu();
+        ~UiMenu() override;
+
+        void load(bool isRomMenu = false);
+
+        UiMain *getUi() { return ui; };
+
+        bool isRom() const { return isRomMenu; };
+
+        virtual bool isOptionHidden(Option *option) { return false; };
+
+        void onKeyUp();
+
+        void onKeyDown();
 
         bool onInput(c2d::Input::Player *players) override;
 
-        void load(bool isRomMenu = false, OptionMenu *om = nullptr);
-
-        UIMain *getUi();
-
-        bool isRom();
-
-        virtual bool isOptionHidden(Option *option);
+        void setVisibility(c2d::Visibility visibility, bool tweenPlay = false) override;
 
     private:
 
-        void updateHighlight();
+        void updateLines();
 
-        UIMain *ui = nullptr;
-        c2d::Text *title = nullptr;
+        UiMain *ui = nullptr;
+        SkinnedText *title = nullptr;
         c2d::RectangleShape *highlight = nullptr;
         std::vector<MenuLine *> lines;
         float alpha = 230;
 
-        OptionMenu *optionMenuGui = nullptr;
-        OptionMenu *optionMenuRom = nullptr;
-        OptionMenu *optionMenu = nullptr;
-        std::vector<Option> *options;
+        std::vector<Option> options;
         c2d::TweenPosition *tweenPosition;
         Skin::TextGroup textGroup;
+
+        float lineHeight = 0;
+        int maxLines = 0;
         int optionIndex = 0;
-        int optionCount = 0;
+        int highlightIndex = 0;
+
         bool isRomMenu = false;
         bool isEmuRunning = false;
+        bool needSave = false;
     };
 }
 
-#endif //C2DUI_UI_MENU_H
+#endif //C2DUI_UI_MENU_NEW_H

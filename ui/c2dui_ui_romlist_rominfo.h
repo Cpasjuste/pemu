@@ -9,7 +9,7 @@ class UIRomInfo : public c2d::Rectangle {
 
 public:
 
-    UIRomInfo(c2dui::UIMain *u, c2dui::UIRomList *uiRList, c2d::Font *fnt, int fntSize);
+    UIRomInfo(c2dui::UiMain *u, c2dui::UIRomList *uiRList, c2d::Font *fnt, int fntSize);
 
     ~UIRomInfo() override;
 
@@ -25,7 +25,7 @@ public:
 
     void load(const ss_api::Game &game = ss_api::Game());
 
-    c2dui::UIMain *ui = nullptr;
+    c2dui::UiMain *ui = nullptr;
     c2dui::UIRomList *uiRomList = nullptr;
     c2d::C2DTexture *texture = nullptr;
     c2d::Font *font;

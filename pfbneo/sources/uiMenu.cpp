@@ -28,5 +28,5 @@ bool PFBAGuiMenu::isOptionHidden(c2dui::Option *option) {
     }
 #endif
 
-    return UIMenuNew::isOptionHidden(option);
+    return UiMenu::isOptionHidden(option);
 }

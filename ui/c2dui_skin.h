@@ -50,13 +50,14 @@ namespace c2dui {
             int id = -1;
         };
 
-        Skin(UIMain *ui, const std::vector<Button> &buttons, const c2d::Vector2f &scaling = c2d::Vector2f(1, 1));
+        Skin(UiMain *ui, const std::vector<Button> &buttons, const c2d::Vector2f &scaling = c2d::Vector2f(1, 1));
 
         ~Skin();
 
         c2d::config::Config *getConfig();
 
-        bool loadRectangleShape(c2d::RectangleShape *shape, const std::vector<std::string> &tree, bool textureUseFillColors = false);
+        bool loadRectangleShape(c2d::RectangleShape *shape, const std::vector<std::string> &tree,
+                                bool textureUseFillColors = false);
 
         RectangleShapeGroup getRectangleShape(const std::vector<std::string> &tree);
 
@@ -97,7 +98,7 @@ namespace c2dui {
                                            const c2d::Text::Overflow &overflow = c2d::Text::Overflow::Clamp,
                                            c2d::Vector2f scale = {1, 1});
 
-        UIMain *ui = nullptr;
+        UiMain *ui = nullptr;
         c2d::config::Config *config = nullptr;
         bool useZippedSkin = false;
         c2d::Vector2f global_scaling = {1.0f, 1.0f};

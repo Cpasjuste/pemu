@@ -11,7 +11,7 @@ namespace c2dui {
 
     public:
 
-        UIProgressBox(UIMain *gui);
+        UIProgressBox(UiMain *gui);
 
         void setTitle(std::string title);
 
