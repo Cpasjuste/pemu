@@ -48,18 +48,32 @@ Config::Config(c2d::Io *io, int ver) {
     append("FULLSCREEN", {"OFF", "ON"}, 0, Option::Id::GUI_FULLSCREEN, Option::Flags::BOOLEAN);
     get()->at(get()->size() - 1).setInfo("This option needs a restart...");
 #endif
-    // build zipped skin list
+
+    // build  skin list
     std::vector<std::string> skins;
-    std::vector<c2d::Io::File> files = io->getDirList(dataPath + "skins/", true);
+    // load skins from romfs
+    std::vector<c2d::Io::File> files = io->getDirList(io->getRomFsPath() + "skins/", true);
     for (auto &file: files) {
-        if (file.type == c2d::Io::Type::Directory || file.name[0] == '.'
-            || !Utility::endsWith(file.name, ".zip")) {
+        if (file.type != c2d::Io::Type::Directory || file.name[0] == '.') {
             continue;
         }
-        std::string skinName = Utility::removeExt(file.name);
-        skins.emplace_back(skinName);
-        printf("skin found: %s\n", skinName.c_str());
+        skins.emplace_back(file.name);
+        printf("skin found: %s\n", file.path.c_str());
     }
+    // load skins from data dir
+    files = io->getDirList(dataPath + "skins/", true);
+    for (auto &file: files) {
+        if (file.type != c2d::Io::Type::Directory || file.name[0] == '.') {
+            continue;
+        }
+        // only append skin name if it
+        if (std::find(skins.begin(), skins.end(), file.name) == skins.end()) {
+            skins.emplace_back(file.name);
+            printf("skin found: %s\n", file.path.c_str());
+        }
+    }
+
+    // set default skin index
     if (!get(Option::Id::GUI_SKIN)) {
         int index = 0;
         for (size_t i = 0; i < skins.size(); i++) {

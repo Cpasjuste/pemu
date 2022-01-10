@@ -71,10 +71,11 @@ void RomList::setLoadingText(const char *format, ...) {
 void RomList::build() {
 
     std::string romPath = ui->getConfig()->getRomPaths().at(FBN_PATH_ARCADE);
-    std::string dataPath = ui->getIo()->getDataPath();
     printf("RomList::build(): ROM_PATH_0: %s\n", romPath.c_str());
 
-    gameList.append(dataPath + "gamelist.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_ARCADE), false, true);
+    gameList.append(ui->getIo()->getRomFsPath() + "gamelist.xml",
+                    ui->getConfig()->getRomPaths().at(FBN_PATH_ARCADE), false, true);
+
     setLoadingText("Games: %i / %i", gameList.getAvailableCount(), gameList.games.size());
     printf("RomList::build: games: %i / %lu\n", gameList.getAvailableCount(), gameList.games.size());
 
@@ -133,7 +134,7 @@ void RomList::build() {
     ui->getConfig()->reset();
     ui->getConfig()->load();
 
-    gameListFav = GameList(dataPath + "favorites.xml");
+    gameListFav = GameList(ui->getIo()->getDataPath() + "favorites.xml");
     for (size_t i = 0; i < gameListFav.games.size(); i++) {
         Game game = gameList.findByPathAndSystem(gameListFav.games[i].path, gameListFav.games[i].system.id);
         if (!game.path.empty()) {

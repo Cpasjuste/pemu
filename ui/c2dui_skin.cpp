@@ -3,56 +3,38 @@
 //
 
 #include "c2dui.h"
-#include <minizip/unzip.h>
 
 Skin::Skin(UiMain *u, const std::vector<Button> &btns, const Vector2f &scaling) {
 
     ui = u;
-    path = ui->getIo()->getHomePath() + "skins/";
 
-    // extract config file from zipped skin but create a default one
-    config = new config::Config("SKIN_CONFIG", path + "default/config.cfg");
-
-    int configLen = 0;
-    std::string skinName = ui->getConfig()->get(Option::GUI_SKIN)->getValueString() + ".zip";
-    char *configData = getZippedData(path + skinName, "config.cfg", &configLen);
-    if (configData == nullptr && skinName != "default.zip") {
-        ui->getConfig()->get(Option::GUI_SKIN)->setValueString("default");
-        skinName = "default.zip";
-        configData = getZippedData(path + skinName, "config.cfg", &configLen);
+    // try to load skin from data directory first
+    path = ui->getIo()->getDataPath() + "skins/" + ui->getConfig()->get(Option::GUI_SKIN)->getValueString() + "/";
+    if (!ui->getIo()->exist(path + "config.cfg")) {
+        // now try from romfs
+        printf("Skin::Skin: skin config do not exist, trying from romfs... (%s)\n", (path + "config.cfg").c_str());
+        path = ui->getIo()->getRomFsPath() + "skins/" + ui->getConfig()->get(Option::GUI_SKIN)->getValueString() + "/";
+        if (!ui->getIo()->exist(path + "config.cfg")) {
+            // restore defaults
+            printf("Skin::Skin: skin config do not exist, reverting to default skin (%s)\n",
+                   (path + "config.cfg").c_str());
+            ui->getConfig()->get(Option::GUI_SKIN)->setValueString("default");
+            path = ui->getIo()->getRomFsPath() + "skins/default/";
+        }
     }
 
-    if (configData != nullptr) {
-        configData[configLen - 1] = '\0';
-        path += skinName;
-        useZippedSkin = true;
-        //printf("Skin: zipped skin found: %s\n", path.c_str());
-    } else {
-        printf("Skin: zipped skin not found: %s\n", (path + skinName).c_str());
-        path += "default/";
-    }
-
+    config = new config::Config("SKIN_CONFIG", path + "config.cfg");
     printf("Skin path: %s\n", path.c_str());
 
-    // TODO: cleanup this
     // load buttons textures
     buttons = btns;
     for (auto &button: buttons) {
-        if (useZippedSkin) {
-            std::string buttonPath = "buttons/" + std::to_string(button.id) + ".png";
-            int size = 0;
-            char *data = getZippedData(path, buttonPath, &size);
-            if (data != nullptr) {
-                button.texture = new C2DTexture((const unsigned char *) data, size);
-                free(data);
-            }
-        } else {
-            std::string buttonPath =
-                    ui->getIo()->getHomePath() + "skins/buttons/" + std::to_string(button.id) + ".png";
+        std::string buttonPath = path + "buttons/" + std::to_string(button.id) + ".png";
+        if (ui->getIo()->exist(buttonPath)) {
             button.texture = new C2DTexture(buttonPath);
-        }
-        if ((button.texture != nullptr) && !button.texture->available) {
-            delete (button.texture);
+            if (button.texture != nullptr && !button.texture->available) {
+                delete (button.texture);
+            }
         }
     }
 
@@ -151,17 +133,8 @@ Skin::Skin(UiMain *u, const std::vector<Button> &btns, const Vector2f &scaling) 
     /// STATES_MENU (END
     ///
 
-    // LOAD/SAVE
-    if (useZippedSkin) {
-        config->loadFromString(configData);
-        free(configData);
-    } else {
-        if (!config->load()) {
-            // file doesn't exist or is malformed, (re)create it
-            config->save();
-        }
-    }
-
+    // load config
+    config->load();
 
     ///
     /// load global scaling from loaded configuration
@@ -194,20 +167,10 @@ Skin::Skin(UiMain *u, const std::vector<Button> &btns, const Vector2f &scaling) 
     font_available = false;
     font = new C2DFont();
     c2d::config::Group *fntGroup = config->getGroup("FONT");
-    if (useZippedSkin) {
-        int size = 0;
-        font_data = getZippedData(path, fntGroup->getOption("path")->getString(), &size);
-        if (font_data != nullptr) {
-            if (font->loadFromMemory(font_data, (size_t) size)) {
-                font_available = true;
-            }
-        }
-    } else {
-        std::string fontPath = path + fntGroup->getOption("path")->getString();
-        printf("font path: %s\n", fontPath.c_str());
-        if (font->loadFromFile(fontPath)) {
-            font_available = true;
-        }
+    std::string fontPath = path + fntGroup->getOption("path")->getString();
+    //printf("font path: %s\n", fontPath.c_str());
+    if (font->loadFromFile(fontPath)) {
+        font_available = true;
     }
     if (!font_available) {
         delete (font);
@@ -241,7 +204,7 @@ config::Group Skin::createRectangleShapeGroup(const std::string &name,
 
 Skin::RectangleShapeGroup Skin::getRectangleShape(const std::vector<std::string> &tree) {
 
-    config::Option *option = nullptr;
+    config::Option *option;
     RectangleShapeGroup rectangleShapeGroup{};
 
     c2d::config::Group *group = config->getGroup(tree[0]);
@@ -336,23 +299,9 @@ Skin::loadRectangleShape(c2d::RectangleShape *shape, const std::vector<std::stri
 
     C2DTexture *tex = nullptr;
     if (!rectangleShapeGroup.texture.empty()) {
-        if (useZippedSkin) {
-            int size = 0;
-            char *data = getZippedData(path, rectangleShapeGroup.texture, &size);
-            printf("Skin::loadRectangleShape(%s, %s)\n",
-                   path.c_str(), rectangleShapeGroup.texture.c_str());
-            if (data) {
-                tex = new C2DTexture((const unsigned char *) data, size);
-                free(data);
-            } else {
-                printf("Skin::loadRectangleShape(%s, %s): failed to load texture\n",
-                       path.c_str(), rectangleShapeGroup.texture.c_str());
-            }
-        } else {
-            std::string bg_path = path + rectangleShapeGroup.texture;
-            if (ui->getIo()->exist(bg_path)) {
-                tex = new C2DTexture(bg_path);
-            }
+        std::string bg_path = path + rectangleShapeGroup.texture;
+        if (ui->getIo()->exist(bg_path)) {
+            tex = new C2DTexture(bg_path);
         }
     }
 
@@ -368,9 +317,7 @@ Skin::loadRectangleShape(c2d::RectangleShape *shape, const std::vector<std::stri
         shape->setOutlineThickness(0);
         shape->add(tex);
     } else {
-        if (tex) {
-            delete (tex);
-        }
+        if (tex) delete (tex);
         shape->setFillColor(rectangleShapeGroup.color);
         shape->setOutlineColor(rectangleShapeGroup.outlineColor);
         shape->setOutlineThickness(rectangleShapeGroup.outlineSize);
@@ -505,56 +452,6 @@ Skin::Button *Skin::getButton(int id) {
 
 c2d::Font *Skin::getFont() {
     return font;
-}
-
-char *Skin::getZippedData(const std::string &p, const std::string &name, int *size) {
-
-    char *data = nullptr;
-
-    printf("Skin::getZippedData(%s, %s)\n", p.c_str(), name.c_str());
-
-    unzFile zip = unzOpen(p.c_str());
-    if (zip == nullptr) {
-        printf("Skin::getZippedData(%s, %s): unzOpen failed\n", p.c_str(), name.c_str());
-        return data;
-    }
-
-    if (unzGoToFirstFile(zip) == UNZ_OK) {
-        do {
-            if (unzOpenCurrentFile(zip) == UNZ_OK) {
-                unz_file_info fileInfo;
-                memset(&fileInfo, 0, sizeof(unz_file_info));
-                if (unzGetCurrentFileInfo(zip, &fileInfo, nullptr, 0, nullptr, 0, nullptr, 0) == UNZ_OK) {
-                    char *zipFileName = (char *) malloc(fileInfo.size_filename + 1);
-                    unzGetCurrentFileInfo(zip, &fileInfo, zipFileName, fileInfo.size_filename + 1,
-                                          nullptr, 0, nullptr, 0);
-                    zipFileName[fileInfo.size_filename] = '\0';
-                    //printf("Skin::getZippedData: found file: %s\n", zipFileName);
-                    if (name == zipFileName) {
-                        data = (char *) malloc(fileInfo.uncompressed_size);
-                        if (size != nullptr) {
-                            *size = (int) fileInfo.uncompressed_size;
-                        }
-                        unzReadCurrentFile(zip, data, (unsigned int) fileInfo.uncompressed_size);
-                        free(zipFileName);
-                        unzClose(zip);
-                        return data;
-                    }
-                    free(zipFileName);
-                }
-                unzCloseCurrentFile(zip);
-            } else {
-                printf("Skin::getZippedData(%s, %s): unzOpenCurrentFile failed\n", p.c_str(), name.c_str());
-                break;
-            }
-        } while (unzGoToNextFile(zip) == UNZ_OK);
-    } else {
-        printf("Skin::getZippedData(%s, %s): unzGoToFirstFile failed\n", p.c_str(), name.c_str());
-    }
-
-    unzClose(zip);
-
-    return data;
 }
 
 Skin::~Skin() {

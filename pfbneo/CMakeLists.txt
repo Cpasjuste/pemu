@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0)
-set(CMAKE_VERBOSE_MAKEFILE ON)
+#set(CMAKE_VERBOSE_MAKEFILE ON)
 
 project(pfbneo)
 
@@ -352,7 +352,8 @@ else ()
     add_dependencies(${PROJECT_NAME}.deps ${PROJECT_NAME}.deps.gamelist)
 endif ()
 
-# add extra data to libcross2d default targets data (nestopia database and zipped skin)
+#[[
+# add extra data to libcross2d default targets data (databases, skins, ...)
 add_custom_target(${PROJECT_NAME}.data.extra
         DEPENDS ${PROJECT_NAME}.data
         # make dummy directory for user files
@@ -367,6 +368,8 @@ add_custom_target(${PROJECT_NAME}.data.extra
         COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/skins/big_preview
         )
 add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}.data.extra)
+]]
+
 # TODO
 #add_dependencies(${PROJECT_NAME}_${TARGET_PLATFORM}_release ${PROJECT_NAME}.data.extra)
 
