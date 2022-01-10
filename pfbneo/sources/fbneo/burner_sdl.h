@@ -166,7 +166,7 @@ extern char szAppTitlePath[MAX_PATH];
 extern char szAppNvPath[MAX_PATH];
 extern char szAppSkinPath[MAX_PATH];
 
-void BurnPathsInit();
+void BurnPathsInit(const char *dataPath);
 
 // drv.cpp
 extern int bRunPause;

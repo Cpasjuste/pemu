@@ -43,22 +43,12 @@ char szAppEEPROMPath[MAX_PATH];
 char szAppHDDPath[MAX_PATH];
 char szAppSkinPath[MAX_PATH];
 
-void BurnPathsInit() {
-#ifdef __PSP2__
-    strncpy(szAppHomePath, "ux0:/data/pfba/", MAX_PATH);
-    strncpy(szAppSkinPath, "app0:/skin/", MAX_PATH);
-#elif __3DS__
-    strncpy(szAppHomePath, "/pfba", MAX_PATH);
-#elif __PS3__
-    strncpy(szAppHomePath, "/dev_hdd0/pfba", MAX_PATH);
-#elif __SWITCH__
-    strncpy(szAppHomePath, "./", MAX_PATH);
-#else
-    getcwd(szAppHomePath, MAX_PATH);
-    strcat(szAppHomePath, "/");
+void BurnPathsInit(const char *dataPath) {
+
+    printf("BurnPathsInit: dataPath = %s\n", dataPath);
+
+    snprintf(szAppHomePath, MAX_PATH - 1, "%s/", dataPath);
     mkdir(szAppHomePath, 0777);
-#endif
-    //printf("szAppHomePath: %s\n", szAppHomePath);
 
     snprintf(szAppRomPath, MAX_PATH - 1, "%s%s", szAppHomePath, "roms");
     mkdir(szAppRomPath, 0777);
@@ -70,10 +60,6 @@ void BurnPathsInit() {
     snprintf(szAppConfigPath, MAX_PATH - 1, "%s%s", szAppHomePath, "configs");
     mkdir(szAppConfigPath, 0777);
     //printf("szAppConfigPath: %s\n", szAppConfigPath);
-
-    snprintf(szAppHiscorePath, MAX_PATH - 1, "%s%s/", szAppHomePath, "hiscores");
-    mkdir(szAppHiscorePath, 0777);
-    //printf("szAppHiscorePath: %s\n", szAppHiscorePath);
 
     snprintf(szAppSamplesPath, MAX_PATH - 1, "%s%s/", szAppHomePath, "samples");
     mkdir(szAppSamplesPath, 0777);
@@ -91,6 +77,10 @@ void BurnPathsInit() {
     mkdir(szAppHDDPath, 0777);
     //printf("szAppHDDPath: %s\n", szAppHDDPath);
 
-    snprintf(szAppEEPROMPath, MAX_PATH - 1, "%seeproms/", szAppHomePath);
+    snprintf(szAppEEPROMPath, MAX_PATH - 1, "%s%s/", szAppHomePath, "eeproms");
     mkdir(szAppEEPROMPath, 0777);
+
+    snprintf(szAppHiscorePath, MAX_PATH - 1, "%s%s/", szAppHomePath, "hiscores");
+    mkdir(szAppHiscorePath, 0777);
+    //printf("szAppHiscorePath: %s\n", szAppHiscorePath);
 }

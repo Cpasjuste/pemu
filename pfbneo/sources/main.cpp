@@ -46,11 +46,13 @@ Skin *skin;
 
 int main(int argc, char **argv) {
 
-    BurnPathsInit();
-    BurnLibInit();
-
     // need custom io for some devices
     auto io = new PFBAIo();
+
+    // fbneo init
+    BurnPathsInit(io->getDataPath().c_str());
+    BurnLibInit();
+
     // load configuration
     int version = (__PFBA_VERSION_MAJOR__ * 100) + __PFBA_VERSION_MINOR__;
     cfg = new PFBAConfig(io, version);
