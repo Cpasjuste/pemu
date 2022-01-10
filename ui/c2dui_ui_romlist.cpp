@@ -236,8 +236,8 @@ void UIRomList::filterRomList() {
 }
 
 void UIRomList::sortRomList() {
-    bool byPath = ui->getConfig()->get(Option::Id::GUI_SHOW_ROM_NAMES)->getValueBool();
-    gameList.sortAlpha(byPath);
+    bool byZipName = ui->getConfig()->get(Option::Id::GUI_SHOW_ZIP_NAMES)->getValueBool();
+    gameList.sortAlpha(byZipName);
 }
 
 void UIRomList::setVideoSnapDelay(int delay) {

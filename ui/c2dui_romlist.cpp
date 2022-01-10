@@ -70,8 +70,9 @@ void RomList::setLoadingText(const char *format, ...) {
 
 void RomList::build() {
 
-    printf("RomList::build(): ROM_PATH_0: %s\n", ui->getConfig()->getRomPaths().at(FBN_PATH_ARCADE).c_str());
+    std::string romPath = ui->getConfig()->getRomPaths().at(FBN_PATH_ARCADE);
     std::string dataPath = ui->getIo()->getDataPath();
+    printf("RomList::build(): ROM_PATH_0: %s\n", romPath.c_str());
 
     gameList.append(dataPath + "gamelist.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_ARCADE), false, true);
     setLoadingText("Games: %i / %i", gameList.getAvailableCount(), gameList.games.size());
@@ -101,7 +102,7 @@ void RomList::build() {
     gameList.genres.insert(gameList.genres.begin(), "ALL");
 
     ui->getConfig()->add(
-            Option::Id::GUI_SHOW_ROM_NAMES, "FILTER_SYSTEM",
+            Option::Id::GUI_SHOW_ZIP_NAMES, "FILTER_SYSTEM",
             gameList.systems, 0, Option::Id::GUI_FILTER_SYSTEM, Option::Flags::STRING | Option::Flags::HIDDEN);
     ui->getConfig()->add(
             Option::Id::GUI_FILTER_SYSTEM, "FILTER_EDITOR",

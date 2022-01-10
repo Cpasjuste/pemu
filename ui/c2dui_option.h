@@ -28,7 +28,7 @@ namespace c2dui {
         enum Id {
             MENU_MAIN = 0,
             GUI_SHOW_ALL,
-            GUI_SHOW_ROM_NAMES,
+            GUI_SHOW_ZIP_NAMES,
             GUI_FILTER_CLONES,
             GUI_FILTER_SYSTEM,
             GUI_FILTER_EDITOR,

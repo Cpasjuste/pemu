@@ -151,8 +151,7 @@ void UIListBox::init(Font *font, int fontSize, bool useIcons) {
 
 void UIListBox::updateLines() {
 
-    bool useRomName = ui->getConfig()->get(Option::Id::GUI_SHOW_ROM_NAMES)->getValueBool();
-    bool pfbn = ui->getConfig()->get(Option::Id::ROM_NEOBIOS) != nullptr;
+    bool useZipName = ui->getConfig()->get(Option::Id::GUI_SHOW_ZIP_NAMES)->getValueBool();
 
     for (unsigned int i = 0; i < (unsigned int) max_lines; i++) {
 
@@ -162,13 +161,7 @@ void UIListBox::updateLines() {
             // set file
             Game game = games[file_index + i];
             lines[i]->setVisibility(Visibility::Visible);
-            if (pfbn) {
-                //std::string upper = Utility::toUpper(useRomName ? game.names[0].text : game.getName().text);
-                lines[i]->setString(useRomName ? game.names[0].text : game.getName().text);
-            } else {
-                //std::string upper = Utility::toUpper(useRomName ? Utility::removeExt(game.path) : game.getName().text);
-                lines[i]->setString(useRomName ? Utility::removeExt(game.path) : game.getName().text);
-            }
+            lines[i]->setString(useZipName ? game.path : game.getName().text);
             // TODO: ICON
             //lines[i]->setIcon(file->icon);
             lines[i]->setColor(game.available ? colorAvailable : colorMissing);

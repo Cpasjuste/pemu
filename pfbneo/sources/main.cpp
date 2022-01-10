@@ -26,7 +26,6 @@
 #include "uiStateMenu.h"
 #include "pfba_io.h"
 #include "romlist.h"
-#include "pfba_ui_romlist.h"
 
 using namespace c2d;
 using namespace c2dui;
@@ -42,9 +41,8 @@ PFBAGuiEmu *uiEmu;
 PFBAUIStateMenu *uiState;
 PFBAConfig *cfg;
 PFBARomList *romList;
-
+UIRomList *uiRomList;
 Skin *skin;
-PFBAUIRomList *uiRomList;
 
 int main(int argc, char **argv) {
 
@@ -58,14 +56,14 @@ int main(int argc, char **argv) {
     cfg = new PFBAConfig(io, version);
 
     Vector2f screen_size = {
-            cfg->get(Option::Id::GUI_SCREEN_WIDTH)->getValueInt(),
-            cfg->get(Option::Id::GUI_SCREEN_HEIGHT)->getValueInt()
+            (float) cfg->get(Option::Id::GUI_SCREEN_WIDTH)->getValueInt(),
+            (float) cfg->get(Option::Id::GUI_SCREEN_HEIGHT)->getValueInt()
     };
     FloatRect windows_size = {
-            cfg->get(Option::Id::GUI_WINDOW_LEFT)->getValueInt(),
-            cfg->get(Option::Id::GUI_WINDOW_TOP)->getValueInt(),
-            cfg->get(Option::Id::GUI_WINDOW_WIDTH)->getValueInt(),
-            cfg->get(Option::Id::GUI_WINDOW_HEIGHT)->getValueInt()
+            (float) cfg->get(Option::Id::GUI_WINDOW_LEFT)->getValueInt(),
+            (float) cfg->get(Option::Id::GUI_WINDOW_TOP)->getValueInt(),
+            (float) cfg->get(Option::Id::GUI_WINDOW_WIDTH)->getValueInt(),
+            (float) cfg->get(Option::Id::GUI_WINDOW_HEIGHT)->getValueInt()
     };
 
     // we need to create a renderer with real screen size
@@ -156,7 +154,7 @@ int main(int argc, char **argv) {
     fba_version += szAppBurnVer;
     romList = new PFBARomList(ui, fba_version);
     romList->build();
-    uiRomList = new PFBAUIRomList(ui, romList, ui->getSize());
+    uiRomList = new UIRomList(ui, romList, ui->getSize());
     uiMenu = new PFBAGuiMenu(ui);
     uiEmu = new PFBAGuiEmu(ui);
     uiState = new PFBAUIStateMenu(ui);
