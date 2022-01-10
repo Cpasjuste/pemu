@@ -47,7 +47,6 @@ public:
     c2d::Text *topstaffText = nullptr;
     c2d::Text *rotationText = nullptr;
     c2d::Text *resolutionText = nullptr;
-    c2d::Text *classificationText = nullptr;
     c2d::Text *cloneofText = nullptr;
     c2d::Text *filenameText = nullptr;
 #ifdef __MPV__

@@ -5,11 +5,6 @@
 #include "c2dui.h"
 #include "romlist.h"
 
-PFBARomList::PFBARomList(c2dui::UiMain *ui, const std::string &emuVersion)
-        : RomList(ui, emuVersion) {
-
-}
-
 void PFBARomList::build() {
 
     std::string dataPath = ui->getIo()->getDataPath();

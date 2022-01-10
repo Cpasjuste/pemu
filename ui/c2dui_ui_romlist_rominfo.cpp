@@ -38,7 +38,6 @@ UIRomInfo::UIRomInfo(UiMain *u, UIRomList *uiRList, Font *fnt, int fntSize)
         topstaffText = addInfoBoxText({"MAIN", "ROM_INFOS", "TOPSTAFF_TEXT"});
         rotationText = addInfoBoxText({"MAIN", "ROM_INFOS", "ROTATION_TEXT"});
         resolutionText = addInfoBoxText({"MAIN", "ROM_INFOS", "RESOLUTION_TEXT"});
-        classificationText = addInfoBoxText({"MAIN", "ROM_INFOS", "CLASSIFICATION_TEXT"});
         cloneofText = addInfoBoxText({"MAIN", "ROM_INFOS", "CLONEOF_TEXT"});
         filenameText = addInfoBoxText({"MAIN", "ROM_INFOS", "FILENAME_TEXT"});
         Rectangle::add(infoBox);
@@ -156,7 +155,6 @@ void UIRomInfo::load(const Game &game) {
         hideText(topstaffText);
         hideText(rotationText);
         hideText(resolutionText);
-        hideText(classificationText);
         hideText(cloneofText);
         hideText(filenameText);
         hideText(synoText);
@@ -178,9 +176,6 @@ void UIRomInfo::load(const Game &game) {
         showText(topstaffText, "Top Staff: " + std::to_string((int) game.topStaff));
         showText(rotationText, "Rotation: " + std::to_string(game.rotation));
         showText(resolutionText, "Resolution: " + game.resolution);
-        // TODO:
-        //showText(classificationText, "Classification: " + game.getClassification().text);
-        showText(classificationText, "Classification: Unknown");
         showText(cloneofText, "Clone Of: " + game.cloneOf);
         showText(filenameText, "File: " + game.path);
         showText(synoText, game.getSynopsis().text);
