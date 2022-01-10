@@ -13,7 +13,7 @@ file(GLOB CROSS2DUI_SOURCE
 
 set(FLAGS -D__SSCRAP__)
 
-if (UPDATE_CONFIG)
+if (OPTION_UPDATE_CONFIG)
     list(APPEND FLAGS -D__UPDATE_CONFIG__)
 endif ()
 
@@ -21,7 +21,7 @@ if (OPTION_FULLSCREEN)
     list(APPEND FLAGS -D__FULLSCREEN__)
 endif ()
 
-if (MPV_PLAYER)
+if (OPTION_MPV_PLAYER)
     list(APPEND FLAGS -D__MPV__)
     list(APPEND LDFLAGS mpv swscale swresample avformat avfilter avcodec avutil ass freetype png bz2 fribidi pthread m z)
 endif ()
@@ -42,8 +42,9 @@ endif ()
 if (PLATFORM_LINUX)
     set(CMAKE_THREAD_PREFER_PTHREAD TRUE)
     find_package(Threads REQUIRED)
+    #list(APPEND LDFLAGS ${OPTION_EMU}-romfs)
     if (NOT PLATFORM_WINDOWS)
-        list(APPEND LDFLAGS ${CMAKE_THREAD_LIBS_INIT} vdpau va va-drm va-x11 X11 lzma dl)
+        list(APPEND LDFLAGS ${CMAKE_THREAD_LIBS_INIT} lzma dl)
     endif ()
 elseif (PLATFORM_SWITCH)
     list(APPEND LDFLAGS opus vpx lzma)

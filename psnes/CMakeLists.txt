@@ -104,6 +104,11 @@ if (PLATFORM_VITA)
     #####################
     set(TITLE_ID "PSNE00001" CACHE STRING "" FORCE)
     list(APPEND SNES9X_LDFLAGS ScePower_stub)
+elseif (PLATFORM_PS4)
+    set(PS4_PKG_TITLE "PSNES")
+    set(PS4_PKG_TITLE_ID "PSNE00001")
+    set(PS4_PKG_VERSION "01.00")
+    list(APPEND SNES9X_CFLAGS -D__LIBRETRO__)
 elseif (PLATFORM_SWITCH)
     #####################
     # NX PLATORM
@@ -133,13 +138,10 @@ add_custom_target(${PROJECT_NAME}.data.extra
         COMMAND cd ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/skins/big_preview && ${ZIP} -ru ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/skins/big_preview.zip .
         COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/skins/big_preview.zip ${CMAKE_CURRENT_BINARY_DIR}/skins/
         COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/skins/big_preview
-        # 400x240 skin
-        COMMAND cd ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/skins/default_400x240 && ${ZIP} -ru ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/skins/default_400x240.zip .
-        COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/skins/default_400x240.zip ${CMAKE_CURRENT_BINARY_DIR}/skins/
-        COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/skins/default_400x240
         )
 add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}.data.extra)
-add_dependencies(${PROJECT_NAME}_${TARGET_PLATFORM}_release ${PROJECT_NAME}.data.extra)
+# TODO
+#add_dependencies(${PROJECT_NAME}_${TARGET_PLATFORM}_release ${PROJECT_NAME}.data.extra)
 
 if (PLATFORM_WINDOWS)
     add_custom_command(TARGET ${PROJECT_NAME}.data.extra POST_BUILD

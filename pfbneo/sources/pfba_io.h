@@ -19,6 +19,16 @@ namespace c2d {
         std::string getDataPath() override {
             return "ux0:/data/pfba/";
         }
+#elif __PS4__
+
+        std::string getHomePath() override {
+            return "/data/pfba/";
+        }
+
+        std::string getDataPath() override {
+            return "/data/pfba/";
+        }
+
 #endif
     };
 }

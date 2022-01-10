@@ -8,7 +8,7 @@
 using namespace c2d;
 using namespace c2dui;
 
-PSNESUIMenu::PSNESUIMenu(c2dui::UiMain *ui) : UIMenu(ui) {
+PSNESUIMenu::PSNESUIMenu(c2dui::UiMain *ui) : UiMenu(ui) {
 
     printf("PSNESUIMenu()\n");
 }
@@ -19,5 +19,5 @@ bool PSNESUIMenu::isOptionHidden(c2dui::Option *option) {
         return true;
     }
 
-    return UIMenu::isOptionHidden(option);
+    return UiMenu::isOptionHidden(option);
 }

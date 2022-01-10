@@ -165,7 +165,7 @@ void UIRomInfo::load(const Game &game) {
         mpv->stop();
 #endif
     } else {
-        printf("load(%s)\n", game.getName().text.c_str());
+        printf("UIRomInfo::load(%s)\n", game.getName().text.c_str());
         // load title/preview texture
         loadTexture(game);
         showText(systemText, "System: " + game.system.text);
@@ -183,7 +183,6 @@ void UIRomInfo::load(const Game &game) {
         showText(classificationText, "Classification: Unknown");
         showText(cloneofText, "Clone Of: " + game.cloneOf);
         showText(filenameText, "File: " + game.path);
-        //
         showText(synoText, game.getSynopsis().text);
     }
 }

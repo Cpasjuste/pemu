@@ -19,6 +19,16 @@ namespace c2d {
         std::string getDataPath() override {
             return "ux0:/data/psnes/";
         }
+#elif __PS4__
+
+        std::string getHomePath() override {
+            return "/data/psnes/";
+        }
+
+        std::string getDataPath() override {
+            return "/data/psnes/";
+        }
+
 #endif
 
     };

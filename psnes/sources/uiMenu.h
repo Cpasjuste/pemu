@@ -5,7 +5,7 @@
 #ifndef PSNES_UIMENU_H
 #define PSNES_UIMENU_H
 
-class PSNESUIMenu : public c2dui::UIMenu {
+class PSNESUIMenu : public c2dui::UiMenu {
 
 public:
 

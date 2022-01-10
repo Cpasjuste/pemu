@@ -1,5 +1,4 @@
 // StringSet C++ class
-#include <malloc.h>
 #include "burner.h"
 
 int __cdecl StringSet::Add(TCHAR* szFormat,...)

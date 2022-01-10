@@ -45,6 +45,7 @@ void PSNESVideo::updateScaling(bool vertical, bool flip) {
             integer_scaling = true;
             break;
 
+#error TODO: 4x
         case 2:
             // 3x (2x software scaling already applied in high res mode)
             factor = high_res ? 1.5f : 3.0f;

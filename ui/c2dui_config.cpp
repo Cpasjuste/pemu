@@ -80,7 +80,10 @@ Config::Config(c2d::Io *io, int ver) {
     /// default rom config
     /////////////////////////////////////////////////
     append("EMULATION", {"EMULATION"}, 0, Option::Id::MENU_ROM_OPTIONS, Option::Flags::MENU);
-    if (C2D_SCREEN_WIDTH > 400) {
+    if (C2D_SCREEN_WIDTH > 1280) {
+        append("SCALING", {"NONE", "2X", "3X", "4X", "FIT", "FIT 4:3", "FULL"}, 2,
+               Option::Id::ROM_SCALING, Option::Flags::STRING);
+    } else if (C2D_SCREEN_WIDTH > 400) {
         append("SCALING", {"NONE", "2X", "3X", "FIT", "FIT 4:3", "FULL"}, 2,
                Option::Id::ROM_SCALING, Option::Flags::STRING);
     } else {

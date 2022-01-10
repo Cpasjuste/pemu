@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0)
-#set(CMAKE_VERBOSE_MAKEFILE ON)
+set(CMAKE_VERBOSE_MAKEFILE ON)
 
 project(pfbneo)
 
@@ -232,6 +232,12 @@ if (PLATFORM_VITA)
     list(APPEND SRC_PFBA sources/cpu/c68000_intf.cpp sources/cpu/cyclone/Cyclone.s)
     list(APPEND FLAGS -DBUILD_C68K -DUSE_FILE32API -DLSB_FIRST -D__PFBA_ARM__)
     list(APPEND LDFLAGS ScePower_stub pthread)
+elseif (PLATFORM_PS4)
+    set(PS4_PKG_TITLE "PFBNE")
+    set(PS4_PKG_TITLE_ID "PFBN00001")
+    set(PS4_PKG_VERSION "01.00")
+    list(APPEND FLAGS -D__fastcall= -DLSB_FIRST)
+    list(APPEND LDFLAGS)
 elseif (PLATFORM_PS3)
     ##############
     # PS3
@@ -361,7 +367,8 @@ add_custom_target(${PROJECT_NAME}.data.extra
         COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/skins/big_preview
         )
 add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}.data.extra)
-add_dependencies(${PROJECT_NAME}_${TARGET_PLATFORM}_release ${PROJECT_NAME}.data.extra)
+# TODO
+#add_dependencies(${PROJECT_NAME}_${TARGET_PLATFORM}_release ${PROJECT_NAME}.data.extra)
 
 if (PLATFORM_WINDOWS)
     add_custom_command(TARGET ${PROJECT_NAME}.data.extra POST_BUILD
@@ -370,13 +377,3 @@ if (PLATFORM_WINDOWS)
             )
 endif ()
 
-#############
-# install
-#############
-install(
-        FILES ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}
-        PERMISSIONS OWNER_EXECUTE OWNER_READ
-        DESTINATION bin
-)
-install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/data_romfs/ DESTINATION share/pfbneo)
-install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/ DESTINATION share/pfbneo)

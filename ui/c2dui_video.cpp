@@ -25,7 +25,7 @@ void C2DUIVideo::updateScaling(bool vertical, bool flip) {
     int rotation_cfg = 0;
     std::string scale_mode = ui->getConfig()->get(Option::Id::ROM_SCALING, true)->getValueString();
     Option *rotationOpt = ui->getConfig()->get(Option::Id::ROM_ROTATION, true);
-    if(rotationOpt != nullptr) {
+    if (rotationOpt != nullptr) {
         rotation_cfg = rotationOpt->getIndex();
     }
 
@@ -94,6 +94,11 @@ void C2DUIVideo::updateScaling(bool vertical, bool flip) {
         sx = sy = std::min(scale_max.x, 3.0f);
         if (sy > scale_max.y) {
             sx = sy = std::min(scale_max.y, 3.0f);
+        }
+    } else if (scale_mode == "4X") {
+        sx = sy = std::min(scale_max.x, 4.0f);
+        if (sy > scale_max.y) {
+            sx = sy = std::min(scale_max.y, 4.0f);
         }
     } else if (scale_mode == "FIT") {
         sx = sy = scale_max.y;
