@@ -32,30 +32,14 @@ PFBAConfig::PFBAConfig(c2d::Io *io, int version) : Config(io, version) {
     ////////////////////////////////////////////////////////////
 
     /// ROMS OPTIONS
-#ifdef __FREEPLAY__
-    add(Option::Id::ROM_FILTER, "FORCE_60HZ",
-        {"OFF", "ON"}, 0, Option::Id::ROM_FORCE_60HZ, Option::HIDDEN | Option::Flags::BOOLEAN);
-    // audio
-    add(Option::Id::ROM_FORCE_60HZ, "FORCE_AUDIO_SYNC",
-        {"OFF", "ON"}, 1, Option::Id::ROM_AUDIO_SYNC, Option::HIDDEN | Option::Flags::BOOLEAN);
-    add(Option::Id::ROM_AUDIO_SYNC, "AUDIO_FREQUENCY",
-        {"11025", "22050", "32000", "44100", "48000"}, 1,
-        Option::Id::ROM_AUDIO_FREQ, Option::HIDDEN | Option::Flags::INTEGER);
-#else
     add(Option::Id::ROM_FILTER, "FORCE_60HZ",
         {"OFF", "ON"}, 1, Option::Id::ROM_FORCE_60HZ, Option::Flags::BOOLEAN);
     // audio
-#ifdef __VITA__
-    add(Option::Id::ROM_FORCE_60HZ, "FORCE_AUDIO_SYNC",
-        {"OFF", "ON"}, 1, Option::Id::ROM_AUDIO_SYNC, Option::Flags::BOOLEAN | Option::HIDDEN);
-#else
     add(Option::Id::ROM_FORCE_60HZ, "FORCE_AUDIO_SYNC",
         {"OFF", "ON"}, 0, Option::Id::ROM_AUDIO_SYNC, Option::Flags::BOOLEAN);
-#endif
     add(Option::Id::ROM_AUDIO_SYNC, "AUDIO_FREQUENCY",
         {"11025", "22050", "32000", "44100", "48000"}, 3, Option::Id::ROM_AUDIO_FREQ, Option::Flags::STRING);
-#endif
-    add(Option::Id::ROM_AUDIO_SYNC, "AUDIO_INTERPOLATION",
+    add(Option::Id::ROM_AUDIO_FREQ, "AUDIO_INTERPOLATION",
         {"0", "1", "3"}, 2, Option::Id::ROM_AUDIO_INTERPOLATION, Option::Flags::STRING);
     add(Option::Id::ROM_AUDIO_INTERPOLATION, "AUDIO_FM_INTERPOLATION",
         {"0", "1", "3"}, 2, Option::Id::ROM_AUDIO_FMINTERPOLATION, Option::Flags::STRING);
@@ -82,6 +66,12 @@ PFBAConfig::PFBAConfig(c2d::Io *io, int version) : Config(io, version) {
     add(Option::Id::ROM_NEOBIOS, "FRAMESKIP",
         {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"},
         0, Option::Id::ROM_FRAMESKIP, Option::Flags::STRING);
+#endif
+
+#ifdef __PS4__
+    // PS4: force 48000hz audio output
+    get(Option::Id::ROM_AUDIO_FREQ)->setIndex(4);
+    get(Option::Id::ROM_AUDIO_FREQ)->setFlags(Option::Flags::STRING | Option::Flags::HIDDEN);
 #endif
 
     // "c2dui_romlist" will also reload config, but we need new roms paths
