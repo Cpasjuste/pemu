@@ -51,17 +51,11 @@ Config::Config(c2d::Io *io, int ver) {
 
     // build  skin list
     std::vector<std::string> skins;
-    // load skins from romfs
-    std::vector<c2d::Io::File> files = io->getDirList(io->getRomFsPath() + "skins/", true);
-    for (auto &file: files) {
-        if (file.type != c2d::Io::Type::Directory || file.name[0] == '.') {
-            continue;
-        }
-        skins.emplace_back(file.name);
-        printf("skin found: %s\n", file.path.c_str());
-    }
-    // load skins from data dir
-    files = io->getDirList(dataPath + "skins/", true);
+    // add default skins from romfs
+    skins.emplace_back("default");
+    skins.emplace_back("big_preview");
+    // add skins from data dir
+    auto files = io->getDirList(dataPath + "skins/", true);
     for (auto &file: files) {
         if (file.type != c2d::Io::Type::Directory || file.name[0] == '.') {
             continue;
