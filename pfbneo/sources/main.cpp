@@ -138,6 +138,20 @@ int main(int argc, char **argv) {
     buttons.emplace_back(KEY_JOY_LSTICK_DEFAULT, "LSTICK");
     buttons.emplace_back(KEY_JOY_RSTICK_DEFAULT, "RSTICK");
     skin = new Skin(ui, buttons);
+#elif __PS4__
+    buttons.emplace_back(KEY_JOY_UP_DEFAULT, "UP");
+    buttons.emplace_back(KEY_JOY_DOWN_DEFAULT, "DOWN");
+    buttons.emplace_back(KEY_JOY_LEFT_DEFAULT, "LEFT");
+    buttons.emplace_back(KEY_JOY_RIGHT_DEFAULT, "RIGHT");
+    buttons.emplace_back(KEY_JOY_FIRE1_DEFAULT, "CROSS");
+    buttons.emplace_back(KEY_JOY_FIRE2_DEFAULT, "CIRCLE");
+    buttons.emplace_back(KEY_JOY_FIRE3_DEFAULT, "SQUARE");
+    buttons.emplace_back(KEY_JOY_FIRE4_DEFAULT, "TRIANGLE");
+    buttons.emplace_back(KEY_JOY_FIRE5_DEFAULT, "L1");
+    buttons.emplace_back(KEY_JOY_FIRE6_DEFAULT, "R1");
+    buttons.emplace_back(KEY_JOY_COIN1_DEFAULT, "L2");
+    buttons.emplace_back(KEY_JOY_START1_DEFAULT, "R2");
+    skin = new Skin(ui, buttons);
 #else
 #if __FULLSCREEN__
     int x, y;

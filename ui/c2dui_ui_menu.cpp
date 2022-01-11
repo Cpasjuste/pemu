@@ -60,11 +60,11 @@ public:
                     sprite->setTexture(button->texture, true);
                     sprite->setVisibility(Visibility::Visible);
                     value->setVisibility(Visibility::Hidden);
-                    float tex_scaling = std::min(
-                            ((getSize().x * 0.8f)) / (float) sprite->getTextureRect().width,
-                            ((getSize().y * 0.8f)) / (float) sprite->getTextureRect().height);
-                    sprite->setScale(tex_scaling, tex_scaling);
-                    sprite->setPosition((getSize().x * 0.67f), (getSize().y / 2) - 1);
+                    float scaling = std::min(
+                            getSize().x / (float) sprite->getTextureRect().width,
+                            getSize().y / (float) sprite->getTextureRect().height);
+                    sprite->setScale(scaling, scaling);
+                    sprite->setPosition((MenuLine::getSize().x * 0.6f), MenuLine::getSize().y / 2);
                     sprite->setOrigin(Origin::Left);
                 } else {
                     sprite->setVisibility(Visibility::Hidden);

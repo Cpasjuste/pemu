@@ -69,8 +69,6 @@ namespace c2dui {
 
         c2d::Font *getFont();
 
-        char *getZippedData(const std::string &path, const std::string &name, int *size = nullptr);
-
         std::string path;
         c2d::Font *font = nullptr;
         bool font_available = true;
@@ -100,7 +98,6 @@ namespace c2dui {
 
         UiMain *ui = nullptr;
         c2d::config::Config *config = nullptr;
-        bool useZippedSkin = false;
         c2d::Vector2f global_scaling = {1.0f, 1.0f};
     };
 }
