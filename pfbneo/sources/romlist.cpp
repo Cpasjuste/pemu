@@ -8,6 +8,9 @@
 void PFBARomList::build() {
 
     std::string dataPath = ui->getIo()->getRomFsPath();
+    if (!ui->getIo()->exist(dataPath + "gamelist_coleco.xml")) {
+        dataPath = ui->getIo()->getDataPath();
+    }
 
     gameList.append(dataPath + "gamelist_coleco.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_COLECO), false);
     setLoadingText("Games: %i / %i", gameList.getAvailableCount(), gameList.games.size());
