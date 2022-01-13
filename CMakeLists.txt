@@ -29,8 +29,8 @@ add_subdirectory(sscrap)
 # required for cmake toolchain setup
 project(pemu)
 set(PROJECT_AUTHOR Cpasjuste)
-set(VERSION_MAJOR 4)
-set(VERSION_MINOR 4)
+set(VERSION_MAJOR 5)
+set(VERSION_MINOR 0)
 
 # pemu (ui)
 add_subdirectory(ui)
