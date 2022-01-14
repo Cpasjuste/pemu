@@ -118,6 +118,8 @@ Config::Config(c2d::Io *io, int ver) {
     append("JOY_FIRE6", KEY_JOY_FIRE6_DEFAULT, Option::Id::JOY_FIRE6, Option::Flags::INPUT);
     append("JOY_COIN1", KEY_JOY_COIN1_DEFAULT, Option::Id::JOY_COIN1, Option::Flags::INPUT);
     append("JOY_START1", KEY_JOY_START1_DEFAULT, Option::Id::JOY_START1, Option::Flags::INPUT);
+    append("JOY_MENU1", KEY_JOY_MENU1_DEFAULT, Option::Id::JOY_MENU1, Option::Flags::INPUT);
+    append("JOY_MENU2", KEY_JOY_MENU2_DEFAULT, Option::Id::JOY_MENU2, Option::Flags::INPUT);
     // TODO: add gui option for axis in option menu
     append("JOY_AXIS_LX", KEY_JOY_AXIS_LX, Option::Id::JOY_AXIS_LX, Option::Flags::INPUT | Option::Flags::HIDDEN);
     append("JOY_AXIS_LY", KEY_JOY_AXIS_LY, Option::Id::JOY_AXIS_LY, Option::Flags::INPUT | Option::Flags::HIDDEN);
@@ -142,6 +144,8 @@ Config::Config(c2d::Io *io, int ver) {
     append("KEY_FIRE6", KEY_KB_FIRE6_DEFAULT, Option::Id::KEY_FIRE6, Option::Flags::INPUT);  // KP_6
     append("KEY_COIN1", KEY_KB_COIN1_DEFAULT, Option::Id::KEY_COIN1, Option::Flags::INPUT);  // ESCAPE
     append("KEY_START1", KEY_KB_START1_DEFAULT, Option::Id::KEY_START1, Option::Flags::INPUT);// ENTER
+    append("KEY_MENU1", KEY_KB_MENU1_DEFAULT, Option::Id::KEY_MENU1, Option::Flags::INPUT);  // ESCAPE
+    append("KEY_MENU2", KEY_KB_MENU2_DEFAULT, Option::Id::KEY_MENU2, Option::Flags::INPUT);// ENTER
 #endif
 
     load(ss_api::Game());
@@ -408,6 +412,8 @@ int *Config::getPlayerInputKeys(int player, bool isRom) {
     keyboard_keys[9] = get(Option::Id::KEY_FIRE4, isRom)->getValueInt();
     keyboard_keys[10] = get(Option::Id::KEY_FIRE5, isRom)->getValueInt();
     keyboard_keys[11] = get(Option::Id::KEY_FIRE6, isRom)->getValueInt();
+    keyboard_keys[12] = get(Option::Id::KEY_MENU1, isRom)->getValueInt();
+    keyboard_keys[13] = get(Option::Id::KEY_MENU2, isRom)->getValueInt();
 #endif
 
     return keyboard_keys;
@@ -428,6 +434,8 @@ int *Config::getPlayerInputButtons(int player, bool isRom) {
     joystick_keys[9] = get(Option::Id::JOY_FIRE4, isRom)->getValueInt();
     joystick_keys[10] = get(Option::Id::JOY_FIRE5, isRom)->getValueInt();
     joystick_keys[11] = get(Option::Id::JOY_FIRE6, isRom)->getValueInt();
+    joystick_keys[12] = get(Option::Id::JOY_MENU1, isRom)->getValueInt();
+    joystick_keys[13] = get(Option::Id::JOY_MENU2, isRom)->getValueInt();
 
     return joystick_keys;
 }

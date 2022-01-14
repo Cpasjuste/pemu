@@ -369,7 +369,7 @@ bool UiMenu::onInput(c2d::Input::Player *players) {
     }
 
     // FIRE2 (BACK)
-    if (keys & Input::Key::Start || keys & Input::Key::Select || keys & Input::Key::Fire2) {
+    if (keys & Input::Key::Menu1 || keys & Input::Key::Menu2 || keys & Input::Key::Fire2) {
         setVisibility(Visibility::Hidden, true);
         if (isEmuRunning) {
             ui->getUiEmu()->resume();

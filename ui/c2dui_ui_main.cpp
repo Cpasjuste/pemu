@@ -178,9 +178,21 @@ void UiMain::updateInputMapping(bool isRomConfig) {
             getInput()->players[i].ry.id = config->get(Option::Id::JOY_AXIS_RY, true)->getValueInt();
         }
     } else {
-        getInput()->setKeyboardMapping(C2D_DEFAULT_KB_KEYS);
+        // keep custom config for menus keys
+        int key_mapping[15];
+        memcpy(key_mapping, C2D_DEFAULT_KB_KEYS, sizeof(key_mapping));
+        key_mapping[12] = config->get(Option::Id::KEY_MENU1, false)->getValueInt();
+        key_mapping[13] = config->get(Option::Id::KEY_MENU2, false)->getValueInt();
+
+        int joy_mapping[15];
+        memcpy(joy_mapping, C2D_DEFAULT_JOY_KEYS, sizeof(joy_mapping));
+        joy_mapping[12] = config->get(Option::Id::JOY_MENU1, false)->getValueInt();
+        joy_mapping[13] = config->get(Option::Id::JOY_MENU2, false)->getValueInt();
+
+        getInput()->setKeyboardMapping(key_mapping);
         for (int i = 0; i < PLAYER_MAX; i++) {
-            getInput()->setJoystickMapping(i, C2D_DEFAULT_JOY_KEYS);
+            getInput()->setJoystickMapping(i, joy_mapping);
+            //
             getInput()->players[i].lx.id = KEY_JOY_AXIS_LX;
             getInput()->players[i].ly.id = KEY_JOY_AXIS_LY;
             getInput()->players[i].rx.id = KEY_JOY_AXIS_RX;

@@ -86,6 +86,8 @@ namespace c2dui {
             JOY_FIRE6,
             JOY_COIN1,
             JOY_START1,
+            JOY_MENU1,
+            JOY_MENU2,
             JOY_AXIS_LX,
             JOY_AXIS_LY,
             JOY_AXIS_RX,
@@ -105,6 +107,8 @@ namespace c2dui {
             KEY_FIRE6,
             KEY_COIN1,
             KEY_START1,
+            KEY_MENU1,
+            KEY_MENU2,
 #endif
         };
 

@@ -329,12 +329,11 @@ bool UIRomList::onInput(c2d::Input::Player *players) {
                 }
             }
         }
-    } else if (keys & Input::Key::Start) {
+    } else if (keys & Input::Key::Menu1) {
         ui->getUiMenu()->load();
-    } else if (keys & Input::Key::Select) {
+    } else if (keys & Input::Key::Menu2) {
         if (getSelection().id > 0) {
             ui->getUiMenu()->load(true);
-
         }
     }
 
