@@ -1,11 +1,300 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Data>
     <jeux>
+        <jeu id="46519" romid="168368">
+            <path>alieninv.zip</path>
+            <noms>
+                <nom region="ss">Alien Invasion</nom>
+                <nom region="us">Alien Invasion</nom>
+            </noms>
+            <regions>
+                <region>us</region>
+            </regions>
+            <cloneof>0</cloneof>
+            <systeme id="80" parentid="0">Channel F</systeme>
+            <synopsis>
+                <synopsis langue="en">This game is very similar to Space Invaders. The player controls a gun turret at the bottom of the screen. The turret can move both left and right and is able to shoot missiles. These missiles are used to shoot down the alien invaders which are moving back and forth in rows dropping missiles toward the player's gun turret. Each alien defeated earns the player points toward their score. Every once in a while, a spaceship will fly across the top of the screen and shooting it will give the player extra points. The goal of the game is to clear the screen of Alien Invaders and score as many points as possible. The game ends when the player loses all three of their lives.
+
+There are 10 game options that can be chosen with different number of players, player missiles and alien missiles. Players can also take turns or play simultaneously.</synopsis>
+            </synopsis>
+            <medias>
+                <media parent="jeu" type="video" region="unk" crc="9c9b2936" md5="02e69a7be4fde9700bc47f8f85c448c6" sha1="c926f0d1628dbc7560f08bca48fa651bfa97348a" format="mp4" support="">media/video/alieninv.mp4</media>
+                <media parent="jeu" type="mixrbv2" region="wor" crc="f5cefb89" md5="d5a2a2540d1a790afa6c52388c4ffe8d" sha1="123dfbc5733c084e4d02d8138df847bd8835effc" format="png" support="">media/mixrbv2/alieninv.png</media>
+            </medias>
+            <dates>
+                <date region="us">1981</date>
+            </dates>
+            <developpeur id="16563">Fairlight</developpeur>
+            <editeur id="20729">Zircon Software</editeur>
+            <genres>
+                <genre id="79" principale="1" parentid="0" langue="en">Shoot'em Up</genre>
+                <genre id="2851" principale="0" parentid="79" langue="en">Shoot'em up / Vertical</genre>
+                <genre id="10" principale="1" parentid="0" langue="en">Action</genre>
+            </genres>
+            <joueurs>1-2</joueurs>
+            <topstaff>0</topstaff>
+            <note>12</note>
+            <rotation>0</rotation>
+        </jeu>
+        <jeu id="46503" romid="168369">
+            <path>backgamm.zip</path>
+            <noms>
+                <nom region="ss">Backgammon / Acey-Deucey</nom>
+                <nom region="us">Backgammon / Acey-Deucey</nom>
+                <nom region="de">Backgammon / Acey-Deucey</nom>
+                <nom region="se">Backgammon / Acey-Deucey</nom>
+            </noms>
+            <regions>
+                <region>us</region>
+            </regions>
+            <cloneof>0</cloneof>
+            <systeme id="80" parentid="0">Channel F</systeme>
+            <synopsis>
+                <synopsis langue="en">The original game of backgammon for the first 2nd-generation console of 1977.  Players take turn rolling dice and then moving their pieces around the game board.  Blue &amp; Red each have to move all their pieces off the board to win, and are competing against each other and against lady luck herself.  
+
+Acey-Deucey is another way to play Backgammon where the starting position is different.  Instead of starting the game with numerous pieces arranged at places around the board, you start with all your pieces at the starting line.  It makes for a longer game, although just as strategic and challenging.</synopsis>
+            </synopsis>
+            <medias>
+                <media parent="jeu" type="video" region="unk" crc="746efb1f" md5="35516c1673adb17ea3c8b0c737c48b79" sha1="d655419aacb902665463d7a9f180784bf61bfd60" format="mp4" support="">media/video/backgamm.mp4</media>
+                <media parent="jeu" type="mixrbv2" region="wor" crc="ab46170d" md5="0b7462d84e09e47f96712fb4cdbff50a" sha1="919f61684734ebfcdbeac3d2c5a39ff2c88d6947" format="png" support="">media/mixrbv2/backgamm.png</media>
+            </medias>
+            <dates>
+                <date region="us">1977</date>
+                <date region="de">1977</date>
+                <date region="se">1977</date>
+            </dates>
+            <developpeur id="16563">Fairlight</developpeur>
+            <editeur id="16563">Fairlight</editeur>
+            <genres>
+                <genre id="33" principale="1" parentid="0" langue="en">Board game</genre>
+                <genre id="27" principale="1" parentid="0" langue="en">Strategy</genre>
+            </genres>
+            <joueurs>2</joueurs>
+            <topstaff>0</topstaff>
+            <note>6</note>
+            <rotation>0</rotation>
+        </jeu>
+        <jeu id="46504" romid="75852">
+            <path>baseball.zip</path>
+            <noms>
+                <nom region="ss">Baseball</nom>
+                <nom region="us">Baseball</nom>
+                <nom region="de">Baseball</nom>
+                <nom region="se">Baseball</nom>
+            </noms>
+            <regions>
+                <region>us</region>
+            </regions>
+            <cloneof>0</cloneof>
+            <systeme id="80" parentid="0">Channel F</systeme>
+            <synopsis>
+                <synopsis langue="en">Batter up!  Or, uhm... Stick-Men Up!?!   The game of baseball for your very own Fairchild Channel-F home videogame system.  Two players go head-to-head to see who is the King of the Diamond.
+
+One player takes to the field, the other grabs a bat and steps up to the plate.  The pitcher can throw fast, slow, and some wicked curves even at the last moment.  Luckily the single-button swing action makes hitting the ball fairly easy, even if getting a single is harder than hitting a double or home-run.</synopsis>
+            </synopsis>
+            <medias>
+                <media parent="jeu" type="video" region="unk" crc="7f57a722" md5="29854fac6c2164dd92f475f72d995c4c" sha1="ed7e75aa0524a1d7d5e34ca0a9e10b97c82ca958" format="mp4" support="">media/video/baseball.mp4</media>
+                <media parent="jeu" type="mixrbv2" region="wor" crc="fa73afe7" md5="5b281e4aef1ec075de2ebd6bb1e24885" sha1="231164a8dba9d63e98da959e185a2adc66cea667" format="png" support="">media/mixrbv2/baseball.png</media>
+            </medias>
+            <dates>
+                <date region="us">1977</date>
+                <date region="de">1977</date>
+                <date region="se">1977</date>
+            </dates>
+            <developpeur id="16563">Fairlight</developpeur>
+            <editeur id="16563">Fairlight</editeur>
+            <genres>
+                <genre id="2853" principale="0" parentid="685" langue="en">Sports / Baseball</genre>
+                <genre id="685" principale="1" parentid="0" langue="en">Sports</genre>
+            </genres>
+            <joueurs>2</joueurs>
+            <topstaff>0</topstaff>
+            <note>7</note>
+            <rotation>0</rotation>
+        </jeu>
+        <jeu id="46514" romid="75853">
+            <path>bowling.zip</path>
+            <noms>
+                <nom region="ss">Bowling</nom>
+                <nom region="us">Bowling</nom>
+                <nom region="de">Bowling</nom>
+                <nom region="se">Bowling</nom>
+            </noms>
+            <regions>
+                <region>us</region>
+            </regions>
+            <cloneof>0</cloneof>
+            <systeme id="80" parentid="0">Channel F</systeme>
+            <synopsis>
+                <synopsis langue="en">The object of the game is to knock down as many pins in 10 frames of bowling, The game gives the player an overhead view of a bowling lane. The player's bowling ball starts out moving back and forth across the front of the lane. This has the player trying to get the lane position they want the ball to start traveling down. Once the ball starts rolling down the lane, the player can curve the ball left or right. Once the curve has started, it can't be changed further.
+
+The game contains 18 game variations. They involve choosing the combination of number of players (1 or 2 players), playing either a regular or split game, and then choosing the speed of play (slow,normal,fast, and fastest).
+
+The regular game, just like it sounds like, is a regular game of bowling featuring the usual rules of play.
+
+The split game has each frame starting  with some combination of less than 10 pins. The player has 2 balls to knock down the remaining pins in each frame.</synopsis>
+            </synopsis>
+            <medias>
+                <media parent="jeu" type="video" region="unk" crc="a99a4685" md5="56c5de823acca798e615e61041f3b4f1" sha1="b6ae432930a00b7781bc3f124e5c2ae78caf9450" format="mp4" support="">media/video/bowling.mp4</media>
+                <media parent="jeu" type="mixrbv2" region="wor" crc="dc3f980e" md5="b9f4b7d23041972e5698dbd7bf812178" sha1="6072c90eab91fc0bdb79f5d4ac07def32a9127a1" format="png" support="">media/mixrbv2/bowling.png</media>
+            </medias>
+            <dates>
+                <date region="us">1978</date>
+                <date region="de">1978</date>
+                <date region="se">1978</date>
+            </dates>
+            <developpeur id="16563">Fairlight</developpeur>
+            <editeur id="16563">Fairlight</editeur>
+            <genres>
+                <genre id="2901" principale="0" parentid="685" langue="en">Sports / Bowling</genre>
+                <genre id="685" principale="1" parentid="0" langue="en">Sports</genre>
+            </genres>
+            <joueurs>1-2</joueurs>
+            <topstaff>0</topstaff>
+            <note>14</note>
+            <rotation>0</rotation>
+        </jeu>
+        <jeu id="46518" romid="168372">
+            <path>casinop.zip</path>
+            <noms>
+                <nom region="ss">Casino Poker</nom>
+                <nom region="us">Casino Poker</nom>
+            </noms>
+            <regions>
+                <region>us</region>
+            </regions>
+            <cloneof>0</cloneof>
+            <systeme id="80" parentid="0">Channel F</systeme>
+            <synopsis>
+                <synopsis langue="en">This game features a simulation of the card game five-card draw poker. 3 players (either 1 or 2 can be human, the rest are controlled by the computer) are dealt five cards each. Players then take turns either calling or raising a bet (which can be up to $25), or if they don't like their cards they can fold. Once that round of betting is done players then can choose to discard up to three of their cards in exchange for three new cards in an attempt to make a better hand. Another round of betting then takes place and after that all the players that didn't fold their hands show their cards and whoever has the highest hand wins all the money in the pot.</synopsis>
+            </synopsis>
+            <medias>
+                <media parent="jeu" type="video" region="unk" crc="eeb88da4" md5="791e1928e0764ce6ec7cb70645a7c200" sha1="f98eb92e7af9c3413e0e7e0d84fc09b3c66fe5cf" format="mp4" support="">media/video/casinop.mp4</media>
+                <media parent="jeu" type="mixrbv2" region="wor" crc="730efe92" md5="3f6d22bf572fac6742aba45c4018b6bc" sha1="df8a0b17536eee25f305af4162f65cb49da50c67" format="png" support="">media/mixrbv2/casinop.png</media>
+            </medias>
+            <dates>
+                <date region="us">1981</date>
+            </dates>
+            <developpeur id="16563">Fairlight</developpeur>
+            <editeur id="20729">Zircon Software</editeur>
+            <genres>
+                <genre id="320" principale="1" parentid="0" langue="en">Casino</genre>
+                <genre id="42" principale="1" parentid="0" langue="en">Playing cards</genre>
+                <genre id="2872" principale="0" parentid="320" langue="en">Casino / Cards</genre>
+            </genres>
+            <joueurs>1-2</joueurs>
+            <topstaff>0</topstaff>
+            <note>16</note>
+            <rotation>0</rotation>
+        </jeu>
+        <jeu id="192443" romid="879527">
+            <path>multicrt.zip</path>
+            <noms>
+                <nom region="ss">Channel F Multi-Cart (Final)</nom>
+                <nom region="wor">Channel F Multi-Cart (Final)</nom>
+            </noms>
+            <cloneof>0</cloneof>
+            <systeme id="80" parentid="0">Channel F</systeme>
+            <synopsis>
+                <synopsis langue="en"></synopsis>
+            </synopsis>
+            <medias>
+                <media parent="jeu" type="mixrbv2" region="wor" crc="9716d514" md5="190382c2b14ad7fed3705ebac1e3c37b" sha1="6540f91e1dcd2cd34546b00b774f2eaa7f0a97bb" format="png" support="">media/mixrbv2/multicrt.png</media>
+            </medias>
+            <dates>
+                <date region="wor"></date>
+            </dates>
+            <genres>
+                <genre id="0" principale="0" parentid="0" langue="en"></genre>
+            </genres>
+            <topstaff>0</topstaff>
+            <note>0</note>
+            <rotation>0</rotation>
+        </jeu>
+        <jeu id="192443" romid="879526">
+            <path>multicrto.zip</path>
+            <noms>
+                <nom region="ss">Channel F Multi-Cart (Older)</nom>
+                <nom region="wor">Channel F Multi-Cart (Older)</nom>
+            </noms>
+            <cloneof>multicrt.zip</cloneof>
+            <systeme id="80" parentid="0">Channel F</systeme>
+            <synopsis>
+                <synopsis langue="en"></synopsis>
+            </synopsis>
+            <medias>
+                <media parent="jeu" type="mixrbv2" region="wor" crc="9716d514" md5="190382c2b14ad7fed3705ebac1e3c37b" sha1="6540f91e1dcd2cd34546b00b774f2eaa7f0a97bb" format="png" support="">media/mixrbv2/multicrt.png</media>
+            </medias>
+            <dates>
+                <date region="wor"></date>
+            </dates>
+            <genres>
+                <genre id="0" principale="0" parentid="0" langue="en"></genre>
+            </genres>
+            <topstaff>0</topstaff>
+            <note>0</note>
+            <rotation>0</rotation>
+        </jeu>
+        <jeu id="46511" romid="75855">
+            <path>checkers.zip</path>
+            <noms>
+                <nom region="ss">Checkers</nom>
+                <nom region="us">Checkers</nom>
+            </noms>
+            <regions>
+                <region>us</region>
+            </regions>
+            <cloneof>0</cloneof>
+            <systeme id="80" parentid="0">Channel F</systeme>
+            <synopsis>
+                <synopsis langue="en">This game features a playable version of the board game Checkers. Players control the 12 checkers at the bottom of the screen and attempt to remove the 12 checkers at the top of the screen which are controlled by a computer opponent. Players can only move their checkers diagonally toward their opponents side of the board. A checker can be jumped when two opposing checkers are next to each other and there is an empty space on the diagonal of the checker getting jumped. If a checker is put into a position of being able to be jumped it must be jumped. If a checker happens to reach the other side of the board, that checker is kinged and is allowed to move both back and forth in diagonal movements. The game is won by the player who removes all their opponents checkers from the board.</synopsis>
+            </synopsis>
+            <medias>
+                <media parent="jeu" type="video" region="unk" crc="1ce39c8f" md5="f2dc49d0c2e2b71f60894bf201a20927" sha1="62d27a2663ecb6aa4a7990add5bd658e657104ef" format="mp4" support="">media/video/checkers.mp4</media>
+                <media parent="jeu" type="mixrbv2" region="wor" crc="cdbc3364" md5="4288e03b12feb1541ff920ee89bfe6f1" sha1="1d3ab4fce5201bc500fc351c4e16ad96b5929759" format="png" support="">media/mixrbv2/checkers.png</media>
+            </medias>
+            <dates>
+                <date region="us">1980</date>
+            </dates>
+            <developpeur id="16563">Fairlight</developpeur>
+            <editeur id="20729">Zircon Software</editeur>
+            <genres>
+                <genre id="33" principale="1" parentid="0" langue="en">Board game</genre>
+                <genre id="27" principale="1" parentid="0" langue="en">Strategy</genre>
+            </genres>
+            <joueurs>1</joueurs>
+            <topstaff>0</topstaff>
+            <note>14</note>
+            <rotation>0</rotation>
+        </jeu>
+        <jeu id="254219" romid="1007305">
+            <path>clrorgan.zip</path>
+            <noms>
+                <nom region="ss">Color Organ (Prototype)</nom>
+            </noms>
+            <cloneof>0</cloneof>
+            <systeme id="80" parentid="0">Channel F</systeme>
+            <synopsis>
+                <synopsis langue="en"></synopsis>
+            </synopsis>
+            <medias>
+                <media parent="jeu" type="mixrbv2" region="wor" crc="9716d514" md5="190382c2b14ad7fed3705ebac1e3c37b" sha1="6540f91e1dcd2cd34546b00b774f2eaa7f0a97bb" format="png" support="">media/mixrbv2/clrorgan.png</media>
+            </medias>
+            <dates>
+                <date region="wor"></date>
+            </dates>
+            <genres>
+                <genre id="0" principale="0" parentid="0" langue="en"></genre>
+            </genres>
+            <topstaff>0</topstaff>
+            <note>0</note>
+            <rotation>0</rotation>
+        </jeu>
         <jeu id="46531" romid="168374">
             <path>democrt1.zip</path>
             <noms>
-                <nom region="ss">Demonstration Cartridge</nom>
-                <nom region="wor">Demonstration Cartridge</nom>
+                <nom region="ss">Democart 1</nom>
+                <nom region="wor">Democart 1</nom>
             </noms>
             <regions>
                 <region>us</region>
@@ -35,8 +324,8 @@
         <jeu id="46532" romid="168375">
             <path>democrt2.zip</path>
             <noms>
-                <nom region="ss">Demonstration Cartridge 2</nom>
-                <nom region="wor">Demonstration Cartridge 2</nom>
+                <nom region="ss">Democart 2</nom>
+                <nom region="wor">Democart 2</nom>
             </noms>
             <regions>
                 <region>us</region>
@@ -63,11 +352,325 @@
             <note>10</note>
             <rotation>0</rotation>
         </jeu>
+        <jeu id="46520" romid="168376">
+            <path>dsrtfox.zip</path>
+            <noms>
+                <nom region="ss">Desert Fox / Shooting Gallery</nom>
+                <nom region="us">Desert Fox / Shooting Gallery</nom>
+                <nom region="de">Desert Fox / Shooting Gallery</nom>
+                <nom region="se">Desert Fox / Shooting Gallery</nom>
+            </noms>
+            <regions>
+                <region>us</region>
+            </regions>
+            <cloneof>0</cloneof>
+            <systeme id="80" parentid="0">Channel F</systeme>
+            <synopsis>
+                <synopsis langue="en">Videocart-2 features two game programs.
+
+Desert Fox. In this game you control one of two tanks engaged in a battle. The goal is to earn as many points as possible by shooting your opponent. On the game screen there are two barriers and five mines. The tanks can not shoot through the barriers or mines making them ideal for cover. The tanks can drive through the barriers, but attempting to drive through a mine will cause your tank to explode awarding your opponent a point.
+
+Shooting Gallery. In this game you control a rifle on the left side of the screen and need to hit a target on the right side of the screen. The goal is to earn as many points as possible by hitting the target with as few misses as possible. You can play with no time limit at an average speed, or increase the challenge by adding a time limit and increasing the game speed. This game can also be played by two players to see who can score the most hits.</synopsis>
+            </synopsis>
+            <medias>
+                <media parent="jeu" type="video" region="unk" crc="06bd57e6" md5="322e6632486eaf639e21485a07bf56fd" sha1="9917f21e932bb52d98f4cf28667285c4796f8d00" format="mp4" support="">media/video/dsrtfox.mp4</media>
+                <media parent="jeu" type="mixrbv2" region="wor" crc="1caf7e83" md5="3185f9842108aacc1078a7c86485e9e6" sha1="46ac54fd587cd901a75e510c3efcd5f39e919d38" format="png" support="">media/mixrbv2/dsrtfox.png</media>
+            </medias>
+            <dates>
+                <date region="us">1976</date>
+                <date region="de">1976</date>
+                <date region="se">1976</date>
+            </dates>
+            <developpeur id="16563">Fairlight</developpeur>
+            <editeur id="16563">Fairlight</editeur>
+            <genres>
+                <genre id="10" principale="1" parentid="0" langue="en">Action</genre>
+            </genres>
+            <joueurs>1-2</joueurs>
+            <topstaff>0</topstaff>
+            <note>8</note>
+            <rotation>0</rotation>
+        </jeu>
+        <jeu id="46508" romid="75859">
+            <path>dodgeit.zip</path>
+            <noms>
+                <nom region="ss">Dodge It</nom>
+                <nom region="us">Dodge It</nom>
+                <nom region="de">Dodge It</nom>
+                <nom region="se">Dodge It</nom>
+            </noms>
+            <regions>
+                <region>us</region>
+            </regions>
+            <cloneof>0</cloneof>
+            <systeme id="80" parentid="0">Channel F</systeme>
+            <synopsis>
+                <synopsis langue="en">Dodge-it is a take on the game of Dodgeball. The player is trapped inside a playfield and has to dodge a ball that continuously keeps bouncing of the sides of the playfield. The longer the player is able to dodge the ball, the more points are earned. After a certain amount of points are earned, another ball enters the playfield thus making the player have to dodge two balls. More balls keep getting added at fixed intervals after that until a total of 9 balls enter the playfield. The game ends when the player is finally hit by the ball.
+
+In the 2 player game, both players are put into the same playfield and try to outlast the other player in not trying to get hit by the balls being thrown by the computer.
+
+The game features random variations in the gameplay, such as having different sized playfields, ball sizes and speeds, and changing the players size and speed.
+
+The game features four different modes which are either a 1 or 2 player Amateur mode or a 1 or 2 player Pro mode.</synopsis>
+            </synopsis>
+            <medias>
+                <media parent="jeu" type="video" region="unk" crc="c9d1db70" md5="b780cef6fac209bb400bf227dc180f4b" sha1="e5b629030b512be349ada29fd297b94d3125eb63" format="mp4" support="">media/video/dodgeit.mp4</media>
+                <media parent="jeu" type="mixrbv2" region="wor" crc="18d4602b" md5="5e4cdb57c98051d659151f9ad778a63e" sha1="f6b9f12efcef4cbcda395aaf22672f8025ccbdcc" format="png" support="">media/mixrbv2/dodgeit.png</media>
+            </medias>
+            <dates>
+                <date region="us">1978</date>
+                <date region="de">1978</date>
+                <date region="se">1978</date>
+            </dates>
+            <developpeur id="16563">Fairlight</developpeur>
+            <editeur id="16563">Fairlight</editeur>
+            <genres>
+                <genre id="685" principale="1" parentid="0" langue="en">Sports</genre>
+                <genre id="10" principale="1" parentid="0" langue="en">Action</genre>
+            </genres>
+            <joueurs>1-2</joueurs>
+            <topstaff>0</topstaff>
+            <note>14</note>
+            <rotation>0</rotation>
+        </jeu>
+        <jeu id="46527" romid="75860">
+            <path>dragrace.zip</path>
+            <noms>
+                <nom region="ss">Drag Race</nom>
+                <nom region="us">Drag Race</nom>
+                <nom region="de">Drag Race</nom>
+                <nom region="se">Drag Race</nom>
+            </noms>
+            <regions>
+                <region>us</region>
+            </regions>
+            <cloneof>0</cloneof>
+            <systeme id="80" parentid="0">Channel F</systeme>
+            <synopsis>
+                <synopsis langue="en">This drag racing simulator makes use of the Channel F's special controllers. While twisting the joystick's head to the left or right controls the engine throttle, the stick movement itself is used to shift gears in a realistic H-pattern.
+
+Depending on the chosen skill level the car available is a family sedan, a modified sedan, a funny car, or a real dragster, although they all look the same on screen. One player can try to beat the predefined par time of 7.7 seconds, or compete against a friend to see who reaches the finish line first. The game manual mentions that a player only wins the game when he brings his victory counter to 99.</synopsis>
+            </synopsis>
+            <medias>
+                <media parent="jeu" type="video" region="unk" crc="5852b695" md5="35e0216e55857b065f9a1901de262576" sha1="30fe95940c6f3439baabe1ee274d4ef063ed1512" format="mp4" support="">media/video/dragrace.mp4</media>
+                <media parent="jeu" type="mixrbv2" region="wor" crc="c48bc4a5" md5="f13205cda7990b368aa35cb3cadca219" sha1="ec297d53cefb90dfc16980a4c693ee962a056679" format="png" support="">media/mixrbv2/dragrace.png</media>
+            </medias>
+            <dates>
+                <date region="us">1977</date>
+                <date region="de">1977</date>
+                <date region="se">1977</date>
+            </dates>
+            <developpeur id="16563">Fairlight</developpeur>
+            <editeur id="16563">Fairlight</editeur>
+            <genres>
+                <genre id="28" principale="1" parentid="0" langue="en">Race, Driving</genre>
+            </genres>
+            <joueurs>1-2</joueurs>
+            <topstaff>0</topstaff>
+            <note>8</note>
+            <rotation>0</rotation>
+        </jeu>
+        <jeu id="46518" romid="879528">
+            <path>drawpkr.zip</path>
+            <noms>
+                <nom region="ss">Draw Poker (Prototype)</nom>
+                <nom region="us">Draw Poker (Prototype)</nom>
+            </noms>
+            <cloneof>casinop.zip</cloneof>
+            <systeme id="80" parentid="0">Channel F</systeme>
+            <synopsis>
+                <synopsis langue="en">This game features a simulation of the card game five-card draw poker. 3 players (either 1 or 2 can be human, the rest are controlled by the computer) are dealt five cards each. Players then take turns either calling or raising a bet (which can be up to $25), or if they don't like their cards they can fold. Once that round of betting is done players then can choose to discard up to three of their cards in exchange for three new cards in an attempt to make a better hand. Another round of betting then takes place and after that all the players that didn't fold their hands show their cards and whoever has the highest hand wins all the money in the pot.</synopsis>
+            </synopsis>
+            <medias>
+                <media parent="jeu" type="video" region="unk" crc="eeb88da4" md5="791e1928e0764ce6ec7cb70645a7c200" sha1="f98eb92e7af9c3413e0e7e0d84fc09b3c66fe5cf" format="mp4" support="">media/video/casinop.mp4</media>
+                <media parent="jeu" type="mixrbv2" region="wor" crc="730efe92" md5="3f6d22bf572fac6742aba45c4018b6bc" sha1="df8a0b17536eee25f305af4162f65cb49da50c67" format="png" support="">media/mixrbv2/casinop.png</media>
+            </medias>
+            <dates>
+                <date region="us">1981</date>
+            </dates>
+            <developpeur id="16563">Fairlight</developpeur>
+            <editeur id="20729">Zircon Software</editeur>
+            <genres>
+                <genre id="320" principale="1" parentid="0" langue="en">Casino</genre>
+                <genre id="42" principale="1" parentid="0" langue="en">Playing cards</genre>
+                <genre id="2872" principale="0" parentid="320" langue="en">Casino / Cards</genre>
+            </genres>
+            <joueurs>1-2</joueurs>
+            <topstaff>0</topstaff>
+            <note>16</note>
+            <rotation>0</rotation>
+        </jeu>
+        <jeu id="46528" romid="168365">
+            <path>channelf.zip</path>
+            <noms>
+                <nom region="ss">Fairchild Channel F (Bios)</nom>
+                <nom region="wor">Fairchild Channel F (Bios)</nom>
+            </noms>
+            <regions>
+                <region>us</region>
+            </regions>
+            <cloneof>0</cloneof>
+            <systeme id="80" parentid="0">Channel F</systeme>
+            <synopsis>
+                <synopsis langue="en"></synopsis>
+            </synopsis>
+            <medias>
+                <media parent="jeu" type="mixrbv2" region="wor" crc="7ced6f99" md5="183c5327ffcf8477ab4f151046877c2e" sha1="c35a85581cbefa94e7487ead4b36fa49142cb275" format="png" support="">media/mixrbv2/channelf.png</media>
+            </medias>
+            <dates>
+                <date region="wor"></date>
+            </dates>
+            <genres>
+                <genre id="0" principale="0" parentid="0" langue="en"></genre>
+            </genres>
+            <topstaff>0</topstaff>
+            <note>0</note>
+            <rotation>0</rotation>
+        </jeu>
+        <jeu id="46517" romid="879531">
+            <path>football.zip</path>
+            <noms>
+                <nom region="ss">Football (Prototype)</nom>
+                <nom region="us">Football (Prototype)</nom>
+            </noms>
+            <cloneof>pfootbll.zip</cloneof>
+            <systeme id="80" parentid="0">Channel F</systeme>
+            <synopsis>
+                <synopsis langue="en">This is a 2 player American Football game played on a horizontal football field. Players take control of a 6 player team and play both offense and defense against an opposing player's team with the objective to outscore their opponent. There are 8 offensive and 8 defensive plays for a total of 16 different plays to call.  On offense, the player can either pass the ball or run using the quarterback to try to score a touchdown. Also available is the option to kick a field goal to score points. On defense, players can have linebackers blitz or try to defend the pass from being completed.
+
+The game contains four different game speeds which are slowest, slow, fast, and fastest.</synopsis>
+            </synopsis>
+            <medias>
+                <media parent="jeu" type="video" region="unk" crc="0496795e" md5="5bfd771749528664ed31b624f7f8b6a4" sha1="177cbf3ca532ff6a4b8cf5168949f7edcab41e36" format="mp4" support="">media/video/pfootbll.mp4</media>
+                <media parent="jeu" type="mixrbv2" region="wor" crc="9aa18c05" md5="7f468ed3626e4ed04a7d9d1546065858" sha1="d51299a3d648ab190799d3d36d5ccd2daaf757f2" format="png" support="">media/mixrbv2/pfootbll.png</media>
+            </medias>
+            <dates>
+                <date region="us">1980</date>
+            </dates>
+            <developpeur id="16563">Fairlight</developpeur>
+            <editeur id="20729">Zircon Software</editeur>
+            <genres>
+                <genre id="2846" principale="0" parentid="685" langue="en">Sports / Football</genre>
+                <genre id="685" principale="1" parentid="0" langue="en">Sports</genre>
+            </genres>
+            <joueurs>2</joueurs>
+            <topstaff>0</topstaff>
+            <note>15</note>
+            <rotation>0</rotation>
+        </jeu>
+        <jeu id="46516" romid="879532">
+            <path>galacticp.zip</path>
+            <noms>
+                <nom region="ss">Galactic Space Wars (Prototype)</nom>
+                <nom region="us">Galactic Space Wars (Prototype)</nom>
+                <nom region="de">Galactic Space Wars (Prototype)</nom>
+            </noms>
+            <cloneof>galactic.zip</cloneof>
+            <systeme id="80" parentid="0">Channel F</systeme>
+            <synopsis>
+                <synopsis langue="en">This game cart contains 2 space themed games.
+
+In Galactic Space Wars, players take control of a fighter spacecraft to find and destroy enemy spacecrafts. Players take a first person perspective from inside the cockpit of the spacecraft to search the vast area of space. Once an enemy craft is located, players try to quickly scroll the ship into their lasers sight. If the enemy stays on the screen too long, it will fire at the player's ship. The player has a limited amount of time to destroy as many ships as possible and not get hit.
+
+Lunar Lander seems to have been inspired by the same titled arcade game. Players pilot a lunar lander and attempt to have a soft landing. The lander only has a certain amount of fuel to maneuver around with thus adding to the challenge. The key is to gently and smoothly lower the lander onto the platform, as coming down too fast or missing the platform crashes the lunar lander. The objective is to land the craft in the least amount of time possible.</synopsis>
+            </synopsis>
+            <medias>
+                <media parent="jeu" type="video" region="unk" crc="099e131f" md5="a4f611706eefc4216da20ca51cda3120" sha1="05516a993797acef7d0f688ea2952f8f0d1ece22" format="mp4" support="">media/video/galactic.mp4</media>
+                <media parent="jeu" type="mixrbv2" region="wor" crc="7b962e5f" md5="fbc95f31ec9144954f6736ae226f0c9d" sha1="9e81faf4253bd01e20d2d51a5a6610d3510c24de" format="png" support="">media/mixrbv2/galactic.png</media>
+            </medias>
+            <dates>
+                <date region="us">1980</date>
+                <date region="de">1980</date>
+            </dates>
+            <developpeur id="16563">Fairlight</developpeur>
+            <editeur id="20729">Zircon Software</editeur>
+            <genres>
+                <genre id="10" principale="1" parentid="0" langue="en">Action</genre>
+            </genres>
+            <joueurs>1-2</joueurs>
+            <topstaff>0</topstaff>
+            <note>10</note>
+            <rotation>0</rotation>
+        </jeu>
+        <jeu id="46516" romid="168379">
+            <path>galactic.zip</path>
+            <noms>
+                <nom region="ss">Galactic Space Wars / Lunar Lander</nom>
+                <nom region="us">Galactic Space Wars / Lunar Lander</nom>
+                <nom region="de">Galactic Space Wars / Lunar Lander</nom>
+            </noms>
+            <regions>
+                <region>us</region>
+            </regions>
+            <cloneof>0</cloneof>
+            <systeme id="80" parentid="0">Channel F</systeme>
+            <synopsis>
+                <synopsis langue="en">This game cart contains 2 space themed games.
+
+In Galactic Space Wars, players take control of a fighter spacecraft to find and destroy enemy spacecrafts. Players take a first person perspective from inside the cockpit of the spacecraft to search the vast area of space. Once an enemy craft is located, players try to quickly scroll the ship into their lasers sight. If the enemy stays on the screen too long, it will fire at the player's ship. The player has a limited amount of time to destroy as many ships as possible and not get hit.
+
+Lunar Lander seems to have been inspired by the same titled arcade game. Players pilot a lunar lander and attempt to have a soft landing. The lander only has a certain amount of fuel to maneuver around with thus adding to the challenge. The key is to gently and smoothly lower the lander onto the platform, as coming down too fast or missing the platform crashes the lunar lander. The objective is to land the craft in the least amount of time possible.</synopsis>
+            </synopsis>
+            <medias>
+                <media parent="jeu" type="video" region="unk" crc="099e131f" md5="a4f611706eefc4216da20ca51cda3120" sha1="05516a993797acef7d0f688ea2952f8f0d1ece22" format="mp4" support="">media/video/galactic.mp4</media>
+                <media parent="jeu" type="mixrbv2" region="wor" crc="7b962e5f" md5="fbc95f31ec9144954f6736ae226f0c9d" sha1="9e81faf4253bd01e20d2d51a5a6610d3510c24de" format="png" support="">media/mixrbv2/galactic.png</media>
+            </medias>
+            <dates>
+                <date region="us">1980</date>
+                <date region="de">1980</date>
+            </dates>
+            <developpeur id="16563">Fairlight</developpeur>
+            <editeur id="20729">Zircon Software</editeur>
+            <genres>
+                <genre id="10" principale="1" parentid="0" langue="en">Action</genre>
+            </genres>
+            <joueurs>1-2</joueurs>
+            <topstaff>0</topstaff>
+            <note>10</note>
+            <rotation>0</rotation>
+        </jeu>
+        <jeu id="46510" romid="75862">
+            <path>hangman.zip</path>
+            <noms>
+                <nom region="ss">Hangman</nom>
+                <nom region="us">Hangman</nom>
+                <nom region="de">Hangman</nom>
+                <nom region="se">Hangman</nom>
+            </noms>
+            <regions>
+                <region>us</region>
+            </regions>
+            <cloneof>0</cloneof>
+            <systeme id="80" parentid="0">Channel F</systeme>
+            <synopsis>
+                <synopsis langue="en">This game lets the player play the classic game of Hangman, in which the player is given an unknown word of a certain length and has to guess the correct letters that are contained in it. The player is only allowed a certain number of guesses. Every incorrect guess will add a body part to a drawing of a man being hanged at the gallows. Once all the man's body parts are drawn from several incorrect guesses, he is hanged and the player loses.
+
+The game contains 64 variations of this basic premise for either 1 or 2 players, with or without a score. Variations include having the computer come up with a word, have a player come up with a word for another player to solve, giving the player one of the letters in the word to help them get started, telling the player the letter belongs to the word but not where, not tolling how long the word is, having the player guess the correct letter and place it where it belongs in a word, and a variation where the player has to solve an anagram.</synopsis>
+            </synopsis>
+            <medias>
+                <media parent="jeu" type="video" region="unk" crc="3c316eca" md5="2195e1b4554288322a3bf268a91fd9fc" sha1="b95d0f33d89dce87a2233cd2ddd059e6becd048b" format="mp4" support="">media/video/hangman.mp4</media>
+                <media parent="jeu" type="mixrbv2" region="wor" crc="baf26518" md5="48545eb1e6ddad1bbbddd08e81a5395a" sha1="8e9cfe4802b26cb5b93ef755af3298eee37a0fbb" format="png" support="">media/mixrbv2/hangman.png</media>
+            </medias>
+            <dates>
+                <date region="us">1978</date>
+                <date region="de">1978</date>
+                <date region="se">1978</date>
+            </dates>
+            <developpeur id="16563">Fairlight</developpeur>
+            <editeur id="16563">Fairlight</editeur>
+            <genres>
+                <genre id="26" principale="1" parentid="0" langue="en">Puzzle-Game</genre>
+            </genres>
+            <joueurs>1-2</joueurs>
+            <topstaff>0</topstaff>
+            <note>16</note>
+            <rotation>0</rotation>
+        </jeu>
         <jeu id="191771" romid="872243">
             <path>builtin.zip</path>
             <noms>
-                <nom region="ss">Hockey And Tennis</nom>
-                <nom region="wor">Hockey And Tennis</nom>
+                <nom region="ss">Hockey + Tennis</nom>
+                <nom region="wor">Hockey + Tennis</nom>
             </noms>
             <regions>
                 <region>us</region>
@@ -105,8 +708,8 @@ Tennis. A simple Pong variant. Two players compete by passing back and forth a b
         <jeu id="191773" romid="872245">
             <path>lightsout.zip</path>
             <noms>
-                <nom region="ss">Lights Out</nom>
-                <nom region="wor">Lights Out</nom>
+                <nom region="ss">Lights Out (HB)</nom>
+                <nom region="wor">Lights Out (HB)</nom>
             </noms>
             <regions>
                 <region>us</region>
@@ -133,11 +736,13 @@ Tennis. A simple Pong variant. Two players compete by passing back and forth a b
             <note>15</note>
             <rotation>0</rotation>
         </jeu>
-        <jeu id="191774" romid="872255">
-            <path>tetris.zip</path>
+        <jeu id="46526" romid="168381">
+            <path>magicnum.zip</path>
             <noms>
-                <nom region="ss">Tetris</nom>
-                <nom region="wor">Tetris</nom>
+                <nom region="ss">Magic Numbers / Mind Reader / Nim</nom>
+                <nom region="us">Magic Numbers / Mind Reader / Nim</nom>
+                <nom region="de">Magic Numbers / Mind Reader / Nim</nom>
+                <nom region="se">Magic Numbers / Mind Reader / Nim</nom>
             </noms>
             <regions>
                 <region>us</region>
@@ -145,139 +750,15 @@ Tennis. A simple Pong variant. Two players compete by passing back and forth a b
             <cloneof>0</cloneof>
             <systeme id="80" parentid="0">Channel F</systeme>
             <synopsis>
-                <synopsis langue="en">In Tetris, players complete lines by moving differently shaped pieces (tetrominoes), which descend onto the playing field. The completed lines disappear and grant the player points, and the player can proceed to fill the vacated spaces. The game ends when the playing field is filled. The longer the player can delay this inevitable outcome, the higher their score will be.</synopsis>
+                <synopsis langue="en">Videocart-8 contains two traditional number games.
+
+Mind Reader is a numerical version of the popular combination guessing game Master Mind. The console chooses a random number and the player is given 20 chances to guess it. After every guess, the display shows how many numbers were correctly placed, and how many numbers are correct but in the wrong spot. Every wrong guess increases the computer's score, and finding the code increases the player's score. The game can be played with a time limit instead of a limited number of guesses.
+
+Nim is a single-player adaptation of a traditional 2-player number game. Depending on the options, there are some piles on screen with a certain number of elements. The player and the console take turns at removing arbitrary numbers of elements from the piles. They have to remove at least 1 element and only from one pile in any turn. The side that gets to remove the last element wins the round. The game can also be played with a time limit.</synopsis>
             </synopsis>
             <medias>
-                <media parent="jeu" type="video" region="unk" crc="a778abc6" md5="c813f36d4d200492abcd02fc35e05c3c" sha1="5ad799b19cf25e4ce733351f8e6d41cc38ba4fe9" format="mp4" support="">media/video/tetris.mp4</media>
-                <media parent="jeu" type="mixrbv2" region="wor" crc="daf4f273" md5="89a59833d5cda43c5b7cddc4fc1752b8" sha1="44f6003cf8793fb161e7507914ab554677a6cd51" format="png" support="">media/mixrbv2/tetris.png</media>
-            </medias>
-            <dates>
-                <date region="us">2004</date>
-            </dates>
-            <developpeur id="8322">Peter Trauner</developpeur>
-            <editeur id="8322">Peter Trauner</editeur>
-            <genres>
-                <genre id="171" principale="1" parentid="0" langue="en">Casual Game</genre>
-                <genre id="3511" principale="1" parentid="0" langue="en">Thinking</genre>
-            </genres>
-            <joueurs>1-2</joueurs>
-            <topstaff>0</topstaff>
-            <note>16</note>
-            <rotation>0</rotation>
-        </jeu>
-        <jeu id="46512" romid="168387">
-            <path>muehle.zip</path>
-            <noms>
-                <nom region="ss">Videocart-1 - Tic-tac-toe, Shooting Gallery, Doodle, Quadra-doodle</nom>
-                <nom region="us">Videocart-1: Tic-Tac-Toe, Shooting Gallery, Doodle</nom>
-                <nom region="eu">Videocart-1: Tic-tac-toe, Shooting Gallery, Doodle, Quadra-doodle</nom>
-                <nom region="de">Videocart-1: Mühle, Tontauben-Schießen, Kreatives Malspiel, Videoscope</nom>
-                <nom region="se">Programkassett 1: Lerduveskytte, Luffarschack, Kaleidoskop, Rita Själv</nom>
-            </noms>
-            <regions>
-                <region>de</region>
-            </regions>
-            <cloneof>0</cloneof>
-            <systeme id="80" parentid="0">Channel F</systeme>
-            <synopsis>
-                <synopsis langue="en">Videocart-1 features 4 different programs.
-
-Tic-Tac-Toe. A computerized version of the popular game. You play the X's and the computer the O's; taking turns your goal is the place three X's on the 3x3 grid before the computer. You always get to move first.
-
-Shooting Gallery. In this game, for 1 or 2 players, you control a rifle and need to hit a target on the other side of the screen. The goal is to hit the target with as few misses as possible. You can play with or without a time limit and at different speeds.
-
-Doodle. This is a drawing program. Using the controller you can draw any picture you like on the screen. There are five different line sizes and three available colors.
-
-Quadra-Doodle. Here the computer will draw random patterns influenced by the player, such as changing the colors used and the size of the lines. You can switch back and forth between Quadra-Doodle and Doodle, allowing you to draw on top of the generated image or the computer to draw on top of yours.</synopsis>
-            </synopsis>
-            <medias>
-                <media parent="jeu" type="video" region="unk" crc="7907b4ae" md5="a3a8ac8889545de6becf1a9beadc4fbb" sha1="64943cd0c68b1edf26b361b106bea8be131ef46a" format="mp4" support="">media/video/muehle.mp4</media>
-                <media parent="jeu" type="mixrbv2" region="wor" crc="cfdcbe7b" md5="8a6e18e2bd7886c6583cf73080b61471" sha1="06a96edcec7c09d4d7b08b9499abb5eae74835ed" format="png" support="">media/mixrbv2/muehle.png</media>
-            </medias>
-            <dates>
-                <date region="us">1976</date>
-                <date region="de">1976</date>
-                <date region="se">1976</date>
-            </dates>
-            <developpeur id="16563">Fairlight</developpeur>
-            <editeur id="16563">Fairlight</editeur>
-            <genres>
-                <genre id="171" principale="1" parentid="0" langue="en">Casual Game</genre>
-                <genre id="27" principale="1" parentid="0" langue="en">Strategy</genre>
-                <genre id="10" principale="1" parentid="0" langue="en">Action</genre>
-            </genres>
-            <joueurs>1-2</joueurs>
-            <topstaff>0</topstaff>
-            <note>15</note>
-            <rotation>0</rotation>
-        </jeu>
-        <jeu id="46512" romid="168399">
-            <path>tctactoe.zip</path>
-            <noms>
-                <nom region="ss">Videocart-1 - Tic-tac-toe, Shooting Gallery, Doodle, Quadra-doodle</nom>
-                <nom region="us">Videocart-1: Tic-Tac-Toe, Shooting Gallery, Doodle</nom>
-                <nom region="eu">Videocart-1: Tic-tac-toe, Shooting Gallery, Doodle, Quadra-doodle</nom>
-                <nom region="de">Videocart-1: Mühle, Tontauben-Schießen, Kreatives Malspiel, Videoscope</nom>
-                <nom region="se">Programkassett 1: Lerduveskytte, Luffarschack, Kaleidoskop, Rita Själv</nom>
-            </noms>
-            <regions>
-                <region>us</region>
-            </regions>
-            <cloneof>0</cloneof>
-            <systeme id="80" parentid="0">Channel F</systeme>
-            <synopsis>
-                <synopsis langue="en">Videocart-1 features 4 different programs.
-
-Tic-Tac-Toe. A computerized version of the popular game. You play the X's and the computer the O's; taking turns your goal is the place three X's on the 3x3 grid before the computer. You always get to move first.
-
-Shooting Gallery. In this game, for 1 or 2 players, you control a rifle and need to hit a target on the other side of the screen. The goal is to hit the target with as few misses as possible. You can play with or without a time limit and at different speeds.
-
-Doodle. This is a drawing program. Using the controller you can draw any picture you like on the screen. There are five different line sizes and three available colors.
-
-Quadra-Doodle. Here the computer will draw random patterns influenced by the player, such as changing the colors used and the size of the lines. You can switch back and forth between Quadra-Doodle and Doodle, allowing you to draw on top of the generated image or the computer to draw on top of yours.</synopsis>
-            </synopsis>
-            <medias>
-                <media parent="jeu" type="video" region="unk" crc="7907b4ae" md5="a3a8ac8889545de6becf1a9beadc4fbb" sha1="64943cd0c68b1edf26b361b106bea8be131ef46a" format="mp4" support="">media/video/tctactoe.mp4</media>
-                <media parent="jeu" type="mixrbv2" region="wor" crc="cfdcbe7b" md5="8a6e18e2bd7886c6583cf73080b61471" sha1="06a96edcec7c09d4d7b08b9499abb5eae74835ed" format="png" support="">media/mixrbv2/tctactoe.png</media>
-            </medias>
-            <dates>
-                <date region="us">1976</date>
-                <date region="de">1976</date>
-                <date region="se">1976</date>
-            </dates>
-            <developpeur id="16563">Fairlight</developpeur>
-            <editeur id="16563">Fairlight</editeur>
-            <genres>
-                <genre id="171" principale="1" parentid="0" langue="en">Casual Game</genre>
-                <genre id="27" principale="1" parentid="0" langue="en">Strategy</genre>
-                <genre id="10" principale="1" parentid="0" langue="en">Action</genre>
-            </genres>
-            <joueurs>1-2</joueurs>
-            <topstaff>0</topstaff>
-            <note>15</note>
-            <rotation>0</rotation>
-        </jeu>
-        <jeu id="46502" romid="168385">
-            <path>mazea.zip</path>
-            <noms>
-                <nom region="ss">Videocart-10 - Maze, Jailbreak</nom>
-                <nom region="us">Videocart-10: Maze -Jailbreak - Blind Man's Bluff - Trailblazer</nom>
-                <nom region="de">Videocart-8: Labyrinth</nom>
-                <nom region="se">Programkassett 10: Labyrint, Rymning, Blindbock, Stigfinnare</nom>
-            </noms>
-            <regions>
-                <region>us</region>
-            </regions>
-            <cloneof>0</cloneof>
-            <systeme id="80" parentid="0">Channel F</systeme>
-            <synopsis>
-                <synopsis langue="en">Poor little mice, doomed to run around in a maze and escape as quickly as they can.  As if that's not enough, the owner's of this maze pit you against a friend to see who will escape first.  And then the diabolical owners take it one step further and add a cat to the maze mix -- forcing you not only to escape first, but escape alive!
-
-This game contains a few variations:  A straight maze run, a jailbreak maze (break through each square), an invisible maze, and a hidden maze (eat your way through I guess).  In all the variations you can choose between 1-4 speeds and/or throw the cat in the maze for an extra challenge.</synopsis>
-            </synopsis>
-            <medias>
-                <media parent="jeu" type="video" region="unk" crc="14cdb43a" md5="5ede3732c1ab65dc64a6a85064337f71" sha1="8a7bedeecab808230a93e244c077a78e612e8f62" format="mp4" support="">media/video/mazea.mp4</media>
-                <media parent="jeu" type="mixrbv2" region="wor" crc="efa8215e" md5="ca637d5ccdcb4951011c5e180c00b4e4" sha1="4dd321ec80f8733f409d0ea89cb3cf7eb60338ca" format="png" support="">media/mixrbv2/mazea.png</media>
+                <media parent="jeu" type="video" region="unk" crc="a0fc00c1" md5="3677f65f7f356ddfd89563beb3d01a67" sha1="57af4f9d688633853f691258a1f48d2a8c71e464" format="mp4" support="">media/video/magicnum.mp4</media>
+                <media parent="jeu" type="mixrbv2" region="wor" crc="b40c8a2b" md5="24b66813cbca1d320ee7c0a21477abab" sha1="2f251640bbbe21be716a56889a6fd5d02548cb59" format="png" support="">media/mixrbv2/magicnum.png</media>
             </medias>
             <dates>
                 <date region="us">1977</date>
@@ -287,21 +768,88 @@ This game contains a few variations:  A straight maze run, a jailbreak maze (bre
             <developpeur id="16563">Fairlight</developpeur>
             <editeur id="16563">Fairlight</editeur>
             <genres>
-                <genre id="2937" principale="0" parentid="10" langue="en">Action / Labyrinth</genre>
-                <genre id="10" principale="1" parentid="0" langue="en">Action</genre>
+                <genre id="26" principale="1" parentid="0" langue="en">Puzzle-Game</genre>
             </genres>
-            <joueurs>2</joueurs>
+            <joueurs>1</joueurs>
             <topstaff>0</topstaff>
-            <note>6</note>
+            <note>16</note>
+            <rotation>0</rotation>
+        </jeu>
+        <jeu id="46524" romid="168382">
+            <path>mthquiz1.zip</path>
+            <noms>
+                <nom region="ss">Math Quiz 1</nom>
+                <nom region="us">Math Quiz 1</nom>
+                <nom region="se">Math Quiz 1</nom>
+            </noms>
+            <regions>
+                <region>us</region>
+            </regions>
+            <cloneof>0</cloneof>
+            <systeme id="80" parentid="0">Channel F</systeme>
+            <synopsis>
+                <synopsis langue="en">Videocart-6 is a math game which focuses on addition and subtraction. The game presents a series of problems to solve; using the controller you need enter in the correct answer. A correct answer earns a point; if you enter an incorrect answer you are then given a second chance. Answer incorrectly a second time and then a point is given to the computer which will also show you how to solve the problem. These are the only variations featured within the game itself, however the instruction manual includes a variety of suggestions for games that can be played by two or more players. These include Mathematical Chairs (two players take turns seeing who can answer the most problems in a row), Math Maze (the manual features a maze drawn on a grid; answer a question correctly and you can move that many spaces), Hang Math (a variation of hang man), Up to 1000 (answer problems correctly to add the value to your score; try to end up with 1000 points without going over), and several more.</synopsis>
+            </synopsis>
+            <medias>
+                <media parent="jeu" type="video" region="unk" crc="be9e441e" md5="1452adc0204b3cbd3cbd55b1a7e48a92" sha1="da8475f893ab9b5987d0838330ceb654d640d0dc" format="mp4" support="">media/video/mthquiz1.mp4</media>
+                <media parent="jeu" type="mixrbv2" region="wor" crc="26030423" md5="b80ae6b757f87bf6434e0f4b7dd2a472" sha1="d63e570bbc92811c1c800c4a553bd584630369e2" format="png" support="">media/mixrbv2/mthquiz1.png</media>
+            </medias>
+            <dates>
+                <date region="us">1977</date>
+                <date region="se">1977</date>
+            </dates>
+            <developpeur id="16563">Fairlight</developpeur>
+            <editeur id="16563">Fairlight</editeur>
+            <genres>
+                <genre id="30" principale="1" parentid="0" langue="en">Educational</genre>
+            </genres>
+            <joueurs>1</joueurs>
+            <topstaff>0</topstaff>
+            <note>9</note>
+            <rotation>0</rotation>
+        </jeu>
+        <jeu id="46525" romid="168383">
+            <path>mthquiz2.zip</path>
+            <noms>
+                <nom region="ss">Math Quiz 2</nom>
+                <nom region="us">Math Quiz 2</nom>
+                <nom region="se">Math Quiz 2</nom>
+            </noms>
+            <regions>
+                <region>us</region>
+            </regions>
+            <cloneof>0</cloneof>
+            <systeme id="80" parentid="0">Channel F</systeme>
+            <synopsis>
+                <synopsis langue="en">Videocart-7 contains the second and last part of the Math Quiz series started with Videocart-6. While the first part lets the players train addition and subtraction, Math Quiz II deals with multiplication and division.
+
+Once again, the game presents the player with a series of problems, simple multiplications in the first game variation, and simple divisions in the second. The results have to be entered using the controller. If the answer is correct, a point will be added to the left counter. After entering a wrong answer, the player gets another chance to correct the result. If it is wrong again, the right counter will be increased, counting the mistakes made so far.</synopsis>
+            </synopsis>
+            <medias>
+                <media parent="jeu" type="video" region="unk" crc="921d5605" md5="69ebaabc81af215606302b123ab36979" sha1="15c624c5ac67386779a633117d33f7ed19702d47" format="mp4" support="">media/video/mthquiz2.mp4</media>
+                <media parent="jeu" type="mixrbv2" region="wor" crc="f8286645" md5="b75f86d75ddd7e02e48f273610774907" sha1="720395e9076cd6f03b89d50ba90e6a879b022b92" format="png" support="">media/mixrbv2/mthquiz2.png</media>
+            </medias>
+            <dates>
+                <date region="us">1977</date>
+                <date region="se">1977</date>
+            </dates>
+            <developpeur id="16563">Fairlight</developpeur>
+            <editeur id="16563">Fairlight</editeur>
+            <genres>
+                <genre id="30" principale="1" parentid="0" langue="en">Educational</genre>
+            </genres>
+            <joueurs>1</joueurs>
+            <topstaff>0</topstaff>
+            <note>10</note>
             <rotation>0</rotation>
         </jeu>
         <jeu id="46502" romid="168384">
             <path>maze.zip</path>
             <noms>
-                <nom region="ss">Videocart-10 - Maze, Jailbreak</nom>
-                <nom region="us">Videocart-10: Maze -Jailbreak - Blind Man's Bluff - Trailblazer</nom>
-                <nom region="de">Videocart-8: Labyrinth</nom>
-                <nom region="se">Programkassett 10: Labyrint, Rymning, Blindbock, Stigfinnare</nom>
+                <nom region="ss">Maze / Jailbreak / Blind-man's-bluff / Trailblazer</nom>
+                <nom region="us">Maze / Jailbreak / Blind-man's-bluff / Trailblazer</nom>
+                <nom region="de">Maze / Jailbreak / Blind-man's-bluff / Trailblazer</nom>
+                <nom region="se">Maze / Jailbreak / Blind-man's-bluff / Trailblazer</nom>
             </noms>
             <regions>
                 <region>us</region>
@@ -333,27 +881,27 @@ This game contains a few variations:  A straight maze run, a jailbreak maze (bre
             <note>6</note>
             <rotation>0</rotation>
         </jeu>
-        <jeu id="46503" romid="168369">
-            <path>backgamm.zip</path>
+        <jeu id="46502" romid="168385">
+            <path>mazea.zip</path>
             <noms>
-                <nom region="ss">Videocart-11 - Backgammon, Acey-deucey</nom>
-                <nom region="us">Videocart-11: Backgammon, Acey-Deucey</nom>
-                <nom region="de">Videocart-9: Backgammon</nom>
-                <nom region="se">Programkassett 11: Brädspel, Dus-Ess</nom>
+                <nom region="ss">Maze / Jailbreak / Blind-man's-bluff / Trailblazer (Alt)</nom>
+                <nom region="us">Maze / Jailbreak / Blind-man's-bluff / Trailblazer (Alt)</nom>
+                <nom region="de">Maze / Jailbreak / Blind-man's-bluff / Trailblazer (Alt)</nom>
+                <nom region="se">Maze / Jailbreak / Blind-man's-bluff / Trailblazer (Alt)</nom>
             </noms>
             <regions>
                 <region>us</region>
             </regions>
-            <cloneof>0</cloneof>
+            <cloneof>maze.zip</cloneof>
             <systeme id="80" parentid="0">Channel F</systeme>
             <synopsis>
-                <synopsis langue="en">The original game of backgammon for the first 2nd-generation console of 1977.  Players take turn rolling dice and then moving their pieces around the game board.  Blue &amp; Red each have to move all their pieces off the board to win, and are competing against each other and against lady luck herself.  
+                <synopsis langue="en">Poor little mice, doomed to run around in a maze and escape as quickly as they can.  As if that's not enough, the owner's of this maze pit you against a friend to see who will escape first.  And then the diabolical owners take it one step further and add a cat to the maze mix -- forcing you not only to escape first, but escape alive!
 
-Acey-Deucey is another way to play Backgammon where the starting position is different.  Instead of starting the game with numerous pieces arranged at places around the board, you start with all your pieces at the starting line.  It makes for a longer game, although just as strategic and challenging.</synopsis>
+This game contains a few variations:  A straight maze run, a jailbreak maze (break through each square), an invisible maze, and a hidden maze (eat your way through I guess).  In all the variations you can choose between 1-4 speeds and/or throw the cat in the maze for an extra challenge.</synopsis>
             </synopsis>
             <medias>
-                <media parent="jeu" type="video" region="unk" crc="746efb1f" md5="35516c1673adb17ea3c8b0c737c48b79" sha1="d655419aacb902665463d7a9f180784bf61bfd60" format="mp4" support="">media/video/backgamm.mp4</media>
-                <media parent="jeu" type="mixrbv2" region="wor" crc="ab46170d" md5="0b7462d84e09e47f96712fb4cdbff50a" sha1="919f61684734ebfcdbeac3d2c5a39ff2c88d6947" format="png" support="">media/mixrbv2/backgamm.png</media>
+                <media parent="jeu" type="video" region="unk" crc="14cdb43a" md5="5ede3732c1ab65dc64a6a85064337f71" sha1="8a7bedeecab808230a93e244c077a78e612e8f62" format="mp4" support="">media/video/maze.mp4</media>
+                <media parent="jeu" type="mixrbv2" region="wor" crc="efa8215e" md5="ca637d5ccdcb4951011c5e180c00b4e4" sha1="4dd321ec80f8733f409d0ea89cb3cf7eb60338ca" format="png" support="">media/mixrbv2/maze.png</media>
             </medias>
             <dates>
                 <date region="us">1977</date>
@@ -363,164 +911,21 @@ Acey-Deucey is another way to play Backgammon where the starting position is dif
             <developpeur id="16563">Fairlight</developpeur>
             <editeur id="16563">Fairlight</editeur>
             <genres>
-                <genre id="33" principale="1" parentid="0" langue="en">Board game</genre>
-                <genre id="27" principale="1" parentid="0" langue="en">Strategy</genre>
+                <genre id="2937" principale="0" parentid="10" langue="en">Action / Labyrinth</genre>
+                <genre id="10" principale="1" parentid="0" langue="en">Action</genre>
             </genres>
             <joueurs>2</joueurs>
             <topstaff>0</topstaff>
             <note>6</note>
             <rotation>0</rotation>
         </jeu>
-        <jeu id="46504" romid="75852">
-            <path>baseball.zip</path>
-            <noms>
-                <nom region="ss">Videocart-12 - Baseball</nom>
-                <nom region="us">Videocart-12: Baseball</nom>
-                <nom region="de">Videocart-10: Baseball</nom>
-                <nom region="se">Programkassett 12: Baseball</nom>
-            </noms>
-            <regions>
-                <region>us</region>
-            </regions>
-            <cloneof>0</cloneof>
-            <systeme id="80" parentid="0">Channel F</systeme>
-            <synopsis>
-                <synopsis langue="en">Batter up!  Or, uhm... Stick-Men Up!?!   The game of baseball for your very own Fairchild Channel-F home videogame system.  Two players go head-to-head to see who is the King of the Diamond.
-
-One player takes to the field, the other grabs a bat and steps up to the plate.  The pitcher can throw fast, slow, and some wicked curves even at the last moment.  Luckily the single-button swing action makes hitting the ball fairly easy, even if getting a single is harder than hitting a double or home-run.</synopsis>
-            </synopsis>
-            <medias>
-                <media parent="jeu" type="video" region="unk" crc="7f57a722" md5="29854fac6c2164dd92f475f72d995c4c" sha1="ed7e75aa0524a1d7d5e34ca0a9e10b97c82ca958" format="mp4" support="">media/video/baseball.mp4</media>
-                <media parent="jeu" type="mixrbv2" region="wor" crc="fa73afe7" md5="5b281e4aef1ec075de2ebd6bb1e24885" sha1="231164a8dba9d63e98da959e185a2adc66cea667" format="png" support="">media/mixrbv2/baseball.png</media>
-            </medias>
-            <dates>
-                <date region="us">1977</date>
-                <date region="de">1977</date>
-                <date region="se">1977</date>
-            </dates>
-            <developpeur id="16563">Fairlight</developpeur>
-            <editeur id="16563">Fairlight</editeur>
-            <genres>
-                <genre id="2853" principale="0" parentid="685" langue="en">Sports / Baseball</genre>
-                <genre id="685" principale="1" parentid="0" langue="en">Sports</genre>
-            </genres>
-            <joueurs>2</joueurs>
-            <topstaff>0</topstaff>
-            <note>7</note>
-            <rotation>0</rotation>
-        </jeu>
-        <jeu id="46505" romid="879547">
-            <path>robotwar.zip</path>
-            <noms>
-                <nom region="ss">Videocart-13 - Robot War, Torpedo Alley</nom>
-                <nom region="us">Videocart-13: Robot War, Torpedo Alley</nom>
-                <nom region="de">Videocart-11: Robot-Jagd, Torpedo</nom>
-                <nom region="se">Programkassett 13: Robotjakt, Torpedskjutning</nom>
-            </noms>
-            <cloneof>0</cloneof>
-            <systeme id="80" parentid="0">Channel F</systeme>
-            <synopsis>
-                <synopsis langue="en">The hunter or the hunted. Choose between these 1 or 2 player action games. ROBOT WAR: The space station computer has gone haywire - four robots are on the hunt and you're in! Take them to one of the electrified force fields and short-circuit their calculated plans! TORPEDO ALLEY: Play against the clock or take on another gunner - take off with your ground battery and "deep six" the invading fleet!</synopsis>
-            </synopsis>
-            <medias>
-                <media parent="jeu" type="video" region="unk" crc="3bef313b" md5="41f268db54a97cea22445616caf12678" sha1="753172db08b10c14b79fc9653ab967711b4c4a79" format="mp4" support="">media/video/robotwar.mp4</media>
-                <media parent="jeu" type="mixrbv2" region="wor" crc="80a52632" md5="a08988af21873f7903a8592ae1231088" sha1="6db1c580e7def3f0338d85e513cf3b30ed963f0d" format="png" support="">media/mixrbv2/robotwar.png</media>
-            </medias>
-            <dates>
-                <date region="us">1977</date>
-                <date region="de">1977</date>
-                <date region="se">1977</date>
-            </dates>
-            <developpeur id="16563">Fairlight</developpeur>
-            <editeur id="16563">Fairlight</editeur>
-            <genres>
-                <genre id="79" principale="1" parentid="0" langue="en">Shoot'em Up</genre>
-                <genre id="2851" principale="0" parentid="79" langue="en">Shoot'em up / Vertical</genre>
-                <genre id="10" principale="1" parentid="0" langue="en">Action</genre>
-            </genres>
-            <joueurs>1-2</joueurs>
-            <topstaff>0</topstaff>
-            <note>12</note>
-            <rotation>0</rotation>
-        </jeu>
-        <jeu id="46505" romid="879547">
-            <path>robotwarp.zip</path>
-            <noms>
-                <nom region="ss">Videocart-13 - Robot War, Torpedo Alley</nom>
-                <nom region="us">Videocart-13: Robot War, Torpedo Alley</nom>
-                <nom region="de">Videocart-11: Robot-Jagd, Torpedo</nom>
-                <nom region="se">Programkassett 13: Robotjakt, Torpedskjutning</nom>
-            </noms>
-            <cloneof>0</cloneof>
-            <systeme id="80" parentid="0">Channel F</systeme>
-            <synopsis>
-                <synopsis langue="en">The hunter or the hunted. Choose between these 1 or 2 player action games. ROBOT WAR: The space station computer has gone haywire - four robots are on the hunt and you're in! Take them to one of the electrified force fields and short-circuit their calculated plans! TORPEDO ALLEY: Play against the clock or take on another gunner - take off with your ground battery and "deep six" the invading fleet!</synopsis>
-            </synopsis>
-            <medias>
-                <media parent="jeu" type="video" region="unk" crc="3bef313b" md5="41f268db54a97cea22445616caf12678" sha1="753172db08b10c14b79fc9653ab967711b4c4a79" format="mp4" support="">media/video/robotwarp.mp4</media>
-                <media parent="jeu" type="mixrbv2" region="wor" crc="80a52632" md5="a08988af21873f7903a8592ae1231088" sha1="6db1c580e7def3f0338d85e513cf3b30ed963f0d" format="png" support="">media/mixrbv2/robotwarp.png</media>
-            </medias>
-            <dates>
-                <date region="us">1977</date>
-                <date region="de">1977</date>
-                <date region="se">1977</date>
-            </dates>
-            <developpeur id="16563">Fairlight</developpeur>
-            <editeur id="16563">Fairlight</editeur>
-            <genres>
-                <genre id="79" principale="1" parentid="0" langue="en">Shoot'em Up</genre>
-                <genre id="2851" principale="0" parentid="79" langue="en">Shoot'em up / Vertical</genre>
-                <genre id="10" principale="1" parentid="0" langue="en">Action</genre>
-            </genres>
-            <joueurs>1-2</joueurs>
-            <topstaff>0</topstaff>
-            <note>12</note>
-            <rotation>0</rotation>
-        </jeu>
-        <jeu id="46506" romid="168396">
-            <path>sonrsrch.zip</path>
-            <noms>
-                <nom region="ss">Videocart-14 - Sonar Search</nom>
-                <nom region="us">Videocart-14: Sonar Search</nom>
-                <nom region="de">Videocart-12: Sonar-Peilung</nom>
-                <nom region="se">Programkassett 14: Sonar-sökning</nom>
-            </noms>
-            <regions>
-                <region>us</region>
-            </regions>
-            <cloneof>0</cloneof>
-            <systeme id="80" parentid="0">Channel F</systeme>
-            <synopsis>
-                <synopsis langue="en">Sonar Search features the basic gameplay idea of Battleship, but with a unique twist. Instead of trying to randomly guess what grid an opponent's battleship is on, after the player takes a shot, the player will hear a  sonar ping noise. The shorter the noise, the closer the player is to hitting a target.
-
-In the 1 player game, the player has a limited number of chances to sink the enemy fleet of ships, while in the 2 player game,  players take turns trying to sink their opponents ships before  having their own ships sunk.</synopsis>
-            </synopsis>
-            <medias>
-                <media parent="jeu" type="video" region="unk" crc="ebf1d97e" md5="8a42c235167759f28ca050ae89eb3b2c" sha1="55a3a2381e92e60297da1a3f3dda1ae68836f29f" format="mp4" support="">media/video/sonrsrch.mp4</media>
-                <media parent="jeu" type="mixrbv2" region="wor" crc="8dccae38" md5="7b05278d47a7d4959b85976001576e1a" sha1="797764631248f42e4883a9dfac61e40efaaa5f5c" format="png" support="">media/mixrbv2/sonrsrch.png</media>
-            </medias>
-            <dates>
-                <date region="us">1977</date>
-                <date region="de">1977</date>
-                <date region="se">1977</date>
-            </dates>
-            <developpeur id="16563">Fairlight</developpeur>
-            <editeur id="16563">Fairlight</editeur>
-            <genres>
-                <genre id="27" principale="1" parentid="0" langue="en">Strategy</genre>
-            </genres>
-            <joueurs>1-2</joueurs>
-            <topstaff>0</topstaff>
-            <note>14</note>
-            <rotation>0</rotation>
-        </jeu>
         <jeu id="46507" romid="168386">
             <path>memory.zip</path>
             <noms>
-                <nom region="ss">Videocart-15 - Memory Match</nom>
-                <nom region="us">Videocart-15: Memory Match</nom>
-                <nom region="de">Videocart-13: Memory</nom>
-                <nom region="se">Programkassett 15: Minnestest</nom>
+                <nom region="ss">Memory Match 1 &amp; 2</nom>
+                <nom region="us">Memory Match 1 &amp; 2</nom>
+                <nom region="de">Memory Match 1 &amp; 2</nom>
+                <nom region="se">Memory Match 1 &amp; 2</nom>
             </noms>
             <regions>
                 <region>us</region>
@@ -561,175 +966,64 @@ The game offers both a 1 player and 2 player mode. In the 1 player game, the pla
             <note>8</note>
             <rotation>0</rotation>
         </jeu>
-        <jeu id="46508" romid="75859">
-            <path>dodgeit.zip</path>
+        <jeu id="46512" romid="168387">
+            <path>muehle.zip</path>
             <noms>
-                <nom region="ss">Videocart-16 - Dodge-it</nom>
-                <nom region="us">Videocart-16: Dodge-It</nom>
-                <nom region="de">Videocart-14: Völkerball</nom>
-                <nom region="se">Programkassett 16: Rymmare-Fasttagare</nom>
+                <nom region="ss">Muehle / Tontauben-Schiessen / Kreatives Malspiel / Videoscope (Ger)</nom>
+                <nom region="us">Muehle / Tontauben-Schiessen / Kreatives Malspiel / Videoscope (Ger)</nom>
+                <nom region="eu">Muehle / Tontauben-Schiessen / Kreatives Malspiel / Videoscope (Ger)</nom>
+                <nom region="de">Muehle / Tontauben-Schiessen / Kreatives Malspiel / Videoscope (Ger)</nom>
+                <nom region="se">Muehle / Tontauben-Schiessen / Kreatives Malspiel / Videoscope (Ger)</nom>
             </noms>
             <regions>
-                <region>us</region>
+                <region>de</region>
             </regions>
-            <cloneof>0</cloneof>
+            <cloneof>tctactoe.zip</cloneof>
             <systeme id="80" parentid="0">Channel F</systeme>
             <synopsis>
-                <synopsis langue="en">Dodge-it is a take on the game of Dodgeball. The player is trapped inside a playfield and has to dodge a ball that continuously keeps bouncing of the sides of the playfield. The longer the player is able to dodge the ball, the more points are earned. After a certain amount of points are earned, another ball enters the playfield thus making the player have to dodge two balls. More balls keep getting added at fixed intervals after that until a total of 9 balls enter the playfield. The game ends when the player is finally hit by the ball.
+                <synopsis langue="en">Videocart-1 features 4 different programs.
 
-In the 2 player game, both players are put into the same playfield and try to outlast the other player in not trying to get hit by the balls being thrown by the computer.
+Tic-Tac-Toe. A computerized version of the popular game. You play the X's and the computer the O's; taking turns your goal is the place three X's on the 3x3 grid before the computer. You always get to move first.
 
-The game features random variations in the gameplay, such as having different sized playfields, ball sizes and speeds, and changing the players size and speed.
+Shooting Gallery. In this game, for 1 or 2 players, you control a rifle and need to hit a target on the other side of the screen. The goal is to hit the target with as few misses as possible. You can play with or without a time limit and at different speeds.
 
-The game features four different modes which are either a 1 or 2 player Amateur mode or a 1 or 2 player Pro mode.</synopsis>
+Doodle. This is a drawing program. Using the controller you can draw any picture you like on the screen. There are five different line sizes and three available colors.
+
+Quadra-Doodle. Here the computer will draw random patterns influenced by the player, such as changing the colors used and the size of the lines. You can switch back and forth between Quadra-Doodle and Doodle, allowing you to draw on top of the generated image or the computer to draw on top of yours.</synopsis>
             </synopsis>
             <medias>
-                <media parent="jeu" type="video" region="unk" crc="c9d1db70" md5="b780cef6fac209bb400bf227dc180f4b" sha1="e5b629030b512be349ada29fd297b94d3125eb63" format="mp4" support="">media/video/dodgeit.mp4</media>
-                <media parent="jeu" type="mixrbv2" region="wor" crc="18d4602b" md5="5e4cdb57c98051d659151f9ad778a63e" sha1="f6b9f12efcef4cbcda395aaf22672f8025ccbdcc" format="png" support="">media/mixrbv2/dodgeit.png</media>
+                <media parent="jeu" type="video" region="unk" crc="7907b4ae" md5="a3a8ac8889545de6becf1a9beadc4fbb" sha1="64943cd0c68b1edf26b361b106bea8be131ef46a" format="mp4" support="">media/video/tctactoe.mp4</media>
+                <media parent="jeu" type="mixrbv2" region="wor" crc="cfdcbe7b" md5="8a6e18e2bd7886c6583cf73080b61471" sha1="06a96edcec7c09d4d7b08b9499abb5eae74835ed" format="png" support="">media/mixrbv2/tctactoe.png</media>
             </medias>
             <dates>
-                <date region="us">1978</date>
-                <date region="de">1978</date>
-                <date region="se">1978</date>
+                <date region="us">1976</date>
+                <date region="de">1976</date>
+                <date region="se">1976</date>
             </dates>
             <developpeur id="16563">Fairlight</developpeur>
             <editeur id="16563">Fairlight</editeur>
             <genres>
-                <genre id="685" principale="1" parentid="0" langue="en">Sports</genre>
+                <genre id="171" principale="1" parentid="0" langue="en">Casual Game</genre>
+                <genre id="27" principale="1" parentid="0" langue="en">Strategy</genre>
                 <genre id="10" principale="1" parentid="0" langue="en">Action</genre>
             </genres>
             <joueurs>1-2</joueurs>
             <topstaff>0</topstaff>
-            <note>14</note>
-            <rotation>0</rotation>
-        </jeu>
-        <jeu id="46509" romid="168390">
-            <path>pinballa.zip</path>
-            <noms>
-                <nom region="ss">Videocart-17 - Pinball Challenge</nom>
-                <nom region="us">Videocart-17: Pinball Challenge</nom>
-                <nom region="de">Videocart-15: Barriere</nom>
-                <nom region="se">Programkassett 17: Plock-I-Pinn</nom>
-            </noms>
-            <regions>
-                <region>us</region>
-            </regions>
-            <cloneof>0</cloneof>
-            <systeme id="80" parentid="0">Channel F</systeme>
-            <synopsis>
-                <synopsis langue="en">Although the title of the game may indicate a pinball game, it is actually a game more inspired by Breakout. The basic gameplay features the player bouncing a ball off of a paddle into a wall of bricks, chipping them off one brick at a time. Each brick destroyed earns the player points depending on its color. Once the ball bounces off the wall of bricks, its up to the player to maneuver the paddle under the falling ball in order to hit it back up into the wall of bricks. 
-
-
-The player loses a life if they miss a ball with their paddle and the ball falls into the abyss. The game ends when the player loses 7 balls. To keep up with the pinball motif, the wall of bricks are referred to as different colored skill lanes, the walls on the side as side rails, and the paddle as a flipper. The game offers 132 variations of this gameplay idea, including variations with different sized paddles, ball speeds, invisible bricks, and even one where the paddle shrinks when the ball is hit.</synopsis>
-            </synopsis>
-            <medias>
-                <media parent="jeu" type="video" region="unk" crc="5eaccbfa" md5="b96972430fa24648c57c9a40bf50d352" sha1="620ab83ffb99a162459b19c5a7fd93ca66e89ca5" format="mp4" support="">media/video/pinballa.mp4</media>
-                <media parent="jeu" type="mixrbv2" region="wor" crc="d6638b93" md5="9fb6c36adfdee9d74719a57a83c3be11" sha1="8bca9b10f6a60926222cc1578e9aa27bf6ad61c8" format="png" support="">media/mixrbv2/pinballa.png</media>
-            </medias>
-            <dates>
-                <date region="us">1978</date>
-                <date region="de">1978</date>
-                <date region="se">1978</date>
-            </dates>
-            <developpeur id="16563">Fairlight</developpeur>
-            <editeur id="16563">Fairlight</editeur>
-            <genres>
-                <genre id="2917" principale="0" parentid="10" langue="en">Action / Breakout games</genre>
-                <genre id="10" principale="1" parentid="0" langue="en">Action</genre>
-            </genres>
-            <joueurs>1-2</joueurs>
-            <topstaff>0</topstaff>
-            <note>12</note>
-            <rotation>0</rotation>
-        </jeu>
-        <jeu id="46509" romid="168389">
-            <path>pinball.zip</path>
-            <noms>
-                <nom region="ss">Videocart-17 - Pinball Challenge</nom>
-                <nom region="us">Videocart-17: Pinball Challenge</nom>
-                <nom region="de">Videocart-15: Barriere</nom>
-                <nom region="se">Programkassett 17: Plock-I-Pinn</nom>
-            </noms>
-            <regions>
-                <region>us</region>
-            </regions>
-            <cloneof>0</cloneof>
-            <systeme id="80" parentid="0">Channel F</systeme>
-            <synopsis>
-                <synopsis langue="en">Although the title of the game may indicate a pinball game, it is actually a game more inspired by Breakout. The basic gameplay features the player bouncing a ball off of a paddle into a wall of bricks, chipping them off one brick at a time. Each brick destroyed earns the player points depending on its color. Once the ball bounces off the wall of bricks, its up to the player to maneuver the paddle under the falling ball in order to hit it back up into the wall of bricks. 
-
-
-The player loses a life if they miss a ball with their paddle and the ball falls into the abyss. The game ends when the player loses 7 balls. To keep up with the pinball motif, the wall of bricks are referred to as different colored skill lanes, the walls on the side as side rails, and the paddle as a flipper. The game offers 132 variations of this gameplay idea, including variations with different sized paddles, ball speeds, invisible bricks, and even one where the paddle shrinks when the ball is hit.</synopsis>
-            </synopsis>
-            <medias>
-                <media parent="jeu" type="video" region="unk" crc="5eaccbfa" md5="b96972430fa24648c57c9a40bf50d352" sha1="620ab83ffb99a162459b19c5a7fd93ca66e89ca5" format="mp4" support="">media/video/pinball.mp4</media>
-                <media parent="jeu" type="mixrbv2" region="wor" crc="d6638b93" md5="9fb6c36adfdee9d74719a57a83c3be11" sha1="8bca9b10f6a60926222cc1578e9aa27bf6ad61c8" format="png" support="">media/mixrbv2/pinball.png</media>
-            </medias>
-            <dates>
-                <date region="us">1978</date>
-                <date region="de">1978</date>
-                <date region="se">1978</date>
-            </dates>
-            <developpeur id="16563">Fairlight</developpeur>
-            <editeur id="16563">Fairlight</editeur>
-            <genres>
-                <genre id="2917" principale="0" parentid="10" langue="en">Action / Breakout games</genre>
-                <genre id="10" principale="1" parentid="0" langue="en">Action</genre>
-            </genres>
-            <joueurs>1-2</joueurs>
-            <topstaff>0</topstaff>
-            <note>12</note>
+            <note>15</note>
             <rotation>0</rotation>
         </jeu>
         <jeu id="46510" romid="168388">
             <path>ordtvlng.zip</path>
             <noms>
-                <nom region="ss">Videocart-18 - Hangman</nom>
-                <nom region="us">Videocart-18: Hangman</nom>
-                <nom region="de">Videocart-16: Rat'mal</nom>
-                <nom region="se">Programkassett 18: Ordtävling</nom>
+                <nom region="ss">Ordtavling (Swe)</nom>
+                <nom region="us">Ordtavling (Swe)</nom>
+                <nom region="de">Ordtavling (Swe)</nom>
+                <nom region="se">Ordtavling (Swe)</nom>
             </noms>
             <regions>
                 <region>se</region>
             </regions>
-            <cloneof>0</cloneof>
-            <systeme id="80" parentid="0">Channel F</systeme>
-            <synopsis>
-                <synopsis langue="en">This game lets the player play the classic game of Hangman, in which the player is given an unknown word of a certain length and has to guess the correct letters that are contained in it. The player is only allowed a certain number of guesses. Every incorrect guess will add a body part to a drawing of a man being hanged at the gallows. Once all the man's body parts are drawn from several incorrect guesses, he is hanged and the player loses.
-
-The game contains 64 variations of this basic premise for either 1 or 2 players, with or without a score. Variations include having the computer come up with a word, have a player come up with a word for another player to solve, giving the player one of the letters in the word to help them get started, telling the player the letter belongs to the word but not where, not tolling how long the word is, having the player guess the correct letter and place it where it belongs in a word, and a variation where the player has to solve an anagram.</synopsis>
-            </synopsis>
-            <medias>
-                <media parent="jeu" type="video" region="unk" crc="3c316eca" md5="2195e1b4554288322a3bf268a91fd9fc" sha1="b95d0f33d89dce87a2233cd2ddd059e6becd048b" format="mp4" support="">media/video/ordtvlng.mp4</media>
-                <media parent="jeu" type="mixrbv2" region="wor" crc="baf26518" md5="48545eb1e6ddad1bbbddd08e81a5395a" sha1="8e9cfe4802b26cb5b93ef755af3298eee37a0fbb" format="png" support="">media/mixrbv2/ordtvlng.png</media>
-            </medias>
-            <dates>
-                <date region="us">1978</date>
-                <date region="de">1978</date>
-                <date region="se">1978</date>
-            </dates>
-            <developpeur id="16563">Fairlight</developpeur>
-            <editeur id="16563">Fairlight</editeur>
-            <genres>
-                <genre id="26" principale="1" parentid="0" langue="en">Puzzle-Game</genre>
-            </genres>
-            <joueurs>1-2</joueurs>
-            <topstaff>0</topstaff>
-            <note>16</note>
-            <rotation>0</rotation>
-        </jeu>
-        <jeu id="46510" romid="75862">
-            <path>hangman.zip</path>
-            <noms>
-                <nom region="ss">Videocart-18 - Hangman</nom>
-                <nom region="us">Videocart-18: Hangman</nom>
-                <nom region="de">Videocart-16: Rat'mal</nom>
-                <nom region="se">Programkassett 18: Ordtävling</nom>
-            </noms>
-            <regions>
-                <region>us</region>
-            </regions>
-            <cloneof>0</cloneof>
+            <cloneof>hangman.zip</cloneof>
             <systeme id="80" parentid="0">Channel F</systeme>
             <synopsis>
                 <synopsis langue="en">This game lets the player play the classic game of Hangman, in which the player is given an unknown word of a certain length and has to guess the correct letters that are contained in it. The player is only allowed a certain number of guesses. Every incorrect guess will add a body part to a drawing of a man being hanged at the gallows. Once all the man's body parts are drawn from several incorrect guesses, he is hanged and the player loses.
@@ -755,501 +1049,11 @@ The game contains 64 variations of this basic premise for either 1 or 2 players,
             <note>16</note>
             <rotation>0</rotation>
         </jeu>
-        <jeu id="46510" romid="168392">
-            <path>ratmal.zip</path>
-            <noms>
-                <nom region="ss">Videocart-18 - Hangman</nom>
-                <nom region="us">Videocart-18: Hangman</nom>
-                <nom region="de">Videocart-16: Rat'mal</nom>
-                <nom region="se">Programkassett 18: Ordtävling</nom>
-            </noms>
-            <regions>
-                <region>de</region>
-            </regions>
-            <cloneof>0</cloneof>
-            <systeme id="80" parentid="0">Channel F</systeme>
-            <synopsis>
-                <synopsis langue="en">This game lets the player play the classic game of Hangman, in which the player is given an unknown word of a certain length and has to guess the correct letters that are contained in it. The player is only allowed a certain number of guesses. Every incorrect guess will add a body part to a drawing of a man being hanged at the gallows. Once all the man's body parts are drawn from several incorrect guesses, he is hanged and the player loses.
-
-The game contains 64 variations of this basic premise for either 1 or 2 players, with or without a score. Variations include having the computer come up with a word, have a player come up with a word for another player to solve, giving the player one of the letters in the word to help them get started, telling the player the letter belongs to the word but not where, not tolling how long the word is, having the player guess the correct letter and place it where it belongs in a word, and a variation where the player has to solve an anagram.</synopsis>
-            </synopsis>
-            <medias>
-                <media parent="jeu" type="video" region="unk" crc="3c316eca" md5="2195e1b4554288322a3bf268a91fd9fc" sha1="b95d0f33d89dce87a2233cd2ddd059e6becd048b" format="mp4" support="">media/video/ratmal.mp4</media>
-                <media parent="jeu" type="mixrbv2" region="wor" crc="baf26518" md5="48545eb1e6ddad1bbbddd08e81a5395a" sha1="8e9cfe4802b26cb5b93ef755af3298eee37a0fbb" format="png" support="">media/mixrbv2/ratmal.png</media>
-            </medias>
-            <dates>
-                <date region="us">1978</date>
-                <date region="de">1978</date>
-                <date region="se">1978</date>
-            </dates>
-            <developpeur id="16563">Fairlight</developpeur>
-            <editeur id="16563">Fairlight</editeur>
-            <genres>
-                <genre id="26" principale="1" parentid="0" langue="en">Puzzle-Game</genre>
-            </genres>
-            <joueurs>1-2</joueurs>
-            <topstaff>0</topstaff>
-            <note>16</note>
-            <rotation>0</rotation>
-        </jeu>
-        <jeu id="46511" romid="168373">
-            <path>checkers.zip</path>
-            <noms>
-                <nom region="ss">Videocart-19 - Checkers</nom>
-                <nom region="us">Videocart-19: Checkers</nom>
-            </noms>
-            <regions>
-                <region>us</region>
-            </regions>
-            <cloneof>0</cloneof>
-            <systeme id="80" parentid="0">Channel F</systeme>
-            <synopsis>
-                <synopsis langue="en">This game features a playable version of the board game Checkers. Players control the 12 checkers at the bottom of the screen and attempt to remove the 12 checkers at the top of the screen which are controlled by a computer opponent. Players can only move their checkers diagonally toward their opponents side of the board. A checker can be jumped when two opposing checkers are next to each other and there is an empty space on the diagonal of the checker getting jumped. If a checker is put into a position of being able to be jumped it must be jumped. If a checker happens to reach the other side of the board, that checker is kinged and is allowed to move both back and forth in diagonal movements. The game is won by the player who removes all their opponents checkers from the board.</synopsis>
-            </synopsis>
-            <medias>
-                <media parent="jeu" type="video" region="unk" crc="1ce39c8f" md5="f2dc49d0c2e2b71f60894bf201a20927" sha1="62d27a2663ecb6aa4a7990add5bd658e657104ef" format="mp4" support="">media/video/checkers.mp4</media>
-                <media parent="jeu" type="mixrbv2" region="wor" crc="cdbc3364" md5="4288e03b12feb1541ff920ee89bfe6f1" sha1="1d3ab4fce5201bc500fc351c4e16ad96b5929759" format="png" support="">media/mixrbv2/checkers.png</media>
-            </medias>
-            <dates>
-                <date region="us">1980</date>
-            </dates>
-            <developpeur id="16563">Fairlight</developpeur>
-            <editeur id="20729">Zircon Software</editeur>
-            <genres>
-                <genre id="33" principale="1" parentid="0" langue="en">Board game</genre>
-                <genre id="27" principale="1" parentid="0" langue="en">Strategy</genre>
-            </genres>
-            <joueurs>1</joueurs>
-            <topstaff>0</topstaff>
-            <note>14</note>
-            <rotation>0</rotation>
-        </jeu>
-        <jeu id="46520" romid="168376">
-            <path>dsrtfox.zip</path>
-            <noms>
-                <nom region="ss">Videocart-2 - Desert Fox, Shooting Gallery</nom>
-                <nom region="us">Videocart-2: Desert Fox, Shooting Gallery</nom>
-                <nom region="de">Videocart-2: Wüstenfuchs, Tontauben-Schießen</nom>
-                <nom region="se">Programkassett 1: Lerduveskytte, Ökenkrig</nom>
-            </noms>
-            <regions>
-                <region>us</region>
-            </regions>
-            <cloneof>0</cloneof>
-            <systeme id="80" parentid="0">Channel F</systeme>
-            <synopsis>
-                <synopsis langue="en">Videocart-2 features two game programs.
-
-Desert Fox. In this game you control one of two tanks engaged in a battle. The goal is to earn as many points as possible by shooting your opponent. On the game screen there are two barriers and five mines. The tanks can not shoot through the barriers or mines making them ideal for cover. The tanks can drive through the barriers, but attempting to drive through a mine will cause your tank to explode awarding your opponent a point.
-
-Shooting Gallery. In this game you control a rifle on the left side of the screen and need to hit a target on the right side of the screen. The goal is to earn as many points as possible by hitting the target with as few misses as possible. You can play with no time limit at an average speed, or increase the challenge by adding a time limit and increasing the game speed. This game can also be played by two players to see who can score the most hits.</synopsis>
-            </synopsis>
-            <medias>
-                <media parent="jeu" type="video" region="unk" crc="06bd57e6" md5="322e6632486eaf639e21485a07bf56fd" sha1="9917f21e932bb52d98f4cf28667285c4796f8d00" format="mp4" support="">media/video/dsrtfox.mp4</media>
-                <media parent="jeu" type="mixrbv2" region="wor" crc="1caf7e83" md5="3185f9842108aacc1078a7c86485e9e6" sha1="46ac54fd587cd901a75e510c3efcd5f39e919d38" format="png" support="">media/mixrbv2/dsrtfox.png</media>
-            </medias>
-            <dates>
-                <date region="us">1976</date>
-                <date region="de">1976</date>
-                <date region="se">1976</date>
-            </dates>
-            <developpeur id="16563">Fairlight</developpeur>
-            <editeur id="16563">Fairlight</editeur>
-            <genres>
-                <genre id="10" principale="1" parentid="0" langue="en">Action</genre>
-            </genres>
-            <joueurs>1-2</joueurs>
-            <topstaff>0</topstaff>
-            <note>8</note>
-            <rotation>0</rotation>
-        </jeu>
-        <jeu id="46513" romid="168401">
-            <path>whizball.zip</path>
-            <noms>
-                <nom region="ss">Videocart-20 - Video Whizball</nom>
-                <nom region="us">Videocart-20: Video Whizball</nom>
-                <nom region="de">Videocart-17: Kickball</nom>
-            </noms>
-            <regions>
-                <region>us</region>
-            </regions>
-            <cloneof>0</cloneof>
-            <systeme id="80" parentid="0">Channel F</systeme>
-            <synopsis>
-                <synopsis langue="en">Video Whizball is a game where players control paddles to protect a goal from being entered by whizballs. To protect their goal, the player's paddle can fire missiles which can be aimed straight or angled. Missiles that hit whizballs can help propel in an opposite direction. If one of the missiles (or the whizballs) hit the player's or an opponent's paddle, they will temporarily disappear leaving their goal undefended. The game is won when one of the players gets to a selected score.
-
-The game contains 72 game variations of this basic premise, including having from 1 to 4 whizballs and 6 different game types. Game types are Basic where each whizball is worth 1 point, Basic Plus where players can guide the missile shots, Bonus where whizballs are worth 1 to 4 points each, Bonus Plus which adds guided missiles to the Bonus mode, Super Bonus where whizballs increase in value the longer they stay in play, and Super Bonus Plus which adds guided missile shots to the Super Bonus mode.</synopsis>
-            </synopsis>
-            <medias>
-                <media parent="jeu" type="video" region="unk" crc="31f71a7b" md5="10d98f555f02c81500250cae6b7d181a" sha1="80ed097f1358a3d1f59b7af1e849685c7d032130" format="mp4" support="">media/video/whizball.mp4</media>
-                <media parent="jeu" type="mixrbv2" region="wor" crc="6da2d661" md5="b2aaaf3f28206dc57f2866d1de0f28b0" sha1="0468be4722bcce6f5e52b4eb7c2679bb0206766c" format="png" support="">media/mixrbv2/whizball.png</media>
-            </medias>
-            <dates>
-                <date region="us">1978</date>
-                <date region="de">1978</date>
-            </dates>
-            <developpeur id="16563">Fairlight</developpeur>
-            <editeur id="16563">Fairlight</editeur>
-            <genres>
-                <genre id="79" principale="1" parentid="0" langue="en">Shoot'em Up</genre>
-                <genre id="2870" principale="0" parentid="79" langue="en">Shoot'em up / Horizontal</genre>
-                <genre id="10" principale="1" parentid="0" langue="en">Action</genre>
-            </genres>
-            <joueurs>1-2</joueurs>
-            <topstaff>0</topstaff>
-            <note>14</note>
-            <rotation>0</rotation>
-        </jeu>
-        <jeu id="46536" romid="168394">
-            <path>schach.zip</path>
-            <noms>
-                <nom region="ss">Schach</nom>
-                <nom region="wor">Videocart-20: Schach</nom>
-                <nom region="de">Videocart-20: Schach</nom>
-            </noms>
-            <regions>
-                <region>de</region>
-            </regions>
-            <cloneof>0</cloneof>
-            <systeme id="80" parentid="0">Channel F</systeme>
-            <synopsis>
-                <synopsis langue="en">Schach (German for "chess") was released for the Saba Videoplay, a Channel F-compatible system that Fairchild licensed for the European market.
-
-In this early chess simulation you can only play against the machine, as there is no multiplayer support. The player can chose either the white (actually green on screen) or black (actually red) pieces, and can select from 4 different AI difficulties. The easiest AI plays its turns in a matter of seconds but, as the difficulty increases, each turn can take several minutes. In the highest difficulty, the AI can take up to 50(!) minutes to decide its move. To allow the player to watch something else on the TV while the system is busy, the game cart has a very special feature: an integrated red led lights up while the machine is "thinking".</synopsis>
-            </synopsis>
-            <medias>
-                <media parent="jeu" type="video" region="unk" crc="ebebfc1b" md5="6060b7bf4d073051eaf4ad5a3cdddc8c" sha1="4aa331b1231c2b1cfe3e83a838344f187c2820fd" format="mp4" support="">media/video/schach.mp4</media>
-                <media parent="jeu" type="mixrbv2" region="wor" crc="268c6028" md5="184e98e1346aefddf27b959ed8d17374" sha1="23b56dae205876f2e7046ebd5d47782da2e231e4" format="png" support="">media/mixrbv2/schach.png</media>
-            </medias>
-            <dates>
-                <date region="de">1979</date>
-            </dates>
-            <developpeur id="30197">SABA</developpeur>
-            <editeur id="30197">SABA</editeur>
-            <genres>
-                <genre id="33" principale="1" parentid="0" langue="en">Board game</genre>
-            </genres>
-            <joueurs>1</joueurs>
-            <topstaff>0</topstaff>
-            <note>16</note>
-            <rotation>0</rotation>
-        </jeu>
-        <jeu id="46514" romid="75853">
-            <path>bowling.zip</path>
-            <noms>
-                <nom region="ss">Videocart-21 - Bowling</nom>
-                <nom region="us">Videocart-21: Bowling</nom>
-                <nom region="de">Videocart-18: Bowling</nom>
-                <nom region="se">Programkassett 21: Bowling</nom>
-            </noms>
-            <regions>
-                <region>us</region>
-            </regions>
-            <cloneof>0</cloneof>
-            <systeme id="80" parentid="0">Channel F</systeme>
-            <synopsis>
-                <synopsis langue="en">The object of the game is to knock down as many pins in 10 frames of bowling, The game gives the player an overhead view of a bowling lane. The player's bowling ball starts out moving back and forth across the front of the lane. This has the player trying to get the lane position they want the ball to start traveling down. Once the ball starts rolling down the lane, the player can curve the ball left or right. Once the curve has started, it can't be changed further.
-
-The game contains 18 game variations. They involve choosing the combination of number of players (1 or 2 players), playing either a regular or split game, and then choosing the speed of play (slow,normal,fast, and fastest).
-
-The regular game, just like it sounds like, is a regular game of bowling featuring the usual rules of play.
-
-The split game has each frame starting  with some combination of less than 10 pins. The player has 2 balls to knock down the remaining pins in each frame.</synopsis>
-            </synopsis>
-            <medias>
-                <media parent="jeu" type="video" region="unk" crc="a99a4685" md5="56c5de823acca798e615e61041f3b4f1" sha1="b6ae432930a00b7781bc3f124e5c2ae78caf9450" format="mp4" support="">media/video/bowling.mp4</media>
-                <media parent="jeu" type="mixrbv2" region="wor" crc="dc3f980e" md5="b9f4b7d23041972e5698dbd7bf812178" sha1="6072c90eab91fc0bdb79f5d4ac07def32a9127a1" format="png" support="">media/mixrbv2/bowling.png</media>
-            </medias>
-            <dates>
-                <date region="us">1978</date>
-                <date region="de">1978</date>
-                <date region="se">1978</date>
-            </dates>
-            <developpeur id="16563">Fairlight</developpeur>
-            <editeur id="16563">Fairlight</editeur>
-            <genres>
-                <genre id="2901" principale="0" parentid="685" langue="en">Sports / Bowling</genre>
-                <genre id="685" principale="1" parentid="0" langue="en">Sports</genre>
-            </genres>
-            <joueurs>1-2</joueurs>
-            <topstaff>0</topstaff>
-            <note>14</note>
-            <rotation>0</rotation>
-        </jeu>
-        <jeu id="46515" romid="168395">
-            <path>slotmchn.zip</path>
-            <noms>
-                <nom region="ss">Videocart-22 - Slot Machine</nom>
-                <nom region="us">Videocart-22: Slot Machine</nom>
-            </noms>
-            <regions>
-                <region>us</region>
-            </regions>
-            <cloneof>0</cloneof>
-            <systeme id="80" parentid="0">Channel F</systeme>
-            <synopsis>
-                <synopsis langue="en">This game attempts to simulate a slot machine. The player can choose their starting purse (from $1 up to $99 in one dollar or $10 increments) and then choose how much they want to bet on each spin of the slot reels.  Each bet can be either for 5¢,10¢,25¢, or 50¢.
-
-The game offers two modes. Random Play mode lets the wheel spin and then stop randomly and the Select Play mode lets the player stop each wheel one at a time when it's spinning.</synopsis>
-            </synopsis>
-            <medias>
-                <media parent="jeu" type="video" region="unk" crc="b4f2f461" md5="f526d9b321ea05aeb3c16adeee88f22b" sha1="56f3e00646c6d7be3a0b12dfe97815c1e7b4e143" format="mp4" support="">media/video/slotmchn.mp4</media>
-                <media parent="jeu" type="mixrbv2" region="wor" crc="a856419c" md5="8b8ca478c76211981f957d8a93013216" sha1="850067ebc579bf47b5ab745f17270af8be1e215b" format="png" support="">media/mixrbv2/slotmchn.png</media>
-            </medias>
-            <dates>
-                <date region="us">1980</date>
-            </dates>
-            <developpeur id="16563">Fairlight</developpeur>
-            <editeur id="20729">Zircon Software</editeur>
-            <genres>
-                <genre id="2860" principale="0" parentid="320" langue="en">Casino / Slot machine</genre>
-                <genre id="320" principale="1" parentid="0" langue="en">Casino</genre>
-                <genre id="40" principale="1" parentid="0" langue="en">Simulation</genre>
-            </genres>
-            <joueurs>1</joueurs>
-            <topstaff>0</topstaff>
-            <note>4</note>
-            <rotation>0</rotation>
-        </jeu>
-        <jeu id="46516" romid="168379">
-            <path>galactic.zip</path>
-            <noms>
-                <nom region="ss">Videocart-23 - Galactic Space Wars</nom>
-                <nom region="us">Videocart-23: Galactic Space Wars, Lunar Lander</nom>
-                <nom region="de">Videocart-19: Odyssee im Weltraum</nom>
-            </noms>
-            <regions>
-                <region>us</region>
-            </regions>
-            <cloneof>0</cloneof>
-            <systeme id="80" parentid="0">Channel F</systeme>
-            <synopsis>
-                <synopsis langue="en">This game cart contains 2 space themed games.
-
-In Galactic Space Wars, players take control of a fighter spacecraft to find and destroy enemy spacecrafts. Players take a first person perspective from inside the cockpit of the spacecraft to search the vast area of space. Once an enemy craft is located, players try to quickly scroll the ship into their lasers sight. If the enemy stays on the screen too long, it will fire at the player's ship. The player has a limited amount of time to destroy as many ships as possible and not get hit.
-
-Lunar Lander seems to have been inspired by the same titled arcade game. Players pilot a lunar lander and attempt to have a soft landing. The lander only has a certain amount of fuel to maneuver around with thus adding to the challenge. The key is to gently and smoothly lower the lander onto the platform, as coming down too fast or missing the platform crashes the lunar lander. The objective is to land the craft in the least amount of time possible.</synopsis>
-            </synopsis>
-            <medias>
-                <media parent="jeu" type="video" region="unk" crc="099e131f" md5="a4f611706eefc4216da20ca51cda3120" sha1="05516a993797acef7d0f688ea2952f8f0d1ece22" format="mp4" support="">media/video/galactic.mp4</media>
-                <media parent="jeu" type="mixrbv2" region="wor" crc="7b962e5f" md5="fbc95f31ec9144954f6736ae226f0c9d" sha1="9e81faf4253bd01e20d2d51a5a6610d3510c24de" format="png" support="">media/mixrbv2/galactic.png</media>
-            </medias>
-            <dates>
-                <date region="us">1980</date>
-                <date region="de">1980</date>
-            </dates>
-            <developpeur id="16563">Fairlight</developpeur>
-            <editeur id="20729">Zircon Software</editeur>
-            <genres>
-                <genre id="10" principale="1" parentid="0" langue="en">Action</genre>
-            </genres>
-            <joueurs>1-2</joueurs>
-            <topstaff>0</topstaff>
-            <note>10</note>
-            <rotation>0</rotation>
-        </jeu>
-        <jeu id="46516" romid="879532">
-            <path>galacticp.zip</path>
-            <noms>
-                <nom region="ss">Videocart-23 - Galactic Space Wars</nom>
-                <nom region="us">Videocart-23: Galactic Space Wars, Lunar Lander</nom>
-                <nom region="de">Videocart-19: Odyssee im Weltraum</nom>
-            </noms>
-            <cloneof>0</cloneof>
-            <systeme id="80" parentid="0">Channel F</systeme>
-            <synopsis>
-                <synopsis langue="en">This game cart contains 2 space themed games.
-
-In Galactic Space Wars, players take control of a fighter spacecraft to find and destroy enemy spacecrafts. Players take a first person perspective from inside the cockpit of the spacecraft to search the vast area of space. Once an enemy craft is located, players try to quickly scroll the ship into their lasers sight. If the enemy stays on the screen too long, it will fire at the player's ship. The player has a limited amount of time to destroy as many ships as possible and not get hit.
-
-Lunar Lander seems to have been inspired by the same titled arcade game. Players pilot a lunar lander and attempt to have a soft landing. The lander only has a certain amount of fuel to maneuver around with thus adding to the challenge. The key is to gently and smoothly lower the lander onto the platform, as coming down too fast or missing the platform crashes the lunar lander. The objective is to land the craft in the least amount of time possible.</synopsis>
-            </synopsis>
-            <medias>
-                <media parent="jeu" type="video" region="unk" crc="099e131f" md5="a4f611706eefc4216da20ca51cda3120" sha1="05516a993797acef7d0f688ea2952f8f0d1ece22" format="mp4" support="">media/video/galacticp.mp4</media>
-                <media parent="jeu" type="mixrbv2" region="wor" crc="7b962e5f" md5="fbc95f31ec9144954f6736ae226f0c9d" sha1="9e81faf4253bd01e20d2d51a5a6610d3510c24de" format="png" support="">media/mixrbv2/galacticp.png</media>
-            </medias>
-            <dates>
-                <date region="us">1980</date>
-                <date region="de">1980</date>
-            </dates>
-            <developpeur id="16563">Fairlight</developpeur>
-            <editeur id="20729">Zircon Software</editeur>
-            <genres>
-                <genre id="10" principale="1" parentid="0" langue="en">Action</genre>
-            </genres>
-            <joueurs>1-2</joueurs>
-            <topstaff>0</topstaff>
-            <note>10</note>
-            <rotation>0</rotation>
-        </jeu>
-        <jeu id="46517" romid="879531">
-            <path>football.zip</path>
-            <noms>
-                <nom region="ss">Videocart-24 - Pro Football</nom>
-                <nom region="us">Videocart-24: Pro Football</nom>
-            </noms>
-            <cloneof>0</cloneof>
-            <systeme id="80" parentid="0">Channel F</systeme>
-            <synopsis>
-                <synopsis langue="en">This is a 2 player American Football game played on a horizontal football field. Players take control of a 6 player team and play both offense and defense against an opposing player's team with the objective to outscore their opponent. There are 8 offensive and 8 defensive plays for a total of 16 different plays to call.  On offense, the player can either pass the ball or run using the quarterback to try to score a touchdown. Also available is the option to kick a field goal to score points. On defense, players can have linebackers blitz or try to defend the pass from being completed.
-
-The game contains four different game speeds which are slowest, slow, fast, and fastest.</synopsis>
-            </synopsis>
-            <medias>
-                <media parent="jeu" type="video" region="unk" crc="0496795e" md5="5bfd771749528664ed31b624f7f8b6a4" sha1="177cbf3ca532ff6a4b8cf5168949f7edcab41e36" format="mp4" support="">media/video/football.mp4</media>
-                <media parent="jeu" type="mixrbv2" region="wor" crc="9aa18c05" md5="7f468ed3626e4ed04a7d9d1546065858" sha1="d51299a3d648ab190799d3d36d5ccd2daaf757f2" format="png" support="">media/mixrbv2/football.png</media>
-            </medias>
-            <dates>
-                <date region="us">1980</date>
-            </dates>
-            <developpeur id="16563">Fairlight</developpeur>
-            <editeur id="20729">Zircon Software</editeur>
-            <genres>
-                <genre id="2846" principale="0" parentid="685" langue="en">Sports / Football</genre>
-                <genre id="685" principale="1" parentid="0" langue="en">Sports</genre>
-            </genres>
-            <joueurs>2</joueurs>
-            <topstaff>0</topstaff>
-            <note>15</note>
-            <rotation>0</rotation>
-        </jeu>
-        <jeu id="46517" romid="168391">
-            <path>pfootbll.zip</path>
-            <noms>
-                <nom region="ss">Videocart-24 - Pro Football</nom>
-                <nom region="us">Videocart-24: Pro Football</nom>
-            </noms>
-            <regions>
-                <region>us</region>
-            </regions>
-            <cloneof>0</cloneof>
-            <systeme id="80" parentid="0">Channel F</systeme>
-            <synopsis>
-                <synopsis langue="en">This is a 2 player American Football game played on a horizontal football field. Players take control of a 6 player team and play both offense and defense against an opposing player's team with the objective to outscore their opponent. There are 8 offensive and 8 defensive plays for a total of 16 different plays to call.  On offense, the player can either pass the ball or run using the quarterback to try to score a touchdown. Also available is the option to kick a field goal to score points. On defense, players can have linebackers blitz or try to defend the pass from being completed.
-
-The game contains four different game speeds which are slowest, slow, fast, and fastest.</synopsis>
-            </synopsis>
-            <medias>
-                <media parent="jeu" type="video" region="unk" crc="0496795e" md5="5bfd771749528664ed31b624f7f8b6a4" sha1="177cbf3ca532ff6a4b8cf5168949f7edcab41e36" format="mp4" support="">media/video/pfootbll.mp4</media>
-                <media parent="jeu" type="mixrbv2" region="wor" crc="9aa18c05" md5="7f468ed3626e4ed04a7d9d1546065858" sha1="d51299a3d648ab190799d3d36d5ccd2daaf757f2" format="png" support="">media/mixrbv2/pfootbll.png</media>
-            </medias>
-            <dates>
-                <date region="us">1980</date>
-            </dates>
-            <developpeur id="16563">Fairlight</developpeur>
-            <editeur id="20729">Zircon Software</editeur>
-            <genres>
-                <genre id="2846" principale="0" parentid="685" langue="en">Sports / Football</genre>
-                <genre id="685" principale="1" parentid="0" langue="en">Sports</genre>
-            </genres>
-            <joueurs>2</joueurs>
-            <topstaff>0</topstaff>
-            <note>15</note>
-            <rotation>0</rotation>
-        </jeu>
-        <jeu id="46518" romid="879528">
-            <path>drawpkr.zip</path>
-            <noms>
-                <nom region="ss">Videocart-25 - Casino Poker</nom>
-                <nom region="us">Videocart-25: Casino Poker</nom>
-            </noms>
-            <cloneof>0</cloneof>
-            <systeme id="80" parentid="0">Channel F</systeme>
-            <synopsis>
-                <synopsis langue="en">This game features a simulation of the card game five-card draw poker. 3 players (either 1 or 2 can be human, the rest are controlled by the computer) are dealt five cards each. Players then take turns either calling or raising a bet (which can be up to $25), or if they don't like their cards they can fold. Once that round of betting is done players then can choose to discard up to three of their cards in exchange for three new cards in an attempt to make a better hand. Another round of betting then takes place and after that all the players that didn't fold their hands show their cards and whoever has the highest hand wins all the money in the pot.</synopsis>
-            </synopsis>
-            <medias>
-                <media parent="jeu" type="video" region="unk" crc="eeb88da4" md5="791e1928e0764ce6ec7cb70645a7c200" sha1="f98eb92e7af9c3413e0e7e0d84fc09b3c66fe5cf" format="mp4" support="">media/video/drawpkr.mp4</media>
-                <media parent="jeu" type="mixrbv2" region="wor" crc="730efe92" md5="3f6d22bf572fac6742aba45c4018b6bc" sha1="df8a0b17536eee25f305af4162f65cb49da50c67" format="png" support="">media/mixrbv2/drawpkr.png</media>
-            </medias>
-            <dates>
-                <date region="us">1981</date>
-            </dates>
-            <developpeur id="16563">Fairlight</developpeur>
-            <editeur id="20729">Zircon Software</editeur>
-            <genres>
-                <genre id="320" principale="1" parentid="0" langue="en">Casino</genre>
-                <genre id="42" principale="1" parentid="0" langue="en">Playing cards</genre>
-                <genre id="2872" principale="0" parentid="320" langue="en">Casino / Cards</genre>
-            </genres>
-            <joueurs>1-2</joueurs>
-            <topstaff>0</topstaff>
-            <note>16</note>
-            <rotation>0</rotation>
-        </jeu>
-        <jeu id="46518" romid="168372">
-            <path>casinop.zip</path>
-            <noms>
-                <nom region="ss">Videocart-25 - Casino Poker</nom>
-                <nom region="us">Videocart-25: Casino Poker</nom>
-            </noms>
-            <regions>
-                <region>us</region>
-            </regions>
-            <cloneof>0</cloneof>
-            <systeme id="80" parentid="0">Channel F</systeme>
-            <synopsis>
-                <synopsis langue="en">This game features a simulation of the card game five-card draw poker. 3 players (either 1 or 2 can be human, the rest are controlled by the computer) are dealt five cards each. Players then take turns either calling or raising a bet (which can be up to $25), or if they don't like their cards they can fold. Once that round of betting is done players then can choose to discard up to three of their cards in exchange for three new cards in an attempt to make a better hand. Another round of betting then takes place and after that all the players that didn't fold their hands show their cards and whoever has the highest hand wins all the money in the pot.</synopsis>
-            </synopsis>
-            <medias>
-                <media parent="jeu" type="video" region="unk" crc="eeb88da4" md5="791e1928e0764ce6ec7cb70645a7c200" sha1="f98eb92e7af9c3413e0e7e0d84fc09b3c66fe5cf" format="mp4" support="">media/video/casinop.mp4</media>
-                <media parent="jeu" type="mixrbv2" region="wor" crc="730efe92" md5="3f6d22bf572fac6742aba45c4018b6bc" sha1="df8a0b17536eee25f305af4162f65cb49da50c67" format="png" support="">media/mixrbv2/casinop.png</media>
-            </medias>
-            <dates>
-                <date region="us">1981</date>
-            </dates>
-            <developpeur id="16563">Fairlight</developpeur>
-            <editeur id="20729">Zircon Software</editeur>
-            <genres>
-                <genre id="320" principale="1" parentid="0" langue="en">Casino</genre>
-                <genre id="42" principale="1" parentid="0" langue="en">Playing cards</genre>
-                <genre id="2872" principale="0" parentid="320" langue="en">Casino / Cards</genre>
-            </genres>
-            <joueurs>1-2</joueurs>
-            <topstaff>0</topstaff>
-            <note>16</note>
-            <rotation>0</rotation>
-        </jeu>
-        <jeu id="46519" romid="168368">
-            <path>alieninv.zip</path>
-            <noms>
-                <nom region="ss">Videocart-26 - Alien Invasion</nom>
-                <nom region="us">Videocart-26: Alien Invasion</nom>
-            </noms>
-            <regions>
-                <region>us</region>
-            </regions>
-            <cloneof>0</cloneof>
-            <systeme id="80" parentid="0">Channel F</systeme>
-            <synopsis>
-                <synopsis langue="en">This game is very similar to Space Invaders. The player controls a gun turret at the bottom of the screen. The turret can move both left and right and is able to shoot missiles. These missiles are used to shoot down the alien invaders which are moving back and forth in rows dropping missiles toward the player's gun turret. Each alien defeated earns the player points toward their score. Every once in a while, a spaceship will fly across the top of the screen and shooting it will give the player extra points. The goal of the game is to clear the screen of Alien Invaders and score as many points as possible. The game ends when the player loses all three of their lives.
-
-There are 10 game options that can be chosen with different number of players, player missiles and alien missiles. Players can also take turns or play simultaneously.</synopsis>
-            </synopsis>
-            <medias>
-                <media parent="jeu" type="video" region="unk" crc="9c9b2936" md5="02e69a7be4fde9700bc47f8f85c448c6" sha1="c926f0d1628dbc7560f08bca48fa651bfa97348a" format="mp4" support="">media/video/alieninv.mp4</media>
-                <media parent="jeu" type="mixrbv2" region="wor" crc="f5cefb89" md5="d5a2a2540d1a790afa6c52388c4ffe8d" sha1="123dfbc5733c084e4d02d8138df847bd8835effc" format="png" support="">media/mixrbv2/alieninv.png</media>
-            </medias>
-            <dates>
-                <date region="us">1981</date>
-            </dates>
-            <developpeur id="16563">Fairlight</developpeur>
-            <editeur id="20729">Zircon Software</editeur>
-            <genres>
-                <genre id="79" principale="1" parentid="0" langue="en">Shoot'em Up</genre>
-                <genre id="2851" principale="0" parentid="79" langue="en">Shoot'em up / Vertical</genre>
-                <genre id="10" principale="1" parentid="0" langue="en">Action</genre>
-            </genres>
-            <joueurs>1-2</joueurs>
-            <topstaff>0</topstaff>
-            <note>12</note>
-            <rotation>0</rotation>
-        </jeu>
         <jeu id="191772" romid="879540">
             <path>pacman.zip</path>
             <noms>
-                <nom region="ss">Pac-man</nom>
-                <nom region="wor">Videocart-27: Pac-man</nom>
+                <nom region="ss">Pac-Man (HB)</nom>
+                <nom region="wor">Pac-Man (HB)</nom>
             </noms>
             <cloneof>0</cloneof>
             <systeme id="80" parentid="0">Channel F</systeme>
@@ -1282,10 +1086,10 @@ This version of Pac-Man retains the intermissions found in the original game.</s
         <jeu id="191772" romid="879541">
             <path>pacmanv2.zip</path>
             <noms>
-                <nom region="ss">Pac-man</nom>
-                <nom region="wor">Videocart-27: Pac-man</nom>
+                <nom region="ss">Pac-Man (HB, v2)</nom>
+                <nom region="wor">Pac-Man (HB, v2)</nom>
             </noms>
-            <cloneof>0</cloneof>
+            <cloneof>pacman.zip</cloneof>
             <systeme id="80" parentid="0">Channel F</systeme>
             <synopsis>
                 <synopsis langue="en">An unauthorized version of Pac-Man.
@@ -1297,7 +1101,7 @@ Pac-Man is not completely defenseless as on each maze, there are four power pell
 This version of Pac-Man retains the intermissions found in the original game.</synopsis>
             </synopsis>
             <medias>
-                <media parent="jeu" type="mixrbv2" region="wor" crc="ee47f9bc" md5="05c97eefc10a65ef10a8571f6443f164" sha1="628ddfdcdc41b5f5ecff964fb0ffe58201d52dba" format="png" support="">media/mixrbv2/pacmanv2.png</media>
+                <media parent="jeu" type="mixrbv2" region="wor" crc="ee47f9bc" md5="05c97eefc10a65ef10a8571f6443f164" sha1="628ddfdcdc41b5f5ecff964fb0ffe58201d52dba" format="png" support="">media/mixrbv2/pacman.png</media>
             </medias>
             <dates>
                 <date region="wor">2009</date>
@@ -1313,13 +1117,13 @@ This version of Pac-Man retains the intermissions found in the original game.</s
             <note>15</note>
             <rotation>0</rotation>
         </jeu>
-        <jeu id="46521" romid="168400">
-            <path>vblckjck.zip</path>
+        <jeu id="46509" romid="168389">
+            <path>pinball.zip</path>
             <noms>
-                <nom region="ss">Videocart-3 - Video Blackjack</nom>
-                <nom region="us">Videocart-3: Video Blackjack</nom>
-                <nom region="de">Videocart 3: Blackjack (17+4)</nom>
-                <nom region="se">Programkassett 3: (21) 1 Eller 2 Spelare</nom>
+                <nom region="ss">Pinball Challenge</nom>
+                <nom region="us">Pinball Challenge</nom>
+                <nom region="de">Pinball Challenge</nom>
+                <nom region="se">Pinball Challenge</nom>
             </noms>
             <regions>
                 <region>us</region>
@@ -1327,45 +1131,157 @@ This version of Pac-Man retains the intermissions found in the original game.</s
             <cloneof>0</cloneof>
             <systeme id="80" parentid="0">Channel F</systeme>
             <synopsis>
-                <synopsis langue="en">Videocart-3 features a computerized version of the card game blackjack. The game follows the typical blackjack rules; your goal is to get cards totaling as close to 21 as possible without going over. The computer acts as the dealer, and is required to hit on a 16 or 'soft 17' and is required to stay on a 'hard 17'. The game features a full 52 card deck, and the computer will automatically shuffle the deck if there are less than 16 cards left; optionally you can request the computer reshuffle the deck at any time. One or two players can play, each player beginning the game with $500. There is a minimum bet of $1 and a maximum bet of $99. In the two player game a player who has gone broke may optionally borrow $100 from the house to re-enter the game.</synopsis>
+                <synopsis langue="en">Although the title of the game may indicate a pinball game, it is actually a game more inspired by Breakout. The basic gameplay features the player bouncing a ball off of a paddle into a wall of bricks, chipping them off one brick at a time. Each brick destroyed earns the player points depending on its color. Once the ball bounces off the wall of bricks, its up to the player to maneuver the paddle under the falling ball in order to hit it back up into the wall of bricks. 
+
+
+The player loses a life if they miss a ball with their paddle and the ball falls into the abyss. The game ends when the player loses 7 balls. To keep up with the pinball motif, the wall of bricks are referred to as different colored skill lanes, the walls on the side as side rails, and the paddle as a flipper. The game offers 132 variations of this gameplay idea, including variations with different sized paddles, ball speeds, invisible bricks, and even one where the paddle shrinks when the ball is hit.</synopsis>
             </synopsis>
             <medias>
-                <media parent="jeu" type="video" region="unk" crc="1bbe1c10" md5="9a4c0a13b59e8215de562024644d71f6" sha1="e5fc2b4aea53e8cc95680acbcef6f6c4b4ac2b6d" format="mp4" support="">media/video/vblckjck.mp4</media>
-                <media parent="jeu" type="mixrbv2" region="wor" crc="c56d2724" md5="e3baeb45cd24da57efde5d957890343f" sha1="182cd6eb10ee224c3477ba38b2d290fab23bb205" format="png" support="">media/mixrbv2/vblckjck.png</media>
+                <media parent="jeu" type="video" region="unk" crc="5eaccbfa" md5="b96972430fa24648c57c9a40bf50d352" sha1="620ab83ffb99a162459b19c5a7fd93ca66e89ca5" format="mp4" support="">media/video/pinball.mp4</media>
+                <media parent="jeu" type="mixrbv2" region="wor" crc="d6638b93" md5="9fb6c36adfdee9d74719a57a83c3be11" sha1="8bca9b10f6a60926222cc1578e9aa27bf6ad61c8" format="png" support="">media/mixrbv2/pinball.png</media>
             </medias>
             <dates>
-                <date region="us">1976</date>
-                <date region="de">1976</date>
-                <date region="se">1976</date>
+                <date region="us">1978</date>
+                <date region="de">1978</date>
+                <date region="se">1978</date>
             </dates>
             <developpeur id="16563">Fairlight</developpeur>
             <editeur id="16563">Fairlight</editeur>
             <genres>
-                <genre id="2872" principale="0" parentid="320" langue="en">Casino / Cards</genre>
-                <genre id="320" principale="1" parentid="0" langue="en">Casino</genre>
-                <genre id="27" principale="1" parentid="0" langue="en">Strategy</genre>
+                <genre id="2917" principale="0" parentid="10" langue="en">Action / Breakout games</genre>
+                <genre id="10" principale="1" parentid="0" langue="en">Action</genre>
             </genres>
             <joueurs>1-2</joueurs>
             <topstaff>0</topstaff>
-            <note>10</note>
+            <note>12</note>
             <rotation>0</rotation>
         </jeu>
-        <jeu id="46522" romid="879549">
-            <path>spitfirep.zip</path>
+        <jeu id="46509" romid="168390">
+            <path>pinballa.zip</path>
             <noms>
-                <nom region="ss">Videocart-4 - Spitfire</nom>
-                <nom region="us">Videocart-4: Spitfire</nom>
-                <nom region="de">Videocart-4: Luftkampf</nom>
-                <nom region="se">Programkassett 4: Röde baronen</nom>
+                <nom region="ss">Pinball Challenge (Alt)</nom>
+                <nom region="us">Pinball Challenge (Alt)</nom>
+                <nom region="de">Pinball Challenge (Alt)</nom>
+                <nom region="se">Pinball Challenge (Alt)</nom>
             </noms>
+            <regions>
+                <region>us</region>
+            </regions>
+            <cloneof>pinball.zip</cloneof>
+            <systeme id="80" parentid="0">Channel F</systeme>
+            <synopsis>
+                <synopsis langue="en">Although the title of the game may indicate a pinball game, it is actually a game more inspired by Breakout. The basic gameplay features the player bouncing a ball off of a paddle into a wall of bricks, chipping them off one brick at a time. Each brick destroyed earns the player points depending on its color. Once the ball bounces off the wall of bricks, its up to the player to maneuver the paddle under the falling ball in order to hit it back up into the wall of bricks. 
+
+
+The player loses a life if they miss a ball with their paddle and the ball falls into the abyss. The game ends when the player loses 7 balls. To keep up with the pinball motif, the wall of bricks are referred to as different colored skill lanes, the walls on the side as side rails, and the paddle as a flipper. The game offers 132 variations of this gameplay idea, including variations with different sized paddles, ball speeds, invisible bricks, and even one where the paddle shrinks when the ball is hit.</synopsis>
+            </synopsis>
+            <medias>
+                <media parent="jeu" type="video" region="unk" crc="5eaccbfa" md5="b96972430fa24648c57c9a40bf50d352" sha1="620ab83ffb99a162459b19c5a7fd93ca66e89ca5" format="mp4" support="">media/video/pinball.mp4</media>
+                <media parent="jeu" type="mixrbv2" region="wor" crc="d6638b93" md5="9fb6c36adfdee9d74719a57a83c3be11" sha1="8bca9b10f6a60926222cc1578e9aa27bf6ad61c8" format="png" support="">media/mixrbv2/pinball.png</media>
+            </medias>
+            <dates>
+                <date region="us">1978</date>
+                <date region="de">1978</date>
+                <date region="se">1978</date>
+            </dates>
+            <developpeur id="16563">Fairlight</developpeur>
+            <editeur id="16563">Fairlight</editeur>
+            <genres>
+                <genre id="2917" principale="0" parentid="10" langue="en">Action / Breakout games</genre>
+                <genre id="10" principale="1" parentid="0" langue="en">Action</genre>
+            </genres>
+            <joueurs>1-2</joueurs>
+            <topstaff>0</topstaff>
+            <note>12</note>
+            <rotation>0</rotation>
+        </jeu>
+        <jeu id="46517" romid="168391">
+            <path>pfootbll.zip</path>
+            <noms>
+                <nom region="ss">Pro Football</nom>
+                <nom region="us">Pro Football</nom>
+            </noms>
+            <regions>
+                <region>us</region>
+            </regions>
             <cloneof>0</cloneof>
             <systeme id="80" parentid="0">Channel F</systeme>
             <synopsis>
-                <synopsis langue="en">Videocart-4 features the action game Spitfire. This is an aerial dogfighting game that pits the Red Baron against the Blue Max. The goal is to try to shoot down your opponent to score a point, and the player with the most points wins. Viewed from the side, your bi-planes have the freedom to fly anywhere on the screen; the screen wraps, so if you fly off of one side you will appear again on the other side. You can also hide just off screen to attempt to sneak up on an opponent; be careful, even though you may not be visible you are still vulnerable to attacks! The game can be played by two players against each other, or one player against the computer. When playing against the computer, the computer's skill level will vary throughout the game; the more times you are successful in shooting down the computer, the more its skill level will increase! However the more the computer shoots you down, the more its skill level will decrease.</synopsis>
+                <synopsis langue="en">This is a 2 player American Football game played on a horizontal football field. Players take control of a 6 player team and play both offense and defense against an opposing player's team with the objective to outscore their opponent. There are 8 offensive and 8 defensive plays for a total of 16 different plays to call.  On offense, the player can either pass the ball or run using the quarterback to try to score a touchdown. Also available is the option to kick a field goal to score points. On defense, players can have linebackers blitz or try to defend the pass from being completed.
+
+The game contains four different game speeds which are slowest, slow, fast, and fastest.</synopsis>
             </synopsis>
             <medias>
-                <media parent="jeu" type="video" region="unk" crc="ecdd055b" md5="290f5ed757c416e8c06f391572771e13" sha1="315c9e9f9eac18a12fd9af121faa0d3e42d14786" format="mp4" support="">media/video/spitfirep.mp4</media>
-                <media parent="jeu" type="mixrbv2" region="wor" crc="e95a1f97" md5="55575338cacf8e1ddf458e846965f384" sha1="a68ec7a7f36637ea67c9dc77809f776aa07a9752" format="png" support="">media/mixrbv2/spitfirep.png</media>
+                <media parent="jeu" type="video" region="unk" crc="0496795e" md5="5bfd771749528664ed31b624f7f8b6a4" sha1="177cbf3ca532ff6a4b8cf5168949f7edcab41e36" format="mp4" support="">media/video/pfootbll.mp4</media>
+                <media parent="jeu" type="mixrbv2" region="wor" crc="9aa18c05" md5="7f468ed3626e4ed04a7d9d1546065858" sha1="d51299a3d648ab190799d3d36d5ccd2daaf757f2" format="png" support="">media/mixrbv2/pfootbll.png</media>
+            </medias>
+            <dates>
+                <date region="us">1980</date>
+            </dates>
+            <developpeur id="16563">Fairlight</developpeur>
+            <editeur id="20729">Zircon Software</editeur>
+            <genres>
+                <genre id="2846" principale="0" parentid="685" langue="en">Sports / Football</genre>
+                <genre id="685" principale="1" parentid="0" langue="en">Sports</genre>
+            </genres>
+            <joueurs>2</joueurs>
+            <topstaff>0</topstaff>
+            <note>15</note>
+            <rotation>0</rotation>
+        </jeu>
+        <jeu id="46510" romid="168392">
+            <path>ratmal.zip</path>
+            <noms>
+                <nom region="ss">Rat' Mal (Ger)</nom>
+                <nom region="us">Rat' Mal (Ger)</nom>
+                <nom region="de">Rat' Mal (Ger)</nom>
+                <nom region="se">Rat' Mal (Ger)</nom>
+            </noms>
+            <regions>
+                <region>de</region>
+            </regions>
+            <cloneof>hangman.zip</cloneof>
+            <systeme id="80" parentid="0">Channel F</systeme>
+            <synopsis>
+                <synopsis langue="en">This game lets the player play the classic game of Hangman, in which the player is given an unknown word of a certain length and has to guess the correct letters that are contained in it. The player is only allowed a certain number of guesses. Every incorrect guess will add a body part to a drawing of a man being hanged at the gallows. Once all the man's body parts are drawn from several incorrect guesses, he is hanged and the player loses.
+
+The game contains 64 variations of this basic premise for either 1 or 2 players, with or without a score. Variations include having the computer come up with a word, have a player come up with a word for another player to solve, giving the player one of the letters in the word to help them get started, telling the player the letter belongs to the word but not where, not tolling how long the word is, having the player guess the correct letter and place it where it belongs in a word, and a variation where the player has to solve an anagram.</synopsis>
+            </synopsis>
+            <medias>
+                <media parent="jeu" type="video" region="unk" crc="3c316eca" md5="2195e1b4554288322a3bf268a91fd9fc" sha1="b95d0f33d89dce87a2233cd2ddd059e6becd048b" format="mp4" support="">media/video/hangman.mp4</media>
+                <media parent="jeu" type="mixrbv2" region="wor" crc="baf26518" md5="48545eb1e6ddad1bbbddd08e81a5395a" sha1="8e9cfe4802b26cb5b93ef755af3298eee37a0fbb" format="png" support="">media/mixrbv2/hangman.png</media>
+            </medias>
+            <dates>
+                <date region="us">1978</date>
+                <date region="de">1978</date>
+                <date region="se">1978</date>
+            </dates>
+            <developpeur id="16563">Fairlight</developpeur>
+            <editeur id="16563">Fairlight</editeur>
+            <genres>
+                <genre id="26" principale="1" parentid="0" langue="en">Puzzle-Game</genre>
+            </genres>
+            <joueurs>1-2</joueurs>
+            <topstaff>0</topstaff>
+            <note>16</note>
+            <rotation>0</rotation>
+        </jeu>
+        <jeu id="46505" romid="879547">
+            <path>robotwarp.zip</path>
+            <noms>
+                <nom region="ss">Robot War (Prototype)</nom>
+                <nom region="us">Robot War (Prototype)</nom>
+                <nom region="de">Robot War (Prototype)</nom>
+                <nom region="se">Robot War (Prototype)</nom>
+            </noms>
+            <cloneof>robotwar.zip</cloneof>
+            <systeme id="80" parentid="0">Channel F</systeme>
+            <synopsis>
+                <synopsis langue="en">The hunter or the hunted. Choose between these 1 or 2 player action games. ROBOT WAR: The space station computer has gone haywire - four robots are on the hunt and you're in! Take them to one of the electrified force fields and short-circuit their calculated plans! TORPEDO ALLEY: Play against the clock or take on another gunner - take off with your ground battery and "deep six" the invading fleet!</synopsis>
+            </synopsis>
+            <medias>
+                <media parent="jeu" type="video" region="unk" crc="3bef313b" md5="41f268db54a97cea22445616caf12678" sha1="753172db08b10c14b79fc9653ab967711b4c4a79" format="mp4" support="">media/video/robotwar.mp4</media>
+                <media parent="jeu" type="mixrbv2" region="wor" crc="80a52632" md5="a08988af21873f7903a8592ae1231088" sha1="6db1c580e7def3f0338d85e513cf3b30ed963f0d" format="png" support="">media/mixrbv2/robotwar.png</media>
             </medias>
             <dates>
                 <date region="us">1977</date>
@@ -1375,22 +1291,198 @@ This version of Pac-Man retains the intermissions found in the original game.</s
             <developpeur id="16563">Fairlight</developpeur>
             <editeur id="16563">Fairlight</editeur>
             <genres>
-                <genre id="2646" principale="1" parentid="0" langue="en">Shooter</genre>
-                <genre id="2881" principale="0" parentid="2646" langue="en">Shooter / Plane, 3rd person</genre>
+                <genre id="79" principale="1" parentid="0" langue="en">Shoot'em Up</genre>
+                <genre id="2851" principale="0" parentid="79" langue="en">Shoot'em up / Vertical</genre>
                 <genre id="10" principale="1" parentid="0" langue="en">Action</genre>
             </genres>
             <joueurs>1-2</joueurs>
             <topstaff>0</topstaff>
-            <note>9</note>
+            <note>12</note>
+            <rotation>0</rotation>
+        </jeu>
+        <jeu id="46505" romid="879547">
+            <path>robotwar.zip</path>
+            <noms>
+                <nom region="ss">Robot War / Torpedo Alley</nom>
+                <nom region="us">Robot War / Torpedo Alley</nom>
+                <nom region="de">Robot War / Torpedo Alley</nom>
+                <nom region="se">Robot War / Torpedo Alley</nom>
+            </noms>
+            <cloneof>0</cloneof>
+            <systeme id="80" parentid="0">Channel F</systeme>
+            <synopsis>
+                <synopsis langue="en">The hunter or the hunted. Choose between these 1 or 2 player action games. ROBOT WAR: The space station computer has gone haywire - four robots are on the hunt and you're in! Take them to one of the electrified force fields and short-circuit their calculated plans! TORPEDO ALLEY: Play against the clock or take on another gunner - take off with your ground battery and "deep six" the invading fleet!</synopsis>
+            </synopsis>
+            <medias>
+                <media parent="jeu" type="video" region="unk" crc="3bef313b" md5="41f268db54a97cea22445616caf12678" sha1="753172db08b10c14b79fc9653ab967711b4c4a79" format="mp4" support="">media/video/robotwar.mp4</media>
+                <media parent="jeu" type="mixrbv2" region="wor" crc="80a52632" md5="a08988af21873f7903a8592ae1231088" sha1="6db1c580e7def3f0338d85e513cf3b30ed963f0d" format="png" support="">media/mixrbv2/robotwar.png</media>
+            </medias>
+            <dates>
+                <date region="us">1977</date>
+                <date region="de">1977</date>
+                <date region="se">1977</date>
+            </dates>
+            <developpeur id="16563">Fairlight</developpeur>
+            <editeur id="16563">Fairlight</editeur>
+            <genres>
+                <genre id="79" principale="1" parentid="0" langue="en">Shoot'em Up</genre>
+                <genre id="2851" principale="0" parentid="79" langue="en">Shoot'em up / Vertical</genre>
+                <genre id="10" principale="1" parentid="0" langue="en">Action</genre>
+            </genres>
+            <joueurs>1-2</joueurs>
+            <topstaff>0</topstaff>
+            <note>12</note>
+            <rotation>0</rotation>
+        </jeu>
+        <jeu id="46536" romid="168394">
+            <path>schach.zip</path>
+            <noms>
+                <nom region="ss">Schach (Ger)</nom>
+                <nom region="wor">Schach (Ger)</nom>
+                <nom region="de">Schach (Ger)</nom>
+            </noms>
+            <regions>
+                <region>de</region>
+            </regions>
+            <cloneof>0</cloneof>
+            <systeme id="80" parentid="0">Channel F</systeme>
+            <synopsis>
+                <synopsis langue="en">Schach (German for "chess") was released for the Saba Videoplay, a Channel F-compatible system that Fairchild licensed for the European market.
+
+In this early chess simulation you can only play against the machine, as there is no multiplayer support. The player can chose either the white (actually green on screen) or black (actually red) pieces, and can select from 4 different AI difficulties. The easiest AI plays its turns in a matter of seconds but, as the difficulty increases, each turn can take several minutes. In the highest difficulty, the AI can take up to 50(!) minutes to decide its move. To allow the player to watch something else on the TV while the system is busy, the game cart has a very special feature: an integrated red led lights up while the machine is "thinking".</synopsis>
+            </synopsis>
+            <medias>
+                <media parent="jeu" type="video" region="unk" crc="ebebfc1b" md5="6060b7bf4d073051eaf4ad5a3cdddc8c" sha1="4aa331b1231c2b1cfe3e83a838344f187c2820fd" format="mp4" support="">media/video/schach.mp4</media>
+                <media parent="jeu" type="mixrbv2" region="wor" crc="268c6028" md5="184e98e1346aefddf27b959ed8d17374" sha1="23b56dae205876f2e7046ebd5d47782da2e231e4" format="png" support="">media/mixrbv2/schach.png</media>
+            </medias>
+            <dates>
+                <date region="de">1979</date>
+            </dates>
+            <developpeur id="30197">SABA</developpeur>
+            <editeur id="30197">SABA</editeur>
+            <genres>
+                <genre id="33" principale="1" parentid="0" langue="en">Board game</genre>
+            </genres>
+            <joueurs>1</joueurs>
+            <topstaff>0</topstaff>
+            <note>16</note>
+            <rotation>0</rotation>
+        </jeu>
+        <jeu id="46515" romid="168395">
+            <path>slotmchn.zip</path>
+            <noms>
+                <nom region="ss">Slot Machine</nom>
+                <nom region="us">Slot Machine</nom>
+            </noms>
+            <regions>
+                <region>us</region>
+            </regions>
+            <cloneof>0</cloneof>
+            <systeme id="80" parentid="0">Channel F</systeme>
+            <synopsis>
+                <synopsis langue="en">This game attempts to simulate a slot machine. The player can choose their starting purse (from $1 up to $99 in one dollar or $10 increments) and then choose how much they want to bet on each spin of the slot reels.  Each bet can be either for 5¢,10¢,25¢, or 50¢.
+
+The game offers two modes. Random Play mode lets the wheel spin and then stop randomly and the Select Play mode lets the player stop each wheel one at a time when it's spinning.</synopsis>
+            </synopsis>
+            <medias>
+                <media parent="jeu" type="video" region="unk" crc="b4f2f461" md5="f526d9b321ea05aeb3c16adeee88f22b" sha1="56f3e00646c6d7be3a0b12dfe97815c1e7b4e143" format="mp4" support="">media/video/slotmchn.mp4</media>
+                <media parent="jeu" type="mixrbv2" region="wor" crc="a856419c" md5="8b8ca478c76211981f957d8a93013216" sha1="850067ebc579bf47b5ab745f17270af8be1e215b" format="png" support="">media/mixrbv2/slotmchn.png</media>
+            </medias>
+            <dates>
+                <date region="us">1980</date>
+            </dates>
+            <developpeur id="16563">Fairlight</developpeur>
+            <editeur id="20729">Zircon Software</editeur>
+            <genres>
+                <genre id="2860" principale="0" parentid="320" langue="en">Casino / Slot machine</genre>
+                <genre id="320" principale="1" parentid="0" langue="en">Casino</genre>
+                <genre id="40" principale="1" parentid="0" langue="en">Simulation</genre>
+            </genres>
+            <joueurs>1</joueurs>
+            <topstaff>0</topstaff>
+            <note>4</note>
+            <rotation>0</rotation>
+        </jeu>
+        <jeu id="46506" romid="168396">
+            <path>sonrsrch.zip</path>
+            <noms>
+                <nom region="ss">Sonar Search</nom>
+                <nom region="us">Sonar Search</nom>
+                <nom region="de">Sonar Search</nom>
+                <nom region="se">Sonar Search</nom>
+            </noms>
+            <regions>
+                <region>us</region>
+            </regions>
+            <cloneof>0</cloneof>
+            <systeme id="80" parentid="0">Channel F</systeme>
+            <synopsis>
+                <synopsis langue="en">Sonar Search features the basic gameplay idea of Battleship, but with a unique twist. Instead of trying to randomly guess what grid an opponent's battleship is on, after the player takes a shot, the player will hear a  sonar ping noise. The shorter the noise, the closer the player is to hitting a target.
+
+In the 1 player game, the player has a limited number of chances to sink the enemy fleet of ships, while in the 2 player game,  players take turns trying to sink their opponents ships before  having their own ships sunk.</synopsis>
+            </synopsis>
+            <medias>
+                <media parent="jeu" type="video" region="unk" crc="ebf1d97e" md5="8a42c235167759f28ca050ae89eb3b2c" sha1="55a3a2381e92e60297da1a3f3dda1ae68836f29f" format="mp4" support="">media/video/sonrsrch.mp4</media>
+                <media parent="jeu" type="mixrbv2" region="wor" crc="8dccae38" md5="7b05278d47a7d4959b85976001576e1a" sha1="797764631248f42e4883a9dfac61e40efaaa5f5c" format="png" support="">media/mixrbv2/sonrsrch.png</media>
+            </medias>
+            <dates>
+                <date region="us">1977</date>
+                <date region="de">1977</date>
+                <date region="se">1977</date>
+            </dates>
+            <developpeur id="16563">Fairlight</developpeur>
+            <editeur id="16563">Fairlight</editeur>
+            <genres>
+                <genre id="27" principale="1" parentid="0" langue="en">Strategy</genre>
+            </genres>
+            <joueurs>1-2</joueurs>
+            <topstaff>0</topstaff>
+            <note>14</note>
+            <rotation>0</rotation>
+        </jeu>
+        <jeu id="46523" romid="75879">
+            <path>spacewar.zip</path>
+            <noms>
+                <nom region="ss">Space War</nom>
+                <nom region="us">Space War</nom>
+                <nom region="de">Space War</nom>
+                <nom region="se">Space War</nom>
+            </noms>
+            <regions>
+                <region>us</region>
+            </regions>
+            <cloneof>0</cloneof>
+            <systeme id="80" parentid="0">Channel F</systeme>
+            <synopsis>
+                <synopsis langue="en">Videocart-5: Space War is an action game where two players each control spaceships. The goal is to destroy your opponents ship by depleting its energy supply; success will earn you a point. Each ship is capable of flying anywhere on the screen and is also equipped with lasers for attacking your opponent. At the beginning of the game each spaceship has 90 energy units; when no energy is left that  ship will be destroyed. Energy can be depleted in two ways: 2 points are used up every time you fire your lasers, and 5 points are lost if hit by enemy laser fire. Should your energy level drop to 10 points or less, you will be unable to fire your lasers; this prevents you from accidentally obliterating your own spaceship! Energy units can be replenished by flying through one of the two starbases located at opposite ends of the screen.</synopsis>
+            </synopsis>
+            <medias>
+                <media parent="jeu" type="video" region="unk" crc="1680e81d" md5="74cf20ade147d6175b1fb5fd1d7c667e" sha1="4136bf9264fd320ad08b2238491bb39d2d3900e7" format="mp4" support="">media/video/spacewar.mp4</media>
+                <media parent="jeu" type="mixrbv2" region="wor" crc="2a5cdd44" md5="d3b8a146e65a7c5c14a12aaa09760966" sha1="bc1e7449ab340370563720668390b0792e480279" format="png" support="">media/mixrbv2/spacewar.png</media>
+            </medias>
+            <dates>
+                <date region="de">1977</date>
+                <date region="us">1977</date>
+                <date region="se">1977</date>
+            </dates>
+            <developpeur id="16563">Fairlight</developpeur>
+            <editeur id="16563">Fairlight</editeur>
+            <genres>
+                <genre id="79" principale="1" parentid="0" langue="en">Shoot'em Up</genre>
+                <genre id="10" principale="1" parentid="0" langue="en">Action</genre>
+            </genres>
+            <joueurs>2</joueurs>
+            <topstaff>0</topstaff>
+            <note>8</note>
             <rotation>0</rotation>
         </jeu>
         <jeu id="46522" romid="75880">
             <path>spitfire.zip</path>
             <noms>
-                <nom region="ss">Videocart-4 - Spitfire</nom>
-                <nom region="us">Videocart-4: Spitfire</nom>
-                <nom region="de">Videocart-4: Luftkampf</nom>
-                <nom region="se">Programkassett 4: Röde baronen</nom>
+                <nom region="ss">Spitfire</nom>
+                <nom region="us">Spitfire</nom>
+                <nom region="de">Spitfire</nom>
+                <nom region="se">Spitfire</nom>
             </noms>
             <regions>
                 <region>us</region>
@@ -1421,13 +1513,45 @@ This version of Pac-Man retains the intermissions found in the original game.</s
             <note>9</note>
             <rotation>0</rotation>
         </jeu>
-        <jeu id="46523" romid="75879">
-            <path>spacewar.zip</path>
+        <jeu id="46522" romid="879549">
+            <path>spitfirep.zip</path>
             <noms>
-                <nom region="ss">Videocart-5 - Space War</nom>
-                <nom region="us">Videocart-5: Space War</nom>
-                <nom region="de">Videocart 5: Kampf im Weltraum</nom>
-                <nom region="se">Programkassett 5: Rymdkrig</nom>
+                <nom region="ss">Spitfire (Prototype)</nom>
+                <nom region="us">Spitfire (Prototype)</nom>
+                <nom region="de">Spitfire (Prototype)</nom>
+                <nom region="se">Spitfire (Prototype)</nom>
+            </noms>
+            <cloneof>spitfire.zip</cloneof>
+            <systeme id="80" parentid="0">Channel F</systeme>
+            <synopsis>
+                <synopsis langue="en">Videocart-4 features the action game Spitfire. This is an aerial dogfighting game that pits the Red Baron against the Blue Max. The goal is to try to shoot down your opponent to score a point, and the player with the most points wins. Viewed from the side, your bi-planes have the freedom to fly anywhere on the screen; the screen wraps, so if you fly off of one side you will appear again on the other side. You can also hide just off screen to attempt to sneak up on an opponent; be careful, even though you may not be visible you are still vulnerable to attacks! The game can be played by two players against each other, or one player against the computer. When playing against the computer, the computer's skill level will vary throughout the game; the more times you are successful in shooting down the computer, the more its skill level will increase! However the more the computer shoots you down, the more its skill level will decrease.</synopsis>
+            </synopsis>
+            <medias>
+                <media parent="jeu" type="video" region="unk" crc="ecdd055b" md5="290f5ed757c416e8c06f391572771e13" sha1="315c9e9f9eac18a12fd9af121faa0d3e42d14786" format="mp4" support="">media/video/spitfire.mp4</media>
+                <media parent="jeu" type="mixrbv2" region="wor" crc="e95a1f97" md5="55575338cacf8e1ddf458e846965f384" sha1="a68ec7a7f36637ea67c9dc77809f776aa07a9752" format="png" support="">media/mixrbv2/spitfire.png</media>
+            </medias>
+            <dates>
+                <date region="us">1977</date>
+                <date region="de">1977</date>
+                <date region="se">1977</date>
+            </dates>
+            <developpeur id="16563">Fairlight</developpeur>
+            <editeur id="16563">Fairlight</editeur>
+            <genres>
+                <genre id="2646" principale="1" parentid="0" langue="en">Shooter</genre>
+                <genre id="2881" principale="0" parentid="2646" langue="en">Shooter / Plane, 3rd person</genre>
+                <genre id="10" principale="1" parentid="0" langue="en">Action</genre>
+            </genres>
+            <joueurs>1-2</joueurs>
+            <topstaff>0</topstaff>
+            <note>9</note>
+            <rotation>0</rotation>
+        </jeu>
+        <jeu id="191774" romid="872255">
+            <path>tetris.zip</path>
+            <noms>
+                <nom region="ss">Tetris (HB)</nom>
+                <nom region="wor">Tetris (HB)</nom>
             </noms>
             <regions>
                 <region>us</region>
@@ -1435,274 +1559,150 @@ This version of Pac-Man retains the intermissions found in the original game.</s
             <cloneof>0</cloneof>
             <systeme id="80" parentid="0">Channel F</systeme>
             <synopsis>
-                <synopsis langue="en">Videocart-5: Space War is an action game where two players each control spaceships. The goal is to destroy your opponents ship by depleting its energy supply; success will earn you a point. Each ship is capable of flying anywhere on the screen and is also equipped with lasers for attacking your opponent. At the beginning of the game each spaceship has 90 energy units; when no energy is left that  ship will be destroyed. Energy can be depleted in two ways: 2 points are used up every time you fire your lasers, and 5 points are lost if hit by enemy laser fire. Should your energy level drop to 10 points or less, you will be unable to fire your lasers; this prevents you from accidentally obliterating your own spaceship! Energy units can be replenished by flying through one of the two starbases located at opposite ends of the screen.</synopsis>
+                <synopsis langue="en">In Tetris, players complete lines by moving differently shaped pieces (tetrominoes), which descend onto the playing field. The completed lines disappear and grant the player points, and the player can proceed to fill the vacated spaces. The game ends when the playing field is filled. The longer the player can delay this inevitable outcome, the higher their score will be.</synopsis>
             </synopsis>
             <medias>
-                <media parent="jeu" type="video" region="unk" crc="1680e81d" md5="74cf20ade147d6175b1fb5fd1d7c667e" sha1="4136bf9264fd320ad08b2238491bb39d2d3900e7" format="mp4" support="">media/video/spacewar.mp4</media>
-                <media parent="jeu" type="mixrbv2" region="wor" crc="2a5cdd44" md5="d3b8a146e65a7c5c14a12aaa09760966" sha1="bc1e7449ab340370563720668390b0792e480279" format="png" support="">media/mixrbv2/spacewar.png</media>
+                <media parent="jeu" type="video" region="unk" crc="a778abc6" md5="c813f36d4d200492abcd02fc35e05c3c" sha1="5ad799b19cf25e4ce733351f8e6d41cc38ba4fe9" format="mp4" support="">media/video/tetris.mp4</media>
+                <media parent="jeu" type="mixrbv2" region="wor" crc="daf4f273" md5="89a59833d5cda43c5b7cddc4fc1752b8" sha1="44f6003cf8793fb161e7507914ab554677a6cd51" format="png" support="">media/mixrbv2/tetris.png</media>
             </medias>
             <dates>
-                <date region="de">1977</date>
-                <date region="us">1977</date>
-                <date region="se">1977</date>
+                <date region="us">2004</date>
+            </dates>
+            <developpeur id="8322">Peter Trauner</developpeur>
+            <editeur id="8322">Peter Trauner</editeur>
+            <genres>
+                <genre id="171" principale="1" parentid="0" langue="en">Casual Game</genre>
+                <genre id="3511" principale="1" parentid="0" langue="en">Thinking</genre>
+            </genres>
+            <joueurs>1-2</joueurs>
+            <topstaff>0</topstaff>
+            <note>16</note>
+            <rotation>0</rotation>
+        </jeu>
+        <jeu id="46512" romid="168399">
+            <path>tctactoe.zip</path>
+            <noms>
+                <nom region="ss">Tic-Tac-Toe / Shooting Gallery / Doodle / Quadra-Doodle</nom>
+                <nom region="us">Tic-Tac-Toe / Shooting Gallery / Doodle / Quadra-Doodle</nom>
+                <nom region="eu">Tic-Tac-Toe / Shooting Gallery / Doodle / Quadra-Doodle</nom>
+                <nom region="de">Tic-Tac-Toe / Shooting Gallery / Doodle / Quadra-Doodle</nom>
+                <nom region="se">Tic-Tac-Toe / Shooting Gallery / Doodle / Quadra-Doodle</nom>
+            </noms>
+            <regions>
+                <region>us</region>
+            </regions>
+            <cloneof>0</cloneof>
+            <systeme id="80" parentid="0">Channel F</systeme>
+            <synopsis>
+                <synopsis langue="en">Videocart-1 features 4 different programs.
+
+Tic-Tac-Toe. A computerized version of the popular game. You play the X's and the computer the O's; taking turns your goal is the place three X's on the 3x3 grid before the computer. You always get to move first.
+
+Shooting Gallery. In this game, for 1 or 2 players, you control a rifle and need to hit a target on the other side of the screen. The goal is to hit the target with as few misses as possible. You can play with or without a time limit and at different speeds.
+
+Doodle. This is a drawing program. Using the controller you can draw any picture you like on the screen. There are five different line sizes and three available colors.
+
+Quadra-Doodle. Here the computer will draw random patterns influenced by the player, such as changing the colors used and the size of the lines. You can switch back and forth between Quadra-Doodle and Doodle, allowing you to draw on top of the generated image or the computer to draw on top of yours.</synopsis>
+            </synopsis>
+            <medias>
+                <media parent="jeu" type="video" region="unk" crc="7907b4ae" md5="a3a8ac8889545de6becf1a9beadc4fbb" sha1="64943cd0c68b1edf26b361b106bea8be131ef46a" format="mp4" support="">media/video/tctactoe.mp4</media>
+                <media parent="jeu" type="mixrbv2" region="wor" crc="cfdcbe7b" md5="8a6e18e2bd7886c6583cf73080b61471" sha1="06a96edcec7c09d4d7b08b9499abb5eae74835ed" format="png" support="">media/mixrbv2/tctactoe.png</media>
+            </medias>
+            <dates>
+                <date region="us">1976</date>
+                <date region="de">1976</date>
+                <date region="se">1976</date>
+            </dates>
+            <developpeur id="16563">Fairlight</developpeur>
+            <editeur id="16563">Fairlight</editeur>
+            <genres>
+                <genre id="171" principale="1" parentid="0" langue="en">Casual Game</genre>
+                <genre id="27" principale="1" parentid="0" langue="en">Strategy</genre>
+                <genre id="10" principale="1" parentid="0" langue="en">Action</genre>
+            </genres>
+            <joueurs>1-2</joueurs>
+            <topstaff>0</topstaff>
+            <note>15</note>
+            <rotation>0</rotation>
+        </jeu>
+        <jeu id="46521" romid="168400">
+            <path>vblckjck.zip</path>
+            <noms>
+                <nom region="ss">Video Blackjack</nom>
+                <nom region="us">Video Blackjack</nom>
+                <nom region="de">Video Blackjack</nom>
+                <nom region="se">Video Blackjack</nom>
+            </noms>
+            <regions>
+                <region>us</region>
+            </regions>
+            <cloneof>0</cloneof>
+            <systeme id="80" parentid="0">Channel F</systeme>
+            <synopsis>
+                <synopsis langue="en">Videocart-3 features a computerized version of the card game blackjack. The game follows the typical blackjack rules; your goal is to get cards totaling as close to 21 as possible without going over. The computer acts as the dealer, and is required to hit on a 16 or 'soft 17' and is required to stay on a 'hard 17'. The game features a full 52 card deck, and the computer will automatically shuffle the deck if there are less than 16 cards left; optionally you can request the computer reshuffle the deck at any time. One or two players can play, each player beginning the game with $500. There is a minimum bet of $1 and a maximum bet of $99. In the two player game a player who has gone broke may optionally borrow $100 from the house to re-enter the game.</synopsis>
+            </synopsis>
+            <medias>
+                <media parent="jeu" type="video" region="unk" crc="1bbe1c10" md5="9a4c0a13b59e8215de562024644d71f6" sha1="e5fc2b4aea53e8cc95680acbcef6f6c4b4ac2b6d" format="mp4" support="">media/video/vblckjck.mp4</media>
+                <media parent="jeu" type="mixrbv2" region="wor" crc="c56d2724" md5="e3baeb45cd24da57efde5d957890343f" sha1="182cd6eb10ee224c3477ba38b2d290fab23bb205" format="png" support="">media/mixrbv2/vblckjck.png</media>
+            </medias>
+            <dates>
+                <date region="us">1976</date>
+                <date region="de">1976</date>
+                <date region="se">1976</date>
+            </dates>
+            <developpeur id="16563">Fairlight</developpeur>
+            <editeur id="16563">Fairlight</editeur>
+            <genres>
+                <genre id="2872" principale="0" parentid="320" langue="en">Casino / Cards</genre>
+                <genre id="320" principale="1" parentid="0" langue="en">Casino</genre>
+                <genre id="27" principale="1" parentid="0" langue="en">Strategy</genre>
+            </genres>
+            <joueurs>1-2</joueurs>
+            <topstaff>0</topstaff>
+            <note>10</note>
+            <rotation>0</rotation>
+        </jeu>
+        <jeu id="46513" romid="168401">
+            <path>whizball.zip</path>
+            <noms>
+                <nom region="ss">Video Whizball</nom>
+                <nom region="us">Video Whizball</nom>
+                <nom region="de">Video Whizball</nom>
+            </noms>
+            <regions>
+                <region>us</region>
+            </regions>
+            <cloneof>0</cloneof>
+            <systeme id="80" parentid="0">Channel F</systeme>
+            <synopsis>
+                <synopsis langue="en">Video Whizball is a game where players control paddles to protect a goal from being entered by whizballs. To protect their goal, the player's paddle can fire missiles which can be aimed straight or angled. Missiles that hit whizballs can help propel in an opposite direction. If one of the missiles (or the whizballs) hit the player's or an opponent's paddle, they will temporarily disappear leaving their goal undefended. The game is won when one of the players gets to a selected score.
+
+The game contains 72 game variations of this basic premise, including having from 1 to 4 whizballs and 6 different game types. Game types are Basic where each whizball is worth 1 point, Basic Plus where players can guide the missile shots, Bonus where whizballs are worth 1 to 4 points each, Bonus Plus which adds guided missiles to the Bonus mode, Super Bonus where whizballs increase in value the longer they stay in play, and Super Bonus Plus which adds guided missile shots to the Super Bonus mode.</synopsis>
+            </synopsis>
+            <medias>
+                <media parent="jeu" type="video" region="unk" crc="31f71a7b" md5="10d98f555f02c81500250cae6b7d181a" sha1="80ed097f1358a3d1f59b7af1e849685c7d032130" format="mp4" support="">media/video/whizball.mp4</media>
+                <media parent="jeu" type="mixrbv2" region="wor" crc="6da2d661" md5="b2aaaf3f28206dc57f2866d1de0f28b0" sha1="0468be4722bcce6f5e52b4eb7c2679bb0206766c" format="png" support="">media/mixrbv2/whizball.png</media>
+            </medias>
+            <dates>
+                <date region="us">1978</date>
+                <date region="de">1978</date>
             </dates>
             <developpeur id="16563">Fairlight</developpeur>
             <editeur id="16563">Fairlight</editeur>
             <genres>
                 <genre id="79" principale="1" parentid="0" langue="en">Shoot'em Up</genre>
+                <genre id="2870" principale="0" parentid="79" langue="en">Shoot'em up / Horizontal</genre>
                 <genre id="10" principale="1" parentid="0" langue="en">Action</genre>
-            </genres>
-            <joueurs>2</joueurs>
-            <topstaff>0</topstaff>
-            <note>8</note>
-            <rotation>0</rotation>
-        </jeu>
-        <jeu id="46524" romid="168382">
-            <path>mthquiz1.zip</path>
-            <noms>
-                <nom region="ss">Videocart-6 - Math Quiz I - Addition, Subtraction</nom>
-                <nom region="us">Videocart-6: Math Quiz I</nom>
-                <nom region="se">Programkassett 6: Matematik</nom>
-            </noms>
-            <regions>
-                <region>us</region>
-            </regions>
-            <cloneof>0</cloneof>
-            <systeme id="80" parentid="0">Channel F</systeme>
-            <synopsis>
-                <synopsis langue="en">Videocart-6 is a math game which focuses on addition and subtraction. The game presents a series of problems to solve; using the controller you need enter in the correct answer. A correct answer earns a point; if you enter an incorrect answer you are then given a second chance. Answer incorrectly a second time and then a point is given to the computer which will also show you how to solve the problem. These are the only variations featured within the game itself, however the instruction manual includes a variety of suggestions for games that can be played by two or more players. These include Mathematical Chairs (two players take turns seeing who can answer the most problems in a row), Math Maze (the manual features a maze drawn on a grid; answer a question correctly and you can move that many spaces), Hang Math (a variation of hang man), Up to 1000 (answer problems correctly to add the value to your score; try to end up with 1000 points without going over), and several more.</synopsis>
-            </synopsis>
-            <medias>
-                <media parent="jeu" type="video" region="unk" crc="be9e441e" md5="1452adc0204b3cbd3cbd55b1a7e48a92" sha1="da8475f893ab9b5987d0838330ceb654d640d0dc" format="mp4" support="">media/video/mthquiz1.mp4</media>
-                <media parent="jeu" type="mixrbv2" region="wor" crc="26030423" md5="b80ae6b757f87bf6434e0f4b7dd2a472" sha1="d63e570bbc92811c1c800c4a553bd584630369e2" format="png" support="">media/mixrbv2/mthquiz1.png</media>
-            </medias>
-            <dates>
-                <date region="us">1977</date>
-                <date region="se">1977</date>
-            </dates>
-            <developpeur id="16563">Fairlight</developpeur>
-            <editeur id="16563">Fairlight</editeur>
-            <genres>
-                <genre id="30" principale="1" parentid="0" langue="en">Educational</genre>
-            </genres>
-            <joueurs>1</joueurs>
-            <topstaff>0</topstaff>
-            <note>9</note>
-            <rotation>0</rotation>
-        </jeu>
-        <jeu id="46525" romid="168383">
-            <path>mthquiz2.zip</path>
-            <noms>
-                <nom region="ss">Videocart-7 - Math Quiz 2 - Multiplication, Division</nom>
-                <nom region="us">Videocart-7: Math Quiz II</nom>
-                <nom region="se">Programkassett 7: Matematik</nom>
-            </noms>
-            <regions>
-                <region>us</region>
-            </regions>
-            <cloneof>0</cloneof>
-            <systeme id="80" parentid="0">Channel F</systeme>
-            <synopsis>
-                <synopsis langue="en">Videocart-7 contains the second and last part of the Math Quiz series started with Videocart-6. While the first part lets the players train addition and subtraction, Math Quiz II deals with multiplication and division.
-
-Once again, the game presents the player with a series of problems, simple multiplications in the first game variation, and simple divisions in the second. The results have to be entered using the controller. If the answer is correct, a point will be added to the left counter. After entering a wrong answer, the player gets another chance to correct the result. If it is wrong again, the right counter will be increased, counting the mistakes made so far.</synopsis>
-            </synopsis>
-            <medias>
-                <media parent="jeu" type="video" region="unk" crc="921d5605" md5="69ebaabc81af215606302b123ab36979" sha1="15c624c5ac67386779a633117d33f7ed19702d47" format="mp4" support="">media/video/mthquiz2.mp4</media>
-                <media parent="jeu" type="mixrbv2" region="wor" crc="f8286645" md5="b75f86d75ddd7e02e48f273610774907" sha1="720395e9076cd6f03b89d50ba90e6a879b022b92" format="png" support="">media/mixrbv2/mthquiz2.png</media>
-            </medias>
-            <dates>
-                <date region="us">1977</date>
-                <date region="se">1977</date>
-            </dates>
-            <developpeur id="16563">Fairlight</developpeur>
-            <editeur id="16563">Fairlight</editeur>
-            <genres>
-                <genre id="30" principale="1" parentid="0" langue="en">Educational</genre>
-            </genres>
-            <joueurs>1</joueurs>
-            <topstaff>0</topstaff>
-            <note>10</note>
-            <rotation>0</rotation>
-        </jeu>
-        <jeu id="46526" romid="168381">
-            <path>magicnum.zip</path>
-            <noms>
-                <nom region="ss">Videocart-8 - Magic Numbers</nom>
-                <nom region="us">Videocart-8: Magic Numbers</nom>
-                <nom region="de">Videocart-6: Magische Zahlen: Gedankenlesen / Nim</nom>
-                <nom region="se">Programkassett 8: Master Mind (Magiska Tal)</nom>
-            </noms>
-            <regions>
-                <region>us</region>
-            </regions>
-            <cloneof>0</cloneof>
-            <systeme id="80" parentid="0">Channel F</systeme>
-            <synopsis>
-                <synopsis langue="en">Videocart-8 contains two traditional number games.
-
-Mind Reader is a numerical version of the popular combination guessing game Master Mind. The console chooses a random number and the player is given 20 chances to guess it. After every guess, the display shows how many numbers were correctly placed, and how many numbers are correct but in the wrong spot. Every wrong guess increases the computer's score, and finding the code increases the player's score. The game can be played with a time limit instead of a limited number of guesses.
-
-Nim is a single-player adaptation of a traditional 2-player number game. Depending on the options, there are some piles on screen with a certain number of elements. The player and the console take turns at removing arbitrary numbers of elements from the piles. They have to remove at least 1 element and only from one pile in any turn. The side that gets to remove the last element wins the round. The game can also be played with a time limit.</synopsis>
-            </synopsis>
-            <medias>
-                <media parent="jeu" type="video" region="unk" crc="a0fc00c1" md5="3677f65f7f356ddfd89563beb3d01a67" sha1="57af4f9d688633853f691258a1f48d2a8c71e464" format="mp4" support="">media/video/magicnum.mp4</media>
-                <media parent="jeu" type="mixrbv2" region="wor" crc="b40c8a2b" md5="24b66813cbca1d320ee7c0a21477abab" sha1="2f251640bbbe21be716a56889a6fd5d02548cb59" format="png" support="">media/mixrbv2/magicnum.png</media>
-            </medias>
-            <dates>
-                <date region="us">1977</date>
-                <date region="de">1977</date>
-                <date region="se">1977</date>
-            </dates>
-            <developpeur id="16563">Fairlight</developpeur>
-            <editeur id="16563">Fairlight</editeur>
-            <genres>
-                <genre id="26" principale="1" parentid="0" langue="en">Puzzle-Game</genre>
-            </genres>
-            <joueurs>1</joueurs>
-            <topstaff>0</topstaff>
-            <note>16</note>
-            <rotation>0</rotation>
-        </jeu>
-        <jeu id="46527" romid="75860">
-            <path>dragrace.zip</path>
-            <noms>
-                <nom region="ss">Videocart-9 - Drag Strip</nom>
-                <nom region="us">Videocart-9: Drag Strip</nom>
-                <nom region="de">Videocart-7: Autorennen</nom>
-                <nom region="se">Programkassett 9: Drag Racing</nom>
-            </noms>
-            <regions>
-                <region>us</region>
-            </regions>
-            <cloneof>0</cloneof>
-            <systeme id="80" parentid="0">Channel F</systeme>
-            <synopsis>
-                <synopsis langue="en">This drag racing simulator makes use of the Channel F's special controllers. While twisting the joystick's head to the left or right controls the engine throttle, the stick movement itself is used to shift gears in a realistic H-pattern.
-
-Depending on the chosen skill level the car available is a family sedan, a modified sedan, a funny car, or a real dragster, although they all look the same on screen. One player can try to beat the predefined par time of 7.7 seconds, or compete against a friend to see who reaches the finish line first. The game manual mentions that a player only wins the game when he brings his victory counter to 99.</synopsis>
-            </synopsis>
-            <medias>
-                <media parent="jeu" type="video" region="unk" crc="5852b695" md5="35e0216e55857b065f9a1901de262576" sha1="30fe95940c6f3439baabe1ee274d4ef063ed1512" format="mp4" support="">media/video/dragrace.mp4</media>
-                <media parent="jeu" type="mixrbv2" region="wor" crc="c48bc4a5" md5="f13205cda7990b368aa35cb3cadca219" sha1="ec297d53cefb90dfc16980a4c693ee962a056679" format="png" support="">media/mixrbv2/dragrace.png</media>
-            </medias>
-            <dates>
-                <date region="us">1977</date>
-                <date region="de">1977</date>
-                <date region="se">1977</date>
-            </dates>
-            <developpeur id="16563">Fairlight</developpeur>
-            <editeur id="16563">Fairlight</editeur>
-            <genres>
-                <genre id="28" principale="1" parentid="0" langue="en">Race, Driving</genre>
             </genres>
             <joueurs>1-2</joueurs>
             <topstaff>0</topstaff>
-            <note>8</note>
-            <rotation>0</rotation>
-        </jeu>
-        <jeu id="46528" romid="168365">
-            <path>channelf.zip</path>
-            <noms>
-                <nom region="ss">ZZZ(notgame):[bios] Fairchild Channel F</nom>
-                <nom region="wor">ZZZ(notgame):[bios] Fairchild Channel F</nom>
-            </noms>
-            <regions>
-                <region>us</region>
-            </regions>
-            <cloneof>0</cloneof>
-            <systeme id="80" parentid="0">Channel F</systeme>
-            <synopsis>
-                <synopsis langue="en"></synopsis>
-            </synopsis>
-            <medias>
-                <media parent="jeu" type="mixrbv2" region="wor" crc="7ced6f99" md5="183c5327ffcf8477ab4f151046877c2e" sha1="c35a85581cbefa94e7487ead4b36fa49142cb275" format="png" support="">media/mixrbv2/channelf.png</media>
-            </medias>
-            <dates>
-                <date region="wor"></date>
-            </dates>
-            <genres>
-                <genre id="0" principale="0" parentid="0" langue="en"></genre>
-            </genres>
-            <topstaff>0</topstaff>
-            <note>0</note>
-            <rotation>0</rotation>
-        </jeu>
-        <jeu id="192443" romid="879527">
-            <path>multicrt.zip</path>
-            <noms>
-                <nom region="ss">ZZZ(notgame):Channel F Multi-cart</nom>
-                <nom region="wor">ZZZ(notgame):Channel F Multi-cart</nom>
-            </noms>
-            <cloneof>0</cloneof>
-            <systeme id="80" parentid="0">Channel F</systeme>
-            <synopsis>
-                <synopsis langue="en"></synopsis>
-            </synopsis>
-            <medias>
-                <media parent="jeu" type="mixrbv2" region="wor" crc="9716d514" md5="190382c2b14ad7fed3705ebac1e3c37b" sha1="6540f91e1dcd2cd34546b00b774f2eaa7f0a97bb" format="png" support="">media/mixrbv2/multicrt.png</media>
-            </medias>
-            <dates>
-                <date region="wor"></date>
-            </dates>
-            <genres>
-                <genre id="0" principale="0" parentid="0" langue="en"></genre>
-            </genres>
-            <topstaff>0</topstaff>
-            <note>0</note>
-            <rotation>0</rotation>
-        </jeu>
-        <jeu id="192443" romid="879526">
-            <path>multicrto.zip</path>
-            <noms>
-                <nom region="ss">ZZZ(notgame):Channel F Multi-cart</nom>
-                <nom region="wor">ZZZ(notgame):Channel F Multi-cart</nom>
-            </noms>
-            <cloneof>0</cloneof>
-            <systeme id="80" parentid="0">Channel F</systeme>
-            <synopsis>
-                <synopsis langue="en"></synopsis>
-            </synopsis>
-            <medias>
-                <media parent="jeu" type="mixrbv2" region="wor" crc="9716d514" md5="190382c2b14ad7fed3705ebac1e3c37b" sha1="6540f91e1dcd2cd34546b00b774f2eaa7f0a97bb" format="png" support="">media/mixrbv2/multicrto.png</media>
-            </medias>
-            <dates>
-                <date region="wor"></date>
-            </dates>
-            <genres>
-                <genre id="0" principale="0" parentid="0" langue="en"></genre>
-            </genres>
-            <topstaff>0</topstaff>
-            <note>0</note>
-            <rotation>0</rotation>
-        </jeu>
-        <jeu id="254219" romid="1007305">
-            <path>clrorgan.zip</path>
-            <noms>
-                <nom region="ss">ZZZ(notgame):color organ</nom>
-            </noms>
-            <cloneof>0</cloneof>
-            <systeme id="80" parentid="0">Channel F</systeme>
-            <synopsis>
-                <synopsis langue="en"></synopsis>
-            </synopsis>
-            <medias>
-                <media parent="jeu" type="mixrbv2" region="wor" crc="9716d514" md5="190382c2b14ad7fed3705ebac1e3c37b" sha1="6540f91e1dcd2cd34546b00b774f2eaa7f0a97bb" format="png" support="">media/mixrbv2/clrorgan.png</media>
-            </medias>
-            <dates>
-                <date region="wor"></date>
-            </dates>
-            <genres>
-                <genre id="0" principale="0" parentid="0" langue="en"></genre>
-            </genres>
-            <topstaff>0</topstaff>
-            <note>0</note>
+            <note>14</note>
             <rotation>0</rotation>
         </jeu>
         <jeu id="251415" romid="1006803">
             <path>werbetxt.zip</path>
             <noms>
-                <nom region="ss">ZZZ(notgame):werbetextcassette</nom>
+                <nom region="ss">Werbetextcassette</nom>
             </noms>
             <cloneof>0</cloneof>
             <systeme id="80" parentid="0">Channel F</systeme>
