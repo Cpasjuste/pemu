@@ -29,23 +29,26 @@ pFBN: Portable FinalBurn Neo
 - pFBN, as fbneo, support consoles roms. Here is the corresponding folders where roms should be located (as fbneo):
     ```
     Arcade              : "roms"
+    Channel F           : "channelf"
     Coleco              : "coleco"
+    Nintendo NES FDS    : "fds"
     Sega GameGear       : "gamegear"
-    Sega MegaDrive      : "megadriv"
+    Sega MegaDrive      : "megadrive"
     MSX                 : "msx"
+    Nintendo NES        : "nes"
+    Neo Geo Pocket      : "ngp"
     Nec PC-Engine       : "pce"
     SG-1000             : "sg1000"
     Nec SuperGraFX      : "sgx"
     Sega Master System  : "sms"
+    Spectrum            : "spectrum"
     Nec TurboGraFX-16   : "tg16"
-    Spectrum            : "zx3"
-    Nintendo NES        : "nes"
-    Nintendo NES FDS    : "nes_fds"
     ```
   
-- pFBN support preview images and videos (put files in corresponding media folder. For arcade roms, for example: png files goes in "roms/media/mixrbv2", mp4 files in "roms/media/video"). Please note that the vita port doesn't support video previews.
-You can download a near fullset mixrbv2 and video package for each platform here:
-    - Arcade: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/arcade_mixrbv2.zip), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/arcade_video.zip)
+- pFBN support preview images and videos (put files in corresponding media folder. For arcade roms, for example: png files goes in "roms/media/mixrbv2", mp4 files in "roms/media/video"). Please note that the vita and ps4 port doesn't support video previews yet.
+You can download a near fullset mixrbv2 and video package for each platform here (hq = high quality, lq = low quality):
+    - Arcade: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/arcade_mixrbv2.zip), [video (hq, 7,1Gb)](http://files.mydedibox.fr/files/dev/pemu/pfbneo/arcade_video_hq.zip), [video (lq, 2,1Gb)](http://files.mydedibox.fr/files/dev/pemu/pfbneo/arcade_video_lq.zip)
+    - Channel f: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/channelf_mixrbv2.zip), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/channelf_video.zip)
     - Coleco: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/coleco_mixrbv2.zip), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/coleco_video.zip)
     - Sega GameGear: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/gamegear_mixrbv2.zip), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/gamegear_video.zip)
     - Sega MegaDrive: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/megadriv_mixrbv2.zip), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/megadriv_video.zip)
