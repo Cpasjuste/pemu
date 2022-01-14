@@ -34,16 +34,17 @@ RomList::RomList(UiMain *_ui, const std::string &emuVersion) {
     }
 
     //auto font_size = (unsigned int) ((float) C2D_DEFAULT_CHAR_SIZE * ((float) C2D_SCREEN_HEIGHT / 720.0f));
-    text = new Text("Games: 0/0", C2D_DEFAULT_CHAR_SIZE, ui->getSkin()->font);
+    text = new Text();
     ui->getSkin()->loadText(text, {"ROM_LIST", "TEXT"});
     text->setOrigin(Origin::BottomLeft);
     text->setPosition(8, rect->getSize().y - ((float) text->getCharacterSize() / 2));
     rect->add(text);
 
-    auto *version = new Text(emuVersion, C2D_DEFAULT_CHAR_SIZE, ui->getSkin()->font);
+    auto *version = new Text();
     ui->getSkin()->loadText(version, {"ROM_LIST", "TEXT"});
     version->setOrigin(Origin::BottomRight);
     version->setPosition(rect->getSize().x - 16, rect->getSize().y - ((float) text->getCharacterSize() / 2));
+    version->setString(emuVersion);
     rect->add(version);
 
     ui->add(rect);
