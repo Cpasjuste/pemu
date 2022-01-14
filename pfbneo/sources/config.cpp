@@ -14,18 +14,20 @@ PFBAConfig::PFBAConfig(c2d::Io *io, int version) : Config(io, version) {
     printf("PFBAConfig(%s, v%i)\n", getConfigPath().c_str(), version);
 
     // add fba default roms paths
+    roms_paths.emplace_back(io->getDataPath() + "channelf/");
     roms_paths.emplace_back(io->getDataPath() + "coleco/");
+    roms_paths.emplace_back(io->getDataPath() + "fds/");
     roms_paths.emplace_back(io->getDataPath() + "gamegear/");
-    roms_paths.emplace_back(io->getDataPath() + "megadriv/");
+    roms_paths.emplace_back(io->getDataPath() + "megadrive/");
     roms_paths.emplace_back(io->getDataPath() + "msx/");
+    roms_paths.emplace_back(io->getDataPath() + "nes/");
+    roms_paths.emplace_back(io->getDataPath() + "ngp/");
     roms_paths.emplace_back(io->getDataPath() + "pce/");
     roms_paths.emplace_back(io->getDataPath() + "sg1000/");
     roms_paths.emplace_back(io->getDataPath() + "sgx/");
     roms_paths.emplace_back(io->getDataPath() + "sms/");
+    roms_paths.emplace_back(io->getDataPath() + "spectrum/");
     roms_paths.emplace_back(io->getDataPath() + "tg16/");
-    roms_paths.emplace_back(io->getDataPath() + "zx3/");
-    roms_paths.emplace_back(io->getDataPath() + "nes/");
-    roms_paths.emplace_back(io->getDataPath() + "nes_fds/");
 
     ////////////////////////////////////////////////////////////
     /// pfba custom config
