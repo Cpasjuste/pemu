@@ -125,21 +125,6 @@ target_link_libraries(${PROJECT_NAME} cross2dui ${SNES9X_LDFLAGS})
 # include libcross2d targets
 include(${CMAKE_SOURCE_DIR}/libcross2d/cmake/targets.cmake)
 
-# add extra data to libcross2d default targets data (zipped skin)
-add_custom_target(${PROJECT_NAME}.data.extra
-        DEPENDS ${PROJECT_NAME}.data
-        # make dummy directory for user files
-        COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/roms
-        # default skin
-        COMMAND cd ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/skins/default && ${ZIP} -ru ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/skins/default.zip .
-        COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/skins/default.zip ${CMAKE_CURRENT_BINARY_DIR}/skins/
-        COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/skins/default
-        # big_preview skin
-        COMMAND cd ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/skins/big_preview && ${ZIP} -ru ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/skins/big_preview.zip .
-        COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/skins/big_preview.zip ${CMAKE_CURRENT_BINARY_DIR}/skins/
-        COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/skins/big_preview
-        )
-add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}.data.extra)
 # TODO
 #add_dependencies(${PROJECT_NAME}_${TARGET_PLATFORM}_release ${PROJECT_NAME}.data.extra)
 
