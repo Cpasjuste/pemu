@@ -207,7 +207,7 @@ set(FLAGS
         -D__PFBA_VERSION_MAJOR__=${VERSION_MAJOR}
         -D__PFBA_VERSION_MINOR__=${VERSION_MINOR}
         -DINCLUDE_7Z_SUPPORT -DMINIZIP_LIB
-        -DUSE_SPEEDHACKS -DBUILD_SDL -DBUILD_M68K
+        -DUSE_SPEEDHACKS -DBUILD_SDL2 -DBUILD_M68K
         -Dstricmp=strcmp
         -Wno-write-strings -Wno-narrowing -fforce-addr -finline-limit=1200 -Wno-sign-compare
         -Wno-unused-variable -Wno-unused-but-set-variable -Wno-sequence-point
