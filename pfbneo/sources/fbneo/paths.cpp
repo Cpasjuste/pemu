@@ -1,18 +1,19 @@
-
 // Paths module
-#include <unistd.h>
 #include <sys/stat.h>
 #include "burner.h"
 
 /////////
 // FBA
 /////////
+#include "version.h"
+
 #define _s(A) #A
 #define _a(A) _s(A)
 #define VERSION _a(VER_MAJOR.VER_MINOR.VER_BETA.VER_ALPHA)
 char szAppBurnVer[16] = VERSION;
+
 // replaces ips_manager.cpp
-bool bDoIpsPatch = 0;
+bool bDoIpsPatch = false;
 
 void IpsApplyPatches(UINT8 *base, char *rom_name) {}
 
