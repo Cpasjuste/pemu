@@ -267,6 +267,9 @@ bool UiMenu::onInput(c2d::Input::Player *players) {
     // LEFT /RIGHT
     if (keys & Input::Key::Left || keys & Input::Key::Right) {
         Option option = lines.at(highlightIndex)->option;
+        if (option.getValues()->size() <= 1) {
+            return true;
+        }
         needSave = true;
         if (keys & Input::Key::Left) {
             option.prev();
