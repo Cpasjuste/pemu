@@ -52,11 +52,11 @@ namespace c2dui {
         Option *get(int id, bool isRom = false);
 
         bool add(int target,
-                         const std::string &text, const std::vector<std::string> &values,
-                         int defaultValue, int id, unsigned int flags);
+                 const std::string &text, const std::vector<std::string> &values,
+                 int defaultValue, int id, unsigned int flags);
 
         void append(const std::string &text, const std::vector<std::string> &values,
-                            int defaultValue, int id, unsigned int flags);
+                    int defaultValue, int id, unsigned int flags);
 
         void append(const std::string &text, int value, int id, unsigned int flags);
 
@@ -77,7 +77,7 @@ namespace c2dui {
 
         int version;
         int keyboard_keys[KEY_COUNT];
-        int joystick_keys[KEY_COUNT];
+        int joystick_keys[KEY_COUNT + 4]; // +4 => axis
     };
 }
 

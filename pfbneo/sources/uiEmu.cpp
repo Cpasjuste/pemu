@@ -12,6 +12,8 @@
 using namespace c2d;
 using namespace c2dui;
 
+extern INT32 Init_Joysticks(int p_one_use_joystick);
+
 extern int InpMake(Input::Player *players);
 
 extern unsigned char inputServiceSwitch;
@@ -167,15 +169,14 @@ int PFBAGuiEmu::load(const ss_api::Game &game) {
     // FBA DRIVER
     ///////////////
     EnableHiscores = 1;
-    InpInit();
-    InpDIP();
+
     printf("Initialize driver...\n");
     // some drivers require audio buffer to be allocated for DrvInit, add a "dummy" one...
     auto *aud = new Audio(audio_freq);
     nBurnSoundRate = aud->getSampleRate();
     nBurnSoundLen = aud->getSamples();
     pBurnSoundOut = (INT16 *) malloc(aud->getSamplesSize());
-    if (DrvInit(nBurnDrvActive, false) != 0) {
+    if (DrvInit((int) nBurnDrvActive, false) != 0) {
         printf("\nDriver initialisation failed\n");
         delete (aud);
         ui->getUiProgressBox()->setVisibility(Visibility::Hidden);
@@ -193,6 +194,15 @@ int PFBAGuiEmu::load(const ss_api::Game &game) {
     ///////////////
     // FBA DRIVER
     ///////////////
+
+    ///////////
+    // INPUT
+    //////////
+    InputInit();
+    Init_Joysticks(1);
+    ///////////
+    // INPUT
+    //////////
 
     ///////////
     // AUDIO
@@ -232,7 +242,8 @@ int PFBAGuiEmu::load(const ss_api::Game &game) {
 void PFBAGuiEmu::stop() {
 
     DrvExit();
-    InpExit();
+    // TODO: refactor
+    //InpExit();
 
     UIEmu::stop();
 }
@@ -311,15 +322,17 @@ bool PFBAGuiEmu::onInput(c2d::Input::Player *players) {
 #endif
 #endif
 
+    // TODO: refactor
+    /*
     inputServiceSwitch = 0;
     inputP1P2Switch = 0;
-
     // look for player 1 combos key
     if ((players[0].keys & Input::Key::Menu2) && (players[0].keys & Input::Key::Fire3)) {
         inputServiceSwitch = 1;
     } else if ((players[0].keys & Input::Key::Menu2) && (players[0].keys & Input::Key::Fire4)) {
         inputP1P2Switch = 1;
     }
+    */
 
     return UIEmu::onInput(players);
 }
@@ -329,9 +342,7 @@ void PFBAGuiEmu::onUpdate() {
     UIEmu::onUpdate();
 
     if (!isPaused()) {
-
-        auto players = ui->getInput()->getPlayers();
-        InpMake(players);
+        InputMake(true);
 #ifdef __VITA__
         int skip = ui->getConfig()->get(Option::Id::ROM_FRAMESKIP, true)->getIndex();
 #else

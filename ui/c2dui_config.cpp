@@ -436,6 +436,10 @@ int *Config::getPlayerInputButtons(int player, bool isRom) {
     joystick_keys[11] = get(Option::Id::JOY_FIRE6, isRom)->getValueInt();
     joystick_keys[12] = get(Option::Id::JOY_MENU1, isRom)->getValueInt();
     joystick_keys[13] = get(Option::Id::JOY_MENU2, isRom)->getValueInt();
+    joystick_keys[14] = get(Option::Id::JOY_AXIS_LX, isRom)->getValueInt();
+    joystick_keys[15] = get(Option::Id::JOY_AXIS_LY, isRom)->getValueInt();
+    joystick_keys[16] = get(Option::Id::JOY_AXIS_RX, isRom)->getValueInt();
+    joystick_keys[17] = get(Option::Id::JOY_AXIS_RY, isRom)->getValueInt();
 
     return joystick_keys;
 }

@@ -79,5 +79,6 @@ PFBAConfig::PFBAConfig(c2d::Io *io, int version) : Config(io, version) {
     // "c2dui_romlist" will also reload config, but we need new roms paths
     reset();
     load();
-    save();
+    // TODO: fixme
+    //save();
 }

@@ -46,6 +46,8 @@ PFBARomList *romList;
 UIRomList *uiRomList;
 Skin *skin;
 
+void BurnPathsInit(const char *dataPath);
+
 int main(int argc, char **argv) {
 
     // need custom io for some devices

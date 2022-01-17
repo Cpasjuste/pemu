@@ -28,18 +28,20 @@ file(GLOB SRC_BURN
 ##############
 set(BURNER_DIRS
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burner
+        ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burner/sdl
         )
 file(GLOB SRC_BURNER
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burner/*.c*
+        ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burner/sdl/inpdipsw.cpp
+        ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burner/sdl/input_sdl2.cpp
+        ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burner/sdl/neocdlist.cpp
+        ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burner/sdl/stringset.cpp
         )
 list(REMOVE_ITEM SRC_BURNER
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burner/conc.cpp
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burner/cong.cpp
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burner/dat.cpp
-        ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burner/gamc.cpp
-        ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burner/gami.cpp
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burner/image.cpp
-        ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burner/misc.cpp
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burner/sshot.cpp
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burner/state.cpp
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burner/unzip.c
@@ -106,7 +108,6 @@ file(GLOB SRC_INTF
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/intf/audio/*.cpp
         )
 list(REMOVE_ITEM SRC_INTF
-        ${CMAKE_SOURCE_DIR}/cores/fbneo/src/intf/input/inp_interface.cpp
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/intf/audio/aud_dsp.cpp
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/intf/audio/aud_interface.cpp
         )
@@ -208,7 +209,6 @@ set(FLAGS
         -D__PFBA_VERSION_MINOR__=${VERSION_MINOR}
         -DINCLUDE_7Z_SUPPORT -DMINIZIP_LIB
         -DUSE_SPEEDHACKS -DBUILD_SDL2 -DBUILD_M68K
-        -Dstricmp=strcmp
         -Wno-write-strings -Wno-narrowing -fforce-addr -finline-limit=1200 -Wno-sign-compare
         -Wno-unused-variable -Wno-unused-but-set-variable -Wno-sequence-point
         )
@@ -291,20 +291,6 @@ elseif (PLATFORM_LINUX)
         list(APPEND LDFLAGS z -static)
     else ()
         list(APPEND FLAGS -D__fastcall=)
-    endif ()
-    if (PLATFORM_LDK)
-        list(REMOVE_ITEM DRV_DIRS ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/midway)
-        list(REMOVE_ITEM SRC_DRV
-                ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/midway/d_kinst.cpp
-                ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/midway/d_wunit.cpp
-                ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/midway/midwunit.cpp
-                )
-        list(REMOVE_ITEM SRC_CPU
-                ${CMAKE_SOURCE_DIR}/cores/fbneo/src/cpu/mips3/mips3.cpp
-                ${CMAKE_SOURCE_DIR}/cores/fbneo/src/cpu/mips3/cop0.cpp
-                ${CMAKE_SOURCE_DIR}/cores/fbneo/src/cpu/mips3/cop1.cpp
-                ${CMAKE_SOURCE_DIR}/cores/fbneo/src/cpu/mips3_intf.cpp
-                )
     endif ()
 endif (PLATFORM_VITA)
 

@@ -7,6 +7,9 @@
 /////////
 // FBA
 /////////
+#define _s(A) #A
+#define _a(A) _s(A)
+#define VERSION _a(VER_MAJOR.VER_MINOR.VER_BETA.VER_ALPHA)
 char szAppBurnVer[16] = VERSION;
 // replaces ips_manager.cpp
 bool bDoIpsPatch = 0;
@@ -19,7 +22,7 @@ void Reinitialise() {}
 // needed by neo_run.cpp
 void wav_exit() {}
 
-int bRunPause;
+bool bRunPause;
 /////////
 // FBA
 /////////

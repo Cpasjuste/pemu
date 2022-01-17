@@ -17,14 +17,6 @@ bool is_netgame_or_recording() {
     return false;
 }
 
-struct MovieExtInfo {
-    // date & time
-    UINT32 year, month, day;
-    UINT32 hour, minute, second;
-};
-
-//struct MovieExtInfo MovieInfo; // from replay.cpp
-
 static UINT8 NeoSystemList[] = {
         0x13, // "Universe BIOS ver. 4.0"
         0x14, // "Universe BIOS ver. 3.3"
@@ -111,6 +103,10 @@ int DrvInit(int nDrvNum, bool bRestore) {
 
     // Define nMaxPlayers early; GameInpInit() needs it (normally defined in DoLibInit()).
     nMaxPlayers = BurnDrvGetMaxPlayers();
+    GameInpInit();
+    //ConfigGameLoad(true);
+    InputMake(true);
+    GameInpDefault();
 
     printf("DrvInit: DoLibInit()\n");
     if (DoLibInit()) {                // Init the Burn library's driver
@@ -128,7 +124,6 @@ int DrvInit(int nDrvNum, bool bRestore) {
     BurnStateLoad(path, 0, NULL);
 
     bDrvOkay = 1;                    // Okay to use all BurnDrv functions
-
     nBurnLayer = 0xFF;                // show all layers
 
     return 0;
@@ -144,11 +139,12 @@ int DrvExit() {
             char path[1024];
             snprintf(path, 1023, "%s%s.fs", szAppEEPROMPath, BurnDrvGetTextA(DRV_NAME));
             BurnStateSave(path, 0);
+            GameInpExit();
             BurnDrvExit();                // Exit the driver
         }
     }
 
-    BurnExtLoadRom = NULL;
+    BurnExtLoadRom = nullptr;
     bDrvOkay = 0;                    // Stop using the BurnDrv functions
     nBurnDrvSelect[0] = ~0U;            // no driver selected
 
@@ -182,7 +178,6 @@ int ProgressUpdateBurner(double dProgress, const TCHAR *pszText, bool bAbs) {
 }
 
 int AppError(TCHAR *szText, int bWarning) {
-
     //ui->getUiMessageBox()->show("ERROR", szText ? szText : "UNKNOW ERROR", "OK");
     return 1;
 }
