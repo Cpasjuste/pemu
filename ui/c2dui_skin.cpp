@@ -70,11 +70,13 @@ Skin::Skin(UiMain *u, const std::vector<Button> &btns, const Vector2f &scaling) 
     config::Group help = createRectangleShapeGroup("HELP");
     main.addGroup(help);
     config::Group romList = createRectangleShapeGroup("ROM_LIST");
+    config::Group romTitleItem = createTextGroup("TITLE_TEXT");
     config::Group romItem = createTextGroup("TEXT");
     romItem.addOption({"color_missing", Color::White});
     romItem.addOption({"color_not_working", Color::White});
     romItem.addOption({"highlight_use_text_color", 0});
     romList.addGroup(romItem);
+    romList.addGroup(romTitleItem);
     main.addGroup(romList);
     //
     config::Group romSyno = createRectangleShapeGroup("ROM_SYNOPSIS");

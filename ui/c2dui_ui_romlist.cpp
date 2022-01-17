@@ -39,18 +39,24 @@ UIRomList::UIRomList(UiMain *u, RomList *rList, const c2d::Vector2f &size) : Rec
     UIRomList::add(romInfo);
 
     // add rom listing ui
-    Skin::TextGroup textGroup = ui->getSkin()->getText({"MAIN", "ROM_LIST", "TEXT"});
-    config::Group *grp = ui->getSkin()->getConfig()->getGroup("ROM_LIST")->getGroup("TEXT");
+    Skin::TextGroup textGroup = skin->getText({"MAIN", "ROM_LIST", "TEXT"});
+    config::Group *grp = skin->getConfig()->getGroup("ROM_LIST")->getGroup("TEXT");
     Color colorMissing = grp->getOption("color_missing")->getColor();
     bool highlightUseFileColors = grp->getOption("highlight_use_text_color")->getInteger() == 1;
 
+    // add rom list title (system text)
+    titleText = new SkinnedText(skin, {"MAIN", "ROM_LIST", "TITLE_TEXT"});
+    if (titleText) {
+        UIRomList::add(titleText);
+    }
+
     // add rom list ui
-    Skin::RectangleShapeGroup romListGroup = ui->getSkin()->getRectangleShape({"MAIN", "ROM_LIST"});
+    Skin::RectangleShapeGroup romListGroup = skin->getRectangleShape({"MAIN", "ROM_LIST"});
     bool use_icons = false;
 #if !(defined(__PSP2__) || defined(__3DS__)) // two slow
     use_icons = ui->getConfig()->get(Option::Id::GUI_SHOW_ICONS)->getValueBool();
 #endif
-    listBox = new UIListBox(ui, ui->getSkin()->font, (int) textGroup.size,
+    listBox = new UIListBox(ui, skin->font, (int) textGroup.size,
                             romListGroup.rect, gameList.games, use_icons);
     listBox->colorMissing = colorMissing;
     listBox->colorAvailable = textGroup.color;
@@ -62,7 +68,7 @@ UIRomList::UIRomList(UiMain *u, RomList *rList, const c2d::Vector2f &size) : Rec
     listBox->setTextOutlineColor(textGroup.outlineColor);
     listBox->setTextOutlineThickness((float) textGroup.outlineSize);
     // hihglight
-    Skin::RectangleShapeGroup rectShape = ui->getSkin()->getRectangleShape({"SKIN_CONFIG", "HIGHLIGHT"});
+    Skin::RectangleShapeGroup rectShape = skin->getRectangleShape({"SKIN_CONFIG", "HIGHLIGHT"});
     listBox->getHighlight()->setFillColor(rectShape.color);
     listBox->getHighlight()->setOutlineColor(rectShape.outlineColor);
     listBox->getHighlight()->setOutlineThickness((float) rectShape.outlineSize);
@@ -87,6 +93,11 @@ void UIRomList::updateRomList() {
 
     filterRomList();
     sortRomList();
+
+    if (titleText) {
+        std::string sys = ui->getConfig()->get(Option::Id::GUI_FILTER_SYSTEM)->getValueString();
+        titleText->setString(sys);
+    }
 
     if (listBox) {
         listBox->setGames(gameList.games);
@@ -328,6 +339,20 @@ bool UIRomList::onInput(c2d::Input::Player *players) {
                     updateRomList();
                 }
             }
+        }
+    } else if (keys & Input::Key::Fire5) {
+        Option *sysOpt = ui->getConfig()->get(Option::Id::GUI_FILTER_SYSTEM);
+        size_t sysCount = sysOpt->getValues()->size();
+        if (sysCount > 1) {
+            sysOpt->prev();
+            updateRomList();
+        }
+    } else if (keys & Input::Key::Fire6) {
+        Option *sysOpt = ui->getConfig()->get(Option::Id::GUI_FILTER_SYSTEM);
+        size_t sysCount = sysOpt->getValues()->size();
+        if (sysCount > 1) {
+            sysOpt->next();
+            updateRomList();
         }
     } else if (keys & Input::Key::Menu1) {
         ui->getUiMenu()->load();
