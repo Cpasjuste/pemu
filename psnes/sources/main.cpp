@@ -141,10 +141,10 @@ int main(int argc, char **argv) {
     buttons.emplace_back(KEY_JOY_FIRE2_DEFAULT, "CIRCLE");
     buttons.emplace_back(KEY_JOY_FIRE3_DEFAULT, "SQUARE");
     buttons.emplace_back(KEY_JOY_FIRE4_DEFAULT, "TRIANGLE");
-    buttons.emplace_back(KEY_JOY_FIRE5_DEFAULT, "L1");
-    buttons.emplace_back(KEY_JOY_FIRE6_DEFAULT, "R1");
-    buttons.emplace_back(KEY_JOY_COIN1_DEFAULT, "L2");
-    buttons.emplace_back(KEY_JOY_START1_DEFAULT, "R2");
+    buttons.emplace_back(KEY_JOY_FIRE5_DEFAULT, "L2");
+    buttons.emplace_back(KEY_JOY_FIRE6_DEFAULT, "R2");
+    buttons.emplace_back(KEY_JOY_COIN1_DEFAULT, "L1");
+    buttons.emplace_back(KEY_JOY_START1_DEFAULT, "R1");
     skin = new Skin(ui, buttons);
 #else
 #if __FULLSCREEN__

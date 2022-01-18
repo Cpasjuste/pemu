@@ -8,6 +8,8 @@
 class SkinnedText : public c2d::Text {
 public:
     explicit SkinnedText(c2dui::Skin *skin, const std::vector<std::string> &cfgTree);
+
+    bool available = true;
 };
 
 #endif //PEMU_SKINNEDTEXT_H

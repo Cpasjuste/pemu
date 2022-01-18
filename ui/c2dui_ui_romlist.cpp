@@ -46,7 +46,7 @@ UIRomList::UIRomList(UiMain *u, RomList *rList, const c2d::Vector2f &size) : Rec
 
     // add rom list title (system text)
     titleText = new SkinnedText(skin, {"MAIN", "ROM_LIST", "TITLE_TEXT"});
-    if (titleText) {
+    if (titleText->available) {
         UIRomList::add(titleText);
     }
 
@@ -94,7 +94,7 @@ void UIRomList::updateRomList() {
     filterRomList();
     sortRomList();
 
-    if (titleText) {
+    if (titleText->available) {
         std::string sys = ui->getConfig()->get(Option::Id::GUI_FILTER_SYSTEM)->getValueString();
         titleText->setString(sys);
     }
