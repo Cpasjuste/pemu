@@ -105,10 +105,9 @@ if (PLATFORM_VITA)
     set(TITLE_ID "PSNE00001" CACHE STRING "" FORCE)
     list(APPEND SNES9X_LDFLAGS ScePower_stub)
 elseif (PLATFORM_PS4)
-    set(PS4_PKG_TITLE "PSNES")
+    set(PS4_PKG_TITLE "pSNES - Portable Snes9x")
     set(PS4_PKG_TITLE_ID "PSNE00001")
-    set(PS4_PKG_VERSION "01.00")
-    list(APPEND SNES9X_CFLAGS -D__LIBRETRO__)
+    set(PS4_PKG_VERSION "05.00")
 elseif (PLATFORM_SWITCH)
     #####################
     # NX PLATORM

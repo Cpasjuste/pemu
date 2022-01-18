@@ -14,6 +14,8 @@ int _newlib_heap_size_user = 192 * 1024 * 1024;
 //unsigned int __stacksize__ = 1024 * 1024;
 //u32 __ctru_heap_size = 1024 * 1024 * 96;
 //u32 __ctru_linear_heap_size = 1024 * 1024 * 8;
+#elif __PS4__
+extern "C" int sceSystemServiceLoadExec(const char *path, const char *args[]);
 #endif
 
 PSNESUIMenu *uiMenu;
@@ -40,6 +42,7 @@ int main(int argc, char **argv) {
     cfg = new PSNESConfig(io, version);
 
     // create paths
+    io->create(io->getDataPath());
     io->create(io->getDataPath() + "configs");
 
     Vector2f screen_size = {
@@ -184,6 +187,9 @@ int main(int argc, char **argv) {
     scePowerSetBusClockFrequency(166);
     scePowerSetGpuClockFrequency(166);
     scePowerSetGpuXbarClockFrequency(111);
+#elif __PS4__
+    sceSystemServiceLoadExec((char *) "exit", nullptr);
+    while (true) {}
 #endif
 
     return 0;
