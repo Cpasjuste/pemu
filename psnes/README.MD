@@ -16,6 +16,7 @@ pSNES: Portable Snes9x
 - Linux (sdl1, sdl2)
 - Nintendo Switch (libnx, sdl2)
 - Sony Ps Vita (vitasdk, vita2d)
+- Sony PS4
 
 ### Capabilities
 - Support save states
@@ -30,7 +31,7 @@ pSNES: Portable Snes9x
 - pSNES support preview images and videos (put files in roms media folder: png files goes in "roms/media/mixrbv2", mp4 files in "roms/media/video"). Please note that the vita port doesn't support video previews.
 You can download a near fullset mixrbv2 and video package here:
     - preview images: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/psnes/psnes_mixrbv2.zip)
-    - preview videos: [video](http://files.mydedibox.fr/files/dev/pemu/psnes/psnes_video.zip)
+    - preview videos: [video](http://files.mydedibox.fr/files/dev/pemu/psnes/psnes_video_hq.zip)
 
 ### Cheat format
 - Example for "Super Mario World (USA).cht" game genie codes
@@ -53,6 +54,10 @@ You can download a near fullset mixrbv2 and video package here:
 ### Installation (vita)
 - copy "psnes" directory to "ux0:/data/" directory on sdcard
 - copy roms to "/ux0/data/psnes/roms/" directory on sdcard
+
+### Installation (ps4)
+- create "/data/psnes" directory on hdd
+- copy roms to "/data/psnes/roms" directory on hdd
 
 ### Usage (switch)
 - Press (+) in the rom list to configure main options and default roms options
