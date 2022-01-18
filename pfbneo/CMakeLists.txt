@@ -228,7 +228,10 @@ if (PLATFORM_VITA)
     enable_language(ASM)
     set(TITLE_ID "PFBA00001" CACHE STRING "" FORCE)
     list(REMOVE_ITEM SRC_CPU ${CMAKE_SOURCE_DIR}/cores/fbneo/src/cpu/m68000_intf.cpp)
-    list(APPEND INC sources/cpu/cyclone)
+    list(APPEND INC
+            sources/cpu/cyclone
+            ${VITASDK}/arm-vita-eabi/include/SDL2/
+            )
     list(APPEND SRC_PFBA sources/cpu/c68000_intf.cpp sources/cpu/cyclone/Cyclone.s)
     list(APPEND FLAGS -DBUILD_C68K -DUSE_FILE32API -DLSB_FIRST -D__PFBA_ARM__)
     list(APPEND LDFLAGS ScePower_stub pthread)
