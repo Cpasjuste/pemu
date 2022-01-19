@@ -43,6 +43,7 @@ int main(int argc, char **argv) {
 
     // create paths
     io->create(io->getDataPath());
+    io->create(io->getDataPath() + "roms");
     io->create(io->getDataPath() + "configs");
 
     Vector2f screen_size = {
