@@ -112,7 +112,7 @@ namespace c2dui {
 #endif
         };
 
-        Option() = default;;
+        Option() = default;
 
         Option(const std::string &name, const std::vector<std::string> &options,
                int defaultValueIndex, int id, unsigned int flags = INTEGER);
