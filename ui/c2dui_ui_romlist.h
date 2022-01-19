@@ -49,7 +49,7 @@ namespace c2dui {
         UIRomInfo *romInfo = nullptr;
         UIListBox *listBox = nullptr;
         RectangleShape *blur = nullptr;
-        c2d::Text *titleText = nullptr;
+        SkinnedText *titleText = nullptr;
 
         c2d::C2DClock timer_load_info;
         int timer_load_info_delay = 300;

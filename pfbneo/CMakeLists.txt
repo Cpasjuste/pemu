@@ -283,7 +283,7 @@ elseif (PLATFORM_SWITCH)
     # NX (SWITCH)
     ##############
     list(APPEND FLAGS
-            -DNO_KEYBOARD -DUSE_FILE32API -DLSB_FIRST
+            -DUSE_FILE32API -DLSB_FIRST
             -ffunction-sections -fomit-frame-pointer)
 elseif (PLATFORM_LINUX)
     ##############

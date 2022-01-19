@@ -9,5 +9,8 @@ SkinnedText::SkinnedText(c2dui::Skin *skin, const std::vector<std::string> &cfgT
     if (!skin->loadText(this, cfgTree)) {
         printf("SkinnedText: could not load %s\n", cfgTree.at(0).c_str());
         available = false;
+        return;
     }
+
+    available = true;
 }
