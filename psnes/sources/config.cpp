@@ -12,12 +12,9 @@ PSNESConfig::PSNESConfig(c2d::Io *io, int version) : Config(io, version) {
 
     printf("PSNESConfig(%s, v%i)\n", getConfigPath().c_str(), version);
 
-    // we want zip names by default
-    get(Option::Id::GUI_SHOW_ZIP_NAMES)->setIndex(1);
-
     add(Option::Id::ROM_SHOW_FPS, "HIGH_RES", {"OFF", "ON"}, 0,
         Option::Id::ROM_PSNES_HIGH_RES, Option::Flags::BOOLEAN);
-    get()->at(get()->size() - 1).setInfo(
+    get(Option::Id::ROM_PSNES_HIGH_RES)->setInfo(
             "Only enable high resolution mode for games which can use it,\n"
             "for example \"Secret Of Mana\".\n"
             "It does have some performance impact.\n\n"
