@@ -320,10 +320,6 @@ void Config::reset() {
     }
 }
 
-std::string Config::getHomePath() {
-    return dataPath;
-}
-
 std::string Config::getConfigPath() {
     return configPath;
 }

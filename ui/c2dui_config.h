@@ -39,8 +39,6 @@ namespace c2dui {
 
         void reset();
 
-        std::string getHomePath();
-
         std::string getConfigPath();
 
         std::string getRomPath(int n = 0);

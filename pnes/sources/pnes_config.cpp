@@ -13,12 +13,4 @@ using namespace c2dui;
 
 PNESConfig::PNESConfig(c2d::Io *io, int version) : Config(io, version) {
 
-    //hide(Option::GUI_USE_DATABASE);
-    //hide(Option::GUI_SHOW_CLONES);
-
-    // set default rom options
-    //reset();
-
-    // load/overwrite configuration from file
-    //load();
 }

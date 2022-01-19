@@ -19,7 +19,6 @@
 
 #include "c2dui.h"
 #include "uiEmu.h"
-#include "uiMenu.h"
 #include "uiStateMenu.h"
 #include "pnes_config.h"
 
@@ -34,7 +33,7 @@ using namespace c2dui;
 int _newlib_heap_size_user = 192 * 1024 * 1024;
 #endif
 
-PNESGuiMenu *uiMenu;
+UiMenu *uiMenu;
 PNESGuiEmu *uiEmu;
 PNESConfig *cfg;
 PNESUIStateMenu *uiState;
@@ -56,10 +55,12 @@ int main(int argc, char **argv) {
     cfg = new PNESConfig(io, pnes_version);
 
     // create paths
-    io->create(cfg->getHomePath() + "configs");
-    io->create(cfg->getHomePath() + "saves");
-    io->create(cfg->getHomePath() + "cache");
-    io->create(cfg->getHomePath() + "mixes");
+    io->create(io->getDataPath());
+    io->create(io->getDataPath() + "roms");
+    io->create(io->getDataPath() + "configs");
+    io->create(io->getDataPath() + "saves");
+    io->create(io->getDataPath() + "cache");
+    io->create(io->getDataPath() + "mixes");
 
     Vector2f screen_size = {
             cfg->get(Option::Id::GUI_SCREEN_WIDTH)->getValueInt(),
@@ -156,7 +157,7 @@ int main(int argc, char **argv) {
     romList = new RomList(ui, nestopia_version);
     romList->build();
     uiRomList = new UIRomList(ui, romList, ui->getSize());
-    uiMenu = new PNESGuiMenu(ui);
+    uiMenu = new UiMenu(ui);
     uiEmu = new PNESGuiEmu(ui);
     uiState = new PNESUIStateMenu(ui);
     ui->init(uiRomList, uiMenu, uiEmu, uiState);
