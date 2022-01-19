@@ -27,6 +27,8 @@ pFBN: Portable FinalBurn Neo
 
 #### GENERAL INFORMATION'S
 
+- pFBN current DATs files are located [here](https://github.com/libretro/FBNeo/tree/a9bce0459fdc5653842b5550542e8c6d0e5342f1/dats).
+
 - pFBN, as fbneo, support consoles roms. Here is the corresponding folders where roms should be located (as fbneo):
     ```
     Arcade              : "roms"
