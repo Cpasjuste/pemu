@@ -40,9 +40,7 @@ set(NESTOPIA_CFLAGS
         -DVERSION="1.0"
         -D__LIBRETRO__ -D_MINGW -D__NST_UNZIP__
         -DNST_NO_2XSAI -DNST_NO_HQ2X -DNST_NO_SCALEX -DNO_NTSC -DNST_NO_XBR
-        -D__PNES__ -DDATADIR="./"
-        -D__PNES_VERSION_MAJOR__=${VERSION_MAJOR}
-        -D__PNES_VERSION_MINOR__=${VERSION_MINOR}
+        -D__PNES__ -D__PNES_VERSION_MAJOR__=${VERSION_MAJOR} -D__PNES_VERSION_MINOR__=${VERSION_MINOR}
         -Wno-unused-definition -Wno-unused-local-typedefs
         -Wno-sign-compare -Wno-unused-variable
         -Wno-delete-non-virtual-dtor -Wno-reorder
@@ -77,12 +75,13 @@ elseif (PLATFORM_PS4)
     set(PS4_PKG_TITLE "pNES - Portable Nestopia")
     set(PS4_PKG_TITLE_ID "PNES00001")
     set(PS4_PKG_VERSION "05.00")
-    list(APPEND NESTOPIA_CFLAGS -Wno-error=undef)
+    list(APPEND NESTOPIA_CFLAGS -DDATADIR="/app0/")
 elseif (PLATFORM_SWITCH)
     #####################
     # SWITCH PLATORM
     #####################
     list(APPEND NESTOPIA_SRC sources/switch/port.c)
+    list(APPEND NESTOPIA_CFLAGS -DDATADIR="romfs:/")
 elseif (PLATFORM_3DS)
     #####################
     # 3DS PLATORM
@@ -93,9 +92,7 @@ elseif (PLATFORM_LINUX)
     #####################
     # SDL2 PLATORM
     #####################
-    if (PLATFORM_WINDOWS)
-        #list(APPEND NESTOPIA_CFLAGS -D_MINGW)
-    endif (PLATFORM_WINDOWS)
+    list(APPEND NESTOPIA_CFLAGS -DDATADIR="romfs:/")
 endif (PLATFORM_VITA)
 
 #####################
@@ -114,8 +111,7 @@ include(${CMAKE_SOURCE_DIR}/libcross2d/cmake/targets.cmake)
 add_custom_target(${PROJECT_NAME}.data.extra
         DEPENDS ${PROJECT_NAME}.data
         # copy nst database from nestopia
-        COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/cores/nestopia/NstDatabase.xml ${CMAKE_CURRENT_BINARY_DIR}
-        COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/cores/nestopia/NstDatabase.xml ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/
+        COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/cores/nestopia/NstDatabase.xml ${CMAKE_CURRENT_BINARY_DIR}/data_romfs/
         )
 add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}.data.extra)
 

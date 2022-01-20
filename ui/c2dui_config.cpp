@@ -430,7 +430,8 @@ int *Config::getPlayerInputButtons(int player, bool isRom) {
 }
 
 c2d::Vector2f Config::getScreenSize() {
-    if (get(Option::Id::GUI_FULLSCREEN)->getValueBool()) {
+    Option *opt = get(Option::Id::GUI_FULLSCREEN);
+    if (opt && opt->getValueBool()) {
         return {0, 0};
     } else {
         return {

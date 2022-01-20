@@ -59,7 +59,6 @@ int main(int argc, char **argv) {
     io->create(io->getDataPath() + "configs");
     io->create(io->getDataPath() + "saves");
     io->create(io->getDataPath() + "cache");
-    io->create(io->getDataPath() + "mixes");
 
     Vector2f screenSize = cfg->getScreenSize();
     ui = new UiMain(screenSize, io, cfg);

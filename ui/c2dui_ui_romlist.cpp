@@ -340,25 +340,30 @@ bool UIRomList::onInput(c2d::Input::Player *players) {
                 }
             }
         }
-    } else if (keys & Input::Key::Fire5) {
-        Option *sysOpt = ui->getConfig()->get(Option::Id::GUI_FILTER_SYSTEM);
-        size_t sysCount = sysOpt->getValues()->size();
-        if (sysCount > 1) {
-            sysOpt->prev();
-            updateRomList();
-        }
-    } else if (keys & Input::Key::Fire6) {
-        Option *sysOpt = ui->getConfig()->get(Option::Id::GUI_FILTER_SYSTEM);
-        size_t sysCount = sysOpt->getValues()->size();
-        if (sysCount > 1) {
-            sysOpt->next();
-            updateRomList();
-        }
     } else if (keys & Input::Key::Menu1) {
         ui->getUiMenu()->load();
     } else if (keys & Input::Key::Menu2) {
         if (getSelection().id > 0) {
             ui->getUiMenu()->load(true);
+        }
+    }
+
+    // only allow system switch if skin contains romlist title
+    if (titleText->available) {
+        if (keys & Input::Key::Fire5) {
+            Option *sysOpt = ui->getConfig()->get(Option::Id::GUI_FILTER_SYSTEM);
+            size_t sysCount = sysOpt->getValues()->size();
+            if (sysCount > 1) {
+                sysOpt->prev();
+                updateRomList();
+            }
+        } else if (keys & Input::Key::Fire6) {
+            Option *sysOpt = ui->getConfig()->get(Option::Id::GUI_FILTER_SYSTEM);
+            size_t sysCount = sysOpt->getValues()->size();
+            if (sysCount > 1) {
+                sysOpt->next();
+                updateRomList();
+            }
         }
     }
 
