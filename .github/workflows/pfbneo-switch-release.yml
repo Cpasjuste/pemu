@@ -31,7 +31,7 @@ jobs:
       - name: Install build dependencies
         run: |
           sudo apt -yq update
-          sudo apt -yq install git cmake zip
+          sudo apt -yq install git build-essential cmake zip
 
       # Build pfbneo
       - name: Build pfbneo
