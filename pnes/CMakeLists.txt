@@ -77,7 +77,7 @@ elseif (PLATFORM_PS4)
     set(PS4_PKG_TITLE "pNES - Portable Nestopia")
     set(PS4_PKG_TITLE_ID "PNES00001")
     set(PS4_PKG_VERSION "05.00")
-    list(APPEND NESTOPIA_CFLAGS -Wno-error=undef)
+    list(APPEND NESTOPIA_CFLAGS -DDATADIR="/data/pnes/")
 elseif (PLATFORM_SWITCH)
     #####################
     # SWITCH PLATORM
