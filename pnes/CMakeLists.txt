@@ -80,7 +80,8 @@ elseif (PLATFORM_SWITCH)
     #####################
     # SWITCH PLATORM
     #####################
-    list(APPEND NESTOPIA_SRC sources/switch/port.c -DDATADIR="romfs:/")
+    list(APPEND NESTOPIA_SRC sources/switch/port.c)
+    list(APPEND NESTOPIA_CFLAGS -DDATADIR="romfs:/")
 elseif (PLATFORM_3DS)
     #####################
     # 3DS PLATORM
