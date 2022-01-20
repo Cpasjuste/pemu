@@ -3,6 +3,8 @@
 //
 
 #include "c2dui.h"
+#include "c2dui_config.h"
+
 
 Config::Config(c2d::Io *io, int ver) {
 
@@ -31,19 +33,6 @@ Config::Config(c2d::Io *io, int ver) {
            Option::Flags::INTEGER | Option::Flags::HIDDEN);
     append("SCREEN_HEIGHT", C2D_SCREEN_HEIGHT, Option::Id::GUI_SCREEN_HEIGHT,
            Option::Flags::INTEGER | Option::Flags::HIDDEN);
-#ifdef __FREEPLAY__
-    append("WINDOW_LEFT", 9, Option::Id::GUI_WINDOW_LEFT, Option::Flags::INTEGER);
-    append("WINDOW_TOP", 4, Option::Id::GUI_WINDOW_TOP, Option::Flags::INTEGER);
-    append("WINDOW_WIDTH", 301, Option::Id::GUI_WINDOW_WIDTH, Option::Flags::INTEGER);
-    append("WINDOW_HEIGHT", 203, Option::Id::GUI_WINDOW_HEIGHT, Option::Flags::INTEGER);
-#else
-    append("WINDOW_LEFT", 0, Option::Id::GUI_WINDOW_LEFT, Option::Flags::INTEGER | Option::Flags::HIDDEN);
-    append("WINDOW_TOP", 0, Option::Id::GUI_WINDOW_TOP, Option::Flags::INTEGER | Option::Flags::HIDDEN);
-    append("WINDOW_WIDTH", C2D_SCREEN_WIDTH, Option::Id::GUI_WINDOW_WIDTH,
-           Option::Flags::INTEGER | Option::Flags::HIDDEN);
-    append("WINDOW_HEIGHT", C2D_SCREEN_HEIGHT, Option::Id::GUI_WINDOW_HEIGHT,
-           Option::Flags::INTEGER | Option::Flags::HIDDEN);
-#endif
 #ifdef __FULLSCREEN__
     append("FULLSCREEN", {"OFF", "ON"}, 0, Option::Id::GUI_FULLSCREEN, Option::Flags::BOOLEAN);
     get()->at(get()->size() - 1).setInfo("This option needs a restart...");
@@ -439,3 +428,15 @@ int *Config::getPlayerInputButtons(int player, bool isRom) {
 
     return joystick_keys;
 }
+
+c2d::Vector2f Config::getScreenSize() {
+    if (get(Option::Id::GUI_FULLSCREEN)->getValueBool()) {
+        return {0, 0};
+    } else {
+        return {
+                (float) get(Option::Id::GUI_SCREEN_WIDTH)->getValueInt(),
+                (float) get(Option::Id::GUI_SCREEN_HEIGHT)->getValueInt()
+        };
+    }
+}
+

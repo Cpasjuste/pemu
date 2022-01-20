@@ -5,8 +5,20 @@
 #include <algorithm>
 #include "c2dui.h"
 
-UiMain::UiMain(const Vector2f &size) : C2DRenderer(size) {
-    printf("UIMain(%i, %i)\n", (int) size.x, (int) size.y);
+UiMain::UiMain(const Vector2f &size, c2d::Io *io, Config *cfg) : C2DRenderer(size) {
+    printf("UiMain(%ix%i)\n", (int) UiMain::getSize().x, (int) UiMain::getSize().y);
+
+    setIo(io);
+    setConfig(cfg);
+
+    // add shaders, if any
+    if (getShaderList() != nullptr) {
+        config->add(Option::Id::ROM_FILTER, "EFFECT", getShaderList()->getNames(), 0,
+                    Option::Id::ROM_SHADER, Option::Flags::STRING);
+    } else {
+        config->add(Option::Id::ROM_FILTER, "EFFECT", {"NONE"}, 0,
+                    Option::Id::ROM_SHADER, Option::Flags::STRING | Option::Flags::HIDDEN);
+    }
 }
 
 UiMain::~UiMain() {

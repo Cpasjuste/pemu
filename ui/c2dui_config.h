@@ -64,6 +64,8 @@ namespace c2dui {
 
         virtual int *getPlayerInputButtons(int player, bool isRom = false);
 
+        c2d::Vector2f getScreenSize();
+
     protected:
         std::vector<std::string> roms_paths;
 

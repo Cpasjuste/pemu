@@ -28,7 +28,7 @@ namespace c2dui {
 
     public:
 
-        explicit UiMain(const c2d::Vector2f &size);
+        explicit UiMain(const c2d::Vector2f &size, c2d::Io *io, Config *cfg);
 
         ~UiMain() override;
 

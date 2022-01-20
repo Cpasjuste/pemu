@@ -52,54 +52,18 @@ int main(int argc, char **argv) {
 
     // need custom io for some devices
     auto io = new PFBAIo();
+    // load configuration
+    int version = (__PFBA_VERSION_MAJOR__ * 100) + __PFBA_VERSION_MINOR__;
+    cfg = new PFBAConfig(io, version);
 
     // fbneo init
     BurnPathsInit(io->getDataPath().c_str());
     BurnLibInit();
 
-    // load configuration
-    int version = (__PFBA_VERSION_MAJOR__ * 100) + __PFBA_VERSION_MINOR__;
-    cfg = new PFBAConfig(io, version);
+    Vector2f screenSize = cfg->getScreenSize();
+    ui = new UiMain(screenSize, io, cfg);
 
-    Vector2f screen_size = {
-            (float) cfg->get(Option::Id::GUI_SCREEN_WIDTH)->getValueInt(),
-            (float) cfg->get(Option::Id::GUI_SCREEN_HEIGHT)->getValueInt()
-    };
-    FloatRect windows_size = {
-            (float) cfg->get(Option::Id::GUI_WINDOW_LEFT)->getValueInt(),
-            (float) cfg->get(Option::Id::GUI_WINDOW_TOP)->getValueInt(),
-            (float) cfg->get(Option::Id::GUI_WINDOW_WIDTH)->getValueInt(),
-            (float) cfg->get(Option::Id::GUI_WINDOW_HEIGHT)->getValueInt()
-    };
-
-    // we need to create a renderer with real screen size
-    printf("screen size: %i x %i, windows: x = %i, y = %i, w = %i, h = %i\n",
-           (int) screen_size.x, (int) screen_size.y,
-           (int) windows_size.left, (int) windows_size.top, (int) windows_size.width, (int) windows_size.height);
-#ifdef __FULLSCREEN__
-    if (cfg->get(Option::Id::GUI_FULLSCREEN)->getValueBool()) {
-        screen_size = Vector2f();
-    }
-#endif
-    ui = new UiMain(screen_size);
-    if (ui->getShaderList() != nullptr) {
-        cfg->add(Option::Id::ROM_FILTER, "EFFECT", ui->getShaderList()->getNames(), 0,
-                 Option::Id::ROM_SHADER, Option::Flags::STRING);
-    } else {
-        cfg->add(Option::Id::ROM_FILTER, "EFFECT", {"NONE"}, 0,
-                 Option::Id::ROM_SHADER, Option::Flags::STRING | Option::Flags::HIDDEN);
-    }
-
-    ui->setIo(io);
-    ui->setConfig(cfg);
-#ifndef __FULLSCREEN__
-    // now set window size, usefull when screen is "cropped" (freeplay zero/cm3)
-    ui->setSize(windows_size.width, windows_size.height);
-    ui->setPosition(windows_size.left, windows_size.top);
-#endif
-
-    // skin
-    // buttons used for ui config menu
+    // skin buttons used for config menu
     std::vector<Skin::Button> buttons;
 
 #ifdef __PSP2__
@@ -121,7 +85,6 @@ int main(int argc, char **argv) {
     buttons.emplace_back(KEY_JOY_FIRE6_DEFAULT, "R");
     buttons.emplace_back(KEY_JOY_COIN1_DEFAULT, "SELECT");
     buttons.emplace_back(KEY_JOY_START1_DEFAULT, "START");
-    skin = new Skin(ui, buttons);
 #elif __SWITCH__
     // see c2d.h for key id
     buttons.emplace_back(KEY_JOY_UP_DEFAULT, "UP");
@@ -141,8 +104,8 @@ int main(int argc, char **argv) {
     buttons.emplace_back(KEY_JOY_ZR_DEFAULT, "ZR");
     buttons.emplace_back(KEY_JOY_LSTICK_DEFAULT, "LSTICK");
     buttons.emplace_back(KEY_JOY_RSTICK_DEFAULT, "RSTICK");
-    skin = new Skin(ui, buttons);
 #elif __PS4__
+    // see c2d.h for key id
     buttons.emplace_back(KEY_JOY_UP_DEFAULT, "UP");
     buttons.emplace_back(KEY_JOY_DOWN_DEFAULT, "DOWN");
     buttons.emplace_back(KEY_JOY_LEFT_DEFAULT, "LEFT");
@@ -155,18 +118,9 @@ int main(int argc, char **argv) {
     buttons.emplace_back(KEY_JOY_FIRE6_DEFAULT, "R2");
     buttons.emplace_back(KEY_JOY_COIN1_DEFAULT, "L1");
     buttons.emplace_back(KEY_JOY_START1_DEFAULT, "R1");
-    skin = new Skin(ui, buttons);
-#else
-#if __FULLSCREEN__
-    int x, y;
-    SDL_GetWindowSize(ui->getWindow(), &x, &y);
-    Vector2f scale = {(float) x / (float) C2D_SCREEN_WIDTH,
-                      (float) y / (float) C2D_SCREEN_HEIGHT};
-    skin = new Skin(ui, buttons, scale);
-#else
-    skin = new Skin(ui, buttons);
 #endif
-#endif
+
+    skin = new Skin(ui, buttons);
     ui->setSkin(skin);
 
     // ui

@@ -30,11 +30,6 @@ UIRomList *uiRomList;
 
 int main(int argc, char **argv) {
 
-#ifdef __3DS__
-    //consoleDebugInit(debugDevice_SVC);
-    //stdout = stderr;
-#endif
-
     // need custom io for some devices
     auto *io = new PSNESIo();
     // load configuration
@@ -46,39 +41,8 @@ int main(int argc, char **argv) {
     io->create(io->getDataPath() + "roms");
     io->create(io->getDataPath() + "configs");
 
-    Vector2f screen_size = {
-            cfg->get(Option::Id::GUI_SCREEN_WIDTH)->getValueInt(),
-            cfg->get(Option::Id::GUI_SCREEN_HEIGHT)->getValueInt()
-    };
-
-    // we need to create a renderer with real screen size
-#ifdef __FULLSCREEN__
-    if (cfg->get(Option::Id::GUI_FULLSCREEN)->getValueBool()) {
-        screen_size = Vector2f();
-    }
-#endif
-    ui = new UiMain(screen_size);
-    if (ui->getShaderList() != nullptr) {
-        cfg->add(Option::Id::ROM_FILTER, "EFFECT", ui->getShaderList()->getNames(), 0,
-                 Option::Id::ROM_SHADER, Option::Flags::STRING);
-    } else {
-        cfg->add(Option::Id::ROM_FILTER, "EFFECT", {"NONE"}, 0,
-                 Option::Id::ROM_SHADER, Option::Flags::STRING | Option::Flags::HIDDEN);
-    }
-
-    ui->setIo(io);
-    ui->setConfig(cfg);
-#ifndef __FULLSCREEN__
-    // now set window size, usefull when screen is "cropped" (freeplay zero/cm3)
-    FloatRect windows_size = {
-            cfg->get(Option::Id::GUI_WINDOW_LEFT)->getValueInt(),
-            cfg->get(Option::Id::GUI_WINDOW_TOP)->getValueInt(),
-            cfg->get(Option::Id::GUI_WINDOW_WIDTH)->getValueInt(),
-            cfg->get(Option::Id::GUI_WINDOW_HEIGHT)->getValueInt()
-    };
-    ui->setSize(windows_size.width, windows_size.height);
-    ui->setPosition(windows_size.left, windows_size.top);
-#endif
+    Vector2f screenSize = cfg->getScreenSize();
+    ui = new UiMain(screenSize, io, cfg);
 
 #ifdef __SOFT_SCALERS__
     // TODO: fix
@@ -92,8 +56,7 @@ int main(int argc, char **argv) {
     ui->getShaderList()->add("HQ2X", nullptr);
 #endif
 
-    // skin
-    // buttons used for ui config menu
+    // skin buttons used for config menu
     std::vector<Skin::Button> buttons;
 
 #ifdef __PSP2__
@@ -115,7 +78,6 @@ int main(int argc, char **argv) {
     buttons.emplace_back(KEY_JOY_FIRE6_DEFAULT, "R");
     buttons.emplace_back(KEY_JOY_COIN1_DEFAULT, "SELECT");
     buttons.emplace_back(KEY_JOY_START1_DEFAULT, "START");
-    skin = new Skin(ui, buttons);
 #elif __SWITCH__
     // see c2d.h for key id
     buttons.emplace_back(KEY_JOY_UP_DEFAULT, "UP");
@@ -135,7 +97,6 @@ int main(int argc, char **argv) {
     buttons.emplace_back(KEY_JOY_ZR_DEFAULT, "ZR");
     buttons.emplace_back(KEY_JOY_LSTICK_DEFAULT, "LSTICK");
     buttons.emplace_back(KEY_JOY_RSTICK_DEFAULT, "RSTICK");
-    skin = new Skin(ui, buttons);
 #elif __PS4__
     buttons.emplace_back(KEY_JOY_UP_DEFAULT, "UP");
     buttons.emplace_back(KEY_JOY_DOWN_DEFAULT, "DOWN");
@@ -149,18 +110,9 @@ int main(int argc, char **argv) {
     buttons.emplace_back(KEY_JOY_FIRE6_DEFAULT, "R2");
     buttons.emplace_back(KEY_JOY_COIN1_DEFAULT, "L1");
     buttons.emplace_back(KEY_JOY_START1_DEFAULT, "R1");
-    skin = new Skin(ui, buttons);
-#else
-#if __FULLSCREEN__
-    int x = 0, y = 0;
-    SDL_GetWindowSize(ui->getWindow(), &x, &y);
-    Vector2f scale = {(float) x / (float) C2D_SCREEN_WIDTH,
-                      (float) y / (float) C2D_SCREEN_HEIGHT};
-    skin = new Skin(ui, buttons, scale);
-#else
-    skin = new Skin(ui, buttons);
 #endif
-#endif
+
+    skin = new Skin(ui, buttons);
     ui->setSkin(skin);
 
     // ui

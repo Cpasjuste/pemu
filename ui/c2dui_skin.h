@@ -50,7 +50,7 @@ namespace c2dui {
             int id = -1;
         };
 
-        Skin(UiMain *ui, const std::vector<Button> &buttons, const c2d::Vector2f &scaling = c2d::Vector2f(1, 1));
+        Skin(UiMain *ui, const std::vector<Button> &buttons);
 
         ~Skin();
 

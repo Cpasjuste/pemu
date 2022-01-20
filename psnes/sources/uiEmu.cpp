@@ -116,7 +116,7 @@ int PSNESUIEmu::load(const ss_api::Game &game) {
     ui->getUiProgressBox()->setLayer(1000);
     ui->flip();
 
-    strncpy(default_dir, ui->getConfig()->getHomePath().c_str(), PATH_MAX);
+    strncpy(default_dir, ui->getIo()->getDataPath().c_str(), PATH_MAX);
     s9x_base_dir = default_dir;
 
     memset(&Settings, 0, sizeof(Settings));

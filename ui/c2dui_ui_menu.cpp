@@ -317,18 +317,6 @@ bool UiMenu::onInput(c2d::Input::Player *players) {
                     ui->getUiEmu()->getVideo()->setShader(option.getIndex());
                 }
                 break;
-            case Option::Id::GUI_WINDOW_LEFT:
-                ui->setPosition((float) option.getValueInt(), ui->getPosition().y);
-                break;
-            case Option::Id::GUI_WINDOW_TOP:
-                ui->setPosition(ui->getPosition().x, (float) option.getValueInt());
-                break;
-            case Option::Id::GUI_WINDOW_WIDTH:
-                ui->setScale((float) option.getValueInt() / ui->getSize().x, ui->getScale().y);
-                break;
-            case Option::Id::GUI_WINDOW_HEIGHT:
-                ui->setScale(ui->getScale().x, (float) option.getValueInt() / ui->getSize().y);
-                break;
             case Option::Id::GUI_VIDEO_SNAP_DELAY:
                 ui->getUiRomList()->setVideoSnapDelay(option.getValueInt());
                 break;

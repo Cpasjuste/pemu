@@ -4,7 +4,7 @@
 
 #include "c2dui.h"
 
-Skin::Skin(UiMain *u, const std::vector<Button> &btns, const Vector2f &scaling) {
+Skin::Skin(UiMain *u, const std::vector<Button> &btns) {
 
     ui = u;
 
@@ -146,10 +146,6 @@ Skin::Skin(UiMain *u, const std::vector<Button> &btns, const Vector2f &scaling) 
         c2d::config::Option *opt = genGrp->getOption("global_scaling");
         if (opt != nullptr) {
             global_scaling = opt->getVector2f();
-            global_scaling.x *= (float) ui->getConfig()->get(c2dui::Option::Id::GUI_WINDOW_WIDTH)->getValueInt()
-                                / (float) ui->getConfig()->get(c2dui::Option::Id::GUI_SCREEN_WIDTH)->getValueInt();
-            global_scaling.y *= (float) ui->getConfig()->get(c2dui::Option::Id::GUI_WINDOW_HEIGHT)->getValueInt()
-                                / (float) ui->getConfig()->get(c2dui::Option::Id::GUI_SCREEN_HEIGHT)->getValueInt();
         }
         opt = genGrp->getOption("resolution");
         if (opt != nullptr) {
@@ -158,9 +154,6 @@ Skin::Skin(UiMain *u, const std::vector<Button> &btns, const Vector2f &scaling) 
             global_scaling.x *= uiRes.x / skinRes.x;
             global_scaling.y *= uiRes.y / skinRes.y;
         }
-    }
-    if (global_scaling.x == 1 && global_scaling.y == 1) {
-        global_scaling = scaling;
     }
 
     ///
