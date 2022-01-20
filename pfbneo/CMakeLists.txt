@@ -305,7 +305,6 @@ set(SRC ${SRC_PFBA} ${SRC_CPU} ${SRC_DRV} ${SRC_BURN} ${SRC_BURNER} ${SRC_INTF} 
 #####################
 add_executable(${PROJECT_NAME} ${SRC} ${CMAKE_CURRENT_BINARY_DIR}/deps/m68kops.c)
 target_compile_options(${PROJECT_NAME} PRIVATE ${FLAGS})
-target_compile_options(${PROJECT_NAME} PRIVATE $<$<COMPILE_LANGUAGE:CXX>:-fno-exceptions -fpermissive>)
 target_include_directories(${PROJECT_NAME} PRIVATE ${INC})
 target_link_libraries(${PROJECT_NAME} cross2dui cross2d ${LDFLAGS})
 # include libcross2d targets

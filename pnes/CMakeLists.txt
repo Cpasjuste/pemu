@@ -70,9 +70,14 @@ if (PLATFORM_VITA)
     #####################
     set(TITLE_ID "PNES00001" CACHE STRING "" FORCE)
     list(APPEND PNES_INC sources/vita)
-    list(APPEND NESTOPIA_SRC sources/switch/port.c)
+    list(APPEND NESTOPIA_SRC sources/vita/port.c)
     list(APPEND NESTOPIA_CFLAGS -Dstrcasecmp=strcmp)
     list(APPEND NESTOPIA_LDFLAGS ScePower_stub)
+elseif (PLATFORM_PS4)
+    set(PS4_PKG_TITLE "pNES - Portable Nestopia")
+    set(PS4_PKG_TITLE_ID "PNES00001")
+    set(PS4_PKG_VERSION "05.00")
+    list(APPEND NESTOPIA_CFLAGS -Wno-error=undef)
 elseif (PLATFORM_SWITCH)
     #####################
     # SWITCH PLATORM
@@ -100,7 +105,6 @@ endif (PLATFORM_VITA)
 add_executable(${PROJECT_NAME} ${PNES_SRC} ${NESTOPIA_SRC})
 target_include_directories(${PROJECT_NAME} PRIVATE ${PNES_INC} ${NESTOPIA_INC})
 target_compile_options(${PROJECT_NAME} PRIVATE ${NESTOPIA_CFLAGS})
-target_compile_options(${PROJECT_NAME} PRIVATE $<$<COMPILE_LANGUAGE:CXX>:-std=c++14 -fexceptions>)
 target_link_libraries(${PROJECT_NAME} cross2dui ${NESTOPIA_LDFLAGS})
 
 # include libcross2d targets

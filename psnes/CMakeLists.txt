@@ -117,7 +117,6 @@ endif ()
 
 add_executable(${PROJECT_NAME} ${PSNES_SRC} ${SNES9X_SRC} ${UNZIP_SRC} ${JMA_SRC})
 target_compile_options(${PROJECT_NAME} PRIVATE ${SNES9X_CFLAGS})
-#target_compile_options(${PROJECT_NAME} PRIVATE $<$<COMPILE_LANGUAGE:CXX>:-std=gnu++11 -fpermissive>)
 target_include_directories(${PROJECT_NAME} PRIVATE ${PSNES_INC} ${SNES9X_INC} ${UNZIP_INC} ${JMA_INC})
 target_link_libraries(${PROJECT_NAME} cross2dui ${SNES9X_LDFLAGS})
 
