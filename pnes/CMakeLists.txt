@@ -92,9 +92,7 @@ elseif (PLATFORM_LINUX)
     #####################
     # SDL2 PLATORM
     #####################
-    if (PLATFORM_WINDOWS)
-        list(APPEND NESTOPIA_CFLAGS -DDATADIR="romfs:/")
-    endif (PLATFORM_WINDOWS)
+    list(APPEND NESTOPIA_CFLAGS -DDATADIR="romfs:/")
 endif (PLATFORM_VITA)
 
 #####################
