@@ -15,6 +15,7 @@ jobs:
   build-psnes-switch-dev:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
+    container: devkitpro/devkita64:latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -27,16 +28,7 @@ jobs:
       - name: Install build dependencies
         run: |
           sudo apt -yq update
-          sudo apt -yq install \
-              zip git autoconf libtool automake build-essential cmake
-
-      # Install switch toolchain
-      - name: Install switch toolchain
-        run: |
-          wget https://github.com/devkitPro/pacman/releases/download/v1.0.2/devkitpro-pacman.amd64.deb
-          sudo dpkg -i devkitpro-pacman.amd64.deb
-          sudo dkp-pacman -Syu
-          sudo dkp-pacman --noconfirm -S switch-dev switch-portlibs
+          sudo apt -yq install git cmake zip
 
       # Build psnes
       - name: Build psnes
