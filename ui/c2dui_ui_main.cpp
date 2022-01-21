@@ -71,8 +71,10 @@ void UiMain::init(UIRomList *_uiRomList, UiMenu *_uiMenu,
                     getSize().y / 2),
             getInput(), skin->font, getFontSize());
     skin->loadRectangleShape(uiMessageBox, {"SKIN_CONFIG", "MESSAGEBOX"});
+    float fontSize = uiMessageBox->getTitleText()->getSize().y * 1.5f;
     uiMessageBox->getTitleText()->setSize(
-            uiMessageBox->getTitleText()->getSize().x * 1.5f, uiMessageBox->getTitleText()->getSize().y * 1.5f);
+            uiMessageBox->getTitleText()->getSize().x * 1.5f, fontSize);
+    uiMessageBox->getTitleText()->setSizeMax(uiMessageBox->getSize().x - (float) fontSize * 2, (float) fontSize + 4);
     uiMessageBox->setSelectedColor(uiMessageBox->getFillColor(), uiMessageBox->getOutlineColor());
     Color c = uiMessageBox->getOutlineColor();
     c.a -= 150;
