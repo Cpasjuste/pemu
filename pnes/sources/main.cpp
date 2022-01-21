@@ -122,7 +122,7 @@ int main(int argc, char **argv) {
     ui->setSkin(skin);
 
     // ui
-    std::string nestopia_version = "Nestopia 1.50";
+    std::string nestopia_version = "Nestopia 1.51.1+";
     romList = new RomList(ui, nestopia_version);
     romList->build();
     uiRomList = new UIRomList(ui, romList, ui->getSize());

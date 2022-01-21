@@ -29,14 +29,13 @@
 #include "uiEmu.h"
 
 #include "core/api/NstApiEmulator.hpp"
-#include "core/api/NstApiInput.hpp"
 #include "core/api/NstApiVideo.hpp"
 #include "core/api/NstApiNsf.hpp"
 
-#include "common/nstcommon.h"
-#include "common/video.h"
-#include "common/config.h"
-#include "common/font.h"
+#include "fltkui/nstcommon.h"
+#include "fltkui/video.h"
+#include "fltkui/config.h"
+#include "fltkui/font.h"
 
 using namespace c2d;
 using namespace c2dui;
@@ -59,29 +58,22 @@ extern Emulator emulator;
 extern PNESGuiEmu *uiEmu;
 
 void nst_ogl_init() {
-
     uiEmu->addVideo(nullptr, nullptr, {basesize.w, basesize.h});
     uiEmu->getVideo()->getTexture()->setFilter(
             conf.video_linear_filter ? Texture::Filter::Linear : Texture::Filter::Point);
 }
 
-void nst_ogl_deinit() {
+void nst_ogl_deinit() {}
 
-}
-
-void nst_ogl_render() {
-
-}
+void nst_ogl_render() {}
 
 void nst_video_refresh() {
-
     // Refresh the video settings
     nst_ogl_deinit();
     nst_ogl_init();
 }
 
 void video_init() {
-
     // Initialize video
     nst_ogl_deinit();
 
@@ -94,6 +86,12 @@ void video_init() {
         video_clear_buffer();
         video_disp_nsf();
     }
+}
+
+void video_toggle_filterupdate() {
+    // Clear the filter update flag
+    Video video(emulator);
+    video.ClearFilterUpdateFlag();
 }
 
 void video_toggle_fullscreen() {
@@ -111,23 +109,7 @@ void video_toggle_filter() {
     //nst_video_refresh();
 }
 
-void video_toggle_filterupdate() {
-
-    // Clear the filter update flag
-    Video video(emulator);
-    video.ClearFilterUpdateFlag();
-}
-
-void video_toggle_scalefactor() {
-
-    // Toggle video scale factor
-    conf.video_scale_factor++;
-    if (conf.video_scale_factor > 8) { conf.video_scale_factor = 1; }
-    //video_init();
-}
-
 void video_set_filter() {
-
     // Set the filter
     Video video(emulator);
     int scalefactor = conf.video_scale_factor;
@@ -140,61 +122,61 @@ void video_set_filter() {
             filter = Video::RenderState::FILTER_NONE;
             break;
 #if 0
-        case 1: // NTSC
-            filter = Video::RenderState::FILTER_NTSC;
-            break;
+            case 1: // NTSC
+                filter = Video::RenderState::FILTER_NTSC;
+                break;
 
-        case 2: // xBR
-            switch (scalefactor) {
-                case 2:
-                    filter = Video::RenderState::FILTER_2XBR;
-                    break;
-                case 3:
-                    filter = Video::RenderState::FILTER_3XBR;
-                    break;
-                case 4:
-                    filter = Video::RenderState::FILTER_4XBR;
-                    break;
-                default:
-                    filter = Video::RenderState::FILTER_NONE;
-                    break;
-            }
-            break;
+            case 2: // xBR
+                switch (scalefactor) {
+                    case 2:
+                        filter = Video::RenderState::FILTER_2XBR;
+                        break;
+                    case 3:
+                        filter = Video::RenderState::FILTER_3XBR;
+                        break;
+                    case 4:
+                        filter = Video::RenderState::FILTER_4XBR;
+                        break;
+                    default:
+                        filter = Video::RenderState::FILTER_NONE;
+                        break;
+                }
+                break;
 
-        case 3: // scale HQx
-            switch (scalefactor) {
-                case 2:
-                    filter = Video::RenderState::FILTER_HQ2X;
-                    break;
-                case 3:
-                    filter = Video::RenderState::FILTER_HQ3X;
-                    break;
-                case 4:
-                    filter = Video::RenderState::FILTER_HQ4X;
-                    break;
-                default:
-                    filter = Video::RenderState::FILTER_NONE;
-                    break;
-            }
-            break;
+            case 3: // scale HQx
+                switch (scalefactor) {
+                    case 2:
+                        filter = Video::RenderState::FILTER_HQ2X;
+                        break;
+                    case 3:
+                        filter = Video::RenderState::FILTER_HQ3X;
+                        break;
+                    case 4:
+                        filter = Video::RenderState::FILTER_HQ4X;
+                        break;
+                    default:
+                        filter = Video::RenderState::FILTER_NONE;
+                        break;
+                }
+                break;
 
-        case 4: // 2xSaI
-            filter = Video::RenderState::FILTER_2XSAI;
-            break;
+            case 4: // 2xSaI
+                filter = Video::RenderState::FILTER_2XSAI;
+                break;
 
-        case 5: // scale x
-            switch (scalefactor) {
-                case 2:
-                    filter = Video::RenderState::FILTER_SCALE2X;
-                    break;
-                case 3:
-                    filter = Video::RenderState::FILTER_SCALE3X;
-                    break;
-                default:
-                    filter = Video::RenderState::FILTER_NONE;
-                    break;
-            }
-            break;
+            case 5: // scale x
+                switch (scalefactor) {
+                    case 2:
+                        filter = Video::RenderState::FILTER_SCALE2X;
+                        break;
+                    case 3:
+                        filter = Video::RenderState::FILTER_SCALE3X;
+                        break;
+                    default:
+                        filter = Video::RenderState::FILTER_NONE;
+                        break;
+                }
+                break;
 #endif
     }
 
@@ -310,6 +292,7 @@ void video_set_filter() {
     renderstate.filter = filter;
     renderstate.width = basesize.w;
     renderstate.height = basesize.h;
+    // TODO: verify this (nestopia fltk port use rgba)
     renderstate.bits.count = 16;
     renderstate.bits.mask.r = 0xf800;
     renderstate.bits.mask.g = 0x07e0;
@@ -321,24 +304,20 @@ void video_set_filter() {
 }
 
 dimensions_t nst_video_get_dimensions_render() {
-
     // Return the dimensions of the rendered video
     return rendersize;
 }
 
 dimensions_t nst_video_get_dimensions_screen() {
-
     // Return the dimensions of the screen
     return screensize;
 }
 
 void nst_video_set_dimensions_screen(dimensions_t scrsize) {
-
     screensize = scrsize;
 }
 
 void video_set_dimensions() {
-
     // Set up the video dimensions
     int scalefactor = conf.video_scale_factor;
     if (conf.video_scale_factor > 4) { scalefactor = 4; }
@@ -350,8 +329,7 @@ void video_set_dimensions() {
         case 0:    // None
             basesize.w = Video::Output::WIDTH;
             basesize.h = Video::Output::HEIGHT;
-            conf.video_tv_aspect ? rendersize.w = tvwidth * wscalefactor : rendersize.w =
-                                                                                   basesize.w * wscalefactor;
+            conf.video_tv_aspect ? rendersize.w = tvwidth * wscalefactor : rendersize.w = basesize.w * wscalefactor;
             rendersize.h = basesize.h * wscalefactor;
             overscan_offset = basesize.w * OVERSCAN_TOP;
             overscan_height = basesize.h - OVERSCAN_TOP - OVERSCAN_BOTTOM;
@@ -371,8 +349,8 @@ void video_set_dimensions() {
         case 5: // ScaleX
             basesize.w = Video::Output::WIDTH * scalefactor;
             basesize.h = Video::Output::HEIGHT * scalefactor;
-            conf.video_tv_aspect ? rendersize.w = tvwidth * wscalefactor : rendersize.w = Video::Output::WIDTH *
-                                                                                          wscalefactor;;
+            conf.video_tv_aspect ? rendersize.w = tvwidth * wscalefactor : rendersize.w =
+                                                                                   Video::Output::WIDTH * wscalefactor;
             rendersize.h = Video::Output::HEIGHT * wscalefactor;
             overscan_offset = basesize.w * OVERSCAN_TOP * scalefactor;
             overscan_height = basesize.h - (OVERSCAN_TOP + OVERSCAN_BOTTOM) * scalefactor;
@@ -397,25 +375,19 @@ void video_set_dimensions() {
     }
 
     // Calculate the aspect from the height because it's smaller
-    float aspect = (float) screensize.h / (float) rendersize.h;
-
-    if (!conf.video_stretch_aspect && conf.video_fullscreen) {
-        rendersize.h *= aspect;
+    if (conf.video_fullscreen) {
+        float aspect = (float) screensize.h / (float) rendersize.h;
         rendersize.w *= aspect;
-    } else if (conf.video_fullscreen) {
-        rendersize.h = screensize.h;
-        rendersize.w = screensize.w;
+        rendersize.h *= aspect;
     }
 }
 
 long video_lock_screen(void *&ptr) {
-
     uiEmu->getVideo()->getTexture()->lock(nullptr, &ptr, nullptr);
     return basesize.w * uiEmu->getVideo()->getTexture()->bpp;
 }
 
 void video_unlock_screen(void *) {
-
     int xscale = renderstate.width / Video::Output::WIDTH;;
     int yscale = renderstate.height / Video::Output::HEIGHT;
 
@@ -432,7 +404,6 @@ void video_unlock_screen(void *) {
 }
 
 void video_screenshot_flip(unsigned char *pixels, int width, int height, int bytes) {
-
     // Flip the pixels
     int rowsize = width * bytes;
     unsigned char *row = (unsigned char *) malloc(rowsize);
@@ -448,7 +419,6 @@ void video_screenshot_flip(unsigned char *pixels, int width, int height, int byt
 }
 
 void video_screenshot(const char *filename) {
-
     if (filename == nullptr) {
         char sshotpath[512];
         snprintf(sshotpath, sizeof(sshotpath), "%sscreenshots/%s-%ld-%d.png", nstpaths.nstdir, nstpaths.gamename,
@@ -460,16 +430,13 @@ void video_screenshot(const char *filename) {
 }
 
 void video_clear_buffer() {
-
     void *ptr;
     int pitch;
-
     uiEmu->getVideo()->getTexture()->lock(nullptr, &ptr, &pitch);
     memset(ptr, 0x00000000, (size_t) uiEmu->getVideo()->getTextureRect().height * pitch);
 }
 
 void video_disp_nsf() {
-
     // Display NSF text
     Nsf nsf(emulator);
 
@@ -488,7 +455,6 @@ void video_disp_nsf() {
 }
 
 void nst_video_print(const char *text, int xpos, int ypos, int seconds, bool bg) {
-
     snprintf(osdtext.textbuf, sizeof(osdtext.textbuf), "%s", text);
     osdtext.xpos = xpos;
     osdtext.ypos = ypos;
@@ -497,13 +463,11 @@ void nst_video_print(const char *text, int xpos, int ypos, int seconds, bool bg)
 }
 
 void nst_video_print_time(const char *timebuf, bool drawtime) {
-
     snprintf(osdtext.timebuf, sizeof(osdtext.timebuf), "%s", timebuf);
     osdtext.drawtime = drawtime;
 }
 
 void nst_video_text_draw(const char *text, int xpos, int ypos, bool bg) {
-
     // Draw text on screen
     uint32_t w = 0xc0c0c0c0; // "White", actually Grey
     uint32_t b = 0x00000000; // Black
@@ -555,7 +519,6 @@ void nst_video_text_draw(const char *text, int xpos, int ypos, bool bg) {
 }
 
 void nst_video_text_match(const char *text, int *xpos, int *ypos, int strpos) {
-
     // Match letters to draw on screen
     switch (text[strpos]) {
         case ' ':
