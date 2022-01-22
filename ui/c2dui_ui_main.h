@@ -57,6 +57,8 @@ namespace c2dui {
 
         UiStateMenu *getUiStateMenu();
 
+        UiStatusBox *getUiStatusBox();
+
         UIProgressBox *getUiProgressBox();
 
         c2d::MessageBox *getUiMessageBox();
@@ -78,6 +80,7 @@ namespace c2dui {
         UiStateMenu *uiState = nullptr;
         UIProgressBox *uiProgressBox = nullptr;
         c2d::MessageBox *uiMessageBox = nullptr;
+        UiStatusBox *uiStatusBox = nullptr;
         c2d::C2DClock timer;
         unsigned int oldKeys = 0;
 

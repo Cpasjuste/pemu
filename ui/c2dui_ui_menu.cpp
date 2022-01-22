@@ -282,7 +282,7 @@ bool UiMenu::onInput(c2d::Input::Player *players) {
         ui->getConfig()->get(option.getId(), isRomMenu)->set(option);
 
         if (!option.getInfo().empty()) {
-            ui->getUiMessageBox()->show("WARNING", option.getInfo(), "OK");
+            ui->getUiStatusBox()->show("INFORMATION", option.getInfo());
         }
 
         switch (option.getId()) {

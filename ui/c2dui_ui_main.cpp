@@ -89,6 +89,9 @@ void UiMain::init(UIRomList *_uiRomList, UiMenu *_uiMenu,
     uiProgressBox = new UIProgressBox(this);
     add(uiProgressBox);
 
+    uiStatusBox = new UiStatusBox(this);
+    add(uiStatusBox);
+
     updateInputMapping(false);
     getInput()->setRepeatDelay(INPUT_DELAY);
 
@@ -171,6 +174,10 @@ UIProgressBox *UiMain::getUiProgressBox() {
     return uiProgressBox;
 }
 
+UiStatusBox *UiMain::getUiStatusBox() {
+    return uiStatusBox;
+}
+
 c2d::MessageBox *UiMain::getUiMessageBox() {
     return uiMessageBox;
 }
@@ -221,4 +228,5 @@ void UiMain::updateInputMapping(bool isRomConfig) {
     ((SWITCHInput *) getInput())->setSingleJoyconMode(single_joy_mode);
 #endif
 }
+
 

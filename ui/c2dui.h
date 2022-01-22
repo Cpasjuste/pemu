@@ -32,6 +32,7 @@
 #include "c2dui_ui_romlist_rominfo.h"
 #include "c2dui_ui_progressbox.h"
 #include "c2dui_ui_menu_state.h"
+#include "c2dui_status_box.h"
 #include "c2dui_ui_main.h"
 
 using namespace c2d;

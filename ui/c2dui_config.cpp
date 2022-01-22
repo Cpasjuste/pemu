@@ -28,14 +28,14 @@ Config::Config(c2d::Io *io, int ver) {
            Option::Id::GUI_FILTER_CLONES, Option::Flags::BOOLEAN | Option::Flags::HIDDEN);
     append("SHOW_ZIP_NAMES", {"OFF", "ON"}, 1, Option::Id::GUI_SHOW_ZIP_NAMES, Option::Flags::BOOLEAN);
     append("SHOW_ICONS", {"OFF", "ON"}, 0, Option::Id::GUI_SHOW_ICONS, Option::Flags::BOOLEAN | Option::Flags::HIDDEN);
-    get()->at(get()->size() - 1).setInfo("Enabling icons needs a restart...");
+    get()->at(get()->size() - 1).setInfo("You need to restart the application for this option to take effect...");
     append("SCREEN_WIDTH", C2D_SCREEN_WIDTH, Option::Id::GUI_SCREEN_WIDTH,
            Option::Flags::INTEGER | Option::Flags::HIDDEN);
     append("SCREEN_HEIGHT", C2D_SCREEN_HEIGHT, Option::Id::GUI_SCREEN_HEIGHT,
            Option::Flags::INTEGER | Option::Flags::HIDDEN);
 #ifdef __FULLSCREEN__
     append("FULLSCREEN", {"OFF", "ON"}, 0, Option::Id::GUI_FULLSCREEN, Option::Flags::BOOLEAN);
-    get()->at(get()->size() - 1).setInfo("This option needs a restart...");
+    get()->at(get()->size() - 1).setInfo("You need to restart the application for this option to take effect...");
 #endif
 
     // build  skin list
@@ -66,7 +66,7 @@ Config::Config(c2d::Io *io, int ver) {
         }
         append("SKIN", skins, index, Option::Id::GUI_SKIN, Option::Flags::STRING);
     }
-    get()->at(get()->size() - 1).setInfo("Changing skins needs a restart...");
+    get()->at(get()->size() - 1).setInfo("You need to restart the application for this option to take effect...");
 
     append("VIDEO_SNAP_DELAY", 5, Option::Id::GUI_VIDEO_SNAP_DELAY, Option::Flags::INTEGER);
 #ifdef __SWITCH__
