@@ -208,9 +208,14 @@ set(FLAGS
         -D__PFBA_VERSION_MAJOR__=${VERSION_MAJOR}
         -D__PFBA_VERSION_MINOR__=${VERSION_MINOR}
         -DINCLUDE_7Z_SUPPORT -DMINIZIP_LIB
-        -DUSE_SPEEDHACKS -DBUILD_SDL2 -DBUILD_M68K
-        -Wno-write-strings -Wno-narrowing -fforce-addr -finline-limit=1200 -Wno-sign-compare
-        -Wno-unused-variable -Wno-unused-but-set-variable -Wno-sequence-point
+        -DBUILD_SDL2 -DBUILD_M68K
+        -fomit-frame-pointer -Wno-write-strings
+        -Wall -Wno-long-long -Wno-sign-compare -Wno-uninitialized -Wno-unused
+        -Wno-conversion -Wno-attributes
+        -Wno-unused-parameter -Wno-unused-value
+        -Wno-format-truncation -Wno-parentheses -Wno-sequence-point
+        -Wno-format -Wno-misleading-indentation
+        -Wno-restrict -Wno-unused-result
         )
 
 set(CMAKE_CXX_STANDARD 17)
@@ -233,7 +238,7 @@ if (PLATFORM_VITA)
             ${VITASDK}/arm-vita-eabi/include/SDL2/
             )
     list(APPEND SRC_PFBA sources/cpu/c68000_intf.cpp sources/cpu/cyclone/Cyclone.s)
-    list(APPEND FLAGS -DBUILD_C68K -DUSE_FILE32API -DLSB_FIRST -D__PFBA_ARM__)
+    list(APPEND FLAGS -DBUILD_C68K -DUSE_FILE32API -DLSB_FIRST -DUSE_SPEEDHACKS -D__PFBA_ARM__)
     list(APPEND LDFLAGS ScePower_stub pthread)
 elseif (PLATFORM_PS4)
     set(PS4_PKG_TITLE "pFBA - Portable Final Burn Neo")
@@ -270,7 +275,7 @@ elseif (PLATFORM_3DS)
             ${DEVKITPRO}/libctru/include
             ${DEVKITPRO}/portlibs/armv6k/include)
     list(APPEND FLAGS -DARM11 -D_3DS -D__3DS__
-            -DNO_KEYBOARD -D__PFBA_ARM__ -DUSE_FILE32API -DLSB_FIRST
+            -DNO_KEYBOARD -D__PFBA_ARM__ -DUSE_FILE32API -DLSB_FIRST -DUSE_SPEEDHACKS
             -ffunction-sections -fomit-frame-pointer)
     list(APPEND LDFLAGS
             ${DEVKITPRO}/portlibs/armv6k/lib/libpng.a

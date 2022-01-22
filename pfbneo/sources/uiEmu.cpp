@@ -14,10 +14,8 @@ using namespace c2dui;
 
 extern INT32 Init_Joysticks(int p_one_use_joystick);
 
-extern int InpMake(Input::Player *players);
-
-extern unsigned char inputServiceSwitch;
-extern unsigned char inputP1P2Switch;
+//extern unsigned char inputServiceSwitch;
+//extern unsigned char inputP1P2Switch;
 
 #ifdef __PFBA_ARM__
 extern int nSekCpuCore;
@@ -29,17 +27,23 @@ static bool isHardware(int hardware, int type) {
 
 #endif
 
-static unsigned int myHighCol16(int r, int g, int b, int /* i */) {
-    unsigned int t;
-    t = (unsigned int) ((r << 8) & 0xf800); // rrrr r000 0000 0000
-    t |= (g << 3) & 0x07e0; // 0000 0ggg ggg0 0000
-    t |= (b >> 3) & 0x001f; // 0000 0000 000b bbbb
+static UINT32 myHighCol16(int r, int g, int b, int /* i */) {
+    UINT32 t;
+    t = (r << 8) & 0xf800;
+    t |= (g << 3) & 0x07e0;
+    t |= (b >> 3) & 0x001f;
     return t;
 }
+
+static UiMain *uiInstance;
+static FloatRect *textureRectInstance;
 
 PFBAGuiEmu::PFBAGuiEmu(UiMain *ui) : UIEmu(ui) {
 
     printf("PFBAGuiEmu()\n");
+
+    uiInstance = ui;
+    textureRectInstance = &textureRect;
 }
 
 #ifdef __PFBA_ARM__
@@ -229,9 +233,9 @@ int PFBAGuiEmu::load(const ss_api::Game &game) {
     nBurnBpp = 2;
     BurnHighCol = myHighCol16;
     BurnRecalcPal();
-    auto v = new PFBAVideo(ui, (void **) &pBurnDraw, &nBurnPitch, Vector2f(w, h));
+    auto v = new PFBAVideo(ui, (void **) &pBurnDraw, &nBurnPitch, Vector2f((float) w, (float) h));
     addVideo(v);
-    textureRect = {0, 0, w, h};
+    textureRect = {0, 0, (float) w, (float) h};
     //////////
     // VIDEO
     //////////
@@ -239,17 +243,24 @@ int PFBAGuiEmu::load(const ss_api::Game &game) {
     return UIEmu::load(game);
 }
 
+void Reinitialise(void) {
+    printf("Reinitialise called\n");
+    int w, h;
+    BurnDrvGetFullSize(&w, &h);
+    auto v = new PFBAVideo(uiInstance, (void **) &pBurnDraw, &nBurnPitch, Vector2f((float) w, (float) h));
+    uiInstance->getUiEmu()->addVideo(v);
+    textureRectInstance->left = 0;
+    textureRectInstance->top = 0;
+    textureRectInstance->width = (float) w;
+    textureRectInstance->height = (float) h;
+}
+
 void PFBAGuiEmu::stop() {
-
     DrvExit();
-    // TODO: refactor
-    //InpExit();
-
     UIEmu::stop();
 }
 
 void PFBAGuiEmu::updateFb() {
-
     if (pBurnDraw == nullptr) {
         video->getTexture()->lock(&textureRect, (void **) &pBurnDraw, &nBurnPitch);
         BurnDrvFrame();
@@ -258,7 +269,6 @@ void PFBAGuiEmu::updateFb() {
 }
 
 void PFBAGuiEmu::renderFrame(bool draw) {
-
     if (!isPaused()) {
 
         pBurnDraw = nullptr;
@@ -280,7 +290,6 @@ void PFBAGuiEmu::renderFrame(bool draw) {
 }
 
 bool PFBAGuiEmu::onInput(c2d::Input::Player *players) {
-
     if (ui->getUiMenu()->isVisible() || ui->getUiStateMenu()->isVisible()) {
         return UIEmu::onInput(players);
     }
@@ -338,7 +347,6 @@ bool PFBAGuiEmu::onInput(c2d::Input::Player *players) {
 }
 
 void PFBAGuiEmu::onUpdate() {
-
     UIEmu::onUpdate();
 
     if (!isPaused()) {

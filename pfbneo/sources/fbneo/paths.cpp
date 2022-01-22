@@ -17,9 +17,6 @@ bool bDoIpsPatch = false;
 
 void IpsApplyPatches(UINT8 *base, char *rom_name) {}
 
-// needed by cps3run.cpp and dataeast/d_backfire.cpp
-void Reinitialise() {}
-
 // needed by neo_run.cpp
 void wav_exit() {}
 
