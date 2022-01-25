@@ -51,7 +51,7 @@ static void C2DGamcMisc(struct GameInp *pgi, char *szi) {
 }
 
 static void C2DGameInpConfigOne(int nPlayer, int nPcDev, struct GameInp *pgi, char *szi) {
-    printf("C2DGameInpConfigOne: player: %i, nPcDev: %i, szi: %s\n", nPlayer, nPcDev, szi);
+    //printf("C2DGameInpConfigOne: player: %i, nPcDev: %i, szi: %s\n", nPlayer, nPcDev, szi);
     GamcPlayer(pgi, szi, nPlayer, nPcDev);
     GamcAnalogJoy(pgi, szi, nPlayer, nPcDev, 1);
     MapJoystick(pgi, szi, nPlayer, nPcDev + 1);
