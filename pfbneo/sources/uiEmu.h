@@ -29,8 +29,6 @@ private:
 
     void updateFb();
 
-    void renderFrame(bool draw = true);
-
     bool audio_sync = false;
 
     c2d::FloatRect textureRect;

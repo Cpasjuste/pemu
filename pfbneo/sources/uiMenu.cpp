@@ -2,8 +2,6 @@
 // Created by cpasjuste on 01/06/18.
 //
 
-#include "burner.h"
-
 #include "c2dui.h"
 #include "uiMenu.h"
 

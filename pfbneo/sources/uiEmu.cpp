@@ -8,14 +8,17 @@
 #include "c2dui.h"
 #include "uiEmu.h"
 #include "video.h"
+#include "fbneo/input.h"
 
 using namespace c2d;
 using namespace c2dui;
 
-extern INT32 Init_Joysticks(int p_one_use_joystick);
+int nVidFullscreen = 0;
+INT32 bVidUseHardwareGamma = 1;
 
-//extern unsigned char inputServiceSwitch;
-//extern unsigned char inputP1P2Switch;
+UINT32 (__cdecl *VidHighCol)(INT32 r, INT32 g, INT32 b, INT32 i);
+
+INT32 VidRecalcPal() { return BurnRecalcPal(); }
 
 #ifdef __PFBA_ARM__
 extern int nSekCpuCore;
@@ -24,7 +27,6 @@ static bool isHardware(int hardware, int type) {
     return (((hardware | HARDWARE_PREFIX_CARTRIDGE) ^ HARDWARE_PREFIX_CARTRIDGE)
             & 0xff000000) == (unsigned int) type;
 }
-
 #endif
 
 static UINT32 myHighCol16(int r, int g, int b, int /* i */) {
@@ -203,7 +205,6 @@ int PFBAGuiEmu::load(const ss_api::Game &game) {
     // INPUT
     //////////
     InputInit();
-    Init_Joysticks(1);
     ///////////
     // INPUT
     //////////
@@ -268,27 +269,6 @@ void PFBAGuiEmu::updateFb() {
     }
 }
 
-void PFBAGuiEmu::renderFrame(bool draw) {
-    if (!isPaused()) {
-
-        pBurnDraw = nullptr;
-
-        if (draw) {
-            video->getTexture()->lock(&textureRect, (void **) &pBurnDraw, &nBurnPitch);
-        }
-
-        BurnDrvFrame();
-
-        if (draw) {
-            video->getTexture()->unlock();
-        }
-
-        if (audio && audio->isAvailable()) {
-            audio->play(pBurnSoundOut, audio->getSamples(), audio_sync);
-        }
-    }
-}
-
 bool PFBAGuiEmu::onInput(c2d::Input::Player *players) {
     if (ui->getUiMenu()->isVisible() || ui->getUiStateMenu()->isVisible()) {
         return UIEmu::onInput(players);
@@ -331,17 +311,13 @@ bool PFBAGuiEmu::onInput(c2d::Input::Player *players) {
 #endif
 #endif
 
-    // TODO: refactor
-    /*
-    inputServiceSwitch = 0;
-    inputP1P2Switch = 0;
-    // look for player 1 combos key
-    if ((players[0].keys & Input::Key::Menu2) && (players[0].keys & Input::Key::Fire3)) {
-        inputServiceSwitch = 1;
-    } else if ((players[0].keys & Input::Key::Menu2) && (players[0].keys & Input::Key::Fire4)) {
-        inputP1P2Switch = 1;
+    if (!isPaused()) {
+        if ((players[0].keys & Input::Key::Menu2) && (players[0].keys & Input::Key::Fire5)) {
+            players[0].keys |= C2D_KEY_DIAG;
+        } else if ((players[0].keys & Input::Key::Menu2) && (players[0].keys & Input::Key::Fire6)) {
+            players[0].keys |= C2D_KEY_SERVICE;
+        }
     }
-    */
 
     return UIEmu::onInput(players);
 }
@@ -350,14 +326,34 @@ void PFBAGuiEmu::onUpdate() {
     UIEmu::onUpdate();
 
     if (!isPaused()) {
+
+        // update fbneo inputs
         InputMake(true);
+
+        // update fbneo video buffer and audio
 #ifdef __VITA__
         int skip = ui->getConfig()->get(Option::Id::ROM_FRAMESKIP, true)->getIndex();
 #else
         int skip = 0;
 #endif
         frameskip++;
-        renderFrame(frameskip > skip);
+
+        pBurnDraw = nullptr;
+
+        if (frameskip > skip) {
+            video->getTexture()->lock(&textureRect, (void **) &pBurnDraw, &nBurnPitch);
+        }
+
+        BurnDrvFrame();
+
+        if (frameskip > skip) {
+            video->getTexture()->unlock();
+        }
+
+        if (audio && audio->isAvailable()) {
+            audio->play(pBurnSoundOut, audio->getSamples(), audio_sync);
+        }
+
         if (frameskip > skip) {
             frameskip = 0;
         }
