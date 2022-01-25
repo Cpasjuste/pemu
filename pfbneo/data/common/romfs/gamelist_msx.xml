@@ -5763,7 +5763,7 @@ As in all post-Arkanoids, powerups are available, in the shape of a circle that 
                 <nom region="wor">Breaker Breaker (Euro)</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="116" parentid="113">MSX2</systeme>
+            <systeme id="113" parentid="0">MSX</systeme>
             <synopsis>
                 <synopsis langue="en">Although it is a variant of the well-known Break-out, there are still some differences; One of them is that Breaker can be played with two bats. One bat is always at the bottom of the screen and can only move sideways. The other bat can move freely around the screen, but can not reach the bottom of the screen. The upper bat is the attacker sending the ball to the desired point, while the other one is the back up. If it is played by one player the second bat can be placed vertically; they always move sideways, only the upper one moves up and down. If it is played by two players each one gets one bat.
 
@@ -11770,7 +11770,7 @@ The Game Boy version of "Double Dragon II" is an English localization of a "Kuni
                 <region>jp</region>
             </regions>
             <cloneof>0</cloneof>
-            <systeme id="116" parentid="113">MSX2</systeme>
+            <systeme id="113" parentid="0">MSX</systeme>
             <synopsis>
                 <synopsis langue="en">All is darkness. The Dragon-lord has captured the Princess and stolen Erdrick's powerful ball of light. You are Erdrick's heir. To you has fallen the most dangerous task - to rescue the King's daughter and recover the mystic ball of light. Search out the Dragon-lord's lair and face your destiny. In this role-playing adventure you are the Dragon Warrior!
 </synopsis>
@@ -11803,7 +11803,7 @@ The Game Boy version of "Double Dragon II" is an English localization of a "Kuni
                 <region>jp</region>
             </regions>
             <cloneof>dquest2.zip</cloneof>
-            <systeme id="116" parentid="113">MSX2</systeme>
+            <systeme id="113" parentid="0">MSX</systeme>
             <synopsis>
                 <synopsis langue="en">Long ago, a descendant of Erdrick the Great defeated the Dragonlord and recovered the mystical ball of light in Alefgard. Under the rule of his children and their descendants there was prosperity throughout the land for generations. One day, however, this peace was shattered by the wicked Sorcerer Hargon. Now it is time for you to claim your birthright as the Prince of Midenhall, for Erdrick's blood also flows through your veins. With the Prince of Cannock and the Princess of Moonbrooke by your side, you are about to embark on a most adventurous journey. Use your strength and cunning for you are about to enter the world of Dragon Quest II.</synopsis>
             </synopsis>
@@ -11834,7 +11834,7 @@ The Game Boy version of "Double Dragon II" is an English localization of a "Kuni
                 <region>jp</region>
             </regions>
             <cloneof>0</cloneof>
-            <systeme id="116" parentid="113">MSX2</systeme>
+            <systeme id="113" parentid="0">MSX</systeme>
             <synopsis>
                 <synopsis langue="en">Long ago, a descendant of Erdrick the Great defeated the Dragonlord and recovered the mystical ball of light in Alefgard. Under the rule of his children and their descendants there was prosperity throughout the land for generations. One day, however, this peace was shattered by the wicked Sorcerer Hargon. Now it is time for you to claim your birthright as the Prince of Midenhall, for Erdrick's blood also flows through your veins. With the Prince of Cannock and the Princess of Moonbrooke by your side, you are about to embark on a most adventurous journey. Use your strength and cunning for you are about to enter the world of Dragon Quest II.</synopsis>
             </synopsis>
@@ -11900,7 +11900,7 @@ The player can collect power stones and coins during the journey; the power ston
                 <region>jp</region>
             </regions>
             <cloneof>0</cloneof>
-            <systeme id="116" parentid="113">MSX2</systeme>
+            <systeme id="113" parentid="0">MSX</systeme>
             <synopsis>
                 <synopsis langue="en">Long ago, an evil dragon named Keela was imprisoned inside a magical dungeon. However time has passed and the magic that sealed the dragon away is weakening. The Drasle family decides that it's time to destroy the dragon once and for all. However only one weapon is capable of doing this, the Dragon Slayer, which is itself sealed away by four magical crowns. The Drasle family decides to take on this quest, and will use every member of the family in order to accomplish it.
 The player chooses a character from among five different members of the Drasle family. The choices are: Xemm the father and woodcutter, Mayna the magic-using mother, Roas the brave warrior son, Lyll the athletic daughter and Pochi the domesticated monster-pet. Each character has unique abilities (including attack and jumping abilities) and can only use certain items from those collected. Players can travel back to the Drasle household at any point to change characters.
@@ -12226,7 +12226,7 @@ The task involves avoiding guards and manipulating valuable objects. The prison 
                 <region>jp</region>
             </regions>
             <cloneof>0</cloneof>
-            <systeme id="116" parentid="113">MSX2</systeme>
+            <systeme id="113" parentid="0">MSX</systeme>
             <synopsis>
                 <synopsis langue="en">Dynamite Bowl is a bowling game simulation based on the real bowling sport and can be played up to five players at one of the thirty lanes.
 The game has two difficulty levels.
@@ -12463,7 +12463,7 @@ After you've shot all aliens you have to get your space craft back on the ground
                 <nom region="wor">Earth Attack (HB)</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="118" parentid="113">MSX Turbo R</systeme>
+            <systeme id="113" parentid="0">MSX</systeme>
             <synopsis>
                 <synopsis langue="en"></synopsis>
             </synopsis>
@@ -18427,7 +18427,7 @@ Hydlide is an action game with strong role-playing elements. The player has to e
                 <nom region="jp">Hydlide 3 - The Space Memories (Jpn)</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="116" parentid="113">MSX2</systeme>
+            <systeme id="113" parentid="0">MSX</systeme>
             <synopsis>
                 <synopsis langue="en">The third entry in the Hydlide series, continuing its action RPG legacy. Character creation allows the player to choose one of the four character classes: Warrior, Thief, Priest, and Monk. In combat, the protagonist uses melee or long-ranged weapons or casts magic spells. Unlike the previous games in the series, the player is required to press the attack button during melee combat, instead of simply "bumping" into the enemies. There is an internal clock in the game, which makes it necessary for the protagonist to sleep periodically and regain his strength. The main character also has to eat from time to time, otherwise his hit points will gradually decrease. The morality system from the previous game returns: killing friendly creatures will reduce the player's morality level, which will eventually have an effect on one of the game's most decisive battles.</synopsis>
             </synopsis>
@@ -24498,7 +24498,7 @@ Points are earned by recovering stolen goods. Other ways of earning points are b
                 <nom region="wor">Marchen Veil I (Jpn)</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="116" parentid="113">MSX2</systeme>
+            <systeme id="113" parentid="0">MSX</systeme>
             <synopsis>
                 <synopsis langue="en"></synopsis>
             </synopsis>
@@ -29203,7 +29203,7 @@ Bosses appear at the end of some levels, and each has a specific weakness you ne
                 <nom region="jp">Out Run (Euro)</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="116" parentid="113">MSX2</systeme>
+            <systeme id="113" parentid="0">MSX</systeme>
             <synopsis>
                 <synopsis langue="en">OutRun is a racing game that allows the player to race across varied terrain in a readily available Ferrari, complete with a female passenger, over a series of short tracks.
 
@@ -29588,7 +29588,7 @@ The control mechanism is similar to golf games, in that the longer you press the
                 <nom region="wor">Pacific (HB, v1.2.4)</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="116" parentid="113">MSX2</systeme>
+            <systeme id="113" parentid="0">MSX</systeme>
             <synopsis>
                 <synopsis langue="en">Teitoku no Ketsudan is another military sim from KOEI. In this game you can choose to be either Japan or the Allies. By managing your fleets and ordering new warships you can control many different sides of the conflict (Ship development, Base defense, Fleet arrangement, Direct battle control, Economic decisions). There are many different options of play in Teitoku no Ketsudan, you can choose to play from one of many different famous battles or you can play the campaign. You can control one side or both. There are also limited controls on victory conditions.</synopsis>
             </synopsis>
@@ -32776,7 +32776,7 @@ Section two is identical to the first, except that it is located outside, the en
                 <nom region="jp">Relics (Jpn)</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="116" parentid="113">MSX2</systeme>
+            <systeme id="113" parentid="0">MSX</systeme>
             <synopsis>
                 <synopsis langue="en">Relics is an Action game, developed and published by Bothtec, which was released in Japan in 1986.</synopsis>
             </synopsis>
@@ -33551,7 +33551,7 @@ Each character has personal weaknesses. Also you can train Rocky prior to each f
                 <nom region="wor">Romancia (Jpn)</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="116" parentid="113">MSX2</systeme>
+            <systeme id="113" parentid="0">MSX</systeme>
             <synopsis>
                 <synopsis langue="en">This game exists in two editions, one for the MSX1 and one for the MSX2 with better graphics.
 
@@ -37905,7 +37905,7 @@ The Flash Mode also returns to this version as well as the new Endless Mode wher
                 <nom region="wor">Super Penguin (Kor)</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="116" parentid="113">MSX2</systeme>
+            <systeme id="113" parentid="0">MSX</systeme>
             <synopsis>
                 <synopsis langue="en"></synopsis>
             </synopsis>
@@ -42496,7 +42496,7 @@ The game is a side scroller, Master Higgins moves across the screen from left to
                 <nom region="jp">Xanadu - Dragon Slayer II (Jpn)</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="116" parentid="113">MSX2</systeme>
+            <systeme id="113" parentid="0">MSX</systeme>
             <synopsis>
                 <synopsis langue="en">Xanadu was the name of the summer capital of the Mongolian-ruled Yuan Dynasty in 13th century China. The game, however, is set in a fantasy world, its Xanadu being mysterious ruins beneath a prosperous kingdom, where only the bravest adventurers dare to venture. The player takes the role of one of such explorers, who is sent by the king to discover the secrets hidden deep within the ruins.
 
