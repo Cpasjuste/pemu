@@ -383,9 +383,7 @@ Skin::TextGroup Skin::getText(const std::vector<std::string> &tree) {
     if (option != nullptr) {
         textGroup.outlineSize = option->getFloat();
         textGroup.outlineSize *= global_scaling.y;
-        if (textGroup.outlineSize > 0 && textGroup.outlineSize < 1) {
-            textGroup.outlineSize = 1;
-        }
+        textGroup.outlineSize = ceil(textGroup.outlineSize);
     }
     option = group->getOption("origin");
     if (option != nullptr) {

@@ -5,7 +5,6 @@
 #include "c2dui.h"
 #include "c2dui_config.h"
 
-
 Config::Config(c2d::Io *io, int ver) {
 
     dataPath = io->getDataPath();
@@ -26,7 +25,7 @@ Config::Config(c2d::Io *io, int ver) {
     append("SHOW", {"ALL", "AVAILABLE", "FAVORITES"}, 0, Option::Id::GUI_SHOW_ALL, Option::Flags::STRING);
     append("SHOW_CLONES", {"OFF", "ON"}, 0,
            Option::Id::GUI_FILTER_CLONES, Option::Flags::BOOLEAN | Option::Flags::HIDDEN);
-    append("SHOW_ZIP_NAMES", {"OFF", "ON"}, 1, Option::Id::GUI_SHOW_ZIP_NAMES, Option::Flags::BOOLEAN);
+    append("SHOW_ZIP_NAMES", {"OFF", "ON"}, 0, Option::Id::GUI_SHOW_ZIP_NAMES, Option::Flags::BOOLEAN);
     append("SHOW_ICONS", {"OFF", "ON"}, 0, Option::Id::GUI_SHOW_ICONS, Option::Flags::BOOLEAN | Option::Flags::HIDDEN);
     get()->at(get()->size() - 1).setInfo("You need to restart the application for this option to take effect...");
     append("SCREEN_WIDTH", C2D_SCREEN_WIDTH, Option::Id::GUI_SCREEN_WIDTH,
