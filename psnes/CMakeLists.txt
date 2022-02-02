@@ -113,6 +113,7 @@ elseif (PLATFORM_SWITCH)
     # NX PLATORM
     #####################
     list(APPEND SNES9X_CFLAGS -Wno-pedantic -Wno-missing-field-initializers -Wno-format-truncation)
+    set(CMAKE_EXECUTABLE_SUFFIX "")
 endif ()
 
 add_executable(${PROJECT_NAME} ${PSNES_SRC} ${SNES9X_SRC} ${UNZIP_SRC} ${JMA_SRC})
