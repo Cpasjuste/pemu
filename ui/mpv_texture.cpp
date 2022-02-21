@@ -28,10 +28,10 @@ void MpvTexture::onDraw(c2d::Transform &transform, bool draw) {
                     {MPV_RENDER_PARAM_INVALID,    nullptr}
             };
 
-            //GLint vp[4];
-            //glGetIntegerv(GL_VIEWPORT, vp);
+            GLint vp[4];
+            glGetIntegerv(GL_VIEWPORT, vp);
             mpv_render_context_render(mpv->getContext(), r_params);
-            //glViewport(vp[0], vp[1], (GLsizei) vp[2], (GLsizei) vp[3]);
+            glViewport(vp[0], vp[1], (GLsizei) vp[2], (GLsizei) vp[3]);
         }
     }
 
