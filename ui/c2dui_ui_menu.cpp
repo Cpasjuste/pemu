@@ -55,8 +55,8 @@ public:
 
         if (option.getFlags() & Option::Flags::INPUT) {
             Skin::Button *button = ui->getSkin()->getButton(option.getValueInt());
-            if (button != nullptr && option.getId() < Option::Id::JOY_DEADZONE) {
-                if (button->texture != nullptr) {
+            if (button && option.getId() < Option::Id::JOY_DEADZONE) {
+                if (button->texture) {
                     sprite->setTexture(button->texture, true);
                     sprite->setVisibility(Visibility::Visible);
                     value->setVisibility(Visibility::Hidden);
@@ -321,9 +321,9 @@ bool UiMenu::onInput(c2d::Input::Player *players) {
                 ui->getUiRomList()->setVideoSnapDelay(option.getValueInt());
                 break;
 #ifdef __SWITCH__
-                case Option::Id::JOY_SINGLEJOYCON:
-                    ((SWITCHInput *) ui->getInput())->setSingleJoyconMode(option.getValueBool());
-                    break;
+            case Option::Id::JOY_SINGLEJOYCON:
+                ((SWITCHInput *) ui->getInput())->setSingleJoyconMode(option.getValueBool());
+                break;
 #endif
             default:
                 break;
