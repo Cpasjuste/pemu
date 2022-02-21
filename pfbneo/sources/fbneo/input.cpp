@@ -36,7 +36,6 @@ int c2d_mapping[KEY_COUNT + 3] = {
 #define KEY(x) { pgi->nInput = GIT_SWITCH; pgi->Input.Switch.nCode = (UINT16)(x); }
 
 static void C2DGamcMisc(struct GameInp *pgi, char *szi) {
-
     INT32 nJoyBase = 0x4000;
 
     if (strcmp(szi, "reset") == 0) {
@@ -46,7 +45,8 @@ static void C2DGamcMisc(struct GameInp *pgi, char *szi) {
     } else if (strcmp(szi, "service") == 0) {
         KEY(nJoyBase + 0x80 + 15);
     } else if (strcmp(szi, "dip") == 0) {
-        KEY(nJoyBase + 0x80 + 16);
+        // this seems to cause some problems in games like mortal kombat
+        //KEY(nJoyBase + 0x80 + 16);
     }
 }
 
@@ -75,14 +75,17 @@ static int C2DGameInpConfig(int nPlayer, int nPcDev) {
         if (bii.szInfo == nullptr) {
             bii.szInfo = "";
         }
+        // skip fire 7/8 since pemu only handle 6 (fire) buttons
+        if (strcmp(bii.szInfo, "p1 fire 7") == 0 || strcmp(bii.szInfo, "p1 fire 8") == 0) {
+            continue;
+        }
+
         C2DGameInpConfigOne(nPlayer, nPcDev, pgi, bii.szInfo);
     }
 
     for (i = 0; i < nMacroCount; i++, pgi++) {
         C2DGameInpConfigOne(nPlayer, nPcDev, pgi, pgi->Macro.szName);
     }
-
-    GameInpCheckLeftAlt();
 
     return 0;
 }
