@@ -80,6 +80,7 @@ elseif (PLATFORM_SWITCH)
     #####################
     list(APPEND NESTOPIA_SRC sources/switch/port.c)
     list(APPEND NESTOPIA_CFLAGS -DDATADIR="romfs:/")
+    set(CMAKE_EXECUTABLE_SUFFIX "")
 elseif (PLATFORM_3DS)
     #####################
     # 3DS PLATORM

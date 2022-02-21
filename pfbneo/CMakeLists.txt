@@ -290,6 +290,7 @@ elseif (PLATFORM_SWITCH)
     list(APPEND FLAGS
             -DUSE_FILE32API -DLSB_FIRST
             -ffunction-sections -fomit-frame-pointer)
+    set(CMAKE_EXECUTABLE_SUFFIX "")
 elseif (PLATFORM_LINUX)
     ##############
     # SDL2
