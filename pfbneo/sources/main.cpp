@@ -45,7 +45,7 @@ PFBARomList *romList;
 UIRomList *uiRomList;
 Skin *skin;
 
-void BurnPathsInit(const char *dataPath);
+void BurnPathsInit(C2DIo *io);
 
 int main(int argc, char **argv) {
 
@@ -56,7 +56,7 @@ int main(int argc, char **argv) {
     cfg = new PFBAConfig(io, version);
 
     // fbneo init
-    BurnPathsInit(io->getDataPath().c_str());
+    BurnPathsInit(io);
     BurnLibInit();
 
     Vector2f screenSize = cfg->getScreenSize();
