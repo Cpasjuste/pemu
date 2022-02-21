@@ -29,6 +29,14 @@ namespace c2d {
             return "/data/pfba/";
         }
 
+#ifndef NDEBUG
+
+        std::string getRomFsPath() override {
+            return "/data/pfba/";
+        }
+
+#endif
+
 #endif
     };
 }

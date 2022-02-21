@@ -6,11 +6,20 @@
 #include <SDL2/SDL_video.h>
 #include "mpv.h"
 
+#ifdef __PS4__
+extern "C" int ps4_mpv_use_precompiled_shaders;
+extern "C" int ps4_mpv_dump_shaders;
+#endif
+
 static void *get_proc_address_mpv(void *unused, const char *name) {
     return SDL_GL_GetProcAddress(name);
 }
 
 Mpv::Mpv(const std::string &configPath, bool initRender) {
+#ifdef __PS4__
+    ps4_mpv_use_precompiled_shaders = 1;
+    ps4_mpv_dump_shaders = 0;
+#endif
 
     handle = mpv_create();
     if (handle == nullptr) {
@@ -25,9 +34,9 @@ Mpv::Mpv(const std::string &configPath, bool initRender) {
     mpv_set_option_string(handle, "msg-level", "all=v");
 #endif
     mpv_set_option_string(handle, "vd-lavc-threads", "2");
-    mpv_set_option_string(handle, "vd-lavc-fast", "yes");
-    mpv_set_option_string(handle, "vd-lavc-skiploopfilter", "all");
     mpv_set_option_string(handle, "audio-channels", "stereo");
+    mpv_set_option_string(handle, "video-sync", "audio");
+
     if (!initRender) {
         mpv_set_option_string(handle, "vid", "no");
         mpv_set_option_string(handle, "aid", "no");
@@ -47,7 +56,7 @@ Mpv::Mpv(const std::string &configPath, bool initRender) {
     if (initRender) {
         mpv_opengl_init_params gl_init_params{get_proc_address_mpv, nullptr, nullptr};
         mpv_render_param params[]{
-                {MPV_RENDER_PARAM_API_TYPE,           const_cast<char *>(MPV_RENDER_API_TYPE_OPENGL)},
+                {MPV_RENDER_PARAM_API_TYPE,           (void *) MPV_RENDER_API_TYPE_OPENGL},
                 {MPV_RENDER_PARAM_OPENGL_INIT_PARAMS, &gl_init_params},
                 {MPV_RENDER_PARAM_INVALID,            nullptr}
         };
@@ -70,7 +79,6 @@ Mpv::~Mpv() {
 }
 
 int Mpv::load(const std::string &file, LoadType loadType, const std::string &options) {
-
     if (handle != nullptr) {
         std::string type = "replace";
         if (loadType == LoadType::Append) {

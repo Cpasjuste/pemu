@@ -32,7 +32,6 @@ using namespace c2dui;
 
 #ifdef __PSP2__
 #include <psp2/power.h>
-int _newlib_heap_size_user = 192 * 1024 * 1024;
 #elif __PS4__
 extern "C" int sceSystemServiceLoadExec(const char *path, const char *args[]);
 #endif

@@ -85,11 +85,7 @@ Config::Config(c2d::Io *io, int ver) {
     } else {
         append("SCALING", {"NONE", "FIT", "FIT 4:3", "FULL"}, 0, Option::Id::ROM_SCALING, Option::Flags::STRING);
     }
-#ifdef __FREEPLAY__
-    append("FILTER", {"POINT", "LINEAR"}, 1, Option::Id::ROM_FILTER, Option::Flags::STRING);
-#else
     append("FILTER", {"POINT", "LINEAR"}, 0, Option::Id::ROM_FILTER, Option::Flags::STRING);
-#endif
     append("SHOW_FPS", {"OFF", "ON"}, 0, Option::Id::ROM_SHOW_FPS, Option::Flags::BOOLEAN);
 
     /// joysticks config
