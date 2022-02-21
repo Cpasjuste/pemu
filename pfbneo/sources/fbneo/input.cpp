@@ -76,7 +76,8 @@ static int C2DGameInpConfig(int nPlayer, int nPcDev) {
             bii.szInfo = "";
         }
         // skip fire 7/8 since pemu only handle 6 (fire) buttons
-        if (strcmp(bii.szInfo, "p1 fire 7") == 0 || strcmp(bii.szInfo, "p1 fire 8") == 0) {
+        if (strcmp(bii.szInfo, "p1 fire 7") == 0 || strcmp(bii.szInfo, "p1 fire 8") == 0
+            || strcmp(bii.szInfo, "p1 fire 9") == 0) {
             continue;
         }
 
