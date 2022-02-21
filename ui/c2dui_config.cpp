@@ -25,7 +25,7 @@ Config::Config(c2d::Io *io, int ver) {
     append("SHOW", {"ALL", "AVAILABLE", "FAVORITES"}, 0, Option::Id::GUI_SHOW_ALL, Option::Flags::STRING);
     append("SHOW_CLONES", {"OFF", "ON"}, 0,
            Option::Id::GUI_FILTER_CLONES, Option::Flags::BOOLEAN | Option::Flags::HIDDEN);
-    append("SHOW_ZIP_NAMES", {"OFF", "ON"}, 0, Option::Id::GUI_SHOW_ZIP_NAMES, Option::Flags::BOOLEAN);
+    append("SHOW_ZIP_NAMES", {"OFF", "ON"}, 1, Option::Id::GUI_SHOW_ZIP_NAMES, Option::Flags::BOOLEAN);
     append("SHOW_ICONS", {"OFF", "ON"}, 0, Option::Id::GUI_SHOW_ICONS, Option::Flags::BOOLEAN | Option::Flags::HIDDEN);
     get()->at(get()->size() - 1).setInfo("You need to restart the application for this option to take effect...");
     append("SCREEN_WIDTH", C2D_SCREEN_WIDTH, Option::Id::GUI_SCREEN_WIDTH,
@@ -131,8 +131,6 @@ Config::Config(c2d::Io *io, int ver) {
     append("KEY_MENU1", KEY_KB_MENU1_DEFAULT, Option::Id::KEY_MENU1, Option::Flags::INPUT);  // ESCAPE
     append("KEY_MENU2", KEY_KB_MENU2_DEFAULT, Option::Id::KEY_MENU2, Option::Flags::INPUT);// ENTER
 #endif
-
-    load(ss_api::Game());
 }
 
 void Config::load(const ss_api::Game &game) {
@@ -291,7 +289,7 @@ void Config::reset() {
 
     options_rom.clear();
 
-    int start = 0, end = (int) options_gui.size();
+    size_t start = 0, end = options_gui.size();
     for (size_t i = 0; i < options_gui.size(); i++) {
         if (options_gui[i].getId() == Option::Id::MENU_ROM_OPTIONS) {
             start = i;
@@ -299,7 +297,7 @@ void Config::reset() {
         }
     }
 
-    for (int i = start; i < end; i++) {
+    for (size_t i = start; i < end; i++) {
         options_rom.emplace_back(options_gui[i]);
     }
 }

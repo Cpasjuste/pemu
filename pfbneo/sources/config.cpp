@@ -33,6 +33,9 @@ PFBAConfig::PFBAConfig(c2d::Io *io, int version) : Config(io, version) {
     /// pfba custom config
     ////////////////////////////////////////////////////////////
 
+    /// MAIN OPTIONS
+    get(Option::Id::GUI_SHOW_ZIP_NAMES)->setValueBool(false);
+
     /// ROMS OPTIONS
     add(Option::Id::ROM_FILTER, "FORCE_60HZ",
         {"OFF", "ON"}, 1, Option::Id::ROM_FORCE_60HZ, Option::Flags::BOOLEAN);
@@ -92,6 +95,4 @@ PFBAConfig::PFBAConfig(c2d::Io *io, int version) : Config(io, version) {
     // "c2dui_romlist" will also reload config, but we need new roms paths
     reset();
     load();
-    // TODO: fixme
-    //save();
 }
