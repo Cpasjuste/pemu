@@ -5,9 +5,9 @@
 #include "c2dui.h"
 #include "c2dui_ui_menu.h"
 
-#define OPTION_ID_QUIT -1
-#define OPTION_ID_STATES -2
-#define OPTION_ID_OTHER -3
+#define OPTION_ID_QUIT (-1)
+#define OPTION_ID_STATES (-2)
+#define OPTION_ID_OTHER (-3)
 
 class MenuLine : public c2d::RectangleShape {
 
@@ -49,7 +49,6 @@ public:
 
         // reset
         name->setString(option.getName());
-        name->setStyle(Text::Regular);
         value->setVisibility(Visibility::Visible);
         setFillColor(Color::Transparent);
 
@@ -78,7 +77,6 @@ public:
                 value->setString(btn);
             }
         } else if (option.getFlags() & Option::Flags::MENU) {
-            name->setStyle(Text::Italic);
             value->setVisibility(Visibility::Hidden);
             setFillColor(ui->getUiMenu()->getOutlineColor());
         } else {
@@ -321,9 +319,9 @@ bool UiMenu::onInput(c2d::Input::Player *players) {
                 ui->getUiRomList()->setVideoSnapDelay(option.getValueInt());
                 break;
 #ifdef __SWITCH__
-            case Option::Id::JOY_SINGLEJOYCON:
-                ((SWITCHInput *) ui->getInput())->setSingleJoyconMode(option.getValueBool());
-                break;
+                case Option::Id::JOY_SINGLEJOYCON:
+                    ((SWITCHInput *) ui->getInput())->setSingleJoyconMode(option.getValueBool());
+                    break;
 #endif
             default:
                 break;
