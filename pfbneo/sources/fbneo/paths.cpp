@@ -29,22 +29,21 @@ char szAppIconPath[MAX_PATH];
 char szAppBlendPath[MAX_PATH];
 char szAppEEPROMPath[MAX_PATH];
 char szAppHDDPath[MAX_PATH];
-char szAppSkinPath[MAX_PATH];
 
 void BurnPathsInit(c2d::C2DIo *io) {
     printf("BurnPathsInit: dataPath = %s\n", io->getDataPath().c_str());
 
-    snprintf(szAppHomePath, MAX_PATH - 1, "%s/", io->getDataPath().c_str());
+    snprintf(szAppHomePath, MAX_PATH - 1, "%s", io->getDataPath().c_str());
     io->create(szAppHomePath);
 
-    snprintf(szAppRomPath, MAX_PATH - 1, "%s%s", szAppHomePath, "roms");
+    snprintf(szAppRomPath, MAX_PATH - 1, "%s%s/", szAppHomePath, "roms");
     io->create(szAppRomPath);
 
-    snprintf(szAppSavePath, MAX_PATH - 1, "%s%s", szAppHomePath, "saves");
+    snprintf(szAppSavePath, MAX_PATH - 1, "%s%s/", szAppHomePath, "saves");
     io->create(szAppSavePath);
     //printf("szAppSavePath: %s\n", szAppSavePath);
 
-    snprintf(szAppConfigPath, MAX_PATH - 1, "%s%s", szAppHomePath, "configs");
+    snprintf(szAppConfigPath, MAX_PATH - 1, "%s%s/", szAppHomePath, "configs");
     io->create(szAppConfigPath);
     //printf("szAppConfigPath: %s\n", szAppConfigPath);
 
@@ -52,7 +51,7 @@ void BurnPathsInit(c2d::C2DIo *io) {
     io->create(szAppSamplesPath);
     //printf("szAppSamplesPath: %s\n", szAppSamplesPath);
 
-    snprintf(szAppIconPath, MAX_PATH - 1, "%s%s", szAppHomePath, "icons");
+    snprintf(szAppIconPath, MAX_PATH - 1, "%s%s/", szAppHomePath, "icons");
     io->create(szAppIconPath);
     //printf("szAppIconPath: %s\n", szAppIconPath);
 
@@ -68,6 +67,6 @@ void BurnPathsInit(c2d::C2DIo *io) {
     io->create(szAppEEPROMPath);
 
     snprintf(szAppHiscorePath, MAX_PATH - 1, "%s%s/", szAppHomePath, "hiscores");
-    io->create(szAppHiscorePath);
-    //printf("szAppHiscorePath: %s\n", szAppHiscorePath);
+    // copy hiscore.dat from romfs to datadir
+    io->copy(io->getRomFsPath() + "hiscores/", std::string(szAppHiscorePath) + "/");
 }
