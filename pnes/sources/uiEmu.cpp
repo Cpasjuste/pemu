@@ -40,6 +40,12 @@ int PNESGuiEmu::load(const ss_api::Game &game) {
     getUi()->getUiProgressBox()->setLayer(1000);
     getUi()->flip();
 
+    // default paths
+    snprintf(nstpaths.romfs, sizeof(nstpaths.romfs), "%s", ui->getIo()->getRomFsPath().c_str());
+    snprintf(nstpaths.nstconfdir, sizeof(nstpaths.nstconfdir), "%s", ui->getIo()->getDataPath().c_str());
+    strncpy(nstpaths.nstdir, nstpaths.nstconfdir, sizeof(nstpaths.nstdir));
+
+    // default config
     nestopia_config_init();
 
     std::string fullPath = game.romsPath + game.path;

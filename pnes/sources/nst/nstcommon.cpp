@@ -443,7 +443,11 @@ void nst_db_load() {
 	}
 
 	// If it fails, try looking in the data directory
+#ifdef __CROSS2D__
+    snprintf(dbpath, sizeof(dbpath), "%sNstDatabase.xml", nstpaths.romfs);
+#else
 	snprintf(dbpath, sizeof(dbpath), "%s/NstDatabase.xml", DATADIR);
+#endif
 	nstdb = new std::ifstream(dbpath, std::ifstream::in|std::ifstream::binary);
 
 	if (nstdb->is_open()) {
@@ -740,6 +744,7 @@ void nst_set_callbacks() {
 }
 
 void nst_set_dirs() {
+#ifndef __CROSS2D__
 	// Set up system directories
 	// create config directory if it doesn't exist
 	if (getenv("XDG_CONFIG_HOME")) {
@@ -764,7 +769,7 @@ void nst_set_dirs() {
 	if (mkdir(nstpaths.nstdir, 0755) && errno != EEXIST) {
 		fprintf(stderr, "Failed to create %s: %d\n", nstpaths.nstdir, errno);
 	}
-
+#endif
 	// create save and state directories if they don't exist
 	char dirstr[256];
 	snprintf(dirstr, sizeof(dirstr), "%ssave", nstpaths.nstdir);

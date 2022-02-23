@@ -58,7 +58,6 @@ int main(int argc, char **argv) {
     io->create(io->getDataPath() + "roms");
     io->create(io->getDataPath() + "configs");
     io->create(io->getDataPath() + "saves");
-    io->create(io->getDataPath() + "cache");
 
     Vector2f screenSize = cfg->getScreenSize();
     ui = new UiMain(screenSize, io, cfg);
