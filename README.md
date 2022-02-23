@@ -22,7 +22,7 @@
         libconfig-dev libglm-dev libfreetype6-dev libpng-dev libminizip-dev zlib1g-dev \
         libvdpau-dev libva-dev libavcodec-dev libavfilter-dev libavformat-dev libavutil-dev \
         libpostproc-dev libswresample-dev libswscale-dev libmpv-dev libass-dev libbz2-dev \
-        libfribidi-dev libphysfs-dev
+        libfribidi-dev libzip-dev libfuse-dev
     ```
 - clone pemu repository:
     ```
