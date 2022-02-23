@@ -52,6 +52,7 @@
 #include "audio.h"
 #include "fltkui/video.h"
 #include "fltkui/samples.h"
+char nstpaths_romfs[256];
 #else
 // Nst Common
 #include "nstcommon.h"
@@ -443,8 +444,8 @@ void nst_db_load() {
 	}
 
 	// If it fails, try looking in the data directory
-#ifdef __CROSS2D__
-    snprintf(dbpath, sizeof(dbpath), "%sNstDatabase.xml", nstpaths.romfs);
+#ifdef __PNES__
+    snprintf(dbpath, sizeof(dbpath), "%sNstDatabase.xml", nstpaths_romfs);
 #else
 	snprintf(dbpath, sizeof(dbpath), "%s/NstDatabase.xml", DATADIR);
 #endif
@@ -744,7 +745,7 @@ void nst_set_callbacks() {
 }
 
 void nst_set_dirs() {
-#ifndef __CROSS2D__
+#ifndef __PNES__
 	// Set up system directories
 	// create config directory if it doesn't exist
 	if (getenv("XDG_CONFIG_HOME")) {

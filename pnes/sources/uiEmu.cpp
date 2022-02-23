@@ -19,6 +19,7 @@ extern PNESGuiEmu *uiEmu;
 settings_t conf;
 
 extern nstpaths_t nstpaths;
+extern char nstpaths_romfs[256];
 
 extern bool (*nst_archive_select)(const char *, char *, size_t);
 
@@ -41,7 +42,7 @@ int PNESGuiEmu::load(const ss_api::Game &game) {
     getUi()->flip();
 
     // default paths
-    snprintf(nstpaths.romfs, sizeof(nstpaths.romfs), "%s", ui->getIo()->getRomFsPath().c_str());
+    snprintf(nstpaths_romfs, sizeof(nstpaths_romfs), "%s", ui->getIo()->getRomFsPath().c_str());
     snprintf(nstpaths.nstconfdir, sizeof(nstpaths.nstconfdir), "%s", ui->getIo()->getDataPath().c_str());
     strncpy(nstpaths.nstdir, nstpaths.nstconfdir, sizeof(nstpaths.nstdir));
 
