@@ -40,7 +40,7 @@ jobs:
         run: |
           cd $GITHUB_WORKSPACE
           mkdir cmake-build && cd cmake-build
-          cmake -G "Unix Makefiles" -DPLATFORM_LINUX=ON -DOPTION_BUILTIN_LIBCONFIG=ON \
+          cmake -G "Unix Makefiles" -DPLATFORM_LINUX=ON \
             -DOPTION_EMU=psnes -DCMAKE_BUILD_TYPE=Debug ..
           make -j $(getconf _NPROCESSORS_ONLN) psnes
           
