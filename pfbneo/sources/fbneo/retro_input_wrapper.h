@@ -56,10 +56,10 @@ void poll_cb();
 #define RETRO_DEVICE_ID_JOYPAD_X        c2d::Input::Key::Fire4
 #define RETRO_DEVICE_ID_JOYPAD_L        c2d::Input::Key::Fire5
 #define RETRO_DEVICE_ID_JOYPAD_R        c2d::Input::Key::Fire6
-#define RETRO_DEVICE_ID_JOYPAD_L2       BIT(20)
-#define RETRO_DEVICE_ID_JOYPAD_R2       BIT(21)
-#define RETRO_DEVICE_ID_JOYPAD_L3       BIT(22)
-#define RETRO_DEVICE_ID_JOYPAD_R3       BIT(23)
+#define RETRO_DEVICE_ID_JOYPAD_L2       c2d::Input::Key::Fire7
+#define RETRO_DEVICE_ID_JOYPAD_R2       c2d::Input::Key::Fire8
+#define RETRO_DEVICE_ID_JOYPAD_L3       BIT(21)
+#define RETRO_DEVICE_ID_JOYPAD_R3       BIT(22)
 
 #define RETRO_DEVICE_ID_JOYPAD_MASK    256
 

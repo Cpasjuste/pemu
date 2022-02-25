@@ -203,16 +203,16 @@ void UiMain::updateInputMapping(bool isRomConfig) {
     } else {
 #ifndef NO_KEYBOARD
         // keep custom config for menus keys
-        int key_mapping[15];
+        int key_mapping[17];
         memcpy(key_mapping, C2D_DEFAULT_KB_KEYS, sizeof(key_mapping));
-        key_mapping[12] = config->get(Option::Id::KEY_MENU1, false)->getValueInt();
-        key_mapping[13] = config->get(Option::Id::KEY_MENU2, false)->getValueInt();
+        key_mapping[14] = config->get(Option::Id::KEY_MENU1, false)->getValueInt();
+        key_mapping[15] = config->get(Option::Id::KEY_MENU2, false)->getValueInt();
         getInput()->setKeyboardMapping(key_mapping);
 #endif
-        int joy_mapping[15];
+        int joy_mapping[17];
         memcpy(joy_mapping, C2D_DEFAULT_JOY_KEYS, sizeof(joy_mapping));
-        joy_mapping[12] = config->get(Option::Id::JOY_MENU1, false)->getValueInt();
-        joy_mapping[13] = config->get(Option::Id::JOY_MENU2, false)->getValueInt();
+        joy_mapping[14] = config->get(Option::Id::JOY_MENU1, false)->getValueInt();
+        joy_mapping[15] = config->get(Option::Id::JOY_MENU2, false)->getValueInt();
 
         for (int i = 0; i < PLAYER_MAX; i++) {
             getInput()->setJoystickMapping(i, joy_mapping);
@@ -228,5 +228,3 @@ void UiMain::updateInputMapping(bool isRomConfig) {
     ((SWITCHInput *) getInput())->setSingleJoyconMode(single_joy_mode);
 #endif
 }
-
-
