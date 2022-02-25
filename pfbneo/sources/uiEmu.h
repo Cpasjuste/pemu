@@ -34,6 +34,8 @@ private:
     c2d::FloatRect textureRect;
 
     int frameskip = 0;
+
+    C2DClock resetClock;
 };
 
 #endif //PFBA_UIEMU_H

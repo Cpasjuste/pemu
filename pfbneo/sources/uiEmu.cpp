@@ -8,13 +8,13 @@
 #include "c2dui.h"
 #include "uiEmu.h"
 #include "video.h"
-#include "fbneo/input.h"
 
 using namespace c2d;
 using namespace c2dui;
 
 int nVidFullscreen = 0;
 INT32 bVidUseHardwareGamma = 1;
+extern struct GameInp *pgi_reset;
 
 UINT32 (__cdecl *VidHighCol)(INT32 r, INT32 g, INT32 b, INT32 i);
 
@@ -202,14 +202,6 @@ int PFBAGuiEmu::load(const ss_api::Game &game) {
     ///////////////
 
     ///////////
-    // INPUT
-    //////////
-    InputInit();
-    ///////////
-    // INPUT
-    //////////
-
-    ///////////
     // AUDIO
     //////////
     addAudio(audio_freq, Audio::toSamples(audio_freq, (float) nBurnFPS / 100.0f));
@@ -312,11 +304,20 @@ bool PFBAGuiEmu::onInput(c2d::Input::Player *players) {
 #endif
 
     if (!isPaused()) {
-        if ((players[0].keys & Input::Key::Menu2) && (players[0].keys & Input::Key::Fire5)) {
-            players[0].keys |= C2D_KEY_DIAG;
-        } else if ((players[0].keys & Input::Key::Menu2) && (players[0].keys & Input::Key::Fire6)) {
-            players[0].keys |= C2D_KEY_SERVICE;
+        // handle reset switch
+        if (players[0].keys & Input::Key::Select) {
+            if (resetClock.getElapsedTime().asSeconds() > 3) {
+                if (pgi_reset) {
+                    pgi_reset->Input.nVal = 1;
+                    *(pgi_reset->Input.pVal) = pgi_reset->Input.nVal;
+                }
+                nCurrentFrame = 0;
+                nFramesEmulated = 0;
+                resetClock.restart();
+            }
+            return UIEmu::onInput(players);
         }
+        resetClock.restart();
     }
 
     return UIEmu::onInput(players);
@@ -336,12 +337,14 @@ void PFBAGuiEmu::onUpdate() {
 #else
         int skip = 0;
 #endif
-        frameskip++;
 
+        nCurrentFrame++;
         pBurnDraw = nullptr;
+        frameskip++;
 
         if (frameskip > skip) {
             video->getTexture()->lock(&textureRect, (void **) &pBurnDraw, &nBurnPitch);
+            nFramesRendered++;
         }
 
         BurnDrvFrame();

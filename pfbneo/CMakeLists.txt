@@ -32,8 +32,6 @@ set(BURNER_DIRS
         )
 file(GLOB SRC_BURNER
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burner/*.c*
-        ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burner/sdl/inpdipsw.cpp
-        ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burner/sdl/input_sdl2.cpp
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burner/sdl/neocdlist.cpp
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burner/sdl/stringset.cpp
         )
@@ -41,6 +39,8 @@ list(REMOVE_ITEM SRC_BURNER
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burner/conc.cpp
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burner/cong.cpp
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burner/dat.cpp
+        ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burner/gamc.cpp
+        ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burner/gami.cpp
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burner/image.cpp
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burner/sshot.cpp
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burner/state.cpp
@@ -102,7 +102,6 @@ set(INTF_DIRS
         )
 file(GLOB SRC_INTF
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/intf/*.cpp
-        ${CMAKE_SOURCE_DIR}/cores/fbneo/src/intf/input/*.cpp
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/intf/cd/*.cpp
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/intf/cd/sdl/*.cpp
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/intf/audio/*.cpp

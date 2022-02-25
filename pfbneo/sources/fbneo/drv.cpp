@@ -2,6 +2,7 @@
 
 #include "c2dui.h"
 #include "burner.h"
+#include "retro_input.h"
 
 using namespace c2dui;
 
@@ -99,14 +100,20 @@ int DrvInit(int nDrvNum, bool bRestore) {
     printf("DrvInit(%i, %i)\n", nDrvNum, bRestore);
     DrvExit();
 
+    // set selected driver
     nBurnDrvSelect[0] = (UINT32) nDrvNum;
-
-    // Define nMaxPlayers early; GameInpInit() needs it (normally defined in DoLibInit()).
+    // for retro_input
+    bIsNeogeoCartGame = ((BurnDrvGetHardwareCode() & HARDWARE_PUBLIC_MASK) == HARDWARE_SNK_NEOGEO);
+    // default input values
     nMaxPlayers = BurnDrvGetMaxPlayers();
-    GameInpInit();
-    //ConfigGameLoad(true);
-    InputMake(true);
-    GameInpDefault();
+    SetDefaultDeviceTypes();
+    // init inputs
+    InputInit();
+    SetControllerInfo();
+    // diag combo
+    SetDiagInpHoldFrameDelay(120);
+    static UINT8 diag_input_combo[] = {254, RETRO_DEVICE_ID_JOYPAD_EMPTY};
+    diag_input = diag_input_combo;
 
     printf("DrvInit: DoLibInit()\n");
     if (DoLibInit()) {                // Init the Burn library's driver
@@ -139,7 +146,7 @@ int DrvExit() {
             char path[1024];
             snprintf(path, 1023, "%s%s.fs", szAppEEPROMPath, BurnDrvGetTextA(DRV_NAME));
             BurnStateSave(path, 0);
-            GameInpExit();
+            InputExit();
             BurnDrvExit();                // Exit the driver
         }
     }
