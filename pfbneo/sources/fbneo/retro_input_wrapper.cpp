@@ -23,13 +23,6 @@ int16_t input_cb(unsigned port, unsigned device, unsigned index, unsigned id) {
     //     port, device, index, id, keys);
 
     if (device == RETRO_DEVICE_JOYPAD) {
-        if (keys > 0)
-            printf("input_cb(joy): port: %i, device: %i, index: %i, id: %x (keys: %x)\n",
-                   port, device, index, id, keys);
-        // diag_input
-        if (id == 254 && (keys & c2d::Input::Key::Start)) {
-            return 1;
-        }
         return keys & id ? 1 : 0;
     }
 

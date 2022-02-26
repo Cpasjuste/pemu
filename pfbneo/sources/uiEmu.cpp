@@ -8,13 +8,13 @@
 #include "c2dui.h"
 #include "uiEmu.h"
 #include "video.h"
+#include "retro_input_wrapper.h"
 
 using namespace c2d;
 using namespace c2dui;
 
 int nVidFullscreen = 0;
 INT32 bVidUseHardwareGamma = 1;
-extern struct GameInp *pgi_reset;
 
 UINT32 (__cdecl *VidHighCol)(INT32 r, INT32 g, INT32 b, INT32 i);
 
@@ -114,8 +114,10 @@ int PFBAGuiEmu::getSekCpuCore() {
 int PFBAGuiEmu::load(const ss_api::Game &game) {
 
     currentGame = game;
-    std::string zipName = Utility::removeExt(game.path);
+    ui->getUiStatusBox()->show("STARTING EMULATION: " + game.names.at(0).text,
+                               "TIPS: PRESS (COIN + START) BUTTONS FOR IN GAME MENU");
 
+    std::string zipName = Utility::removeExt(game.path);
     if (game.system.id == SYSTEM_ID_COLECO) {
         zipName = "cv_" + zipName;
     } else if (game.system.id == SYSTEM_ID_GAMEGEAR) {
@@ -236,8 +238,8 @@ int PFBAGuiEmu::load(const ss_api::Game &game) {
     return UIEmu::load(game);
 }
 
+// need for some games
 void Reinitialise(void) {
-    printf("Reinitialise called\n");
     int w, h;
     BurnDrvGetFullSize(&w, &h);
     auto v = new PFBAVideo(uiInstance, (void **) &pBurnDraw, &nBurnPitch, Vector2f((float) w, (float) h));
@@ -303,23 +305,6 @@ bool PFBAGuiEmu::onInput(c2d::Input::Player *players) {
 #endif
 #endif
 
-    if (!isPaused()) {
-        // handle reset switch
-        if (players[0].keys & Input::Key::Select) {
-            if (resetClock.getElapsedTime().asSeconds() > 3) {
-                if (pgi_reset) {
-                    pgi_reset->Input.nVal = 1;
-                    *(pgi_reset->Input.pVal) = pgi_reset->Input.nVal;
-                }
-                nCurrentFrame = 0;
-                nFramesEmulated = 0;
-                resetClock.restart();
-            }
-            return UIEmu::onInput(players);
-        }
-        resetClock.restart();
-    }
-
     return UIEmu::onInput(players);
 }
 
@@ -327,9 +312,38 @@ void PFBAGuiEmu::onUpdate() {
     UIEmu::onUpdate();
 
     if (!isPaused()) {
-
         // update fbneo inputs
         InputMake(true);
+
+        // handle diagnostic and reset switch
+        unsigned int keys = ui->getInput()->getKeys(0);
+        if (keys & Input::Key::Select) {
+            if (clock.getElapsedTime().asSeconds() > 2) {
+                if (pgi_reset) {
+                    ui->getUiStatusBox()->show("RESET",
+                                               "TIPS: YOU CAN PRESS START "
+                                               "BUTTON 2 SECONDS FOR DIAG MENU...");
+                    pgi_reset->Input.nVal = 1;
+                    *(pgi_reset->Input.pVal) = pgi_reset->Input.nVal;
+                }
+                nCurrentFrame = 0;
+                nFramesEmulated = 0;
+                clock.restart();
+            }
+        } else if (keys & Input::Key::Start) {
+            if (clock.getElapsedTime().asSeconds() > 2) {
+                if (pgi_diag) {
+                    ui->getUiStatusBox()->show("DIAGNOSTIC",
+                                               "TIPS: YOU CAN PRESS COIN "
+                                               "BUTTON 2 SECONDS TO RESET CURRENT GAME...");
+                    pgi_diag->Input.nVal = 1;
+                    *(pgi_diag->Input.pVal) = pgi_diag->Input.nVal;
+                }
+                clock.restart();
+            }
+        } else {
+            clock.restart();
+        }
 
         // update fbneo video buffer and audio
 #ifdef __VITA__
@@ -338,7 +352,6 @@ void PFBAGuiEmu::onUpdate() {
         int skip = 0;
 #endif
 
-        nCurrentFrame++;
         pBurnDraw = nullptr;
         frameskip++;
 
@@ -348,17 +361,15 @@ void PFBAGuiEmu::onUpdate() {
         }
 
         BurnDrvFrame();
+        nCurrentFrame++;
 
         if (frameskip > skip) {
             video->getTexture()->unlock();
+            frameskip = 0;
         }
 
         if (audio && audio->isAvailable()) {
             audio->play(pBurnSoundOut, audio->getSamples(), audio_sync);
-        }
-
-        if (frameskip > skip) {
-            frameskip = 0;
         }
     }
 }

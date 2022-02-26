@@ -110,10 +110,6 @@ int DrvInit(int nDrvNum, bool bRestore) {
     // init inputs
     InputInit();
     SetControllerInfo();
-    // diag combo
-    SetDiagInpHoldFrameDelay(120);
-    static UINT8 diag_input_combo[] = {254, RETRO_DEVICE_ID_JOYPAD_EMPTY};
-    diag_input = diag_input_combo;
 
     printf("DrvInit: DoLibInit()\n");
     if (DoLibInit()) {                // Init the Burn library's driver

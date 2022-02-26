@@ -35,7 +35,7 @@ private:
 
     int frameskip = 0;
 
-    C2DClock resetClock;
+    C2DClock clock;
 };
 
 #endif //PFBA_UIEMU_H
