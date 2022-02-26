@@ -9,7 +9,7 @@
 #include <string>
 #include <vector>
 #include "burner.h"
-#include "cross2d/skeleton/input.h"
+#include "cross2d/c2d.h"
 
 extern bool bIsNeogeoCartGame;
 extern unsigned nGameType;

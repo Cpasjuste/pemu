@@ -2900,6 +2900,9 @@ void InputMake(void)
 			}
 		}
 	}
+#ifdef __CROSS2D__
+    return 0;
+#endif
 }
 
 void RefreshLightgunCrosshair()
@@ -2942,6 +2945,9 @@ void InputInit()
 	GameInpDefault();
 
 	bInputInitialized = true;
+#ifdef __CROSS2D__
+    return 0;
+#endif
 }
 
 #ifdef __CROSS2D__
@@ -2957,6 +2963,10 @@ void InputExit()
 
 	bInputInitialized = false;
 	bLibretroSupportsBitmasks = false;
+
+#ifdef __CROSS2D__
+    return 0;
+#endif
 }
 
 #ifndef __CROSS2D__

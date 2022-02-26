@@ -29,6 +29,14 @@ namespace c2d {
             return "/data/pnes/";
         }
 
+#ifndef NDEBUG
+
+        std::string getRomFsPath() override {
+            return "/data/pnes/";
+        }
+
+#endif
+
 #endif
 
     };
