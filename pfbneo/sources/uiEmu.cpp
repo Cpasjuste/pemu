@@ -114,10 +114,8 @@ int PFBAGuiEmu::getSekCpuCore() {
 int PFBAGuiEmu::load(const ss_api::Game &game) {
 
     currentGame = game;
-    ui->getUiStatusBox()->show("STARTING EMULATION: " + game.names.at(0).text,
-                               "TIPS: PRESS (COIN + START) BUTTONS FOR IN GAME MENU");
-
     std::string zipName = Utility::removeExt(game.path);
+
     if (game.system.id == SYSTEM_ID_COLECO) {
         zipName = "cv_" + zipName;
     } else if (game.system.id == SYSTEM_ID_GAMEGEAR) {
@@ -320,8 +318,7 @@ void PFBAGuiEmu::onUpdate() {
         if (keys & Input::Key::Select) {
             if (clock.getElapsedTime().asSeconds() > 2) {
                 if (pgi_reset) {
-                    ui->getUiStatusBox()->show("RESET",
-                                               "TIPS: YOU CAN PRESS START "
+                    ui->getUiStatusBox()->show("TIPS: PRESS START "
                                                "BUTTON 2 SECONDS FOR DIAG MENU...");
                     pgi_reset->Input.nVal = 1;
                     *(pgi_reset->Input.pVal) = pgi_reset->Input.nVal;
@@ -333,8 +330,7 @@ void PFBAGuiEmu::onUpdate() {
         } else if (keys & Input::Key::Start) {
             if (clock.getElapsedTime().asSeconds() > 2) {
                 if (pgi_diag) {
-                    ui->getUiStatusBox()->show("DIAGNOSTIC",
-                                               "TIPS: YOU CAN PRESS COIN "
+                    ui->getUiStatusBox()->show("TIPS: PRESS COIN "
                                                "BUTTON 2 SECONDS TO RESET CURRENT GAME...");
                     pgi_diag->Input.nVal = 1;
                     *(pgi_diag->Input.pVal) = pgi_diag->Input.nVal;

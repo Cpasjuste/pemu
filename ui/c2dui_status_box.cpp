@@ -14,26 +14,22 @@ UiStatusBox::UiStatusBox(UiMain *m)
     icon->add(new TweenRotation(360, 0, 2, TweenLoop::Loop, TweenState::Playing));
     add(icon);
 
-    titleText = new Text("WT", (int) (getSize().y * 0.45f), main->getFont());
-    titleText->setPosition(icon->getSize().x + 8, 4);
-    add(titleText);
+    text = new Text("TIPS:", (int) (getSize().y * 0.7f), main->getFont());
+    text->setOutlineThickness(1.0f * main->getScaling());
+    text->setPosition(icon->getSize().x + (4 * main->getScaling()), (getSize().y / 2) + text->getOutlineThickness());
+    text->setOrigin(Origin::Left);
+    text->setFillColor(SkinnedRectangle::getOutlineColor());
+    add(text);
 
-    messageText = new Text("WT", (int) (getSize().y * 0.45f), main->getFont());
-    messageText->setPosition(titleText->getPosition().x,
-                             titleText->getPosition().y + titleText->getSize().y + 2);
-    messageText->setSizeMax(getSize().x - icon->getSize().x - 16, 0);
-    add(messageText);
-
-    tween = new TweenAlpha(0, 255, 1.0f);
+    tween = new TweenAlpha(0, SkinnedRectangle::getAlpha(), 1.0f);
     add(tween);
 
     setVisibility(Visibility::Hidden);
 }
 
-void UiStatusBox::show(const std::string &title, const std::string &message, bool inf, bool drawNow) {
-
-    titleText->setString(title);
-    messageText->setString(message);
+void UiStatusBox::show(const std::string &t, bool inf, bool drawNow) {
+    text->setString(t);
+    setSize(icon->getLocalBounds().width + text->getLocalBounds().width + (8 * main->getScaling()), getSize().y);
 
     infinite = inf;
     clock->restart();
@@ -51,7 +47,6 @@ void UiStatusBox::hide() {
 }
 
 void UiStatusBox::onDraw(c2d::Transform &transform, bool draw) {
-
     if (isVisible() && !infinite && clock->getElapsedTime().asSeconds() > 5) {
         setVisibility(Visibility::Hidden, true);
     }

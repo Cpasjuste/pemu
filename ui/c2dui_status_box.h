@@ -15,7 +15,7 @@ namespace c2dui {
 
         ~UiStatusBox() override;
 
-        void show(const std::string &title, const std::string &message, bool infinite = false, bool drawNow = false);
+        void show(const std::string &text, bool infinite = false, bool drawNow = false);
 
         void hide();
 
@@ -25,8 +25,7 @@ namespace c2dui {
 
         UiMain *main;
         SkinnedRectangle *icon;
-        c2d::Text *titleText;
-        c2d::Text *messageText;
+        c2d::Text *text;
         c2d::TweenAlpha *tween;
         c2d::Clock *clock;
         bool infinite = false;
