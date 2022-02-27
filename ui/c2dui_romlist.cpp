@@ -37,13 +37,13 @@ RomList::RomList(UiMain *_ui, const std::string &emuVersion) {
     text = new Text();
     ui->getSkin()->loadText(text, {"ROM_LIST", "TEXT"});
     text->setOrigin(Origin::BottomLeft);
-    text->setPosition(8, rect->getSize().y - ((float) text->getCharacterSize() / 2));
+    text->setPosition(8, rect->getSize().y - 8);
     rect->add(text);
 
     auto *version = new Text();
     ui->getSkin()->loadText(version, {"ROM_LIST", "TEXT"});
     version->setOrigin(Origin::BottomRight);
-    version->setPosition(rect->getSize().x - 16, rect->getSize().y - ((float) text->getCharacterSize() / 2));
+    version->setPosition(rect->getSize().x - 8, rect->getSize().y - 8);
     version->setString(emuVersion);
     rect->add(version);
 

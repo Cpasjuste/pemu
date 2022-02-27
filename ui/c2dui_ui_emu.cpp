@@ -96,7 +96,7 @@ void UIEmu::addVideo(void **pixels, int *pitch,
 int UIEmu::load(const Game &game) {
 
     printf("UIEmu::load(%s)\n", game.path.c_str());
-    ui->getUiStatusBox()->show("TIPS: PRESS COIN + START BUTTONS FOR IN GAME MENU...");
+    ui->getUiStatusBox()->show("TIPS: PRESS MENU1 + MENU2 BUTTONS FOR IN GAME MENU...");
     currentGame = game;
 
     // set fps text on top
