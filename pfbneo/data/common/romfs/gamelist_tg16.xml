@@ -7,7 +7,7 @@
                 <nom region="ss">Aero Blasters</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">Air Buster is a fast side-scrolling shooter. The player controls a small craft through different levels with many enemies. Every level ends with a boss and some sections speed up the gameplay, offering fast obstacle courses both horizontally and vertically scrolling. Flying orange pods release many power-ups at once, enhancing the ships with new or more powerful lasers, wing men and shields. The player can also hold the fire key to charge a blast that removes all enemy bullets from the screen and deals damage to all enemies. With an unforgiving difficulty, every hit is fatal, but the game can be continued from any point as long as there are lives and credits left. The game can be played with two players cooperatively.</synopsis>
             </synopsis>
@@ -34,7 +34,7 @@
                 <nom region="ss">Air Zonk</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">The little and bald prehistoric fellow is back and eager to fight once more, but this time no head-kicking nor bare-teeth hill climbing. PC Denjin is a crazy shooter stuffed with wacky and insane action. Our hero character is somehow very different too - this time he is a flying sunglass-wearing cyborg who fights his way through five intense levels. He is also not alone to face the challenges ahead and the army of minions the evil King Droll sends agains him - he is accompanied by new friends, from a massive robot-rocket to a flying mummy and a big and round floating cow. Smilies and power-ups can of course be collected throughout the game and a special and large sunglass-wearing smiley can call one of PC Denjin's friend to the rescue. But this is not all, if he collects the same kind of smiley twice, then they'll both do a mind-blowing mega-fusion. Freaky stuff. On top of being able to use a large selection of weapons, the player can also charge them up at any time by holding the fire button. Wait too long, and PC Denjin over-heats and drops a huge sunglass-wearing purple poo-poo that explodes and causes a fair amount of damage to all nearby enemies.</synopsis>
             </synopsis>
@@ -61,7 +61,7 @@
                 <nom region="ss">Alien Crush</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">Alien Crush is an alien-themed video pinball game.  The graphics feature strong similarities to the art from the Alien movies, and everything has a dark and sinister look.
 
@@ -90,7 +90,7 @@ The main table has numerous moving targets and ball locks and is two screens hig
                 <nom region="ss">Ballistix</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">Psygnosis' Ballistix is an arcade game in which you have to manipulate a ball in order to score a goal with your opponent. To do this, you will control an arrow that defines a direction, and pressing the fire key will launch a ball from this arrow in the direction the arrow points to; by launching balls at correct angles, you will manipulate the main ball and control the way it moves. Ballistix also keeps certain physics laws (namely gravity and friction), and will present you with varying obstacles in either one or two player mode.</synopsis>
             </synopsis>
@@ -117,7 +117,7 @@ The main table has numerous moving targets and ball locks and is two screens hig
                 <nom region="ss">Battle Royale</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">Battle Royale is a wrestling game that presents last-man-standing type battles between up two five wrestlers.
 
@@ -146,7 +146,7 @@ The game features three difficulty settings, five wrestlers to choose from, and 
                 <nom region="ss">Blazing Lazers</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">Blazing Lazers is a top-down shooter featuring 9 levels of varied and fast-paced action.  The story here is the usual save-the-world variety. You must pilot your ship against 8 super-weapons and ultimately destroy the menace once and for all.
 
@@ -175,7 +175,7 @@ The power-up system in Blazing Lazers deserves special mention.  There are four 
                 <nom region="ss">Bloody Wolf</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">Snake and Eagle, two commandos of the Bloody Wolf special forces, receive instructions from their commander to destroy the enemy's heavily armed base to rescue the President and any allies who have been reported as MIA.
 
@@ -208,7 +208,7 @@ The President and your fellow soldiers need you!</synopsis>
                 <nom region="ss">Bomberman</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">The black spaceman kidnapped your beloved and brought her to his chambers in the castle, far beyond your reach, over the rivers, forest and mountains. Your job is to save her, battling the sea of the enemies, with only bombs at your disposal.
 
@@ -239,7 +239,7 @@ This top-down action-arcade game consists of nine levels per stage, each tougher
                 <nom region="ss">Bomberman '93</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">Black Bomberman has cut power to the galaxy's own power station, which resulted in disputes between seven planets, and it is up to White Bomberman to restore power to the station and bring peace to the planets again. The objective is the same as in Dyna Blaster: use bombs to destroy all enemies in a level. Once you have destroyed them all, find the exit hidden in a block so you can be transported to the next level. A block will also flash yellow to let you know that a power-up can be obtained there. Power-ups include more bombs, manual detonation, extra lives, and extended flames. Occasionally, you also get the ability to walk through bombs or walls, or to kick bombs.
 
@@ -270,7 +270,7 @@ Besides this Normal mode, there are two other modes: Battle and Versus. In Battl
                 <nom region="ss">Bonk III - Bonk's Big Adventure</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">Bonk's Big Adventure is the third instalment in the side-scrolling platformer series. As in previous games, the player assumes the role of a caveman named Bonk who headbutts his way through various enemies in order to defeat King Drool. Familiar moves include swinging on trees, bouncing off walls, breaking blocks and climbing walls with his teeth. Compared to the previous games, he walks and moves a little faster.</synopsis>
             </synopsis>
@@ -297,7 +297,7 @@ Besides this Normal mode, there are two other modes: Battle and Versus. In Battl
                 <nom region="ss">Bonk's Adventure</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">Bonk's Adventure is a prehistoric platform game where you are in control of a large bald headed caveman, guiding him through the levels taking out all manner of strange prehistoric creatures that get in your way including King Drools henchmen - all in effort to free the captured/controlled residents of Moonland (bosses) - including the Princess Za from King Drool attempted take over.
 
@@ -330,7 +330,7 @@ A variety of bonus stages can be found throughout the game, which provide bonus 
                 <nom region="ss">Bonk's Revenge</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">Bonk has his revenge on King Drool III in his second game for the TurboGrafx.  It's not exactly clear why Bonk is so vengeful, but it appears that King Drool is responsible.  Bonk uses his over-sized cranium as a lethal weapon in this sequel.
 
@@ -359,7 +359,7 @@ The gameplay in this adventure is very similar to the first game.  Bonk has  hea
                 <nom region="ss">Boxyboy</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">Mastermind your way to the top, as your first job turns into a mind-boggling game of strategy! Show 'em you've got the brains and muscle, and they'll send you around the world to face 100 mind-bending levels of puzzles. Just be cool, and you'll discover secret levels that twist brains into pretzels! Soon you can start calling the shots with your own puzzle creations! One thing's for sure. Once you're into this brain buster, you'll be too hooked to stop!</synopsis>
             </synopsis>
@@ -386,7 +386,7 @@ The gameplay in this adventure is very similar to the first game.  Bonk has  hea
                 <nom region="ss">Bravoman</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">The evil Dr. Bomb has taken over Nitta village and only you, an ordinary salary man, can stop his evil plans by transforming into the fabulous superhero Bravoman!
 
@@ -417,7 +417,7 @@ Features 22 stages filled with bizarre settings and enemies, all rendered using 
                 <nom region="ss">Cadash</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">Trouble is in the kingdom of Dilsarl: the young, beautiful princess Salasa was abducted by the evil arch-mage Balrog. The king seeks help from the four best warriors of the country. The task is clear, but not so simple: find Balrog, destroy his evil minions and other monsters roaming the land, and rescue the princess.
 
@@ -446,7 +446,7 @@ Cadash is a platform action role-playing game. The player chooses one of the fou
                 <nom region="ss">Champions Forever Boxing</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">It's Ali, Foreman, Frazier, Holmes, and Norton - five of the world's greatest heavyweight boxing champs! Be them or battle them. Each has his actual physical traits and boxing style. Move and jab, or go toe-to-toe and unleash a flurry of punishing hooks and uppercuts, and body shots. Protect yourself by blocking punches or clinching. Taunt opponents with showboat moves if you've got the guts. Fight exhibition matches or an entire 15-year career. Between round close-ups show each boxer's facial damage. Beat these 5 legends and become a Champion Forever.
 
@@ -475,7 +475,7 @@ Cadash is a platform action role-playing game. The player chooses one of the fou
                 <nom region="ss">Chew Man Fu</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">Chew Man Fu has set a curse to rob the world of fried rice, egg rolls and all its other favourite foods. To stop him you must work through 550 rounds, clearing them by placing four different coloured balls into the appropriately-coloured hole.
 
@@ -504,7 +504,7 @@ Gameplay is something of a Pengo variant, as the single-screen levels are inhabi
                 <nom region="ss">China Warrior</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">China Warrior is a game in the spirit of Kung-Fu Master.  The story is of a Kung-Fu warrior named Wang who sets out the destroy the Dark Emperor and liberate China.  The gameplay is a side-scroller and the goal of the game is to make it to the end of the stage and battle its boss, bashing bad guys along the way.  There are only three types of attack; punch, kick and jump-kick and there are four stages in all.</synopsis>
             </synopsis>
@@ -531,7 +531,7 @@ Gameplay is something of a Pengo variant, as the single-screen levels are inhabi
                 <nom region="ss">Cratermaze</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">Cratermaze is an action puzzle game viewed from an overhead perspective. Each stage consists of a maze filled with various enemies and items. You must collect all of the keys on the stage to open the exit door while avoiding or eliminating enemies. Your primary method of dealing with enemies is to dig holes; if an enemy walks into a hole, they are momentarily trapped and you can then fill the hole to kill the enemy.
 
@@ -562,7 +562,7 @@ The Japanese release, Doraemon: Meikyu Daisakusen, features popular children's c
                 <nom region="ss">Cyber Core</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">Cyber-Core is a vertically scrolling shooter in which the player fights insects. The basic idea is traditional: shooting everything before they can shoot/touch the player: after three hits the chitin armor breaks and a life is lost. Besides flying enemies which are disposed of with the standard gun, the player also has to deal with enemies on the ground which need to be hit with one of the unlimited bomb.</synopsis>
             </synopsis>
@@ -589,7 +589,7 @@ The Japanese release, Doraemon: Meikyu Daisakusen, features popular children's c
                 <nom region="ss">Darkwing Duck</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">Darkwing Duck was a popular animated television show that aired on weekday afternoons in the early 1990's. Darkwing was a crime-fighting duck that kept the city safe from a bunch of not-so-smart criminals.
 
@@ -618,7 +618,7 @@ The TurboGrafx-16 game based on the cartoon is very different from the NES and G
                 <nom region="ss">Davis Cup Tennis</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">Challenge 32 top-seeded international pros in explosive court action, or take on your friends with tons of real playing options and a true player's view! Command an arsenal of pinpoint serves and powerful baseline passing shots. Attack the net with topspin or dropshot volleys. Then destroy your opponent's lob and morale with your overhead spash. Play singles and doubles on grass, clay, indoors or hardcourt in exhibition and worldwide tournaments. Practice against the ball machine to perfect your skills for the ultimate quest, the coveted David Cup!</synopsis>
             </synopsis>
@@ -645,7 +645,7 @@ The TurboGrafx-16 game based on the cartoon is very different from the NES and G
                 <nom region="ss">Dead Moon</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">About 200 years in the future, a comet is detected at the edge of the solar system.  Astronomers determine that it will pass near the earth, and send probes to examine it.  When the probes near the comet, it abruptly changes directions and heads towards earth.  At the last moment, the people of earth are able to launch surface-to-comet missiles and deflect its impact into the moon. At the center of the impact crater, alien war machines are gathering! The U.N. sends a lone spaceship to the moon to destroy the alien threat.
 
@@ -674,7 +674,7 @@ Dead Moon is a side scrolling shooter with 6 levels that take place on earth, in
                 <nom region="ss">Deep Blue</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">Aliens are invading the ocean and have mutated the fish and other aquatic beings! But an A.N.G.E.L. Fish Attack Sub is on its way to blast through four scenes of swimming terror and stop the aliens from taking over the sea. Fortunately, the A.N.G.E.L. is helped on its way by a number of power-ups - for instance, Healing Power completely repairs the sub and Speed Power speeds it up. Up to three modes of attack can be used to combat the mutant fish - the starting Pulse Shot, the destructive Swirl Cutter, and the Bubble Beam. But the A.N.G.E.L. is not indestructible. Four colors on the A.N.G.E.L.'s eye indicate the amount of damage the sub has sustained, and when it's had enough and explodes, that's the end of the A.N.G.E.L. and the end of the game.</synopsis>
             </synopsis>
@@ -701,7 +701,7 @@ Dead Moon is a side scrolling shooter with 6 levels that take place on earth, in
                 <nom region="ss">Devil's Crush - Naxat Pinball</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">Imagine an adventure game in the format of pinball, and you get Dragon's Fury. Your hero is a small silver ball, and your battlefield is a three-tiered pinball machine. Using your ball, you can defeat monsters, rack up points, and enter bonus stages. If you play with enough skill, you can trigger all sorts of point-accumulating bonuses. If you get one billion points, you get to fight the final boss and view the ending to the game.</synopsis>
             </synopsis>
@@ -728,7 +728,7 @@ Dead Moon is a side scrolling shooter with 6 levels that take place on earth, in
                 <nom region="ss">Double Dungeons - W</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">Double Dungeons is a solo dungeon crawler in the strictest sense. One or two players can explore pseudo-3D, maze-like dungeons (without auto-map feature, but with directions displayed on the screen) and fight the monsters populating them. The player(s) can choose to venture into any of the available 20 dungeons. The dungeons have the same textures, but their layout varies; the higher is the number of the chosen dungeon, the more dangerous are its enemies. Two-player mode features a split screen; the two players start exploring the dungeon from different points.
 
@@ -761,7 +761,7 @@ There is no narrative in the game; the only story-related information comes in f
                 <nom region="ss">Dragon Spirit</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">Amur, the spirit of the dragon, lives within you. As the winged creature that breathes mega-tons of fire, your mission is revealed. Rescue Princess Alicia from Zowel, Demon of Darkness. So take to the skies and destroy enemy creatures with breath and fireballs. Add dragon heads and incredible power-ups. Confront Zowel in a Super Battle of Beasts. (Careful not to breathe on Alicia).</synopsis>
             </synopsis>
@@ -788,7 +788,7 @@ There is no narrative in the game; the only story-related information comes in f
                 <nom region="ss">Dragon's Curse</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">Poor Hu-Man! he just isn't his old self. Trying to escape from the evil dragon Mecha, he's transformed into the horrific Lizard Man! Get ready to kick some serious dragon tail, because 5 more are waiting to stop you. Each is more vicious than the last. And each turns Hu-Man into a different kind of total gross out! Slash 'em, burn 'em, and blow 'em away! Then capture the Salamander Cross to break the DRAGON'S CURSE.</synopsis>
             </synopsis>
@@ -815,7 +815,7 @@ There is no narrative in the game; the only story-related information comes in f
                 <nom region="ss">Drop.Off</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">Drop Off is similar to Breakout, in that the player controls a paddle which can move left and right, hitting a ball which the player is using to eliminate jewels at the upper end of the play field. The game differs from Breakout, however, in that the paddle can also be moved up and down, the jewels are moving down toward the player's paddle, and there is a border at the bottom of the play field which bounces the ball back.
 
@@ -844,7 +844,7 @@ The plot of the game involves the antagonist character's girlfriend being in a c
                 <nom region="ss">Dungeon Explorer</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">The former king of Oddesia has entrusted you with an important, dangerous task. You must find the sacred ORA stone, which possesses the powers of life, light and happiness, and retrieve it before the king of the alien race, Natas, does. He has conquered this land and plunged it into an age of terror and despair, plagued with violence. It is up to you to stand against him and return your world to its former glory.
 
@@ -873,7 +873,7 @@ Dungeon Explorer plays like Gauntlet: you choose one of several different charac
                 <nom region="ss">Falcon</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">When you climb into the cockpit of the F-16 Fighting Falcon, get set for the "fight of your life" as the powerful Falcon F-16 takes you streaking across the sky at mach 2. Accurate weapons system, head-up-displays, cockpit controls and overall flight characteristics make this the ultimate in simulations. The enemy MiGs you encounter are very resourceful and skilled. And if that isn't enough, challenge another pilot in the head-to-head option via direct computer link. State of the art 3D graphic images of buildings, forests, freeways, and bridges flash by as you fly at the speed of sound only 150 feet above the deck. Take out bridges, power stations, tanks, airfields and SAM sites. Whether you are a novice pilot or a real "top gun", FALCON is for you!</synopsis>
             </synopsis>
@@ -900,7 +900,7 @@ Dungeon Explorer plays like Gauntlet: you choose one of several different charac
                 <nom region="ss">Fantasy Zone</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">The Fantasy Zone is a solar system consisting of eight brightly colored, fantastic planets. The evil Menons are trying to take over all of the planets in the Fantasy Zone by using misappropriated foreign currency to build their forces. It is the player's job to recover all of the coins and save the solar system! 
 
@@ -929,7 +929,7 @@ Fantasy Zone is an arcade style shooter for one or two players. The goal is to d
                 <nom region="ss">Final Lap Twin</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">Final Lap Twin is an open-wheel F1-style racing game loosely based on Namco's Final Lap arcade game.  The game display is always in split screen mode, even if only one player is playing.  The other display shows your nearest rival if you are racing against the computer.
 
@@ -960,7 +960,7 @@ Quest mode has more depth and forms the core of Final Lap Twin.  This is essenti
                 <nom region="ss">Galaga '90</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">Galaga '88 takes the basic gameplay of Galaga and adds higher-quality graphics, triple ship abilities, parsec progression, power-ups, asteroids, bosses and other enhancements. Periodically the player encounters Challenging Stages, which are set to music and feature "dancing" enemies.  The objective is to shoot all 40 enemies before they disappear, for a bonus of at least 10,000 points. There are a total of 29 stages. The player can begin with one ship with two in reserve or start right out with a dual ship (but only one in reserve).  
 
@@ -991,7 +991,7 @@ Later in the game some enemies are equipped with armor that renders them invinci
                 <nom region="ss">Ghost Manor</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">With an earth-shattering explosion, horror from another dimension grips your once peaceful town. Grisly creatures prey on the innocent. The dead rise to roam the streets. All resistance falls! But hey, no problem, you have a plan! Find the secret passage to their mansion stronghold and battle past the zombies and ghouls. Now get your axe inside, 'cause it's way full of demons and ghastly surprises! Ride the awesome Skull Slammer and search for their leader, the hideous Orb gamut. Discover his weakness and be a hero. If you don't, you'll be dust.</synopsis>
             </synopsis>
@@ -1018,7 +1018,7 @@ Later in the game some enemies are equipped with armor that renders them invinci
                 <nom region="ss">Gunboat</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">Gunboat is a 2D action simulation. You take control of a U.S. Gunboat in several conflict zones.
 
@@ -1058,7 +1058,7 @@ Anchors aweigh!</synopsis>
                 <nom region="ss">Hit the Ice - VHL - The Official Video Hockey League</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">This radical hockey game pits you and your team against some of the toughest skaters ever to burn a hole in the ice! Victory goes to the team that kicks, punches, and high-sticks its opponent into slush. Standard hockey rules apply, plus a few surprises to stir things up. So lace on your skates and fasten your face mask - hockey is about to break loose!</synopsis>
             </synopsis>
@@ -1085,7 +1085,7 @@ Anchors aweigh!</synopsis>
                 <nom region="ss">Impossamole</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">Monty Mole has been living in luxury since his previous adventures, but he has now been beamed up by an alien race who want him to do a job for them. Monty must trek through five worlds to retrieve the sacred scrolls of the race's Guardians. 
 
@@ -1116,7 +1116,7 @@ The platform-based gameplay is similar to Monty's earlier games, with primarily 
                 <nom region="ss">J.J. &amp; Jeff</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">Kato &amp; Ken Detective Agency are assigned the task of locating a missing rich man, and you can choose either Kato or Ken to go on the mission. Your partner doesn't like this one bit, so he decides to make a nuisance of himself along the way. Similar to Adventure Island, you must make your way through several levels, destroying wildlife along the way, but instead of using a hammer, you have three different ways to kill them: jump on or kick them, or when they are walking on the ground, blow gas out of them. 
 
@@ -1147,7 +1147,7 @@ Along the way, you can enter doors. Doing this will give you a hint about the le
                 <nom region="ss">Jack Nicklaus' Turbo Golf</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">Jack Nicklaus' Greatest 18 Holes of Major Championship Golf is a 3D golf simulation featuring an 18 Hole course created by Jack Nicklaus himself. Each of the 18 holes are from famous courses around the world and include number 8 at Pebble Beach, number 18 from Muirfield, number 12 from St. Andrews, number 12 from Augusta, number 10 at Riviera, and more. Gameplay is for one to four players and can be either stroke play or a skins game.</synopsis>
             </synopsis>
@@ -1174,7 +1174,7 @@ Along the way, you can enter doors. Doing this will give you a hint about the le
                 <nom region="ss">Jackie Chan's Action Kung Fu</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">Jackie Chan and his twin sister Josephine were great kung fu fighters in China and trained under a great master. One day when Jackie and Josephine were out walking, the Master's great enemy, The Sorcerer, appeared. The Sorcerer had come to rule over China and knew the twins would stand in his way, so he cast a spell to make Josephine disappear. Now it's up to Jackie Chan to follow after the Sorcerer and battle his minions in order to rescue his sister and save China.
 
@@ -1203,7 +1203,7 @@ Jackie Chan's Action Kung Fu is a side-scrolling fighting game. Jackie's control
                 <nom region="ss">Keith Courage in Alpha Zones</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">As a member of N.I.C.E. (Nations for International Citizens of Earth), Keith Courage takes up the fight against the aliens of B.A.D. (Bad Alien Dudes) through seven levels in this side-scrolling action platformer.
 
@@ -1234,7 +1234,7 @@ When he makes it to a certain point in each level, Keith Courage is given access
                 <nom region="ss">King of Casino</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">King of Casino is a casino simulation and offers five different games to win/lose some electronic money with: poker, slot machine, blackjack, roulette and Keno. After selecting one of the three playing modes (normal, fast or party), there are 15 casinos with slight differences to choose on a town map. Inside the casino the games itself are started by clicking on one of the gambling tables.</synopsis>
             </synopsis>
@@ -1261,7 +1261,7 @@ When he makes it to a certain point in each level, Keith Courage is given access
                 <nom region="ss">Klax</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">An action/puzzle game, the object is to catch assorted color falling tiles and create rows, columns, or diagonals of a single color. Each level requires a different pattern to be made, and the tiles fall faster, more at a time, and in an increasing number of colors as the game progresses.</synopsis>
             </synopsis>
@@ -1288,7 +1288,7 @@ When he makes it to a certain point in each level, Keith Courage is given access
                 <nom region="ss">Legend of Hero Tonma</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">A little caped hero called Tommy must fight his way to the boss' castle through a cute world to rescue a princess, but stopping him from his rescue mission will be several enemies, which he has to deal with by launching little fireballs at them. Tommy may also jump on their heads to stun them for a moment.
 
@@ -1317,7 +1317,7 @@ Getting power-ups will make the fireball soon increase to a bouncing fireball, w
                 <nom region="ss">Magical Chase</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">Ripple is a student of magic, and her teacher is a terrifying witch. Ripple's particulary afraid of her teacher right now, because she's just broken a promise she made to the witch: Ripple took a peek inside the forbidden book Sleeping Demons! No sooner had she opened the cover than out jumped six demons, which raced away! Unless she can catch all six demons and get them back inside the book, the witch will turn Ripple into a frog for breaking her promise! Ripple sets off on her quest with her two Elf-Star friends, Topsy and Turvy. Good luck, Ripple!!</synopsis>
             </synopsis>
@@ -1344,7 +1344,7 @@ Getting power-ups will make the fireball soon increase to a bouncing fireball, w
                 <nom region="ss">Military Madness</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">Military Madness is a futuristic turn-based strategy war game.  The year is 2089 and the setting is Earth?s moon, which yields many important resources.  While the governments of Earth bicker over their staked claims on the moon, the evil Axis Empire launches a lunar military campaign and takes over the moon, using its factories to produce advanced weaponry, the most devastating of which is the SAM (Supreme Atomic Missile).  As commander of the Allied forces, it is the player?s responsibility to lead what?s left of the Allied armies in a desperate offensive against the Axis Empire on the lunar surface before they can use the SAM to destroy Earth.
 
@@ -1373,7 +1373,7 @@ There are 32 maps (2 different campaigns with 16 maps each) to play through.  In
                 <nom region="ss">Moto Roader</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">The action in this racing game is viewed from above and features rotational controls. There are 6 racetracks featured including real-world ones such as Laguna Seca. Before each race you can buy a full compliment of upgrades and weapons, with each area (engine, handling, turbo and so on) having several variably-priced options. The unusual thing about the racing system is that the action always follows the leader. If you slip too far behind, your car is blown up and placed back onto the track further on in order to keep up (similarly to Micro Machines). This can only happen a limited number of times before the game is over.</synopsis>
             </synopsis>
@@ -1400,7 +1400,7 @@ There are 32 maps (2 different campaigns with 16 maps each) to play through.  In
                 <nom region="ss">Neutopia</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">The princess Aurora was kidnapped by the evil Dirth, and the king send a warrior named Jazeta on a mission to rescue her. It appears that once Dirth way sealed by eight wise men who used the power of eight sacred medallions. Princess Aurora is the only one who knows how to use those medallions, and that is why Dirth abducted her. The hero must explore the land, descend to the dangerous labyrinths, retrieve the eight medallions, rescue the princess, and defeat Dirth.
 
@@ -1429,7 +1429,7 @@ Very similar to  Zelda games, Neutopia allows the player to freely roam the vast
                 <nom region="ss">Neutopia II</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">Some years have passed since the brave hero Jazeta destroyed Dirth, the Emperor of Darkness. Peace has returned to the land of Neutopia. But there are still monsters roaming the countryside, and some of them were spotted near Yurius Shrine. Jazeta went there to find out what exactly had happened. But he didn't return... You are Jazeta's son, and you must first of all find your missing father! Can it be that the shadow of Emperor of Darkness threatens the peaceful land again?..
 
@@ -1458,7 +1458,7 @@ The sequel to "Neutopia" is similar to the predecessor in every way. Navigating 
                 <nom region="ss">New Adventure Island</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">Somewhere on the peaceful Adventure Island, Master Higgins weds Tina, the new "Miss Island". Everyone who was invited to the wedding begins to celebrate when, suddenly, the evil Baron Bronsky appears and snatches Tina away, while his henchmen take the six children away. To reach his castle and rescue Tina, Master Higgins must first rescue the six children, each of whom is hidden on a separate island.
 
@@ -1493,7 +1493,7 @@ An update of the original NES game.</synopsis>
                 <nom region="ss">Night Creatures</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">Night Creatures for the TurboGrafx-16 is an action/adventure side-scrolling platformer.  You are an unfortunate peon who is bitten by Hecate, a witch.  Unless you kill Hecate by sun-up you will forever be doomed to be a creature of the night.
 
@@ -1522,7 +1522,7 @@ The world of Night Creatures consists of several different scenes, a town, a gra
                 <nom region="ss">Ninja Spirit</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">A ninja-based action game that has the player leading Moonlight through numerous enemy-riddled levels on a quest to exact revenge against his father's murderer. To accomplish this task Moonlight is armed with a katana, shurikens, bombs, and a sickle and chain weapon. Each weapon offers its own advantages and must be used at certain times to overcome specific obstacles or opponents. 
 
@@ -1551,7 +1551,7 @@ The game's coin-op origins are evident in the fact that that the home versions d
                 <nom region="ss">Order of the Griffon</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">The people of Radlebb Keep are worried: Undead and werewolves have been seen in the nearby forests, and rumor has that a vampire has taken residence at Koriszegy Keep. Lord Korrigan hires a group of adventurers to dispel the rumors. They soon find out that not only the rumors are true, but that there are also other evil forces at work in the area.
 
@@ -1582,7 +1582,7 @@ A party consists of four characters, which cannot be created but must be selecte
                 <nom region="ss">Ordyne</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">Ordyne is a horizontal side-scrolling shoot 'em up (also considered a "cute 'em up" due to its lighter tone) that puts players in the role of Yûichirô Tomari, a genius scientist, and Sunday Chin, his faithful assistant.  The two heroes must rescue Tomari's fiancee Kana Aibara from the evil Dr. Kubota.
 
@@ -1613,7 +1613,7 @@ Ordyne is two-player simultaneous.</synopsis>
                 <nom region="ss">Pac-Land</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">Pac-Land is a side-scrolling 1-2 player game with a cartoony feel to it. Now equipped with arms, face, and legs, Pac must guide a fairy back to her home in Fairy Land, but this task will not be easy because Inky, Blinky, Pinky, Clyde, and Sue will pursue Pac-Man as he travels through Pac-Land. When he finally transports the fairy back to her home, Pac is given some magic shoes, which will help him get to his own home, where he will be greeted by his family: Ms. Pac-Man, Baby Pac-Man, Chomp Chomp, and Sourpuss. 
 
@@ -1642,7 +1642,7 @@ There are sixteen rounds to complete, with four trips each. During each round, h
                 <nom region="ss">Panza Kick Boxing</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">Endorsed by André Panza, this video game adaptation of Thai kick boxing features over 35 moves. Use the training gym to build up your character's abilities until you feel ready to take on an opponent. You also have the ability to customize your attacks. When you are ready, go to the ring to take on various opponents as you try to become the best kick boxer in the game. </synopsis>
             </synopsis>
@@ -1669,7 +1669,7 @@ There are sixteen rounds to complete, with four trips each. During each round, h
                 <nom region="ss">Parasol Stars - The Story of Bubble Bobble III</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">This sequel to Rainbow Islands sees a return to the gameplay of Bubble Bobble, but with Bub and Bob in their now-human forms.
 
@@ -1700,7 +1700,7 @@ But this time they're armed with umbrellas! Oh, okay then, parasols...</synopsis
                 <nom region="ss">Power Golf</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">Power Golf is played primarily with a top-down view of each hole, and a 3rd person perspective for hitting the ball.  There is also stroke and match play, and a competition mode for up to three players.
 
@@ -1737,7 +1737,7 @@ Competition -- This is the three-player mode.  The game operates in the form of 
                 <nom region="ss">Psychosis</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">There is something wrong with your brain. It is being taken over by the Devil Ugar himself! Your only recourse is to fight back against this hostile invasion. Thankfully your mind has created the ultimate weapon: a ship with which you can navigate the five causes (stages) and blast back the Devil's evil minions. It is your only hope, your one last chance to free your mind from this evil influence.
 
@@ -1766,7 +1766,7 @@ Psychosis is a side-scrolling shooter where each level is meant to represent a d
                 <nom region="ss">R-Type</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">R-Type is a side scrolling shoot 'em up best known for its extremely tough and strategic gameplay.  You control the R-9 spaceship as it launches a last-ditch effort to repel the evil Bydo empire.
 
@@ -1797,7 +1797,7 @@ The stages of R-Type are made in an organic style, certainly inspired by H. R. G
                 <nom region="ss">Raiden</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">In the year 2090, Earth is invaded by extra-terrestrials. The World Alliance of Nations has developed a supersonic attack fighter, Raiden, to defend the Earth. A pilot must take control of the experimental fighter to destroy the alien warships that just happen to look like odd variations of typical military tanks and planes with gadgets attached to them. 
 
@@ -1826,7 +1826,7 @@ Raiden (called Raiden Trad on the Genesis and SNES) is an over-head vertical-scr
                 <nom region="ss">Samurai-Ghost</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">In the year 1192, the darkness of the Minamoto clan has come and is spreading across Japan. The country is being ravaged, and only one man of the lost Heike clan can return from the depths of hell to put a stop to it. His name is Taira no Kagekiyo.
 
@@ -1857,7 +1857,7 @@ The game features three modes of play: "side mode", a small-scale action platfor
                 <nom region="ss">Shockman</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">In the sequel to Kaizou Choujin Shubibinman once again the player takes the role of either cyborg Tasuke or Kyapiko (renamed Arnold and Sonya for their US debut) to face an alien threat to the world.
 
@@ -1880,13 +1880,13 @@ Both cyborgs have traded their energy blades for ranged attacks, which change th
             <note>14</note>
             <rotation>0</rotation>
         </jeu>
-        <jeu id="14591">
+        <jeu id="14591" romid="172290">
             <path>sidearms.zip</path>
             <noms>
                 <nom region="ss">Sidearms - Hyper Dyne</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">Originating in the arcades, Side Arms is a horizontally scrolling shoot ?em up in which you control Lieutenant Henry (a second player can control Sergeant Sanders in some versions), armed with crude weaponry and protective jump-suits. They must save the earth from the mercenary invaders of Bozon. You must first reach Bozon?s territories, then wipe out its forces hidden in caverns and lurking in underground seas, before destroying the main invasion ship. Lots of extra weapons can be picked up, often with similar tokens to those in 1943 and some other Capcom titles. Most weapons can be shot either to the left or the right, giving you more range to launch attacks.</synopsis>
             </synopsis>
@@ -1913,7 +1913,7 @@ Both cyborgs have traded their energy blades for ranged attacks, which change th
                 <nom region="ss">Silent Debuggers</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">Arriving at a desolate cargo station searching for treasure, a debugger and his buddy Leon encounter monsters instead.
 
@@ -1944,7 +1944,7 @@ Fight monsters with a variety of weapons and protect the valuable utility rooms 
                 <nom region="ss">Sinistron</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">Sinistron is a side scrolling shooter similar to R-Type, but has a unique weapons system in which you can open and close your shields to improve your fire power at the expense of making your ship vulnerable. There are also several different powerups you can pick up such as missiles and different types of lasers.
 
@@ -1977,7 +1977,7 @@ The Japanese version, "Violent Soldier", had slightly different graphics.</synop
                 <nom region="ss">Soldier Blade</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">A top down sci-fi shooter in which you take to the skies of several planets in an advanced starfighter in order to eradicate an alien invasion.
 
@@ -2008,7 +2008,7 @@ The game also features a unique weapon system with three customizable gun pods, 
                 <nom region="ss">Somer Assault</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">Somer Assault is a difficult to describe game.  In it you control a pink slinky character with guns attached to it.  You move around mazes, climbing on walls, on the ceiling, through shortcuts, and attempt to find you way to the end.  Along the way, you have to shoot out many, many enemies.  And at the end, you will find a nasty boss surprise.
 
@@ -2037,7 +2037,7 @@ The story is bizarre, which fits the concept of the game.  A sorceress has plans
                 <nom region="ss">Sonic Spike - World Championship Beach Volleyball</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">Sonic Spike is a beach volleyball game. The player takes the role of a volleyball team with two athletes (which have different strengths and disadvantages) and tries to win a tournament. The second athlete can also be played by a second human player. The controls offer no surprises: players move an athlete over the field and use two buttons for jumping and hitting. Single players also have to switch between the two athletes.</synopsis>
             </synopsis>
@@ -2064,7 +2064,7 @@ The story is bizarre, which fits the concept of the game.  A sorceress has plans
                 <nom region="ss">Space Harrier</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">Run? fly? dodge those obstacles, but return fire on wave after wave of attacking aliens. Armed with a really big gun, you have to defend yourself against the alien hordes using your wits to navigate around the screen. But watch out for those end of level bosses!
 
@@ -2093,7 +2093,7 @@ Originating in the arcades, Space Harrier is a third-person rail shooter with ps
                 <nom region="ss">Splatterhouse</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">Splatterhouse is the first game in the series, but only the second game to appear on a home console (after Splatterhouse: Wanpaku Graffiti on the NES), which was later continued on the SEGA Genesis.
 
@@ -2124,7 +2124,7 @@ Rick must survive seven blood-soaked levels full of corpses, demons, and other d
                 <nom region="ss">Super Star Soldier</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">Super Star Soldier takes place in the far future, where you are the last hope for planet Earth, which is being attacked by an alien race.
 
@@ -2155,7 +2155,7 @@ Each level has its own tough boss at the end.</synopsis>
                 <nom region="ss">Super Volleyball</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">Super Volleyball is an indoor volleyball game for one or two players. The single player mode offers two game options: normal game and World League. Choosing normal game pits the player against the computer in a single game. Choosing World League pits the player against all other teams available. A password save is available in this mode.
 
@@ -2180,13 +2180,13 @@ Gameplay is viewed from a side scrolling perspective, with the camera fixed on t
             <note>16</note>
             <rotation>0</rotation>
         </jeu>
-        <jeu id="14520">
+        <jeu id="14520" romid="601818">
             <path>chasehq.zip</path>
             <noms>
                 <nom region="ss">Taito Chase H.Q.</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">New York has become a haven for drug dealers, murderers and petty criminals of all sorts. The New York City Police Department has established a special task force to help clean up the city. The task force is led by Detective Tony Gibson,a former Formula 1 driver. With his partner Raymond Brody, he patrols the city in his specially armored and supercharged Chase 928S4.
 
@@ -2221,7 +2221,7 @@ You are a new member of the task force. Your mission is to use these tactics in 
                 <nom region="ss">Takin' It to the Hoop</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">Takin' it to the Hoop is a basketball game with comic graphics. The player either participates in a league, play-offs or a single match and chooses one of eight American teams with twelve athletes. The team's performance during a match does not only depend on the player's ability but also on the athlethe's statistics (e.g. agility or dribbling) and their energy. Energy decreases during the course of a match and describes how much power an athlete has left. There are also three different defense tactics (one-on-one defense, zone defense or a mix between the two) which can be set before the match or during interceptions.
 
@@ -2250,7 +2250,7 @@ During the matches, the player controls the ball carrier when in offense and man
                 <nom region="ss">TaleSpin</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">Take off with those high-flying Disney heroes, Captain Baloo and Kit Cloudkicker in the action-packed adventure TaleSpin. Imagine, you're after the lost treasure of Ionia, and the Watusi Witch Doctor is after you! Can you defeat him to go on and defy the dreaded Iron Vulture and make it to the Ice Caves of Thembria? Are you brave enough to challenge Shere Khan for the treasure? Find out by playing TaleSpin, with seven thrilling levels and 150 danger-filled screens!</synopsis>
             </synopsis>
@@ -2277,7 +2277,7 @@ During the matches, the player controls the ball carrier when in offense and man
                 <nom region="ss">The Legendary Axe</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">You are the mighty warrior Gogan, whose village has been required  by the Jagu tribe to give a human sacrifice each year. Flare, your childhood friend, has been chosen as the sacrifice. Your task is to rescue Flare and destroy the Jagu and their leader. To help you complete your mission, you are given the Legendary Axe, which is said to possess tremendous power that is usable only to its wielder. 
 
@@ -2307,7 +2307,7 @@ There are six zones in the game and has Gogan exploring forests, caves, mountain
                 <nom region="ss">The Legendary Axe II</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">The Axe is back... with twice the force and twice the fury of 1989's "Videogame of the Year"! This time it's brother against brother locked in deadly combat. Your older brother has summoned unspeakable forces of evil to take control of the kingdom. Treachery rules! Your only hope is the legendary royal sword! But will its power be enough to overcome the Cliffs of Chaos? The Skull Dungeons? And the treacherous Crypts of Slime? Only your courage, your fighting skill, and the Legendary Axe can answer!
 
@@ -2336,7 +2336,7 @@ This game has you fighting monsters through seven stages with just a sword, but 
                 <nom region="ss">Tiger Road</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">This arcade conversion is a  beat 'em up in which you (as Lee Wong) must rescue the village children from the evil Ryo Ken Oh. Many levels are horizontally scrolling, although with high ledges to jump onto and follow for a slightly different path. Magic urns containing improved weapons appear frequently. Most enemies are easy to attack and only need one hit to kill, although they come at you in large hordes. Once you get to the indoor sections you will find big enemies with the ability to kill you with one hit, in sections set on multiple levels complete with stairways.</synopsis>
             </synopsis>
@@ -2363,7 +2363,7 @@ This game has you fighting monsters through seven stages with just a sword, but 
                 <nom region="ss">Time Cruise</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">Time Cruise is a pinball game with a story.  The story has a scientist by the name of Eric who one day hears a voice claiming to be an extraterrestrial and through this voice learns the secret to time travel.  After several years of building his creation, he is finally finished and crawls in to his round metal time machine and is off on a quest to travel through time and meet his extraterrestrial friend.
 
@@ -2392,7 +2392,7 @@ The goal of the game, much like many others in the genre, is to reach and certai
                 <nom region="ss">Timeball</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">The concept behind Blodia is very simple: 1-You have a screen of pipe-work. 2-There is a ball travelling down the pipe. 3-If the ball drops down a gap in the pipe you have to start again. That's it. So what this all amounts to is you frantically sliding the tiles around block-puzzle style to keep that cursed ball bearing on track. God forbid that you think the ball is moving too slowly, you can even push a button to speed the damn thing up, but you have to wonder why you would ever want to do that.</synopsis>
             </synopsis>
@@ -2419,7 +2419,7 @@ The goal of the game, much like many others in the genre, is to reach and certai
                 <nom region="ss">Tricky Kick</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">Tricky Kick is a sliding block puzzle game for the TurboGrafix-16.
 
@@ -2453,7 +2453,7 @@ The game has a regular mode and a special mode with 60 puzzles each.  Many of th
                 <nom region="ss">Turrican</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">Three-headed demon Morgul has been influencing people's dreams to create nightmares, but more recently these nightmares have become real. Only Turrican can save them in this fast paced side scrolling shoot-em up. It features 5 worlds and 13 levels of challenging gameplay.
 
@@ -2482,7 +2482,7 @@ Gameplay is conceptually simple: just jump, shoot and explore. However, this gam
                 <nom region="ss">TV Sports Basketball</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">Basketball was the second sport to which Cinemaware applied their philosophy of lavish production and advanced cutscenes. Exhibition and league matches are on offer, with the opportunity to recreate a full league season with 1 player assigned to each of the 28 clubs. The game uses varying camera positions, with top-down views when the ball is close to either hoop, and a side-view when the ball is mid-court - controls remain unchanged for these, so the switch doesn't cause a sudden change in player movement.
 
@@ -2511,7 +2511,7 @@ As well as playing the matches you have full coaching control. This can involve 
                 <nom region="ss">TV Sports Football</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">Before Electronic Arts sought to imitate television coverage of sports with their EA Sports titles, Cinemaware had the same idea, initially applying it to (American) Football. Cutscenes follow dramatic moments in the match, and each match is preceded by a TV-style introduction. The game is primarily action-based, although you also choose your plays before executing them. You then bring the passes and runs to life on the pitch itself. You can play single matches or full leagues, with any of the NFL teams of the time.</synopsis>
             </synopsis>
@@ -2538,7 +2538,7 @@ As well as playing the matches you have full coaching control. This can involve 
                 <nom region="ss">TV Sports Hockey</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">Cinemaware's TV Sports series got an exclusive entry on the TurboGrafx-16 with this hockey game.
 
@@ -2571,7 +2571,7 @@ Exhibition games can be played with either full or easy rules - easy mode has le
                 <nom region="ss">Veigues - Tactical Gladiator</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">For 3 years, alien invaders have been pounding the earth into a smoldering ruin. There isn't a man alive who can stop them. But now there's Veigues, a devastating fighting machine! Built with captured enemy technology, he's our last desperate hope for survival... and you're in control! Trash the invaders with the Plazma Cannon! Just keep your firepower hot and fight like there's no tomorrow. Destroy the aliens or there won't be!</synopsis>
             </synopsis>
@@ -2598,7 +2598,7 @@ Exhibition games can be played with either full or easy rules - easy mode has le
                 <nom region="ss">Victory Run</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">Victory Run is an arcade racer based on the Paris-Dakar rally. The gameplay is similar to OutRun, with your car appearing near the bottom of the screen, and a course made of scaling sprites laid out ahead.  
 
@@ -2627,7 +2627,7 @@ At the start of the race, you choose how many spare engines, tires, brakes, and 
                 <nom region="ss">Vigilante</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">Vigilante is a side-scrolling beat-em-up, based on the popular coin-up. It features an anonymous tough hero that roams the streets to beat up The Rogues gang that kidnapped his girlfriend Maria. 
 
@@ -2656,7 +2656,7 @@ The game offers five distinct locations, such as city streets and a junkyard, wi
                 <nom region="ss">World Class Baseball</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">World Class Baseball is a baseball game. The player controls the pitcher and fielders (through an automatic system that, following baseball games' tradition, gives to him control on the one of the players who is closest to the ball); not the batter. One or two little windows display the runner's status during the face-off between the batter and the pitcher; once the ball is hit the view changes to a bird's eye one, showing a good portion of the game field where the action is taking place, together with a permanent small field's image at the right bottom of the screen displaying the position of every player on the whole field.</synopsis>
             </synopsis>
@@ -2683,7 +2683,7 @@ The game offers five distinct locations, such as city streets and a junkyard, wi
                 <nom region="ss">World Court Tennis</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">World Court Tennis is a tennis game with a twist. The action itself features no big surprises: the players control their characters over the scrolling tennis field and try to counter balls from their opponents. It is possible to perform typical tennis actions like cross, smash or lob and the hit performance depends on the timing.</synopsis>
             </synopsis>
@@ -2710,7 +2710,7 @@ The game offers five distinct locations, such as city streets and a junkyard, wi
                 <nom region="ss">World Sports Competition</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">World Sports Competition is a Summer Olympics title, originally released on the PC Engine (TurboGrafx-16).
 
@@ -2745,7 +2745,7 @@ Track - 100 Meter Dash, 110 Meter Hurdles &amp; 400 Meter Dash.</synopsis>
                 <nom region="ss">Yo, Bro</nom>
             </noms>
             <cloneof>0</cloneof>
-            <systeme id="31" parentid="0">PC Engine</systeme>
+            <systeme id="758" parentid="31">PC Engine TurboGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">Ratz attack! Ratz attack! The city of Los Angeles is being invaded! Only Lil Bro', Camp California's rad skateboarding dude, can save it. The evil Ratz gang is unleashing a barrage of killer creatures and devices. Find incredibly cool weapons to fight back. Wipe out their earthquake machines and nasty man-eating plants with rockets and grenades. Fight off wicked space aliens and launch your bonus attacks. It'll take everything you've got to send the Ratz packing!</synopsis>
             </synopsis>
