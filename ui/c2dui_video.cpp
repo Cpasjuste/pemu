@@ -4,15 +4,14 @@
 
 #include "c2dui.h"
 
-C2DUIVideo::C2DUIVideo(UiMain *gui, void **_pixels, int *_pitch,
-                       const c2d::Vector2f &size, Texture::Format format) : C2DTexture(size, format) {
-
-    ui = gui;
-
-    printf("game: %ix%i\n", (int) size.x, (int) size.y);
+C2DUIVideo::C2DUIVideo(UiMain *u, void **_pixels, int *_pitch,
+                       const c2d::Vector2f &size, const c2d::Vector2i &a, Texture::Format format)
+        : C2DTexture(size, format) {
+    ui = u;
+    aspect = a;
 
     if (_pixels != nullptr) {
-        FloatRect rect = (FloatRect) getTextureRect();
+        auto rect = (FloatRect) getTextureRect();
         C2DTexture::lock(&rect, _pixels, _pitch);
         C2DTexture::unlock();
     }
@@ -23,15 +22,19 @@ void C2DUIVideo::updateScaling(bool vertical, bool flip) {
     bool rotated = false;
     float rotation = 0;
     int rotation_cfg = 0;
-    std::string scale_mode = ui->getConfig()->get(Option::Id::ROM_SCALING, true)->getValueString();
+    std::string scale_value = ui->getConfig()->get(Option::Id::ROM_SCALING, true)->getValueString();
+    float scale_value_float = (float) ui->getConfig()->get(Option::Id::ROM_SCALING, true)->getIndex() + 1;
+    std::string scaling_mode = ui->getConfig()->get(Option::Id::ROM_SCALING_MODE, true)->getValueString();
+    float game_aspect_ratio = vertical ? (float) aspect.y / (float) aspect.x
+                                       : (float) aspect.x / (float) aspect.y;
     Option *rotationOpt = ui->getConfig()->get(Option::Id::ROM_ROTATION, true);
-    if (rotationOpt != nullptr) {
+    if (rotationOpt) {
         rotation_cfg = rotationOpt->getIndex();
     }
 
     Vector2f screen = ui->getSize();
     Vector2f scale_max;
-    float sx = 1, sy = 1;
+    Vector2f scale;
 
 #ifndef __PSP2__
     if (vertical) {
@@ -73,58 +76,58 @@ void C2DUIVideo::updateScaling(bool vertical, bool flip) {
 #endif
 
     if (rotated) {
-        scale_max.x = screen.x / getTextureRect().height;
-        scale_max.y = screen.y / getTextureRect().width;
+        scale_max.x = screen.x / (float) getTextureRect().height;
+        scale_max.y = screen.y / (float) getTextureRect().width;
     } else {
-        scale_max.x = screen.x / getTextureRect().width;
-        scale_max.y = screen.y / getTextureRect().height;
+        scale_max.x = screen.x / (float) getTextureRect().width;
+        scale_max.y = screen.y / (float) getTextureRect().height;
     }
 
-    if (scale_mode == "NONE") {
-        // small screens 1x == downscale
-        if (scale_max.x < 1 || scale_max.y < 1) {
-            sx = sy = rotated ? scale_max.y : scale_max.x;
-        }
-    } else if (scale_mode == "2X") {
-        sx = sy = std::min(scale_max.x, 2.0f);
-        if (sy > scale_max.y) {
-            sx = sy = std::min(scale_max.y, 2.0f);
-        }
-    } else if (scale_mode == "3X") {
-        sx = sy = std::min(scale_max.x, 3.0f);
-        if (sy > scale_max.y) {
-            sx = sy = std::min(scale_max.y, 3.0f);
-        }
-    } else if (scale_mode == "4X") {
-        sx = sy = std::min(scale_max.x, 4.0f);
-        if (sy > scale_max.y) {
-            sx = sy = std::min(scale_max.y, 4.0f);
-        }
-    } else if (scale_mode == "FIT") {
-        sx = sy = scale_max.y;
-        if (sx > scale_max.x) {
-            sx = sy = scale_max.x;
-        }
-    } else if (scale_mode == "FIT 4:3") {
-        if (rotated) {
-            sx = scale_max.y;
-            float size_y = sx * getTextureRect().width * 1.33f;
-            sy = std::min(scale_max.x, size_y / getTextureRect().height);
+    if (scale_value == "FULL") {
+        scale.x = rotated ? scale_max.y : scale_max.x;
+        scale.y = rotated ? scale_max.x : scale_max.y;
+    } else {
+        if (!rotated) {
+            // scale_value_float 4 == FIT
+            scale.y = scale_value_float == 4 ? scale_max.y : std::min(scale_max.y, scale_value_float);
+            float size_x = ((float) getTextureRect().height * scale.y) * game_aspect_ratio;
+            if (scaling_mode == "AUTO") {
+                scale.x = size_x / (float) getTextureRect().width;
+                // use integer scaling if aspect ratio is not too divergent
+                if (scale.y / scale.x < 1.1f) {
+                    scale.x = scale.y;
+                }
+            } else if (scaling_mode == "ASPECT") {
+                scale.x = size_x / (float) getTextureRect().width;
+            } else {
+                // integer scaling
+                scale.x = scale.y;
+            }
         } else {
-            sy = scale_max.y;
-            float size_x = sy * getTextureRect().height * 1.33f;
-            sx = std::min(scale_max.x, size_x / getTextureRect().width);
+            // scale_value_float 4 == FIT
+            scale.x = scale_value_float == 4 ? scale_max.y : std::min(scale_max.y, scale_value_float);
+            float size_y = ((float) getTextureRect().width * scale.x) / game_aspect_ratio;
+            if (scaling_mode == "AUTO") {
+                scale.y = size_y / (float) getTextureRect().height;
+                // use integer scaling if aspect ratio is not too divergent
+                if (scale.y / scale.x < 1.1f) {
+                    scale.y = scale.x;
+                }
+            } else if (scaling_mode == "ASPECT") {
+                scale.y = size_y / (float) getTextureRect().height;
+            } else {
+                // integer scaling
+                scale.y = scale.x;
+            }
         }
-    } else if (scale_mode == "FULL") {
-        sx = rotated ? scale_max.y : scale_max.x;
-        sy = rotated ? scale_max.x : scale_max.y;
     }
 
     printf("C2DUIVideo::updateScaling: mode: %s, scaling: %f x %f, size: %i x %i, rotation: %i\n",
-           scale_mode.c_str(), sx, sy, (int) (getSize().x * sx), (int) (getSize().y * sy), rotation_cfg);
+           scale_value.c_str(), scale.x, scale.y,
+           (int) (getSize().x * scale.x), (int) (getSize().y * scale.y), rotation_cfg);
 
     setOrigin(Origin::Center);
     setPosition(screen.x / 2, screen.y / 2);
-    setScale(sx, sy);
+    setScale(scale);
     setRotation(rotation);
 }

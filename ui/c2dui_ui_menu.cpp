@@ -305,6 +305,19 @@ bool UiMenu::onInput(c2d::Input::Player *players) {
                     ui->getUiEmu()->getVideo()->updateScaling();
                 }
                 break;
+            case Option::Id::ROM_SCALING_MODE:
+                if (option.getValueString() == "AUTO") {
+                    ui->getUiStatusBox()->show("TRY TO KEEP INTEGER SCALING IF ASPECT RATIO IS NOT TOO DIVERGENT");
+                } else if (option.getValueString() == "ASPECT") {
+                    ui->getUiStatusBox()->show("KEEP GAME ASPECT RATIO - SOME SHADERS MAY NOT RENDER CORRECTLY");
+                } else {
+                    ui->getUiStatusBox()->show(
+                            "FORCE INTEGER SCALING - ASPECT RATIO MAY BE WRONG BUT SHADERS WILL RENDER CORRECTLY");
+                }
+                if (isEmuRunning) {
+                    ui->getUiEmu()->getVideo()->updateScaling();
+                }
+                break;
             case Option::Id::ROM_FILTER:
                 if (isEmuRunning) {
                     ui->getUiEmu()->getVideo()->setFilter((Texture::Filter) option.getIndex());

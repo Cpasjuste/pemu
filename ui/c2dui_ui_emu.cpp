@@ -79,14 +79,14 @@ void UIEmu::addVideo(C2DUIVideo *_video) {
 }
 
 void UIEmu::addVideo(void **pixels, int *pitch,
-                     const c2d::Vector2f &size, Texture::Format format) {
+                     const c2d::Vector2f &size, const c2d::Vector2i &aspect, Texture::Format format) {
 
     if (video != nullptr) {
         delete (video);
         video = nullptr;
     }
 
-    auto *_video = new C2DUIVideo(ui, pixels, pitch, size, format);
+    auto *_video = new C2DUIVideo(ui, pixels, pitch, size, aspect, format);
     _video->setShader(ui->getConfig()->get(Option::Id::ROM_SHADER, true)->getIndex());
     _video->setFilter((Texture::Filter) ui->getConfig()->get(Option::Id::ROM_FILTER, true)->getIndex());
     _video->updateScaling();

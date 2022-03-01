@@ -24,7 +24,6 @@ namespace c2dui {
         virtual void onDraw(c2d::Transform &transform, bool draw = true) override;
 
         UiMain *main;
-        SkinnedRectangle *icon;
         c2d::Text *text;
         c2d::TweenAlpha *tween;
         c2d::Clock *clock;

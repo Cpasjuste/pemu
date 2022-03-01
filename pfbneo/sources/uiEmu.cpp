@@ -38,14 +38,10 @@ static UINT32 myHighCol16(int r, int g, int b, int /* i */) {
 }
 
 static UiMain *uiInstance;
-static FloatRect *textureRectInstance;
 
 PFBAGuiEmu::PFBAGuiEmu(UiMain *ui) : UIEmu(ui) {
-
     printf("PFBAGuiEmu()\n");
-
     uiInstance = ui;
-    textureRectInstance = &textureRect;
 }
 
 #ifdef __PFBA_ARM__
@@ -154,7 +150,7 @@ int PFBAGuiEmu::load(const ss_api::Game &game) {
     }
 
     if (nBurnDrvActive >= nBurnDrvCount) {
-        printf("PFBAGui::runRom: driver not found\n");
+        printf("PFBAGuiEmu::load: driver not found\n");
         return -1;
     }
 
@@ -176,14 +172,14 @@ int PFBAGuiEmu::load(const ss_api::Game &game) {
     ///////////////
     EnableHiscores = 1;
 
-    printf("Initialize driver...\n");
+    printf("PFBAGuiEmu::load: initialize driver...\n");
     // some drivers require audio buffer to be allocated for DrvInit, add a "dummy" one...
     auto *aud = new Audio(audio_freq);
     nBurnSoundRate = aud->getSampleRate();
     nBurnSoundLen = aud->getSamples();
     pBurnSoundOut = (INT16 *) malloc(aud->getSamplesSize());
     if (DrvInit((int) nBurnDrvActive, false) != 0) {
-        printf("\nDriver initialisation failed\n");
+        printf("\nPFBAGuiEmu::load: driver initialisation failed\n");
         delete (aud);
         ui->getUiProgressBox()->setVisibility(Visibility::Hidden);
         ui->getUiMessageBox()->show("ERROR", "DRIVER INIT FAILED", "OK");
@@ -212,7 +208,7 @@ int PFBAGuiEmu::load(const ss_api::Game &game) {
     }
     audio_sync = ui->getConfig()->get(Option::Id::ROM_AUDIO_SYNC, true)->getValueBool();
     targetFps = (float) nBurnFPS / 100;
-    printf("FORCE_60HZ: %i, AUDIO_SYNC: %i, FPS: %f (BURNFPS: %f)\n",
+    printf("PFBAGuiEmu::load: FORCE_60HZ: %i, AUDIO_SYNC: %i, FPS: %f (BURNFPS: %f)\n",
            bForce60Hz, audio_sync, (float) nBurnFPS / 100.0f, targetFps);
     ///////////
     // AUDIO
@@ -221,14 +217,15 @@ int PFBAGuiEmu::load(const ss_api::Game &game) {
     //////////
     // VIDEO
     //////////
-    int w, h;
-    BurnDrvGetFullSize(&w, &h);
+    Vector2i size, aspect;
+    BurnDrvGetFullSize(&size.x, &size.y);
+    BurnDrvGetAspect(&aspect.x, &aspect.y);
     nBurnBpp = 2;
     BurnHighCol = myHighCol16;
     BurnRecalcPal();
-    auto v = new PFBAVideo(ui, (void **) &pBurnDraw, &nBurnPitch, Vector2f((float) w, (float) h));
+    auto v = new PFBAVideo(ui, (void **) &pBurnDraw, &nBurnPitch, (Vector2f) size, aspect);
     addVideo(v);
-    textureRect = {0, 0, (float) w, (float) h};
+    printf("PFBAGuiEmu::load: size: %i x %i, aspect: %i x %i\n", size.x, size.y, aspect.x, aspect.y);
     //////////
     // VIDEO
     //////////
@@ -238,14 +235,12 @@ int PFBAGuiEmu::load(const ss_api::Game &game) {
 
 // need for some games
 void Reinitialise(void) {
-    int w, h;
-    BurnDrvGetFullSize(&w, &h);
-    auto v = new PFBAVideo(uiInstance, (void **) &pBurnDraw, &nBurnPitch, Vector2f((float) w, (float) h));
+    Vector2i size, aspect;
+    BurnDrvGetFullSize(&size.x, &size.y);
+    BurnDrvGetAspect(&aspect.x, &aspect.y);
+    auto v = new PFBAVideo(uiInstance, (void **) &pBurnDraw, &nBurnPitch, (Vector2f) size, aspect);
     uiInstance->getUiEmu()->addVideo(v);
-    textureRectInstance->left = 0;
-    textureRectInstance->top = 0;
-    textureRectInstance->width = (float) w;
-    textureRectInstance->height = (float) h;
+    printf("PFBAGuiEmu::Reinitialise: size: %i x %i, aspect: %i x %i\n", size.x, size.y, aspect.x, aspect.y);
 }
 
 void PFBAGuiEmu::stop() {
@@ -255,7 +250,7 @@ void PFBAGuiEmu::stop() {
 
 void PFBAGuiEmu::updateFb() {
     if (pBurnDraw == nullptr) {
-        video->getTexture()->lock(&textureRect, (void **) &pBurnDraw, &nBurnPitch);
+        video->getTexture()->lock(nullptr, (void **) &pBurnDraw, &nBurnPitch);
         BurnDrvFrame();
         video->getTexture()->unlock();
     }
@@ -352,7 +347,7 @@ void PFBAGuiEmu::onUpdate() {
         frameskip++;
 
         if (frameskip > skip) {
-            video->getTexture()->lock(&textureRect, (void **) &pBurnDraw, &nBurnPitch);
+            video->getTexture()->lock(nullptr, (void **) &pBurnDraw, &nBurnPitch);
             nFramesRendered++;
         }
 

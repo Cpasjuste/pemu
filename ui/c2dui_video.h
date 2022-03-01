@@ -12,13 +12,14 @@ namespace c2dui {
     public:
 
         C2DUIVideo(UiMain *ui, void **pixels, int *pitch, const c2d::Vector2f &size,
-                   c2d::Texture::Format format = c2d::Texture::Format::RGB565);
+                   const c2d::Vector2i &aspect = {4, 3}, c2d::Texture::Format format = c2d::Texture::Format::RGB565);
 
         virtual void updateScaling(bool vertical = false, bool flip = false);
 
     private:
 
         UiMain *ui = nullptr;
+        c2d::Vector2i aspect;
     };
 }
 

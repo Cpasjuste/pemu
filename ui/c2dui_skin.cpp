@@ -63,8 +63,6 @@ Skin::Skin(UiMain *u, const std::vector<Button> &btns) {
 
     /// STATUSBOX
     config::Group statusBox = createRectangleShapeGroup("STATUSBOX");
-    config::Group statusBoxIcon = createRectangleShapeGroup("ICON");
-    statusBox.addGroup(statusBoxIcon);
     config->addGroup(statusBox);
 
     /// MAIN (ROM LIST)

@@ -10,13 +10,12 @@ UiStatusBox::UiStatusBox(UiMain *m)
     main = m;
     clock = new C2DClock();
 
-    icon = new SkinnedRectangle(main->getSkin(), {"SKIN_CONFIG", "STATUSBOX", "ICON"});
-    icon->add(new TweenRotation(360, 0, 2, TweenLoop::Loop, TweenState::Playing));
-    add(icon);
+    SkinnedRectangle::setCornersRadius(8);
+    SkinnedRectangle::setCornerPointCount(8);
 
-    text = new Text("TIPS:", (int) (getSize().y * 0.7f), main->getFont());
+    text = new Text("TIPS:", (int) (getSize().y * 0.65f), main->getFont());
     text->setOutlineThickness(1.0f * main->getScaling());
-    text->setPosition(icon->getSize().x + (4 * main->getScaling()), (getSize().y / 2) + text->getOutlineThickness());
+    text->setPosition(4 * main->getScaling(), (getSize().y / 2) + text->getOutlineThickness());
     text->setOrigin(Origin::Left);
     text->setFillColor(SkinnedRectangle::getOutlineColor());
     add(text);
@@ -29,7 +28,7 @@ UiStatusBox::UiStatusBox(UiMain *m)
 
 void UiStatusBox::show(const std::string &t, bool inf, bool drawNow) {
     text->setString(t);
-    setSize(icon->getLocalBounds().width + text->getLocalBounds().width + (8 * main->getScaling()), getSize().y);
+    setSize(text->getLocalBounds().width + (8 * main->getScaling()), getSize().y);
 
     infinite = inf;
     clock->restart();

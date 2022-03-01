@@ -31,8 +31,6 @@ private:
 
     bool audio_sync = false;
 
-    c2d::FloatRect textureRect;
-
     int frameskip = 0;
 
     C2DClock clock;

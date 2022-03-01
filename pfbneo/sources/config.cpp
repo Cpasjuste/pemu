@@ -39,26 +39,26 @@ PFBAConfig::PFBAConfig(c2d::Io *io, int version) : Config(io, version) {
     /// ROMS OPTIONS
     add(Option::Id::ROM_FILTER, "FORCE_60HZ",
         {"OFF", "ON"}, 1, Option::Id::ROM_FORCE_60HZ, Option::Flags::BOOLEAN);
-    get(Option::Id::ROM_FORCE_60HZ)->setInfo("You need to restart emulation for this option to take effect...");
+    get(Option::Id::ROM_FORCE_60HZ)->setInfo("YOU NEED TO RESTART EMULATION AFTER CHANGING THIS OPTION");
 
     // audio
     add(Option::Id::ROM_FORCE_60HZ, "FORCE_AUDIO_SYNC",
         {"OFF", "ON"}, 0, Option::Id::ROM_AUDIO_SYNC, Option::Flags::BOOLEAN);
-    get(Option::Id::ROM_AUDIO_SYNC)->setInfo("You need to restart emulation for this option to take effect...");
+    get(Option::Id::ROM_AUDIO_SYNC)->setInfo("YOU NEED TO RESTART EMULATION AFTER CHANGING THIS OPTION");
 
     add(Option::Id::ROM_AUDIO_SYNC, "AUDIO_FREQUENCY",
         {"11025", "22050", "32000", "44100", "48000"}, 3, Option::Id::ROM_AUDIO_FREQ, Option::Flags::STRING);
-    get(Option::Id::ROM_AUDIO_FREQ)->setInfo("You need to restart emulation for this option to take effect...");
+    get(Option::Id::ROM_AUDIO_FREQ)->setInfo("YOU NEED TO RESTART EMULATION AFTER CHANGING THIS OPTION");
 
     add(Option::Id::ROM_AUDIO_FREQ, "AUDIO_INTERPOLATION",
         {"0", "1", "3"}, 2, Option::Id::ROM_AUDIO_INTERPOLATION, Option::Flags::STRING);
     get(Option::Id::ROM_AUDIO_INTERPOLATION)->setInfo(
-            "You need to restart emulation for this option to take effect...");
+            "YOU NEED TO RESTART EMULATION AFTER CHANGING THIS OPTION");
 
     add(Option::Id::ROM_AUDIO_INTERPOLATION, "AUDIO_FM_INTERPOLATION",
         {"0", "1", "3"}, 2, Option::Id::ROM_AUDIO_FMINTERPOLATION, Option::Flags::STRING);
     get(Option::Id::ROM_AUDIO_FMINTERPOLATION)->setInfo(
-            "You need to restart emulation for this option to take effect...");
+            "YOU NEED TO RESTART EMULATION AFTER CHANGING THIS OPTION");
 
 #ifdef __VITA__
     add(Option::Id::ROM_AUDIO_FMINTERPOLATION, "ROTATION",
@@ -76,7 +76,7 @@ PFBAConfig::PFBAConfig(c2d::Io *io, int version) : Config(io, version) {
          "NEO_MVH_MV1CA", "NEO_MVH_MV1CJ",
          "DECK_V6", "DEVKIT"},
         0, Option::Id::ROM_NEOBIOS, Option::Flags::STRING);
-    get(Option::Id::ROM_NEOBIOS)->setInfo("You need to restart emulation for this option to take effect...");
+    get(Option::Id::ROM_NEOBIOS)->setInfo("YOU NEED TO RESTART EMULATION AFTER CHANGING THIS OPTION");
 #ifdef __VITA__
     // do not use unibios as default on vita for cyclone asm compatibility
     get(Option::Id::ROM_NEOBIOS)->setIndex(4);

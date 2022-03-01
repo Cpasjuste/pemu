@@ -50,6 +50,7 @@ namespace c2dui {
 #endif
             MENU_ROM_OPTIONS,
             ROM_SCALING,
+            ROM_SCALING_MODE,
             ROM_FILTER,
             ROM_SHADER,
             ROM_FORCE_60HZ,
