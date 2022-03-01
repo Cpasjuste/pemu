@@ -131,7 +131,7 @@ Texture *UIRomList::getPreviewTexture(const ss_api::Game &game) {
         delete (texture);
         texture = nullptr;
         if (game.isClone()) {
-            Game parentGame = gameList.findByPath(game.cloneOf);
+            Game parentGame = gameList.findGameByPath(game.cloneOf);
             if (!parentGame.path.empty()) {
                 mediaPath = parentGame.getMedia("mixrbv2").url;
                 if (mediaPath.empty()) {
@@ -147,7 +147,7 @@ Texture *UIRomList::getPreviewTexture(const ss_api::Game &game) {
             }
         } else {
             // for non arcade game, search for a "screenscraper" game with same name
-            std::vector<Game> clones = gameList.findByName(game);
+            std::vector<Game> clones = gameList.findGamesByName(game);
             for (const auto &g: clones) {
                 mediaPath = g.getMedia("mixrbv2").url;
                 fullPath = g.romsPath + mediaPath;
@@ -179,7 +179,7 @@ std::string UIRomList::getPreviewVideo(const ss_api::Game &game) {
     printf("getPreviewVideo(%s)\n", fullPath.c_str());
     if (!ui->getIo()->exist(fullPath)) {
         fullPath = "";
-        Game parentGame = gameList.findByPath(game.cloneOf);
+        Game parentGame = gameList.findGameByPath(game.cloneOf);
         if (!parentGame.path.empty()) {
             mediaPath = parentGame.getMedia("video").url;
             if (mediaPath.empty()) {
@@ -192,7 +192,7 @@ std::string UIRomList::getPreviewVideo(const ss_api::Game &game) {
             }
         } else {
             // for non arcade game, search for a "screenscraper" game with same name
-            std::vector<Game> clones = gameList.findByName(game);
+            std::vector<Game> clones = gameList.findGamesByName(game);
             for (const auto &g: clones) {
                 mediaPath = g.getMedia("video").url;
                 fullPath = game.romsPath + mediaPath;
@@ -209,41 +209,28 @@ std::string UIRomList::getPreviewVideo(const ss_api::Game &game) {
 }
 
 void UIRomList::filterRomList() {
-
     Option *opt = ui->getConfig()->get(Option::Id::GUI_SHOW_ALL);
-    if (opt->getValueString() == "FAVORITES") {
-        gameList = romList->gameListFav.filter(
-                false,
-                ui->getConfig()->get(Option::Id::GUI_FILTER_CLONES)->getValueBool(),
-                ui->getConfig()->get(Option::Id::GUI_FILTER_SYSTEM)->getValueString(),
-                ui->getConfig()->get(Option::Id::GUI_FILTER_EDITOR)->getValueString(),
-                ui->getConfig()->get(Option::Id::GUI_FILTER_DEVELOPER)->getValueString(),
+    ss_api::GameList *list = opt->getValueString() == "FAVORITES" ? &romList->gameListFav : &romList->gameList;
 
-                ui->getConfig()->get(Option::Id::GUI_FILTER_PLAYERS)->getValueString(),
-                ui->getConfig()->get(Option::Id::GUI_FILTER_RATING)->getValueString(),
-                "ALL",
-                ui->getConfig()->get(Option::Id::GUI_FILTER_ROTATION)->getValueString(),
-                ui->getConfig()->get(Option::Id::GUI_FILTER_RESOLUTION)->getValueString(),
-                ui->getConfig()->get(Option::Id::GUI_FILTER_DATE)->getValueString(),
-                ui->getConfig()->get(Option::Id::GUI_FILTER_GENRE)->getValueString()
-        );
-    } else {
-        gameList = romList->gameList.filter(
-                ui->getConfig()->get(Option::Id::GUI_SHOW_ALL)->getValueString() == "AVAILABLE",
-                ui->getConfig()->get(Option::Id::GUI_FILTER_CLONES)->getValueBool(),
-                ui->getConfig()->get(Option::Id::GUI_FILTER_SYSTEM)->getValueString(),
-                ui->getConfig()->get(Option::Id::GUI_FILTER_EDITOR)->getValueString(),
-                ui->getConfig()->get(Option::Id::GUI_FILTER_DEVELOPER)->getValueString(),
+    bool available = opt->getValueString() == "FAVORITES" ? false : opt->getValueString() == "AVAILABLE";
+    bool showClones = ui->getConfig()->get(Option::Id::GUI_FILTER_CLONES)->getValueBool();
+    std::string system = ui->getConfig()->get(Option::Id::GUI_FILTER_SYSTEM)->getValueString();
+    int systemId = system == "ALL" ? -1 : list->findSystemByName(system).id;
+    std::string editor = ui->getConfig()->get(Option::Id::GUI_FILTER_EDITOR)->getValueString();
+    int editorId = editor == "ALL" ? -1 : list->findEditorByName(editor).id;
+    std::string dev = ui->getConfig()->get(Option::Id::GUI_FILTER_DEVELOPER)->getValueString();
+    int devId = dev == "ALL" ? -1 : list->findDeveloperByName(dev).id;
+    int players = Utility::parseInt(ui->getConfig()->get(Option::Id::GUI_FILTER_PLAYERS)->getValueString(), -1);
+    int rating = Utility::parseInt(ui->getConfig()->get(Option::Id::GUI_FILTER_RATING)->getValueString(), -1);
+    int rotation = Utility::parseInt(ui->getConfig()->get(Option::Id::GUI_FILTER_ROTATION)->getValueString(), -1);
 
-                ui->getConfig()->get(Option::Id::GUI_FILTER_PLAYERS)->getValueString(),
-                ui->getConfig()->get(Option::Id::GUI_FILTER_RATING)->getValueString(),
-                "ALL",
-                ui->getConfig()->get(Option::Id::GUI_FILTER_ROTATION)->getValueString(),
-                ui->getConfig()->get(Option::Id::GUI_FILTER_RESOLUTION)->getValueString(),
-                ui->getConfig()->get(Option::Id::GUI_FILTER_DATE)->getValueString(),
-                ui->getConfig()->get(Option::Id::GUI_FILTER_GENRE)->getValueString()
-        );
-    }
+    gameList = list->filter(
+            available, showClones, systemId, editorId, devId,
+            players, rating, -1, rotation,
+            ui->getConfig()->get(Option::Id::GUI_FILTER_RESOLUTION)->getValueString(),
+            ui->getConfig()->get(Option::Id::GUI_FILTER_DATE)->getValueString(),
+            ui->getConfig()->get(Option::Id::GUI_FILTER_GENRE)->getValueString()
+    );
 }
 
 void UIRomList::sortRomList() {

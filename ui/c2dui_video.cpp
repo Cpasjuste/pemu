@@ -94,7 +94,7 @@ void C2DUIVideo::updateScaling(bool vertical, bool flip) {
             if (scaling_mode == "AUTO") {
                 scale.x = size_x / (float) getTextureRect().width;
                 // use integer scaling if aspect ratio is not too divergent
-                if (scale.y / scale.x < 1.1f) {
+                if (scale.y / scale.x < 1.2f && scale.y / scale.x > 0.8f) {
                     scale.x = scale.y;
                 }
             } else if (scaling_mode == "ASPECT") {
@@ -110,7 +110,7 @@ void C2DUIVideo::updateScaling(bool vertical, bool flip) {
             if (scaling_mode == "AUTO") {
                 scale.y = size_y / (float) getTextureRect().height;
                 // use integer scaling if aspect ratio is not too divergent
-                if (scale.y / scale.x < 1.1f) {
+                if (scale.y / scale.x < 1.2f && scale.y / scale.x > 0.8f) {
                     scale.y = scale.x;
                 }
             } else if (scaling_mode == "ASPECT") {
