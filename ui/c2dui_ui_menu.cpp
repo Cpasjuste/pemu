@@ -303,6 +303,20 @@ bool UiMenu::onInput(c2d::Input::Player *players) {
             case Option::Id::ROM_SCALING:
                 if (isEmuRunning) {
                     ui->getUiEmu()->getVideo()->updateScaling();
+                    auto gw = (float) ui->getUiEmu()->getVideo()->getTextureRect().width;
+                    auto gh = (float) ui->getUiEmu()->getVideo()->getTextureRect().height;
+                    float gr = std::max(
+                            (float) ui->getUiEmu()->getVideo()->aspect.x /
+                            (float) ui->getUiEmu()->getVideo()->aspect.y,
+                            (float) ui->getUiEmu()->getVideo()->aspect.y /
+                            (float) ui->getUiEmu()->getVideo()->aspect.x);
+                    float ow = gw * ui->getUiEmu()->getVideo()->getScale().x;
+                    float oh = gh * ui->getUiEmu()->getVideo()->getScale().y;
+                    float ratio = std::max(ow / oh, oh / ow);
+                    ui->getUiStatusBox()->show(
+                            "GAME: %ix%i - RATIO: %.2f | OUTPUT: %ix%i - RATIO: %.2f - SCALING: %.2fx%.2f",
+                            (int) gw, (int) gh, gr, (int) ow, (int) oh, ratio,
+                            ui->getUiEmu()->getVideo()->getScale().x, ui->getUiEmu()->getVideo()->getScale().y);
                 }
                 break;
             case Option::Id::ROM_SCALING_MODE:
@@ -326,6 +340,7 @@ bool UiMenu::onInput(c2d::Input::Player *players) {
             case Option::Id::ROM_SHADER:
                 if (isEmuRunning) {
                     ui->getUiEmu()->getVideo()->setShader(option.getIndex());
+                    ui->getUiStatusBox()->show(option.getValueString());
                 }
                 break;
             case Option::Id::GUI_VIDEO_SNAP_DELAY:

@@ -17,6 +17,8 @@ namespace c2dui {
 
         void show(const std::string &text, bool infinite = false, bool drawNow = false);
 
+        void show(const char *fmt, ...);
+
         void hide();
 
     private:

@@ -16,10 +16,11 @@ namespace c2dui {
 
         virtual void updateScaling(bool vertical = false, bool flip = false);
 
+        c2d::Vector2i aspect;
+
     private:
 
         UiMain *ui = nullptr;
-        c2d::Vector2i aspect;
     };
 }
 

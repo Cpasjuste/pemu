@@ -14,9 +14,9 @@ UiStatusBox::UiStatusBox(UiMain *m)
     SkinnedRectangle::setCornerPointCount(8);
 
     text = new Text("TIPS:", (int) (getSize().y * 0.65f), main->getFont());
-    text->setOutlineThickness(1.0f * main->getScaling());
-    text->setPosition(4 * main->getScaling(), (getSize().y / 2) + text->getOutlineThickness());
+    //text->setOutlineThickness(1.0f * main->getScaling());
     text->setOrigin(Origin::Left);
+    text->setPosition(6 * main->getScaling(), (getSize().y / 2) + SkinnedRectangle::getOutlineThickness());
     text->setFillColor(SkinnedRectangle::getOutlineColor());
     add(text);
 
@@ -28,7 +28,7 @@ UiStatusBox::UiStatusBox(UiMain *m)
 
 void UiStatusBox::show(const std::string &t, bool inf, bool drawNow) {
     text->setString(t);
-    setSize(text->getLocalBounds().width + (8 * main->getScaling()), getSize().y);
+    setSize(text->getLocalBounds().width + (12 * main->getScaling()), getSize().y);
 
     infinite = inf;
     clock->restart();
@@ -38,6 +38,15 @@ void UiStatusBox::show(const std::string &t, bool inf, bool drawNow) {
             main->flip();
         }
     }
+}
+
+void UiStatusBox::show(const char *fmt, ...) {
+    char msg[512];
+    va_list args;
+    va_start(args, fmt);
+    vsnprintf(msg, 512, fmt, args);
+    va_end(args);
+    show(std::string(msg), false, false);
 }
 
 void UiStatusBox::hide() {
