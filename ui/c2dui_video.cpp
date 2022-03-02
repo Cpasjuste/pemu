@@ -50,6 +50,8 @@ void C2DUIVideo::updateScaling(bool vertical, bool flip) {
                 rotation = flip ? 180 : 0;
                 break;
         }
+    } else if (flip) {
+        rotation = 180;
     }
 #else
     // TODO: force right to left orientation on psp2,
@@ -122,9 +124,9 @@ void C2DUIVideo::updateScaling(bool vertical, bool flip) {
         }
     }
 
-    printf("C2DUIVideo::updateScaling: mode: %s, scaling: %f x %f, size: %i x %i, rotation: %i\n",
-           scale_value.c_str(), scale.x, scale.y,
-           (int) (getSize().x * scale.x), (int) (getSize().y * scale.y), rotation_cfg);
+    printf("C2DUIVideo::updateScaling: mode: %s, scaling: %f x %f, size: %i x %i, vertical: %i, flipped: %i, rotation: %i\n",
+           scale_value.c_str(), scale.x, scale.y, (int) (getSize().x * scale.x), (int) (getSize().y * scale.y),
+           vertical, flip, rotation_cfg);
 
     setOrigin(Origin::Center);
     setPosition(screen.x / 2, screen.y / 2);
