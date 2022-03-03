@@ -206,7 +206,7 @@ int PFBAGuiEmu::load(const ss_api::Game &game) {
         nBurnSoundLen = audio->getSamples();
         pBurnSoundOut = (INT16 *) malloc(audio->getSamplesSize());
     }
-    audio_sync = ui->getConfig()->get(Option::Id::ROM_AUDIO_SYNC, true)->getValueBool();
+    audio_sync = !bForce60Hz;
     targetFps = (float) nBurnFPS / 100;
     printf("PFBAGuiEmu::load: FORCE_60HZ: %i, AUDIO_SYNC: %i, FPS: %f (BURNFPS: %f)\n",
            bForce60Hz, audio_sync, (float) nBurnFPS / 100.0f, targetFps);
