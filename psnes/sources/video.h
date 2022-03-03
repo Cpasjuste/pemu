@@ -2,10 +2,8 @@
 // Created by cpasjuste on 25/11/16.
 //
 
-#ifndef _PSNESVIDEO_H_
-#define _PSNESVIDEO_H_
-
-#include <cstring>
+#ifndef PSNESVIDEO_H
+#define PSNESVIDEO_H
 
 namespace c2dui {
 
@@ -15,7 +13,7 @@ namespace c2dui {
 
         PSNESVideo(UiMain *ui, void **pixels, int *pitch, const c2d::Vector2f &size);
 
-        void updateScaling(bool vertical = false, bool flip = false);
+        void updateScaling(bool vertical = false, bool flip = false) override;
 
     private:
 
@@ -23,4 +21,4 @@ namespace c2dui {
     };
 }
 
-#endif //_PSNESVIDEO_H_
+#endif //PSNESVIDEO_H

@@ -18,7 +18,6 @@ C2DUIVideo::C2DUIVideo(UiMain *u, void **_pixels, int *_pitch,
 }
 
 void C2DUIVideo::updateScaling(bool vertical, bool flip) {
-
     bool rotated = false;
     float rotation = 0;
     int rotation_cfg = 0;
@@ -124,8 +123,10 @@ void C2DUIVideo::updateScaling(bool vertical, bool flip) {
         }
     }
 
-    printf("C2DUIVideo::updateScaling: mode: %s, scaling: %f x %f, size: %i x %i, vertical: %i, flipped: %i, rotation: %i\n",
-           scale_value.c_str(), scale.x, scale.y, (int) (getSize().x * scale.x), (int) (getSize().y * scale.y),
+    printf("C2DUIVideo::updateScaling: mode: %s, scaling: %f x %f,"
+           " size: %i x %i, vertical: %i, flipped: %i, rotation: %i\n",
+           scale_value.c_str(), scale.x, scale.y,
+           (int) ((float) getTextureRect().width * scale.x), (int) ((float) getTextureRect().height * scale.y),
            vertical, flip, rotation_cfg);
 
     setOrigin(Origin::Center);

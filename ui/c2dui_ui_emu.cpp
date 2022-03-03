@@ -175,7 +175,7 @@ void UIEmu::onUpdate() {
             if (!fpsText->isVisible()) {
                 fpsText->setVisibility(c2d::Visibility::Visible);
             }
-            sprintf(fpsString, "FPS: %.3g/%i", ui->getFps(), (int) targetFps);
+            sprintf(fpsString, "FPS: %.0f/%.0f", ui->getFps(), targetFps);
             fpsText->setString(getFpsString());
         } else {
             if (fpsText->isVisible()) {
