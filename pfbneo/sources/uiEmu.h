@@ -7,11 +7,11 @@
 
 #include <string>
 
-class PFBAGuiEmu : public c2dui::UIEmu {
+class PFBAUiEmu : public c2dui::UiEmu {
 
 public:
 
-    explicit PFBAGuiEmu(c2dui::UiMain *ui);
+    explicit PFBAUiEmu(c2dui::UiMain *ui);
 
     int load(const ss_api::Game &game) override;
 
@@ -26,8 +26,6 @@ private:
     bool onInput(c2d::Input::Player *players) override;
 
     void onUpdate() override;
-
-    void updateFb();
 
     bool audio_sync = false;
 

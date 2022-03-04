@@ -30,7 +30,7 @@ UiMain::~UiMain() {
 }
 
 void UiMain::init(UIRomList *_uiRomList, UiMenu *_uiMenu,
-                  UIEmu *_uiEmu, UiStateMenu *_uiState) {
+                  UiEmu *_uiEmu, UiStateMenu *_uiState) {
 #if 0
     uiHighlight = new UIHighlight();
     skin->loadRectangleShape(uiHighlight, {"SKIN_CONFIG", "HIGHLIGHT"});
@@ -158,7 +158,7 @@ UIRomList *UiMain::getUiRomList() {
     return uiRomList;
 }
 
-UIEmu *UiMain::getUiEmu() {
+UiEmu *UiMain::getUiEmu() {
     return uiEmu;
 }
 

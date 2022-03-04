@@ -38,7 +38,7 @@ extern "C" int sceSystemServiceLoadExec(const char *path, const char *args[]);
 
 UiMain *ui;
 PFBAGuiMenu *uiMenu;
-PFBAGuiEmu *uiEmu;
+PFBAUiEmu *uiEmu;
 PFBAUIStateMenu *uiState;
 PFBAConfig *cfg;
 PFBARomList *romList;
@@ -94,14 +94,14 @@ int main(int argc, char **argv) {
     buttons.emplace_back(KEY_JOY_FIRE2_DEFAULT, "B");
     buttons.emplace_back(KEY_JOY_FIRE3_DEFAULT, "X");
     buttons.emplace_back(KEY_JOY_FIRE4_DEFAULT, "Y");
-    buttons.emplace_back(KEY_JOY_FIRE5_DEFAULT, "L");
-    buttons.emplace_back(KEY_JOY_FIRE6_DEFAULT, "R");
-    buttons.emplace_back(KEY_JOY_FIRE7_DEFAULT, "ZL");
-    buttons.emplace_back(KEY_JOY_FIRE8_DEFAULT, "ZR");
+    buttons.emplace_back(KEY_JOY_FIRE5_DEFAULT, "ZL");
+    buttons.emplace_back(KEY_JOY_FIRE6_DEFAULT, "ZR");
+    buttons.emplace_back(KEY_JOY_FIRE7_DEFAULT, "L");
+    buttons.emplace_back(KEY_JOY_FIRE8_DEFAULT, "R");
     buttons.emplace_back(KEY_JOY_COIN1_DEFAULT, "-");
     buttons.emplace_back(KEY_JOY_START1_DEFAULT, "+");
-    buttons.emplace_back(KEY_JOY_MENU1_DEFAULT, "+");
-    buttons.emplace_back(KEY_JOY_MENU2_DEFAULT, "-");
+    buttons.emplace_back(KEY_JOY_MENU1_DEFAULT, "R");
+    buttons.emplace_back(KEY_JOY_MENU2_DEFAULT, "L");
     // switch special keys
     buttons.emplace_back(KEY_JOY_LSTICK_DEFAULT, "LSTICK");
     buttons.emplace_back(KEY_JOY_RSTICK_DEFAULT, "RSTICK");
@@ -135,7 +135,7 @@ int main(int argc, char **argv) {
     romList->build();
     uiRomList = new UIRomList(ui, romList, ui->getSize());
     uiMenu = new PFBAGuiMenu(ui);
-    uiEmu = new PFBAGuiEmu(ui);
+    uiEmu = new PFBAUiEmu(ui);
     uiState = new PFBAUIStateMenu(ui);
     ui->init(uiRomList, uiMenu, uiEmu, uiState);
 

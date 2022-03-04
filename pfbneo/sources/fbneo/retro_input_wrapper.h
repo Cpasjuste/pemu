@@ -44,16 +44,23 @@ void poll_cb();
 #define RETRO_DEVICE_ANALOG       5
 #define RETRO_DEVICE_POINTER      6
 
+#ifdef __SWITCH__
+#define RETRO_DEVICE_ID_JOYPAD_B        c2d::Input::Key::Fire2
+#define RETRO_DEVICE_ID_JOYPAD_A        c2d::Input::Key::Fire1
+#define RETRO_DEVICE_ID_JOYPAD_Y        c2d::Input::Key::Fire4
+#define RETRO_DEVICE_ID_JOYPAD_X        c2d::Input::Key::Fire3
+#else
 #define RETRO_DEVICE_ID_JOYPAD_B        c2d::Input::Key::Fire1
+#define RETRO_DEVICE_ID_JOYPAD_A        c2d::Input::Key::Fire2
 #define RETRO_DEVICE_ID_JOYPAD_Y        c2d::Input::Key::Fire3
+#define RETRO_DEVICE_ID_JOYPAD_X        c2d::Input::Key::Fire4
+#endif
 #define RETRO_DEVICE_ID_JOYPAD_SELECT   c2d::Input::Key::Select
 #define RETRO_DEVICE_ID_JOYPAD_START    c2d::Input::Key::Start
 #define RETRO_DEVICE_ID_JOYPAD_UP       c2d::Input::Key::Up
 #define RETRO_DEVICE_ID_JOYPAD_DOWN     c2d::Input::Key::Down
 #define RETRO_DEVICE_ID_JOYPAD_LEFT     c2d::Input::Key::Left
 #define RETRO_DEVICE_ID_JOYPAD_RIGHT    c2d::Input::Key::Right
-#define RETRO_DEVICE_ID_JOYPAD_A        c2d::Input::Key::Fire2
-#define RETRO_DEVICE_ID_JOYPAD_X        c2d::Input::Key::Fire4
 #define RETRO_DEVICE_ID_JOYPAD_L        c2d::Input::Key::Fire5
 #define RETRO_DEVICE_ID_JOYPAD_R        c2d::Input::Key::Fire6
 #define RETRO_DEVICE_ID_JOYPAD_L2       c2d::Input::Key::Fire7

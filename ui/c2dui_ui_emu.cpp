@@ -4,9 +4,8 @@
 
 #include "c2dui.h"
 
-UIEmu::UIEmu(UiMain *u) : RectangleShape(u->getSize()) {
-
-    printf("UIEmu()\n");
+UiEmu::UiEmu(UiMain *u) : RectangleShape(u->getSize()) {
+    printf("UiEmu()\n");
 
     ui = u;
     RectangleShape::setFillColor(Color::Transparent);
@@ -20,8 +19,102 @@ UIEmu::UIEmu(UiMain *u) : RectangleShape(u->getSize()) {
     RectangleShape::setVisibility(Visibility::Hidden);
 }
 
-bool UIEmu::onInput(c2d::Input::Player *players) {
+void UiEmu::addAudio(c2d::Audio *_audio) {
+    if (audio != nullptr) {
+        delete (audio);
+    }
 
+    audio = _audio;
+}
+
+void UiEmu::addAudio(int rate, int samples, Audio::C2DAudioCallback cb) {
+    auto *aud = new C2DAudio(rate, samples, cb);
+    addAudio(aud);
+}
+
+void UiEmu::addVideo(C2DUIVideo *v) {
+    if (video) {
+        delete (video);
+    }
+
+    video = v;
+    video->setShader(ui->getConfig()->get(Option::Id::ROM_SHADER, true)->getIndex());
+    video->setFilter((Texture::Filter) ui->getConfig()->get(Option::Id::ROM_FILTER, true)->getIndex());
+    video->updateScaling();
+    add(video);
+}
+
+void UiEmu::addVideo(void **pixels, int *pitch,
+                     const c2d::Vector2f &size, const c2d::Vector2i &aspect, Texture::Format format) {
+    auto *v = new C2DUIVideo(ui, pixels, pitch, size, aspect, format);
+    addVideo(v);
+}
+
+int UiEmu::load(const Game &game) {
+    printf("UiEmu::load: name: %s, path: %s\n",
+           game.path.c_str(), game.romsPath.c_str());
+    ui->getUiStatusBox()->show("TIPS: PRESS MENU1 + MENU2 BUTTONS FOR IN GAME MENU...");
+    currentGame = game;
+
+    // set fps text on top
+    getFpsText()->setLayer(2);
+
+    setVisibility(Visibility::Visible);
+    ui->getUiProgressBox()->setVisibility(Visibility::Hidden);
+    ui->getUiRomList()->setVisibility(Visibility::Hidden);
+
+    resume();
+
+    return 0;
+}
+
+void UiEmu::pause() {
+    printf("UiEmu::pause()\n");
+    if (audio != nullptr) {
+        audio->pause(1);
+    }
+    // set ui input configuration
+    ui->updateInputMapping(false);
+    // enable auto repeat delay
+    ui->getInput()->setRepeatDelay(INPUT_DELAY);
+
+    paused = true;
+}
+
+void UiEmu::resume() {
+    printf("UiEmu::resume()\n");
+    // set per rom input configuration
+    ui->updateInputMapping(true);
+    // disable auto repeat delay
+    ui->getInput()->setRepeatDelay(0);
+
+    if (audio != nullptr) {
+        audio->pause(0);
+    }
+
+    paused = false;
+}
+
+void UiEmu::stop() {
+    printf("UiEmu::stop()\n");
+    if (audio) {
+        printf("Closing audio...\n");
+        audio->pause(1);
+        delete (audio);
+        audio = nullptr;
+    }
+
+    if (video) {
+        printf("Closing video...\n");
+        delete (video);
+        video = nullptr;
+    }
+
+    ui->updateInputMapping(false);
+    setVisibility(Visibility::Hidden);
+}
+
+bool UiEmu::onInput(c2d::Input::Player *players) {
     if (ui->getUiMenu()->isVisible() || ui->getUiStateMenu()->isVisible()) {
         return C2DObject::onInput(players);
     }
@@ -43,129 +136,7 @@ bool UIEmu::onInput(c2d::Input::Player *players) {
     return C2DObject::onInput(players);
 }
 
-void UIEmu::addAudio(c2d::Audio *_audio) {
-
-    if (audio != nullptr) {
-        delete (audio);
-        audio = nullptr;
-    }
-
-    audio = _audio;
-}
-
-void UIEmu::addAudio(int rate, int samples, Audio::C2DAudioCallback cb) {
-
-    if (audio != nullptr) {
-        delete (audio);
-        audio = nullptr;
-    }
-
-    auto *aud = new C2DAudio(rate, samples, cb);
-    addAudio(aud);
-}
-
-void UIEmu::addVideo(C2DUIVideo *_video) {
-
-    if (video != nullptr) {
-        delete (video);
-        video = nullptr;
-    }
-
-    video = _video;
-    video->setShader(ui->getConfig()->get(Option::Id::ROM_SHADER, true)->getIndex());
-    video->setFilter((Texture::Filter) ui->getConfig()->get(Option::Id::ROM_FILTER, true)->getIndex());
-    video->updateScaling();
-    add(video);
-}
-
-void UIEmu::addVideo(void **pixels, int *pitch,
-                     const c2d::Vector2f &size, const c2d::Vector2i &aspect, Texture::Format format) {
-
-    if (video != nullptr) {
-        delete (video);
-        video = nullptr;
-    }
-
-    auto *_video = new C2DUIVideo(ui, pixels, pitch, size, aspect, format);
-    _video->setShader(ui->getConfig()->get(Option::Id::ROM_SHADER, true)->getIndex());
-    _video->setFilter((Texture::Filter) ui->getConfig()->get(Option::Id::ROM_FILTER, true)->getIndex());
-    _video->updateScaling();
-    addVideo(_video);
-}
-
-int UIEmu::load(const Game &game) {
-    printf("UIEmu::load: name: %s, path: %s\n",
-           game.path.c_str(), game.romsPath.c_str());
-    ui->getUiStatusBox()->show("TIPS: PRESS MENU1 + MENU2 BUTTONS FOR IN GAME MENU...");
-    currentGame = game;
-
-    // set fps text on top
-    getFpsText()->setLayer(2);
-
-    setVisibility(Visibility::Visible);
-    ui->getUiProgressBox()->setVisibility(Visibility::Hidden);
-    ui->getUiRomList()->setVisibility(Visibility::Hidden);
-
-    resume();
-
-    return 0;
-}
-
-void UIEmu::pause() {
-
-    printf("UIEmu::pause()\n");
-
-    if (audio != nullptr) {
-        audio->pause(1);
-    }
-    // set ui input configuration
-    ui->updateInputMapping(false);
-    // enable auto repeat delay
-    ui->getInput()->setRepeatDelay(INPUT_DELAY);
-
-    paused = true;
-}
-
-void UIEmu::resume() {
-
-    printf("UIEmu::resume()\n");
-
-    // set per rom input configuration
-    ui->updateInputMapping(true);
-    // disable auto repeat delay
-    ui->getInput()->setRepeatDelay(0);
-
-    if (audio != nullptr) {
-        audio->pause(0);
-    }
-
-    paused = false;
-}
-
-void UIEmu::stop() {
-
-    printf("UIEmu::stop()\n");
-
-    if (audio != nullptr) {
-        printf("Closing audio...\n");
-        audio->pause(1);
-        delete (audio);
-        audio = nullptr;
-    }
-
-    if (video != nullptr) {
-        printf("Closing video...\n");
-        delete (video);
-        video = nullptr;
-    }
-
-    //ui->getUiHighlight()->setVisibility(Visibility::Visible);
-    ui->updateInputMapping(false);
-    setVisibility(Visibility::Hidden);
-}
-
-void UIEmu::onUpdate() {
-
+void UiEmu::onUpdate() {
     C2DObject::onUpdate();
 
     if (!isPaused()) {
@@ -176,7 +147,7 @@ void UIEmu::onUpdate() {
                 fpsText->setVisibility(c2d::Visibility::Visible);
             }
             sprintf(fpsString, "FPS: %.0f/%.0f", ui->getFps(), targetFps);
-            fpsText->setString(getFpsString());
+            fpsText->setString(fpsString);
         } else {
             if (fpsText->isVisible()) {
                 fpsText->setVisibility(c2d::Visibility::Hidden);
@@ -185,34 +156,22 @@ void UIEmu::onUpdate() {
     }
 }
 
-UiMain *UIEmu::getUi() {
+UiMain *UiEmu::getUi() {
     return ui;
 }
 
-C2DUIVideo *UIEmu::getVideo() {
+C2DUIVideo *UiEmu::getVideo() {
     return video;
 }
 
-c2d::Audio *UIEmu::getAudio() {
+c2d::Audio *UiEmu::getAudio() {
     return audio;
 }
 
-float UIEmu::getFrameDuration() {
-    return frameDuration;
-}
-
-void UIEmu::setFrameDuration(float f) {
-    frameDuration = f;
-}
-
-c2d::Text *UIEmu::getFpsText() {
+c2d::Text *UiEmu::getFpsText() {
     return fpsText;
 }
 
-char *UIEmu::getFpsString() {
-    return fpsString;
-}
-
-bool UIEmu::isPaused() {
+bool UiEmu::isPaused() {
     return paused;
 }
