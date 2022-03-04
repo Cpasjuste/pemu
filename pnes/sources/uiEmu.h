@@ -7,7 +7,7 @@
 
 #include <string>
 
-class PNESGuiEmu : public c2dui::UIEmu {
+class PNESGuiEmu : public c2dui::UiEmu {
 
 public:
 

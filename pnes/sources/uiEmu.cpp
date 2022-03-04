@@ -28,12 +28,11 @@ extern Nes::Core::Input::Controllers *cNstPads;
 extern Emulator emulator;
 /// NESTOPIA
 
-PNESGuiEmu::PNESGuiEmu(UiMain *ui) : UIEmu(ui) {
+PNESGuiEmu::PNESGuiEmu(UiMain *ui) : UiEmu(ui) {
     printf("PNESGuiEmu()\n");
 }
 
 int PNESGuiEmu::load(const ss_api::Game &game) {
-
     getUi()->getUiProgressBox()->setTitle(game.getName().text);
     getUi()->getUiProgressBox()->setMessage("Please wait...");
     getUi()->getUiProgressBox()->setProgress(0);
@@ -62,11 +61,10 @@ int PNESGuiEmu::load(const ss_api::Game &game) {
     getUi()->delay(500);
     getUi()->getUiProgressBox()->setVisibility(Visibility::Hidden);
 
-    return UIEmu::load(game);
+    return UiEmu::load(game);
 }
 
 void PNESGuiEmu::stop() {
-
     nst_pause();
 
     // Remove the cartridge and shut down the NES
@@ -77,23 +75,22 @@ void PNESGuiEmu::stop() {
     nst_fds_bios_unload();
     nst_palette_unload();
 
-    UIEmu::stop();
+    UiEmu::stop();
 }
 
 bool PNESGuiEmu::onInput(c2d::Input::Player *players) {
-    return UIEmu::onInput(players);
+    return UiEmu::onInput(players);
 }
 
 void PNESGuiEmu::onUpdate() {
-
     if (!isPaused()) {
 
         // fps
         int showFps = getUi()->getConfig()->get(Option::Id::ROM_SHOW_FPS, true)->getValueBool();
         getFpsText()->setVisibility(showFps ? Visibility::Visible : Visibility::Hidden);
         if (showFps) {
-            sprintf(getFpsString(), "FPS: %.2g/%2d", getUi()->getFps(), nst_pal() ? 50 : 60);
-            getFpsText()->setString(getFpsString());
+            sprintf(fpsString, "FPS: %.2g/%2d", getUi()->getFps(), nst_pal() ? 50 : 60);
+            getFpsText()->setString(fpsString);
         }
 
         // update nestopia buttons
@@ -134,7 +131,7 @@ void PNESGuiEmu::onUpdate() {
         nst_emuloop();
     }
 
-    UIEmu::onUpdate();
+    UiEmu::onUpdate();
 }
 
 /// NESTOPIA

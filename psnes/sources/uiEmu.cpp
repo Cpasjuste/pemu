@@ -102,7 +102,7 @@ std::string getButtonId(int player, const std::string &name) {
     return "Joypad" + std::to_string(player) + " " + name;
 }
 
-PSNESUIEmu::PSNESUIEmu(UiMain *ui) : UIEmu(ui) {
+PSNESUIEmu::PSNESUIEmu(UiMain *ui) : UiEmu(ui) {
 
     printf("PSNESUIEmu()\n");
     _ui = ui;
@@ -286,7 +286,7 @@ int PSNESUIEmu::load(const ss_api::Game &game) {
     ui->delay(500);
     ui->getUiProgressBox()->setVisibility(Visibility::Hidden);
 
-    return UIEmu::load(game);
+    return UiEmu::load(game);
 }
 
 void PSNESUIEmu::stop() {
@@ -320,16 +320,16 @@ void PSNESUIEmu::stop() {
         free(audio_buffer);
     }
 
-    UIEmu::stop();
+    UiEmu::stop();
 }
 
 bool PSNESUIEmu::onInput(c2d::Input::Player *players) {
-    return UIEmu::onInput(players);
+    return UiEmu::onInput(players);
 }
 
 void PSNESUIEmu::onUpdate() {
 
-    UIEmu::onUpdate();
+    UiEmu::onUpdate();
 
     if (isVisible() && !isPaused()) {
 
@@ -367,12 +367,12 @@ void PSNESUIEmu::onUpdate() {
 
 void PSNESUIEmu::pause() {
     S9xSetSoundMute(TRUE);
-    UIEmu::pause();
+    UiEmu::pause();
 }
 
 void PSNESUIEmu::resume() {
     S9xSetSoundMute(FALSE);
-    UIEmu::resume();
+    UiEmu::resume();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
