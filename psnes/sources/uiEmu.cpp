@@ -102,13 +102,13 @@ std::string getButtonId(int player, const std::string &name) {
     return "Joypad" + std::to_string(player) + " " + name;
 }
 
-PSNESUIEmu::PSNESUIEmu(UiMain *ui) : UiEmu(ui) {
+PSNESUiEmu::PSNESUiEmu(UiMain *ui) : UiEmu(ui) {
 
     printf("PSNESUIEmu()\n");
     _ui = ui;
 }
 
-int PSNESUIEmu::load(const ss_api::Game &game) {
+int PSNESUiEmu::load(const ss_api::Game &game) {
 
     ui->getUiProgressBox()->setTitle(game.getName().text);
     ui->getUiProgressBox()->setMessage("Please wait...");
@@ -289,7 +289,7 @@ int PSNESUIEmu::load(const ss_api::Game &game) {
     return UiEmu::load(game);
 }
 
-void PSNESUIEmu::stop() {
+void PSNESUiEmu::stop() {
 
     Settings.StopEmulation = TRUE;
 
@@ -323,11 +323,11 @@ void PSNESUIEmu::stop() {
     UiEmu::stop();
 }
 
-bool PSNESUIEmu::onInput(c2d::Input::Player *players) {
+bool PSNESUiEmu::onInput(c2d::Input::Player *players) {
     return UiEmu::onInput(players);
 }
 
-void PSNESUIEmu::onUpdate() {
+void PSNESUiEmu::onUpdate() {
 
     UiEmu::onUpdate();
 
@@ -365,12 +365,12 @@ void PSNESUIEmu::onUpdate() {
     }
 }
 
-void PSNESUIEmu::pause() {
+void PSNESUiEmu::pause() {
     S9xSetSoundMute(TRUE);
     UiEmu::pause();
 }
 
-void PSNESUIEmu::resume() {
+void PSNESUiEmu::resume() {
     S9xSetSoundMute(FALSE);
     UiEmu::resume();
 }

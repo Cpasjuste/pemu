@@ -19,7 +19,7 @@ extern "C" int sceSystemServiceLoadExec(const char *path, const char *args[]);
 #endif
 
 PSNESUIMenu *uiMenu;
-PSNESUIEmu *uiEmu;
+PSNESUiEmu *uiEmu;
 PSNESConfig *cfg;
 PSNESUIStateMenu *uiState;
 RomList *romList;
@@ -129,7 +129,7 @@ int main(int argc, char **argv) {
     romList->build();
     uiRomList = new UIRomList(ui, romList, ui->getSize());
     uiMenu = new PSNESUIMenu(ui);
-    uiEmu = new PSNESUIEmu(ui);
+    uiEmu = new PSNESUiEmu(ui);
     uiState = new PSNESUIStateMenu(ui);
     ui->init(uiRomList, uiMenu, uiEmu, uiState);
 

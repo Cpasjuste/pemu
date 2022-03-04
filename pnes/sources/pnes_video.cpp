@@ -55,7 +55,7 @@ extern nstpaths_t nstpaths;
 extern Emulator emulator;
 
 // C2DUI
-extern PNESGuiEmu *uiEmu;
+extern PNESUiEmu *uiEmu;
 
 void nst_ogl_init() {
     uiEmu->addVideo(nullptr, nullptr, {basesize.w, basesize.h});

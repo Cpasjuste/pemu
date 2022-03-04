@@ -36,7 +36,7 @@ extern "C" int sceSystemServiceLoadExec(const char *path, const char *args[]);
 #endif
 
 UiMenu *uiMenu;
-PNESGuiEmu *uiEmu;
+PNESUiEmu *uiEmu;
 PNESConfig *cfg;
 PNESUIStateMenu *uiState;
 RomList *romList;
@@ -133,7 +133,7 @@ int main(int argc, char **argv) {
     romList->build();
     uiRomList = new UIRomList(ui, romList, ui->getSize());
     uiMenu = new UiMenu(ui);
-    uiEmu = new PNESGuiEmu(ui);
+    uiEmu = new PNESUiEmu(ui);
     uiState = new PNESUIStateMenu(ui);
     ui->init(uiRomList, uiMenu, uiEmu, uiState);
 

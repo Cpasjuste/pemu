@@ -13,7 +13,7 @@
 #include "c2dui.h"
 #include "uiEmu.h"
 
-extern PNESGuiEmu *uiEmu;
+extern PNESUiEmu *uiEmu;
 
 /// NESTOPIA
 settings_t conf;
@@ -28,11 +28,11 @@ extern Nes::Core::Input::Controllers *cNstPads;
 extern Emulator emulator;
 /// NESTOPIA
 
-PNESGuiEmu::PNESGuiEmu(UiMain *ui) : UiEmu(ui) {
+PNESUiEmu::PNESUiEmu(UiMain *ui) : UiEmu(ui) {
     printf("PNESGuiEmu()\n");
 }
 
-int PNESGuiEmu::load(const ss_api::Game &game) {
+int PNESUiEmu::load(const ss_api::Game &game) {
     getUi()->getUiProgressBox()->setTitle(game.getName().text);
     getUi()->getUiProgressBox()->setMessage("Please wait...");
     getUi()->getUiProgressBox()->setProgress(0);
@@ -64,7 +64,7 @@ int PNESGuiEmu::load(const ss_api::Game &game) {
     return UiEmu::load(game);
 }
 
-void PNESGuiEmu::stop() {
+void PNESUiEmu::stop() {
     nst_pause();
 
     // Remove the cartridge and shut down the NES
@@ -78,11 +78,11 @@ void PNESGuiEmu::stop() {
     UiEmu::stop();
 }
 
-bool PNESGuiEmu::onInput(c2d::Input::Player *players) {
+bool PNESUiEmu::onInput(c2d::Input::Player *players) {
     return UiEmu::onInput(players);
 }
 
-void PNESGuiEmu::onUpdate() {
+void PNESUiEmu::onUpdate() {
     if (!isPaused()) {
 
         // fps
@@ -216,7 +216,7 @@ void audio_adj_volume() {
 }
 
 /// NESTOPIA CONFIG
-void PNESGuiEmu::nestopia_config_init() {
+void PNESUiEmu::nestopia_config_init() {
 
     // Video
     conf.video_filter = 0;
@@ -277,7 +277,7 @@ void PNESGuiEmu::nestopia_config_init() {
 }
 
 // NESTOPIA CORE INIT
-int PNESGuiEmu::nestopia_core_init(const char *rom_path) {
+int PNESUiEmu::nestopia_core_init(const char *rom_path) {
 
     // Set up directories
     nst_set_dirs();
