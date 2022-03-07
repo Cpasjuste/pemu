@@ -5,12 +5,7 @@
             <path>1941.zip</path>
             <noms>
                 <nom region="ss">1941 - Counter Attack</nom>
-                <nom region="jp">1941 - Counter Attack</nom>
-                <nom region="wor">1941 - Counter Attack</nom>
             </noms>
-            <regions>
-                <region>jp</region>
-            </regions>
             <cloneof>0</cloneof>
             <systeme id="105" parentid="31">PC Engine SuperGrafx</systeme>
             <synopsis>
@@ -19,8 +14,8 @@
 The game consists of six levels and was the first in the series to introduce a +1 to the high score when Continues are used.</synopsis>
             </synopsis>
             <medias>
-                <media parent="jeu" type="video" region="unk" crc="714aed21" md5="245f86bee805c156eeae7060702d1d1f" sha1="bb767c9a9f15fba6912fc036a533452bea1e06c9" format="mp4" support="">media/video/1941.mp4</media>
-                <media parent="jeu" type="mixrbv2" region="wor" crc="72ee6e5e" md5="6b1259750b55edfe39cb9fdd733e8a2a" sha1="1f29587bbff4ff9b4d345d3180cc5d9bbad2cfdb" format="png" support="">media/mixrbv2/1941.png</media>
+                <media parent="jeu" type="video" region="unk" format="mp4" support="">media/video/1941.mp4</media>
+                <media parent="jeu" type="mixrbv2" region="wor" format="png" support="">media/mixrbv2/1941.png</media>
             </medias>
             <dates>
                 <date region="jp">1991</date>
@@ -39,8 +34,6 @@ The game consists of six levels and was the first in the series to introduce a +
             <path>aldynes.zip</path>
             <noms>
                 <nom region="ss">Aldynes</nom>
-                <nom region="jp">Aldynes</nom>
-                <nom region="wor">Aldynes</nom>
             </noms>
             <cloneof>0</cloneof>
             <systeme id="105" parentid="31">PC Engine SuperGrafx</systeme>
@@ -50,8 +43,8 @@ The game consists of six levels and was the first in the series to introduce a +
 The game consists of six levels and was the first in the series to introduce a +1 to the high score when Continues are used.</synopsis>
             </synopsis>
             <medias>
-                <media parent="jeu" type="video" region="unk" crc="714aed21" md5="245f86bee805c156eeae7060702d1d1f" sha1="bb767c9a9f15fba6912fc036a533452bea1e06c9" format="mp4" support="">media/video/aldynes.mp4</media>
-                <media parent="jeu" type="mixrbv2" region="wor" crc="72ee6e5e" md5="6b1259750b55edfe39cb9fdd733e8a2a" sha1="1f29587bbff4ff9b4d345d3180cc5d9bbad2cfdb" format="png" support="">media/mixrbv2/aldynes.png</media>
+                <media parent="jeu" type="video" region="unk" format="mp4" support="">media/video/aldynes.mp4</media>
+                <media parent="jeu" type="mixrbv2" region="wor" format="png" support="">media/mixrbv2/aldynes.png</media>
             </medias>
             <dates>
                 <date region="jp">1991</date>
@@ -70,19 +63,15 @@ The game consists of six levels and was the first in the series to introduce a +
             <path>battlace.zip</path>
             <noms>
                 <nom region="ss">Battle Ace</nom>
-                <nom region="jp">Battle Ace</nom>
             </noms>
-            <regions>
-                <region>jp</region>
-            </regions>
             <cloneof>0</cloneof>
             <systeme id="105" parentid="31">PC Engine SuperGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">Battle Ace is an action-oriented flight game in a first-person perspective. The player mans a space ship, including a radar which shows enemies, and the goal is to reach the end of each level where an end boss waits. As usually, the main occupation is to blast a lot of aliens which approach the player. The available weapons are bombs and a machine gun, both unlimited. Getting hit is a bad idea because it results in death. The player has three lives which can be raised by scoring 20000 points.</synopsis>
             </synopsis>
             <medias>
-                <media parent="jeu" type="video" region="unk" crc="dcb3891a" md5="d900a2a9603ccf99835ffb3b800c5be2" sha1="e8991c56524024a3393846c2462665892d0b9c69" format="mp4" support="">media/video/battlace.mp4</media>
-                <media parent="jeu" type="mixrbv2" region="wor" crc="7eebf93e" md5="b6cbe690afa14e4f2a3cb5c4081289c7" sha1="add51c02c4fdf980b7516ad397450625159a7d0f" format="png" support="">media/mixrbv2/battlace.png</media>
+                <media parent="jeu" type="video" region="unk" format="mp4" support="">media/video/battlace.mp4</media>
+                <media parent="jeu" type="mixrbv2" region="wor" format="png" support="">media/mixrbv2/battlace.png</media>
             </medias>
             <dates>
                 <date region="jp">1989</date>
@@ -101,21 +90,15 @@ The game consists of six levels and was the first in the series to introduce a +
             <path>daimakai.zip</path>
             <noms>
                 <nom region="ss">Dai Makaimura</nom>
-                <nom region="us">Dai Makaimura</nom>
-                <nom region="jp">Dai Makaimura</nom>
-                <nom region="eu">Dai Makaimura</nom>
             </noms>
-            <regions>
-                <region>jp</region>
-            </regions>
             <cloneof>0</cloneof>
             <systeme id="105" parentid="31">PC Engine SuperGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">Three years after the events of Ghosts'n Goblins, the world is once again under attack by demons. Guinevere, Arthur the knight's fiancée, is killed before his eyes by Lucifer himself. Arthur is forced to travel the kingdom infested with evil creatures to save the soul of his beloved.</synopsis>
             </synopsis>
             <medias>
-                <media parent="jeu" type="video" region="unk" crc="10111ad2" md5="634dd71dbc226a10f17eee810fefff57" sha1="6db08e6b1ff0c6dd31dd7b535b0f385269b9d86c" format="mp4" support="">media/video/daimakai.mp4</media>
-                <media parent="jeu" type="mixrbv2" region="wor" crc="988674dc" md5="852dcca6918621bfd0877198504e2de6" sha1="a3dac002e4c117c8159c1944cb653aa2678d5ee0" format="png" support="">media/mixrbv2/daimakai.png</media>
+                <media parent="jeu" type="video" region="unk" format="mp4" support="">media/video/daimakai.mp4</media>
+                <media parent="jeu" type="mixrbv2" region="wor" format="png" support="">media/mixrbv2/daimakai.png</media>
             </medias>
             <dates>
                 <date region="jp">1990</date>
@@ -124,33 +107,22 @@ The game consists of six levels and was the first in the series to introduce a +
             <editeur id="8730">NEC</editeur>
             <genres>
                 <genre id="7" principale="1" parentid="0" langue="en">Platform</genre>
-                <genre id="10" principale="1" parentid="0" langue="en">Action</genre>
             </genres>
             <joueurs>1</joueurs>
             <topstaff>0</topstaff>
             <note>14</note>
             <rotation>0</rotation>
         </jeu>
-        <jeu id="129653" romid="518996">
+        <jeu id="129653" romid="158425">
             <path>daimakai1.zip</path>
             <noms>
                 <nom region="ss">Dai Makaimura (Alt)</nom>
-                <nom region="us">Dai Makaimura (Alt)</nom>
-                <nom region="jp">Dai Makaimura (Alt)</nom>
-                <nom region="eu">Dai Makaimura (Alt)</nom>
             </noms>
-            <regions>
-                <region>jp</region>
-            </regions>
             <cloneof>daimakai.zip</cloneof>
             <systeme id="105" parentid="31">PC Engine SuperGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">Three years after the events of Ghosts'n Goblins, the world is once again under attack by demons. Guinevere, Arthur the knight's fiancée, is killed before his eyes by Lucifer himself. Arthur is forced to travel the kingdom infested with evil creatures to save the soul of his beloved.</synopsis>
             </synopsis>
-            <medias>
-                <media parent="jeu" type="video" region="unk" crc="10111ad2" md5="634dd71dbc226a10f17eee810fefff57" sha1="6db08e6b1ff0c6dd31dd7b535b0f385269b9d86c" format="mp4" support="">media/video/daimakai.mp4</media>
-                <media parent="jeu" type="mixrbv2" region="wor" crc="988674dc" md5="852dcca6918621bfd0877198504e2de6" sha1="a3dac002e4c117c8159c1944cb653aa2678d5ee0" format="png" support="">media/mixrbv2/daimakai.png</media>
-            </medias>
             <dates>
                 <date region="jp">1990</date>
             </dates>
@@ -158,33 +130,22 @@ The game consists of six levels and was the first in the series to introduce a +
             <editeur id="8730">NEC</editeur>
             <genres>
                 <genre id="7" principale="1" parentid="0" langue="en">Platform</genre>
-                <genre id="10" principale="1" parentid="0" langue="en">Action</genre>
             </genres>
             <joueurs>1</joueurs>
             <topstaff>0</topstaff>
             <note>14</note>
             <rotation>0</rotation>
         </jeu>
-        <jeu id="129653" romid="90290">
+        <jeu id="129653" romid="158425">
             <path>daimakaid.zip</path>
             <noms>
                 <nom region="ss">Dai Makaimura (Chris Covell's Debug Menu Hack)</nom>
-                <nom region="us">Dai Makaimura (Chris Covell's Debug Menu Hack)</nom>
-                <nom region="jp">Dai Makaimura (Chris Covell's Debug Menu Hack)</nom>
-                <nom region="eu">Dai Makaimura (Chris Covell's Debug Menu Hack)</nom>
             </noms>
-            <regions>
-                <region>jp</region>
-            </regions>
             <cloneof>daimakai.zip</cloneof>
             <systeme id="105" parentid="31">PC Engine SuperGrafx</systeme>
             <synopsis>
                 <synopsis langue="en">Three years after the events of Ghosts'n Goblins, the world is once again under attack by demons. Guinevere, Arthur the knight's fiancée, is killed before his eyes by Lucifer himself. Arthur is forced to travel the kingdom infested with evil creatures to save the soul of his beloved.</synopsis>
             </synopsis>
-            <medias>
-                <media parent="jeu" type="video" region="unk" crc="10111ad2" md5="634dd71dbc226a10f17eee810fefff57" sha1="6db08e6b1ff0c6dd31dd7b535b0f385269b9d86c" format="mp4" support="">media/video/daimakai.mp4</media>
-                <media parent="jeu" type="mixrbv2" region="wor" crc="988674dc" md5="852dcca6918621bfd0877198504e2de6" sha1="a3dac002e4c117c8159c1944cb653aa2678d5ee0" format="png" support="">media/mixrbv2/daimakai.png</media>
-            </medias>
             <dates>
                 <date region="jp">1990</date>
             </dates>
@@ -192,7 +153,6 @@ The game consists of six levels and was the first in the series to introduce a +
             <editeur id="8730">NEC</editeur>
             <genres>
                 <genre id="7" principale="1" parentid="0" langue="en">Platform</genre>
-                <genre id="10" principale="1" parentid="0" langue="en">Action</genre>
             </genres>
             <joueurs>1</joueurs>
             <topstaff>0</topstaff>
@@ -203,11 +163,7 @@ The game consists of six levels and was the first in the series to introduce a +
             <path>granzort.zip</path>
             <noms>
                 <nom region="ss">Madou Ou Granzort</nom>
-                <nom region="jp">Madou Ou Granzort</nom>
             </noms>
-            <regions>
-                <region>jp</region>
-            </regions>
             <cloneof>0</cloneof>
             <systeme id="105" parentid="31">PC Engine SuperGrafx</systeme>
             <synopsis>
@@ -216,8 +172,8 @@ You will cross ruins, underground, a forest or any futuristic complex by laminat
 You will make your character jump by pressing the I button and hit him by pressing the II button. It is the Select button that pauses the game, as Run is used to switch heroes. At any time you can switch from the red knight to the green, then to the blue and so on.</synopsis>
             </synopsis>
             <medias>
-                <media parent="jeu" type="video" region="unk" crc="a64314db" md5="e059429e2ed07250199015e543b9bbe8" sha1="0369fb7978b5372b93f66dd0b826410eedbff02a" format="mp4" support="">media/video/granzort.mp4</media>
-                <media parent="jeu" type="mixrbv2" region="wor" crc="bfd42aea" md5="69ea83639dc5bd53ded75db818d9614e" sha1="527f9574f9285d89ced7508c2a6deb7e6076472d" format="png" support="">media/mixrbv2/granzort.png</media>
+                <media parent="jeu" type="video" region="unk" format="mp4" support="">media/video/granzort.mp4</media>
+                <media parent="jeu" type="mixrbv2" region="wor" format="png" support="">media/mixrbv2/granzort.png</media>
             </medias>
             <dates>
                 <date region="jp">1990</date>
@@ -226,19 +182,18 @@ You will make your character jump by pressing the I button and hit him by pressi
             <editeur id="83">Hudson</editeur>
             <genres>
                 <genre id="10" principale="1" parentid="0" langue="en">Action</genre>
-                <genre id="7" principale="1" parentid="0" langue="en">Platform</genre>
             </genres>
             <joueurs>1</joueurs>
             <topstaff>0</topstaff>
             <note>17</note>
             <rotation>0</rotation>
         </jeu>
-        <jeu>
+        <jeu id="4096943883" romid="4096943883">
             <path>rtypeuh.zip</path>
             <noms>
                 <nom region="wor">R-Type - Chris Covell's Unfinished SGX Hack</nom>
             </noms>
-            <systeme/>
+            <systeme id="105" parentid="0">PC Engine SuperGrafx</systeme>
             <dates>
                 <date region="wor">2019</date>
             </dates>
@@ -248,12 +203,12 @@ You will make your character jump by pressing the I button and hit him by pressi
             <note>0</note>
             <rotation>0</rotation>
         </jeu>
-        <jeu>
+        <jeu id="345494241" romid="345494241">
             <path>rta2.zip</path>
             <noms>
                 <nom region="wor">RTA2 - Homebrew conversion of RTA2</nom>
             </noms>
-            <systeme/>
+            <systeme id="105" parentid="0">PC Engine SuperGrafx</systeme>
             <dates>
                 <date region="wor">2016</date>
             </dates>

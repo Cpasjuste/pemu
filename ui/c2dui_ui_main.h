@@ -33,7 +33,7 @@ namespace c2dui {
         ~UiMain() override;
 
         void init(UIRomList *uiRomList, UiMenu *uiMenu,
-                  UIEmu *uiEmu, UiStateMenu *uiState);
+                  UiEmu *uiEmu, UiStateMenu *uiState);
 
         void setConfig(Config *cfg);
 
@@ -51,11 +51,13 @@ namespace c2dui {
 
         UIRomList *getUiRomList();
 
-        UIEmu *getUiEmu();
+        UiEmu *getUiEmu();
 
         UiMenu *getUiMenu();
 
         UiStateMenu *getUiStateMenu();
+
+        UiStatusBox *getUiStatusBox();
 
         UIProgressBox *getUiProgressBox();
 
@@ -74,10 +76,11 @@ namespace c2dui {
         UIHighlight *uiHighlight = nullptr;
         UiMenu *uiMenu = nullptr;
         UIRomList *uiRomList = nullptr;
-        UIEmu *uiEmu = nullptr;
+        UiEmu *uiEmu = nullptr;
         UiStateMenu *uiState = nullptr;
         UIProgressBox *uiProgressBox = nullptr;
         c2d::MessageBox *uiMessageBox = nullptr;
+        UiStatusBox *uiStatusBox = nullptr;
         c2d::C2DClock timer;
         unsigned int oldKeys = 0;
 

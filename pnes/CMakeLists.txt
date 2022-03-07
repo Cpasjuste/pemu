@@ -21,14 +21,12 @@ file(GLOB NESTOPIA_SRC
         ${CMAKE_SOURCE_DIR}/cores/nestopia/source/core/board/*.c*
         ${CMAKE_SOURCE_DIR}/cores/nestopia/source/core/input/*.c*
         ${CMAKE_SOURCE_DIR}/cores/nestopia/source/core/vssystem/*.c*
-        ${CMAKE_SOURCE_DIR}/cores/nestopia/source/common/*.c*
+        ${CMAKE_SOURCE_DIR}/cores/nestopia/source/fltkui/cheats.cpp
+        ${CMAKE_SOURCE_DIR}/cores/nestopia/source/fltkui/homebrew.cpp
+        ${CMAKE_SOURCE_DIR}/cores/nestopia/source/fltkui/samples.cpp
         )
 
 list(REMOVE_ITEM NESTOPIA_SRC
-        ${CMAKE_SOURCE_DIR}/cores/nestopia/source/common/audio.cpp
-        ${CMAKE_SOURCE_DIR}/cores/nestopia/source/common/video.cpp
-        ${CMAKE_SOURCE_DIR}/cores/nestopia/source/common/config.cpp
-        ${CMAKE_SOURCE_DIR}/cores/nestopia/source/common/sdlinput.cpp
         ${CMAKE_SOURCE_DIR}/cores/nestopia/source/core/NstVideoFilter2xSaI.cpp
         ${CMAKE_SOURCE_DIR}/cores/nestopia/source/core/NstVideoFilterHqX.cpp
         ${CMAKE_SOURCE_DIR}/cores/nestopia/source/core/NstVideoFilterScaleX.cpp
@@ -37,8 +35,8 @@ list(REMOVE_ITEM NESTOPIA_SRC
         )
 
 set(NESTOPIA_CFLAGS
-        -DVERSION="1.0"
-        -D__LIBRETRO__ -D_MINGW -D__NST_UNZIP__
+        -DVERSION="1.51.1+"
+        -D_MINGW # for nst_sample_load_archive
         -DNST_NO_2XSAI -DNST_NO_HQ2X -DNST_NO_SCALEX -DNO_NTSC -DNST_NO_XBR
         -D__PNES__ -D__PNES_VERSION_MAJOR__=${VERSION_MAJOR} -D__PNES_VERSION_MINOR__=${VERSION_MINOR}
         -Wno-unused-definition -Wno-unused-local-typedefs
@@ -56,8 +54,8 @@ endif ()
 ##############
 # pnes
 ##############
-set(PNES_INC sources)
-file(GLOB PNES_SRC sources/*.c*)
+set(PNES_INC sources sources/nst)
+file(GLOB PNES_SRC sources/*.c* sources/nst/*.c*)
 
 #####################
 # PLATORM SPECIFIC

@@ -19,7 +19,7 @@ extern "C" int sceSystemServiceLoadExec(const char *path, const char *args[]);
 #endif
 
 PSNESUIMenu *uiMenu;
-PSNESUIEmu *uiEmu;
+PSNESUiEmu *uiEmu;
 PSNESConfig *cfg;
 PSNESUIStateMenu *uiState;
 RomList *romList;
@@ -88,16 +88,19 @@ int main(int argc, char **argv) {
     buttons.emplace_back(KEY_JOY_FIRE2_DEFAULT, "B");
     buttons.emplace_back(KEY_JOY_FIRE3_DEFAULT, "X");
     buttons.emplace_back(KEY_JOY_FIRE4_DEFAULT, "Y");
-    buttons.emplace_back(KEY_JOY_FIRE5_DEFAULT, "L");
-    buttons.emplace_back(KEY_JOY_FIRE6_DEFAULT, "R");
+    buttons.emplace_back(KEY_JOY_FIRE5_DEFAULT, "ZL");
+    buttons.emplace_back(KEY_JOY_FIRE6_DEFAULT, "ZR");
+    buttons.emplace_back(KEY_JOY_FIRE7_DEFAULT, "L");
+    buttons.emplace_back(KEY_JOY_FIRE8_DEFAULT, "R");
     buttons.emplace_back(KEY_JOY_COIN1_DEFAULT, "-");
     buttons.emplace_back(KEY_JOY_START1_DEFAULT, "+");
+    buttons.emplace_back(KEY_JOY_MENU1_DEFAULT, "R");
+    buttons.emplace_back(KEY_JOY_MENU2_DEFAULT, "L");
     // switch special keys
-    buttons.emplace_back(KEY_JOY_ZL_DEFAULT, "ZL");
-    buttons.emplace_back(KEY_JOY_ZR_DEFAULT, "ZR");
     buttons.emplace_back(KEY_JOY_LSTICK_DEFAULT, "LSTICK");
     buttons.emplace_back(KEY_JOY_RSTICK_DEFAULT, "RSTICK");
 #elif __PS4__
+    // see c2d.h for key id
     buttons.emplace_back(KEY_JOY_UP_DEFAULT, "UP");
     buttons.emplace_back(KEY_JOY_DOWN_DEFAULT, "DOWN");
     buttons.emplace_back(KEY_JOY_LEFT_DEFAULT, "LEFT");
@@ -108,8 +111,12 @@ int main(int argc, char **argv) {
     buttons.emplace_back(KEY_JOY_FIRE4_DEFAULT, "TRIANGLE");
     buttons.emplace_back(KEY_JOY_FIRE5_DEFAULT, "L2");
     buttons.emplace_back(KEY_JOY_FIRE6_DEFAULT, "R2");
+    buttons.emplace_back(KEY_JOY_FIRE7_DEFAULT, "L2");
+    buttons.emplace_back(KEY_JOY_FIRE8_DEFAULT, "R2");
     buttons.emplace_back(KEY_JOY_COIN1_DEFAULT, "L1");
     buttons.emplace_back(KEY_JOY_START1_DEFAULT, "R1");
+    buttons.emplace_back(KEY_JOY_MENU1_DEFAULT, "L1");
+    buttons.emplace_back(KEY_JOY_MENU2_DEFAULT, "R1");
 #endif
 
     skin = new Skin(ui, buttons);
@@ -122,7 +129,7 @@ int main(int argc, char **argv) {
     romList->build();
     uiRomList = new UIRomList(ui, romList, ui->getSize());
     uiMenu = new PSNESUIMenu(ui);
-    uiEmu = new PSNESUIEmu(ui);
+    uiEmu = new PSNESUiEmu(ui);
     uiState = new PSNESUIStateMenu(ui);
     ui->init(uiRomList, uiMenu, uiEmu, uiState);
 

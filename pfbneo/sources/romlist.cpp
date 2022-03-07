@@ -13,46 +13,46 @@ void PFBARomList::build() {
     }
 
     gameList.append(dataPath + "gamelist_channelf.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_CHANNELF), false);
-    setLoadingText("Games: %i / %i", gameList.getAvailableCount(), gameList.games.size());
+    setLoadingText("Games: %li / %li", gameList.getAvailableCount(), gameList.games.size());
 
     gameList.append(dataPath + "gamelist_coleco.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_COLECO), false);
-    setLoadingText("Games: %i / %i", gameList.getAvailableCount(), gameList.games.size());
+    setLoadingText("Games: %li / %li", gameList.getAvailableCount(), gameList.games.size());
 
     gameList.append(dataPath + "gamelist_fds.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_FDS), false);
-    setLoadingText("Games: %i / %i", gameList.getAvailableCount(), gameList.games.size());
+    setLoadingText("Games: %li / %li", gameList.getAvailableCount(), gameList.games.size());
 
     gameList.append(dataPath + "gamelist_gamegear.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_GAMEGEAR), false);
-    setLoadingText("Games: %i / %i", gameList.getAvailableCount(), gameList.games.size());
+    setLoadingText("Games: %li / %li", gameList.getAvailableCount(), gameList.games.size());
 
     gameList.append(dataPath + "gamelist_megadrive.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_MEGADRIVE), false);
-    setLoadingText("Games: %i / %i", gameList.getAvailableCount(), gameList.games.size());
+    setLoadingText("Games: %li / %li", gameList.getAvailableCount(), gameList.games.size());
 
     gameList.append(dataPath + "gamelist_msx.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_MSX), false);
-    setLoadingText("Games: %i / %i", gameList.getAvailableCount(), gameList.games.size());
+    setLoadingText("Games: %li / %li", gameList.getAvailableCount(), gameList.games.size());
 
     gameList.append(dataPath + "gamelist_nes.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_NES), false);
-    setLoadingText("Games: %i / %i", gameList.getAvailableCount(), gameList.games.size());
+    setLoadingText("Games: %li / %li", gameList.getAvailableCount(), gameList.games.size());
 
     gameList.append(dataPath + "gamelist_ngp.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_NGP), false);
-    setLoadingText("Games: %i / %i", gameList.getAvailableCount(), gameList.games.size());
+    setLoadingText("Games: %li / %li", gameList.getAvailableCount(), gameList.games.size());
 
     gameList.append(dataPath + "gamelist_pce.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_PCE), false);
-    setLoadingText("Games: %i / %i", gameList.getAvailableCount(), gameList.games.size());
+    setLoadingText("Games: %li / %li", gameList.getAvailableCount(), gameList.games.size());
 
     gameList.append(dataPath + "gamelist_sg1000.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_SG1000), false);
-    setLoadingText("Games: %i / %i", gameList.getAvailableCount(), gameList.games.size());
+    setLoadingText("Games: %li / %li", gameList.getAvailableCount(), gameList.games.size());
 
     gameList.append(dataPath + "gamelist_sgx.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_SGX), false);
-    setLoadingText("Games: %i / %i", gameList.getAvailableCount(), gameList.games.size());
+    setLoadingText("Games: %li / %li", gameList.getAvailableCount(), gameList.games.size());
 
     gameList.append(dataPath + "gamelist_sms.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_SMS), false);
-    setLoadingText("Games: %i / %i", gameList.getAvailableCount(), gameList.games.size());
+    setLoadingText("Games: %li / %li", gameList.getAvailableCount(), gameList.games.size());
 
     gameList.append(dataPath + "gamelist_spectrum.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_SPECTRUM), false);
-    setLoadingText("Games: %i / %i", gameList.getAvailableCount(), gameList.games.size());
+    setLoadingText("Games: %li / %li", gameList.getAvailableCount(), gameList.games.size());
 
     gameList.append(dataPath + "gamelist_tg16.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_TG16), false);
-    setLoadingText("Games: %i / %i", gameList.getAvailableCount(), gameList.games.size());
+    setLoadingText("Games: %li / %li", gameList.getAvailableCount(), gameList.games.size());
 
     RomList::build();
 

@@ -5,9 +5,9 @@
 #include "c2dui.h"
 #include "c2dui_ui_menu.h"
 
-#define OPTION_ID_QUIT -1
-#define OPTION_ID_STATES -2
-#define OPTION_ID_OTHER -3
+#define OPTION_ID_QUIT (-1)
+#define OPTION_ID_STATES (-2)
+#define OPTION_ID_OTHER (-3)
 
 class MenuLine : public c2d::RectangleShape {
 
@@ -49,14 +49,13 @@ public:
 
         // reset
         name->setString(option.getName());
-        name->setStyle(Text::Regular);
         value->setVisibility(Visibility::Visible);
         setFillColor(Color::Transparent);
 
         if (option.getFlags() & Option::Flags::INPUT) {
             Skin::Button *button = ui->getSkin()->getButton(option.getValueInt());
-            if (button != nullptr && option.getId() < Option::Id::JOY_DEADZONE) {
-                if (button->texture != nullptr) {
+            if (button && option.getId() < Option::Id::JOY_DEADZONE) {
+                if (button->texture) {
                     sprite->setTexture(button->texture, true);
                     sprite->setVisibility(Visibility::Visible);
                     value->setVisibility(Visibility::Hidden);
@@ -78,7 +77,6 @@ public:
                 value->setString(btn);
             }
         } else if (option.getFlags() & Option::Flags::MENU) {
-            name->setStyle(Text::Italic);
             value->setVisibility(Visibility::Hidden);
             setFillColor(ui->getUiMenu()->getOutlineColor());
         } else {
@@ -282,7 +280,7 @@ bool UiMenu::onInput(c2d::Input::Player *players) {
         ui->getConfig()->get(option.getId(), isRomMenu)->set(option);
 
         if (!option.getInfo().empty()) {
-            ui->getUiMessageBox()->show("WARNING", option.getInfo(), "OK");
+            ui->getUiStatusBox()->show(option.getInfo());
         }
 
         switch (option.getId()) {
@@ -305,6 +303,33 @@ bool UiMenu::onInput(c2d::Input::Player *players) {
             case Option::Id::ROM_SCALING:
                 if (isEmuRunning) {
                     ui->getUiEmu()->getVideo()->updateScaling();
+                    auto gw = (float) ui->getUiEmu()->getVideo()->getTextureRect().width;
+                    auto gh = (float) ui->getUiEmu()->getVideo()->getTextureRect().height;
+                    float gr = std::max(
+                            (float) ui->getUiEmu()->getVideo()->aspect.x /
+                            (float) ui->getUiEmu()->getVideo()->aspect.y,
+                            (float) ui->getUiEmu()->getVideo()->aspect.y /
+                            (float) ui->getUiEmu()->getVideo()->aspect.x);
+                    float ow = gw * ui->getUiEmu()->getVideo()->getScale().x;
+                    float oh = gh * ui->getUiEmu()->getVideo()->getScale().y;
+                    float ratio = std::max(ow / oh, oh / ow);
+                    ui->getUiStatusBox()->show(
+                            "GAME: %ix%i - RATIO: %.2f | OUTPUT: %ix%i - RATIO: %.2f - SCALING: %.2fx%.2f",
+                            (int) gw, (int) gh, gr, (int) ow, (int) oh, ratio,
+                            ui->getUiEmu()->getVideo()->getScale().x, ui->getUiEmu()->getVideo()->getScale().y);
+                }
+                break;
+            case Option::Id::ROM_SCALING_MODE:
+                if (option.getValueString() == "AUTO") {
+                    ui->getUiStatusBox()->show("TRY TO KEEP INTEGER SCALING IF ASPECT RATIO IS NOT TOO DIVERGENT");
+                } else if (option.getValueString() == "ASPECT") {
+                    ui->getUiStatusBox()->show("KEEP GAME ASPECT RATIO - SOME SHADERS MAY NOT RENDER CORRECTLY");
+                } else {
+                    ui->getUiStatusBox()->show(
+                            "FORCE INTEGER SCALING - ASPECT RATIO MAY BE WRONG BUT SHADERS WILL RENDER CORRECTLY");
+                }
+                if (isEmuRunning) {
+                    ui->getUiEmu()->getVideo()->updateScaling();
                 }
                 break;
             case Option::Id::ROM_FILTER:
@@ -315,6 +340,7 @@ bool UiMenu::onInput(c2d::Input::Player *players) {
             case Option::Id::ROM_SHADER:
                 if (isEmuRunning) {
                     ui->getUiEmu()->getVideo()->setShader(option.getIndex());
+                    ui->getUiStatusBox()->show(option.getValueString());
                 }
                 break;
             case Option::Id::GUI_VIDEO_SNAP_DELAY:

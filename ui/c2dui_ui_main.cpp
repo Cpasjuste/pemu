@@ -30,7 +30,7 @@ UiMain::~UiMain() {
 }
 
 void UiMain::init(UIRomList *_uiRomList, UiMenu *_uiMenu,
-                  UIEmu *_uiEmu, UiStateMenu *_uiState) {
+                  UiEmu *_uiEmu, UiStateMenu *_uiState) {
 #if 0
     uiHighlight = new UIHighlight();
     skin->loadRectangleShape(uiHighlight, {"SKIN_CONFIG", "HIGHLIGHT"});
@@ -71,8 +71,10 @@ void UiMain::init(UIRomList *_uiRomList, UiMenu *_uiMenu,
                     getSize().y / 2),
             getInput(), skin->font, getFontSize());
     skin->loadRectangleShape(uiMessageBox, {"SKIN_CONFIG", "MESSAGEBOX"});
+    float fontSize = uiMessageBox->getTitleText()->getSize().y * 1.5f;
     uiMessageBox->getTitleText()->setSize(
-            uiMessageBox->getTitleText()->getSize().x * 1.5f, uiMessageBox->getTitleText()->getSize().y * 1.5f);
+            uiMessageBox->getTitleText()->getSize().x * 1.5f, fontSize);
+    uiMessageBox->getTitleText()->setSizeMax(uiMessageBox->getSize().x - (float) fontSize * 2, (float) fontSize + 4);
     uiMessageBox->setSelectedColor(uiMessageBox->getFillColor(), uiMessageBox->getOutlineColor());
     Color c = uiMessageBox->getOutlineColor();
     c.a -= 150;
@@ -86,6 +88,9 @@ void UiMain::init(UIRomList *_uiRomList, UiMenu *_uiMenu,
 
     uiProgressBox = new UIProgressBox(this);
     add(uiProgressBox);
+
+    uiStatusBox = new UiStatusBox(this);
+    add(uiStatusBox);
 
     updateInputMapping(false);
     getInput()->setRepeatDelay(INPUT_DELAY);
@@ -153,7 +158,7 @@ UIRomList *UiMain::getUiRomList() {
     return uiRomList;
 }
 
-UIEmu *UiMain::getUiEmu() {
+UiEmu *UiMain::getUiEmu() {
     return uiEmu;
 }
 
@@ -167,6 +172,10 @@ UiStateMenu *UiMain::getUiStateMenu() {
 
 UIProgressBox *UiMain::getUiProgressBox() {
     return uiProgressBox;
+}
+
+UiStatusBox *UiMain::getUiStatusBox() {
+    return uiStatusBox;
 }
 
 c2d::MessageBox *UiMain::getUiMessageBox() {
@@ -194,16 +203,16 @@ void UiMain::updateInputMapping(bool isRomConfig) {
     } else {
 #ifndef NO_KEYBOARD
         // keep custom config for menus keys
-        int key_mapping[15];
+        int key_mapping[17];
         memcpy(key_mapping, C2D_DEFAULT_KB_KEYS, sizeof(key_mapping));
-        key_mapping[12] = config->get(Option::Id::KEY_MENU1, false)->getValueInt();
-        key_mapping[13] = config->get(Option::Id::KEY_MENU2, false)->getValueInt();
+        key_mapping[14] = config->get(Option::Id::KEY_MENU1, false)->getValueInt();
+        key_mapping[15] = config->get(Option::Id::KEY_MENU2, false)->getValueInt();
         getInput()->setKeyboardMapping(key_mapping);
 #endif
-        int joy_mapping[15];
+        int joy_mapping[17];
         memcpy(joy_mapping, C2D_DEFAULT_JOY_KEYS, sizeof(joy_mapping));
-        joy_mapping[12] = config->get(Option::Id::JOY_MENU1, false)->getValueInt();
-        joy_mapping[13] = config->get(Option::Id::JOY_MENU2, false)->getValueInt();
+        joy_mapping[14] = config->get(Option::Id::JOY_MENU1, false)->getValueInt();
+        joy_mapping[15] = config->get(Option::Id::JOY_MENU2, false)->getValueInt();
 
         for (int i = 0; i < PLAYER_MAX; i++) {
             getInput()->setJoystickMapping(i, joy_mapping);
@@ -219,4 +228,3 @@ void UiMain::updateInputMapping(bool isRomConfig) {
     ((SWITCHInput *) getInput())->setSingleJoyconMode(single_joy_mode);
 #endif
 }
-

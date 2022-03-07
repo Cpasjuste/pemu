@@ -51,11 +51,11 @@ void Option::setValueInt(int value) {
 }
 
 bool Option::getValueBool() {
-    return getValueString() == "ON";
+    return getIndex() > 0;
 }
 
 void Option::setValueBool(bool value) {
-    setValueString(value ? "ON" : "OFF");
+    setIndex(value ? 1 : 0);
 }
 
 int Option::getId() {

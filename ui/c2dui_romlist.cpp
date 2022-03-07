@@ -5,7 +5,6 @@
 #include <vector>
 #include <string>
 #include <algorithm>
-#include <iostream>
 #include "c2dui.h"
 
 RomList::RomList(UiMain *_ui, const std::string &emuVersion) {
@@ -37,13 +36,13 @@ RomList::RomList(UiMain *_ui, const std::string &emuVersion) {
     text = new Text();
     ui->getSkin()->loadText(text, {"ROM_LIST", "TEXT"});
     text->setOrigin(Origin::BottomLeft);
-    text->setPosition(8, rect->getSize().y - ((float) text->getCharacterSize() / 2));
+    text->setPosition(8, rect->getSize().y - 8);
     rect->add(text);
 
     auto *version = new Text();
     ui->getSkin()->loadText(version, {"ROM_LIST", "TEXT"});
     version->setOrigin(Origin::BottomRight);
-    version->setPosition(rect->getSize().x - 16, rect->getSize().y - ((float) text->getCharacterSize() / 2));
+    version->setPosition(rect->getSize().x - 8, rect->getSize().y - 8);
     version->setString(emuVersion);
     rect->add(version);
 
@@ -82,50 +81,51 @@ void RomList::build() {
     gameList.append(gameListPath,
                     ui->getConfig()->getRomPaths().at(FBN_PATH_ARCADE), false, true);
 
-    setLoadingText("Games: %i / %i", gameList.getAvailableCount(), gameList.games.size());
-    printf("RomList::build: games: %i / %lu\n", gameList.getAvailableCount(), gameList.games.size());
+    setLoadingText("Games: %li / %li", gameList.getAvailableCount(), gameList.games.size());
+    printf("RomList::build: games: %li / %li\n", gameList.getAvailableCount(), gameList.games.size());
 
     // sort lists
-    std::sort(gameList.systems.begin(), gameList.systems.end(), Api::sortByName);
-    std::sort(gameList.editors.begin(), gameList.editors.end(), Api::sortByName);
-    std::sort(gameList.developers.begin(), gameList.developers.end(), Api::sortByName);
-    std::sort(gameList.players.begin(), gameList.players.end(), Api::sortByName);
-    std::sort(gameList.ratings.begin(), gameList.ratings.end(), Api::sortByName);
-    std::sort(gameList.topStaffs.begin(), gameList.topStaffs.end(), Api::sortByName);
-    std::sort(gameList.rotations.begin(), gameList.rotations.end(), Api::sortByName);
+    std::sort(gameList.systems.begin(), gameList.systems.end(), Api::sortSystemByName);
+    std::sort(gameList.editors.begin(), gameList.editors.end(), Api::sortEditorByName);
+    std::sort(gameList.developers.begin(), gameList.developers.end(), Api::sortDeveloperByName);
+    std::sort(gameList.players.begin(), gameList.players.end(), Api::sortInteger);
+    std::sort(gameList.ratings.begin(), gameList.ratings.end(), Api::sortInteger);
+    //std::sort(gameList.topStaffs.begin(), gameList.topStaffs.end(), Api::sortByName);
+    std::sort(gameList.rotations.begin(), gameList.rotations.end(), Api::sortInteger);
     std::sort(gameList.resolutions.begin(), gameList.resolutions.end(), Api::sortByName);
     std::sort(gameList.dates.begin(), gameList.dates.end(), Api::sortByName);
     std::sort(gameList.genres.begin(), gameList.genres.end(), Api::sortByName);
 
-    gameList.systems.insert(gameList.systems.begin(), "ALL");
-    gameList.editors.insert(gameList.editors.begin(), "ALL");
-    gameList.developers.insert(gameList.developers.begin(), "ALL");
-    gameList.players.insert(gameList.players.begin(), "ALL");
-    gameList.ratings.insert(gameList.ratings.begin(), "ALL");
+    //TODO: gameList.systems.insert(gameList.systems.begin(), {9999, 0, "ARCADE"});
+    //gameList.systems.insert(gameList.systems.begin(), {0, 0, "ALL"});
+    //gameList.editors.insert(gameList.editors.begin(), {0, "ALL"});
+    //gameList.developers.insert(gameList.developers.begin(), {0, "ALL"});
+    //gameList.players.insert(gameList.players.begin(), "ALL");
+    //gameList.ratings.insert(gameList.ratings.begin(), "ALL");
     gameList.topStaffs.insert(gameList.topStaffs.begin(), "ALL");
-    gameList.rotations.insert(gameList.rotations.begin(), "ALL");
     gameList.resolutions.insert(gameList.resolutions.begin(), "ALL");
     gameList.dates.insert(gameList.dates.begin(), "ALL");
     gameList.genres.insert(gameList.genres.begin(), "ALL");
 
     ui->getConfig()->add(
             Option::Id::GUI_SHOW_ZIP_NAMES, "FILTER_SYSTEM",
-            gameList.systems, 0, Option::Id::GUI_FILTER_SYSTEM, Option::Flags::STRING | Option::Flags::HIDDEN);
+            gameList.getSystemNames(), 0, Option::Id::GUI_FILTER_SYSTEM, Option::Flags::STRING | Option::Flags::HIDDEN);
     ui->getConfig()->add(
             Option::Id::GUI_FILTER_SYSTEM, "FILTER_EDITOR",
-            gameList.editors, 0, Option::Id::GUI_FILTER_EDITOR, Option::Flags::STRING);
+            gameList.getEditorNames(), 0, Option::Id::GUI_FILTER_EDITOR, Option::Flags::STRING);
     ui->getConfig()->add(
             Option::Id::GUI_FILTER_EDITOR, "FILTER_DEVELOPER",
-            gameList.developers, 0, Option::Id::GUI_FILTER_DEVELOPER, Option::Flags::STRING);
+            gameList.getDeveloperNames(), 0, Option::Id::GUI_FILTER_DEVELOPER, Option::Flags::STRING);
     ui->getConfig()->add(
             Option::Id::GUI_FILTER_DEVELOPER, "FILTER_PLAYERS",
-            gameList.players, 0, Option::Id::GUI_FILTER_PLAYERS, Option::Flags::STRING);
+            gameList.getPlayersNames(), 0, Option::Id::GUI_FILTER_PLAYERS, Option::Flags::STRING);
     ui->getConfig()->add(
             Option::Id::GUI_FILTER_PLAYERS, "FILTER_RATING",
-            gameList.ratings, 0, Option::Id::GUI_FILTER_RATING, Option::Flags::STRING);
+            gameList.getRatingNames(), 0, Option::Id::GUI_FILTER_RATING, Option::Flags::STRING);
     ui->getConfig()->add(
             Option::Id::GUI_FILTER_RATING, "FILTER_ROTATION",
-            gameList.rotations, 0, Option::Id::GUI_FILTER_ROTATION, Option::Flags::STRING | Option::Flags::HIDDEN);
+            gameList.getRotationNames(), 0, Option::Id::GUI_FILTER_ROTATION,
+            Option::Flags::STRING | Option::Flags::HIDDEN);
     ui->getConfig()->add(
             Option::Id::GUI_FILTER_ROTATION, "FILTER_RESOLUTION",
             gameList.resolutions, 0, Option::Id::GUI_FILTER_RESOLUTION, Option::Flags::STRING | Option::Flags::HIDDEN);
@@ -142,7 +142,7 @@ void RomList::build() {
 
     gameListFav = GameList(ui->getIo()->getDataPath() + "favorites.xml");
     for (size_t i = 0; i < gameListFav.games.size(); i++) {
-        Game game = gameList.findByPathAndSystem(gameListFav.games[i].path, gameListFav.games[i].system.id);
+        Game game = gameList.findGameByPathAndSystem(gameListFav.games[i].path, gameListFav.games[i].system.id);
         if (!game.path.empty()) {
             gameListFav.games[i].available = true;
             gameListFav.games[i].romsPath = game.romsPath;

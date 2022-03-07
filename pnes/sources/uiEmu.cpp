@@ -4,21 +4,22 @@
 
 #include <fstream>
 
-#include "common/nstcommon.h"
-#include "common/video.h"
-#include "common/config.h"
-#include "common/input.h"
+#include "fltkui/nstcommon.h"
+#include "fltkui/video.h"
+#include "fltkui/config.h"
+#include "input.h"
 #include "audio.h"
 
 #include "c2dui.h"
 #include "uiEmu.h"
 
-extern PNESGuiEmu *uiEmu;
+extern PNESUiEmu *uiEmu;
 
 /// NESTOPIA
 settings_t conf;
 
 extern nstpaths_t nstpaths;
+extern char nstpaths_romfs[256];
 
 extern bool (*nst_archive_select)(const char *, char *, size_t);
 
@@ -27,12 +28,11 @@ extern Nes::Core::Input::Controllers *cNstPads;
 extern Emulator emulator;
 /// NESTOPIA
 
-PNESGuiEmu::PNESGuiEmu(UiMain *ui) : UIEmu(ui) {
+PNESUiEmu::PNESUiEmu(UiMain *ui) : UiEmu(ui) {
     printf("PNESGuiEmu()\n");
 }
 
-int PNESGuiEmu::load(const ss_api::Game &game) {
-
+int PNESUiEmu::load(const ss_api::Game &game) {
     getUi()->getUiProgressBox()->setTitle(game.getName().text);
     getUi()->getUiProgressBox()->setMessage("Please wait...");
     getUi()->getUiProgressBox()->setProgress(0);
@@ -40,6 +40,12 @@ int PNESGuiEmu::load(const ss_api::Game &game) {
     getUi()->getUiProgressBox()->setLayer(1000);
     getUi()->flip();
 
+    // default paths
+    snprintf(nstpaths_romfs, sizeof(nstpaths_romfs), "%s", ui->getIo()->getRomFsPath().c_str());
+    snprintf(nstpaths.nstconfdir, sizeof(nstpaths.nstconfdir), "%s", ui->getIo()->getDataPath().c_str());
+    strncpy(nstpaths.nstdir, nstpaths.nstconfdir, sizeof(nstpaths.nstdir));
+
+    // default config
     nestopia_config_init();
 
     std::string fullPath = game.romsPath + game.path;
@@ -55,11 +61,10 @@ int PNESGuiEmu::load(const ss_api::Game &game) {
     getUi()->delay(500);
     getUi()->getUiProgressBox()->setVisibility(Visibility::Hidden);
 
-    return UIEmu::load(game);
+    return UiEmu::load(game);
 }
 
-void PNESGuiEmu::stop() {
-
+void PNESUiEmu::stop() {
     nst_pause();
 
     // Remove the cartridge and shut down the NES
@@ -70,23 +75,22 @@ void PNESGuiEmu::stop() {
     nst_fds_bios_unload();
     nst_palette_unload();
 
-    UIEmu::stop();
+    UiEmu::stop();
 }
 
-bool PNESGuiEmu::onInput(c2d::Input::Player *players) {
-    return UIEmu::onInput(players);
+bool PNESUiEmu::onInput(c2d::Input::Player *players) {
+    return UiEmu::onInput(players);
 }
 
-void PNESGuiEmu::onUpdate() {
-
+void PNESUiEmu::onUpdate() {
     if (!isPaused()) {
 
         // fps
         int showFps = getUi()->getConfig()->get(Option::Id::ROM_SHOW_FPS, true)->getValueBool();
         getFpsText()->setVisibility(showFps ? Visibility::Visible : Visibility::Hidden);
         if (showFps) {
-            sprintf(getFpsString(), "FPS: %.2g/%2d", getUi()->getFps(), nst_pal() ? 50 : 60);
-            getFpsText()->setString(getFpsString());
+            sprintf(fpsString, "FPS: %.2g/%2d", getUi()->getFps(), nst_pal() ? 50 : 60);
+            getFpsText()->setString(fpsString);
         }
 
         // update nestopia buttons
@@ -127,7 +131,7 @@ void PNESGuiEmu::onUpdate() {
         nst_emuloop();
     }
 
-    UIEmu::onUpdate();
+    UiEmu::onUpdate();
 }
 
 /// NESTOPIA
@@ -177,10 +181,15 @@ void audio_set_params(Sound::Output *soundoutput) {
     if (aud != nullptr) {
         // Set audio parameters
         Sound sound(emulator);
+
         sound.SetSampleBits(16);
         sound.SetSampleRate((unsigned long) conf.audio_sample_rate);
+
         sound.SetSpeaker(Sound::SPEAKER_STEREO);
         sound.SetSpeed(Sound::DEFAULT_SPEED);
+
+        audio_adj_volume();
+
         audio_buffer = malloc(aud->getSamplesSize());
         soundoutput->samples[0] = audio_buffer;
         soundoutput->length[0] = (unsigned int) aud->getSamples();
@@ -189,8 +198,25 @@ void audio_set_params(Sound::Output *soundoutput) {
     }
 }
 
+void audio_adj_volume() {
+    // Adjust the audio volume to the current settings
+    Sound sound(emulator);
+    sound.SetVolume(Sound::ALL_CHANNELS, conf.audio_volume);
+    sound.SetVolume(Sound::CHANNEL_SQUARE1, conf.audio_vol_sq1);
+    sound.SetVolume(Sound::CHANNEL_SQUARE2, conf.audio_vol_sq2);
+    sound.SetVolume(Sound::CHANNEL_TRIANGLE, conf.audio_vol_tri);
+    sound.SetVolume(Sound::CHANNEL_NOISE, conf.audio_vol_noise);
+    sound.SetVolume(Sound::CHANNEL_DPCM, conf.audio_vol_dpcm);
+    sound.SetVolume(Sound::CHANNEL_FDS, conf.audio_vol_fds);
+    sound.SetVolume(Sound::CHANNEL_MMC5, conf.audio_vol_mmc5);
+    sound.SetVolume(Sound::CHANNEL_VRC6, conf.audio_vol_vrc6);
+    sound.SetVolume(Sound::CHANNEL_VRC7, conf.audio_vol_vrc7);
+    sound.SetVolume(Sound::CHANNEL_N163, conf.audio_vol_n163);
+    sound.SetVolume(Sound::CHANNEL_S5B, conf.audio_vol_s5b);
+}
+
 /// NESTOPIA CONFIG
-void PNESGuiEmu::nestopia_config_init() {
+void PNESUiEmu::nestopia_config_init() {
 
     // Video
     conf.video_filter = 0;
@@ -217,7 +243,6 @@ void PNESGuiEmu::nestopia_config_init() {
     conf.video_xbr_pixel_blending = false;
 
     // Audio
-    conf.audio_api = 0;
     conf.audio_stereo = true;
     conf.audio_sample_rate = 48000;
     conf.audio_volume = 85;
@@ -241,13 +266,10 @@ void PNESGuiEmu::nestopia_config_init() {
     // Misc
     conf.misc_default_system = 0;
     conf.misc_soft_patching = true;
-    //conf.misc_suppress_screensaver = true;
     conf.misc_genie_distortion = false;
-    //conf.misc_disable_gui = false;
     conf.misc_disable_cursor = false;
     conf.misc_disable_cursor_special = false;
     conf.misc_config_pause = false;
-    conf.misc_last_folder = nullptr;
     conf.misc_power_state = 0;
     conf.misc_homebrew_exit = -1;
     conf.misc_homebrew_stdout = -1;
@@ -255,7 +277,7 @@ void PNESGuiEmu::nestopia_config_init() {
 }
 
 // NESTOPIA CORE INIT
-int PNESGuiEmu::nestopia_core_init(const char *rom_path) {
+int PNESUiEmu::nestopia_core_init(const char *rom_path) {
 
     // Set up directories
     nst_set_dirs();
@@ -314,3 +336,9 @@ int nestopia_state_save(const char *path) {
 
     return ret;
 }
+
+void nst_input_turbo_pulse(Nes::Api::Input::Controllers *controllers) {}
+
+void nst_input_turbo_init() {}
+
+void nst_input_init() {}

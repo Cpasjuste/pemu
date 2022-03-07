@@ -5,7 +5,6 @@
 #include "c2dui.h"
 #include "c2dui_config.h"
 
-
 Config::Config(c2d::Io *io, int ver) {
 
     dataPath = io->getDataPath();
@@ -28,14 +27,14 @@ Config::Config(c2d::Io *io, int ver) {
            Option::Id::GUI_FILTER_CLONES, Option::Flags::BOOLEAN | Option::Flags::HIDDEN);
     append("SHOW_ZIP_NAMES", {"OFF", "ON"}, 1, Option::Id::GUI_SHOW_ZIP_NAMES, Option::Flags::BOOLEAN);
     append("SHOW_ICONS", {"OFF", "ON"}, 0, Option::Id::GUI_SHOW_ICONS, Option::Flags::BOOLEAN | Option::Flags::HIDDEN);
-    get()->at(get()->size() - 1).setInfo("Enabling icons needs a restart...");
+    get()->at(get()->size() - 1).setInfo("YOU NEED TO RESTART THE APPLICATION AFTER CHANGING THIS OPTION");
     append("SCREEN_WIDTH", C2D_SCREEN_WIDTH, Option::Id::GUI_SCREEN_WIDTH,
            Option::Flags::INTEGER | Option::Flags::HIDDEN);
     append("SCREEN_HEIGHT", C2D_SCREEN_HEIGHT, Option::Id::GUI_SCREEN_HEIGHT,
            Option::Flags::INTEGER | Option::Flags::HIDDEN);
 #ifdef __FULLSCREEN__
     append("FULLSCREEN", {"OFF", "ON"}, 0, Option::Id::GUI_FULLSCREEN, Option::Flags::BOOLEAN);
-    get()->at(get()->size() - 1).setInfo("This option needs a restart...");
+    get()->at(get()->size() - 1).setInfo("YOU NEED TO RESTART THE APPLICATION AFTER CHANGING THIS OPTION");
 #endif
 
     // build  skin list
@@ -66,7 +65,7 @@ Config::Config(c2d::Io *io, int ver) {
         }
         append("SKIN", skins, index, Option::Id::GUI_SKIN, Option::Flags::STRING);
     }
-    get()->at(get()->size() - 1).setInfo("Changing skins needs a restart...");
+    get()->at(get()->size() - 1).setInfo("YOU NEED TO RESTART THE APPLICATION AFTER CHANGING THIS OPTION");
 
     append("VIDEO_SNAP_DELAY", 5, Option::Id::GUI_VIDEO_SNAP_DELAY, Option::Flags::INTEGER);
 #ifdef __SWITCH__
@@ -77,20 +76,18 @@ Config::Config(c2d::Io *io, int ver) {
     /// default rom config
     /////////////////////////////////////////////////
     append("EMULATION", {"EMULATION"}, 0, Option::Id::MENU_ROM_OPTIONS, Option::Flags::MENU);
-    if (C2D_SCREEN_WIDTH > 1280) {
-        append("SCALING", {"NONE", "2X", "3X", "4X", "FIT", "FIT 4:3", "FULL"}, 3,
+    if (C2D_SCREEN_HEIGHT > 720) {
+        append("SCALING", {"NONE", "2X", "3X", "4X", "FIT", "FULL"}, 3,
                Option::Id::ROM_SCALING, Option::Flags::STRING);
-    } else if (C2D_SCREEN_WIDTH > 400) {
-        append("SCALING", {"NONE", "2X", "3X", "FIT", "FIT 4:3", "FULL"}, 2,
+    } else if (C2D_SCREEN_HEIGHT > 240) {
+        append("SCALING", {"NONE", "2X", "3X", "FIT", "FULL"}, 2,
                Option::Id::ROM_SCALING, Option::Flags::STRING);
     } else {
-        append("SCALING", {"NONE", "FIT", "FIT 4:3", "FULL"}, 0, Option::Id::ROM_SCALING, Option::Flags::STRING);
+        append("SCALING", {"NONE", "FIT", "FULL"}, 0, Option::Id::ROM_SCALING, Option::Flags::STRING);
     }
-#ifdef __FREEPLAY__
-    append("FILTER", {"POINT", "LINEAR"}, 1, Option::Id::ROM_FILTER, Option::Flags::STRING);
-#else
+    append("SCALING_MODE", {"AUTO", "ASPECT", "INTEGER"}, 0,
+           Option::Id::ROM_SCALING_MODE, Option::Flags::STRING);
     append("FILTER", {"POINT", "LINEAR"}, 0, Option::Id::ROM_FILTER, Option::Flags::STRING);
-#endif
     append("SHOW_FPS", {"OFF", "ON"}, 0, Option::Id::ROM_SHOW_FPS, Option::Flags::BOOLEAN);
 
     /// joysticks config
@@ -105,6 +102,8 @@ Config::Config(c2d::Io *io, int ver) {
     append("JOY_FIRE4", KEY_JOY_FIRE4_DEFAULT, Option::Id::JOY_FIRE4, Option::Flags::INPUT);
     append("JOY_FIRE5", KEY_JOY_FIRE5_DEFAULT, Option::Id::JOY_FIRE5, Option::Flags::INPUT);
     append("JOY_FIRE6", KEY_JOY_FIRE6_DEFAULT, Option::Id::JOY_FIRE6, Option::Flags::INPUT);
+    append("JOY_FIRE7", KEY_JOY_FIRE7_DEFAULT, Option::Id::JOY_FIRE7, Option::Flags::INPUT);
+    append("JOY_FIRE8", KEY_JOY_FIRE8_DEFAULT, Option::Id::JOY_FIRE8, Option::Flags::INPUT);
     append("JOY_COIN1", KEY_JOY_COIN1_DEFAULT, Option::Id::JOY_COIN1, Option::Flags::INPUT);
     append("JOY_START1", KEY_JOY_START1_DEFAULT, Option::Id::JOY_START1, Option::Flags::INPUT);
     append("JOY_MENU1", KEY_JOY_MENU1_DEFAULT, Option::Id::JOY_MENU1, Option::Flags::INPUT);
@@ -121,23 +120,23 @@ Config::Config(c2d::Io *io, int ver) {
 #ifndef NO_KEYBOARD
     // keyboard
     append("KEYBOARD", {"KEYBOARD"}, 0, Option::Id::MENU_KEYBOARD, Option::Flags::MENU);
-    append("KEY_UP", KEY_KB_UP_DEFAULT, Option::Id::KEY_UP, Option::Flags::INPUT);        // KP_UP
-    append("KEY_DOWN", KEY_KB_DOWN_DEFAULT, Option::Id::KEY_DOWN, Option::Flags::INPUT);    // KP_DOWN
-    append("KEY_LEFT", KEY_KB_LEFT_DEFAULT, Option::Id::KEY_LEFT, Option::Flags::INPUT);    // KP_LEFT
-    append("KEY_RIGHT", KEY_KB_RIGHT_DEFAULT, Option::Id::KEY_RIGHT, Option::Flags::INPUT);  // KP_RIGHT
-    append("KEY_FIRE1", KEY_KB_FIRE1_DEFAULT, Option::Id::KEY_FIRE1, Option::Flags::INPUT);  // KP_1
-    append("KEY_FIRE2", KEY_KB_FIRE2_DEFAULT, Option::Id::KEY_FIRE2, Option::Flags::INPUT);  // KP_2
-    append("KEY_FIRE3", KEY_KB_FIRE3_DEFAULT, Option::Id::KEY_FIRE3, Option::Flags::INPUT);  // KP_3
-    append("KEY_FIRE4", KEY_KB_FIRE4_DEFAULT, Option::Id::KEY_FIRE4, Option::Flags::INPUT);  // KP_4
-    append("KEY_FIRE5", KEY_KB_FIRE5_DEFAULT, Option::Id::KEY_FIRE5, Option::Flags::INPUT);  // KP_5
-    append("KEY_FIRE6", KEY_KB_FIRE6_DEFAULT, Option::Id::KEY_FIRE6, Option::Flags::INPUT);  // KP_6
-    append("KEY_COIN1", KEY_KB_COIN1_DEFAULT, Option::Id::KEY_COIN1, Option::Flags::INPUT);  // ESCAPE
-    append("KEY_START1", KEY_KB_START1_DEFAULT, Option::Id::KEY_START1, Option::Flags::INPUT);// ENTER
-    append("KEY_MENU1", KEY_KB_MENU1_DEFAULT, Option::Id::KEY_MENU1, Option::Flags::INPUT);  // ESCAPE
-    append("KEY_MENU2", KEY_KB_MENU2_DEFAULT, Option::Id::KEY_MENU2, Option::Flags::INPUT);// ENTER
+    append("KEY_UP", KEY_KB_UP_DEFAULT, Option::Id::KEY_UP, Option::Flags::INPUT);
+    append("KEY_DOWN", KEY_KB_DOWN_DEFAULT, Option::Id::KEY_DOWN, Option::Flags::INPUT);
+    append("KEY_LEFT", KEY_KB_LEFT_DEFAULT, Option::Id::KEY_LEFT, Option::Flags::INPUT);
+    append("KEY_RIGHT", KEY_KB_RIGHT_DEFAULT, Option::Id::KEY_RIGHT, Option::Flags::INPUT);
+    append("KEY_FIRE1", KEY_KB_FIRE1_DEFAULT, Option::Id::KEY_FIRE1, Option::Flags::INPUT);
+    append("KEY_FIRE2", KEY_KB_FIRE2_DEFAULT, Option::Id::KEY_FIRE2, Option::Flags::INPUT);
+    append("KEY_FIRE3", KEY_KB_FIRE3_DEFAULT, Option::Id::KEY_FIRE3, Option::Flags::INPUT);
+    append("KEY_FIRE4", KEY_KB_FIRE4_DEFAULT, Option::Id::KEY_FIRE4, Option::Flags::INPUT);
+    append("KEY_FIRE5", KEY_KB_FIRE5_DEFAULT, Option::Id::KEY_FIRE5, Option::Flags::INPUT);
+    append("KEY_FIRE6", KEY_KB_FIRE6_DEFAULT, Option::Id::KEY_FIRE6, Option::Flags::INPUT);
+    append("KEY_FIRE7", KEY_KB_FIRE7_DEFAULT, Option::Id::KEY_FIRE7, Option::Flags::INPUT);
+    append("KEY_FIRE8", KEY_KB_FIRE8_DEFAULT, Option::Id::KEY_FIRE8, Option::Flags::INPUT);
+    append("KEY_COIN1", KEY_KB_COIN1_DEFAULT, Option::Id::KEY_COIN1, Option::Flags::INPUT);
+    append("KEY_START1", KEY_KB_START1_DEFAULT, Option::Id::KEY_START1, Option::Flags::INPUT);
+    append("KEY_MENU1", KEY_KB_MENU1_DEFAULT, Option::Id::KEY_MENU1, Option::Flags::INPUT);
+    append("KEY_MENU2", KEY_KB_MENU2_DEFAULT, Option::Id::KEY_MENU2, Option::Flags::INPUT);
 #endif
-
-    load(ss_api::Game());
 }
 
 void Config::load(const ss_api::Game &game) {
@@ -296,7 +295,7 @@ void Config::reset() {
 
     options_rom.clear();
 
-    int start = 0, end = (int) options_gui.size();
+    size_t start = 0, end = options_gui.size();
     for (size_t i = 0; i < options_gui.size(); i++) {
         if (options_gui[i].getId() == Option::Id::MENU_ROM_OPTIONS) {
             start = i;
@@ -304,7 +303,7 @@ void Config::reset() {
         }
     }
 
-    for (int i = start; i < end; i++) {
+    for (size_t i = start; i < end; i++) {
         options_rom.emplace_back(options_gui[i]);
     }
 }
@@ -382,9 +381,8 @@ bool Config::hide(int index, bool isRom) {
 }
 
 int *Config::getPlayerInputKeys(int player, bool isRom) {
-
 #ifndef NO_KEYBOARD
-    // TODO: player > 0 not supported yet
+    // TODO: allow per player config
     keyboard_keys[0] = get(Option::Id::KEY_UP, isRom)->getValueInt();
     keyboard_keys[1] = get(Option::Id::KEY_DOWN, isRom)->getValueInt();
     keyboard_keys[2] = get(Option::Id::KEY_LEFT, isRom)->getValueInt();
@@ -397,16 +395,17 @@ int *Config::getPlayerInputKeys(int player, bool isRom) {
     keyboard_keys[9] = get(Option::Id::KEY_FIRE4, isRom)->getValueInt();
     keyboard_keys[10] = get(Option::Id::KEY_FIRE5, isRom)->getValueInt();
     keyboard_keys[11] = get(Option::Id::KEY_FIRE6, isRom)->getValueInt();
-    keyboard_keys[12] = get(Option::Id::KEY_MENU1, isRom)->getValueInt();
-    keyboard_keys[13] = get(Option::Id::KEY_MENU2, isRom)->getValueInt();
+    keyboard_keys[12] = get(Option::Id::KEY_FIRE7, isRom)->getValueInt();
+    keyboard_keys[13] = get(Option::Id::KEY_FIRE8, isRom)->getValueInt();
+    keyboard_keys[14] = get(Option::Id::KEY_MENU1, isRom)->getValueInt();
+    keyboard_keys[15] = get(Option::Id::KEY_MENU2, isRom)->getValueInt();
 #endif
 
     return keyboard_keys;
 }
 
 int *Config::getPlayerInputButtons(int player, bool isRom) {
-
-    // TODO: player > 0 not supported yet
+    // TODO: allow per player config
     joystick_keys[0] = get(Option::Id::JOY_UP, isRom)->getValueInt();
     joystick_keys[1] = get(Option::Id::JOY_DOWN, isRom)->getValueInt();
     joystick_keys[2] = get(Option::Id::JOY_LEFT, isRom)->getValueInt();
@@ -419,12 +418,15 @@ int *Config::getPlayerInputButtons(int player, bool isRom) {
     joystick_keys[9] = get(Option::Id::JOY_FIRE4, isRom)->getValueInt();
     joystick_keys[10] = get(Option::Id::JOY_FIRE5, isRom)->getValueInt();
     joystick_keys[11] = get(Option::Id::JOY_FIRE6, isRom)->getValueInt();
-    joystick_keys[12] = get(Option::Id::JOY_MENU1, isRom)->getValueInt();
-    joystick_keys[13] = get(Option::Id::JOY_MENU2, isRom)->getValueInt();
-    joystick_keys[14] = get(Option::Id::JOY_AXIS_LX, isRom)->getValueInt();
-    joystick_keys[15] = get(Option::Id::JOY_AXIS_LY, isRom)->getValueInt();
-    joystick_keys[16] = get(Option::Id::JOY_AXIS_RX, isRom)->getValueInt();
-    joystick_keys[17] = get(Option::Id::JOY_AXIS_RY, isRom)->getValueInt();
+    joystick_keys[12] = get(Option::Id::JOY_FIRE7, isRom)->getValueInt();
+    joystick_keys[13] = get(Option::Id::JOY_FIRE8, isRom)->getValueInt();
+    joystick_keys[14] = get(Option::Id::JOY_MENU1, isRom)->getValueInt();
+    joystick_keys[15] = get(Option::Id::JOY_MENU2, isRom)->getValueInt();
+    // axis
+    joystick_keys[16] = get(Option::Id::JOY_AXIS_LX, isRom)->getValueInt();
+    joystick_keys[17] = get(Option::Id::JOY_AXIS_LY, isRom)->getValueInt();
+    joystick_keys[18] = get(Option::Id::JOY_AXIS_RX, isRom)->getValueInt();
+    joystick_keys[19] = get(Option::Id::JOY_AXIS_RY, isRom)->getValueInt();
 
     return joystick_keys;
 }
@@ -440,4 +442,3 @@ c2d::Vector2f Config::getScreenSize() {
         };
     }
 }
-

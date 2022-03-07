@@ -61,6 +61,10 @@ Skin::Skin(UiMain *u, const std::vector<Button> &btns) {
     config::Group mbox = createRectangleShapeGroup("MESSAGEBOX");
     config->addGroup(mbox);
 
+    /// STATUSBOX
+    config::Group statusBox = createRectangleShapeGroup("STATUSBOX");
+    config->addGroup(statusBox);
+
     /// MAIN (ROM LIST)
     config::Group main = createRectangleShapeGroup("MAIN");
     // rom list title + text
@@ -301,22 +305,17 @@ Skin::loadRectangleShape(c2d::RectangleShape *shape, const std::vector<std::stri
     }
 
     if (tex && tex->available) {
+        tex->setFilter((Texture::Filter) rectangleShapeGroup.filtering);
         tex->setScale(rectangleShapeGroup.rect.width / tex->getSize().x,
                       rectangleShapeGroup.rect.height / tex->getSize().y);
-        tex->setFillColor(rectangleShapeGroup.color);
-        tex->setOutlineColor(rectangleShapeGroup.outlineColor);
-        tex->setOutlineThickness(rectangleShapeGroup.outlineSize);
-        tex->setFilter((Texture::Filter) rectangleShapeGroup.filtering);
-        shape->setFillColor(textureUseFillColors ? rectangleShapeGroup.color : Color::Transparent);
-        shape->setOutlineColor(Color::Transparent);
-        shape->setOutlineThickness(0);
-        shape->add(tex);
+        shape->setTexture(tex, true);
     } else {
         if (tex) delete (tex);
-        shape->setFillColor(rectangleShapeGroup.color);
-        shape->setOutlineColor(rectangleShapeGroup.outlineColor);
-        shape->setOutlineThickness(rectangleShapeGroup.outlineSize);
     }
+
+    shape->setFillColor(rectangleShapeGroup.color);
+    shape->setOutlineColor(rectangleShapeGroup.outlineColor);
+    shape->setOutlineThickness(rectangleShapeGroup.outlineSize);
 
     return true;
 }
@@ -382,9 +381,7 @@ Skin::TextGroup Skin::getText(const std::vector<std::string> &tree) {
     if (option != nullptr) {
         textGroup.outlineSize = option->getFloat();
         textGroup.outlineSize *= global_scaling.y;
-        if (textGroup.outlineSize > 0 && textGroup.outlineSize < 1) {
-            textGroup.outlineSize = 1;
-        }
+        textGroup.outlineSize = ceil(textGroup.outlineSize);
     }
     option = group->getOption("origin");
     if (option != nullptr) {

@@ -8,16 +8,17 @@
 #include "c2dui.h"
 #include "uiEmu.h"
 #include "video.h"
+#include "retro_input_wrapper.h"
 
 using namespace c2d;
 using namespace c2dui;
 
-extern INT32 Init_Joysticks(int p_one_use_joystick);
+int nVidFullscreen = 0;
+INT32 bVidUseHardwareGamma = 1;
 
-extern int InpMake(Input::Player *players);
+UINT32 (__cdecl *VidHighCol)(INT32 r, INT32 g, INT32 b, INT32 i);
 
-extern unsigned char inputServiceSwitch;
-extern unsigned char inputP1P2Switch;
+INT32 VidRecalcPal() { return BurnRecalcPal(); }
 
 #ifdef __PFBA_ARM__
 extern int nSekCpuCore;
@@ -26,25 +27,26 @@ static bool isHardware(int hardware, int type) {
     return (((hardware | HARDWARE_PREFIX_CARTRIDGE) ^ HARDWARE_PREFIX_CARTRIDGE)
             & 0xff000000) == (unsigned int) type;
 }
-
 #endif
 
-static unsigned int myHighCol16(int r, int g, int b, int /* i */) {
-    unsigned int t;
-    t = (unsigned int) ((r << 8) & 0xf800); // rrrr r000 0000 0000
-    t |= (g << 3) & 0x07e0; // 0000 0ggg ggg0 0000
-    t |= (b >> 3) & 0x001f; // 0000 0000 000b bbbb
+static UINT32 myHighCol16(int r, int g, int b, int /* i */) {
+    UINT32 t;
+    t = (r << 8) & 0xf800;
+    t |= (g << 3) & 0x07e0;
+    t |= (b >> 3) & 0x001f;
     return t;
 }
 
-PFBAGuiEmu::PFBAGuiEmu(UiMain *ui) : UIEmu(ui) {
+static UiMain *uiInstance;
 
-    printf("PFBAGuiEmu()\n");
+PFBAUiEmu::PFBAUiEmu(UiMain *ui) : UiEmu(ui) {
+    printf("PFBAUiEmu()\n");
+    uiInstance = ui;
 }
 
 #ifdef __PFBA_ARM__
 
-int PFBAGuiEmu::getSekCpuCore() {
+int PFBAUiEmu::getSekCpuCore() {
 
     int sekCpuCore = 0; // SEK_CORE_C68K: USE CYCLONE ARM ASM M68K CORE
 
@@ -105,7 +107,7 @@ int PFBAGuiEmu::getSekCpuCore() {
 
 #endif
 
-int PFBAGuiEmu::load(const ss_api::Game &game) {
+int PFBAUiEmu::load(const ss_api::Game &game) {
 
     currentGame = game;
     std::string zipName = Utility::removeExt(game.path);
@@ -148,7 +150,7 @@ int PFBAGuiEmu::load(const ss_api::Game &game) {
     }
 
     if (nBurnDrvActive >= nBurnDrvCount) {
-        printf("PFBAGui::runRom: driver not found\n");
+        printf("PFBAUiEmu::load: driver not found\n");
         return -1;
     }
 
@@ -170,14 +172,14 @@ int PFBAGuiEmu::load(const ss_api::Game &game) {
     ///////////////
     EnableHiscores = 1;
 
-    printf("Initialize driver...\n");
-    // some drivers require audio buffer to be allocated for DrvInit, add a "dummy" one...
+    printf("PFBAUiEmu::load: initialize driver...\n");
+    // some drivers require audio buffer to be allocated for DrvInit, add a "dummy" one for now...
     auto *aud = new Audio(audio_freq);
     nBurnSoundRate = aud->getSampleRate();
     nBurnSoundLen = aud->getSamples();
     pBurnSoundOut = (INT16 *) malloc(aud->getSamplesSize());
     if (DrvInit((int) nBurnDrvActive, false) != 0) {
-        printf("\nDriver initialisation failed\n");
+        printf("\nPFBAUiEmu::load: driver initialisation failed\n");
         delete (aud);
         ui->getUiProgressBox()->setVisibility(Visibility::Hidden);
         ui->getUiMessageBox()->show("ERROR", "DRIVER INIT FAILED", "OK");
@@ -189,20 +191,9 @@ int PFBAGuiEmu::load(const ss_api::Game &game) {
     nFramesEmulated = 0;
     nFramesRendered = 0;
     nCurrentFrame = 0;
-    setFrameDuration(1.0f / ((float) nBurnFPS / 100.0f));
-    //printf("frame_duration: %f\n", getFrameDuration());
     ///////////////
     // FBA DRIVER
     ///////////////
-
-    ///////////
-    // INPUT
-    //////////
-    InputInit();
-    Init_Joysticks(1);
-    ///////////
-    // INPUT
-    //////////
 
     ///////////
     // AUDIO
@@ -213,9 +204,9 @@ int PFBAGuiEmu::load(const ss_api::Game &game) {
         nBurnSoundLen = audio->getSamples();
         pBurnSoundOut = (INT16 *) malloc(audio->getSamplesSize());
     }
-    audio_sync = ui->getConfig()->get(Option::Id::ROM_AUDIO_SYNC, true)->getValueBool();
+    audio_sync = !bForce60Hz;
     targetFps = (float) nBurnFPS / 100;
-    printf("FORCE_60HZ: %i, AUDIO_SYNC: %i, FPS: %f (BURNFPS: %f)\n",
+    printf("PFBAUiEmu::load: FORCE_60HZ: %i, AUDIO_SYNC: %i, FPS: %f (BURNFPS: %f)\n",
            bForce60Hz, audio_sync, (float) nBurnFPS / 100.0f, targetFps);
     ///////////
     // AUDIO
@@ -224,65 +215,47 @@ int PFBAGuiEmu::load(const ss_api::Game &game) {
     //////////
     // VIDEO
     //////////
-    int w, h;
-    BurnDrvGetFullSize(&w, &h);
+    Vector2i size, aspect;
+    BurnDrvGetFullSize(&size.x, &size.y);
+    BurnDrvGetAspect(&aspect.x, &aspect.y);
     nBurnBpp = 2;
     BurnHighCol = myHighCol16;
     BurnRecalcPal();
-    auto v = new PFBAVideo(ui, (void **) &pBurnDraw, &nBurnPitch, Vector2f(w, h));
-    addVideo(v);
-    textureRect = {0, 0, w, h};
+    // video may already be initialized from fbneo driver (Reinitialise)
+    if (!getVideo()) {
+        auto v = new PFBAVideo(ui, (void **) &pBurnDraw, &nBurnPitch, (Vector2f) size, aspect);
+        addVideo(v);
+        printf("PFBAUiEmu::load: size: %i x %i, aspect: %i x %i, pitch: %i\n",
+               size.x, size.y, aspect.x, aspect.y, nBurnPitch);
+    } else {
+        printf("PFBAUiEmu::load: video already initialized, skipped\n");
+    }
     //////////
     // VIDEO
     //////////
 
-    return UIEmu::load(game);
+    return UiEmu::load(game);
 }
 
-void PFBAGuiEmu::stop() {
+// need for some games
+void Reinitialise(void) {
+    Vector2i size, aspect;
+    BurnDrvGetFullSize(&size.x, &size.y);
+    BurnDrvGetAspect(&aspect.x, &aspect.y);
+    auto v = new PFBAVideo(uiInstance, (void **) &pBurnDraw, &nBurnPitch, (Vector2f) size, aspect);
+    uiInstance->getUiEmu()->addVideo(v);
+    printf("PFBAUiEmu::Reinitialise: size: %i x %i, aspect: %i x %i\n",
+           size.x, size.y, aspect.x, aspect.y);
+}
 
+void PFBAUiEmu::stop() {
     DrvExit();
-    // TODO: refactor
-    //InpExit();
-
-    UIEmu::stop();
+    UiEmu::stop();
 }
 
-void PFBAGuiEmu::updateFb() {
-
-    if (pBurnDraw == nullptr) {
-        video->getTexture()->lock(&textureRect, (void **) &pBurnDraw, &nBurnPitch);
-        BurnDrvFrame();
-        video->getTexture()->unlock();
-    }
-}
-
-void PFBAGuiEmu::renderFrame(bool draw) {
-
-    if (!isPaused()) {
-
-        pBurnDraw = nullptr;
-
-        if (draw) {
-            video->getTexture()->lock(&textureRect, (void **) &pBurnDraw, &nBurnPitch);
-        }
-
-        BurnDrvFrame();
-
-        if (draw) {
-            video->getTexture()->unlock();
-        }
-
-        if (audio && audio->isAvailable()) {
-            audio->play(pBurnSoundOut, audio->getSamples(), audio_sync);
-        }
-    }
-}
-
-bool PFBAGuiEmu::onInput(c2d::Input::Player *players) {
-
+bool PFBAUiEmu::onInput(c2d::Input::Player *players) {
     if (ui->getUiMenu()->isVisible() || ui->getUiStateMenu()->isVisible()) {
-        return UIEmu::onInput(players);
+        return UiEmu::onInput(players);
     }
 
     // TODO: cross2d: add universal input rotation support
@@ -322,36 +295,71 @@ bool PFBAGuiEmu::onInput(c2d::Input::Player *players) {
 #endif
 #endif
 
-    // TODO: refactor
-    /*
-    inputServiceSwitch = 0;
-    inputP1P2Switch = 0;
-    // look for player 1 combos key
-    if ((players[0].keys & Input::Key::Menu2) && (players[0].keys & Input::Key::Fire3)) {
-        inputServiceSwitch = 1;
-    } else if ((players[0].keys & Input::Key::Menu2) && (players[0].keys & Input::Key::Fire4)) {
-        inputP1P2Switch = 1;
-    }
-    */
-
-    return UIEmu::onInput(players);
+    return UiEmu::onInput(players);
 }
 
-void PFBAGuiEmu::onUpdate() {
-
-    UIEmu::onUpdate();
-
-    if (!isPaused()) {
-        InputMake(true);
-#ifdef __VITA__
-        int skip = ui->getConfig()->get(Option::Id::ROM_FRAMESKIP, true)->getIndex();
-#else
-        int skip = 0;
-#endif
-        frameskip++;
-        renderFrame(frameskip > skip);
-        if (frameskip > skip) {
-            frameskip = 0;
-        }
+void PFBAUiEmu::onUpdate() {
+    if (isPaused()) {
+        return;
     }
+
+    // update fbneo inputs
+    InputMake(true);
+
+    // handle diagnostic and reset switch
+    unsigned int keys = ui->getInput()->getKeys(0);
+    if (keys & Input::Key::Select) {
+        if (clock.getElapsedTime().asSeconds() > 2) {
+            if (pgi_reset) {
+                ui->getUiStatusBox()->show("TIPS: PRESS START "
+                                           "BUTTON 2 SECONDS FOR DIAG MENU...");
+                pgi_reset->Input.nVal = 1;
+                *(pgi_reset->Input.pVal) = pgi_reset->Input.nVal;
+            }
+            nCurrentFrame = 0;
+            nFramesEmulated = 0;
+            clock.restart();
+        }
+    } else if (keys & Input::Key::Start) {
+        if (clock.getElapsedTime().asSeconds() > 2) {
+            if (pgi_diag) {
+                ui->getUiStatusBox()->show("TIPS: PRESS COIN "
+                                           "BUTTON 2 SECONDS TO RESET CURRENT GAME...");
+                pgi_diag->Input.nVal = 1;
+                *(pgi_diag->Input.pVal) = pgi_diag->Input.nVal;
+            }
+            clock.restart();
+        }
+    } else {
+        clock.restart();
+    }
+
+    // update fbneo video buffer and audio
+#ifdef __VITA__
+    int skip = ui->getConfig()->get(Option::Id::ROM_FRAMESKIP, true)->getIndex();
+#else
+    int skip = 0;
+#endif
+
+    pBurnDraw = nullptr;
+    frameskip++;
+
+    if (frameskip > skip) {
+        video->getTexture()->lock(nullptr, (void **) &pBurnDraw, &nBurnPitch);
+        nFramesRendered++;
+    }
+
+    BurnDrvFrame();
+    nCurrentFrame++;
+
+    if (frameskip > skip) {
+        video->getTexture()->unlock();
+        frameskip = 0;
+    }
+
+    if (audio && audio->isAvailable()) {
+        audio->play(pBurnSoundOut, audio->getSamples(), audio_sync);
+    }
+
+    UiEmu::onUpdate();
 }

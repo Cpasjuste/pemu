@@ -32,21 +32,20 @@ using namespace c2dui;
 
 #ifdef __PSP2__
 #include <psp2/power.h>
-int _newlib_heap_size_user = 192 * 1024 * 1024;
 #elif __PS4__
 extern "C" int sceSystemServiceLoadExec(const char *path, const char *args[]);
 #endif
 
 UiMain *ui;
 PFBAGuiMenu *uiMenu;
-PFBAGuiEmu *uiEmu;
+PFBAUiEmu *uiEmu;
 PFBAUIStateMenu *uiState;
 PFBAConfig *cfg;
 PFBARomList *romList;
 UIRomList *uiRomList;
 Skin *skin;
 
-void BurnPathsInit(const char *dataPath);
+void BurnPathsInit(C2DIo *io);
 
 int main(int argc, char **argv) {
 
@@ -57,7 +56,7 @@ int main(int argc, char **argv) {
     cfg = new PFBAConfig(io, version);
 
     // fbneo init
-    BurnPathsInit(io->getDataPath().c_str());
+    BurnPathsInit(io);
     BurnLibInit();
 
     Vector2f screenSize = cfg->getScreenSize();
@@ -95,13 +94,15 @@ int main(int argc, char **argv) {
     buttons.emplace_back(KEY_JOY_FIRE2_DEFAULT, "B");
     buttons.emplace_back(KEY_JOY_FIRE3_DEFAULT, "X");
     buttons.emplace_back(KEY_JOY_FIRE4_DEFAULT, "Y");
-    buttons.emplace_back(KEY_JOY_FIRE5_DEFAULT, "L");
-    buttons.emplace_back(KEY_JOY_FIRE6_DEFAULT, "R");
+    buttons.emplace_back(KEY_JOY_FIRE5_DEFAULT, "ZL");
+    buttons.emplace_back(KEY_JOY_FIRE6_DEFAULT, "ZR");
+    buttons.emplace_back(KEY_JOY_FIRE7_DEFAULT, "L");
+    buttons.emplace_back(KEY_JOY_FIRE8_DEFAULT, "R");
     buttons.emplace_back(KEY_JOY_COIN1_DEFAULT, "-");
     buttons.emplace_back(KEY_JOY_START1_DEFAULT, "+");
+    buttons.emplace_back(KEY_JOY_MENU1_DEFAULT, "R");
+    buttons.emplace_back(KEY_JOY_MENU2_DEFAULT, "L");
     // switch special keys
-    buttons.emplace_back(KEY_JOY_ZL_DEFAULT, "ZL");
-    buttons.emplace_back(KEY_JOY_ZR_DEFAULT, "ZR");
     buttons.emplace_back(KEY_JOY_LSTICK_DEFAULT, "LSTICK");
     buttons.emplace_back(KEY_JOY_RSTICK_DEFAULT, "RSTICK");
 #elif __PS4__
@@ -116,8 +117,12 @@ int main(int argc, char **argv) {
     buttons.emplace_back(KEY_JOY_FIRE4_DEFAULT, "TRIANGLE");
     buttons.emplace_back(KEY_JOY_FIRE5_DEFAULT, "L2");
     buttons.emplace_back(KEY_JOY_FIRE6_DEFAULT, "R2");
+    buttons.emplace_back(KEY_JOY_FIRE7_DEFAULT, "L2");
+    buttons.emplace_back(KEY_JOY_FIRE8_DEFAULT, "R2");
     buttons.emplace_back(KEY_JOY_COIN1_DEFAULT, "L1");
     buttons.emplace_back(KEY_JOY_START1_DEFAULT, "R1");
+    buttons.emplace_back(KEY_JOY_MENU1_DEFAULT, "L1");
+    buttons.emplace_back(KEY_JOY_MENU2_DEFAULT, "R1");
 #endif
 
     skin = new Skin(ui, buttons);
@@ -130,7 +135,7 @@ int main(int argc, char **argv) {
     romList->build();
     uiRomList = new UIRomList(ui, romList, ui->getSize());
     uiMenu = new PFBAGuiMenu(ui);
-    uiEmu = new PFBAGuiEmu(ui);
+    uiEmu = new PFBAUiEmu(ui);
     uiState = new PFBAUIStateMenu(ui);
     ui->init(uiRomList, uiMenu, uiEmu, uiState);
 

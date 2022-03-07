@@ -2,10 +2,8 @@
 // Created by cpasjuste on 25/11/16.
 //
 
-#ifndef _PFBAVIDEO_H_
-#define _PFBAVIDEO_H_
-
-#include <cstring>
+#ifndef PFBN_VIDEO_H
+#define PFBN_VIDEO_H
 
 namespace c2dui {
 
@@ -13,10 +11,11 @@ namespace c2dui {
 
     public:
 
-        PFBAVideo(UiMain *ui, void **pixels, int *pitch, const c2d::Vector2f &size);
+        PFBAVideo(UiMain *ui, void **pixels, int *pitch, const c2d::Vector2f &size,
+                  const c2d::Vector2i &aspect = {4, 3});
 
-        void updateScaling(bool vertical = false, bool flip = false);
+        void updateScaling(bool vertical = false, bool flip = false) override;
     };
 }
 
-#endif //_PFBAVIDEO_H_
+#endif //PFBN_VIDEO_H

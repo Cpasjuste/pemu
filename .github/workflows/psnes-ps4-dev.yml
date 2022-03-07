@@ -53,6 +53,6 @@ jobs:
           cd $GITHUB_WORKSPACE
           mkdir cmake-build && cd cmake-build
           export OPENORBIS=/opt/pacbrew/ps4/openorbis
-          cmake -G "Unix Makefiles" -DPLATFORM_PS4=ON -DOPTION_MPV_PLAYER=OFF \
+          cmake -G "Unix Makefiles" -DPLATFORM_PS4=ON \
             -DOPTION_EMU=psnes -DCMAKE_BUILD_TYPE=Debug ..
           make -j $(getconf _NPROCESSORS_ONLN) psnes_pkg

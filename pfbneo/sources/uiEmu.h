@@ -7,11 +7,11 @@
 
 #include <string>
 
-class PFBAGuiEmu : public c2dui::UIEmu {
+class PFBAUiEmu : public c2dui::UiEmu {
 
 public:
 
-    explicit PFBAGuiEmu(c2dui::UiMain *ui);
+    explicit PFBAUiEmu(c2dui::UiMain *ui);
 
     int load(const ss_api::Game &game) override;
 
@@ -27,15 +27,11 @@ private:
 
     void onUpdate() override;
 
-    void updateFb();
-
-    void renderFrame(bool draw = true);
-
     bool audio_sync = false;
 
-    c2d::FloatRect textureRect;
-
     int frameskip = 0;
+
+    C2DClock clock;
 };
 
 #endif //PFBA_UIEMU_H

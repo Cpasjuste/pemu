@@ -6,8 +6,15 @@
 #include "SkinnedText.h"
 
 SkinnedText::SkinnedText(c2dui::Skin *skin, const std::vector<std::string> &cfgTree) : Text() {
+
+    printf("SkinnedText: ");
+    for (const auto & i : cfgTree) {
+        printf("=> %s ", i.c_str());
+    }
+    printf("\n");
+
     if (!skin->loadText(this, cfgTree)) {
-        printf("SkinnedText: could not load %s\n", cfgTree.at(0).c_str());
+        printf("SkinnedText: tree not found in config file...\n");
         available = false;
         return;
     }

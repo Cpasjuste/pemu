@@ -1,5 +1,5 @@
 // Paths module
-#include <sys/stat.h>
+#include "cross2d/c2d.h"
 #include "burner.h"
 
 /////////
@@ -17,23 +17,7 @@ bool bDoIpsPatch = false;
 
 void IpsApplyPatches(UINT8 *base, char *rom_name) {}
 
-// needed by cps3run.cpp and dataeast/d_backfire.cpp
-void Reinitialise() {}
-
-// needed by neo_run.cpp
-void wav_exit() {}
-
 bool bRunPause;
-/////////
-// FBA
-/////////
-
-#ifdef __PSP2__
-#include <psp2/io/stat.h>
-#define mkdir sceIoMkdir
-#elif __WINDOWS__
-#define mkdir(x, y) mkdir(x)
-#endif
 
 char szAppHomePath[MAX_PATH];
 char szAppRomPath[MAX_PATH];
@@ -45,46 +29,44 @@ char szAppIconPath[MAX_PATH];
 char szAppBlendPath[MAX_PATH];
 char szAppEEPROMPath[MAX_PATH];
 char szAppHDDPath[MAX_PATH];
-char szAppSkinPath[MAX_PATH];
 
-void BurnPathsInit(const char *dataPath) {
+void BurnPathsInit(c2d::C2DIo *io) {
+    printf("BurnPathsInit: dataPath = %s\n", io->getDataPath().c_str());
 
-    printf("BurnPathsInit: dataPath = %s\n", dataPath);
+    snprintf(szAppHomePath, MAX_PATH - 1, "%s", io->getDataPath().c_str());
+    io->create(szAppHomePath);
 
-    snprintf(szAppHomePath, MAX_PATH - 1, "%s/", dataPath);
-    mkdir(szAppHomePath, 0777);
+    snprintf(szAppRomPath, MAX_PATH - 1, "%s%s/", szAppHomePath, "roms");
+    io->create(szAppRomPath);
 
-    snprintf(szAppRomPath, MAX_PATH - 1, "%s%s", szAppHomePath, "roms");
-    mkdir(szAppRomPath, 0777);
-
-    snprintf(szAppSavePath, MAX_PATH - 1, "%s%s", szAppHomePath, "saves");
-    mkdir(szAppSavePath, 0777);
+    snprintf(szAppSavePath, MAX_PATH - 1, "%s%s/", szAppHomePath, "saves");
+    io->create(szAppSavePath);
     //printf("szAppSavePath: %s\n", szAppSavePath);
 
-    snprintf(szAppConfigPath, MAX_PATH - 1, "%s%s", szAppHomePath, "configs");
-    mkdir(szAppConfigPath, 0777);
+    snprintf(szAppConfigPath, MAX_PATH - 1, "%s%s/", szAppHomePath, "configs");
+    io->create(szAppConfigPath);
     //printf("szAppConfigPath: %s\n", szAppConfigPath);
 
     snprintf(szAppSamplesPath, MAX_PATH - 1, "%s%s/", szAppHomePath, "samples");
-    mkdir(szAppSamplesPath, 0777);
+    io->create(szAppSamplesPath);
     //printf("szAppSamplesPath: %s\n", szAppSamplesPath);
 
-    snprintf(szAppIconPath, MAX_PATH - 1, "%s%s", szAppHomePath, "icons");
-    mkdir(szAppIconPath, 0777);
+    snprintf(szAppIconPath, MAX_PATH - 1, "%s%s/", szAppHomePath, "icons");
+    io->create(szAppIconPath);
     //printf("szAppIconPath: %s\n", szAppIconPath);
 
     snprintf(szAppBlendPath, MAX_PATH - 1, "%s%s/", szAppHomePath, "blend");
-    mkdir(szAppBlendPath, 0777);
+    io->create(szAppBlendPath);
     //printf("szAppBlendPath: %s\n", szAppBlendPath);
 
     snprintf(szAppHDDPath, MAX_PATH - 1, "%s%s/", szAppHomePath, "hdd");
-    mkdir(szAppHDDPath, 0777);
+    io->create(szAppHDDPath);
     //printf("szAppHDDPath: %s\n", szAppHDDPath);
 
     snprintf(szAppEEPROMPath, MAX_PATH - 1, "%s%s/", szAppHomePath, "eeproms");
-    mkdir(szAppEEPROMPath, 0777);
+    io->create(szAppEEPROMPath);
 
     snprintf(szAppHiscorePath, MAX_PATH - 1, "%s%s/", szAppHomePath, "hiscores");
-    mkdir(szAppHiscorePath, 0777);
-    //printf("szAppHiscorePath: %s\n", szAppHiscorePath);
+    // copy hiscore.dat from romfs to datadir
+    io->copy(io->getRomFsPath() + "hiscores/", std::string(szAppHiscorePath) + "/");
 }
