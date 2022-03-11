@@ -6,7 +6,6 @@
 
 UiStatusBox::UiStatusBox(UiMain *m)
         : SkinnedRectangle(m->getSkin(), {"SKIN_CONFIG", "STATUSBOX"}) {
-
     main = m;
     clock = new C2DClock();
 
@@ -63,5 +62,7 @@ void UiStatusBox::onDraw(c2d::Transform &transform, bool draw) {
 }
 
 UiStatusBox::~UiStatusBox() {
+#ifndef __PSP2__ // TODO: fix
     delete (clock);
+#endif
 }

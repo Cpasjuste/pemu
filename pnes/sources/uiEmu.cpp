@@ -56,6 +56,8 @@ int PNESUiEmu::load(const ss_api::Game &game) {
         return -1;
     }
 
+    targetFps = nst_pal() ? 50 : 60;
+
     getUi()->getUiProgressBox()->setProgress(1);
     getUi()->flip();
     getUi()->delay(500);
@@ -84,15 +86,6 @@ bool PNESUiEmu::onInput(c2d::Input::Player *players) {
 
 void PNESUiEmu::onUpdate() {
     if (!isPaused()) {
-
-        // fps
-        int showFps = getUi()->getConfig()->get(Option::Id::ROM_SHOW_FPS, true)->getValueBool();
-        getFpsText()->setVisibility(showFps ? Visibility::Visible : Visibility::Hidden);
-        if (showFps) {
-            sprintf(fpsString, "FPS: %.2g/%2d", getUi()->getFps(), nst_pal() ? 50 : 60);
-            getFpsText()->setString(fpsString);
-        }
-
         // update nestopia buttons
         auto *players = getUi()->getInput()->getPlayers();
 
@@ -131,7 +124,7 @@ void PNESUiEmu::onUpdate() {
         nst_emuloop();
     }
 
-    UiEmu::onUpdate();
+    return UiEmu::onUpdate();
 }
 
 /// NESTOPIA

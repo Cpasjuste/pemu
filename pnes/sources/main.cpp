@@ -30,7 +30,6 @@ using namespace c2dui;
 #include <psp2/power.h>
 #include <psp2/io/dirent.h>
 #define mkdir(x, y) sceIoMkdir(x, 0777)
-int _newlib_heap_size_user = 192 * 1024 * 1024;
 #elif __PS4__
 extern "C" int sceSystemServiceLoadExec(const char *path, const char *args[]);
 #endif

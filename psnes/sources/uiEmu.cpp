@@ -60,24 +60,6 @@ static const char *s9x_base_dir = nullptr;
 
 static char default_dir[PATH_MAX + 1];
 
-#ifdef __PSP2__
-static const char dirNames[13][32] =
-        {
-                "ux0:/data/psnes/",             // DEFAULT_DIR
-                "ux0:/data/psnes/",             // HOME_DIR
-                "ux0:/data/psnes/",             // ROMFILENAME_DIR
-                "ux0:/data/psnes/roms",          // ROM_DIR
-                "ux0:/data/psnes/sram",         // SRAM_DIR
-                "ux0:/data/psnes/saves",        // SNAPSHOT_DIR
-                "ux0:/data/psnes/screenshots",  // SCREENSHOT_DIR
-                "ux0:/data/psnes/spc",          // SPC_DIR
-                "ux0:/data/psnes/cheat",        // CHEAT_DIR
-                "ux0:/data/psnes/patch",        // PATCH_DIR
-                "ux0:/data/psnes/bios",         // BIOS_DIR
-                "ux0:/data/psnes/log",          // LOG_DIR
-                ""
-        };
-#else
 static const char dirNames[13][32] =
         {
                 "",             // DEFAULT_DIR
@@ -94,7 +76,6 @@ static const char dirNames[13][32] =
                 "log",          // LOG_DIR
                 ""
         };
-#endif
 
 static int make_snes9x_dirs(void);
 
@@ -246,13 +227,6 @@ int PSNESUiEmu::load(const ss_api::Game &game) {
     S9xBlitHQ2xFilterInit();
 #endif
 
-#ifdef __PSP2__
-    GFX.Pitch = SNES_WIDTH * 2;
-    PSNESVideo *v = new PSNESVideo(getUi(), (void **) &GFX.Screen, (int *) &GFX.Pitch,
-                                   Vector2f(SNES_WIDTH, SNES_HEIGHT_EXTENDED));
-    addVideo(v);
-    memset(GFX.Screen, 0, (size_t) getVideo()->getTexture()->pitch * getVideo()->getTextureRect().height);
-#else
     if (Settings.SupportHiRes) {
         GFX.Pitch = SNES_WIDTH * 2 * 2;
         gfx_snes_buffer = (uint8 *) malloc(GFX.Pitch * ((SNES_HEIGHT_EXTENDED + 4) * 2));
@@ -271,7 +245,6 @@ int PSNESUiEmu::load(const ss_api::Game &game) {
         addVideo(v);
         memset(GFX.Screen, 0, (size_t) getVideo()->getTexture()->pitch * getVideo()->getTextureRect().height);
     }
-#endif
 
     S9xGraphicsInit();
 
@@ -395,7 +368,6 @@ bool8 S9xInitUpdate() {
  */
 bool8 S9xDeinitUpdate(int width, int height) {
 
-#ifndef __PSP2__
     Blitter blit = nullptr;
 #ifdef __SOFT_SCALERS__
     int effect = _ui->getConfig()->getValue(Option::ROM_SHADER, true);
@@ -501,7 +473,6 @@ bool8 S9xDeinitUpdate(int width, int height) {
     snes9x_prev_height = height;
 
     video->getTexture()->unlock();
-#endif
 
     return TRUE;
 }
@@ -705,11 +676,7 @@ void S9xSyncSpeed() {
 
     if (Settings.SoundSync == TRUE) {
         while (S9xSyncSound() == FALSE) {
-#ifdef __PSP2__
-            sceKernelDelayThread(1);
-#else
             usleep(1);
-#endif
         }
     }
 
@@ -776,11 +743,7 @@ void S9xSyncSpeed() {
     while (timercmp(&next1, &now, >)) {
         // If we're ahead of time, sleep a while.
         unsigned timeleft = (next1.tv_sec - now.tv_sec) * 1000000 + next1.tv_usec - now.tv_usec;
-#ifdef __PSP2__
-        sceKernelDelayThread(timeleft);
-#else
         usleep(timeleft);
-#endif
         while (gettimeofday(&now, NULL) == -1);
         // Continue with a while-loop because usleep() could be interrupted by a signal.
     }
