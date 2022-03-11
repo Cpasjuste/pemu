@@ -146,7 +146,7 @@ void audio_deinit() {
 
 void audio_queue() {
     if (uiEmu->getAudio() != nullptr) {
-        uiEmu->getAudio()->play(audio_buffer, uiEmu->getAudio()->getSamples(), true);
+        uiEmu->getAudio()->play(audio_buffer, uiEmu->getAudio()->getSamples(), nst_pal());
     }
 }
 
