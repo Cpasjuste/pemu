@@ -78,8 +78,8 @@ int main(int argc, char **argv) {
     buttons.emplace_back(KEY_JOY_FIRE8_DEFAULT, "NONE");
     buttons.emplace_back(KEY_JOY_COIN1_DEFAULT, "SELECT");
     buttons.emplace_back(KEY_JOY_START1_DEFAULT, "START");
-    buttons.emplace_back(KEY_JOY_MENU1_DEFAULT, "R");
-    buttons.emplace_back(KEY_JOY_MENU2_DEFAULT, "L");
+    buttons.emplace_back(KEY_JOY_MENU1_DEFAULT, "START");
+    buttons.emplace_back(KEY_JOY_MENU2_DEFAULT, "SELECT");
 #elif __SWITCH__
     // see c2d.h for key id
     buttons.emplace_back(KEY_JOY_UP_DEFAULT, "UP");
