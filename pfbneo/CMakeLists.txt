@@ -237,7 +237,7 @@ if (PLATFORM_VITA)
             ${VITASDK}/arm-vita-eabi/include/SDL2/
             )
     list(APPEND SRC_PFBA sources/cpu/c68000_intf.cpp sources/cpu/cyclone/Cyclone.s)
-    list(APPEND FLAGS -DBUILD_C68K -DUSE_FILE32API -DLSB_FIRST -DUSE_SPEEDHACKS -D__PFBA_ARM__)
+    list(APPEND FLAGS -DBUILD_C68K -DUSE_FILE32API -DLSB_FIRST -DUSE_SPEEDHACKS -D__PFBA_ARM__ -Os)
     list(APPEND LDFLAGS ScePower_stub pthread)
 elseif (PLATFORM_PS4)
     set(PS4_PKG_TITLE "pFBN - Portable Final Burn Neo")

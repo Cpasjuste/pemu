@@ -6,7 +6,7 @@
 #include "romlist.h"
 
 void PFBARomList::build() {
-
+#ifndef __VITA__
     std::string dataPath = ui->getIo()->getRomFsPath();
     if (!ui->getIo()->exist(dataPath + "gamelist_coleco.xml")) {
         dataPath = ui->getIo()->getDataPath();
@@ -53,7 +53,7 @@ void PFBARomList::build() {
 
     gameList.append(dataPath + "gamelist_tg16.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_TG16), false);
     setLoadingText("Games: %li / %li", gameList.getAvailableCount(), gameList.games.size());
-
+#endif
     RomList::build();
 
     // remove hidden flags for pfba

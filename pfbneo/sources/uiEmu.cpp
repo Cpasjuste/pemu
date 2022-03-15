@@ -27,6 +27,7 @@ static bool isHardware(int hardware, int type) {
     return (((hardware | HARDWARE_PREFIX_CARTRIDGE) ^ HARDWARE_PREFIX_CARTRIDGE)
             & 0xff000000) == (unsigned int) type;
 }
+
 #endif
 
 static UINT32 myHighCol16(int r, int g, int b, int /* i */) {
@@ -92,9 +93,8 @@ int PFBAUiEmu::getSekCpuCore() {
     std::string zip = BurnDrvGetTextA(DRV_NAME);
     for (unsigned int i = 0; i < zipList.size(); i++) {
         if (zipList[i].compare(0, zip.length(), zip) == 0) {
-            ui->getUiMessageBox()->show(
-                    "WARNING", "THIS GAME DOES NOT SUPPORT THE M68K ASM CORE\n"
-                               "CYCLONE ASM CORE DISABLED", "OK");
+            ui->getUiStatusBox()->show("THIS GAME DOES NOT SUPPORT THE M68K ASM CORE\n"
+                                       "CYCLONE ASM CORE DISABLED");
             sekCpuCore = 1; // SEK_CORE_M68K: USE C M68K CORE
             break;
         }
