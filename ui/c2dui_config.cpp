@@ -79,8 +79,11 @@ Config::Config(c2d::Io *io, int ver) {
     if (C2D_SCREEN_HEIGHT > 720) {
         append("SCALING", {"NONE", "2X", "3X", "4X", "FIT", "FULL"}, 3,
                Option::Id::ROM_SCALING, Option::Flags::STRING);
-    } else if (C2D_SCREEN_HEIGHT > 240) {
+    } else if (C2D_SCREEN_HEIGHT > 544) {
         append("SCALING", {"NONE", "2X", "3X", "FIT", "FULL"}, 2,
+               Option::Id::ROM_SCALING, Option::Flags::STRING);
+    } else if (C2D_SCREEN_HEIGHT > 240) {
+        append("SCALING", {"NONE", "2X", "FIT", "FULL"}, 1,
                Option::Id::ROM_SCALING, Option::Flags::STRING);
     } else {
         append("SCALING", {"NONE", "FIT", "FULL"}, 0, Option::Id::ROM_SCALING, Option::Flags::STRING);
