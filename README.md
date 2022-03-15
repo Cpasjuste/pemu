@@ -10,6 +10,10 @@
 [![psnes-ps4-release](https://github.com/Cpasjuste/pemu/actions/workflows/psnes-ps4-release.yml/badge.svg)](https://github.com/Cpasjuste/pemu/actions/workflows/psnes-ps4-release.yml)
 [![pnes-ps4-release](https://github.com/Cpasjuste/pemu/actions/workflows/pnes-ps4-release.yml/badge.svg)](https://github.com/Cpasjuste/pemu/actions/workflows/pnes-ps4-release.yml)
 
+[![pfbneo-vita-release](https://github.com/Cpasjuste/pemu/actions/workflows/pfbneo-vita-release.yml/badge.svg)](https://github.com/Cpasjuste/pemu/actions/workflows/pfbneo-vita-release.yml)
+[![psnes-vita-release](https://github.com/Cpasjuste/pemu/actions/workflows/psnes-vita-release.yml/badge.svg)](https://github.com/Cpasjuste/pemu/actions/workflows/psnes-vita-release.yml)
+[![pnes-vita-release](https://github.com/Cpasjuste/pemu/actions/workflows/pnes-vita-release.yml/badge.svg)](https://github.com/Cpasjuste/pemu/actions/workflows/pnes-vita-release.yml)
+
 ## pEMU: Portable Emulator
 
 **<ins>Building on ubuntu for ubuntu</ins>**
