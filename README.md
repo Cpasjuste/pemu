@@ -70,15 +70,6 @@
     sudo apt -yq update
     sudo apt -yq install git build-essential cmake zip libgpgme11
     ```
-- Install dotnet sdk (for pkgtool):
-    ```
-    wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
-    sudo dpkg -i packages-microsoft-prod.deb
-    sudo apt -yq update
-    sudo apt -yq install apt-transport-https
-    sudo apt -yq update
-    sudo apt-get install -yq dotnet-sdk-3.1
-    ```
 - Install ps4 toolchain:
     ```
     wget https://github.com/PacBrew/pacbrew-pacman/releases/download/pacbrew-release-1.0/pacbrew-pacman-1.0.deb
