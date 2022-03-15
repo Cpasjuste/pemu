@@ -119,6 +119,24 @@ int main(int argc, char **argv) {
     buttons.emplace_back(KEY_JOY_START1_DEFAULT, "R1");
     buttons.emplace_back(KEY_JOY_MENU1_DEFAULT, "L1");
     buttons.emplace_back(KEY_JOY_MENU2_DEFAULT, "R1");
+#else
+    // see c2d.h for key id
+    buttons.emplace_back(KEY_JOY_UP_DEFAULT, "UP");
+    buttons.emplace_back(KEY_JOY_DOWN_DEFAULT, "DOWN");
+    buttons.emplace_back(KEY_JOY_LEFT_DEFAULT, "LEFT");
+    buttons.emplace_back(KEY_JOY_RIGHT_DEFAULT, "RIGHT");
+    buttons.emplace_back(KEY_JOY_FIRE1_DEFAULT, "CROSS");
+    buttons.emplace_back(KEY_JOY_FIRE2_DEFAULT, "CIRCLE");
+    buttons.emplace_back(KEY_JOY_FIRE3_DEFAULT, "SQUARE");
+    buttons.emplace_back(KEY_JOY_FIRE4_DEFAULT, "TRIANGLE");
+    buttons.emplace_back(KEY_JOY_FIRE5_DEFAULT, "LT");
+    buttons.emplace_back(KEY_JOY_FIRE6_DEFAULT, "RT");
+    buttons.emplace_back(KEY_JOY_FIRE7_DEFAULT, "LT");
+    buttons.emplace_back(KEY_JOY_FIRE8_DEFAULT, "RT");
+    buttons.emplace_back(KEY_JOY_COIN1_DEFAULT, "LB");
+    buttons.emplace_back(KEY_JOY_START1_DEFAULT, "RB");
+    buttons.emplace_back(KEY_JOY_MENU1_DEFAULT, "LB");
+    buttons.emplace_back(KEY_JOY_MENU2_DEFAULT, "RB");
 #endif
 
     skin = new Skin(ui, buttons);
