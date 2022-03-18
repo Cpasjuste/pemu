@@ -50,7 +50,7 @@ pFBN: Portable FinalBurn Neo
   
 - pFBN support preview images and videos (put files in corresponding media folder. For arcade roms, for example: png files goes in "roms/media/mixrbv2", mp4 files in "roms/media/video"). Please note that the vita and ps4 port doesn't support video previews yet.
 You can download a near fullset mixrbv2 and video package for each platform here (hq = high quality, lq = low quality, download one of them):
-    - Arcade: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/arcade_mixrbv2.zip), [video_hq](http://files.mydedibox.fr/files/dev/pemu/pfbneo/arcade_video_hq.zip) (7.1GB), [video_lq](http://files.mydedibox.fr/files/dev/pemu/pfbneo/arcade_video_lq.zip) (2.1GB)
+    - Arcade: [mixrbv2_lq](http://files.mydedibox.fr/files/dev/pemu/pfbneo/arcade_mixrbv2_lq.zip) (225MB), [mixrbv2_hq](http://files.mydedibox.fr/files/dev/pemu/pfbneo/arcade_mixrbv2_hq.zip) (1.5GB), [video_hq](http://files.mydedibox.fr/files/dev/pemu/pfbneo/arcade_video_hq.zip) (7.1GB), [video_lq](http://files.mydedibox.fr/files/dev/pemu/pfbneo/arcade_video_lq.zip) (2.1GB)
     - Channel F: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/channelf_mixrbv2.zip), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/channelf_video.zip)
     - Coleco: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/coleco_mixrbv2.zip), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/coleco_video.zip)
     - Nintendo NES FDS: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/fds_mixrbv2.zip), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/fds_video.zip)
