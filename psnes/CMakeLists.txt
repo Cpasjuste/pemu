@@ -107,7 +107,7 @@ if (PLATFORM_VITA)
 elseif (PLATFORM_PS4)
     set(PS4_PKG_TITLE "pSNES - Portable Snes9x")
     set(PS4_PKG_TITLE_ID "PSNE00001")
-    set(PS4_PKG_VERSION "05.00")
+    set(PS4_PKG_VERSION "${VERSION_MAJOR}.${VERSION_MINOR}")
 elseif (PLATFORM_SWITCH)
     #####################
     # NX PLATORM

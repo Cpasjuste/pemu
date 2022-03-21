@@ -72,7 +72,7 @@ if (PLATFORM_VITA)
 elseif (PLATFORM_PS4)
     set(PS4_PKG_TITLE "pNES - Portable Nestopia")
     set(PS4_PKG_TITLE_ID "PNES00001")
-    set(PS4_PKG_VERSION "05.00")
+    set(PS4_PKG_VERSION "${VERSION_MAJOR}.${VERSION_MINOR}")
     list(APPEND NESTOPIA_CFLAGS -DDATADIR="/app0/")
 elseif (PLATFORM_SWITCH)
     #####################

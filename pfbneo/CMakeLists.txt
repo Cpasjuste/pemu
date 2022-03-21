@@ -230,7 +230,7 @@ endif ()
 #################
 if (PLATFORM_VITA)
     enable_language(ASM)
-    set(TITLE_ID "PFBA00001" CACHE STRING "" FORCE)
+    set(TITLE_ID "PFBN00001" CACHE STRING "" FORCE)
     list(REMOVE_ITEM SRC_CPU ${CMAKE_SOURCE_DIR}/cores/fbneo/src/cpu/m68000_intf.cpp)
     list(APPEND INC
             sources/cpu/cyclone
