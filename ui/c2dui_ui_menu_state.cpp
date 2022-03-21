@@ -219,7 +219,7 @@ void UiStateMenu::setVisibility(c2d::Visibility visibility, bool tweenPlay) {
         ui->getUiRomList()->getBlur()->setVisibility(visibility, true);
     }
     if (ui->getUiEmu() && visibility == Visibility::Visible) {
-        title->setString(ui->getUiRomList()->getSelection().getName().text);
+        title->setString(ui->getUiRomList()->getSelection().name);
         for (auto &state: uiStateList->states) {
             state->setRom(ui->getUiRomList()->getSelection());
         }

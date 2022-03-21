@@ -15,7 +15,7 @@ namespace c2dui {
 
         ~UiStatusBox() override;
 
-        void show(const std::string &text, bool infinite = false, bool drawNow = false);
+        void show(const std::string &text);
 
         void show(const char *fmt, ...);
 
@@ -29,7 +29,6 @@ namespace c2dui {
         c2d::Text *text;
         c2d::TweenAlpha *tween;
         c2d::Clock *clock;
-        bool infinite = false;
     };
 }
 

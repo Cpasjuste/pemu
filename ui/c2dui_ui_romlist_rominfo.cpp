@@ -35,7 +35,6 @@ UIRomInfo::UIRomInfo(UiMain *u, UIRomList *uiRList, Font *fnt, int fntSize)
         genreText = addInfoBoxText({"MAIN", "ROM_INFOS", "GENRE_TEXT"});
         playersText = addInfoBoxText({"MAIN", "ROM_INFOS", "PLAYERS_TEXT"});
         ratingText = addInfoBoxText({"MAIN", "ROM_INFOS", "RATING_TEXT"});
-        topstaffText = addInfoBoxText({"MAIN", "ROM_INFOS", "TOPSTAFF_TEXT"});
         rotationText = addInfoBoxText({"MAIN", "ROM_INFOS", "ROTATION_TEXT"});
         resolutionText = addInfoBoxText({"MAIN", "ROM_INFOS", "RESOLUTION_TEXT"});
         cloneofText = addInfoBoxText({"MAIN", "ROM_INFOS", "CLONEOF_TEXT"});
@@ -152,7 +151,6 @@ void UIRomInfo::load(const Game &game) {
         hideText(genreText);
         hideText(playersText);
         hideText(ratingText);
-        hideText(topstaffText);
         hideText(rotationText);
         hideText(resolutionText);
         hideText(cloneofText);
@@ -163,22 +161,21 @@ void UIRomInfo::load(const Game &game) {
         mpv->stop();
 #endif
     } else {
-        printf("UIRomInfo::load(%s)\n", game.getName().text.c_str());
+        printf("UIRomInfo::load(%s)\n", game.name.c_str());
         // load title/preview texture
         loadTexture(game);
-        showText(systemText, "System: " + game.system.text);
-        showText(developerText, "Developer: " + game.developer.text);
-        showText(editorText, "Editor: " + game.editor.text);
-        showText(dateText, "Date: " + game.getDate().text);
-        showText(genreText, "Genre: " + game.getGenre().text);
+        showText(systemText, "System: " + game.system.name);
+        showText(developerText, "Developer: " + game.developer.name);
+        showText(editorText, "Editor: " + game.editor.name);
+        showText(dateText, "Date: " + game.date);
+        showText(genreText, "Genre: " + game.genre.name);
         showText(playersText, "Players: " + game.players);
         showText(ratingText, "Rating: " + std::to_string(game.rating));
-        showText(topstaffText, "Top Staff: " + std::to_string((int) game.topStaff));
         showText(rotationText, "Rotation: " + std::to_string(game.rotation));
-        showText(resolutionText, "Resolution: " + game.resolution);
-        showText(cloneofText, "Clone Of: " + game.cloneOf);
+        showText(resolutionText, "Resolution: " + (game.resolution.empty() ? "UNKNOWN" : game.resolution));
+        showText(cloneofText, "Clone Of: " + (game.cloneOf.empty() ? "NONE" : game.cloneOf));
         showText(filenameText, "File: " + game.path);
-        showText(synoText, game.getSynopsis().text);
+        showText(synoText, game.synopsis);
     }
 }
 

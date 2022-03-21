@@ -10,12 +10,10 @@ using namespace c2dui;
 using namespace ss_api;
 
 UIRomList::UIRomList(UiMain *u, RomList *rList, const c2d::Vector2f &size) : RectangleShape(size) {
-
     printf("UIRomList\n");
 
     ui = u;
     romList = rList;
-    gameList = romList->gameList;
     Skin *skin = ui->getSkin();
 
     // set gui main "window"
@@ -90,7 +88,6 @@ UIRomList::UIRomList(UiMain *u, RomList *rList, const c2d::Vector2f &size) : Rec
 }
 
 void UIRomList::updateRomList() {
-
     filterRomList();
     sortRomList();
 
@@ -113,7 +110,6 @@ void UIRomList::updateRomList() {
 }
 
 Texture *UIRomList::getPreviewTexture(const ss_api::Game &game) {
-
     // load image
     C2DTexture *texture = nullptr;
     std::string fullPath, mediaPath;
@@ -166,7 +162,6 @@ Texture *UIRomList::getPreviewTexture(const ss_api::Game &game) {
 }
 
 std::string UIRomList::getPreviewVideo(const ss_api::Game &game) {
-
     std::string fullPath, mediaPath;
 
     // if database doesn't contains any media, just use default path
@@ -210,12 +205,18 @@ std::string UIRomList::getPreviewVideo(const ss_api::Game &game) {
 
 void UIRomList::filterRomList() {
     Option *opt = ui->getConfig()->get(Option::Id::GUI_SHOW_ALL);
-    ss_api::GameList *list = opt->getValueString() == "FAVORITES" ? &romList->gameListFav : &romList->gameList;
+    ss_api::GameList *list = opt->getValueString() == "FAVORITES" ? romList->gameListFav : romList->gameList;
 
     bool available = opt->getValueString() == "FAVORITES" ? false : opt->getValueString() == "AVAILABLE";
     bool showClones = ui->getConfig()->get(Option::Id::GUI_FILTER_CLONES)->getValueBool();
     std::string system = ui->getConfig()->get(Option::Id::GUI_FILTER_SYSTEM)->getValueString();
-    int systemId = system == "ALL" ? -1 : list->findSystemByName(system).id;
+    int systemId;
+    // custom arcade system (mame sscrap id 75)
+    if (system == "ARCADE") {
+        systemId = 9999;
+    } else {
+        systemId = system == "ALL" ? -1 : list->systemList.findByName(system).id;
+    }
     std::string editor = ui->getConfig()->get(Option::Id::GUI_FILTER_EDITOR)->getValueString();
     int editorId = editor == "ALL" ? -1 : list->findEditorByName(editor).id;
     std::string dev = ui->getConfig()->get(Option::Id::GUI_FILTER_DEVELOPER)->getValueString();
@@ -223,13 +224,14 @@ void UIRomList::filterRomList() {
     int players = Utility::parseInt(ui->getConfig()->get(Option::Id::GUI_FILTER_PLAYERS)->getValueString(), -1);
     int rating = Utility::parseInt(ui->getConfig()->get(Option::Id::GUI_FILTER_RATING)->getValueString(), -1);
     int rotation = Utility::parseInt(ui->getConfig()->get(Option::Id::GUI_FILTER_ROTATION)->getValueString(), -1);
+    std::string genre = ui->getConfig()->get(Option::Id::GUI_FILTER_GENRE)->getValueString();
+    int genreId = genre == "ALL" ? -1 : list->findGenreByName(genre).id;
 
     gameList = list->filter(
-            available, showClones, systemId, editorId, devId,
-            players, rating, -1, rotation,
+            available, showClones, systemId == 9999 ? -1 : systemId, systemId == 9999 ? 75 : -1,
+            editorId, devId, players, rating, rotation, genreId,
             ui->getConfig()->get(Option::Id::GUI_FILTER_RESOLUTION)->getValueString(),
-            ui->getConfig()->get(Option::Id::GUI_FILTER_DATE)->getValueString(),
-            ui->getConfig()->get(Option::Id::GUI_FILTER_GENRE)->getValueString()
+            ui->getConfig()->get(Option::Id::GUI_FILTER_DATE)->getValueString()
     );
 }
 
@@ -251,7 +253,6 @@ RomList *UIRomList::getRomList() {
 }
 
 void UIRomList::setVisibility(c2d::Visibility visibility, bool tweenPlay) {
-
     if (visibility == c2d::Visibility::Hidden) {
         romInfo->load();
         timer_load_info_done = 0;
@@ -265,7 +266,6 @@ void UIRomList::setVisibility(c2d::Visibility visibility, bool tweenPlay) {
 }
 
 bool UIRomList::onInput(c2d::Input::Player *players) {
-
     if (ui->getUiMenu()->isVisible()
         || ui->getUiStateMenu()->isVisible()
         || ui->getUiProgressBox()->isVisible()) {
@@ -307,17 +307,15 @@ bool UIRomList::onInput(c2d::Input::Player *players) {
     } else if (keys & Input::Key::Fire3) {
         // add to favorites
         Game game = getSelection();
-        if (game.id > 0 && !romList->gameListFav.exist(game.romId)) {
-            int res = ui->getUiMessageBox()->show("FAVORITES",
-                                                  "Add to favorites ?",
-                                                  "OK", "CANCEL");
+        if (game.id > 0 && !romList->gameListFav->exist(game.id)) {
+            int res = ui->getUiMessageBox()->show(
+                    "FAVORITES", "Add to favorites ?", "OK", "CANCEL");
             if (res == MessageBox::LEFT) {
                 romList->addFav(game);
             }
-        } else if (game.id > 0 && romList->gameListFav.exist(game.romId)) {
-            int res = ui->getUiMessageBox()->show("FAVORITES",
-                                                  "Remove from favorites ?",
-                                                  "OK", "CANCEL");
+        } else if (game.id > 0 && romList->gameListFav->exist(game.id)) {
+            int res = ui->getUiMessageBox()->show(
+                    "FAVORITES", "Remove from favorites ?", "OK", "CANCEL");
             if (res == MessageBox::LEFT) {
                 romList->removeFav(game);
                 Option *opt = ui->getConfig()->get(Option::Id::GUI_SHOW_ALL);
@@ -358,7 +356,6 @@ bool UIRomList::onInput(c2d::Input::Player *players) {
 }
 
 void UIRomList::onUpdate() {
-
     if (!isVisible() || ui->getUiProgressBox()->isVisible()) {
         return;
     }

@@ -25,7 +25,7 @@ public:
         name->setOutlineColor(textGroup.outlineColor);
         name->setOrigin(Origin::Left);
         name->setPosition(0, MenuLine::getSize().y / 2);
-        name->setSizeMax((MenuLine::getSize().x * 0.6f), 0);
+        name->setSizeMax((MenuLine::getSize().x * 0.55f), 0);
         MenuLine::add(name);
 
         value = new Text("OPTION VALUE", textGroup.size, font);
@@ -33,8 +33,8 @@ public:
         value->setOutlineThickness(textGroup.outlineSize);
         value->setOutlineColor(textGroup.outlineColor);
         value->setOrigin(Origin::Left);
-        value->setPosition((MenuLine::getSize().x * 0.6f), MenuLine::getSize().y / 2);
-        value->setSizeMax(MenuLine::getSize().x * 0.3f, 0);
+        value->setPosition((MenuLine::getSize().x * 0.56f), MenuLine::getSize().y / 2);
+        value->setSizeMax(MenuLine::getSize().x * 0.40f, 0);
         MenuLine::add(value);
 
         sprite = new Sprite();
@@ -63,7 +63,7 @@ public:
                             getSize().x / (float) sprite->getTextureRect().width,
                             getSize().y / (float) sprite->getTextureRect().height);
                     sprite->setScale(scaling, scaling);
-                    sprite->setPosition((MenuLine::getSize().x * 0.6f), MenuLine::getSize().y / 2);
+                    sprite->setPosition((MenuLine::getSize().x * 0.56f), MenuLine::getSize().y / 2);
                     sprite->setOrigin(Origin::Left);
                 } else {
                     sprite->setVisibility(Visibility::Hidden);
@@ -146,7 +146,7 @@ void UiMenu::load(bool isRom) {
 
     if (isRomMenu) {
         ui->getConfig()->load(game);
-        title->setString(game.getName().text);
+        title->setString(game.name);
     } else {
         title->setString("MAIN OPTIONS");
     }
@@ -295,9 +295,13 @@ bool UiMenu::onInput(c2d::Input::Player *players) {
             case Option::Id::GUI_FILTER_ROTATION:
             case Option::Id::GUI_FILTER_RESOLUTION:
             case Option::Id::GUI_FILTER_DATE:
-            case Option::Id::GUI_FILTER_GENRE:
+            case Option::Id::GUI_FILTER_GENRE: {
+                std::string name = Utility::toUpper(option.getName());
+                std::string value = Utility::toUpper(option.getValueString());
+                ui->getUiStatusBox()->show("%s: %s", name.c_str(), value.c_str());
                 ui->getUiRomList()->updateRomList();
                 break;
+            }
 
             case Option::ROM_ROTATION:
             case Option::Id::ROM_SCALING:

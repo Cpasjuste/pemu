@@ -30,8 +30,8 @@ namespace c2dui {
         UiMain *ui;
         c2d::RectangleShape *rect;
         c2d::Text *text;
-        ss_api::GameList gameList;
-        ss_api::GameList gameListFav;
+        ss_api::GameList *gameList = nullptr;
+        ss_api::GameList *gameListFav = nullptr;
         std::vector<std::string> paths;
         char icon_path[1024];
         float time_start = 0;

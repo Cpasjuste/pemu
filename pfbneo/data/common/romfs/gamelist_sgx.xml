@@ -1,222 +1,124 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Data>
-    <jeux>
-        <jeu id="59380" romid="158422">
-            <path>1941.zip</path>
-            <noms>
-                <nom region="ss">1941 - Counter Attack</nom>
-            </noms>
-            <cloneof>0</cloneof>
-            <systeme id="105" parentid="31">PC Engine SuperGrafx</systeme>
-            <synopsis>
-                <synopsis langue="en">The SuperGrafx port of Capcom's hit arcade game. The goal is to shoot down enemy airplanes and collect weapon power-ups (POW). The game uses a vitality system instead of life system in which if the player is hit, it loses one point of vitality and the player is destroyed if hit with 0 vitality then the player is given the option to continue. Lightning attacks can be used by pressing the B button which sacrifices a portion of life energy. Player 1 flies the P-38 Lightning and Player 2 the new Mosquito Mk IV. The game shifts from the original Pacific Front setting with that of the Western Front, in the north Atlantic Ocean. 
+<gameList>
+    <game id="158422">
+        <path>1941.zip</path>
+        <name>1941 - Counter Attack</name>
+        <desc>The SuperGrafx port of Capcom's hit arcade game. The goal is to shoot down enemy airplanes and collect weapon power-ups (POW). The game uses a vitality system instead of life system in which if the player is hit, it loses one point of vitality and the player is destroyed if hit with 0 vitality then the player is given the option to continue. Lightning attacks can be used by pressing the B button which sacrifices a portion of life energy. Player 1 flies the P-38 Lightning and Player 2 the new Mosquito Mk IV. The game shifts from the original Pacific Front setting with that of the Western Front, in the north Atlantic Ocean. 
 
-The game consists of six levels and was the first in the series to introduce a +1 to the high score when Continues are used.</synopsis>
-            </synopsis>
-            <medias>
-                <media parent="jeu" type="video" region="unk" format="mp4" support="">media/video/1941.mp4</media>
-                <media parent="jeu" type="mixrbv2" region="wor" format="png" support="">media/mixrbv2/1941.png</media>
-            </medias>
-            <dates>
-                <date region="jp">1991</date>
-            </dates>
-            <developpeur id="31">Capcom</developpeur>
-            <editeur id="31">Capcom</editeur>
-            <genres>
-                <genre id="79" principale="1" parentid="0" langue="en">Shoot'em Up</genre>
-            </genres>
-            <joueurs>1-2</joueurs>
-            <topstaff>0</topstaff>
-            <note>15</note>
-            <rotation>0</rotation>
-        </jeu>
-        <jeu id="59380" romid="641470">
-            <path>aldynes.zip</path>
-            <noms>
-                <nom region="ss">Aldynes</nom>
-            </noms>
-            <cloneof>0</cloneof>
-            <systeme id="105" parentid="31">PC Engine SuperGrafx</systeme>
-            <synopsis>
-                <synopsis langue="en">The SuperGrafx port of Capcom's hit arcade game. The goal is to shoot down enemy airplanes and collect weapon power-ups (POW). The game uses a vitality system instead of life system in which if the player is hit, it loses one point of vitality and the player is destroyed if hit with 0 vitality then the player is given the option to continue. Lightning attacks can be used by pressing the B button which sacrifices a portion of life energy. Player 1 flies the P-38 Lightning and Player 2 the new Mosquito Mk IV. The game shifts from the original Pacific Front setting with that of the Western Front, in the north Atlantic Ocean. 
+The game consists of six levels and was the first in the series to introduce a +1 to the high score when Continues are used.</desc>
+        <rating>0.75</rating>
+        <releasedate>19910101T000000</releasedate>
+        <developer id="31">Capcom</developer>
+        <publisher id="31">Capcom</publisher>
+        <genre>Shoot'em Up</genre>
+        <genreid>79</genreid>
+        <players>1-2</players>
+        <system id="105" parentId="31">PC Engine SuperGrafx</system>
+        <image type="mixrbv2">media/mixrbv2/1941.png</image>
+        <video type="video">media/video/1941.mp4</video>
+    </game>
+    <game id="641470">
+        <path>aldynes.zip</path>
+        <name>Aldynes</name>
+        <desc>The SuperGrafx port of Capcom's hit arcade game. The goal is to shoot down enemy airplanes and collect weapon power-ups (POW). The game uses a vitality system instead of life system in which if the player is hit, it loses one point of vitality and the player is destroyed if hit with 0 vitality then the player is given the option to continue. Lightning attacks can be used by pressing the B button which sacrifices a portion of life energy. Player 1 flies the P-38 Lightning and Player 2 the new Mosquito Mk IV. The game shifts from the original Pacific Front setting with that of the Western Front, in the north Atlantic Ocean. 
 
-The game consists of six levels and was the first in the series to introduce a +1 to the high score when Continues are used.</synopsis>
-            </synopsis>
-            <medias>
-                <media parent="jeu" type="video" region="unk" format="mp4" support="">media/video/aldynes.mp4</media>
-                <media parent="jeu" type="mixrbv2" region="wor" format="png" support="">media/mixrbv2/aldynes.png</media>
-            </medias>
-            <dates>
-                <date region="jp">1991</date>
-            </dates>
-            <developpeur id="31">Capcom</developpeur>
-            <editeur id="31">Capcom</editeur>
-            <genres>
-                <genre id="79" principale="1" parentid="0" langue="en">Shoot'em Up</genre>
-            </genres>
-            <joueurs>1-2</joueurs>
-            <topstaff>0</topstaff>
-            <note>15</note>
-            <rotation>0</rotation>
-        </jeu>
-        <jeu id="59383" romid="158424">
-            <path>battlace.zip</path>
-            <noms>
-                <nom region="ss">Battle Ace</nom>
-            </noms>
-            <cloneof>0</cloneof>
-            <systeme id="105" parentid="31">PC Engine SuperGrafx</systeme>
-            <synopsis>
-                <synopsis langue="en">Battle Ace is an action-oriented flight game in a first-person perspective. The player mans a space ship, including a radar which shows enemies, and the goal is to reach the end of each level where an end boss waits. As usually, the main occupation is to blast a lot of aliens which approach the player. The available weapons are bombs and a machine gun, both unlimited. Getting hit is a bad idea because it results in death. The player has three lives which can be raised by scoring 20000 points.</synopsis>
-            </synopsis>
-            <medias>
-                <media parent="jeu" type="video" region="unk" format="mp4" support="">media/video/battlace.mp4</media>
-                <media parent="jeu" type="mixrbv2" region="wor" format="png" support="">media/mixrbv2/battlace.png</media>
-            </medias>
-            <dates>
-                <date region="jp">1989</date>
-            </dates>
-            <developpeur id="83">Hudson</developpeur>
-            <editeur id="83">Hudson</editeur>
-            <genres>
-                <genre id="79" principale="1" parentid="0" langue="en">Shoot'em Up</genre>
-            </genres>
-            <joueurs>1</joueurs>
-            <topstaff>0</topstaff>
-            <note>13</note>
-            <rotation>0</rotation>
-        </jeu>
-        <jeu id="129653" romid="158425">
-            <path>daimakai.zip</path>
-            <noms>
-                <nom region="ss">Dai Makaimura</nom>
-            </noms>
-            <cloneof>0</cloneof>
-            <systeme id="105" parentid="31">PC Engine SuperGrafx</systeme>
-            <synopsis>
-                <synopsis langue="en">Three years after the events of Ghosts'n Goblins, the world is once again under attack by demons. Guinevere, Arthur the knight's fiancée, is killed before his eyes by Lucifer himself. Arthur is forced to travel the kingdom infested with evil creatures to save the soul of his beloved.</synopsis>
-            </synopsis>
-            <medias>
-                <media parent="jeu" type="video" region="unk" format="mp4" support="">media/video/daimakai.mp4</media>
-                <media parent="jeu" type="mixrbv2" region="wor" format="png" support="">media/mixrbv2/daimakai.png</media>
-            </medias>
-            <dates>
-                <date region="jp">1990</date>
-            </dates>
-            <developpeur id="31">Capcom</developpeur>
-            <editeur id="8730">NEC</editeur>
-            <genres>
-                <genre id="7" principale="1" parentid="0" langue="en">Platform</genre>
-            </genres>
-            <joueurs>1</joueurs>
-            <topstaff>0</topstaff>
-            <note>14</note>
-            <rotation>0</rotation>
-        </jeu>
-        <jeu id="129653" romid="158425">
-            <path>daimakai1.zip</path>
-            <noms>
-                <nom region="ss">Dai Makaimura (Alt)</nom>
-            </noms>
-            <cloneof>daimakai.zip</cloneof>
-            <systeme id="105" parentid="31">PC Engine SuperGrafx</systeme>
-            <synopsis>
-                <synopsis langue="en">Three years after the events of Ghosts'n Goblins, the world is once again under attack by demons. Guinevere, Arthur the knight's fiancée, is killed before his eyes by Lucifer himself. Arthur is forced to travel the kingdom infested with evil creatures to save the soul of his beloved.</synopsis>
-            </synopsis>
-            <dates>
-                <date region="jp">1990</date>
-            </dates>
-            <developpeur id="31">Capcom</developpeur>
-            <editeur id="8730">NEC</editeur>
-            <genres>
-                <genre id="7" principale="1" parentid="0" langue="en">Platform</genre>
-            </genres>
-            <joueurs>1</joueurs>
-            <topstaff>0</topstaff>
-            <note>14</note>
-            <rotation>0</rotation>
-        </jeu>
-        <jeu id="129653" romid="158425">
-            <path>daimakaid.zip</path>
-            <noms>
-                <nom region="ss">Dai Makaimura (Chris Covell's Debug Menu Hack)</nom>
-            </noms>
-            <cloneof>daimakai.zip</cloneof>
-            <systeme id="105" parentid="31">PC Engine SuperGrafx</systeme>
-            <synopsis>
-                <synopsis langue="en">Three years after the events of Ghosts'n Goblins, the world is once again under attack by demons. Guinevere, Arthur the knight's fiancée, is killed before his eyes by Lucifer himself. Arthur is forced to travel the kingdom infested with evil creatures to save the soul of his beloved.</synopsis>
-            </synopsis>
-            <dates>
-                <date region="jp">1990</date>
-            </dates>
-            <developpeur id="31">Capcom</developpeur>
-            <editeur id="8730">NEC</editeur>
-            <genres>
-                <genre id="7" principale="1" parentid="0" langue="en">Platform</genre>
-            </genres>
-            <joueurs>1</joueurs>
-            <topstaff>0</topstaff>
-            <note>14</note>
-            <rotation>0</rotation>
-        </jeu>
-        <jeu id="59385" romid="158426">
-            <path>granzort.zip</path>
-            <noms>
-                <nom region="ss">Madou Ou Granzort</nom>
-            </noms>
-            <cloneof>0</cloneof>
-            <systeme id="105" parentid="31">PC Engine SuperGrafx</systeme>
-            <synopsis>
-                <synopsis langue="en">Madouou Granzort is a platform/action game that consists of seven zones each guarded by a boss.
+The game consists of six levels and was the first in the series to introduce a +1 to the high score when Continues are used.</desc>
+        <rating>0.75</rating>
+        <releasedate>19910101T000000</releasedate>
+        <developer id="31">Capcom</developer>
+        <publisher id="31">Capcom</publisher>
+        <genre>Shoot'em Up</genre>
+        <genreid>79</genreid>
+        <players>1-2</players>
+        <system id="105" parentId="31">PC Engine SuperGrafx</system>
+        <image type="mixrbv2">media/mixrbv2/aldynes.png</image>
+        <video type="video">media/video/aldynes.mp4</video>
+    </game>
+    <game id="158424">
+        <path>battlace.zip</path>
+        <name>Battle Ace</name>
+        <desc>Battle Ace is an action-oriented flight game in a first-person perspective. The player mans a space ship, including a radar which shows enemies, and the goal is to reach the end of each level where an end boss waits. As usually, the main occupation is to blast a lot of aliens which approach the player. The available weapons are bombs and a machine gun, both unlimited. Getting hit is a bad idea because it results in death. The player has three lives which can be raised by scoring 20000 points.</desc>
+        <rating>0.65</rating>
+        <releasedate>19890101T000000</releasedate>
+        <developer id="83">Hudson</developer>
+        <publisher id="83">Hudson</publisher>
+        <genre>Shoot'em Up</genre>
+        <genreid>79</genreid>
+        <players>1</players>
+        <system id="105" parentId="31">PC Engine SuperGrafx</system>
+        <image type="mixrbv2">media/mixrbv2/battlace.png</image>
+        <video type="video">media/video/battlace.mp4</video>
+    </game>
+    <game id="158425">
+        <path>daimakai.zip</path>
+        <name>Dai Makaimura</name>
+        <desc>Three years after the events of Ghosts'n Goblins, the world is once again under attack by demons. Guinevere, Arthur the knight's fiancée, is killed before his eyes by Lucifer himself. Arthur is forced to travel the kingdom infested with evil creatures to save the soul of his beloved.</desc>
+        <rating>0.70</rating>
+        <releasedate>19900101T000000</releasedate>
+        <developer id="31">Capcom</developer>
+        <publisher id="8730">NEC</publisher>
+        <genre>Platform</genre>
+        <genreid>7</genreid>
+        <players>1</players>
+        <system id="105" parentId="31">PC Engine SuperGrafx</system>
+        <image type="mixrbv2">media/mixrbv2/daimakai.png</image>
+        <video type="video">media/video/daimakai.mp4</video>
+    </game>
+    <game id="158425">
+        <path>daimakai1.zip</path>
+        <name>Dai Makaimura (Alt)</name>
+        <desc>Three years after the events of Ghosts'n Goblins, the world is once again under attack by demons. Guinevere, Arthur the knight's fiancée, is killed before his eyes by Lucifer himself. Arthur is forced to travel the kingdom infested with evil creatures to save the soul of his beloved.</desc>
+        <rating>0.70</rating>
+        <releasedate>19900101T000000</releasedate>
+        <developer id="31">Capcom</developer>
+        <publisher id="8730">NEC</publisher>
+        <genre>Platform</genre>
+        <genreid>7</genreid>
+        <players>1</players>
+        <cloneof>daimakai.zip</cloneof>
+        <system id="105" parentId="31">PC Engine SuperGrafx</system>
+    </game>
+    <game id="158425">
+        <path>daimakaid.zip</path>
+        <name>Dai Makaimura (Chris Covell's Debug Menu Hack)</name>
+        <desc>Three years after the events of Ghosts'n Goblins, the world is once again under attack by demons. Guinevere, Arthur the knight's fiancée, is killed before his eyes by Lucifer himself. Arthur is forced to travel the kingdom infested with evil creatures to save the soul of his beloved.</desc>
+        <rating>0.70</rating>
+        <releasedate>19900101T000000</releasedate>
+        <developer id="31">Capcom</developer>
+        <publisher id="8730">NEC</publisher>
+        <genre>Platform</genre>
+        <genreid>7</genreid>
+        <players>1</players>
+        <cloneof>daimakai.zip</cloneof>
+        <system id="105" parentId="31">PC Engine SuperGrafx</system>
+    </game>
+    <game id="158426">
+        <path>granzort.zip</path>
+        <name>Madou Ou Granzort</name>
+        <desc>Madouou Granzort is a platform/action game that consists of seven zones each guarded by a boss.
 You will cross ruins, underground, a forest or any futuristic complex by laminating robots of various forms.
-You will make your character jump by pressing the I button and hit him by pressing the II button. It is the Select button that pauses the game, as Run is used to switch heroes. At any time you can switch from the red knight to the green, then to the blue and so on.</synopsis>
-            </synopsis>
-            <medias>
-                <media parent="jeu" type="video" region="unk" format="mp4" support="">media/video/granzort.mp4</media>
-                <media parent="jeu" type="mixrbv2" region="wor" format="png" support="">media/mixrbv2/granzort.png</media>
-            </medias>
-            <dates>
-                <date region="jp">1990</date>
-            </dates>
-            <developpeur id="4920">Sunrise Software</developpeur>
-            <editeur id="83">Hudson</editeur>
-            <genres>
-                <genre id="10" principale="1" parentid="0" langue="en">Action</genre>
-            </genres>
-            <joueurs>1</joueurs>
-            <topstaff>0</topstaff>
-            <note>17</note>
-            <rotation>0</rotation>
-        </jeu>
-        <jeu id="4096943883" romid="4096943883">
-            <path>rtypeuh.zip</path>
-            <noms>
-                <nom region="wor">R-Type - Chris Covell's Unfinished SGX Hack</nom>
-            </noms>
-            <systeme id="105" parentid="0">PC Engine SuperGrafx</systeme>
-            <dates>
-                <date region="wor">2019</date>
-            </dates>
-            <developpeur id="0">NEC</developpeur>
-            <editeur id="0">NEC</editeur>
-            <topstaff>0</topstaff>
-            <note>0</note>
-            <rotation>0</rotation>
-        </jeu>
-        <jeu id="345494241" romid="345494241">
-            <path>rta2.zip</path>
-            <noms>
-                <nom region="wor">RTA2 - Homebrew conversion of RTA2</nom>
-            </noms>
-            <systeme id="105" parentid="0">PC Engine SuperGrafx</systeme>
-            <dates>
-                <date region="wor">2016</date>
-            </dates>
-            <developpeur id="0">REVIVAL GAMES</developpeur>
-            <editeur id="0">REVIVAL GAMES</editeur>
-            <topstaff>0</topstaff>
-            <note>0</note>
-            <rotation>0</rotation>
-        </jeu>
-    </jeux>
-</Data>
+You will make your character jump by pressing the I button and hit him by pressing the II button. It is the Select button that pauses the game, as Run is used to switch heroes. At any time you can switch from the red knight to the green, then to the blue and so on.</desc>
+        <rating>0.85</rating>
+        <releasedate>19900101T000000</releasedate>
+        <developer id="4920">Sunrise Software</developer>
+        <publisher id="83">Hudson</publisher>
+        <genre>Action</genre>
+        <genreid>10</genreid>
+        <players>1</players>
+        <system id="105" parentId="31">PC Engine SuperGrafx</system>
+        <image type="mixrbv2">media/mixrbv2/granzort.png</image>
+        <video type="video">media/video/granzort.mp4</video>
+    </game>
+    <game id="4096943883">
+        <path>rtypeuh.zip</path>
+        <name>R-Type - Chris Covell's Unfinished SGX Hack</name>
+        <releasedate>20190101T000000</releasedate>
+        <system id="105" parentId="31">PC Engine SuperGrafx</system>
+    </game>
+    <game id="345494241">
+        <path>rta2.zip</path>
+        <name>RTA2 - Homebrew conversion of RTA2</name>
+        <releasedate>20160101T000000</releasedate>
+        <system id="105" parentId="31">PC Engine SuperGrafx</system>
+    </game>
+</gameList>
