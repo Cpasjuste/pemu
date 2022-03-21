@@ -135,7 +135,7 @@ void UIListBox::init(Font *font, int fontSize, bool useIcons) {
 
     // add lines of text
     for (unsigned int i = 0; i < (unsigned int) max_lines; i++) {
-        FloatRect r = {1, (line_height * i) + 1, getSize().x - 2, line_height - 2};
+        FloatRect r = {1, (line_height * i), getSize().x - 2, line_height - 2};
         Texture *icon = nullptr;
         /*
          * TODO: fix icons
