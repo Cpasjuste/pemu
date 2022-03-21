@@ -33,7 +33,7 @@ PNESUiEmu::PNESUiEmu(UiMain *ui) : UiEmu(ui) {
 }
 
 int PNESUiEmu::load(const ss_api::Game &game) {
-    getUi()->getUiProgressBox()->setTitle(game.getName().text);
+    getUi()->getUiProgressBox()->setTitle(game.name);
     getUi()->getUiProgressBox()->setMessage("Please wait...");
     getUi()->getUiProgressBox()->setProgress(0);
     getUi()->getUiProgressBox()->setVisibility(Visibility::Visible);

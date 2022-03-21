@@ -91,7 +91,7 @@ PSNESUiEmu::PSNESUiEmu(UiMain *ui) : UiEmu(ui) {
 
 int PSNESUiEmu::load(const ss_api::Game &game) {
 
-    ui->getUiProgressBox()->setTitle(game.getName().text);
+    ui->getUiProgressBox()->setTitle(game.name);
     ui->getUiProgressBox()->setMessage("Please wait...");
     ui->getUiProgressBox()->setProgress(0);
     ui->getUiProgressBox()->setVisibility(Visibility::Visible);
