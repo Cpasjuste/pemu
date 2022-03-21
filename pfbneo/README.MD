@@ -71,27 +71,46 @@ You can download a near fullset mixrbv2 and video package for each platform here
 
 * ##### GENERAL INFORMATION
     * Using icons on the Nintendo Switch will make main loading time longer if a lot of icons are detected. There's currently no plan to improve this.
-    * You can enable or disable single joycon support from the pFBN main menu (+). When enabled, all detected joycons (not docked) will be handled as a single controller/player.
-    * Point scaling is currently limited to 1x, 2x and 3x size. FIT, FIT 4/3 and FULL options will fallback to 3x.
+    * You can enable or disable single joycon support from the pFBN main menu (R). When enabled, all detected joycons (not docked) will be handled as a single controller/player. (Use build-in keys mapping)
 
 * ##### NINTENDO SWITCH CONTROLS (UI)
    ```
-   (L/R)            : SWITCH FROM TITLE TO PREVIEW IMAGE
-   (+)              : GENERAL OPTIONS + DEFAULT ROMS OPTIONS
-   (-)              : PER ROM OPTIONS
-   (A)              : RUN ROM
+   (ZL/ZR)           : SWITCH SYSTEM
+   (R)               : GENERAL OPTIONS + DEFAULT ROMS OPTIONS
+   (L)               : PER ROM OPTIONS
+   (X)               : ADD/REMOVE FAVORITE
+   (A)               : RUN ROM
+   ```
+
+* ##### NINTENDO SWITCH CONTROLS (UI - SINGLE JOYCON MODE)
+   ```
+   *1P CONTROLLER ONLY*
+   (ZL/ZR)           : GENERAL OPTIONS + DEFAULT ROMS OPTIONS
+   (STICK)           : PER ROM OPTIONS
+   (L/R)             : SWITCH SYSTEM
    ```
 
 * ##### NINTENDO SWITCH CONTROLS (IN-GAME)
    ```
-   (+)              : START
-   (-)              : COINS
-   (+/-) + (A)      : START
-   (+/-) + (B)      : COINS
-   (+/-) + (X)      : SERVICE SWITCH
-   (+/-) + (Y)      : 1P + 2P START
-   (+/-) + (L/R)    : pFBN MENU
-   (+)   + (-)      : UNIBIOS MENU (NEOGEO ONLY)
+   (+)               : START (HOLD 2 SECONDS FOR DIAG MENU)
+   (-)               : COINS (HOLD 2 SECONDS TO RESET CURRENT GAME)
+   (L) + (R)         : pFBN MENU
+   (+) + (-/R)       : UNIBIOS MENU (NEOGEO ONLY)
+   ```
+
+* ##### NINTENDO SWITCH CONTROLS (IN-GAME - SINGLE JOYCON MODE)
+   ```
+   (+/-)             : COINS
+   (L/R)             : START
+   ```
+
+   ```
+   *1P CONTROLLER ONLY*
+   (-/ZL)  + (L)     : LEFT  JOYCON FOR UNIBIOS MENU (NEOGEO ONLY)
+   (+/ZR)  + (R)     : RIGHT JOYCON FOR UNIBIOS MENU (NEOGEO ONLY)
+   (STICK) + (ZL/ZR) : pFBN MENU
+   (L/R)             : HOLD 2 SECONDS FOR DIAG MENU
+   (+/-)             : HOLD 2 SECONDS TO RESET CURRENT GAME
    ```
 
 -----
