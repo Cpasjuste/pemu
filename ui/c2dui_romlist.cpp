@@ -7,12 +7,12 @@
 #include <algorithm>
 #include "c2dui.h"
 
-RomList::RomList(UiMain *_ui, const std::string &emuVersion) {
-
+RomList::RomList(UiMain *_ui, const std::string &emuVersion, const std::vector<std::string> &_filters) {
     printf("RomList()\n");
 
     ui = _ui;
     paths = ui->getConfig()->getRomPaths();
+    filters = _filters;
 
     // UI
     rect = new C2DRectangle(
@@ -32,7 +32,6 @@ RomList::RomList(UiMain *_ui, const std::string &emuVersion) {
         delete (title);
     }
 
-    //auto font_size = (unsigned int) ((float) C2D_DEFAULT_CHAR_SIZE * ((float) C2D_SCREEN_HEIGHT / 720.0f));
     text = new Text();
     ui->getSkin()->loadText(text, {"ROM_LIST", "TEXT"});
     text->setOrigin(Origin::BottomLeft);
@@ -82,7 +81,7 @@ void RomList::build() {
     }
 
     gameList->append(gameListPath,
-                     ui->getConfig()->getRomPaths().at(FBN_PATH_ARCADE), false, true);
+                     ui->getConfig()->getRomPaths().at(FBN_PATH_ARCADE), false, filters);
 
     setLoadingText("Games: %li / %li", gameList->getAvailableCount(), gameList->games.size());
     printf("RomList::build: games: %li / %li\n", gameList->getAvailableCount(), gameList->games.size());
