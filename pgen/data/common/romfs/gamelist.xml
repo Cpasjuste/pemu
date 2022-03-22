@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gameList>
+    <game id="569699">
+        <path>Sonic The Hedgehog (USA, Europe).zip</path>
+        <name>Sonic the Hedgehog</name>
+        <desc>Sonic the Hedgehog is the first of many games starring Sega's premier rodent Sonic. It's a side scrolling platform game with a difference: speed. Sonic rushes through levels with incredible speed, allowing him to traverse loops and jumps with ease. The evil Dr. Robotnik has captured many of Sonic's animal friends and trapped them inside robots. Sonic can free his friends by destroying the robots with his spin attack. Meanwhile, Dr. Robotnik is trying to control the all-powerful chaos emeralds and Sonic must grab them before he does in the 3D rotating bonus levels. Sonic's weapon is his spin attack; while jumping, Sonic destroys hostile robots by touch. Throughout the platforming levels Sonic collects numerous rings. If Sonic is hit by an enemy, all the rings he's carrying fall out and scatter around; Sonic can quickly grab the rings back before they disappear. If Sonic is hit while not carrying any rings, he dies. Collecting 100 rings gives Sonic an extra life. There is also an invincibility bonus which temporarily protects Sonic from all attacks. The game is divided into several "zones", each of them containing three levels. At the end of each zone Sonic confronts Dr. Robotnik in a boss fight. Sonic the Hedgehog is a significant game because it gave Sega it's first real mascot, and established the Genesis as the video game system with "attitude."</desc>
+        <rating>0.80</rating>
+        <releasedate>19910101T000000</releasedate>
+        <developer id="3">SEGA</developer>
+        <publisher id="3">SEGA</publisher>
+        <genre>Action</genre>
+        <genreid>10</genreid>
+        <players>1</players>
+        <cloneof>0</cloneof>
+        <system id="1" parentId="0">Megadrive</system>
+    </game>
+</gameList>

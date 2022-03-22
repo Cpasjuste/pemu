@@ -41,6 +41,9 @@ if (OPTION_EMU STREQUAL "pnes")
 elseif (OPTION_EMU STREQUAL "psnes")
     # psnes
     add_subdirectory(psnes)
+elseif (OPTION_EMU STREQUAL "pgen")
+    # pgen
+    add_subdirectory(pgen)
 else ()
     # pfbneo
     add_subdirectory(pfbneo)
