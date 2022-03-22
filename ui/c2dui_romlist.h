@@ -15,7 +15,7 @@ namespace c2dui {
 
     public:
 
-        RomList(UiMain *ui, const std::string &emuVersion);
+        RomList(UiMain *ui, const std::string &emuVersion, const std::vector<std::string> &filters);
 
         virtual ~RomList();
 
@@ -35,6 +35,9 @@ namespace c2dui {
         std::vector<std::string> paths;
         char icon_path[1024];
         float time_start = 0;
+
+    private:
+        std::vector<std::string> filters;
     };
 }
 

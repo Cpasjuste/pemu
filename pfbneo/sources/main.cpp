@@ -153,7 +153,7 @@ int main(int argc, char **argv) {
     // ui
     std::string fba_version = "fbneo: ";
     fba_version += szAppBurnVer;
-    romList = new PFBARomList(ui, fba_version);
+    romList = new PFBARomList(ui, fba_version, {".zip"});
     romList->build();
     uiRomList = new UIRomList(ui, romList, ui->getSize());
     uiMenu = new PFBAGuiMenu(ui);
