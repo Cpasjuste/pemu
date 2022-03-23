@@ -2,6 +2,7 @@
 // Created by cpasjuste on 21/03/2022.
 //
 
+#include <stdio.h>
 #include "osd.h"
 #include "sms_ntsc.h"
 #include "md_ntsc.h"
@@ -12,8 +13,34 @@ t_config config;
 sms_ntsc_t *sms_ntsc;
 md_ntsc_t *md_ntsc;
 
-void osd_input_update() {
+char GG_ROM[256];
+char AR_ROM[256];
+char SK_ROM[256];
+char SK_UPMEM[256];
+char GG_BIOS[256];
+char MD_BIOS[256];
+char CD_BIOS_EU[256];
+char CD_BIOS_US[256];
+char CD_BIOS_JP[256];
+char MS_BIOS_US[256];
+char MS_BIOS_EU[256];
+char MS_BIOS_JP[256];
 
+void osd_input_update() {}
+
+void set_paths_default(const char *biosPath) {
+    snprintf(GG_ROM, 256, "%s/ggenie.bin", biosPath);
+    snprintf(AR_ROM, 256, "%s/areplay.bin", biosPath);
+    snprintf(SK_ROM, 256, "%s/sk.bin", biosPath);
+    snprintf(SK_UPMEM, 256, "%s/sk2chip.bin", biosPath);
+    snprintf(CD_BIOS_US, 256, "%s/bios_CD_U.bin", biosPath);
+    snprintf(CD_BIOS_EU, 256, "%s/bios_CD_E.bin", biosPath);
+    snprintf(CD_BIOS_JP, 256, "%s/bios_CD_J.bin", biosPath);
+    snprintf(MD_BIOS, 256, "%s/bios_MD.bin", biosPath);
+    snprintf(MS_BIOS_US, 256, "%s/bios_U.sms", biosPath);
+    snprintf(MS_BIOS_EU, 256, "%s/bios_E.sms", biosPath);
+    snprintf(MS_BIOS_JP, 256, "%s/bios_J.sms", biosPath);
+    snprintf(GG_BIOS, 256, "%s/bios.gg", biosPath);
 }
 
 void set_config_defaults() {

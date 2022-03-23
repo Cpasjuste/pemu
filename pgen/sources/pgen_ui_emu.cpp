@@ -3,7 +3,7 @@
 //
 
 #include "c2dui.h"
-#include "uiEmu.h"
+#include "pgen_ui_emu.h"
 #include "osd.h"
 
 extern "C" {
@@ -14,6 +14,9 @@ static short sound_buffer[2048];
 
 PGENUiEmu::PGENUiEmu(UiMain *ui) : UiEmu(ui) {
     printf("PGENUiEmu()\n");
+
+    set_config_defaults();
+    set_paths_default((ui->getIo()->getDataPath() + "bios").c_str());
 }
 
 int PGENUiEmu::load(const ss_api::Game &game) {
@@ -24,33 +27,7 @@ int PGENUiEmu::load(const ss_api::Game &game) {
     getUi()->getUiProgressBox()->setLayer(1000);
     getUi()->flip();
 
-    set_config_defaults();
-    system_bios = 0;
-
-    /* Genesis BOOT ROM support (2KB max) */
-    char *boot_rom_data;
-    memset(boot_rom, 0xFF, 0x800);
-    size_t size = getUi()->getIo()->read(MD_BIOS, &boot_rom_data, 0x800);
-    if (boot_rom_data && size == 0x800) {
-        int i;
-
-        memcpy(boot_rom, boot_rom_data, 0x800);
-        free(boot_rom_data);
-
-        /* check BOOT ROM */
-        if (!memcmp((char *) (boot_rom + 0x120), "GENESIS OS", 10)) {
-            /* mark Genesis BIOS as loaded */
-            printf("GENESIS BOOT ROM LOADED\n");
-            system_bios = SYSTEM_MD;
-        }
-
-        /* Byteswap ROM */
-        for (i = 0; i < 0x800; i += 2) {
-            uint8 temp = boot_rom[i];
-            boot_rom[i] = boot_rom[i + 1];
-            boot_rom[i + 1] = temp;
-        }
-    }
+    loadBios();
 
     // video init
     memset(&bitmap, 0, sizeof(bitmap));
@@ -102,18 +79,44 @@ bool PGENUiEmu::onInput(c2d::Input::Player *players) {
 
 void PGENUiEmu::onUpdate() {
     if (!isPaused()) {
-        // TODO
         // inputs
-        auto *players = getUi()->getInput()->getPlayers();
+        for (int i = 0; i < PLAYER_MAX; i++) {
+            unsigned int keys = getUi()->getInput()->getKeys(i);
+            input.pad[i] = 0;
+            switch (input.dev[i]) {
+                case DEVICE_PAD6B:
+                case DEVICE_PAD3B:
+                case DEVICE_PAD2B:
+                    if (keys & Input::Key::Up) input.pad[i] |= INPUT_UP;
+                    if (keys & Input::Key::Down) input.pad[i] |= INPUT_DOWN;
+                    if (keys & Input::Key::Left) input.pad[i] |= INPUT_LEFT;
+                    if (keys & Input::Key::Right) input.pad[i] |= INPUT_RIGHT;
+                    if (keys & Input::Key::Fire1) input.pad[i] |= INPUT_A;
+                    if (keys & Input::Key::Fire2) input.pad[i] |= INPUT_B;
+                    if (keys & Input::Key::Fire3) input.pad[i] |= INPUT_C;
+                    if (keys & Input::Key::Fire4) input.pad[i] |= INPUT_X;
+                    if (keys & Input::Key::Fire5) input.pad[i] |= INPUT_Y;
+                    if (keys & Input::Key::Fire6) input.pad[i] |= INPUT_Z;
+                    if (keys & Input::Key::Select) input.pad[i] |= INPUT_MODE;
+                    if (keys & Input::Key::Start) input.pad[i] |= INPUT_START;
+                    break;
+                default:
+                    break;
+            }
 
-        if (bitmap.viewport.changed & 1) {
+        }
+
+        // viewport
+        if (bitmap.viewport.changed & 9) {
             bitmap.viewport.changed &= ~1;
+            if (bitmap.viewport.changed & 8) bitmap.viewport.changed &= ~8;
             printf("viewport changed: %ix%i (bitmap size: %ix%i)\n",
-                   bitmap.viewport.w, bitmap.viewport.h,
-                   bitmap.width, bitmap.height);
+                   bitmap.viewport.w, bitmap.viewport.h, bitmap.width, bitmap.height);
             if (bitmap.viewport.w != getVideo()->getTextureRect().width
                 || bitmap.viewport.h != getVideo()->getTextureRect().height) {
                 addVideo((void **) &bitmap.data, &bitmap.pitch, {bitmap.viewport.w, bitmap.viewport.h});
+                bitmap.width = bitmap.viewport.w;
+                bitmap.height = bitmap.viewport.h;
             }
         }
 
@@ -135,4 +138,33 @@ void PGENUiEmu::onUpdate() {
     }
 
     return UiEmu::onUpdate();
+}
+
+void PGENUiEmu::loadBios() {
+    system_bios = 0;
+
+    /* Genesis BOOT ROM support (2KB max) */
+    char *boot_rom_data;
+    memset(boot_rom, 0xFF, 0x800);
+    size_t size = getUi()->getIo()->read(MD_BIOS, &boot_rom_data, 0x800);
+    if (boot_rom_data && size == 0x800) {
+        int i;
+
+        memcpy(boot_rom, boot_rom_data, 0x800);
+        free(boot_rom_data);
+
+        /* check BOOT ROM */
+        if (!memcmp((char *) (boot_rom + 0x120), "GENESIS OS", 10)) {
+            /* mark Genesis BIOS as loaded */
+            printf("GENESIS BOOT ROM LOADED\n");
+            system_bios = SYSTEM_MD;
+        }
+
+        /* Byteswap ROM */
+        for (i = 0; i < 0x800; i += 2) {
+            uint8 temp = boot_rom[i];
+            boot_rom[i] = boot_rom[i + 1];
+            boot_rom[i + 1] = temp;
+        }
+    }
 }

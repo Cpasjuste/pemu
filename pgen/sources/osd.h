@@ -73,21 +73,6 @@ typedef struct {
 
 extern t_config config;
 
-// TODO
-#define GG_ROM      "./ggenie.bin"
-#define AR_ROM      "./areplay.bin"
-#define SK_ROM      "./sk.bin"
-#define SK_UPMEM    "./sk2chip.bin"
-#define CD_BIOS_US  "./bios_CD_U.bin"
-#define CD_BIOS_EU  "./bios_CD_E.bin"
-#define CD_BIOS_JP  "./bios_CD_J.bin"
-#define MD_BIOS     "./bios_MD.bin"
-#define MS_BIOS_US  "./bios_U.sms"
-#define MS_BIOS_EU  "./bios_E.sms"
-#define MS_BIOS_JP  "./bios_J.sms"
-#define GG_BIOS     "./bios.gg"
-
-/*
 extern char GG_ROM[256];
 extern char AR_ROM[256];
 extern char SK_ROM[256];
@@ -100,11 +85,12 @@ extern char CD_BIOS_JP[256];
 extern char MS_BIOS_US[256];
 extern char MS_BIOS_EU[256];
 extern char MS_BIOS_JP[256];
-*/
 
 extern void osd_input_update(void);
 
 extern int load_archive(char *filename, unsigned char *buffer, int maxsize, char *extension);
+
+extern void set_paths_default(const char *biosPath);
 
 extern void set_config_defaults();
 

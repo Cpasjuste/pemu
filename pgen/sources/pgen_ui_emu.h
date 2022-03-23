@@ -2,8 +2,8 @@
 // Created by cpasjuste on 01/06/18.
 //
 
-#ifndef PGEN_UIEMU_H
-#define PGEN_UIEMU_H
+#ifndef PGEN_UI_EMU_H
+#define PGEN_UI_EMU_H
 
 #include <string>
 
@@ -20,6 +20,9 @@ public:
     bool onInput(c2d::Input::Player *players) override;
 
     void onUpdate() override;
+
+private:
+    void loadBios();
 };
 
-#endif //PGEN_UIEMU_H
+#endif //PGEN_UI_EMU_H

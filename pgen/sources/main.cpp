@@ -18,7 +18,8 @@
  */
 
 #include "c2dui.h"
-#include "uiEmu.h"
+#include "pgen_ui_emu.h"
+#include "pgen_io.h"
 
 using namespace c2d;
 using namespace c2dui;
@@ -43,14 +44,16 @@ UIRomList *uiRomList;
 
 int main(int argc, char **argv) {
     // need custom io for some devices
-    auto *io = new C2DIo();
+    auto *io = new PGENIo();
     // load configuration
     int pgen_version = (__PGEN_VERSION_MAJOR__ * 100) + __PGEN_VERSION_MINOR__;
     cfg = new Config(io, pgen_version);
 
     // create paths
     io->create(io->getDataPath());
+    io->create(io->getDataPath() + "bios");
     io->create(io->getDataPath() + "roms");
+    io->create(io->getDataPath() + "configs");
 
     Vector2f screenSize = cfg->getScreenSize();
     ui = new UiMain(screenSize, io, cfg);
@@ -143,8 +146,10 @@ int main(int argc, char **argv) {
     ui->setSkin(skin);
 
     // ui
-    std::string nestopia_version = "Nestopia 1.51.1+";
-    romList = new RomList(ui, nestopia_version);
+    std::string genesis_version = "Genesis Plus GX";
+    romList = new RomList(ui, genesis_version,
+                          {".zip", ".md", ".smd", ".gen", ".bin", ".mdx",
+                           ".cue", ".iso", ".sms", ".gg", ".sg", ".68k", ".chd"});
     romList->build();
     uiRomList = new UIRomList(ui, romList, ui->getSize());
     uiMenu = new UiMenu(ui);
