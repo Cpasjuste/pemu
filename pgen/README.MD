@@ -41,6 +41,10 @@ You can download a near full-set mixrbv2 and video package (either in high quali
 - install vpk
 - copy roms to "ux0:/data/pgen/roms/" directory on hdd
 
+### Bios
+You should put these sega bios in the "pgen/bios" directory:
+ggenie.bin, areplay.bin, sk.bin, sk2chip.bin, bios_CD_U.bin, bios_CD_E.bin, bios_CD_J.bin, bios_MD.bin, bios_U.sms, bios_E.sms, bios_J.sms, bios.gg
+
 ### Usage (switch)
 - Press (L) in the rom list to configure main options and default roms options
 - Press (R) in the rom list to configure per rom options
