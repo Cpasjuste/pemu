@@ -127,7 +127,7 @@ Texture *UIRomList::getPreviewTexture(const ss_api::Game &game) {
         delete (texture);
         texture = nullptr;
         if (game.isClone()) {
-            Game parentGame = gameList.findGameByPath(game.cloneOf);
+            Game parentGame = romList->gameList->findGameByPath(game.cloneOf);
             if (!parentGame.path.empty()) {
                 mediaPath = parentGame.getMedia("mixrbv2").url;
                 if (mediaPath.empty()) {
@@ -143,7 +143,7 @@ Texture *UIRomList::getPreviewTexture(const ss_api::Game &game) {
             }
         } else {
             // for non arcade game, search for a "screenscraper" game with same name
-            std::vector<Game> clones = gameList.findGamesByName(game);
+            std::vector<Game> clones = romList->gameList->findGamesByName(game);
             for (const auto &g: clones) {
                 mediaPath = g.getMedia("mixrbv2").url;
                 fullPath = g.romsPath + mediaPath;
@@ -174,7 +174,7 @@ std::string UIRomList::getPreviewVideo(const ss_api::Game &game) {
     printf("getPreviewVideo(%s)\n", fullPath.c_str());
     if (!ui->getIo()->exist(fullPath)) {
         fullPath = "";
-        Game parentGame = gameList.findGameByPath(game.cloneOf);
+        Game parentGame = romList->gameList->findGameByPath(game.cloneOf);
         if (!parentGame.path.empty()) {
             mediaPath = parentGame.getMedia("video").url;
             if (mediaPath.empty()) {
@@ -187,7 +187,7 @@ std::string UIRomList::getPreviewVideo(const ss_api::Game &game) {
             }
         } else {
             // for non arcade game, search for a "screenscraper" game with same name
-            std::vector<Game> clones = gameList.findGamesByName(game);
+            std::vector<Game> clones = romList->gameList->findGamesByName(game);
             for (const auto &g: clones) {
                 mediaPath = g.getMedia("video").url;
                 fullPath = game.romsPath + mediaPath;
