@@ -14,7 +14,6 @@ static short sound_buffer[2048];
 
 PGENUiEmu::PGENUiEmu(UiMain *ui) : UiEmu(ui) {
     printf("PGENUiEmu()\n");
-
     set_config_defaults();
     set_paths_default((ui->getIo()->getDataPath() + "bios").c_str());
 }
@@ -31,13 +30,8 @@ int PGENUiEmu::load(const ss_api::Game &game) {
 
     // video init
     memset(&bitmap, 0, sizeof(bitmap));
-    bitmap.width = 320;
-    bitmap.height = 224;
-    bitmap.viewport.x = 0;
-    bitmap.viewport.y = 0;
-    bitmap.viewport.w = 320;
-    bitmap.viewport.h = 224;
-    addVideo((void **) &bitmap.data, &bitmap.pitch, {320, 224});
+    addVideo((void **) &bitmap.data, &bitmap.pitch, {720, 576});
+    getVideo()->setOutlineThickness(1);
 
     // load rom
     std::string path = game.romsPath + game.path;
@@ -106,18 +100,18 @@ void PGENUiEmu::onUpdate() {
 
         }
 
-        // viewport
-        if (bitmap.viewport.changed & 9) {
+        if (bitmap.viewport.changed & 4) {
+            printf("interlaced mode change: {%i, %i, %i, %i}\n",
+                   bitmap.viewport.x, bitmap.viewport.y, bitmap.viewport.w, bitmap.viewport.h);
+            resizeVideo();
+            bitmap.viewport.changed &= ~4;
+        }
+
+        if (bitmap.viewport.changed & 1) {
+            printf("video mode change: {%i, %i, %i, %i}\n",
+                   bitmap.viewport.x, bitmap.viewport.y, bitmap.viewport.w, bitmap.viewport.h);
+            resizeVideo();
             bitmap.viewport.changed &= ~1;
-            if (bitmap.viewport.changed & 8) bitmap.viewport.changed &= ~8;
-            printf("viewport changed: %ix%i (bitmap size: %ix%i)\n",
-                   bitmap.viewport.w, bitmap.viewport.h, bitmap.width, bitmap.height);
-            if (bitmap.viewport.w != getVideo()->getTextureRect().width
-                || bitmap.viewport.h != getVideo()->getTextureRect().height) {
-                addVideo((void **) &bitmap.data, &bitmap.pitch, {bitmap.viewport.w, bitmap.viewport.h});
-                bitmap.width = bitmap.viewport.w;
-                bitmap.height = bitmap.viewport.h;
-            }
         }
 
         // genesis frame step
@@ -138,6 +132,14 @@ void PGENUiEmu::onUpdate() {
     }
 
     return UiEmu::onUpdate();
+}
+
+void PGENUiEmu::resizeVideo() {
+    getVideo()->resize({bitmap.viewport.w, bitmap.viewport.h});
+    free(getVideo()->pixels);
+    getVideo()->pixels = (unsigned char *) malloc(720 * 576 * 2);
+    getVideo()->lock(nullptr, (void **) &bitmap.data, &bitmap.pitch);
+    getVideo()->updateScaling();
 }
 
 void PGENUiEmu::loadBios() {
@@ -168,3 +170,4 @@ void PGENUiEmu::loadBios() {
         }
     }
 }
+

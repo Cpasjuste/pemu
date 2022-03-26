@@ -7,9 +7,9 @@
 
 void PFBARomList::build() {
 #ifndef __VITA__
-    std::string dataPath = ui->getIo()->getRomFsPath();
+    std::string dataPath = ui->getIo()->getDataPath();
     if (!ui->getIo()->exist(dataPath + "gamelist.xml")) {
-        dataPath = ui->getIo()->getDataPath();
+        dataPath = ui->getIo()->getRomFsPath();
     }
 
     gameList->append(dataPath + "gamelist_channelf.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_CHANNELF), false);

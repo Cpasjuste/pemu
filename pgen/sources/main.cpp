@@ -20,6 +20,8 @@
 #include "c2dui.h"
 #include "pgen_ui_emu.h"
 #include "pgen_io.h"
+#include "pgen_config.h"
+#include "pgen_romlist.h"
 
 using namespace c2d;
 using namespace c2dui;
@@ -34,9 +36,9 @@ extern "C" int sceSystemServiceLoadExec(const char *path, const char *args[]);
 
 UiMenu *uiMenu;
 PGENUiEmu *uiEmu;
-Config *cfg;
+PGENConfig *cfg;
+PGENRomList *romList;
 UiStateMenu *uiState;
-RomList *romList;
 
 UiMain *ui;
 Skin *skin;
@@ -47,7 +49,7 @@ int main(int argc, char **argv) {
     auto *io = new PGENIo();
     // load configuration
     int pgen_version = (__PGEN_VERSION_MAJOR__ * 100) + __PGEN_VERSION_MINOR__;
-    cfg = new Config(io, pgen_version);
+    cfg = new PGENConfig(io, pgen_version);
 
     // create paths
     io->create(io->getDataPath());
@@ -147,9 +149,9 @@ int main(int argc, char **argv) {
 
     // ui
     std::string genesis_version = "Genesis Plus GX";
-    romList = new RomList(ui, genesis_version,
-                          {".zip", ".md", ".smd", ".gen", ".bin", ".mdx",
-                           ".cue", ".iso", ".sms", ".gg", ".sg", ".68k", ".chd"});
+    romList = new PGENRomList(ui, genesis_version,
+                              {".zip", ".md", ".smd", ".gen", ".bin", ".mdx",
+                               ".cue", ".iso", ".sms", ".gg", ".sg", ".68k", ".chd"});
     romList->build();
     uiRomList = new UIRomList(ui, romList, ui->getSize());
     uiMenu = new UiMenu(ui);

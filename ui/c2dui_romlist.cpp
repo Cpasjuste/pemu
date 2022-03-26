@@ -75,9 +75,9 @@ void RomList::build() {
     std::string romPath = ui->getConfig()->getRomPaths().at(FBN_PATH_ARCADE);
     printf("RomList::build(): ROM_PATH_0: %s\n", romPath.c_str());
 
-    std::string gameListPath = ui->getIo()->getRomFsPath() + "gamelist.xml";
+    std::string gameListPath = ui->getIo()->getDataPath() + "gamelist.xml";
     if (!ui->getIo()->exist(gameListPath)) {
-        gameListPath = ui->getIo()->getDataPath() + "gamelist.xml";
+        gameListPath = ui->getIo()->getRomFsPath() + "gamelist.xml";
     }
 
     gameList->append(gameListPath,

@@ -21,6 +21,8 @@ public:
 
     void onUpdate() override;
 
+    void resizeVideo();
+
 private:
     void loadBios();
 };

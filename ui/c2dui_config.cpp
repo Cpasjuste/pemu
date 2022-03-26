@@ -5,7 +5,7 @@
 #include "c2dui.h"
 #include "c2dui_config.h"
 
-Config::Config(c2d::Io *io, int ver) {
+Config::Config(c2d::Io *io, int ver, const std::string &defaultRomsPath) {
 
     dataPath = io->getDataPath();
     configPath = dataPath + "config.cfg";
@@ -15,7 +15,7 @@ Config::Config(c2d::Io *io, int ver) {
 
     /// add default roms paths
     roms_paths.clear();
-    roms_paths.emplace_back(io->getDataPath() + "roms/");
+    roms_paths.emplace_back(io->getDataPath() + defaultRomsPath);
 
     /// default options available for all cores
     /////////////////////////////////////////////////

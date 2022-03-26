@@ -53,7 +53,7 @@ typedef struct {
     uint8 lock_on;
     uint8 add_on;
     uint8 overscan;
-    uint8 aspect_ratio;
+    uint8 aspect;
     uint8 ntsc;
     uint8 lcd;
     uint8 gg_extra;
@@ -61,7 +61,7 @@ typedef struct {
     uint8 render;
     t_input_config input[MAX_INPUTS];
     uint8 invert_mouse;
-    uint8 gun_cursor;
+    uint8 gun_cursor[2];
     uint32 overclock;
     uint8 no_sprite_limit;
 #ifdef USE_PER_SOUND_CHANNELS_CONFIG
