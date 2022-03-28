@@ -84,7 +84,6 @@ std::string getButtonId(int player, const std::string &name) {
 }
 
 PSNESUiEmu::PSNESUiEmu(UiMain *ui) : UiEmu(ui) {
-
     printf("PSNESUIEmu()\n");
     _ui = ui;
 }
@@ -114,7 +113,7 @@ int PSNESUiEmu::load(const ss_api::Game &game) {
     // audio
     Settings.SixteenBitSound = TRUE;
     Settings.Stereo = TRUE;
-    Settings.SoundSync = TRUE;
+    Settings.SoundSync = FALSE;
     Settings.SoundInputRate = 31950;
 #ifdef __VITA__
     Settings.SoundPlaybackRate = 22050;
@@ -169,8 +168,9 @@ int PSNESUiEmu::load(const ss_api::Game &game) {
         return -1;
     }
 
-    S9xInitSound(0);
+    S9xInitSound(32);
     S9xSetSoundMute(FALSE);
+    S9xSetSamplesAvailableCallback(nullptr, nullptr);
 
     //getButtonId
     S9xUnmapAllControls();
@@ -248,11 +248,11 @@ int PSNESUiEmu::load(const ss_api::Game &game) {
 
     S9xGraphicsInit();
 
-    int samples = Audio::toSamples(Settings.SoundPlaybackRate, Memory.ROMFramesPerSecond);
-    addAudio(Settings.SoundPlaybackRate, samples);
-    audio_buffer = malloc(getAudio()->getSamplesSize());
+    int samples = Audio::toSamples((int) Settings.SoundPlaybackRate, (float) Memory.ROMFramesPerSecond);
+    addAudio((int) Settings.SoundPlaybackRate, samples);
+    audio_buffer = malloc(getAudio()->getSamplesSize() * 2);
 
-    targetFps = Memory.ROMFramesPerSecond;
+    targetFps = (float) Memory.ROMFramesPerSecond;
 
     ui->getUiProgressBox()->setProgress(1);
     ui->flip();
@@ -305,9 +305,6 @@ void PSNESUiEmu::onUpdate() {
     UiEmu::onUpdate();
 
     if (isVisible() && !isPaused()) {
-
-        S9xMainLoop();
-
         auto players = ui->getInput()->getPlayers();
 
         // update snes9x buttons
@@ -326,15 +323,11 @@ void PSNESUiEmu::onUpdate() {
             S9xReportButton(11 + (i * 12), (players[i].keys & Input::Key::Select) > 0);
         }
 
-        /*
-#ifndef NDEBUG
-        float elapsed = timer.getElapsedTime().asSeconds();
-        if (elapsed >= 0.5f) {
-            printf("delta: %f\n", _ui->getDeltaTime().asSeconds());
-            timer.restart();
-        }
-#endif
-         */
+        S9xMainLoop();
+
+        int samples = S9xGetSampleCount();
+        S9xMixSamples((uint8 *) audio_buffer, samples);
+        _ui->getUiEmu()->getAudio()->play(audio_buffer, samples >> 1, true);
     }
 }
 
@@ -673,87 +666,6 @@ void S9xAutoSaveSRAM() {
  * You should adjust the frame rate in this function
  */
 void S9xSyncSpeed() {
-
-    if (Settings.SoundSync == TRUE) {
-        while (S9xSyncSound() == FALSE) {
-            usleep(1);
-        }
-    }
-
-    if (Settings.DumpStreams)
-        return;
-
-    if (Settings.SkipFrames == FALSE && Settings.TurboMode == FALSE) {
-        IPPU.FrameSkip = 0;
-        IPPU.SkippedFrames = 0;
-        IPPU.RenderThisFrame = TRUE;
-        return;
-    }
-
-    if (Settings.HighSpeedSeek > 0)
-        Settings.HighSpeedSeek--;
-
-    if (Settings.TurboMode) {
-        if ((++IPPU.FrameSkip >= Settings.TurboSkipFrames) && !Settings.HighSpeedSeek) {
-            IPPU.FrameSkip = 0;
-            IPPU.SkippedFrames = 0;
-            IPPU.RenderThisFrame = TRUE;
-        } else {
-            IPPU.SkippedFrames++;
-            IPPU.RenderThisFrame = FALSE;
-        }
-
-        return;
-    }
-
-    static struct timeval next1 = {0, 0};
-    struct timeval now;
-
-    while (gettimeofday(&now, NULL) == -1);
-
-    // If there is no known "next" frame, initialize it now.
-    if (next1.tv_sec == 0) {
-        next1 = now;
-        next1.tv_usec++;
-    }
-
-    // If we're on AUTO_FRAMERATE, we'll display frames always only if there's excess time.
-    // Otherwise we'll display the defined amount of frames.
-    unsigned limit = (Settings.SkipFrames == AUTO_FRAMERATE) ? (timercmp(&next1, &now, <) ? 10 : 1)
-                                                             : Settings.SkipFrames;
-
-    IPPU.RenderThisFrame = (++IPPU.SkippedFrames >= limit) ? TRUE : FALSE;
-
-    if (IPPU.RenderThisFrame)
-        IPPU.SkippedFrames = 0;
-    else {
-        // If we were behind the schedule, check how much it is.
-        if (timercmp(&next1, &now, <)) {
-            unsigned lag = (now.tv_sec - next1.tv_sec) * 1000000 + now.tv_usec - next1.tv_usec;
-            if (lag >= 500000) {
-                // More than a half-second behind means probably pause.
-                // The next line prevents the magic fast-forward effect.
-                next1 = now;
-            }
-        }
-    }
-
-    // Delay until we're completed this frame.
-    // Can't use setitimer because the sound code already could be using it. We don't actually need it either.
-    while (timercmp(&next1, &now, >)) {
-        // If we're ahead of time, sleep a while.
-        unsigned timeleft = (next1.tv_sec - now.tv_sec) * 1000000 + next1.tv_usec - now.tv_usec;
-        usleep(timeleft);
-        while (gettimeofday(&now, NULL) == -1);
-        // Continue with a while-loop because usleep() could be interrupted by a signal.
-    }
-
-    // Calculate the timestamp of the next frame.
-    next1.tv_usec += Settings.FrameTime;
-    if (next1.tv_usec >= 1000000) {
-        next1.tv_sec += next1.tv_usec / 1000000;
-        next1.tv_usec %= 1000000;
-    }
 }
 
 /**
@@ -818,29 +730,10 @@ const char *S9xStringInput(const char *message) {
  * Use this function if your system should change its color palette to match the SNES's.
  * Otherwise let it empty.
  */
-void S9xSetPalette() {
-}
+void S9xSetPalette() {}
 
-static void samples_available(void *data) {
-    int samples = S9xGetSampleCount();
-    S9xMixSamples((uint8 *) audio_buffer, samples);
-    _ui->getUiEmu()->getAudio()->play(audio_buffer, samples >> 1, Memory.ROMFramesPerSecond < 60);
-}
-
-bool8
-S9xOpenSoundDevice() {
-    S9xSetSamplesAvailableCallback(samples_available, nullptr);
+bool8 S9xOpenSoundDevice() {
     return TRUE;
 }
 
-void
-S9xToggleSoundChannel(int c) {
-    static int sound_switch = 255;
-
-    if (c == 8)
-        sound_switch = 255;
-    else
-        sound_switch ^= 1 << c;
-
-    S9xSetSoundControl(sound_switch);
-}
+void S9xToggleSoundChannel(int c) {}
