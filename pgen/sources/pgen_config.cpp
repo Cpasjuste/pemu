@@ -12,8 +12,8 @@ PGENConfig::PGENConfig(c2d::Io *io, int version, const std::string &defaultRomsP
         : Config(io, version, defaultRomsPath) {
     // add default roms paths
     roms_paths.emplace_back(io->getDataPath() + "sms/");
-    roms_paths.emplace_back(io->getDataPath() + "gg/");
-    roms_paths.emplace_back(io->getDataPath() + "mcd/");
+    roms_paths.emplace_back(io->getDataPath() + "gamegear/");
+    roms_paths.emplace_back(io->getDataPath() + "megacd/");
     roms_paths.emplace_back(io->getDataPath() + "sg1000/");
 
     // no need for auto-scaling mode on pgen

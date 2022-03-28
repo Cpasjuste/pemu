@@ -21,7 +21,9 @@ pGEN: Portable Genesis
 - Support hardware filtering (shaders)
 
 ### Romset
-- The pGEN database (for infos and medias) is built against the no-intro romset "No-Intro - Sega - Mega Drive - Genesis (2017-03-18).zip".
+- The pGEN database (for infos and medias) is built against these no-intro sets:
+  - No-Intro - Sega - Mega Drive - Genesis (2017-03-18).zip
+  - No-Intro - Sega - Game Gear (20210519).zip
 
 ### Preview images and videos
 - pGEN support preview images and videos (put files in roms media folder: png files goes in "roms/media/mixrbv2", mp4 files in "roms/media/video"). Please note that the vita port doesn't support video previews.
