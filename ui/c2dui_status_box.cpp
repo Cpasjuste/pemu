@@ -56,7 +56,5 @@ void UiStatusBox::onDraw(c2d::Transform &transform, bool draw) {
 }
 
 UiStatusBox::~UiStatusBox() {
-#ifndef __PSP2__ // TODO: fix
     delete (clock);
-#endif
 }
