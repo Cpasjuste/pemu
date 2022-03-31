@@ -4,15 +4,14 @@
 
 #include "c2dui.h"
 
-C2DUIVideo::C2DUIVideo(UiMain *u, void **_pixels, int *_pitch,
-                       const c2d::Vector2f &size, const c2d::Vector2i &a, Texture::Format format)
+C2DUIVideo::C2DUIVideo(UiMain *u, uint8_t **_pixels, int *_pitch,
+                       const c2d::Vector2i &size, const c2d::Vector2i &a, Texture::Format format)
         : C2DTexture(size, format) {
     ui = u;
     aspect = a;
 
     if (_pixels != nullptr) {
-        auto rect = (FloatRect) getTextureRect();
-        C2DTexture::lock(&rect, _pixels, _pitch);
+        C2DTexture::lock(_pixels, _pitch, getTextureRect());
         C2DTexture::unlock();
     }
 }

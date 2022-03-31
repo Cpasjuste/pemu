@@ -11,7 +11,7 @@ using namespace c2dui;
 
 extern Vector2f snes9x_game_size;
 
-PSNESVideo::PSNESVideo(UiMain *gui, void **_pixels, int *_pitch, const c2d::Vector2f &size)
+PSNESVideo::PSNESVideo(UiMain *gui, uint8_t **_pixels, int *_pitch, const c2d::Vector2i &size)
         : C2DUIVideo(gui, _pixels, _pitch, size) {
     ui = gui;
 }

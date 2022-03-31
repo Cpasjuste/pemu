@@ -44,8 +44,8 @@ void UiEmu::addVideo(C2DUIVideo *v) {
     add(video);
 }
 
-void UiEmu::addVideo(void **pixels, int *pitch,
-                     const c2d::Vector2f &size, const c2d::Vector2i &aspect, Texture::Format format) {
+void UiEmu::addVideo(uint8_t **pixels, int *pitch,
+                     const c2d::Vector2i &size, const c2d::Vector2i &aspect, Texture::Format format) {
     auto *v = new C2DUIVideo(ui, pixels, pitch, size, aspect, format);
     addVideo(v);
 }

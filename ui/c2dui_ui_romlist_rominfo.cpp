@@ -52,7 +52,7 @@ UIRomInfo::UIRomInfo(UiMain *u, UIRomList *uiRList, Font *fnt, int fntSize)
 
 #ifdef __MPV__
     mpv = new Mpv(ui->getIo()->getDataPath() + "mpv", true);
-    mpvTexture = new MpvTexture(previewBox->getSize(), mpv);
+    mpvTexture = new MpvTexture({previewBox->getSize().x, previewBox->getSize().y}, mpv);
     mpvTexture->setOrigin(previewBox->getOrigin());
     mpvTexture->setPosition(previewBox->getPosition());
     mpvTexture->setAlpha(0);

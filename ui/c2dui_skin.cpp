@@ -175,11 +175,7 @@ Skin::Skin(UiMain *u, const std::vector<Button> &btns) {
         delete (font);
         font = ui->getFont();
     }
-    if (ui->getSize().y < 720) {
-        font->setFilter(Texture::Filter::Linear);
-    } else {
-        font->setFilter((Texture::Filter) fntGroup->getOption("filtering")->getInteger());
-    }
+    font->setFilter((Texture::Filter) fntGroup->getOption("filtering")->getInteger());
     font->setOffset(fntGroup->getOption("offset")->getVector2f());
 }
 

@@ -233,17 +233,17 @@ int PSNESUiEmu::load(const ss_api::Game &game) {
         memset(gfx_snes_buffer, 0, GFX.Pitch * ((SNES_HEIGHT_EXTENDED + 4) * 2));
         GFX.Screen = (uint16 *) gfx_snes_buffer;
         snes9x_game_size = {SNES_WIDTH * 2, SNES_HEIGHT_EXTENDED * 2};
-        auto v = new PSNESVideo(getUi(), (void **) &gfx_video_buffer, nullptr,
-                                Vector2f(SNES_WIDTH * 2, SNES_HEIGHT_EXTENDED * 2));
+        auto v = new PSNESVideo(getUi(), &gfx_video_buffer, nullptr,
+                                Vector2i(SNES_WIDTH * 2, SNES_HEIGHT_EXTENDED * 2));
         addVideo(v);
-        memset(gfx_video_buffer, 0, (size_t) getVideo()->getTexture()->pitch * getVideo()->getTextureRect().height);
+        memset(gfx_video_buffer, 0, (size_t) getVideo()->getTexture()->m_pitch * getVideo()->getTextureRect().height);
     } else {
         GFX.Pitch = SNES_WIDTH * 2;
         snes9x_game_size = {SNES_WIDTH, SNES_HEIGHT_EXTENDED};
-        auto v = new PSNESVideo(getUi(), (void **) &GFX.Screen, (int *) &GFX.Pitch,
-                                Vector2f(SNES_WIDTH, SNES_HEIGHT_EXTENDED));
+        auto v = new PSNESVideo(getUi(), (uint8_t **) &GFX.Screen, (int *) &GFX.Pitch,
+                                Vector2i(SNES_WIDTH, SNES_HEIGHT_EXTENDED));
         addVideo(v);
-        memset(GFX.Screen, 0, (size_t) getVideo()->getTexture()->pitch * getVideo()->getTextureRect().height);
+        memset(GFX.Screen, 0, (size_t) getVideo()->getTexture()->m_pitch * getVideo()->getTextureRect().height);
     }
 
     S9xGraphicsInit();
@@ -441,21 +441,21 @@ bool8 S9xDeinitUpdate(int width, int height) {
             blit = S9xBlitPixSimple1x1;
         }
 
-        blit((uint8 *) GFX.Screen, GFX.Pitch, gfx_video_buffer, video->getTexture()->pitch, width, height);
+        blit((uint8 *) GFX.Screen, GFX.Pitch, gfx_video_buffer, video->getTexture()->m_pitch, width, height);
 
         if (height < snes9x_prev_height) {
-            int p = video->getTexture()->pitch >> 2;
+            int p = video->getTexture()->m_pitch >> 2;
             for (int y = SNES_HEIGHT * 2; y < SNES_HEIGHT_EXTENDED * 2; y++) {
-                auto *d = (uint32 *) (gfx_video_buffer + y * video->getTexture()->pitch);
+                auto *d = (uint32 *) (gfx_video_buffer + y * video->getTexture()->m_pitch);
                 for (int x = 0; x < p; x++)
                     *d++ = 0;
             }
         }
     } else {
         if (height < snes9x_prev_height) {
-            int p = video->getTexture()->pitch >> 2;
+            int p = video->getTexture()->m_pitch >> 2;
             for (int y = SNES_HEIGHT; y < SNES_HEIGHT_EXTENDED; y++) {
-                auto *d = (uint32 *) (GFX.Screen + y * video->getTexture()->pitch);
+                auto *d = (uint32 *) (GFX.Screen + y * video->getTexture()->m_pitch);
                 for (int x = 0; x < p; x++)
                     *d++ = 0;
             }
