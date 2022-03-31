@@ -11,7 +11,7 @@ namespace c2dui {
 
     public:
 
-        PFBAVideo(UiMain *ui, void **pixels, int *pitch, const c2d::Vector2f &size,
+        PFBAVideo(UiMain *ui, uint8_t **pixels, int *pitch, const c2d::Vector2i &size,
                   const c2d::Vector2i &aspect = {4, 3});
 
         void updateScaling(bool vertical = false, bool flip = false) override;

@@ -223,7 +223,7 @@ int PFBAUiEmu::load(const ss_api::Game &game) {
     BurnRecalcPal();
     // video may already be initialized from fbneo driver (Reinitialise)
     if (!getVideo()) {
-        auto v = new PFBAVideo(ui, (void **) &pBurnDraw, &nBurnPitch, (Vector2f) size, aspect);
+        auto v = new PFBAVideo(ui, &pBurnDraw, &nBurnPitch, size, aspect);
         addVideo(v);
         printf("PFBAUiEmu::load: size: %i x %i, aspect: %i x %i, pitch: %i\n",
                size.x, size.y, aspect.x, aspect.y, nBurnPitch);
@@ -242,7 +242,7 @@ void Reinitialise(void) {
     Vector2i size, aspect;
     BurnDrvGetFullSize(&size.x, &size.y);
     BurnDrvGetAspect(&aspect.x, &aspect.y);
-    auto v = new PFBAVideo(uiInstance, (void **) &pBurnDraw, &nBurnPitch, (Vector2f) size, aspect);
+    auto v = new PFBAVideo(uiInstance, &pBurnDraw, &nBurnPitch, size, aspect);
     uiInstance->getUiEmu()->addVideo(v);
     printf("PFBAUiEmu::Reinitialise: size: %i x %i, aspect: %i x %i\n",
            size.x, size.y, aspect.x, aspect.y);
@@ -345,7 +345,7 @@ void PFBAUiEmu::onUpdate() {
     frameskip++;
 
     if (frameskip > skip) {
-        video->getTexture()->lock(nullptr, (void **) &pBurnDraw, &nBurnPitch);
+        video->getTexture()->lock(&pBurnDraw, &nBurnPitch);
         nFramesRendered++;
     }
 

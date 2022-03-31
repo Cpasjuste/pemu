@@ -383,8 +383,9 @@ void video_set_dimensions() {
 }
 
 long video_lock_screen(void *&ptr) {
-    uiEmu->getVideo()->getTexture()->lock(nullptr, &ptr, nullptr);
-    return basesize.w * uiEmu->getVideo()->getTexture()->bpp;
+    int pitch;
+    uiEmu->getVideo()->getTexture()->lock((uint8_t **) &ptr, &pitch);
+    return pitch;
 }
 
 void video_unlock_screen(void *) {
@@ -432,7 +433,7 @@ void video_screenshot(const char *filename) {
 void video_clear_buffer() {
     void *ptr;
     int pitch;
-    uiEmu->getVideo()->getTexture()->lock(nullptr, &ptr, &pitch);
+    uiEmu->getVideo()->getTexture()->lock((uint8_t **) &ptr, &pitch);
     memset(ptr, 0x00000000, (size_t) uiEmu->getVideo()->getTextureRect().height * pitch);
 }
 
@@ -482,7 +483,7 @@ void nst_video_text_draw(const char *text, int xpos, int ypos, bool bg) {
 
     uint32_t *videobuf;
 
-    uiEmu->getVideo()->getTexture()->lock(nullptr, (void **) &videobuf, nullptr);
+    uiEmu->getVideo()->getTexture()->lock((uint8_t **) &videobuf);
 
     if (bg) { // Draw background borders
         for (int i = 0; i < numchars * 8; i++) { // Rows above and below
