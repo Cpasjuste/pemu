@@ -30,8 +30,7 @@ int PGENUiEmu::load(const ss_api::Game &game) {
 
     // video init
     memset(&bitmap, 0, sizeof(bitmap));
-    addVideo(&bitmap.data, &bitmap.pitch, {720, 576});
-    getVideo()->setOutlineThickness(1);
+    addVideo(&bitmap.data, &bitmap.pitch, {512, 512});
 
     // load rom
     std::string path = game.romsPath + game.path;
@@ -135,14 +134,9 @@ void PGENUiEmu::onUpdate() {
 }
 
 void PGENUiEmu::resizeVideo() {
-    getVideo()->resize({bitmap.viewport.w, bitmap.viewport.h});
-#ifdef __VITA__
-#error TODO
-#else
-    free(getVideo()->m_pixels);
-    getVideo()->m_pixels = (unsigned char *) malloc(720 * 576 * 2);
-#endif
-    getVideo()->lock(&bitmap.data, &bitmap.pitch);
+    getVideo()->setTextureRect({0, 0, bitmap.viewport.w, bitmap.viewport.h});
+    getVideo()->setSize((float) bitmap.viewport.w, (float) bitmap.viewport.h);
+    getVideo()->lock(&bitmap.data, &bitmap.pitch, {0, 0, bitmap.viewport.w, bitmap.viewport.h});
     getVideo()->updateScaling();
 }
 
