@@ -263,14 +263,17 @@ bool PFBAUiEmu::onInput(c2d::Input::Player *players) {
     // 0 > "OFF"
     // 1 > "ON"
     // 2 > "FLIP"
+    // 3 > "CAB" (vita/switch)
     int rotation = getUi()->getConfig()->get(Option::Id::ROM_ROTATION, true)->getIndex();
     if (BurnDrvGetFlags() & BDF_ORIENTATION_VERTICAL) {
         if (rotation == 0) {
             ui->getInput()->setRotation(Input::Rotation::R90, Input::Rotation::R0);
         } else if (rotation == 1) {
             ui->getInput()->setRotation(Input::Rotation::R0, Input::Rotation::R0);
-        } else {
+        } else if (rotation == 2) {
             ui->getInput()->setRotation(Input::Rotation::R270, Input::Rotation::R0);
+        } else {
+            ui->getInput()->setRotation(Input::Rotation::R270, Input::Rotation::R270);
         }
     }
 

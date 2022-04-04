@@ -34,14 +34,14 @@ void C2DUIVideo::updateScaling(bool vertical, bool flip) {
     Vector2f scale_max;
     Vector2f scale;
 
-#ifndef __PSP2__
     if (vertical) {
         switch (rotation_cfg) {
             case 1: // ON
                 rotation = flip ? 90 : 270;
                 rotated = true;
                 break;
-            case 2: // CAB MODE
+            case 2: // FLIP
+            case 3: // CAB
                 rotation = flip ? 0 : 180;
                 break;
             default: // OFF
@@ -51,29 +51,6 @@ void C2DUIVideo::updateScaling(bool vertical, bool flip) {
     } else if (flip) {
         rotation = 180;
     }
-#else
-    // TODO: force right to left orientation on psp2,
-    // should add platform specific code
-    if ((rotation_cfg == 0 || rotation_cfg == 3) && vertical) {
-        if (!flip) {
-            rotation = 180;
-        }
-    } else if (rotation_cfg == 2 && vertical) {
-        if (flip) {
-            rotation = 180;
-        }
-    } else {
-        if (flip) {
-            rotation = 90;
-            rotated = 1;
-        } else if (vertical) {
-            rotation = -90;
-            rotated = 1;
-        } else {
-            rotation = 0;
-        }
-    }
-#endif
 
     if (rotated) {
         scale_max.x = screen.x / (float) getTextureRect().height;
