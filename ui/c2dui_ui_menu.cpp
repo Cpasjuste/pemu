@@ -246,30 +246,30 @@ void UiMenu::onKeyDown() {
 
 bool UiMenu::onInput(c2d::Input::Player *players) {
 
-    unsigned int keys = players[0].keys;
+    unsigned int buttons = players[0].buttons;
 
     if (ui->getUiStateMenu()->isVisible()) {
         return C2DObject::onInput(players);
     }
 
     // UP
-    if (keys & Input::Key::Up) {
+    if (buttons & Input::Button::Up) {
         onKeyUp();
     }
 
     // DOWN
-    if (keys & Input::Key::Down) {
+    if (buttons & Input::Button::Down) {
         onKeyDown();
     }
 
     // LEFT /RIGHT
-    if (keys & Input::Key::Left || keys & Input::Key::Right) {
+    if (buttons & Input::Button::Left || buttons & Input::Button::Right) {
         Option option = lines.at(highlightIndex)->option;
         if (option.getValues()->size() <= 1) {
             return true;
         }
         needSave = true;
-        if (keys & Input::Key::Left) {
+        if (buttons & Input::Button::Left) {
             option.prev();
         } else {
             option.next();
@@ -361,7 +361,7 @@ bool UiMenu::onInput(c2d::Input::Player *players) {
     }
 
     // FIRE1 (ENTER)
-    if (keys & Input::Key::Fire1) {
+    if (buttons & Input::Button::A) {
         Option option = lines.at(highlightIndex)->option;
         if (option.getFlags() == Option::Flags::INPUT) {
             int new_key = 0;
@@ -390,7 +390,7 @@ bool UiMenu::onInput(c2d::Input::Player *players) {
     }
 
     // FIRE2 (BACK)
-    if (keys & Input::Key::Menu1 || keys & Input::Key::Menu2 || keys & Input::Key::Fire2) {
+    if (buttons & Input::Button::Menu1 || buttons & Input::Button::Menu2 || buttons & Input::Button::B) {
         setVisibility(Visibility::Hidden, true);
         if (isEmuRunning) {
             ui->getUiEmu()->resume();

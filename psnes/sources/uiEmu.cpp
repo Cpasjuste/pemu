@@ -309,18 +309,19 @@ void PSNESUiEmu::onUpdate() {
 
         // update snes9x buttons
         for (uint32 i = 0; i < 4; i++) {
-            S9xReportButton(0 + (i * 12), (players[i].keys & Input::Key::Up) > 0);
-            S9xReportButton(1 + (i * 12), (players[i].keys & Input::Key::Down) > 0);
-            S9xReportButton(2 + (i * 12), (players[i].keys & Input::Key::Left) > 0);
-            S9xReportButton(3 + (i * 12), (players[i].keys & Input::Key::Right) > 0);
-            S9xReportButton(4 + (i * 12), (players[i].keys & Input::Key::Fire1) > 0);
-            S9xReportButton(5 + (i * 12), (players[i].keys & Input::Key::Fire2) > 0);
-            S9xReportButton(6 + (i * 12), (players[i].keys & Input::Key::Fire3) > 0);
-            S9xReportButton(7 + (i * 12), (players[i].keys & Input::Key::Fire4) > 0);
-            S9xReportButton(8 + (i * 12), (players[i].keys & Input::Key::Fire5) > 0);
-            S9xReportButton(9 + (i * 12), (players[i].keys & Input::Key::Fire6) > 0);
-            S9xReportButton(10 + (i * 12), (players[i].keys & Input::Key::Start) > 0);
-            S9xReportButton(11 + (i * 12), (players[i].keys & Input::Key::Select) > 0);
+            unsigned int buttons = players[i].buttons;
+            S9xReportButton(0 + (i * 12), (buttons & Input::Button::Up) > 0);
+            S9xReportButton(1 + (i * 12), (buttons & Input::Button::Down) > 0);
+            S9xReportButton(2 + (i * 12), (buttons & Input::Button::Left) > 0);
+            S9xReportButton(3 + (i * 12), (buttons & Input::Button::Right) > 0);
+            S9xReportButton(4 + (i * 12), (buttons & Input::Button::A) > 0);
+            S9xReportButton(5 + (i * 12), (buttons & Input::Button::B) > 0);
+            S9xReportButton(6 + (i * 12), (buttons & Input::Button::X) > 0);
+            S9xReportButton(7 + (i * 12), (buttons & Input::Button::Y) > 0);
+            S9xReportButton(8 + (i * 12), (buttons & Input::Button::LT) > 0);
+            S9xReportButton(9 + (i * 12), (buttons & Input::Button::RT) > 0);
+            S9xReportButton(10 + (i * 12), (buttons & Input::Button::Start) > 0);
+            S9xReportButton(11 + (i * 12), (buttons & Input::Button::Select) > 0);
         }
 
         S9xMainLoop();

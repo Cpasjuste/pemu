@@ -230,17 +230,16 @@ void UiStateMenu::setVisibility(c2d::Visibility visibility, bool tweenPlay) {
 }
 
 bool UiStateMenu::onInput(c2d::Input::Player *players) {
+    unsigned int buttons = players[0].buttons;
 
-    unsigned int key = players[0].keys;
-
-    if (key & Input::Key::Left) {
+    if (buttons & Input::Button::Left) {
         uiStateList->left();
-    } else if (key & Input::Key::Right) {
+    } else if (buttons & Input::Button::Right) {
         uiStateList->right();
     }
 
     // FIRE1
-    if (key & Input::Key::Fire1) {
+    if (buttons & Input::Button::A) {
         isEmuRunning = ui->getUiEmu()->isVisible();
         if (isEmuRunning) {
             UiState *state = uiStateList->getSelection();
@@ -278,15 +277,17 @@ bool UiStateMenu::onInput(c2d::Input::Player *players) {
     }
 
     // FIRE2
-    if (key & Input::Key::Fire2) {
+    if (buttons & Input::Button::B) {
         setVisibility(Visibility::Hidden, true);
         ui->getUiMenu()->setVisibility(Visibility::Visible, true);
     }
 
+    // TODO: verify this
+#if 0
     // QUIT
-    if (key & EV_QUIT) {
+    if (buttons & Input::Button::Quit) {
         return EV_QUIT;
     }
-
+#endif
     return true;
 }

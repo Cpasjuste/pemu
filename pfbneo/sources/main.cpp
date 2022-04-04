@@ -31,7 +31,9 @@ using namespace c2d;
 using namespace c2dui;
 
 #ifdef __PSP2__
+
 #include <psp2/power.h>
+
 #elif __PS4__
 extern "C" int sceSystemServiceLoadExec(const char *path, const char *args[]);
 #endif
@@ -76,16 +78,16 @@ int main(int argc, char **argv) {
     buttons.emplace_back(KEY_JOY_DOWN_DEFAULT, "DOWN");
     buttons.emplace_back(KEY_JOY_LEFT_DEFAULT, "LEFT");
     buttons.emplace_back(KEY_JOY_RIGHT_DEFAULT, "RIGHT");
-    buttons.emplace_back(KEY_JOY_FIRE1_DEFAULT, "TRIANGLE");
-    buttons.emplace_back(KEY_JOY_FIRE2_DEFAULT, "CIRCLE");
-    buttons.emplace_back(KEY_JOY_FIRE3_DEFAULT, "CROSS");
-    buttons.emplace_back(KEY_JOY_FIRE4_DEFAULT, "SQUARE");
-    buttons.emplace_back(KEY_JOY_FIRE5_DEFAULT, "L");
-    buttons.emplace_back(KEY_JOY_FIRE6_DEFAULT, "R");
-    buttons.emplace_back(KEY_JOY_FIRE7_DEFAULT, "NONE");
-    buttons.emplace_back(KEY_JOY_FIRE8_DEFAULT, "NONE");
-    buttons.emplace_back(KEY_JOY_COIN1_DEFAULT, "SELECT");
-    buttons.emplace_back(KEY_JOY_START1_DEFAULT, "START");
+    buttons.emplace_back(KEY_JOY_A_DEFAULT, "TRIANGLE");
+    buttons.emplace_back(KEY_JOY_B_DEFAULT, "CIRCLE");
+    buttons.emplace_back(KEY_JOY_X_DEFAULT, "CROSS");
+    buttons.emplace_back(KEY_JOY_Y_DEFAULT, "SQUARE");
+    buttons.emplace_back(KEY_JOY_LB_DEFAULT, "L");
+    buttons.emplace_back(KEY_JOY_RB_DEFAULT, "R");
+    buttons.emplace_back(KEY_JOY_LT_DEFAULT, "NONE");
+    buttons.emplace_back(KEY_JOY_RT_DEFAULT, "NONE");
+    buttons.emplace_back(KEY_JOY_SELECT_DEFAULT, "SELECT");
+    buttons.emplace_back(KEY_JOY_START_DEFAULT, "START");
     buttons.emplace_back(KEY_JOY_MENU1_DEFAULT, "START");
     buttons.emplace_back(KEY_JOY_MENU2_DEFAULT, "SELECT");
 #elif __SWITCH__
@@ -133,16 +135,16 @@ int main(int argc, char **argv) {
     buttons.emplace_back(KEY_JOY_DOWN_DEFAULT, "DOWN");
     buttons.emplace_back(KEY_JOY_LEFT_DEFAULT, "LEFT");
     buttons.emplace_back(KEY_JOY_RIGHT_DEFAULT, "RIGHT");
-    buttons.emplace_back(KEY_JOY_FIRE1_DEFAULT, "CROSS");
-    buttons.emplace_back(KEY_JOY_FIRE2_DEFAULT, "CIRCLE");
-    buttons.emplace_back(KEY_JOY_FIRE3_DEFAULT, "SQUARE");
-    buttons.emplace_back(KEY_JOY_FIRE4_DEFAULT, "TRIANGLE");
-    buttons.emplace_back(KEY_JOY_FIRE5_DEFAULT, "LT");
-    buttons.emplace_back(KEY_JOY_FIRE6_DEFAULT, "RT");
-    buttons.emplace_back(KEY_JOY_FIRE7_DEFAULT, "LT");
-    buttons.emplace_back(KEY_JOY_FIRE8_DEFAULT, "RT");
-    buttons.emplace_back(KEY_JOY_COIN1_DEFAULT, "LB");
-    buttons.emplace_back(KEY_JOY_START1_DEFAULT, "RB");
+    buttons.emplace_back(KEY_JOY_A_DEFAULT, "CROSS");
+    buttons.emplace_back(KEY_JOY_B_DEFAULT, "CIRCLE");
+    buttons.emplace_back(KEY_JOY_X_DEFAULT, "SQUARE");
+    buttons.emplace_back(KEY_JOY_Y_DEFAULT, "TRIANGLE");
+    buttons.emplace_back(KEY_JOY_LT_DEFAULT, "LT");
+    buttons.emplace_back(KEY_JOY_RT_DEFAULT, "RT");
+    buttons.emplace_back(KEY_JOY_LB_DEFAULT, "LB");
+    buttons.emplace_back(KEY_JOY_RB_DEFAULT, "RB");
+    buttons.emplace_back(KEY_JOY_SELECT_DEFAULT, "SELECT");
+    buttons.emplace_back(KEY_JOY_START_DEFAULT, "START");
     buttons.emplace_back(KEY_JOY_MENU1_DEFAULT, "LB");
     buttons.emplace_back(KEY_JOY_MENU2_DEFAULT, "RB");
 #endif

@@ -272,28 +272,28 @@ bool UIRomList::onInput(c2d::Input::Player *players) {
         return false;
     }
 
-    unsigned int keys = players[0].keys;
-    if (keys & Input::Key::Up) {
+    unsigned int buttons = players[0].buttons;
+    if (buttons & Input::Button::Up) {
         listBox->up();
         romInfo->load();
         timer_load_info_done = 0;
         timer_load_video_done = 0;
-    } else if (keys & Input::Key::Down) {
+    } else if (buttons & Input::Button::Down) {
         listBox->down();
         romInfo->load();
         timer_load_info_done = 0;
         timer_load_video_done = 0;
-    } else if (keys & Input::Key::Right) {
+    } else if (buttons & Input::Button::Right) {
         listBox->setSelection(listBox->getIndex() + listBox->getMaxLines());
         romInfo->load();
         timer_load_info_done = 0;
         timer_load_video_done = 0;
-    } else if (keys & Input::Key::Left) {
+    } else if (buttons & Input::Button::Left) {
         listBox->setSelection(listBox->getIndex() - listBox->getMaxLines());
         romInfo->load();
         timer_load_info_done = 0;
         timer_load_video_done = 0;
-    } else if (keys & Input::Key::Fire1) {
+    } else if (buttons & Input::Button::A) {
         Game game = getSelection();
         if (game.available) {
 #ifdef __MPV__
@@ -304,7 +304,7 @@ bool UIRomList::onInput(c2d::Input::Player *players) {
             ui->getUiEmu()->load(game);
             return true;
         }
-    } else if (keys & Input::Key::Fire3) {
+    } else if (buttons & Input::Button::X) {
         // add to favorites
         Game game = getSelection();
         if (game.id > 0 && !romList->gameListFav->exist(game.id)) {
@@ -325,9 +325,9 @@ bool UIRomList::onInput(c2d::Input::Player *players) {
                 }
             }
         }
-    } else if (keys & Input::Key::Menu1) {
+    } else if (buttons & Input::Button::Menu1) {
         ui->getUiMenu()->load();
-    } else if (keys & Input::Key::Menu2) {
+    } else if (buttons & Input::Button::Menu2) {
         if (getSelection().id > 0) {
             ui->getUiMenu()->load(true);
         }
@@ -335,14 +335,14 @@ bool UIRomList::onInput(c2d::Input::Player *players) {
 
     // only allow system switch if skin contains romlist title
     if (titleText->available) {
-        if (keys & Input::Key::Fire5) {
+        if (buttons & Input::Button::LT) {
             Option *sysOpt = ui->getConfig()->get(Option::Id::GUI_FILTER_SYSTEM);
             size_t sysCount = sysOpt->getValues()->size();
             if (sysCount > 1) {
                 sysOpt->prev();
                 updateRomList();
             }
-        } else if (keys & Input::Key::Fire6) {
+        } else if (buttons & Input::Button::RT) {
             Option *sysOpt = ui->getConfig()->get(Option::Id::GUI_FILTER_SYSTEM);
             size_t sysCount = sysOpt->getValues()->size();
             if (sysCount > 1) {
@@ -360,12 +360,12 @@ void UIRomList::onUpdate() {
         return;
     }
 
-    unsigned int keys = ui->getInput()->getKeys();
+    unsigned int buttons = ui->getInput()->getButtons();
 
-    if (keys > 0 && keys != Input::Delay) {
+    if (buttons > 0 && buttons != Input::Delay) {
         timer_load_info.restart();
         timer_load_video.restart();
-    } else if (keys == 0) {
+    } else if (buttons == 0) {
         if ((timer_load_info_done == 0) && timer_load_info.getElapsedTime().asMilliseconds() > timer_load_info_delay) {
             romInfo->load(listBox->getSelection());
             timer_load_info_done = 1;

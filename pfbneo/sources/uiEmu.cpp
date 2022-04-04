@@ -255,10 +255,25 @@ void PFBAUiEmu::stop() {
 
 bool PFBAUiEmu::onInput(c2d::Input::Player *players) {
     if (ui->getUiMenu()->isVisible() || ui->getUiStateMenu()->isVisible()) {
+        ui->getInput()->setRotation(Input::Rotation::R0, Input::Rotation::R0);
         return UiEmu::onInput(players);
     }
 
-    // TODO: cross2d: add universal input rotation support
+    // rotation config:
+    // 0 > "OFF"
+    // 1 > "ON"
+    // 2 > "FLIP"
+    int rotation = getUi()->getConfig()->get(Option::Id::ROM_ROTATION, true)->getIndex();
+    if (BurnDrvGetFlags() & BDF_ORIENTATION_VERTICAL) {
+        if (rotation == 0) {
+            ui->getInput()->setRotation(Input::Rotation::R90, Input::Rotation::R0);
+        } else if (rotation == 1) {
+            ui->getInput()->setRotation(Input::Rotation::R0, Input::Rotation::R0);
+        } else {
+            ui->getInput()->setRotation(Input::Rotation::R270, Input::Rotation::R0);
+        }
+    }
+
 #if 0
     int rotation_config =
             getUi()->getConfig()->get(Option::Index::ROM_ROTATION, true)->getValueBool();
@@ -307,8 +322,8 @@ void PFBAUiEmu::onUpdate() {
     InputMake(true);
 
     // handle diagnostic and reset switch
-    unsigned int keys = ui->getInput()->getKeys(0);
-    if (keys & Input::Key::Select) {
+    unsigned int buttons = ui->getInput()->getButtons();
+    if (buttons & Input::Button::Select) {
         if (clock.getElapsedTime().asSeconds() > 2) {
             if (pgi_reset) {
                 ui->getUiStatusBox()->show("TIPS: PRESS START "
@@ -320,7 +335,7 @@ void PFBAUiEmu::onUpdate() {
             nFramesEmulated = 0;
             clock.restart();
         }
-    } else if (keys & Input::Key::Start) {
+    } else if (buttons & Input::Button::Start) {
         if (clock.getElapsedTime().asSeconds() > 2) {
             if (pgi_diag) {
                 ui->getUiStatusBox()->show("TIPS: PRESS COIN "

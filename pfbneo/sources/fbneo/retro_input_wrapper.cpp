@@ -18,12 +18,12 @@ static int nDIPOffset;
 
 int16_t input_cb(unsigned port, unsigned device, unsigned index, unsigned id) {
     if (port < PLAYER_MAX) {
-        unsigned int keys = c2d_renderer->getInput()->getPlayer((int) port)->keys;
+        unsigned int buttons = c2d_renderer->getInput()->getPlayer((int) port)->buttons;
         //printf("input_cb(joy): port: %i, device: %i, index: %i, id: %x (keys: %x)\n",
         //     port, device, index, id, keys);
 
         if (device == RETRO_DEVICE_JOYPAD) {
-            return keys & id ? 1 : 0;
+            return buttons & id ? 1 : 0;
         }
     }
 

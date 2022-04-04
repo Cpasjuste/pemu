@@ -74,24 +74,24 @@ void PGENUiEmu::onUpdate() {
     if (!isPaused()) {
         // inputs
         for (int i = 0; i < PLAYER_MAX; i++) {
-            unsigned int keys = getUi()->getInput()->getKeys(i);
+            unsigned int buttons = getUi()->getInput()->getButtons(i);
             input.pad[i] = 0;
             switch (input.dev[i]) {
                 case DEVICE_PAD6B:
                 case DEVICE_PAD3B:
                 case DEVICE_PAD2B:
-                    if (keys & Input::Key::Up) input.pad[i] |= INPUT_UP;
-                    if (keys & Input::Key::Down) input.pad[i] |= INPUT_DOWN;
-                    if (keys & Input::Key::Left) input.pad[i] |= INPUT_LEFT;
-                    if (keys & Input::Key::Right) input.pad[i] |= INPUT_RIGHT;
-                    if (keys & Input::Key::Fire1) input.pad[i] |= INPUT_A;
-                    if (keys & Input::Key::Fire2) input.pad[i] |= INPUT_B;
-                    if (keys & Input::Key::Fire3) input.pad[i] |= INPUT_C;
-                    if (keys & Input::Key::Fire4) input.pad[i] |= INPUT_X;
-                    if (keys & Input::Key::Fire5) input.pad[i] |= INPUT_Y;
-                    if (keys & Input::Key::Fire6) input.pad[i] |= INPUT_Z;
-                    if (keys & Input::Key::Select) input.pad[i] |= INPUT_MODE;
-                    if (keys & Input::Key::Start) input.pad[i] |= INPUT_START;
+                    if (buttons & Input::Button::Up) input.pad[i] |= INPUT_UP;
+                    if (buttons & Input::Button::Down) input.pad[i] |= INPUT_DOWN;
+                    if (buttons & Input::Button::Left) input.pad[i] |= INPUT_LEFT;
+                    if (buttons & Input::Button::Right) input.pad[i] |= INPUT_RIGHT;
+                    if (buttons & Input::Button::A) input.pad[i] |= INPUT_A;
+                    if (buttons & Input::Button::B) input.pad[i] |= INPUT_B;
+                    if (buttons & Input::Button::X) input.pad[i] |= INPUT_C;
+                    if (buttons & Input::Button::Y) input.pad[i] |= INPUT_X;
+                    if (buttons & Input::Button::LT) input.pad[i] |= INPUT_Y;
+                    if (buttons & Input::Button::RT) input.pad[i] |= INPUT_Z;
+                    if (buttons & Input::Button::Select) input.pad[i] |= INPUT_MODE;
+                    if (buttons & Input::Button::Start) input.pad[i] |= INPUT_START;
                     break;
                 default:
                     break;
