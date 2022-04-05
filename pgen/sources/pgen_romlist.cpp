@@ -33,7 +33,15 @@ void PGENRomList::build() {
         }
     }
     // reset system filtering
-    ui->getConfig()->get(Option::Id::GUI_FILTER_SYSTEM)->set(
-            {"FILTER_SYSTEM", gameList->systemList.getNames(),
-             0, Option::Id::GUI_FILTER_SYSTEM, Option::Flags::STRING});
+    Option *sysOpt = ui->getConfig()->get(Option::Id::GUI_FILTER_SYSTEM);
+    std::string sys = sysOpt->getValueString();
+    sysOpt->set({"FILTER_SYSTEM", gameList->systemList.getNames(),
+                 0, Option::Id::GUI_FILTER_SYSTEM, Option::Flags::STRING});
+    // restore config option
+    for (int i = 0; i < sysOpt->size(); i++) {
+        if (sysOpt->getValueString() == sys) {
+            break;
+        }
+        sysOpt->next();
+    }
 }
