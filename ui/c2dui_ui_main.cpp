@@ -105,14 +105,13 @@ void UiMain::setSkin(Skin *s) {
 }
 
 void UiMain::onUpdate() {
-
     unsigned int buttons = getInput()->getButtons();
     if (buttons & Input::Button::Quit) {
         done = true;
         return C2DRenderer::onUpdate();
     }
 
-    if (uiEmu && !uiEmu->isVisible()) {
+    if (uiEmu && (!uiEmu->isVisible() || uiEmu->isPaused())) {
         if (buttons != Input::Button::Delay) {
             bool changed = (oldKeys ^ buttons) != 0;
             oldKeys = buttons;

@@ -14,10 +14,10 @@ void PGENRomList::build() {
     gameList->append(dataPath + "gamelist_sms.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_CHANNELF), false);
     setLoadingText("Games: %li / %li", gameList->getAvailableCount(), gameList->games.size());
 
-    gameList->append(dataPath + "gamelist_gg_xml", ui->getConfig()->getRomPaths().at(FBN_PATH_COLECO), false);
+    gameList->append(dataPath + "gamelist_gamegear_xml", ui->getConfig()->getRomPaths().at(FBN_PATH_COLECO), false);
     setLoadingText("Games: %li / %li", gameList->getAvailableCount(), gameList->games.size());
 
-    gameList->append(dataPath + "gamelist_mcd.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_FDS), false);
+    gameList->append(dataPath + "gamelist_megacd.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_FDS), false);
     setLoadingText("Games: %li / %li", gameList->getAvailableCount(), gameList->games.size());
 
     gameList->append(dataPath + "gamelist_sg1000.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_GAMEGEAR), false);

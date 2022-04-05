@@ -404,8 +404,9 @@ std::vector<c2d::Input::ButtonMapping> Config::getKeyboardMapping(int player, bo
             {Input::Button::Menu1,  get(Option::Id::KEY_MENU1, isRom)->getValueInt()},
             {Input::Button::Menu2,  get(Option::Id::KEY_MENU2, isRom)->getValueInt()}
     };
-#endif
+#else
     return {};
+#endif
 }
 
 std::vector<c2d::Input::ButtonMapping> Config::getJoystickMapping(int player, bool isRom) {
