@@ -86,21 +86,20 @@ int main(int argc, char **argv) {
     buttons.emplace_back(KEY_JOY_DOWN_DEFAULT, "DOWN");
     buttons.emplace_back(KEY_JOY_LEFT_DEFAULT, "LEFT");
     buttons.emplace_back(KEY_JOY_RIGHT_DEFAULT, "RIGHT");
-    buttons.emplace_back(KEY_JOY_FIRE1_DEFAULT, "A");
-    buttons.emplace_back(KEY_JOY_FIRE2_DEFAULT, "B");
-    buttons.emplace_back(KEY_JOY_FIRE3_DEFAULT, "X");
-    buttons.emplace_back(KEY_JOY_FIRE4_DEFAULT, "Y");
-    buttons.emplace_back(KEY_JOY_FIRE5_DEFAULT, "ZL");
-    buttons.emplace_back(KEY_JOY_FIRE6_DEFAULT, "ZR");
-    buttons.emplace_back(KEY_JOY_FIRE7_DEFAULT, "L");
-    buttons.emplace_back(KEY_JOY_FIRE8_DEFAULT, "R");
-    buttons.emplace_back(KEY_JOY_COIN1_DEFAULT, "-");
-    buttons.emplace_back(KEY_JOY_START1_DEFAULT, "+");
+    buttons.emplace_back(KEY_JOY_A_DEFAULT, "A");
+    buttons.emplace_back(KEY_JOY_B_DEFAULT, "B");
+    buttons.emplace_back(KEY_JOY_X_DEFAULT, "X");
+    buttons.emplace_back(KEY_JOY_Y_DEFAULT, "Y");
+    buttons.emplace_back(KEY_JOY_LT_DEFAULT, "ZL");
+    buttons.emplace_back(KEY_JOY_RT_DEFAULT, "ZR");
+    buttons.emplace_back(KEY_JOY_LB_DEFAULT, "L");
+    buttons.emplace_back(KEY_JOY_RB_DEFAULT, "R");
+    buttons.emplace_back(KEY_JOY_LS_DEFAULT, "LS");
+    buttons.emplace_back(KEY_JOY_RS_DEFAULT, "RS");
+    buttons.emplace_back(KEY_JOY_SELECT_DEFAULT, "-");
+    buttons.emplace_back(KEY_JOY_START_DEFAULT, "+");
     buttons.emplace_back(KEY_JOY_MENU1_DEFAULT, "R");
     buttons.emplace_back(KEY_JOY_MENU2_DEFAULT, "L");
-    // switch special keys
-    buttons.emplace_back(KEY_JOY_LSTICK_DEFAULT, "LSTICK");
-    buttons.emplace_back(KEY_JOY_RSTICK_DEFAULT, "RSTICK");
 #elif __PS4__
     // see c2d.h for key id
     buttons.emplace_back(KEY_JOY_UP_DEFAULT, "UP");

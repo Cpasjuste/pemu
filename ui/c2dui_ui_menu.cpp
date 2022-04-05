@@ -351,9 +351,9 @@ bool UiMenu::onInput(c2d::Input::Player *players) {
                 ui->getUiRomList()->setVideoSnapDelay(option.getValueInt());
                 break;
 #ifdef __SWITCH__
-                case Option::Id::JOY_SINGLEJOYCON:
-                    ((SWITCHInput *) ui->getInput())->setSingleJoyconMode(option.getValueBool());
-                    break;
+            case Option::Id::JOY_SINGLEJOYCON:
+                SDL_SetHint("SDL_SINGLE_JOY_MODE", option.getValueBool() ? "1" : "0");
+                break;
 #endif
             default:
                 break;

@@ -229,6 +229,6 @@ void UiMain::updateInputMapping(bool isRomConfig) {
     }
 #ifdef __SWITCH__
     bool single_joy_mode = config->get(Option::Id::JOY_SINGLEJOYCON)->getValueBool();
-    ((SWITCHInput *) getInput())->setSingleJoyMode(single_joy_mode);
+    SDL_SetHint("SDL_SINGLE_JOY_MODE", single_joy_mode ? "1" : "0");
 #endif
 }
