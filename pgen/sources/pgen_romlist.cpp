@@ -15,7 +15,7 @@ void PGENRomList::build() {
                      ui->getConfig()->getRomPaths().at(FBN_PATH_CHANNELF), false, filters);
     setLoadingText("Games: %li / %li", gameList->getAvailableCount(), gameList->games.size());
 
-    gameList->append(dataPath + "gamelist_gamegear_xml",
+    gameList->append(dataPath + "gamelist_gamegear.xml",
                      ui->getConfig()->getRomPaths().at(FBN_PATH_COLECO), false, filters);
     setLoadingText("Games: %li / %li", gameList->getAvailableCount(), gameList->games.size());
 
