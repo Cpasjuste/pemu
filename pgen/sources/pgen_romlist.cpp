@@ -11,16 +11,20 @@ void PGENRomList::build() {
         dataPath = ui->getIo()->getRomFsPath();
     }
 
-    gameList->append(dataPath + "gamelist_sms.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_CHANNELF), false);
+    gameList->append(dataPath + "gamelist_sms.xml",
+                     ui->getConfig()->getRomPaths().at(FBN_PATH_CHANNELF), false, filters);
     setLoadingText("Games: %li / %li", gameList->getAvailableCount(), gameList->games.size());
 
-    gameList->append(dataPath + "gamelist_gamegear_xml", ui->getConfig()->getRomPaths().at(FBN_PATH_COLECO), false);
+    gameList->append(dataPath + "gamelist_gamegear_xml",
+                     ui->getConfig()->getRomPaths().at(FBN_PATH_COLECO), false, filters);
     setLoadingText("Games: %li / %li", gameList->getAvailableCount(), gameList->games.size());
 
-    gameList->append(dataPath + "gamelist_megacd.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_FDS), false);
+    gameList->append(dataPath + "gamelist_megacd.xml",
+                     ui->getConfig()->getRomPaths().at(FBN_PATH_FDS), false, filters);
     setLoadingText("Games: %li / %li", gameList->getAvailableCount(), gameList->games.size());
 
-    gameList->append(dataPath + "gamelist_sg1000.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_GAMEGEAR), false);
+    gameList->append(dataPath + "gamelist_sg1000.xml",
+                     ui->getConfig()->getRomPaths().at(FBN_PATH_GAMEGEAR), false, filters);
     setLoadingText("Games: %li / %li", gameList->getAvailableCount(), gameList->games.size());
 
     RomList::build();

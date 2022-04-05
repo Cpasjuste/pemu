@@ -36,7 +36,7 @@ namespace c2dui {
         char icon_path[1024];
         float time_start = 0;
 
-    private:
+    protected:
         std::vector<std::string> filters;
     };
 }
