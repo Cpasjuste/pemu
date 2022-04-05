@@ -104,13 +104,16 @@ void PGENUiEmu::onUpdate() {
                    bitmap.viewport.x, bitmap.viewport.y, bitmap.viewport.w, bitmap.viewport.h);
             resizeVideo();
             bitmap.viewport.changed &= ~4;
-        }
-
-        if (bitmap.viewport.changed & 1) {
+        } else if (bitmap.viewport.changed & 1) {
             printf("video mode change: {%i, %i, %i, %i}\n",
                    bitmap.viewport.x, bitmap.viewport.y, bitmap.viewport.w, bitmap.viewport.h);
             resizeVideo();
             bitmap.viewport.changed &= ~1;
+        } else if (video->getTextureRect().width != bitmap.viewport.w ||
+                   video->getTextureRect().height != bitmap.viewport.h) {
+            printf("video rect {%i, %i} != bitmap size: {%i, %i}\n",
+                   video->getTextureRect().width, video->getTextureRect().height, bitmap.viewport.w, bitmap.viewport.h);
+            resizeVideo();
         }
 
         // genesis frame step
@@ -134,10 +137,10 @@ void PGENUiEmu::onUpdate() {
 }
 
 void PGENUiEmu::resizeVideo() {
-    getVideo()->setTextureRect({0, 0, bitmap.viewport.w, bitmap.viewport.h});
-    getVideo()->setSize((float) bitmap.viewport.w, (float) bitmap.viewport.h);
-    getVideo()->lock(&bitmap.data, &bitmap.pitch, {0, 0, bitmap.viewport.w, bitmap.viewport.h});
-    getVideo()->updateScaling();
+    video->setTextureRect({0, 0, bitmap.viewport.w, bitmap.viewport.h});
+    video->setSize((float) bitmap.viewport.w, (float) bitmap.viewport.h);
+    video->lock(&bitmap.data, &bitmap.pitch, {0, 0, bitmap.viewport.w, bitmap.viewport.h});
+    video->updateScaling();
 }
 
 void PGENUiEmu::loadBios() {

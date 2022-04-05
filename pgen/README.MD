@@ -25,6 +25,7 @@ pGEN: Portable Genesis
   - No-Intro - Sega - Mega Drive - Genesis (2017-03-18).zip
   - No-Intro - Sega - Game Gear (20210519).zip
   - No-Intro - Sega - Master System - Mark III (2017-04-14).zip
+  - [REDUMP] Disc Image Collection: Sega - Sega Mega CD updated 2021-01-08 (20-42-03)
 
 ### Preview images and videos
 - pGEN support preview images and videos (put files in roms media folder: png files goes in "roms/media/mixrbv2", mp4 files in "roms/media/video"). Please note that the vita port doesn't support video previews.
