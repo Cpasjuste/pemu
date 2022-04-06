@@ -55,6 +55,7 @@ int main(int argc, char **argv) {
     io->create(io->getDataPath());
     io->create(io->getDataPath() + "bios");
     io->create(io->getDataPath() + "roms");
+    io->create(io->getDataPath() + "rams");
     io->create(io->getDataPath() + "configs");
 
     Vector2f screenSize = cfg->getScreenSize();

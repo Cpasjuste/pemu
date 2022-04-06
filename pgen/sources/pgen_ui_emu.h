@@ -25,6 +25,10 @@ public:
 
 private:
     void loadBios();
+
+    void loadBram();
+
+    void saveBram();
 };
 
 #endif //PGEN_UI_EMU_H
