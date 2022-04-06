@@ -244,6 +244,8 @@ void UiMenu::onKeyDown() {
     updateLines();
 }
 
+extern "C" void SWITCH_ShowControllerSupport(void);
+
 bool UiMenu::onInput(c2d::Input::Player *players) {
 
     unsigned int buttons = players[0].buttons;
@@ -350,11 +352,6 @@ bool UiMenu::onInput(c2d::Input::Player *players) {
             case Option::Id::GUI_VIDEO_SNAP_DELAY:
                 ui->getUiRomList()->setVideoSnapDelay(option.getValueInt());
                 break;
-#ifdef __SWITCH__
-            case Option::Id::JOY_SINGLEJOYCON:
-                SDL_SetHint("SDL_SINGLE_JOY_MODE", option.getValueBool() ? "1" : "0");
-                break;
-#endif
             default:
                 break;
         }

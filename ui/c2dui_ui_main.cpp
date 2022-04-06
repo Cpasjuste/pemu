@@ -226,8 +226,4 @@ void UiMain::updateInputMapping(bool isRomConfig) {
                                            config->getJoystickDeadZone(0, false));
         }
     }
-#ifdef __SWITCH__
-    bool single_joy_mode = config->get(Option::Id::JOY_SINGLEJOYCON)->getValueBool();
-    SDL_SetHint("SDL_SINGLE_JOY_MODE", single_joy_mode ? "1" : "0");
-#endif
 }

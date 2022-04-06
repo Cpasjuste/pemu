@@ -67,9 +67,6 @@ Config::Config(c2d::Io *io, int ver, const std::string &defaultRomsPath) {
     get()->at(get()->size() - 1).setInfo("YOU NEED TO RESTART THE APPLICATION AFTER CHANGING THIS OPTION");
 
     append("VIDEO_SNAP_DELAY", 5, Option::Id::GUI_VIDEO_SNAP_DELAY, Option::Flags::INTEGER);
-#ifdef __SWITCH__
-    append("SINGLE_JOYCONS", {"OFF", "ON"}, 0, Option::Id::JOY_SINGLEJOYCON, Option::Flags::BOOLEAN);
-#endif
 
     /////////////////////////////////////////////////
     /// default rom config

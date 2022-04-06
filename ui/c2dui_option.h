@@ -45,9 +45,6 @@ namespace c2dui {
             GUI_FULLSCREEN,
             GUI_SKIN,
             GUI_VIDEO_SNAP_DELAY,
-#ifdef __SWITCH__
-            JOY_SINGLEJOYCON,
-#endif
             MENU_ROM_OPTIONS,
             ROM_SCALING,
             ROM_SCALING_MODE,
