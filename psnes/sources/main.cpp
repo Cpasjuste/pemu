@@ -106,16 +106,18 @@ int main(int argc, char **argv) {
     buttons.emplace_back(KEY_JOY_DOWN_DEFAULT, "DOWN");
     buttons.emplace_back(KEY_JOY_LEFT_DEFAULT, "LEFT");
     buttons.emplace_back(KEY_JOY_RIGHT_DEFAULT, "RIGHT");
-    buttons.emplace_back(KEY_JOY_FIRE1_DEFAULT, "CROSS");
-    buttons.emplace_back(KEY_JOY_FIRE2_DEFAULT, "CIRCLE");
-    buttons.emplace_back(KEY_JOY_FIRE3_DEFAULT, "SQUARE");
-    buttons.emplace_back(KEY_JOY_FIRE4_DEFAULT, "TRIANGLE");
-    buttons.emplace_back(KEY_JOY_FIRE5_DEFAULT, "L2");
-    buttons.emplace_back(KEY_JOY_FIRE6_DEFAULT, "R2");
-    buttons.emplace_back(KEY_JOY_FIRE7_DEFAULT, "L2");
-    buttons.emplace_back(KEY_JOY_FIRE8_DEFAULT, "R2");
-    buttons.emplace_back(KEY_JOY_COIN1_DEFAULT, "L1");
-    buttons.emplace_back(KEY_JOY_START1_DEFAULT, "R1");
+    buttons.emplace_back(KEY_JOY_A_DEFAULT, "CROSS");
+    buttons.emplace_back(KEY_JOY_B_DEFAULT, "CIRCLE");
+    buttons.emplace_back(KEY_JOY_X_DEFAULT, "SQUARE");
+    buttons.emplace_back(KEY_JOY_Y_DEFAULT, "TRIANGLE");
+    buttons.emplace_back(KEY_JOY_LT_DEFAULT, "L2");
+    buttons.emplace_back(KEY_JOY_RT_DEFAULT, "R2");
+    buttons.emplace_back(KEY_JOY_LB_DEFAULT, "L2");
+    buttons.emplace_back(KEY_JOY_RB_DEFAULT, "R2");
+    buttons.emplace_back(KEY_JOY_LS_DEFAULT, "LS");
+    buttons.emplace_back(KEY_JOY_RS_DEFAULT, "RS");
+    buttons.emplace_back(KEY_JOY_SELECT_DEFAULT, "L1");
+    buttons.emplace_back(KEY_JOY_START_DEFAULT, "R1");
     buttons.emplace_back(KEY_JOY_MENU1_DEFAULT, "L1");
     buttons.emplace_back(KEY_JOY_MENU2_DEFAULT, "R1");
 #else
