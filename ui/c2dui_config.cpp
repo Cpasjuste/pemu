@@ -40,7 +40,6 @@ Config::Config(c2d::Io *io, int ver, const std::string &defaultRomsPath) {
     std::vector<std::string> skins;
     // add default skins from romfs
     skins.emplace_back("default");
-    skins.emplace_back("big_preview");
     // add skins from data dir
     auto files = io->getDirList(dataPath + "skins/", true);
     for (auto &file: files) {

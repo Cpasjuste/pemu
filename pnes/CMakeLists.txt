@@ -84,6 +84,7 @@ elseif (PLATFORM_3DS)
     #####################
     # 3DS PLATORM
     #####################
+    list(APPEND PNES_INC sources/3ds)
     list(APPEND NESTOPIA_CFLAGS -Dstrcasecmp=strcmp)
     list(APPEND NESTOPIA_SRC sources/3ds/port.c)
 elseif (PLATFORM_LINUX)

@@ -12,14 +12,14 @@ Skin::Skin(UiMain *u, const std::vector<Button> &btns) {
     path = ui->getIo()->getDataPath() + "skins/" + ui->getConfig()->get(Option::GUI_SKIN)->getValueString() + "/";
     if (!ui->getIo()->exist(path + "config.cfg")) {
         // now try from romfs
-        printf("Skin::Skin: skin config do not exist, trying from romfs... (%s)\n", (path + "config.cfg").c_str());
         path = ui->getIo()->getRomFsPath() + "skins/" + ui->getConfig()->get(Option::GUI_SKIN)->getValueString() + "/";
+        printf("Skin::Skin: skin config do not exist, trying from romfs... (%s)\n", (path + "config.cfg").c_str());
         if (!ui->getIo()->exist(path + "config.cfg")) {
             // restore defaults
-            printf("Skin::Skin: skin config do not exist, reverting to default skin (%s)\n",
-                   (path + "config.cfg").c_str());
             ui->getConfig()->get(Option::GUI_SKIN)->setValueString("default");
             path = ui->getIo()->getRomFsPath() + "skins/default/";
+            printf("Skin::Skin: skin config do not exist, reverting to default skin (%s)\n",
+                   (path + "config.cfg").c_str());
         }
     }
 
