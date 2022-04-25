@@ -22,6 +22,7 @@
 #include "pgen_io.h"
 #include "pgen_config.h"
 #include "pgen_romlist.h"
+#include "pgen_ui_statemenu.h"
 
 using namespace c2d;
 using namespace c2dui;
@@ -38,7 +39,7 @@ UiMenu *uiMenu;
 PGENUiEmu *uiEmu;
 PGENConfig *cfg;
 PGENRomList *romList;
-UiStateMenu *uiState;
+PGENUIStateMenu *uiState;
 
 UiMain *ui;
 Skin *skin;
@@ -57,6 +58,7 @@ int main(int argc, char **argv) {
     io->create(io->getDataPath() + "roms");
     io->create(io->getDataPath() + "rams");
     io->create(io->getDataPath() + "configs");
+    io->create(io->getDataPath() + "saves");
 
     Vector2f screenSize = cfg->getScreenSize();
     ui = new UiMain(screenSize, io, cfg);
@@ -159,7 +161,7 @@ int main(int argc, char **argv) {
     uiRomList = new UIRomList(ui, romList, ui->getSize());
     uiMenu = new UiMenu(ui);
     uiEmu = new PGENUiEmu(ui);
-    uiState = new UiStateMenu(ui);
+    uiState = new PGENUIStateMenu(ui);
     ui->init(uiRomList, uiMenu, uiEmu, uiState);
 
     while (!ui->done) {

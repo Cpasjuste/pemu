@@ -19,6 +19,8 @@ namespace c2dui {
 
         bool onInput(c2d::Input::Player *players) override;
 
+        UiMain *getUi() { return ui; };
+
         virtual bool loadStateCore(const char *path) { return false; };
 
         virtual bool saveStateCore(const char *path) { return false; };
