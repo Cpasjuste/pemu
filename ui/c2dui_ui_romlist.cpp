@@ -9,27 +9,22 @@ using namespace c2d;
 using namespace c2dui;
 using namespace ss_api;
 
-UIRomList::UIRomList(UiMain *u, RomList *rList, const c2d::Vector2f &size) : RectangleShape(size) {
+UIRomList::UIRomList(UiMain *u, RomList *rList, const c2d::Vector2f &size)
+        : SkinnedRectangle(u->getSkin(), {"MAIN"}) {
     printf("UIRomList\n");
 
     ui = u;
     romList = rList;
     Skin *skin = ui->getSkin();
 
-    // set gui main "window"
-    skin->loadRectangleShape(this, {"MAIN"});
-
     // add title image if available
-    auto *title = new RectangleShape({16, 16});
-    skin->loadRectangleShape(title, {"MAIN", "TITLE"});
+    auto *title = new SkinnedRectangle(ui->getSkin(), {"MAIN", "TITLE"});
     UIRomList::add(title);
 
     // add help image if available
-    auto *help = new RectangleShape({16, 16});
-    if (skin->loadRectangleShape(help, {"MAIN", "HELP"})) {
+    auto *help = new SkinnedRectangle(ui->getSkin(), {"MAIN", "HELP"});
+    if (help->available) {
         UIRomList::add(help);
-    } else {
-        delete (help);
     }
 
     // add rom info ui
@@ -39,11 +34,21 @@ UIRomList::UIRomList(UiMain *u, RomList *rList, const c2d::Vector2f &size) : Rec
     // add rom listing ui
     Skin::TextGroup textGroup = skin->getText({"MAIN", "ROM_LIST", "TEXT"});
     config::Group *grp = skin->getConfig()->getGroup("ROM_LIST")->getGroup("TEXT");
-    Color colorMissing = grp->getOption("color_missing")->getColor();
+    config::Option *opt = grp->getOption("color_missing");
+    Color colorMissing;
+    if (opt->getType() == config::Option::Type::String) {
+        opt = skin->getConfig()->getOption("COLORS", opt->getString());
+        if (opt) {
+            colorMissing = opt->getColor();
+        }
+    } else {
+        colorMissing = grp->getOption("color_missing")->getColor();
+    }
+
     bool highlightUseFileColors = grp->getOption("highlight_use_text_color")->getInteger() == 1;
 
     // add rom list title (system text)
-    titleText = new SkinnedText(skin, {"MAIN", "ROM_LIST", "TITLE_TEXT"});
+    titleText = new SkinnedText(skin, {"MAIN", "ROM_LIST", "SYSTEM_TEXT"});
     if (titleText->available) {
         UIRomList::add(titleText);
     }

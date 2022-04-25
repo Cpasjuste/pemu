@@ -244,8 +244,6 @@ void UiMenu::onKeyDown() {
     updateLines();
 }
 
-extern "C" void SWITCH_ShowControllerSupport(void);
-
 bool UiMenu::onInput(c2d::Input::Player *players) {
 
     unsigned int buttons = players[0].buttons;

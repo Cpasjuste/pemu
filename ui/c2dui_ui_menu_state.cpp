@@ -181,25 +181,21 @@ public:
     int index = 0;
 };
 
-UiStateMenu::UiStateMenu(UiMain *u) : RectangleShape(Vector2f(16, 16)) {
-
+UiStateMenu::UiStateMenu(UiMain *u) : SkinnedRectangle(u->getSkin(), {"STATES_MENU"}) {
     printf("UIStateMenu()\n");
 
-    this->ui = u;
+    ui = u;
     Skin *skin = ui->getSkin();
 
-    // main rect/bg
-    skin->loadRectangleShape(this, {"STATES_MENU"});
-
     // menu title
-    title = new Text("TITLE", C2D_DEFAULT_CHAR_SIZE, ui->getSkin()->font);
+    title = new SkinnedText(skin, {"STATES_MENU", "TITLE_TEXT"});
+    title->setString("TITLE");
     title->setStyle(Text::Underlined);
-    skin->loadText(title, {"STATES_MENU", "TITLE_TEXT"});
     UiStateMenu::add(title);
 
-    int start_y = (int) (title->getGlobalBounds().top + title->getGlobalBounds().height + 16 * ui->getScaling());
+    float start_y = title->getLocalBounds().top + title->getLocalBounds().height + (55 * ui->getScaling());
     uiStateList = new UiStateList(ui, {
-            UiStateMenu::getLocalBounds().left + UiStateMenu::getSize().x / 2, (float) start_y + 32,
+            UiStateMenu::getLocalBounds().left + UiStateMenu::getSize().x / 2, start_y,
             UiStateMenu::getSize().x - 64, UiStateMenu::getSize().x / (STATES_COUNT + 1)
     });
     uiStateList->setOrigin(Origin::Top);

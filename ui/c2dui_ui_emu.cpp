@@ -62,6 +62,7 @@ int UiEmu::load(const Game &game) {
     setVisibility(Visibility::Visible);
     ui->getUiProgressBox()->setVisibility(Visibility::Hidden);
     ui->getUiRomList()->setVisibility(Visibility::Hidden);
+    ui->getUiRomList()->getBlur()->setVisibility(Visibility::Hidden);
 
     resume();
 

@@ -107,7 +107,6 @@ int main(int argc, char **argv) {
     buttons.emplace_back(KEY_JOY_MENU1_DEFAULT, "R");
     buttons.emplace_back(KEY_JOY_MENU2_DEFAULT, "L");
 #elif __PS4__
-    // see c2d.h for key id
     buttons.emplace_back(KEY_JOY_UP_DEFAULT, "UP");
     buttons.emplace_back(KEY_JOY_DOWN_DEFAULT, "DOWN");
     buttons.emplace_back(KEY_JOY_LEFT_DEFAULT, "LEFT");
@@ -122,8 +121,8 @@ int main(int argc, char **argv) {
     buttons.emplace_back(KEY_JOY_RB_DEFAULT, "R2");
     buttons.emplace_back(KEY_JOY_LS_DEFAULT, "LS");
     buttons.emplace_back(KEY_JOY_RS_DEFAULT, "RS");
-    buttons.emplace_back(KEY_JOY_SELECT_DEFAULT, "L1");
-    buttons.emplace_back(KEY_JOY_START_DEFAULT, "R1");
+    buttons.emplace_back(KEY_JOY_SELECT_DEFAULT, "TOUCH");
+    buttons.emplace_back(KEY_JOY_START_DEFAULT, "OPTIONS");
     buttons.emplace_back(KEY_JOY_MENU1_DEFAULT, "L1");
     buttons.emplace_back(KEY_JOY_MENU2_DEFAULT, "R1");
 #else

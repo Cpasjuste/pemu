@@ -9,7 +9,7 @@ class UiStateList;
 
 namespace c2dui {
 
-    class UiStateMenu : public c2d::RectangleShape {
+    class UiStateMenu : public SkinnedRectangle {
 
     public:
 
@@ -27,7 +27,7 @@ namespace c2dui {
 
         UiMain *ui = nullptr;
         UiStateList *uiStateList = nullptr;
-        c2d::Text *title = nullptr;
+        SkinnedText *title = nullptr;
         bool isEmuRunning = false;
     };
 }

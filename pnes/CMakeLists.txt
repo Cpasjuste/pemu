@@ -106,6 +106,18 @@ target_link_libraries(${PROJECT_NAME} cross2dui ${NESTOPIA_LDFLAGS})
 # include libcross2d targets
 include(${CMAKE_SOURCE_DIR}/libcross2d/cmake/targets.cmake)
 
+# add common skin data
+add_custom_target(${PROJECT_NAME}.data.skin
+        COMMAND ${CMAKE_COMMAND} -D SRC=${CMAKE_CURRENT_SOURCE_DIR}/../data/common/romfs -D DST=${CMAKE_CURRENT_BINARY_DIR}/data_romfs -P ${CMAKE_CURRENT_LIST_DIR}/../libcross2d/cmake/copy_directory_custom.cmake
+        COMMAND ${CMAKE_COMMAND} -D SRC=${CMAKE_CURRENT_SOURCE_DIR}/../data/${TARGET_PLATFORM}/romfs -D DST=${CMAKE_CURRENT_BINARY_DIR}/data_romfs -P ${CMAKE_CURRENT_LIST_DIR}/../libcross2d/cmake/copy_directory_custom.cmake
+        )
+add_dependencies(${PROJECT_NAME}.data.skin ${PROJECT_NAME}.data)
+if (PLATFORM_LINUX OR PLATFORM_WINDOWS)
+    add_dependencies(${PROJECT_NAME}-romfs ${PROJECT_NAME}.data.skin)
+else ()
+    add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}.data.skin)
+endif ()
+
 # add extra data to libcross2d default targets data (nestopia database and zipped skin)
 add_custom_target(${PROJECT_NAME}.data.extra
         DEPENDS ${PROJECT_NAME}.data
