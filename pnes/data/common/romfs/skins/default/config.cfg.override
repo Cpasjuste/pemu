@@ -12,7 +12,7 @@ SKIN_CONFIG :
     color7 = [ 193, 18, 28, 255 ];      // MAIN > outline_color
     color8 = [ 255, 255, 255, 255 ];    // MAIN > TITLE > color
     color9 = [ 0, 0, 0, 255 ];          // MAIN > TITLE > outline_color
-    color10 = [ 255, 255, 255, 255 ];   // MAIN > HELP > color
+    color10 = [ 180, 180, 180, 255 ];   // MAIN > HELP > color
     color11 = [ 193, 18, 28, 255 ];     // MAIN > HELP > outline_color
     color12 = [ 0, 10, 50, 255 ];      // MAIN > ROM_LIST > color
     color13 = [ 193, 18, 28, 255 ];    // MAIN > ROM_LIST > outline_color

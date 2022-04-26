@@ -21,11 +21,9 @@ UIRomList::UIRomList(UiMain *u, RomList *rList, const c2d::Vector2f &size)
     auto *title = new SkinnedRectangle(ui->getSkin(), {"MAIN", "TITLE"});
     UIRomList::add(title);
 
-    // add help image if available
-    auto *help = new SkinnedRectangle(ui->getSkin(), {"MAIN", "HELP"});
-    if (help->available) {
-        UIRomList::add(help);
-    }
+    // add help
+    auto *help = new UiHelp(ui);
+    UIRomList::add(help);
 
     // add rom info ui
     romInfo = new UIRomInfo(ui, this, skin->font, ui->getFontSize());

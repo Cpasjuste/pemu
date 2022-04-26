@@ -12,8 +12,8 @@ SKIN_CONFIG :
     color7 = [ 193, 18, 28, 255 ];      // MAIN > outline_color
     color8 = [ 255, 255, 255, 255 ];    // MAIN > TITLE > color
     color9 = [ 0, 0, 0, 255 ];          // MAIN > TITLE > outline_color
-    color10 = [ 255, 255, 255, 255 ];   // MAIN > HELP > color
-    color11 = [ 0, 114, 67, 255 ];     // MAIN > HELP > outline_color
+    color10 = [ 0, 56, 123, 255 ];   // MAIN > HELP > color
+    color11 = [ 193, 18, 28, 255 ];     // MAIN > HELP > outline_color
     color12 = [ 0, 56, 123, 255 ];      // MAIN > ROM_LIST > color
     color13 = [ 247, 186, 11, 255 ];    // MAIN > ROM_LIST > outline_color
     color14 = [ 40, 40, 40, 255 ];      // MAIN > ROM_LIST > TITLE_TEXT > color
@@ -32,7 +32,7 @@ SKIN_CONFIG :
     color27 = [ 193, 18, 28, 255 ];      // MAIN > ROM_SYNOPSIS > color
     color28 = [ 0, 56, 123, 255 ];    // MAIN > ROM_SYNOPSIS > outline_color
     color29 = [ 247, 186, 11, 255 ];    // MAIN > ROM_SYNOPSIS > TEXT > color
-    color30 = [ 0, 0, 0, 255 ];         // MAIN > ROM_SYNOPSIS > TEXT > outline_color
+    color30 = [ 0, 56, 123, 255 ];         // MAIN > ROM_SYNOPSIS > TEXT > outline_color
     color31 = [ 0, 56, 123, 240 ];   // OPTIONS_MENU > color
     color32 = [ 193, 18, 28, 255 ];       // OPTIONS_MENU > outline_color
     color33 = [ 200, 200, 200, 255 ];   // OPTIONS_MENU > TITLE_TEXT > color

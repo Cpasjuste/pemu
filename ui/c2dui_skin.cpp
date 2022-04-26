@@ -4,8 +4,7 @@
 
 #include "c2dui.h"
 
-Skin::Skin(UiMain *u, const std::vector<Button> &btns) {
-
+Skin::Skin(UiMain *u) {
     ui = u;
 
     // try to load skin from data directory first
@@ -27,13 +26,33 @@ Skin::Skin(UiMain *u, const std::vector<Button> &btns) {
     printf("Skin path: %s\n", path.c_str());
 
     // load buttons textures
-    buttons = btns;
+    // see c2d.h for key id
+    buttons.emplace_back(KEY_JOY_UP_DEFAULT, "UP");
+    buttons.emplace_back(KEY_JOY_DOWN_DEFAULT, "DOWN");
+    buttons.emplace_back(KEY_JOY_LEFT_DEFAULT, "LEFT");
+    buttons.emplace_back(KEY_JOY_RIGHT_DEFAULT, "RIGHT");
+    buttons.emplace_back(KEY_JOY_A_DEFAULT, "A");
+    buttons.emplace_back(KEY_JOY_B_DEFAULT, "B");
+    buttons.emplace_back(KEY_JOY_X_DEFAULT, "X");
+    buttons.emplace_back(KEY_JOY_Y_DEFAULT, "Y");
+    buttons.emplace_back(KEY_JOY_LT_DEFAULT, "LT");
+    buttons.emplace_back(KEY_JOY_RT_DEFAULT, "RT");
+    buttons.emplace_back(KEY_JOY_LB_DEFAULT, "LB");
+    buttons.emplace_back(KEY_JOY_RB_DEFAULT, "RB");
+    buttons.emplace_back(KEY_JOY_LS_DEFAULT, "LS");
+    buttons.emplace_back(KEY_JOY_RS_DEFAULT, "RS");
+    buttons.emplace_back(KEY_JOY_SELECT_DEFAULT, "SELECT");
+    buttons.emplace_back(KEY_JOY_START_DEFAULT, "START");
+    buttons.emplace_back(KEY_JOY_MENU1_DEFAULT, "LB");
+    buttons.emplace_back(KEY_JOY_MENU2_DEFAULT, "RB");
+    buttons.emplace_back(100, "DPAD"); // dpad for help
     for (auto &button: buttons) {
         std::string buttonPath = path + "buttons/" + std::to_string(button.id) + ".png";
         if (ui->getIo()->exist(buttonPath)) {
             button.texture = new C2DTexture(buttonPath);
-            if (button.texture != nullptr && !button.texture->available) {
+            if (button.texture && !button.texture->available) {
                 delete (button.texture);
+                button.texture = nullptr;
             }
         }
     }

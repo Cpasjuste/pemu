@@ -123,8 +123,8 @@ bool UIRomInfo::loadTexture(const Game &game) {
         texture->setOrigin(Origin::Center);
         texture->setPosition(Vector2f(previewBox->getSize().x / 2, previewBox->getSize().y / 2));
         float tex_scaling = std::min(
-                previewBox->getSize().x / texture->getTextureRect().width,
-                previewBox->getSize().y / texture->getTextureRect().height);
+                previewBox->getSize().x / (float) texture->getTextureRect().width,
+                previewBox->getSize().y / (float) texture->getTextureRect().height);
         texture->setScale(tex_scaling, tex_scaling);
         texture->setAlpha(0);
         texture->add(new TweenAlpha(0, 255, 0.3f, TweenLoop::None, TweenState::Playing));

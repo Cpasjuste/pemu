@@ -52,19 +52,19 @@ pFBN: Portable FinalBurn Neo
 You can download a near fullset mixrbv2 and video package for each platform here:
     - Arcade: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/arcade_mixrbv2.zip) (1.5GB), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/arcade_video.zip) (7.1GB)
     - Channel F: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/channelf_mixrbv2.zip), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/channelf_video.zip)
-    - Coleco: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/coleco_mixrbv2.zip), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/coleco_video.zip)
+    - Colecovision: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/coleco_mixrbv2.zip) (128MB), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/coleco_video.zip) (248MB)
+    - MSX: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/msx_mixrbv2.zip) (77MB), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/msx_video.zip) (417MB)
+    - Nec PC-Engine: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/pce_mixrbv2.zip) (200MB), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/pce_video.zip) (1.2GB)
+    - Nec SuperGraFX: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/sgx_mixrbv2.zip), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/sgx_video.zip)
+    - Nec TurboGraFX-16: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/tg16_mixrbv2.zip), [video_hq](http://files.mydedibox.fr/files/dev/pemu/pfbneo/tg16_video_hq.zip) (713MB), [video_lq](http://files.mydedibox.fr/files/dev/pemu/pfbneo/tg16_video_lq.zip) (112MB)
+    - Neo Geo Pocket: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/ngp_mixrbv2.zip), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/ngp_video.zip)
+    - Nintendo NES: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/nes_mixrbv2.zip) (667MB), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/nes_video.zip) (5.3GB)
     - Nintendo NES FDS: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/fds_mixrbv2.zip), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/fds_video.zip)
     - Sega GameGear: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/gamegear_mixrbv2.zip) (178MB), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/gamegear_video.zip) (1.9GB)
+    - Sega Master System: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/sms_mixrbv2.zip) (219MB), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/sms_video.zip) (2.2GB)
     - Sega MegaDrive: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/megadrive_mixrbv2.zip) (878MB), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/megadrive_video.zip) (9.5GB)
-    - MSX: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/msx_mixrbv2.zip) (77MB), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/msx_video.zip) (417MB)
-    - Nintendo NES: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/nes_mixrbv2.zip) (667MB), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/nes_video.zip) (5.3GB)
-    - Neo Geo Pocket: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/ngp_mixrbv2.zip), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/ngp_video.zip)
-    - Nec PC-Engine: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/pce_mixrbv2.zip), [video_hq](http://files.mydedibox.fr/files/dev/pemu/pfbneo/pce_video_hq.zip) (1.2GB), [video_lq](http://files.mydedibox.fr/files/dev/pemu/pfbneo/pce_video_lq.zip) (265MB)
     - SG-1000: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/sg1000_mixrbv2.zip), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/sg1000_video.zip)
-    - Nec SuperGraFX: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/sgx_mixrbv2.zip), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/sgx_video.zip)
-    - Sega Master System: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/sms_mixrbv2.zip), [video_hq](http://files.mydedibox.fr/files/dev/pemu/pfbneo/sms_video_hq.zip) (2.2GB), [video_lq](http://files.mydedibox.fr/files/dev/pemu/pfbneo/sms_video_lq.zip) (434MB)
     - Spectrum: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/spectrum_mixrbv2.zip) (110MB), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/spectrum_video.zip) (1.1GB)
-    - Nec TurboGraFX-16: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/tg16_mixrbv2.zip), [video_hq](http://files.mydedibox.fr/files/dev/pemu/pfbneo/tg16_video_hq.zip) (713MB), [video_lq](http://files.mydedibox.fr/files/dev/pemu/pfbneo/tg16_video_lq.zip) (112MB)
 -----
 
 ### NINTENDO SWITCH INFORMATION
