@@ -57,7 +57,7 @@ You can download a near fullset mixrbv2 and video package for each platform here
     - Nec PC-Engine: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/pce_mixrbv2.zip) (200MB), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/pce_video.zip) (1.2GB)
     - Nec SuperGraFX: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/sgx_mixrbv2.zip), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/sgx_video.zip)
     - Nec TurboGraFX-16: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/tg16_mixrbv2.zip), [video_hq](http://files.mydedibox.fr/files/dev/pemu/pfbneo/tg16_video_hq.zip) (713MB), [video_lq](http://files.mydedibox.fr/files/dev/pemu/pfbneo/tg16_video_lq.zip) (112MB)
-    - Neo Geo Pocket: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/ngp_mixrbv2.zip), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/ngp_video.zip)
+    - Neo Geo Pocket: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/ngp_mixrbv2.zip) (47MB), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/ngp_video.zip) (280MB)
     - Nintendo NES: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/nes_mixrbv2.zip) (667MB), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/nes_video.zip) (5.3GB)
     - Nintendo NES FDS: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/fds_mixrbv2.zip) (71MB), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/fds_video.zip) (543MB)
     - Sega GameGear: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/gamegear_mixrbv2.zip) (178MB), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/gamegear_video.zip) (1.9GB)

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gameList>
-    <game id="177604">
+    <game id="464801465">
         <path>bakumats.zip</path>
         <name>Bakumatsu Rouman Tokubetsu Hen - Gekka no Kenshi - Tsuki ni Saku Hana, Chiri Yuku Hana (Jpn)</name>
         <desc>1863. History's hidden secret is revealed. During the age known as "Bakumatsu", 135 years ago, chaos rules! It's all yours: A new type of weapon fighting game in which Power and Speed weapons, in addition to various Repel moves can be used to experience a new sensation in video game thrills!</desc>
@@ -12,9 +12,11 @@
         <genreid>10</genreid>
         <players>1-2</players>
         <cloneof>lastblad.zip</cloneof>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
+        <image type="mixrbv2">media/mixrbv2/lastblad.png</image>
+        <video type="video">media/video/lastblad.mp4</video>
     </game>
-    <game id="177679">
+    <game id="4145086654">
         <path>bigbang.zip</path>
         <name>Big Bang Pro Wrestling (Jpn)</name>
         <desc>Only a handful of top wrestlers can be show their face on the TV for their fans at home. In the I.E.W mat, this rule is no exception. In an event practiced for 300 years, only the best performances are in demand. This year, the great king of the I.E.W, Joseph Steel, returns to defend his throne. The story of eight top wrestlers competing for the greatest prize on the ring, the I.E.W champion belt, is about to begin...</desc>
@@ -26,9 +28,11 @@
         <genreid>2861</genreid>
         <players>2</players>
         <cloneof>wrestmad.zip</cloneof>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
+        <image type="mixrbv2">media/mixrbv2/wrestmad.png</image>
+        <video type="video">media/video/wrestmad.mp4</video>
     </game>
-    <game id="177565">
+    <game id="1591387930">
         <path>bikkuri.zip</path>
         <name>Bikkuriman 2000 - Viva! Pocket Festiva! (Jpn)</name>
         <desc>The game is a collection of mini-games. 
@@ -44,11 +48,11 @@ At first only a few mini-games are available, with more being unlocked by comple
         <genre>Adventure</genre>
         <genreid>13</genreid>
         <players>1</players>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/bikkuri.png</image>
         <video type="video">media/video/bikkuri.mp4</video>
     </game>
-    <game id="177567">
+    <game id="60703351">
         <path>biomotor.zip</path>
         <name>BioMotor Unitron (Euro, USA)</name>
         <desc>Biomotor Unitron is a RPG for the Neo Geo Pocket Color.
@@ -68,11 +72,11 @@ The battles are like in Pokémon, completely menu based. You pick whatever power
         <genre>Role playing games</genre>
         <genreid>8</genreid>
         <players>1-2</players>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/biomotor.png</image>
         <video type="video">media/video/biomotor.mp4</video>
     </game>
-    <game id="177567">
+    <game id="1360549960">
         <path>biomotorj.zip</path>
         <name>BioMotor Unitron (Jpn)</name>
         <desc>Biomotor Unitron is a RPG for the Neo Geo Pocket Color.
@@ -93,9 +97,11 @@ The battles are like in Pokémon, completely menu based. You pick whatever power
         <genreid>8</genreid>
         <players>1-2</players>
         <cloneof>biomotor.zip</cloneof>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
+        <image type="mixrbv2">media/mixrbv2/biomotor.png</image>
+        <video type="video">media/video/biomotor.mp4</video>
     </game>
-    <game id="177651">
+    <game id="858029146">
         <path>bamp.zip</path>
         <name>Bust-A-Move Pocket (Prototype)</name>
         <desc>The classic game Bubble Bobble is the ancestor of Puzzle Bobble. Your aim in each stage is to break all the bubbles, by breaking 3 or more of the same color.  The game contains a two-player mode where each player tries to break all bubbles first.</desc>
@@ -107,9 +113,11 @@ The battles are like in Pokémon, completely menu based. You pick whatever power
         <genreid>27</genreid>
         <players>1-2</players>
         <cloneof>pbobble.zip</cloneof>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
+        <image type="mixrbv2">media/mixrbv2/pbobble.png</image>
+        <video type="video">media/video/pbobble.mp4</video>
     </game>
-    <game id="177651">
+    <game id="32708278">
         <path>bam.zip</path>
         <name>Bust-A-Move Pocket (USA)</name>
         <desc>The classic game Bubble Bobble is the ancestor of Puzzle Bobble. Your aim in each stage is to break all the bubbles, by breaking 3 or more of the same color.  The game contains a two-player mode where each player tries to break all bubbles first.</desc>
@@ -121,9 +129,11 @@ The battles are like in Pokémon, completely menu based. You pick whatever power
         <genreid>27</genreid>
         <players>1-2</players>
         <cloneof>pbobble.zip</cloneof>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
+        <image type="mixrbv2">media/mixrbv2/pbobble.png</image>
+        <video type="video">media/video/pbobble.mp4</video>
     </game>
-    <game id="177571">
+    <game id="2483155410">
         <path>coolboar.zip</path>
         <name>Cool Boarders Pocket (Euro, Jpn)</name>
         <desc>Cool Boarders Pocket differs to other games in the Cool Boarders series. It features an isometric (overhead) view instead of a third-person perspective. The game features two play modes a free-ride mode where the player navigates an obstacle course with no restrictions until he/she reaches the goal, and a survival mode where the player snowboards through the obstacle course until they run out of health. The game allows the player to choose one of two characters; a female or male snowboarder.</desc>
@@ -134,11 +144,11 @@ The battles are like in Pokémon, completely menu based. You pick whatever power
         <genre>Sports / Skiing</genre>
         <genreid>2902</genreid>
         <players>1</players>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/coolboar.png</image>
         <video type="video">media/video/coolboar.mp4</video>
     </game>
-    <game id="177573">
+    <game id="1393656837">
         <path>coolcool.zip</path>
         <name>Cool Cool Jam (Euro, USA, Sample)</name>
         <desc>Cool Cool Jam is a rhythm video game which appeared on the Neo Geo Pocket Color in 2000. Cool Cool Jam is comparable in gameplay to other rhythm games such as: PaRappa the Rapper, Donkey Konga or Beatmania.
@@ -167,11 +177,11 @@ Guitar 2 - Plays the same as the previous Guitar game only upside down.</desc>
         <genre>Music and Dance</genre>
         <genreid>425</genreid>
         <players>2</players>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/coolcool.png</image>
         <video type="video">media/video/coolcool.mp4</video>
     </game>
-    <game id="177573">
+    <game id="522019955">
         <path>coolcoolj.zip</path>
         <name>Cool Cool Jam (Jpn)</name>
         <desc>Cool Cool Jam is a rhythm video game which appeared on the Neo Geo Pocket Color in 2000. Cool Cool Jam is comparable in gameplay to other rhythm games such as: PaRappa the Rapper, Donkey Konga or Beatmania.
@@ -201,9 +211,11 @@ Guitar 2 - Plays the same as the previous Guitar game only upside down.</desc>
         <genreid>425</genreid>
         <players>2</players>
         <cloneof>coolcool.zip</cloneof>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
+        <image type="mixrbv2">media/mixrbv2/coolcool.png</image>
+        <video type="video">media/video/coolcool.mp4</video>
     </game>
-    <game id="177574">
+    <game id="592762199">
         <path>crushrol.zip</path>
         <name>Crush Roller (World)</name>
         <desc>Crush Roller is a game for the Neo Geo Pocket Color based on the 1981 arcade game Make Trax, which was released as Crush Roller in Europe and Asia.
@@ -222,11 +234,11 @@ When the entire maze is painted you win the level. Unlike the original arcade ve
         <genre>Action / Labyrinth</genre>
         <genreid>2937</genreid>
         <players>1-2</players>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/crushrol.png</image>
         <video type="video">media/video/crushrol.mp4</video>
     </game>
-    <game id="177575">
+    <game id="1482636678">
         <path>darkarms.zip</path>
         <name>Dark Arms - Beast Buster 1999 (Euro, USA) ~ Beast Buster - Yami no Seitai Heiki (Jpn)</name>
         <desc>Dark Arms: Beast Buster 1999 is a RPG for the Neo Geo Pocket Color. It's a spin-off from the arcade game Beast Busters.
@@ -241,11 +253,11 @@ The game features puzzles that have to be solved and a wide array of undead mons
         <genre>Role playing games</genre>
         <genreid>8</genreid>
         <players>1-2</players>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/darkarms.png</image>
         <video type="video">media/video/darkarms.mp4</video>
     </game>
-    <game id="177575">
+    <game id="3510116759">
         <path>darkarmsp.zip</path>
         <name>Dark Arms - Beast Buster 1999 (Prototype)</name>
         <desc>Dark Arms: Beast Buster 1999 is a RPG for the Neo Geo Pocket Color. It's a spin-off from the arcade game Beast Busters.
@@ -261,9 +273,11 @@ The game features puzzles that have to be solved and a wide array of undead mons
         <genreid>8</genreid>
         <players>1-2</players>
         <cloneof>darkarms.zip</cloneof>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
+        <image type="mixrbv2">media/mixrbv2/darkarms.png</image>
+        <video type="video">media/video/darkarms.mp4</video>
     </game>
-    <game id="177577">
+    <game id="3281482173">
         <path>deltawrp.zip</path>
         <name>Delta Warp (Jpn)</name>
         <desc>Delta Warp is a puzzle game released in 2000 for the Neo Geo Pocket Color. The game involves the player moving triangular shaped tiles across a board whilst avoiding hazards such as ice. Delta Warp was released only in Japan but features English text menus and the simple gameplay style means it can be played by non-Japanese readers.</desc>
@@ -274,11 +288,11 @@ The game features puzzles that have to be solved and a wide array of undead mons
         <genre>Puzzle-Game</genre>
         <genreid>26</genreid>
         <players>1-2</players>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/deltawrp.png</image>
         <video type="video">media/video/deltawrp.mp4</video>
     </game>
-    <game id="177579">
+    <game id="872750553">
         <path>ogrebatl.zip</path>
         <name>Densetsu no Ogre Battle Gaiden - Zenobia no Ouji (Jpn)</name>
         <desc>A side story to the original Ogre Battle game for the SNES, Zenobia no Ouji's side-story takes place during the fourteenth chapter ("The Capital of Milano") of the original game.
@@ -291,11 +305,11 @@ Much like its predecessor, the game is a unique blend of traditional RPG and str
         <genre>Strategy</genre>
         <genreid>27</genreid>
         <players>1-2</players>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/ogrebatl.png</image>
         <video type="video">media/video/ogrebatl.mp4</video>
     </game>
-    <game id="177580">
+    <game id="3774881575">
         <path>dendego2.zip</path>
         <name>Densha de Go! 2 on Neo Geo Pocket (Jpn)</name>
         <desc>The 1998 sequel of the popular Japanese train driving game by Taito has once again been ported to various home systems. For the first time on the PlayStation, it is possible to drive through the snow, and take a seat in the cockpit of a Shinkansen bullet train.
@@ -316,11 +330,11 @@ The following routes are available:
         <genre>Simulation</genre>
         <genreid>40</genreid>
         <players>1-2</players>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/dendego2.png</image>
         <video type="video">media/video/dendego2.mp4</video>
     </game>
-    <game id="177580">
+    <game id="3854587482">
         <path>dendego2p.zip</path>
         <name>Densha de Go! 2 on Neo Geo Pocket (Jpn, Prototype)</name>
         <desc>The 1998 sequel of the popular Japanese train driving game by Taito has once again been ported to various home systems. For the first time on the PlayStation, it is possible to drive through the snow, and take a seat in the cockpit of a Shinkansen bullet train.
@@ -342,9 +356,11 @@ The following routes are available:
         <genreid>40</genreid>
         <players>1-2</players>
         <cloneof>dendego2.zip</cloneof>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
+        <image type="mixrbv2">media/mixrbv2/dendego2.png</image>
+        <video type="video">media/video/dendego2.mp4</video>
     </game>
-    <game id="177585">
+    <game id="403629511">
         <path>divealrmj.zip</path>
         <name>Dive Alert - Barn Hen (Jpn)</name>
         <desc>The player takes control of a character named Matt. The game is set in the future and the world is primarily surrounded by water. The only small patch of land called is called Terra. The player must show their worth to be accepted on to Terra by proving their skill as a submarine commander and destroying enemy vessels.
@@ -358,9 +374,11 @@ Matt's version features different characters, items and boats to Becky's version
         <genreid>8</genreid>
         <players>1-2</players>
         <cloneof>divealrm.zip</cloneof>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
+        <image type="mixrbv2">media/mixrbv2/divealrm.png</image>
+        <video type="video">media/video/divealrm.mp4</video>
     </game>
-    <game id="177585">
+    <game id="1048034833">
         <path>divealrmjp.zip</path>
         <name>Dive Alert - Barn Hen (Jpn, Prototype)</name>
         <desc>The player takes control of a character named Matt. The game is set in the future and the world is primarily surrounded by water. The only small patch of land called is called Terra. The player must show their worth to be accepted on to Terra by proving their skill as a submarine commander and destroying enemy vessels.
@@ -374,9 +392,11 @@ Matt's version features different characters, items and boats to Becky's version
         <genreid>8</genreid>
         <players>1-2</players>
         <cloneof>divealrm.zip</cloneof>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
+        <image type="mixrbv2">media/mixrbv2/divealrm.png</image>
+        <video type="video">media/video/divealrm.mp4</video>
     </game>
-    <game id="177582">
+    <game id="541768166">
         <path>divealrb.zip</path>
         <name>Dive Alert - Becky's Version (Euro, USA)</name>
         <desc>Dive Alert: Becky's Version is an RPG for the Neo Geo Pocket Color. There is another version of Dive Alert called Dive Alert: Matt's Version. The two games are rather like joint Pokemon releases (Red/Blue, etc) wherein they are overall the same game with a variety of smaller differences.
@@ -393,11 +413,11 @@ The game features the ability for two players to link up Neo Geo Pocket Color un
         <genre>Role playing games</genre>
         <genreid>8</genreid>
         <players>1-2</players>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/divealrb.png</image>
         <video type="video">media/video/divealrb.mp4</video>
     </game>
-    <game id="177585">
+    <game id="1735011086">
         <path>divealrm.zip</path>
         <name>Dive Alert - Matt's Version (Euro, USA)</name>
         <desc>The player takes control of a character named Matt. The game is set in the future and the world is primarily surrounded by water. The only small patch of land called is called Terra. The player must show their worth to be accepted on to Terra by proving their skill as a submarine commander and destroying enemy vessels.
@@ -410,11 +430,11 @@ Matt's version features different characters, items and boats to Becky's version
         <genre>Role playing games</genre>
         <genreid>8</genreid>
         <players>1-2</players>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/divealrm.png</image>
         <video type="video">media/video/divealrm.mp4</video>
     </game>
-    <game id="177582">
+    <game id="747450522">
         <path>divealrbj.zip</path>
         <name>Dive Alert - Rebecca Hen (Jpn)</name>
         <desc>Dive Alert: Becky's Version is an RPG for the Neo Geo Pocket Color. There is another version of Dive Alert called Dive Alert: Matt's Version. The two games are rather like joint Pokemon releases (Red/Blue, etc) wherein they are overall the same game with a variety of smaller differences.
@@ -432,9 +452,11 @@ The game features the ability for two players to link up Neo Geo Pocket Color un
         <genreid>8</genreid>
         <players>1-2</players>
         <cloneof>divealrb.zip</cloneof>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
+        <image type="mixrbv2">media/mixrbv2/divealrb.png</image>
+        <video type="video">media/video/divealrb.mp4</video>
     </game>
-    <game id="177587">
+    <game id="3910466138">
         <path>dokodemo.zip</path>
         <name>Dokodemo Mahjong (Jpn)</name>
         <desc>Jeu de Mahjong ou l'on prend part à des parties de 4 joueurs, et ou l'on joue de l'argent.
@@ -445,11 +467,11 @@ La partie se termine une fois notre cave de depart epuisé.</desc>
         <publisher id="776">ADK</publisher>
         <genre>Asiatic board game</genre>
         <genreid>2647</genreid>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/dokodemo.png</image>
         <video type="video">media/video/dokodemo.mp4</video>
     </game>
-    <game id="177588">
+    <game id="2482737540">
         <path>dynaslug.zip</path>
         <name>Dynamite Slugger (Euro, Jpn)</name>
         <desc>Dynamite Slugger is a video game. It was released in 2000 for the Neo Geo Pocket Color handheld game console. The game is similar to other Baseball videogames on the Neo Geo Pocket Color such as Baseball Stars and Baseball Stars Color. Due to Dynamite Slugger being the latest baseball videogame to be released for the Neo Geo Pocket Color it features better graphics than other sports titles.</desc>
@@ -460,11 +482,11 @@ La partie se termine une fois notre cave de depart epuisé.</desc>
         <genre>Sports / Baseball</genre>
         <genreid>2853</genreid>
         <players>1-2</players>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/dynaslug.png</image>
         <video type="video">media/video/dynaslug.mp4</video>
     </game>
-    <game id="177589">
+    <game id="1680074062">
         <path>evolutn.zip</path>
         <name>Evolution - Eternal Dungeons (Euro)</name>
         <desc>A portable version of Evolution: The World of Sacred Device. Eternal Dungeon tells the story of the young explorer Mag Launcher and his quest for the fabled Evolutia, an item of immense power.
@@ -478,11 +500,11 @@ As expected for a portable version, the gameplay has been significantly downgrad
         <genre>Role playing games</genre>
         <genreid>8</genreid>
         <players>1-2</players>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/evolutn.png</image>
         <video type="video">media/video/evolutn.mp4</video>
     </game>
-    <game id="177590">
+    <game id="3397488841">
         <path>cotton.zip</path>
         <name>Fantastic Night Dreams Cotton (Euro)</name>
         <desc>Fantastic Night Dreams: Cotton is a 2D side-scrolling shooter in which the player takes the role of the young witch Cotton, who sets out on her magical broom on a quest to get her favorite candy. Fortunately for us her obsession gets her in the way of several world-threatening terrors that she must destroy in standard shooter fare.
@@ -495,11 +517,11 @@ The game features an experience-earning system in which the more enemies the pla
         <genre>Shoot'em Up</genre>
         <genreid>79</genreid>
         <players>1</players>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/cotton.png</image>
         <video type="video">media/video/cotton.mp4</video>
     </game>
-    <game id="177590">
+    <game id="1804844330">
         <path>cottonj.zip</path>
         <name>Fantastic Night Dreams Cotton (Jpn)</name>
         <desc>Fantastic Night Dreams: Cotton is a 2D side-scrolling shooter in which the player takes the role of the young witch Cotton, who sets out on her magical broom on a quest to get her favorite candy. Fortunately for us her obsession gets her in the way of several world-threatening terrors that she must destroy in standard shooter fare.
@@ -513,9 +535,11 @@ The game features an experience-earning system in which the more enemies the pla
         <genreid>79</genreid>
         <players>1</players>
         <cloneof>cotton.zip</cloneof>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
+        <image type="mixrbv2">media/mixrbv2/cotton.png</image>
+        <video type="video">media/video/cotton.mp4</video>
     </game>
-    <game id="76070">
+    <game id="3282337849">
         <path>faselei.zip</path>
         <name>Faselei! (Euro)</name>
         <desc>Faselei! is one of the last titles to be released for the Neo Geo Pocket Color and even features digitised lyrics to the game's main theme. Heavily story driven, this strategy RPG takes place in a time when mechs known as TS are the weapon of choice for combat. Gameplay revolves around the battles and customising your TS between those battles.
@@ -528,11 +552,11 @@ Battles are part turn based and part realtime. The player inputs their actions a
         <genre>Strategy</genre>
         <genreid>27</genreid>
         <players>1</players>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/faselei.png</image>
         <video type="video">media/video/faselei.mp4</video>
     </game>
-    <game id="76070">
+    <game id="4256798720">
         <path>faseleij.zip</path>
         <name>Faselei! (Jpn)</name>
         <desc>Faselei! is one of the last titles to be released for the Neo Geo Pocket Color and even features digitised lyrics to the game's main theme. Heavily story driven, this strategy RPG takes place in a time when mechs known as TS are the weapon of choice for combat. Gameplay revolves around the battles and customising your TS between those battles.
@@ -546,9 +570,11 @@ Battles are part turn based and part realtime. The player inputs their actions a
         <genreid>27</genreid>
         <players>1</players>
         <cloneof>faselei.zip</cloneof>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
+        <image type="mixrbv2">media/mixrbv2/faselei.png</image>
+        <video type="video">media/video/faselei.mp4</video>
     </game>
-    <game id="177596">
+    <game id="1958438033">
         <path>ganbaren.zip</path>
         <name>Ganbare Neo Poke-kun (Jpn)</name>
         <desc>In this unique game you keep watch on the wacky Neo Poke-kun, a cartoony programmer...thing that lives locked in his small Tokyo apartment. You don't have direct control of his actions but instead interact with him indirectly by switching stuff in his apartment on and off, which triggers different reactions from him. More importantly you can invite different characters to visit Neo Poke-kun, which will also trigger different reactions from him. Depending on the time of day and the visitor you may get different reactions from Poke-kun, and if you make him happy enough he'll get to work and code a mini-game for you.
@@ -563,7 +589,7 @@ The game has a distinctly bizarre sense of humor with tons of wacky animations p
         <genre>Simulation</genre>
         <genreid>40</genreid>
         <players>1-2</players>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/ganbaren.png</image>
         <video type="video">media/video/ganbaren.mp4</video>
     </game>
@@ -571,9 +597,9 @@ The game has a distinctly bizarre sense of humor with tons of wacky animations p
         <path>gearsoffate.zip</path>
         <name>Gears of Fate (HB)</name>
         <releasedate>20000101T000000</releasedate>
-        <system id="25" parentId="82">Neo-Geo Pocket</system>
+        <system id="25" parentid="82">Neo-Geo Pocket</system>
     </game>
-    <game id="177597">
+    <game id="2876465825">
         <path>infinity.zip</path>
         <name>Infinity Cure (Jpn)</name>
         <desc>A port of the visual novel "Infinity" for the Neo-Geo Pocket Color</desc>
@@ -584,11 +610,11 @@ The game has a distinctly bizarre sense of humor with tons of wacky animations p
         <genre>Adventure</genre>
         <genreid>13</genreid>
         <players>1</players>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/infinity.png</image>
         <video type="video">media/video/infinity.mp4</video>
     </game>
-    <game id="177598">
+    <game id="2314231232">
         <path>kikousei.zip</path>
         <name>Kikou Seiki Unitron - Sono Tsuide. Hikari Umareru Chi Yori. (Jpn)</name>
         <desc>Kikou Seiki Unitron (English: Armor Chronicles Unitron) is the sequel to Biomotor Unitron. 
@@ -604,11 +630,11 @@ Using a link cable two players can pit their unitrons against each other in a he
         <genre>Role playing games</genre>
         <genreid>8</genreid>
         <players>1-2</players>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/kikousei.png</image>
         <video type="video">media/video/kikousei.mp4</video>
     </game>
-    <game id="167484">
+    <game id="2125705061">
         <path>kof_mlon.zip</path>
         <name>King of Fighters R-1 &amp; Melon-chan no Seichou Nikki (Jpn, Prototype)</name>
         <desc>The King of Fighters: R1 marks SNK's first time bringing the KOF series onto a handheld... and what better system than their own Neo Geo Pocket to do just that? 14 of the most well known KOF characters make their appearance in KOF: R-1, along with some recognizable backgrounds and gameplay features based on The King of Fighters '97. Players can choose from "Extra" &amp; "Advance" play modes similar to KOF '97, and most characters play closely to their original versions.</desc>
@@ -619,11 +645,11 @@ Using a link cable two players can pit their unitrons against each other in a he
         <genre>Fight</genre>
         <genreid>14</genreid>
         <players>2</players>
-        <system id="25" parentId="82">Neo-Geo Pocket</system>
+        <system id="25" parentid="82">Neo-Geo Pocket</system>
         <image type="mixrbv2">media/mixrbv2/kof_mlon.png</image>
         <video type="video">media/video/kof_mlon.mp4</video>
     </game>
-    <game id="177603">
+    <game id="4157562077">
         <path>koikoi.zip</path>
         <name>Koi Koi Mahjong (Jpn)</name>
         <desc>"Koi Koi Mahjong" is a Mahjong simulation, reserved for the Japanese market.
@@ -634,11 +660,11 @@ The player can choose between 4 protagonists and 3 game modes.</desc>
         <publisher id="325">Visco</publisher>
         <genre>Asiatic board game</genre>
         <genreid>2647</genreid>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/koikoi.png</image>
         <video type="video">media/video/koikoi.mp4</video>
     </game>
-    <game id="177606">
+    <game id="1414368267">
         <path>magdropjd.zip</path>
         <name>Magical Drop Pocket (Demo)</name>
         <desc>Magical Drop Pocket's core mechanics are similar to those of Magical Drop III. The only exception is that that the battlefield consists of six columns instead of seven, akin to the Super Famicom ports of the first two Magical Drop games.
@@ -654,9 +680,11 @@ Like many other handheld puzzle games of the time, Story does not feature a "tru
         <genreid>26</genreid>
         <players>1-2</players>
         <cloneof>magdrop.zip</cloneof>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
+        <image type="mixrbv2">media/mixrbv2/magdrop.png</image>
+        <video type="video">media/video/magdrop.mp4</video>
     </game>
-    <game id="177606">
+    <game id="3056413399">
         <path>magdrop.zip</path>
         <name>Magical Drop Pocket (Euro, USA)</name>
         <desc>Magical Drop Pocket's core mechanics are similar to those of Magical Drop III. The only exception is that that the battlefield consists of six columns instead of seven, akin to the Super Famicom ports of the first two Magical Drop games.
@@ -671,11 +699,11 @@ Like many other handheld puzzle games of the time, Story does not feature a "tru
         <genre>Puzzle-Game</genre>
         <genreid>26</genreid>
         <players>1-2</players>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/magdrop.png</image>
         <video type="video">media/video/magdrop.mp4</video>
     </game>
-    <game id="177606">
+    <game id="448263368">
         <path>magdropj.zip</path>
         <name>Magical Drop Pocket (Jpn)</name>
         <desc>Magical Drop Pocket's core mechanics are similar to those of Magical Drop III. The only exception is that that the battlefield consists of six columns instead of seven, akin to the Super Famicom ports of the first two Magical Drop games.
@@ -691,9 +719,11 @@ Like many other handheld puzzle games of the time, Story does not feature a "tru
         <genreid>26</genreid>
         <players>1-2</players>
         <cloneof>magdrop.zip</cloneof>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
+        <image type="mixrbv2">media/mixrbv2/magdrop.png</image>
+        <video type="video">media/video/magdrop.mp4</video>
     </game>
-    <game id="167486">
+    <game id="3207765223">
         <path>melonchn.zip</path>
         <name>Melon-chan no Seichou Nikki (Jpn)</name>
         <desc>Melon Chan's Growth Diary (Japan: Melon-chan no Seichouki) is a Life simulation game it is comparable to Tamagotchi and other virtual life simulations. In Melon Chan's Growth Diary the player raises and nurtures little girl Melon Chan. The games was only released in Japan and was one of the earliest titles released for the Neo Geo Pocket.
@@ -703,14 +733,14 @@ The game was released for the Neo Geo Pocket and features monochrome graphics; h
         <releasedate>19980101T000000</releasedate>
         <developer id="776">ADK</developer>
         <publisher id="80">SNK</publisher>
-        <genre>Simulation</genre>
-        <genreid>40</genreid>
+        <genre>Simulation / Life</genre>
+        <genreid>20684</genreid>
         <players>1</players>
-        <system id="25" parentId="82">Neo-Geo Pocket</system>
+        <system id="25" parentid="82">Neo-Geo Pocket</system>
         <image type="mixrbv2">media/mixrbv2/melonchn.png</image>
         <video type="video">media/video/melonchn.mp4</video>
     </game>
-    <game id="177608">
+    <game id="1593217226">
         <path>memories.zip</path>
         <name>Memories Off - Pure (Jpn)</name>
         <desc>Memories Off: Pure game takes place a few years prior to the events in Memories Off. (a Visual Novel released in 1999 on Playstation) 
@@ -723,11 +753,11 @@ One playthrough of Pure takes about 3-4 hours, but it has replay value through a
         <genre>Adventure</genre>
         <genreid>13</genreid>
         <players>1</players>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/memories.png</image>
         <video type="video">media/video/memories.mp4</video>
     </game>
-    <game id="177609">
+    <game id="3567573860">
         <path>mslug1st.zip</path>
         <name>Metal Slug - 1st Mission (World)</name>
         <desc>As a member of the elite forces squad "Peregrine Falcons," your mission is to eliminate the evil Colonel Bildegaarn. Using the Metal Slug multifunction tank and the Slug Flyer as well as your wits and handgun blast through up to 17 missions in your quest to make the world safe from tyranny. Multiple stage progressions and a gameplay ranking system give reason to play through more than once. In-game save lets the player on the go turn off the Neo Geo Pocket and not lose progress.</desc>
@@ -738,11 +768,11 @@ One playthrough of Pure takes about 3-4 hours, but it has replay value through a
         <genre>Shooter</genre>
         <genreid>2646</genreid>
         <players>1</players>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/mslug1st.png</image>
         <video type="video">media/video/mslug1st.mp4</video>
     </game>
-    <game id="177610">
+    <game id="2050602593">
         <path>mslug2ndd.zip</path>
         <name>Metal Slug - 2nd Mission (Demo)</name>
         <desc>Take control of the Metal Slug tank on the NGPC once again, this time to defeat the rebel strike force "Phantom." Travel through 38 stages in a non-linear battle path defeating enemy troops and rescuing hostages. Pilot the Metal Slug tank, Slug Flyer combat jet, and the Slug Sub submarine and fire the heavy machine gun, rocket launcher, and fire gun. Two unique playable characters, a list of rescued hostages, and a time attack mode add depth to this side-scroller.</desc>
@@ -754,9 +784,11 @@ One playthrough of Pure takes about 3-4 hours, but it has replay value through a
         <genreid>2646</genreid>
         <players>1</players>
         <cloneof>mslug2nd.zip</cloneof>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
+        <image type="mixrbv2">media/mixrbv2/mslug2nd.png</image>
+        <video type="video">media/video/mslug2nd.mp4</video>
     </game>
-    <game id="177610">
+    <game id="3680424146">
         <path>mslug2nd.zip</path>
         <name>Metal Slug - 2nd Mission (World)</name>
         <desc>Take control of the Metal Slug tank on the NGPC once again, this time to defeat the rebel strike force "Phantom." Travel through 38 stages in a non-linear battle path defeating enemy troops and rescuing hostages. Pilot the Metal Slug tank, Slug Flyer combat jet, and the Slug Sub submarine and fire the heavy machine gun, rocket launcher, and fire gun. Two unique playable characters, a list of rescued hostages, and a time attack mode add depth to this side-scroller.</desc>
@@ -767,11 +799,11 @@ One playthrough of Pure takes about 3-4 hours, but it has replay value through a
         <genre>Shooter</genre>
         <genreid>2646</genreid>
         <players>1</players>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/mslug2nd.png</image>
         <video type="video">media/video/mslug2nd.mp4</video>
     </game>
-    <game id="177612">
+    <game id="3838489332">
         <path>mezase.zip</path>
         <name>Mezase! Kanji Ou (Jpn)</name>
         <desc>A kanji-study game with a quiz-like approach.</desc>
@@ -780,11 +812,11 @@ One playthrough of Pure takes about 3-4 hours, but it has replay value through a
         <publisher id="80">SNK</publisher>
         <genre>Educational</genre>
         <genreid>30</genreid>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/mezase.png</image>
         <video type="video">media/video/mezase.mp4</video>
     </game>
-    <game id="177613">
+    <game id="1883433845">
         <path>mizuki.zip</path>
         <name>Mizuki Shigeru no Youkai Shashinkan (Jpn)</name>
         <desc>This is an RPG based on the works of the famous manga artist Shigeru Mizuki, known in Japan for his knowledge of youkai (supernatural ghosts of Japanese folklore). In this game, you explore various areas of Japan, taking pictures of youkai, and using these pictures in card battles. This is a very popular game among Japanese NGPC enthusiasts.</desc>
@@ -795,29 +827,31 @@ One playthrough of Pure takes about 3-4 hours, but it has replay value through a
         <genre>Role playing games</genre>
         <genreid>8</genreid>
         <players>1</players>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/mizuki.png</image>
         <video type="video">media/video/mizuki.mp4</video>
     </game>
-    <game id="177619">
+    <game id="785910028">
         <path>neoderby.zip</path>
         <name>Neo Derby Champ Daiyosou (Jpn)</name>
         <desc>Neo Derby Champ Daiyosou is a Sports game, developed and published by Dyna Corporation, which was released in Japan in 1999.</desc>
         <releasedate>19990101T000000</releasedate>
-        <publisher id="5525">Dyna</publisher>
+        <developer id="29831">Dyna Corporation</developer>
+        <publisher id="29831">Dyna Corporation</publisher>
         <genre>Sports with Animals</genre>
         <genreid>2650</genreid>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <players>1</players>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/neoderby.png</image>
         <video type="video">media/video/neoderby.mp4</video>
     </game>
-    <game id="167482">
+    <game id="1785172626">
         <path>ngp.zip</path>
         <name>NeoGeo Pocket (Bios)</name>
-        <system id="25" parentId="82">Neo-Geo Pocket</system>
+        <system id="25" parentid="82">Neo-Geo Pocket</system>
         <image type="mixrbv2">media/mixrbv2/ngp.png</image>
     </game>
-    <game id="177627">
+    <game id="1328838143">
         <path>nigeronpe.zip</path>
         <name>Nige-ron-pa (Hack, English)</name>
         <desc>A simple handheld RPG mostly made up of side- and fetch quests. As you move through the game you can recruit friends and receive various licenses that function similar to jobs, that allow you to perform more powerful skills and magic attacks.</desc>
@@ -828,9 +862,11 @@ One playthrough of Pure takes about 3-4 hours, but it has replay value through a
         <genre>Role playing games</genre>
         <genreid>8</genreid>
         <cloneof>nigeronp.zip</cloneof>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
+        <image type="mixrbv2">media/mixrbv2/nigeronp.png</image>
+        <video type="video">media/video/nigeronp.mp4</video>
     </game>
-    <game id="177627">
+    <game id="2777396020">
         <path>nigeronp.zip</path>
         <name>Nige-ron-pa (Jpn)</name>
         <desc>A simple handheld RPG mostly made up of side- and fetch quests. As you move through the game you can recruit friends and receive various licenses that function similar to jobs, that allow you to perform more powerful skills and magic attacks.</desc>
@@ -840,11 +876,11 @@ One playthrough of Pure takes about 3-4 hours, but it has replay value through a
         <publisher id="18845">Dennou Eizou</publisher>
         <genre>Role playing games</genre>
         <genreid>8</genreid>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/nigeronp.png</image>
         <video type="video">media/video/nigeronp.mp4</video>
     </game>
-    <game id="177642">
+    <game id="221081946">
         <path>oekakip.zip</path>
         <name>Oekaki Puzzle (Jpn)</name>
         <desc>Picture Puzzle (Oekaki Puzzle in Japan) is a paint-by-numbers puzzle game developed by Success for the Neo Geo Pocket Color. The game plays identical to Nintendo's Picross series. Picture Puzzle offers a total of 200 puzzles: 20 5x5 puzzles, 105 10x10's, and 75 15x15's. This is biased towards smaller puzzles because the grids in anything larger would be incredibly tiny on the NGPC's screen. Also, larger puzzles take much longer to solve; smaller puzzles allows you to pick up the Pocket for 10-20 minutes at a time and, on a good day, solve a complete puzzle.
@@ -858,9 +894,11 @@ Upon completion of a puzzle, the game replaces it with a colored version of the 
         <genreid>26</genreid>
         <players>1</players>
         <cloneof>picturep.zip</cloneof>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
+        <image type="mixrbv2">media/mixrbv2/picturep.png</image>
+        <video type="video">media/video/picturep.mp4</video>
     </game>
-    <game id="177629">
+    <game id="3358139045">
         <path>pacman.zip</path>
         <name>Pac-Man (World)</name>
         <desc>One of the most popular and influential games of the 1980's, Pac-Man stars a little, yellow dot-muncher who works his way around to clear a maze of the various dots and fruit which inhabit the board.
@@ -877,11 +915,11 @@ Survive a few rounds of gameplay, and be treated to humorous intermissions betwe
         <genre>Action / Labyrinth</genre>
         <genreid>2937</genreid>
         <players>1</players>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/pacman.png</image>
         <video type="video">media/video/pacman.mp4</video>
     </game>
-    <game id="177630">
+    <game id="172779516">
         <path>pslotazt.zip</path>
         <name>Pachi-Slot Aruze Oukoku Pocket - Azteca (Jpn)</name>
         <desc>This software reproduces the popular pachislot machine "Azteca". In addition to playing the actual machine, the software is equipped with a database of "Reach Me" and "CT Lottery Laws" and a "CT Machine Notebook Mode" that allows users to enter records of their actual play at a real hall.</desc>
@@ -891,11 +929,11 @@ Survive a few rounds of gameplay, and be treated to humorous intermissions betwe
         <publisher id="29839">Aruze Corp</publisher>
         <genre>Casino</genre>
         <genreid>320</genreid>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/pslotazt.png</image>
         <video type="video">media/video/pslotazt.mp4</video>
     </game>
-    <game id="177631">
+    <game id="466410367">
         <path>pslotdk2.zip</path>
         <name>Pachi-Slot Aruze Oukoku Pocket - Dekahel 2 (Jpn)</name>
         <desc>Pachi-Slot Aruze Oukoku Pocket: DH2 is a Miscellaneous game, developed and published by Aruze Corp, which was released in Japan in 2001.</desc>
@@ -904,11 +942,11 @@ Survive a few rounds of gameplay, and be treated to humorous intermissions betwe
         <publisher id="29839">Aruze Corp</publisher>
         <genre>Casino</genre>
         <genreid>320</genreid>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/pslotdk2.png</image>
         <video type="video">media/video/pslotdk2.mp4</video>
     </game>
-    <game id="177632">
+    <game id="4016461680">
         <path>pslotds2.zip</path>
         <name>Pachi-Slot Aruze Oukoku Pocket - Delsol 2 (Jpn)</name>
         <desc>Includes "Del Sol 2," the successor to the "Azteca" pachislot machine. A total of four modes can be played: "Free Play Mode" for careful simulation, "Replay Removal Training Mode" and "CT Training Mode" for practice focused on techniques necessary for strategy, and "Notebook Mode" for actual data input and analysis.</desc>
@@ -918,11 +956,11 @@ Survive a few rounds of gameplay, and be treated to humorous intermissions betwe
         <publisher id="29839">Aruze Corp</publisher>
         <genre>Casino</genre>
         <genreid>320</genreid>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/pslotds2.png</image>
         <video type="video">media/video/pslotds2.mp4</video>
     </game>
-    <game id="177633">
+    <game id="3207649219">
         <path>pslotecp.zip</path>
         <name>Pachi-Slot Aruze Oukoku Pocket - e-Cup (Jpn)</name>
         <desc>A pachislot machine simulator of the same name, based on the subject of golf. It features a "Replay Removal Training Mode" to learn techniques for winning large amounts of medals, and a "Strategy Memo Function" that allows users to create a database by entering the results of playing the actual machine, income and expenditure, and the payout status of the expansion.</desc>
@@ -932,11 +970,11 @@ Survive a few rounds of gameplay, and be treated to humorous intermissions betwe
         <publisher id="29839">Aruze Corp</publisher>
         <genre>Casino</genre>
         <genreid>320</genreid>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/pslotecp.png</image>
         <video type="video">media/video/pslotecp.mp4</video>
     </game>
-    <game id="177635">
+    <game id="224368794">
         <path>pslothana.zip</path>
         <name>Pachi-Slot Aruze Oukoku Pocket - Hanabi (Jpn, v3)</name>
         <desc>Software aimed at capturing the popular pachislot "HANABI". We will support the capture of the actual machine with a full range of functions such as a function to make a note of the actual number of balls in the hall and the amount of income and expenditure, free play, and data analysis. There is also a "delay".</desc>
@@ -947,9 +985,11 @@ Survive a few rounds of gameplay, and be treated to humorous intermissions betwe
         <genre>Casino</genre>
         <genreid>320</genreid>
         <cloneof>pslothan.zip</cloneof>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
+        <image type="mixrbv2">media/mixrbv2/pslothan.png</image>
+        <video type="video">media/video/pslothan.mp4</video>
     </game>
-    <game id="177635">
+    <game id="1219383147">
         <path>pslothan.zip</path>
         <name>Pachi-Slot Aruze Oukoku Pocket - Hanabi (Jpn, v5)</name>
         <desc>Software aimed at capturing the popular pachislot "HANABI". We will support the capture of the actual machine with a full range of functions such as a function to make a note of the actual number of balls in the hall and the amount of income and expenditure, free play, and data analysis. There is also a "delay".</desc>
@@ -959,11 +999,11 @@ Survive a few rounds of gameplay, and be treated to humorous intermissions betwe
         <publisher id="29839">Aruze Corp</publisher>
         <genre>Casino</genre>
         <genreid>320</genreid>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/pslothan.png</image>
         <video type="video">media/video/pslothan.mp4</video>
     </game>
-    <game id="177636">
+    <game id="811114979">
         <path>pslotooh.zip</path>
         <name>Pachi-Slot Aruze Oukoku Pocket - Oohanabi (Jpn)</name>
         <desc>A complete reproduction of the actual pachislot machine of the same name published by Aruze. Using the function settings, various strategy techniques can be cultivated. It also has a "strategy memo function" that allows users to create their own original database by inputting the results of actual play at the hall, income and expenditure, and payout status of expansion.</desc>
@@ -971,11 +1011,11 @@ Survive a few rounds of gameplay, and be treated to humorous intermissions betwe
         <publisher id="29839">Aruze Corp</publisher>
         <genre>Casino</genre>
         <genreid>320</genreid>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/pslotooh.png</image>
         <video type="video">media/video/pslotooh.mp4</video>
     </game>
-    <game id="177637">
+    <game id="1239292253">
         <path>pslotpc2.zip</path>
         <name>Pachi-Slot Aruze Oukoku Pocket - Porcano 2 (Jpn)</name>
         <desc>The latest in the Aruze Pachiro simulator series. This time, the popular PORKANO2 model is included. Practice with this software to hone your skills and conquer real pachislot.</desc>
@@ -984,11 +1024,11 @@ Survive a few rounds of gameplay, and be treated to humorous intermissions betwe
         <publisher id="29839">Aruze Corp</publisher>
         <genre>Casino</genre>
         <genreid>320</genreid>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/pslotpc2.png</image>
         <video type="video">media/video/pslotpc2.mp4</video>
     </game>
-    <game id="177638">
+    <game id="2697241190">
         <path>pslotwrd.zip</path>
         <name>Pachi-Slot Aruze Oukoku Pocket - Ward of Lights (Jpn)</name>
         <desc>Reproduced Word of Lights following the No. 1 model Azteca in 1999. In addition to normal play as on the actual machine, there is a mode for intensive practice of replay removal and CT play, as well as a database and a mode for registering practice records.</desc>
@@ -997,11 +1037,11 @@ Survive a few rounds of gameplay, and be treated to humorous intermissions betwe
         <publisher id="29839">Aruze Corp</publisher>
         <genre>Casino</genre>
         <genreid>320</genreid>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/pslotwrd.png</image>
         <video type="video">media/video/pslotwrd.mp4</video>
     </game>
-    <game id="177639">
+    <game id="1880108449">
         <path>pachinko.zip</path>
         <name>Pachinko Hisshou Guide - Pocket Parlor (Jpn)</name>
         <desc>Software that reproduces the popular actual machine "CR Fever Casino RX". The software is complete with commentary by Mr. Osaki Ichimanbatsu, who is well-known for his work in the magazine "Pachinko Hissatsu Guide. A "Reach Gallery Mode" is also available, which displays the reach action and reliability.</desc>
@@ -1010,22 +1050,22 @@ Survive a few rounds of gameplay, and be treated to humorous intermissions betwe
         <publisher id="18847">Sankyo</publisher>
         <genre>Casino</genre>
         <genreid>320</genreid>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/pachinko.png</image>
         <video type="video">media/video/pachinko.mp4</video>
     </game>
-    <game id="177640">
+    <game id="866227100">
         <path>prtymail.zip</path>
         <name>Party Mail (Jpn)</name>
         <desc>Software for exchanging e-mails and playing mini-games with a large number of people using a wireless unit. When the sender is set as one of five different pets, they start speaking distinctive words each time mail arrives.</desc>
         <releasedate>19990101T000000</releasedate>
         <developer id="776">ADK</developer>
         <publisher id="80">SNK</publisher>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/prtymail.png</image>
         <video type="video">media/video/prtymail.mp4</video>
     </game>
-    <game id="177640">
+    <game id="2880915198">
         <path>prtymailp.zip</path>
         <name>Party Mail (Prototype)</name>
         <desc>Software for exchanging e-mails and playing mini-games with a large number of people using a wireless unit. When the sender is set as one of five different pets, they start speaking distinctive words each time mail arrives.</desc>
@@ -1033,9 +1073,11 @@ Survive a few rounds of gameplay, and be treated to humorous intermissions betwe
         <developer id="776">ADK</developer>
         <publisher id="80">SNK</publisher>
         <cloneof>prtymail.zip</cloneof>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
+        <image type="mixrbv2">media/mixrbv2/prtymail.png</image>
+        <video type="video">media/video/prtymail.mp4</video>
     </game>
-    <game id="177642">
+    <game id="1530924555">
         <path>picturep.zip</path>
         <name>Picture Puzzle (Euro, USA)</name>
         <desc>Picture Puzzle (Oekaki Puzzle in Japan) is a paint-by-numbers puzzle game developed by Success for the Neo Geo Pocket Color. The game plays identical to Nintendo's Picross series. Picture Puzzle offers a total of 200 puzzles: 20 5x5 puzzles, 105 10x10's, and 75 15x15's. This is biased towards smaller puzzles because the grids in anything larger would be incredibly tiny on the NGPC's screen. Also, larger puzzles take much longer to solve; smaller puzzles allows you to pick up the Pocket for 10-20 minutes at a time and, on a good day, solve a complete puzzle.
@@ -1048,11 +1090,11 @@ Upon completion of a puzzle, the game replaces it with a colored version of the 
         <genre>Puzzle-Game</genre>
         <genreid>26</genreid>
         <players>1</players>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/picturep.png</image>
         <video type="video">media/video/picturep.mp4</video>
     </game>
-    <game id="857377">
+    <game id="2113249507">
         <path>neo21.zip</path>
         <name>Pocket Casino Series - Neo 21 (Euro, USA)</name>
         <desc>Neo 21 is a casino-style blackjack game that offers three modes of play: Casino Mode, Original Mode, and Versus mode. As a casino style game, it supports all the actions that players sitting at a casino blackjack table can perform.
@@ -1069,11 +1111,11 @@ In Neo 21, players engage in a one-on-one match against a CPU dealer, or in the 
         <genre>Casino</genre>
         <genreid>320</genreid>
         <players>1-2</players>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/neo21.png</image>
         <video type="video">media/video/neo21.mp4</video>
     </game>
-    <game id="177615">
+    <game id="3859431031">
         <path>neobacca.zip</path>
         <name>Pocket Casino Series - Neo Baccarat (Euro)</name>
         <desc>Experience the Thrills of NEO BACCARAT, the New Game in the Pocket Casino Series!
@@ -1092,11 +1134,11 @@ To see explanations of game rules, select the "Game Explanation" item in the Opt
         <genre>Casino</genre>
         <genreid>320</genreid>
         <players>1-2</players>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/neobacca.png</image>
         <video type="video">media/video/neobacca.mp4</video>
     </game>
-    <game id="177615">
+    <game id="3761680164">
         <path>neobaccap.zip</path>
         <name>Pocket Casino Series - Neo Baccarat (Prototype)</name>
         <desc>Experience the Thrills of NEO BACCARAT, the New Game in the Pocket Casino Series!
@@ -1116,9 +1158,11 @@ To see explanations of game rules, select the "Game Explanation" item in the Opt
         <genreid>320</genreid>
         <players>1-2</players>
         <cloneof>neobacca.zip</cloneof>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
+        <image type="mixrbv2">media/mixrbv2/neobacca.png</image>
+        <video type="video">media/video/neobacca.mp4</video>
     </game>
-    <game id="167487">
+    <game id="2765138723">
         <path>neocher.zip</path>
         <name>Pocket Casino Series - Neo Cherry Master (Euro, Jpn)</name>
         <desc>Neo Cherry Master is a virtual slot machine simulator for the Neo Geo Pocket. The game simulates the old fashioned fruit-matching slots (infamously known as one-armed bandits), where the player simply "pulls the lever" and leaves the rest up to chance. The game features two modes, Simple and Original mode, with the only difference being that the latter allows for name entry and the ability to save high scores.</desc>
@@ -1128,11 +1172,11 @@ To see explanations of game rules, select the "Game Explanation" item in the Opt
         <genre>Casino / Slot machine</genre>
         <genreid>2860</genreid>
         <players>1</players>
-        <system id="25" parentId="82">Neo-Geo Pocket</system>
+        <system id="25" parentid="82">Neo-Geo Pocket</system>
         <image type="mixrbv2">media/mixrbv2/neocher.png</image>
         <video type="video">media/video/neocher.mp4</video>
     </game>
-    <game id="177617">
+    <game id="766929169">
         <path>neocherc.zip</path>
         <name>Pocket Casino Series - Neo Cherry Master Color (World)</name>
         <desc>Experience the play of actual casino gaming! Feel the fun of ultra-real slot machine game simulation!!
@@ -1147,11 +1191,11 @@ Includes 2 modes for that tantalizing taste of slot machine gaming! (Original mo
         <genre>Casino</genre>
         <genreid>320</genreid>
         <players>1-2</players>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/neocherc.png</image>
         <video type="video">media/video/neocherc.mp4</video>
     </game>
-    <game id="177617">
+    <game id="1100745726">
         <path>neochercp.zip</path>
         <name>Pocket Casino Series - Neo Cherry Master Color (World, Prototype)</name>
         <desc>Experience the play of actual casino gaming! Feel the fun of ultra-real slot machine game simulation!!
@@ -1167,9 +1211,11 @@ Includes 2 modes for that tantalizing taste of slot machine gaming! (Original mo
         <genreid>320</genreid>
         <players>1-2</players>
         <cloneof>neocherc.zip</cloneof>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
+        <image type="mixrbv2">media/mixrbv2/neocherc.png</image>
+        <video type="video">media/video/neocherc.mp4</video>
     </game>
-    <game id="177621">
+    <game id="903416870">
         <path>neodraga.zip</path>
         <name>Pocket Casino Series - Neo Dragon's Wild (World, v11)</name>
         <desc>The super authentic Poker game simulation!!
@@ -1186,9 +1232,11 @@ Skilled players can choose Original Mode to enjoy real poker with authentic feel
         <genreid>320</genreid>
         <players>1</players>
         <cloneof>neodrag.zip</cloneof>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
+        <image type="mixrbv2">media/mixrbv2/neodrag.png</image>
+        <video type="video">media/video/neodrag.mp4</video>
     </game>
-    <game id="177621">
+    <game id="1166086941">
         <path>neodrag.zip</path>
         <name>Pocket Casino Series - Neo Dragon's Wild (World, v13)</name>
         <desc>The super authentic Poker game simulation!!
@@ -1204,11 +1252,11 @@ Skilled players can choose Original Mode to enjoy real poker with authentic feel
         <genre>Casino</genre>
         <genreid>320</genreid>
         <players>1</players>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/neodrag.png</image>
         <video type="video">media/video/neodrag.mp4</video>
     </game>
-    <game id="177623">
+    <game id="4036670426">
         <path>neomystr.zip</path>
         <name>Pocket Casino Series - Neo Mystery Bonus (World)</name>
         <desc>Neo Mystery Bonus, while not the most fully featured slots game around, is quick and simple to get into. Like most other slots games You start by placing your bet then spin the slots and test your luck. The graphics are plain and depict the different icons on the machine very clearly. There are no extra modes in the game, just basic slots.</desc>
@@ -1219,11 +1267,11 @@ Skilled players can choose Original Mode to enjoy real poker with authentic feel
         <genre>Casino</genre>
         <genreid>320</genreid>
         <players>1</players>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/neomystr.png</image>
         <video type="video">media/video/neomystr.mp4</video>
     </game>
-    <game id="177594">
+    <game id="2497689832">
         <path>fatfury.zip</path>
         <name>Pocket Fighting Series - Garou Densetsu First Contact ~ Fatal Fury F-Contact (World)</name>
         <desc>Using the world-famous Japanese "SD" (Super-Deformed) artwork style, this is the only title of the Fatal Fury series to be released on SNK's color handheld.
@@ -1238,11 +1286,11 @@ Due to NGPC hardware limitations, some characters have been removed from the mai
         <genre>Fight</genre>
         <genreid>14</genreid>
         <players>1-2</players>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/fatfury.png</image>
         <video type="video">media/video/fatfury.mp4</video>
     </game>
-    <game id="177594">
+    <game id="1201428385">
         <path>fatfuryd.zip</path>
         <name>Pocket Fighting Series - Garou Densetsu First Contact ~ Fatal Fury F-Contact (World, Demo)</name>
         <desc>Using the world-famous Japanese "SD" (Super-Deformed) artwork style, this is the only title of the Fatal Fury series to be released on SNK's color handheld.
@@ -1258,9 +1306,11 @@ Due to NGPC hardware limitations, some characters have been removed from the mai
         <genreid>14</genreid>
         <players>1-2</players>
         <cloneof>fatfury.zip</cloneof>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
+        <image type="mixrbv2">media/mixrbv2/fatfury.png</image>
+        <video type="video">media/video/fatfury.mp4</video>
     </game>
-    <game id="167485">
+    <game id="1648608752">
         <path>kofr1.zip</path>
         <name>Pocket Fighting Series - King of Fighters R-1 (Euro, Jpn)</name>
         <desc>The King of Fighters: R1 marks SNK's first time bringing the KOF series onto a handheld... and what better system than their own Neo Geo Pocket to do just that? 14 of the most well known KOF characters make their appearance in KOF: R-1, along with some recognizable backgrounds and gameplay features based on The King of Fighters '97. Players can choose from "Extra" &amp; "Advance" play modes similar to KOF '97, and most characters play closely to their original versions.</desc>
@@ -1271,31 +1321,82 @@ Due to NGPC hardware limitations, some characters have been removed from the mai
         <genre>Fight</genre>
         <genreid>14</genreid>
         <players>2</players>
-        <system id="25" parentId="82">Neo-Geo Pocket</system>
+        <system id="25" parentid="82">Neo-Geo Pocket</system>
         <image type="mixrbv2">media/mixrbv2/kofr1.png</image>
         <video type="video">media/video/kofr1.mp4</video>
     </game>
     <game id="2457490458">
         <path>kofr2.zip</path>
         <name>Pocket Fighting Series - King of Fighters R-2 (World)</name>
+        <desc>Using again the Japanese "SD" (Super-Deformed) artwork style (now reworked), the KOF Series makes your debut in the new SNK's color handheld. The title brings the same gameplay characteristics present in its arcade/console counter-part The King of Fighters '98, like the possibility of choose between two game modes (Advanced or Extra), an identical adaptation of the battle stages, the addition of "Advantage System" (directly related to the power gauges) and the chance to battle with a powered version of the "franchise boss", Rugal Bernstein.
+
+Unlike the previous game (The King of Fighters R-1), this sequence doesn't have a defined storyline, but it's implicit that Rugal is still alive and returns once again to try conquer the world and satisfy his evil ambitions.
+
+The teams included in the game were slightly reformulated and now are the following ones (this time, Leona Heidern and Iori Yagami are single entries):
+
+1. Team Kusanagi (Kyo Kusanagi, Saisyu Kusanagi and Shingo Yabuki)Super Babe Team (Athena Asamiya, Yuri Sakazaki and Kasumi Todo)
+2. New Southtown Team (Ryo Sakazaki, Mai Shiranui and Terry Bogard)
+3. Orochi Team (Yashiro Nanakase, Shermie and Chris)</desc>
+        <rating>0.80</rating>
         <releasedate>19990101T000000</releasedate>
-        <system id="25" parentId="82">Neo-Geo Pocket</system>
+        <developer id="80">SNK</developer>
+        <publisher id="80">SNK</publisher>
+        <genre>Fight</genre>
+        <genreid>14</genreid>
+        <players>1-2</players>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
+        <image type="mixrbv2">media/mixrbv2/kofr2.png</image>
+        <video type="video">media/video/kofr2.mp4</video>
     </game>
-    <game id="2457490458">
+    <game id="1581003032">
         <path>kofr2d2.zip</path>
         <name>Pocket Fighting Series - King of Fighters R-2 (World, Demo Version 2)</name>
+        <desc>Using again the Japanese "SD" (Super-Deformed) artwork style (now reworked), the KOF Series makes your debut in the new SNK's color handheld. The title brings the same gameplay characteristics present in its arcade/console counter-part The King of Fighters '98, like the possibility of choose between two game modes (Advanced or Extra), an identical adaptation of the battle stages, the addition of "Advantage System" (directly related to the power gauges) and the chance to battle with a powered version of the "franchise boss", Rugal Bernstein.
+
+Unlike the previous game (The King of Fighters R-1), this sequence doesn't have a defined storyline, but it's implicit that Rugal is still alive and returns once again to try conquer the world and satisfy his evil ambitions.
+
+The teams included in the game were slightly reformulated and now are the following ones (this time, Leona Heidern and Iori Yagami are single entries):
+
+1. Team Kusanagi (Kyo Kusanagi, Saisyu Kusanagi and Shingo Yabuki)Super Babe Team (Athena Asamiya, Yuri Sakazaki and Kasumi Todo)
+2. New Southtown Team (Ryo Sakazaki, Mai Shiranui and Terry Bogard)
+3. Orochi Team (Yashiro Nanakase, Shermie and Chris)</desc>
+        <rating>0.80</rating>
         <releasedate>19990101T000000</releasedate>
+        <developer id="80">SNK</developer>
+        <publisher id="80">SNK</publisher>
+        <genre>Fight</genre>
+        <genreid>14</genreid>
+        <players>1-2</players>
         <cloneof>kofr2.zip</cloneof>
-        <system id="25" parentId="82">Neo-Geo Pocket</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
+        <image type="mixrbv2">media/mixrbv2/kofr2.png</image>
+        <video type="video">media/video/kofr2.mp4</video>
     </game>
-    <game id="2457490458">
+    <game id="2477043740">
         <path>kofr2d.zip</path>
         <name>Pocket Fighting Series - King of Fighters R-2 (World, Demo)</name>
+        <desc>Using again the Japanese "SD" (Super-Deformed) artwork style (now reworked), the KOF Series makes your debut in the new SNK's color handheld. The title brings the same gameplay characteristics present in its arcade/console counter-part The King of Fighters '98, like the possibility of choose between two game modes (Advanced or Extra), an identical adaptation of the battle stages, the addition of "Advantage System" (directly related to the power gauges) and the chance to battle with a powered version of the "franchise boss", Rugal Bernstein.
+
+Unlike the previous game (The King of Fighters R-1), this sequence doesn't have a defined storyline, but it's implicit that Rugal is still alive and returns once again to try conquer the world and satisfy his evil ambitions.
+
+The teams included in the game were slightly reformulated and now are the following ones (this time, Leona Heidern and Iori Yagami are single entries):
+
+1. Team Kusanagi (Kyo Kusanagi, Saisyu Kusanagi and Shingo Yabuki)Super Babe Team (Athena Asamiya, Yuri Sakazaki and Kasumi Todo)
+2. New Southtown Team (Ryo Sakazaki, Mai Shiranui and Terry Bogard)
+3. Orochi Team (Yashiro Nanakase, Shermie and Chris)</desc>
+        <rating>0.80</rating>
         <releasedate>19990101T000000</releasedate>
+        <developer id="80">SNK</developer>
+        <publisher id="80">SNK</publisher>
+        <genre>Fight</genre>
+        <genreid>14</genreid>
+        <players>1-2</players>
         <cloneof>kofr2.zip</cloneof>
-        <system id="25" parentId="82">Neo-Geo Pocket</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
+        <image type="mixrbv2">media/mixrbv2/kofr2.png</image>
+        <video type="video">media/video/kofr2.mp4</video>
     </game>
-    <game id="177658">
+    <game id="2716854604">
         <path>samsho2.zip</path>
         <name>Pocket Fighting Series - Samurai Shodown! 2 (World)</name>
         <desc>One of SNK's legendary fighting game series has made a return! In Samurai Shodown II, you can take on one of the roles of 15 warriors as you fight your way through the land to defeat the evil Mizuki! Slash, kick, and slice your opponents in half...do whatever it takes...live by the sword, and die by its blade.</desc>
@@ -1306,11 +1407,11 @@ Due to NGPC hardware limitations, some characters have been removed from the mai
         <genre>Fight</genre>
         <genreid>14</genreid>
         <players>1-2</players>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/samsho2.png</image>
         <video type="video">media/video/samsho2.mp4</video>
     </game>
-    <game id="167491">
+    <game id="2629471299">
         <path>samsho.zip</path>
         <name>Pocket Fighting Series - Samurai Spirit! (Jpn) ~ Samurai Shodown! (Euro)</name>
         <desc>Samurai Shodown! Pocket is essentially a "portable" version of Samurai Shodown 4. Like the other fighting games on the Neo Geo Pocket, the characters are drawn in Super Deformed chibi style (big heads and tiny bodies). This title was also one of the first games for the Neo Geo Pocket, so the game was only in black and white... The gameplay of Samurai Shodown is quite well adapted in the pocket version, but it is not as enjoyable as the Neo Geo classic. The gameplay is very simplified in this version. The characters keep most of their special moves and moves, but the deep strategies of the arcade are almost gone. It's basically a new game that, while not spectacular, is fun.</desc>
@@ -1321,11 +1422,11 @@ Due to NGPC hardware limitations, some characters have been removed from the mai
         <genre>Fight</genre>
         <genreid>14</genreid>
         <players>1</players>
-        <system id="25" parentId="82">Neo-Geo Pocket</system>
+        <system id="25" parentid="82">Neo-Geo Pocket</system>
         <image type="mixrbv2">media/mixrbv2/samsho.png</image>
         <video type="video">media/video/samsho.mp4</video>
     </game>
-    <game id="177643">
+    <game id="324407692">
         <path>poktlove.zip</path>
         <name>Pocket Love if (Jpn)</name>
         <desc>The third in a series that was released up to the second Game Boy. The purpose is to train myself as a high school student and receive a confession from a girl on White Day. With the addition of new characters, the system and production have also been enhanced.</desc>
@@ -1335,11 +1436,11 @@ Due to NGPC hardware limitations, some characters have been removed from the mai
         <publisher id="382">Kindle Imagine Develop</publisher>
         <genre>Simulation</genre>
         <genreid>40</genreid>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/poktlove.png</image>
         <video type="video">media/video/poktlove.mp4</video>
     </game>
-    <game id="177644">
+    <game id="401950433">
         <path>pockrev.zip</path>
         <name>Pocket Reversi (Euro)</name>
         <desc>Pocket Reversi is an adaptation by Success of the classic strategy game. In single-player, you must make your way through Tournament Mode, competing against eight progressively difficult opponents. You can also take the 'Ability Level Test' which grades you based on your play. For beginners, 'Reversi Lesson' provides ten short tutorial sessions to teach you the basics of the game. There's also a 'Free Play' mode where you can choose to see all available moves and to even take back your last move. Finally, there's a two-player mode accessible via the link cable.</desc>
@@ -1350,11 +1451,11 @@ Due to NGPC hardware limitations, some characters have been removed from the mai
         <genre>Puzzle-Game</genre>
         <genreid>26</genreid>
         <players>1</players>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/pockrev.png</image>
         <video type="video">media/video/pockrev.mp4</video>
     </game>
-    <game id="177644">
+    <game id="2615989477">
         <path>pockrevj.zip</path>
         <name>Pocket Reversi (Jpn)</name>
         <desc>Pocket Reversi is an adaptation by Success of the classic strategy game. In single-player, you must make your way through Tournament Mode, competing against eight progressively difficult opponents. You can also take the 'Ability Level Test' which grades you based on your play. For beginners, 'Reversi Lesson' provides ten short tutorial sessions to teach you the basics of the game. There's also a 'Free Play' mode where you can choose to see all available moves and to even take back your last move. Finally, there's a two-player mode accessible via the link cable.</desc>
@@ -1366,9 +1467,11 @@ Due to NGPC hardware limitations, some characters have been removed from the mai
         <genreid>26</genreid>
         <players>1</players>
         <cloneof>pockrev.zip</cloneof>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
+        <image type="mixrbv2">media/mixrbv2/pockrev.png</image>
+        <video type="video">media/video/pockrev.mp4</video>
     </game>
-    <game id="177563">
+    <game id="2131972039">
         <path>bstarsc.zip</path>
         <name>Pocket Sport Series - Baseball Stars Color (World)</name>
         <desc>Baseball Stars Color is sports game about baseball. Game is similar to Baseball Stars from NES but has less realistic characters and gameplay's style. You manage own baseball team and play in series of matches. Game has typical baseball rules - one player throws the ball, second hits the ball, someone else grabs it etc. Each character has own statistics</desc>
@@ -1379,11 +1482,11 @@ Due to NGPC hardware limitations, some characters have been removed from the mai
         <genre>Sports / Baseball</genre>
         <genreid>2853</genreid>
         <players>1-2</players>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/bstarsc.png</image>
         <video type="video">media/video/bstarsc.mp4</video>
     </game>
-    <game id="177625">
+    <game id="2321341852">
         <path>neoturfm.zip</path>
         <name>Pocket Sport Series - Big Tournament Golf ~ Neo Turf Masters (World)</name>
         <desc>Neo Turf Masters is a golf game that offers play in three different countries. You can play in the US, Germany, and Japan. There are 18 holes per course, just like in real life, which totals to 54 holes. The game features a two-player versus mode and three single player modes. You can choose from one of six different characters, who each have their own strengths and weaknesses. Like many other golf games, you use an accurate click type of play, where you click in an overhead map where you want to hit the ball, then adjust hook, slice, and power. In Versus mode, you can earn "super-clubs" that can only be used once. These can also be traded between friends.</desc>
@@ -1394,11 +1497,11 @@ Due to NGPC hardware limitations, some characters have been removed from the mai
         <genre>Sports / Golf</genre>
         <genreid>2913</genreid>
         <players>1-2</players>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/neoturfm.png</image>
         <video type="video">media/video/neoturfm.mp4</video>
     </game>
-    <game id="177622">
+    <game id="288171532">
         <path>neocuppl.zip</path>
         <name>Pocket Sport Series - Neo Geo Cup '98 Plus (World)</name>
         <desc>Neo Geo Cup '98 Plus is a soccer game for the Neo Geo Pocket. The game features single match play, head-to-head play (using a link cable), and story mode. You can choose to play one of 16 international teams. Each team has their own collective stats. On the field you can perform passes, shots, dribbles, slidings and charges. In the story mode you have to win as many matches as possible in a series of tournaments. Before and during matches you can change the field formations and switch players. Each won match gives you prize money, this can be used to buy items for your team. These items usually improve one stat, but decrease another.</desc>
@@ -1409,11 +1512,11 @@ Due to NGPC hardware limitations, some characters have been removed from the mai
         <genre>Sports</genre>
         <genreid>685</genreid>
         <players>1</players>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/neocuppl.png</image>
         <video type="video">media/video/neocuppl.mp4</video>
     </game>
-    <game id="177624">
+    <game id="2090740442">
         <path>neoproyk.zip</path>
         <name>Pocket Sport Series - Neo Poke Pro Yakyuu (Jpn)</name>
         <desc>NeoPoke Pro Yakyuu is a sports game, developed and published by SNK, which was released in Japan in 1999.</desc>
@@ -1422,11 +1525,11 @@ Due to NGPC hardware limitations, some characters have been removed from the mai
         <publisher id="80">SNK</publisher>
         <genre>Sports</genre>
         <genreid>685</genreid>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/neoproyk.png</image>
         <video type="video">media/video/neoproyk.mp4</video>
     </game>
-    <game id="177646">
+    <game id="2950274582">
         <path>ptennisc.zip</path>
         <name>Pocket Sport Series - Pocket Tennis Color (World)</name>
         <desc>This sports favorite boasts eight playable characters and enough tennis action to keep any fan happy. Enjoy realistic play that gives you complete array of shots, including lobs, high-speed smashes and more. Exhibition mode sets up a single match against the computer, or, with the NeoGeo Cable Link (sold separately), a friend. Tournament mode pits you against stiff competition to see if you've got what it takes to earn the title. Save your match results so you can brag later. Record mode lets you relax and enjoy your on-court accomplishments by viewing your records and trophies.</desc>
@@ -1437,11 +1540,11 @@ Due to NGPC hardware limitations, some characters have been removed from the mai
         <genre>Sports</genre>
         <genreid>685</genreid>
         <players>1</players>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/ptennisc.png</image>
         <video type="video">media/video/ptennisc.mp4</video>
     </game>
-    <game id="167483">
+    <game id="2945388146">
         <path>bstars.zip</path>
         <name>Pocket Sports Series - Baseball Stars (Euro, Jpn)</name>
         <desc>Baseball Stars is sports game about baseball. Game is similar to Baseball Stars from NES but has less realistic characters and gameplay's style. You manage own baseball team and play in series of matches. Game has typical baseball rules - one player throws the ball, second hits the ball, someone else grabs it etc. Each character has own statistics, like stamina.</desc>
@@ -1452,11 +1555,11 @@ Due to NGPC hardware limitations, some characters have been removed from the mai
         <genre>Sports / Baseball</genre>
         <genreid>2853</genreid>
         <players>1-2</players>
-        <system id="25" parentId="82">Neo-Geo Pocket</system>
+        <system id="25" parentid="82">Neo-Geo Pocket</system>
         <image type="mixrbv2">media/mixrbv2/bstars.png</image>
         <video type="video">media/video/bstars.mp4</video>
     </game>
-    <game id="167488">
+    <game id="545750373">
         <path>neocup98.zip</path>
         <name>Pocket Sports Series - Neo Geo Cup '98 (Euro, Jpn)</name>
         <desc>In the story mode you choose a team among the best in the world with the objective of winning the famous Neo Geo Cup. However, this is no easy task and winning the title will require long hours of intense matches. Each match will give you a certain number of points that can be used in the store, which adds a little RPG touch. Buying shorts, cleats, jerseys and many other items from a given selection will increase your team's abilities according to several criteria and make your players faster or more skilled in front of the goal.</desc>
@@ -1467,11 +1570,11 @@ Due to NGPC hardware limitations, some characters have been removed from the mai
         <genre>Sports / Soccer</genre>
         <genreid>2847</genreid>
         <players>1-2</players>
-        <system id="25" parentId="82">Neo-Geo Pocket</system>
+        <system id="25" parentid="82">Neo-Geo Pocket</system>
         <image type="mixrbv2">media/mixrbv2/neocup98.png</image>
         <video type="video">media/video/neocup98.mp4</video>
     </game>
-    <game id="167489">
+    <game id="672278352">
         <path>ptennis.zip</path>
         <name>Pocket Sports Series - Pocket Tennis (Euro, Jpn)</name>
         <desc>Pocket Tennis a simple tennis game with two play modes: Exhibition and Tournament.
@@ -1486,11 +1589,11 @@ Tournament is only against computer. Human player can pick his/her character but
         <genre>Sports</genre>
         <genreid>685</genreid>
         <players>1-2</players>
-        <system id="25" parentId="82">Neo-Geo Pocket</system>
+        <system id="25" parentid="82">Neo-Geo Pocket</system>
         <image type="mixrbv2">media/mixrbv2/ptennis.png</image>
         <video type="video">media/video/ptennis.mp4</video>
     </game>
-    <game id="76126">
+    <game id="3443881949">
         <path>puyopopa.zip</path>
         <name>Puyo Pop (World, v5) ~ Puyo Pyuo Tsuu (Jpn, v5)</name>
         <desc>The object of this head-to-head puzzle game is to clear your grid of falling patterns called puyos by forming chains of four or more same-colored puyos in a straight line or one of several geometric patterns. What makes this a challenging two-player contest is the fact that when you clear a chain of puyos from your grid, it drops a random piece of filler onto your opponent's grid. The more puyos you clear, the more you fill your opponent's grid, and if you can clutter up his grid enough to fill it to the top, you've won the game.</desc>
@@ -1502,9 +1605,11 @@ Tournament is only against computer. Human player can pick his/her character but
         <genreid>26</genreid>
         <players>1</players>
         <cloneof>puyopop.zip</cloneof>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
+        <image type="mixrbv2">media/mixrbv2/puyopop.png</image>
+        <video type="video">media/video/puyopop.mp4</video>
     </game>
-    <game id="76126">
+    <game id="3279758183">
         <path>puyopop.zip</path>
         <name>Puyo Pop (World, v6) ~ Puyo Pyuo Tsuu (Jpn, v6)</name>
         <desc>The object of this head-to-head puzzle game is to clear your grid of falling patterns called puyos by forming chains of four or more same-colored puyos in a straight line or one of several geometric patterns. What makes this a challenging two-player contest is the fact that when you clear a chain of puyos from your grid, it drops a random piece of filler onto your opponent's grid. The more puyos you clear, the more you fill your opponent's grid, and if you can clutter up his grid enough to fill it to the top, you've won the game.</desc>
@@ -1515,11 +1620,11 @@ Tournament is only against computer. Human player can pick his/her character but
         <genre>Puzzle-Game</genre>
         <genreid>26</genreid>
         <players>1</players>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/puyopop.png</image>
         <video type="video">media/video/puyopop.mp4</video>
     </game>
-    <game id="177651">
+    <game id="2487180990">
         <path>pbobbleb.zip</path>
         <name>Puzzle Bobble Mini (Euro, Jpn, v09 Prototype?)</name>
         <desc>The classic game Bubble Bobble is the ancestor of Puzzle Bobble. Your aim in each stage is to break all the bubbles, by breaking 3 or more of the same color.  The game contains a two-player mode where each player tries to break all bubbles first.</desc>
@@ -1531,9 +1636,11 @@ Tournament is only against computer. Human player can pick his/her character but
         <genreid>27</genreid>
         <players>1-2</players>
         <cloneof>pbobble.zip</cloneof>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
+        <image type="mixrbv2">media/mixrbv2/pbobble.png</image>
+        <video type="video">media/video/pbobble.mp4</video>
     </game>
-    <game id="177651">
+    <game id="3462106556">
         <path>pbobblea.zip</path>
         <name>Puzzle Bobble Mini (Euro, Jpn, v09)</name>
         <desc>The classic game Bubble Bobble is the ancestor of Puzzle Bobble. Your aim in each stage is to break all the bubbles, by breaking 3 or more of the same color.  The game contains a two-player mode where each player tries to break all bubbles first.</desc>
@@ -1545,9 +1652,11 @@ Tournament is only against computer. Human player can pick his/her character but
         <genreid>27</genreid>
         <players>1-2</players>
         <cloneof>pbobble.zip</cloneof>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
+        <image type="mixrbv2">media/mixrbv2/pbobble.png</image>
+        <video type="video">media/video/pbobble.mp4</video>
     </game>
-    <game id="177651">
+    <game id="13778940">
         <path>pbobble.zip</path>
         <name>Puzzle Bobble Mini (Euro, Jpn, v10)</name>
         <desc>The classic game Bubble Bobble is the ancestor of Puzzle Bobble. Your aim in each stage is to break all the bubbles, by breaking 3 or more of the same color.  The game contains a two-player mode where each player tries to break all bubbles first.</desc>
@@ -1558,11 +1667,11 @@ Tournament is only against computer. Human player can pick his/her character but
         <genre>Strategy</genre>
         <genreid>27</genreid>
         <players>1-2</players>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/pbobble.png</image>
         <video type="video">media/video/pbobble.mp4</video>
     </game>
-    <game id="177653">
+    <game id="2618276560">
         <path>puzzlink.zip</path>
         <name>Puzzle Link (Euro)</name>
         <desc>Puzzle Link is a game where blocks of matching color have to be dissolved. New blocks constantly scroll into the screen from the top. The game is over when the first blocks reach the bottom of the screen. You can dissolve blocks by shooting at them. The shots form a line where they impact. If that line connects otherwise unconnected blocks of the same color they will dissolve.
@@ -1575,11 +1684,11 @@ There are three different modes: In "Normal" you have to link two special blocks
         <genre>Puzzle-Game</genre>
         <genreid>26</genreid>
         <players>1</players>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/puzzlink.png</image>
         <video type="video">media/video/puzzlink.mp4</video>
     </game>
-    <game id="177654">
+    <game id="3088083026">
         <path>puzzlnk2.zip</path>
         <name>Puzzle Link 2 (Euro, USA)</name>
         <desc>The gameplay of Puzzle Link 2 is generally identical to the first game: Puzzle Link is a game where blocks of matching color have to be dissolved. New blocks constantly scroll into the screen from the top. The game is over when the first blocks reach the bottom of the screen. You can dissolve blocks by shooting at them. The shots form a line where they impact. If that line connects otherwise unconnected blocks of the same color they will dissolve.
@@ -1592,11 +1701,11 @@ There are new modes in Puzzle Link 2. Like the original, there are the standard 
         <genre>Puzzle-Game</genre>
         <genreid>26</genreid>
         <players>1</players>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/puzzlnk2.png</image>
         <video type="video">media/video/puzzlnk2.mp4</video>
     </game>
-    <game id="167490">
+    <game id="2722144529">
         <path>tsunapn.zip</path>
         <name>Renketsu Puzzle Tsunagete Pon! (Jpn)</name>
         <desc>Renketsu Puzzle Tsunagete Pon! is a game where blocks  have to be dissolved. New blocks constantly scroll into the screen from the top. The game is over when the first blocks reach the bottom of the screen.</desc>
@@ -1607,11 +1716,11 @@ There are new modes in Puzzle Link 2. Like the original, there are the standard 
         <genre>Puzzle-Game</genre>
         <genreid>26</genreid>
         <players>1-2</players>
-        <system id="25" parentId="82">Neo-Geo Pocket</system>
+        <system id="25" parentid="82">Neo-Geo Pocket</system>
         <image type="mixrbv2">media/mixrbv2/tsunapn.png</image>
         <video type="video">media/video/tsunapn.mp4</video>
     </game>
-    <game id="177653">
+    <game id="3924263893">
         <path>tsunapnc.zip</path>
         <name>Renketsu Puzzle Tsunagete Pon! Color (Jpn)</name>
         <desc>Puzzle Link is a game where blocks of matching color have to be dissolved. New blocks constantly scroll into the screen from the top. The game is over when the first blocks reach the bottom of the screen. You can dissolve blocks by shooting at them. The shots form a line where they impact. If that line connects otherwise unconnected blocks of the same color they will dissolve.
@@ -1625,9 +1734,11 @@ There are three different modes: In "Normal" you have to link two special blocks
         <genreid>26</genreid>
         <players>1</players>
         <cloneof>puzzlink.zip</cloneof>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
+        <image type="mixrbv2">media/mixrbv2/puzzlink.png</image>
+        <video type="video">media/video/puzzlink.mp4</video>
     </game>
-    <game id="177656">
+    <game id="445273440">
         <path>rockmanb.zip</path>
         <name>Rockman - Battle &amp; Fighters (Jpn)</name>
         <desc>Rockman Battle &amp; Fighters is a fighting game similar to the two arcade titles Mega Man: The Power Battle, and Mega Man 2: The Power Fighters. 
@@ -1642,11 +1753,11 @@ Two players can use a link cable to transfer database information between system
         <genre>Fight</genre>
         <genreid>14</genreid>
         <players>1</players>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/rockmanb.png</image>
         <video type="video">media/video/rockmanb.mp4</video>
     </game>
-    <game id="177656">
+    <game id="3587607176">
         <path>rockmanbd.zip</path>
         <name>Rockman - Battle &amp; Fighters (Jpn, Demo)</name>
         <desc>Rockman Battle &amp; Fighters is a fighting game similar to the two arcade titles Mega Man: The Power Battle, and Mega Man 2: The Power Fighters. 
@@ -1662,9 +1773,11 @@ Two players can use a link cable to transfer database information between system
         <genreid>14</genreid>
         <players>1</players>
         <cloneof>rockmanb.zip</cloneof>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
+        <image type="mixrbv2">media/mixrbv2/rockmanb.png</image>
+        <video type="video">media/video/rockmanb.mp4</video>
     </game>
-    <game id="177659">
+    <game id="59339488">
         <path>shanghaipj.zip</path>
         <name>Shanghai Mini (Jpn, Prototype)</name>
         <desc>Shanghai Mini is a release for one more platform in the for ever continuing series of Activision's tile matching game. 
@@ -1678,9 +1791,11 @@ Included are classic, tournament and dynasty modes. Classic is normal game with 
         <genreid>27</genreid>
         <players>1-2</players>
         <cloneof>shanghai.zip</cloneof>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
+        <image type="mixrbv2">media/mixrbv2/shanghai.png</image>
+        <video type="video">media/video/shanghai.mp4</video>
     </game>
-    <game id="177659">
+    <game id="2739108624">
         <path>shanghaipu.zip</path>
         <name>Shanghai Mini (USA, Prototype)</name>
         <desc>Shanghai Mini is a release for one more platform in the for ever continuing series of Activision's tile matching game. 
@@ -1694,9 +1809,11 @@ Included are classic, tournament and dynasty modes. Classic is normal game with 
         <genreid>27</genreid>
         <players>1-2</players>
         <cloneof>shanghai.zip</cloneof>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
+        <image type="mixrbv2">media/mixrbv2/shanghai.png</image>
+        <video type="video">media/video/shanghai.mp4</video>
     </game>
-    <game id="177659">
+    <game id="2427771098">
         <path>shanghai.zip</path>
         <name>Shanghai Mini (World)</name>
         <desc>Shanghai Mini is a release for one more platform in the for ever continuing series of Activision's tile matching game. 
@@ -1709,11 +1826,11 @@ Included are classic, tournament and dynasty modes. Classic is normal game with 
         <genre>Strategy</genre>
         <genreid>27</genreid>
         <players>1-2</players>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/shanghai.png</image>
         <video type="video">media/video/shanghai.mp4</video>
     </game>
-    <game id="177589">
+    <game id="4055088818">
         <path>evolutnj.zip</path>
         <name>Shinki Sekai Evolution - Hateshinai Dungeon (Jpn)</name>
         <desc>A portable version of Evolution: The World of Sacred Device. Eternal Dungeon tells the story of the young explorer Mag Launcher and his quest for the fabled Evolutia, an item of immense power.
@@ -1728,9 +1845,11 @@ As expected for a portable version, the gameplay has been significantly downgrad
         <genreid>8</genreid>
         <players>1-2</players>
         <cloneof>evolutn.zip</cloneof>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
+        <image type="mixrbv2">media/mixrbv2/evolutn.png</image>
+        <video type="video">media/video/evolutn.mp4</video>
     </game>
-    <game id="167492">
+    <game id="43349716">
         <path>shougi.zip</path>
         <name>Shougi no Tatsujin (Jpn)</name>
         <desc>Shogi is the Japanese equivalent of chess. Indeed, as in chess, the goal of the game is to subdue the opposing king! Nevertheless, there are several differences between the Shogi and our chess game, be it in the nature of the pieces, their positions or their movements.</desc>
@@ -1740,11 +1859,11 @@ As expected for a portable version, the gameplay has been significantly downgrad
         <genre>Asiatic board game</genre>
         <genreid>2647</genreid>
         <players>1-2</players>
-        <system id="25" parentId="82">Neo-Geo Pocket</system>
+        <system id="25" parentid="82">Neo-Geo Pocket</system>
         <image type="mixrbv2">media/mixrbv2/shougi.png</image>
         <video type="video">media/video/shougi.mp4</video>
     </game>
-    <game id="177663">
+    <game id="3715474861">
         <path>shougic.zip</path>
         <name>Shougi no Tatsujin Color (Jpn)</name>
         <desc>Neo Geo Pocket version of "Master of Shogi". You can play against 8 unique characters, and you can choose from 3 levels: beginner, intermediate, and advanced.</desc>
@@ -1753,11 +1872,11 @@ As expected for a portable version, the gameplay has been significantly downgrad
         <publisher id="776">ADK</publisher>
         <genre>Asiatic board game</genre>
         <genreid>2647</genreid>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/shougic.png</image>
         <video type="video">media/video/shougic.mp4</video>
     </game>
-    <game id="177665">
+    <game id="1381557944">
         <path>snkgals.zip</path>
         <name>SNK Gals' Fighters (Euro, USA)</name>
         <desc>Organized and sponsored by a mysterious fighter nicknamed as "Miss X", the first Queen of Fighters Tournament is officially open, but this competition differs of the others for allowing ONLY women as participants. Meanwhile, after have passed for several and tough fights (including a final showdown with Miss X), the winner will be rewarded with a mystical artifact known as the "K Talisman", that has the capacity to grant any wish. With this rare-unique possibility of accomplish their pessoal dreams and ambitions, 8 powerful femme fatale fighters were invited to face the biggest combat of their lives...
@@ -1772,11 +1891,11 @@ The gameplay is identical to KOF's Advanced Mode (e.g. Emergency Evasion and Run
         <genre>Fight</genre>
         <genreid>14</genreid>
         <players>1-2</players>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/snkgals.png</image>
         <video type="video">media/video/snkgals.mp4</video>
     </game>
-    <game id="177665">
+    <game id="3739947000">
         <path>snkgalsj.zip</path>
         <name>SNK Gals' Fighters (Jpn)</name>
         <desc>Organized and sponsored by a mysterious fighter nicknamed as "Miss X", the first Queen of Fighters Tournament is officially open, but this competition differs of the others for allowing ONLY women as participants. Meanwhile, after have passed for several and tough fights (including a final showdown with Miss X), the winner will be rewarded with a mystical artifact known as the "K Talisman", that has the capacity to grant any wish. With this rare-unique possibility of accomplish their pessoal dreams and ambitions, 8 powerful femme fatale fighters were invited to face the biggest combat of their lives...
@@ -1792,9 +1911,11 @@ The gameplay is identical to KOF's Advanced Mode (e.g. Emergency Evasion and Run
         <genreid>14</genreid>
         <players>1-2</players>
         <cloneof>snkgals.zip</cloneof>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
+        <image type="mixrbv2">media/mixrbv2/snkgals.png</image>
+        <video type="video">media/video/snkgals.mp4</video>
     </game>
-    <game id="177666">
+    <game id="1766720750">
         <path>svccard2e.zip</path>
         <name>SNK vs. Capcom - Card Fighters 2 - Expand Edition (Hack, English)</name>
         <desc>SNK vs. Capcom: Card Fighter's Clash 2 Expand Edition continues the mascot packed trading card game action that began with the original.</desc>
@@ -1806,9 +1927,11 @@ The gameplay is identical to KOF's Advanced Mode (e.g. Emergency Evasion and Run
         <genreid>42</genreid>
         <players>1-2</players>
         <cloneof>svccard2.zip</cloneof>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
+        <image type="mixrbv2">media/mixrbv2/svccard2.png</image>
+        <video type="video">media/video/svccard2.mp4</video>
     </game>
-    <game id="177666">
+    <game id="221697502">
         <path>svccard2.zip</path>
         <name>SNK vs. Capcom - Card Fighters 2 - Expand Edition (Jpn)</name>
         <desc>SNK vs. Capcom: Card Fighter's Clash 2 Expand Edition continues the mascot packed trading card game action that began with the original.</desc>
@@ -1819,11 +1942,11 @@ The gameplay is identical to KOF's Advanced Mode (e.g. Emergency Evasion and Run
         <genre>Playing cards</genre>
         <genreid>42</genreid>
         <players>1-2</players>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/svccard2.png</image>
         <video type="video">media/video/svccard2.mp4</video>
     </game>
-    <game id="177667">
+    <game id="1103505753">
         <path>svccardc.zip</path>
         <name>SNK vs. Capcom - Card Fighters' Clash - Capcom Cardfighter's Version (Euro, USA)</name>
         <desc>Compete in the SC Card Fighters' Clash tournament with your Capcom deck in this NGPC card game. Collect the 300 cards from both SNK and Capcom franchises and duel and trade with your friends using the extensive link mode. With mechanics similar to CCGs such as Yu-Gi-Oh and popular characters from both SNK and Capcom, Card Fighters clash offers both collection and strategy gameplay. This game also allows linking with SNK vs. Capcom: Match of the Millennium to transfer collectible points.</desc>
@@ -1834,11 +1957,11 @@ The gameplay is identical to KOF's Advanced Mode (e.g. Emergency Evasion and Run
         <genre>Strategy</genre>
         <genreid>27</genreid>
         <players>1-2</players>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/svccardc.png</image>
         <video type="video">media/video/svccardc.mp4</video>
     </game>
-    <game id="177668">
+    <game id="3350381603">
         <path>svccards.zip</path>
         <name>SNK vs. Capcom - Card Fighters' Clash - SNK Cardfighter's Version (Euro, USA)</name>
         <desc>Compete in the SC Card Fighters' Clash tournament with your SNK deck in this NGPC card game. Collect the 300 cards from both SNK and Capcom franchises and duel and trade with your friends using the extensive link mode. With mechanics similar to CCGs such as Yu-Gi-Oh and popular characters from both SNK and Capcom, Card Fighters clash offers both collection and strategy gameplay. This game also allows linking with SNK vs. Capcom: Match of the Millennium to transfer collectible points.</desc>
@@ -1849,11 +1972,11 @@ The gameplay is identical to KOF's Advanced Mode (e.g. Emergency Evasion and Run
         <genre>Strategy</genre>
         <genreid>27</genreid>
         <players>1-2</players>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/svccards.png</image>
         <video type="video">media/video/svccards.mp4</video>
     </game>
-    <game id="177668">
+    <game id="728615906">
         <path>svccardp.zip</path>
         <name>SNK vs. Capcom - Gekitotsu Card Fighters (Jpn, Demo)</name>
         <desc>Compete in the SC Card Fighters' Clash tournament with your SNK deck in this NGPC card game. Collect the 300 cards from both SNK and Capcom franchises and duel and trade with your friends using the extensive link mode. With mechanics similar to CCGs such as Yu-Gi-Oh and popular characters from both SNK and Capcom, Card Fighters clash offers both collection and strategy gameplay. This game also allows linking with SNK vs. Capcom: Match of the Millennium to transfer collectible points.</desc>
@@ -1865,9 +1988,11 @@ The gameplay is identical to KOF's Advanced Mode (e.g. Emergency Evasion and Run
         <genreid>27</genreid>
         <players>1-2</players>
         <cloneof>svccards.zip</cloneof>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
+        <image type="mixrbv2">media/mixrbv2/svccards.png</image>
+        <video type="video">media/video/svccards.mp4</video>
     </game>
-    <game id="177667">
+    <game id="2119317041">
         <path>svccardcj.zip</path>
         <name>SNK vs. Capcom - Gekitotsu Card Fighters - Capcom Supporters Version (Jpn)</name>
         <desc>Compete in the SC Card Fighters' Clash tournament with your Capcom deck in this NGPC card game. Collect the 300 cards from both SNK and Capcom franchises and duel and trade with your friends using the extensive link mode. With mechanics similar to CCGs such as Yu-Gi-Oh and popular characters from both SNK and Capcom, Card Fighters clash offers both collection and strategy gameplay. This game also allows linking with SNK vs. Capcom: Match of the Millennium to transfer collectible points.</desc>
@@ -1879,9 +2004,11 @@ The gameplay is identical to KOF's Advanced Mode (e.g. Emergency Evasion and Run
         <genreid>27</genreid>
         <players>1-2</players>
         <cloneof>svccardc.zip</cloneof>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
+        <image type="mixrbv2">media/mixrbv2/svccardc.png</image>
+        <video type="video">media/video/svccardc.mp4</video>
     </game>
-    <game id="177668">
+    <game id="3401655407">
         <path>svccardsja.zip</path>
         <name>SNK vs. Capcom - Gekitotsu Card Fighters - SNK Supporters Version (Jpn, v6)</name>
         <desc>Compete in the SC Card Fighters' Clash tournament with your SNK deck in this NGPC card game. Collect the 300 cards from both SNK and Capcom franchises and duel and trade with your friends using the extensive link mode. With mechanics similar to CCGs such as Yu-Gi-Oh and popular characters from both SNK and Capcom, Card Fighters clash offers both collection and strategy gameplay. This game also allows linking with SNK vs. Capcom: Match of the Millennium to transfer collectible points.</desc>
@@ -1893,9 +2020,11 @@ The gameplay is identical to KOF's Advanced Mode (e.g. Emergency Evasion and Run
         <genreid>27</genreid>
         <players>1-2</players>
         <cloneof>svccards.zip</cloneof>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
+        <image type="mixrbv2">media/mixrbv2/svccards.png</image>
+        <video type="video">media/video/svccards.mp4</video>
     </game>
-    <game id="177668">
+    <game id="1824550974">
         <path>svccardsj.zip</path>
         <name>SNK vs. Capcom - Gekitotsu Card Fighters - SNK Supporters Version (Jpn, v7)</name>
         <desc>Compete in the SC Card Fighters' Clash tournament with your SNK deck in this NGPC card game. Collect the 300 cards from both SNK and Capcom franchises and duel and trade with your friends using the extensive link mode. With mechanics similar to CCGs such as Yu-Gi-Oh and popular characters from both SNK and Capcom, Card Fighters clash offers both collection and strategy gameplay. This game also allows linking with SNK vs. Capcom: Match of the Millennium to transfer collectible points.</desc>
@@ -1907,9 +2036,11 @@ The gameplay is identical to KOF's Advanced Mode (e.g. Emergency Evasion and Run
         <genreid>27</genreid>
         <players>1-2</players>
         <cloneof>svccards.zip</cloneof>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
+        <image type="mixrbv2">media/mixrbv2/svccards.png</image>
+        <video type="video">media/video/svccards.mp4</video>
     </game>
-    <game id="177673">
+    <game id="283189462">
         <path>svc.zip</path>
         <name>SNK vs. Capcom - The Match of the Millennium (World) ~ Choujou Kessen Saikyou Fighters - SNK vs Capcom (Jpn)</name>
         <desc>With 18 starting characters (26 total after unlocking), numerous battle modes and varied minigames, this may be the largest fighting game for the Neo Geo Pocket Color. Choose the fighting style that suits you from the available Single, Tag and Team modes. The SC Olympic mode grants access to minigames from a music game featuring Felicia to a whack-a-mole style game with Jubei. The Olympic mode also allows players to compete for gold, silver and bronze medals in various fighting challenges. Link features include NGPC-to-NGPC battles and NGPC-to-Dreamcast data exchange with other SNK titles.</desc>
@@ -1920,11 +2051,11 @@ The gameplay is identical to KOF's Advanced Mode (e.g. Emergency Evasion and Run
         <genre>Fight</genre>
         <genreid>14</genreid>
         <players>1-2</players>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/svc.png</image>
         <video type="video">media/video/svc.mp4</video>
     </game>
-    <game id="177674">
+    <game id="1172016460">
         <path>sonic.zip</path>
         <name>Sonic the Hedgehog - Pocket Adventure (World)</name>
         <desc>Sonic the Hedgehog Pocket Adventure, or Sonic Pocket Adventure for short, is a 1999 platform video game in the Sonic the Hedgehog series developed by SNK. It was released in December 1999 in North America, and May 2000 in Japan, exclusively for the Neo Geo Pocket Color handheld game console. It is also only the second game of the Sonic series ever to be released on a non-Sega video game console, the first being Sonic Jam on the Game.com. The game was praised by critics, receiving perfect scores from multiple reviews.
@@ -1936,11 +2067,11 @@ The gameplay is identical to KOF's Advanced Mode (e.g. Emergency Evasion and Run
         <genre>Platform</genre>
         <genreid>7</genreid>
         <players>1-2</players>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/sonic.png</image>
         <video type="video">media/video/sonic.mp4</video>
     </game>
-    <game id="177674">
+    <game id="4261863014">
         <path>sonicp2.zip</path>
         <name>Sonic the Hedgehog - Pocket Adventure (World, Oct 22 1999 Prototype)</name>
         <desc>Sonic the Hedgehog Pocket Adventure, or Sonic Pocket Adventure for short, is a 1999 platform video game in the Sonic the Hedgehog series developed by SNK. It was released in December 1999 in North America, and May 2000 in Japan, exclusively for the Neo Geo Pocket Color handheld game console. It is also only the second game of the Sonic series ever to be released on a non-Sega video game console, the first being Sonic Jam on the Game.com. The game was praised by critics, receiving perfect scores from multiple reviews.
@@ -1953,9 +2084,11 @@ The gameplay is identical to KOF's Advanced Mode (e.g. Emergency Evasion and Run
         <genreid>7</genreid>
         <players>1-2</players>
         <cloneof>sonic.zip</cloneof>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
+        <image type="mixrbv2">media/mixrbv2/sonic.png</image>
+        <video type="video">media/video/sonic.mp4</video>
     </game>
-    <game id="177674">
+    <game id="1024900382">
         <path>sonicp.zip</path>
         <name>Sonic the Hedgehog - Pocket Adventure (World, Prototype)</name>
         <desc>Sonic the Hedgehog Pocket Adventure, or Sonic Pocket Adventure for short, is a 1999 platform video game in the Sonic the Hedgehog series developed by SNK. It was released in December 1999 in North America, and May 2000 in Japan, exclusively for the Neo Geo Pocket Color handheld game console. It is also only the second game of the Sonic series ever to be released on a non-Sega video game console, the first being Sonic Jam on the Game.com. The game was praised by critics, receiving perfect scores from multiple reviews.
@@ -1968,9 +2101,11 @@ The gameplay is identical to KOF's Advanced Mode (e.g. Emergency Evasion and Run
         <genreid>7</genreid>
         <players>1-2</players>
         <cloneof>sonic.zip</cloneof>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
+        <image type="mixrbv2">media/mixrbv2/sonic.png</image>
+        <video type="video">media/video/sonic.mp4</video>
     </game>
-    <game id="177676">
+    <game id="3840263967">
         <path>hanadojo.zip</path>
         <name>Soreike!! Hanafuda Doujou (Jpn)</name>
         <desc>This software allows players to enjoy the game of Hanafuda (Japanese playing cards) "Koi Koi," with a "Tournament" mode in which players aim to win against nine other players, a "Battle Mode" in which players enjoy a game of "Sashi," and a "Certification Mode" in which they are judged on their abilities.</desc>
@@ -1980,11 +2115,11 @@ The gameplay is identical to KOF's Advanced Mode (e.g. Emergency Evasion and Run
         <publisher id="5525">Dyna</publisher>
         <genre>Asiatic board game</genre>
         <genreid>2647</genreid>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/hanadojo.png</image>
         <video type="video">media/video/hanadojo.mp4</video>
     </game>
-    <game id="177677">
+    <game id="2055637074">
         <path>srmp.zip</path>
         <name>Super Real Mahjong - Premium Collection (Jpn)</name>
         <desc>Super Real Mahjong Premium Collection is the first portable installment of the Super Real Mahjong series. As usual, you play strip mahjong with pretty girls, this time several from many of the games. However, due to system limitations, only some strip scenes are animated. It also has some visual novel-like qualities, in particular a story mode where you try to focus on one girl each time the game is played. This is accomplished by choosing the right options when presented to you. If you manage to focus on a single girl, her CG is unlocked in the gallery.</desc>
@@ -1994,11 +2129,11 @@ The gameplay is identical to KOF's Advanced Mode (e.g. Emergency Evasion and Run
         <publisher id="326">SETA Corporation</publisher>
         <genre>Asiatic board game</genre>
         <genreid>2647</genreid>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/srmp.png</image>
         <video type="video">media/video/srmp.mp4</video>
     </game>
-    <game id="177602">
+    <game id="1120241853">
         <path>kofpara.zip</path>
         <name>The King of Fighters - Battle de Paradise (Jpn)</name>
         <desc>The King of Fighters: Battle De Paradise is a board based, two player party game that plays in a similar manner as sugoroku. The player can either link with another user to play or challenge the CPU. Each side choose one of four original characters to represent their place on the board as well as an accompanying Striker character (the Extra Strikers from The King of Fighters '99: Evolution). If they're unsatisfied with their avatar's name, an option to rename their character is also given.
@@ -2011,11 +2146,11 @@ Players roll a dice and move along the board with various squares. Specially mar
         <genre>Board game</genre>
         <genreid>33</genreid>
         <players>1-2</players>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/kofpara.png</image>
         <video type="video">media/video/kofpara.mp4</video>
     </game>
-    <game id="177604">
+    <game id="1624138305">
         <path>lastblad.zip</path>
         <name>The Last Blade - Beyond the Destiny (Euro)</name>
         <desc>1863. History's hidden secret is revealed. During the age known as "Bakumatsu", 135 years ago, chaos rules! It's all yours: A new type of weapon fighting game in which Power and Speed weapons, in addition to various Repel moves can be used to experience a new sensation in video game thrills!</desc>
@@ -2026,11 +2161,11 @@ Players roll a dice and move along the board with various squares. Specially mar
         <genre>Action</genre>
         <genreid>10</genreid>
         <players>1-2</players>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/lastblad.png</image>
         <video type="video">media/video/lastblad.mp4</video>
     </game>
-    <game id="177654">
+    <game id="491065987">
         <path>tsunapn2.zip</path>
         <name>Tsunagete Pon! 2 (Jpn)</name>
         <desc>The gameplay of Puzzle Link 2 is generally identical to the first game: Puzzle Link is a game where blocks of matching color have to be dissolved. New blocks constantly scroll into the screen from the top. The game is over when the first blocks reach the bottom of the screen. You can dissolve blocks by shooting at them. The shots form a line where they impact. If that line connects otherwise unconnected blocks of the same color they will dissolve.
@@ -2044,9 +2179,11 @@ There are new modes in Puzzle Link 2. Like the original, there are the standard 
         <genreid>26</genreid>
         <players>1</players>
         <cloneof>puzzlnk2.zip</cloneof>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
+        <image type="mixrbv2">media/mixrbv2/puzzlnk2.png</image>
+        <video type="video">media/video/puzzlnk2.mp4</video>
     </game>
-    <game id="177679">
+    <game id="2292183180">
         <path>wrestmad.zip</path>
         <name>Wrestling Madness (Euro, USA, Prototype)</name>
         <desc>Only a handful of top wrestlers can be show their face on the TV for their fans at home. In the I.E.W mat, this rule is no exception. In an event practiced for 300 years, only the best performances are in demand. This year, the great king of the I.E.W, Joseph Steel, returns to defend his throne. The story of eight top wrestlers competing for the greatest prize on the ring, the I.E.W champion belt, is about to begin...</desc>
@@ -2057,7 +2194,7 @@ There are new modes in Puzzle Link 2. Like the original, there are the standard 
         <genre>Sports / Wrestling</genre>
         <genreid>2861</genreid>
         <players>2</players>
-        <system id="82" parentId="0">Neo-Geo Pocket Color</system>
+        <system id="82" parentid="0">Neo-Geo Pocket Color</system>
         <image type="mixrbv2">media/mixrbv2/wrestmad.png</image>
         <video type="video">media/video/wrestmad.mp4</video>
     </game>
