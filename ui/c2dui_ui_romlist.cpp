@@ -46,9 +46,13 @@ UIRomList::UIRomList(UiMain *u, RomList *rList, const c2d::Vector2f &size)
     bool highlightUseFileColors = grp->getOption("highlight_use_text_color")->getInteger() == 1;
 
     // add rom list title (system text)
-    titleText = new SkinnedText(skin, {"MAIN", "ROM_LIST", "SYSTEM_TEXT"});
-    if (titleText->available) {
-        UIRomList::add(titleText);
+    if (!(ui->getConfig()->get(Option::Id::GUI_FILTER_SYSTEM)->getFlags() & Option::Flags::HIDDEN)) {
+        titleText = new SkinnedText(skin, {"MAIN", "ROM_LIST", "SYSTEM_TEXT"});
+        if (titleText->available) {
+            UIRomList::add(titleText);
+        } else {
+            delete (titleText);
+        }
     }
 
     // add rom list ui
@@ -94,7 +98,7 @@ void UIRomList::updateRomList() {
     filterRomList();
     sortRomList();
 
-    if (titleText->available) {
+    if (titleText && titleText->available) {
         std::string sys = ui->getConfig()->get(Option::Id::GUI_FILTER_SYSTEM)->getValueString();
         titleText->setString(sys);
     }
@@ -337,7 +341,7 @@ bool UIRomList::onInput(c2d::Input::Player *players) {
     }
 
     // only allow system switch if skin contains romlist title
-    if (titleText->available) {
+    if (titleText && titleText->available) {
         if (buttons & Input::Button::LT) {
             Option *sysOpt = ui->getConfig()->get(Option::Id::GUI_FILTER_SYSTEM);
             size_t sysCount = sysOpt->getValues()->size();

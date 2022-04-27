@@ -12,7 +12,7 @@ public:
     PGENRomList(c2dui::UiMain *ui, const std::string &emuVersion, const std::vector<std::string> &filters)
             : c2dui::RomList(ui, emuVersion, filters) {};
 
-    void build() override;
+    void build(bool addArcadeSystem = false) override;
 };
 
 #endif //PGEN_ROMLIST_H

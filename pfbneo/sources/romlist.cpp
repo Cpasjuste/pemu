@@ -5,7 +5,7 @@
 #include "c2dui.h"
 #include "romlist.h"
 
-void PFBARomList::build() {
+void PFBARomList::build(bool addArcadeSystem) {
 #ifndef __VITA__
     std::string dataPath = ui->getIo()->getDataPath();
     if (!ui->getIo()->exist(dataPath + "gamelist.xml")) {
@@ -55,7 +55,7 @@ void PFBARomList::build() {
     setLoadingText("Games: %li / %li", gameList->getAvailableCount(), gameList->games.size());
 #endif
 
-    RomList::build();
+    RomList::build(addArcadeSystem);
 
     // remove hidden flags for pfba
     ui->getConfig()->get(Option::Id::GUI_FILTER_CLONES)->setFlags(Option::Flags::BOOLEAN);

@@ -12,7 +12,7 @@ public:
     PFBARomList(c2dui::UiMain *ui, const std::string &emuVersion, const std::vector<std::string> &filters)
             : c2dui::RomList(ui, emuVersion, filters) {};
 
-    void build() override;
+    void build(bool addArcadeSystem = true) override;
 };
 
 #endif //PFBA_ROMLIST_H

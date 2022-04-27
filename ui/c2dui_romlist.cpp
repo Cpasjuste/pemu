@@ -70,8 +70,7 @@ void RomList::setLoadingText(const char *format, ...) {
     ui->flip();
 }
 
-void RomList::build() {
-
+void RomList::build(bool addArcadeSystem) {
     std::string romPath = ui->getConfig()->getRomPaths().at(FBN_PATH_ARCADE);
     printf("RomList::build(): ROM_PATH_0: %s\n", romPath.c_str());
 
@@ -97,9 +96,11 @@ void RomList::build() {
     std::sort(gameList->resolutions.begin(), gameList->resolutions.end(), Api::sortByName);
     std::sort(gameList->dates.begin(), gameList->dates.end(), Api::sortByName);
 
-    gameList->systemList.systems.insert(gameList->systemList.systems.begin(), {9999, 0, "ARCADE"});
     gameList->resolutions.insert(gameList->resolutions.begin(), "ALL");
     gameList->dates.insert(gameList->dates.begin(), "ALL");
+    if (addArcadeSystem) {
+        gameList->systemList.systems.insert(gameList->systemList.systems.begin(), {9999, 0, "ARCADE"});
+    }
 
     ui->getConfig()->add(
             Option::Id::GUI_SHOW_ZIP_NAMES, "FILTER_SYSTEM",
