@@ -51,7 +51,7 @@ pFBN: Portable FinalBurn Neo
 - pFBN support preview images and videos (put files in corresponding media folder. For arcade roms, for example: png files goes in "roms/media/mixrbv2", mp4 files in "roms/media/video"). Please note that the vita port doesn't support video previews.
 You can download a near fullset mixrbv2 and video package for each platform here:
     - Arcade: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/arcade_mixrbv2.zip) (1.5GB), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/arcade_video.zip) (7.1GB)
-    - Channel F: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/channelf_mixrbv2.zip), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/channelf_video.zip)
+    - Channel F: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/channelf_mixrbv2.zip) (16MB), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/channelf_video.zip) (11MB)
     - Colecovision: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/coleco_mixrbv2.zip) (128MB), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/coleco_video.zip) (248MB)
     - MSX: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/msx_mixrbv2.zip) (77MB), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/msx_video.zip) (417MB)
     - Nec PC-Engine: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/pce_mixrbv2.zip) (200MB), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/pce_video.zip) (1.2GB)
