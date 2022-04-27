@@ -33,7 +33,7 @@ public:
         value->setOutlineThickness(textGroup.outlineSize);
         value->setOutlineColor(textGroup.outlineColor);
         value->setOrigin(Origin::Left);
-        value->setPosition((MenuLine::getSize().x * 0.56f), MenuLine::getSize().y / 2);
+        value->setPosition((MenuLine::getSize().x * 0.57f), MenuLine::getSize().y / 2);
         value->setSizeMax(MenuLine::getSize().x * 0.40f, 0);
         MenuLine::add(value);
 
