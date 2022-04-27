@@ -2,7 +2,7 @@ SKIN_CONFIG :
 {
   COLORS :
   {
-    color0 = [ 247, 186, 11, 255 ];       // HIGHLIGHT > color
+    color0 = [ 64, 64, 64, 255 ];       // HIGHLIGHT > color
     color1 = [ 193, 18, 28, 255 ];     // HIGHLIGHT > outline_color
     color2 = [ 0, 56, 123, 240 ];       // MESSAGEBOX > color
     color3 = [ 193, 18, 28, 255 ];     // MESSAGEBOX > outline_color
@@ -43,7 +43,7 @@ SKIN_CONFIG :
     color38 = [ 193, 18, 28, 255 ];     // STATES_MENU > outline_color
     color39 = [ 200, 200, 200, 255 ];   // STATES_MENU > TITLE_TEXT > color
     color40 = [ 220, 0, 0, 255 ];       // STATES_MENU > TITLE_TEXT > outline_color
-    color41 = [ 200, 200, 200, 255 ];      // STATES_MENU > STATES_ITEM > color
+    color41 = [ 64, 64, 64, 255 ];      // STATES_MENU > STATES_ITEM > color
     color42 = [ 0, 0, 0, 255 ];    // STATES_MENU > STATES_ITEM > outline_color
     color43 = [ 200, 200, 200, 255 ];   // STATES_MENU > STATES_ITEM > STATE_TEXT > color
     color44 = [ 0, 0, 0, 255 ];         // STATES_MENU > STATES_ITEM > STATE_TEXT > outline_color
