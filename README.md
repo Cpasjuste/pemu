@@ -32,7 +32,7 @@
     ```
     git clone --recursive https://github.com/Cpasjuste/pemu.git`
     ```
-- build (replace `pfbneo` with emulator target: `pfbneo`, `psnes`, `pnes`):
+- build (replace `pfbneo` with emulator target: `pfbneo`, `psnes`, `pnes`, `pgen` or `all`):
 	```
 	mkdir cmake-build && cd cmake-build
 	cmake -G "Unix Makefiles" -DPLATFORM_LINUX=ON -DOPTION_BUILTIN_LIBCONFIG=ON \
@@ -58,7 +58,7 @@
     ```
     git clone --recursive https://github.com/Cpasjuste/pemu.git`
     ```
-- build (replace `pfbneo` with emulator target: `pfbneo`, `psnes`, `pnes`):
+- build (replace `pfbneo` with emulator target: `pfbneo`, `psnes`, `pnes`, `pgen` or `all`):
     ```
     mkdir cmake-build && cd cmake-build
     source /etc/profile.d/devkit-env.sh
@@ -85,34 +85,33 @@
     ```
     git clone --recursive https://github.com/Cpasjuste/pemu.git`
     ```
-- build (replace `pfbneo` with emulator target: `pfbneo`, `psnes`, `pnes`):
+- build (replace `pfbneo` with emulator target: `pfbneo`, `psnes`, `pnes`, `pgen` or `all`):
     ```
     mkdir cmake-build && cd cmake-build
     export OPENORBIS=/opt/pacbrew/ps4/openorbis
-    cmake -G "Unix Makefiles" -DPLATFORM_PS4=ON -DOPTION_MPV_PLAYER=OFF \
-        -DOPTION_EMU=pfbneo -DCMAKE_BUILD_TYPE=Release ..
+    cmake -G "Unix Makefiles" -DPLATFORM_PS4=ON -DOPTION_EMU=pfbneo -DCMAKE_BUILD_TYPE=Release ..
     make pfbneo.deps
     make -j $(getconf _NPROCESSORS_ONLN) pfbneo_ps4_release
     ```
 
 **<ins>Building on windows for windows (TODO: update build instructions)</ins>**
 - download, install and update [MYSYS2](http://www.msys2.org/)
-- install msys2 dependencies:
-    ```
-    pacman -S git zip automake autoconf make mingw-w64-x86_64-make mingw-w64-x86_64-gcc \
-        mingw-w64-x86_64-gdb mingw-w64-x86_64-SDL2 mingw-w64-x86_64-freetype mingw-w64-x86_64-cmake \
-        mingw-w64-x86_64-glm mingw-w64-x86_64-glew mingw-w64-x86_64-libconfig mingw-w64-x86_64-tinyxml2 \
-        mingw-w64-x86_64-zlib mingw-w64-x86_64-perl mingw-w64-x86_64-ffmpeg mingw-w64-x86_64-mpv mingw-w64-x86_64-physfs
+  - install msys2 dependencies:
+      ```
+      pacman -S --noconfirm --needed git zip perl make \
+        mingw-w64-x86_64-binutils mingw-w64-x86_64-gcc mingw-w64-x86_64-make mingw-w64-x86_64-cmake mingw-w64-x86_64-pkgconf \
+        mingw-w64-x86_64-SDL2 mingw-w64-x86_64-freetype mingw-w64-x86_64-glm \
+        mingw-w64-x86_64-glew mingw-w64-x86_64-libconfig mingw-w64-x86_64-tinyxml2 \
+        mingw-w64-x86_64-mpv mingw-w64-x86_64-zlib mingw-w64-x86_64-minizip
     ```
 - clone pemu repository:
     ```
     git clone --recursive https://github.com/Cpasjuste/pemu.git`
     ```
-- build (replace `pfbneo` with emulator target: `pfbneo`, `psnes`, `pnes`):
+- build (replace `pfbneo` with emulator target: `pfbneo`, `psnes`, `pnes`, `pgen` or `all`):
     ```
     mkdir cmake-build && cd cmake-build
-    cmake -G "MSYS Makefiles" -DPLATFORM_WINDOWS=ON -DOPTION_BUILTIN_MINIZIP=ON \
-        -DOPTION_EMU=pfbneo -DCMAKE_BUILD_TYPE=Release ..
+    cmake -G "MSYS Makefiles" -DPLATFORM_WINDOWS=ON -DOPTION_EMU=pfbneo -DCMAKE_BUILD_TYPE=Release ..
     make pfbneo.deps
     make pfbneo
     ```

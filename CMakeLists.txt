@@ -18,10 +18,10 @@ set(OPTION_UPDATE_CONFIG ON CACHE BOOL "Force config file updating")
 ####################
 
 # linux/windows screen handling options
-if (PLATFORM_LINUX)
+if (PLATFORM_LINUX OR PLATFORM_WINDOWS)
     set(OPTION_RESOLUTION ON CACHE BOOL "Add screen resolution option")
     set(OPTION_FULLSCREEN ON CACHE BOOL "Add switch to fullscreen option")
-endif (PLATFORM_LINUX)
+endif ()
 
 # add sscrap (screenscrapper scrapper!) library
 add_subdirectory(sscrap)
@@ -35,8 +35,14 @@ set(VERSION_MINOR 0)
 # pemu (ui)
 add_subdirectory(ui)
 
-# pnes
-if (OPTION_EMU STREQUAL "pnes")
+# emulator selection
+if (OPTION_EMU STREQUAL "all")
+    add_subdirectory(pfbneo)
+    add_subdirectory(pgen)
+    add_subdirectory(pnes)
+    add_subdirectory(psnes)
+elseif (OPTION_EMU STREQUAL "pnes")
+    # pnes
     add_subdirectory(pnes)
 elseif (OPTION_EMU STREQUAL "psnes")
     # psnes

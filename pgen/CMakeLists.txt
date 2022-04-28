@@ -70,7 +70,7 @@ elseif (PLATFORM_SWITCH)
     list(APPEND PGEN_SRC)
     list(APPEND PGEN_CFLAGS)
 elseif (PLATFORM_3DS)
-elseif (PLATFORM_LINUX)
+elseif (PLATFORM_LINUX OR PLATFORM_WINDOWS)
     #####################
     # SDL2 PLATORM
     #####################
@@ -95,7 +95,7 @@ add_custom_target(${PROJECT_NAME}.data.skin
         COMMAND ${CMAKE_COMMAND} -D SRC=${CMAKE_CURRENT_SOURCE_DIR}/../data/${TARGET_PLATFORM}/romfs -D DST=${CMAKE_CURRENT_BINARY_DIR}/data_romfs -P ${CMAKE_CURRENT_LIST_DIR}/../libcross2d/cmake/copy_directory_custom.cmake
         )
 add_dependencies(${PROJECT_NAME}.data.skin ${PROJECT_NAME}.data)
-if (PLATFORM_LINUX OR PLATFORM_WINDOWS)
+if (PLATFORM_LINUX)
     add_dependencies(${PROJECT_NAME}-romfs ${PROJECT_NAME}.data.skin)
 else ()
     add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}.data.skin)
