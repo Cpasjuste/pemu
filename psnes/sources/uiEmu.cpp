@@ -17,11 +17,8 @@
 #include <cheats.h>
 
 #ifdef __PSP2__
-
 #include <psp2/io/dirent.h>
 #include <psp2/kernel/threadmgr.h>
-
-#define mkdir(x, y) sceIoMkdir(x, 0777)
 #define usleep sceKernelDelayThread
 #endif
 
@@ -501,13 +498,13 @@ static int make_snes9x_dirs() {
     if (strlen(s9x_base_dir) + 1 + sizeof(dirNames[0]) > PATH_MAX + 1)
         return (-1);
 
-    mkdir(s9x_base_dir, 0755);
+    _ui->getIo()->create(s9x_base_dir);
 
     for (int i = 0; i < LAST_DIR; i++) {
         if (dirNames[i][0]) {
             char s[PATH_MAX + 1];
             snprintf(s, PATH_MAX + 1, "%s%s%s", s9x_base_dir, SLASH_STR, dirNames[i]);
-            mkdir(s, 0755);
+            _ui->getIo()->create(s);
         }
     }
 

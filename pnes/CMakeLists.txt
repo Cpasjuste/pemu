@@ -69,13 +69,11 @@ elseif (PLATFORM_PS4)
     set(PS4_PKG_TITLE "pNES - Portable Nestopia")
     set(PS4_PKG_TITLE_ID "PNES00001")
     set(PS4_PKG_VERSION "${VERSION_MAJOR}.${VERSION_MINOR}")
-    list(APPEND NESTOPIA_CFLAGS -DDATADIR="/app0/")
 elseif (PLATFORM_SWITCH)
     #####################
     # SWITCH PLATFORM
     #####################
     list(APPEND NESTOPIA_SRC sources/switch/port.c)
-    list(APPEND NESTOPIA_CFLAGS -DDATADIR="romfs:/")
 elseif (PLATFORM_3DS)
     #####################
     # 3DS PLATFORM
@@ -87,12 +85,10 @@ elseif (PLATFORM_LINUX)
     #####################
     # LINUX
     #####################
-    list(APPEND NESTOPIA_CFLAGS -DDATADIR="romfs:/")
 elseif (PLATFORM_WINDOWS)
     #####################
     # WINDOWS
     #####################
-    list(APPEND NESTOPIA_CFLAGS -DDATADIR="./data_romfs/")
 endif (PLATFORM_VITA)
 
 #####################
