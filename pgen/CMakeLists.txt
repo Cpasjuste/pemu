@@ -32,9 +32,6 @@ file(GLOB GENESIS_SRC
         ${CMAKE_SOURCE_DIR}/cores/genesis/core/z80/*c*
         )
 
-list(REMOVE_ITEM GENESIS_SRC
-        )
-
 set(GENESIS_CFLAGS
         -DUSE_16BPP_RENDERING -DHAVE_YM3438_CORE -DHAVE_OPLL_CORE -DLSB_FIRST
         -DVERSION="1.0"
