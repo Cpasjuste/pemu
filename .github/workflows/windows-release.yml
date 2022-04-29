@@ -2,8 +2,8 @@ name: windows-release
 
 on:
   push:
-    branches: [ master ]
-  workflow_dispatch:
+    tags:
+      - "v*.*"
 
 jobs:
 
@@ -35,21 +35,32 @@ jobs:
           cmake -G "MSYS Makefiles" -DPLATFORM_WINDOWS=ON -DOPTION_EMU=pfbneo -DCMAKE_BUILD_TYPE=Debug ..
           make pfbneo.deps
           make pfbneo_windows_release
+          mv *.zip $GITHUB_WORKSPACE
 
       - name: Build pgen
         run: |
           mkdir cmake-build-pgen && cd cmake-build-pgen
           cmake -G "MSYS Makefiles" -DPLATFORM_WINDOWS=ON -DOPTION_EMU=pgen -DCMAKE_BUILD_TYPE=Debug ..
           make pgen_windows_release
+          mv *.zip $GITHUB_WORKSPACE
 
       - name: Build pnes
         run: |
           mkdir cmake-build-pnes && cd cmake-build-pnes
           cmake -G "MSYS Makefiles" -DPLATFORM_WINDOWS=ON -DOPTION_EMU=pnes -DCMAKE_BUILD_TYPE=Debug ..
           make pnes_windows_release
+          mv *.zip $GITHUB_WORKSPACE
 
       - name: Build psnes
         run: |
           mkdir cmake-build-psnes && cd cmake-build-psnes
           cmake -G "MSYS Makefiles" -DPLATFORM_WINDOWS=ON -DOPTION_EMU=psnes -DCMAKE_BUILD_TYPE=Debug ..
           make psnes_windows_release
+          mv *.zip $GITHUB_WORKSPACE
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: $GITHUB_WORKSPACE/*.zip
+          token: ${{ secrets.RELEASE_TOKEN }}
