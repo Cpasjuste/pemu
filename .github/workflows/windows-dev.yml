@@ -6,28 +6,16 @@ on:
   workflow_dispatch:
 
 jobs:
+
   build-pfbneo-windows-dev:
     runs-on: windows-latest
-    strategy:
-      matrix:
-        fail-fast: false
-        include:
-          - { icon: '🟦', sys: mingw64 }
-      name: 🚧${{ matrix.icon }} ${{ matrix.sys }}
     defaults:
       run:
         shell: msys2 {0}
 
     steps:
-
-      - name: '🧰 Checkout'
-        uses: actions/checkout@v2
+      - uses: msys2/setup-msys2@v2
         with:
-          submodules: recursive
-
-      - name: Install build dependencies
-        with:
-          msystem: ${{matrix.sys}}
           update: true
           install: >-
             git zip perl make
@@ -36,8 +24,28 @@ jobs:
             mingw-w64-x86_64-glew mingw-w64-x86_64-libconfig mingw-w64-x86_64-tinyxml2
             mingw-w64-x86_64-mpv mingw-w64-x86_64-zlib mingw-w64-x86_64-minizip
 
+      - name: '🧰 Checkout'
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
+
       - name: Build pfbneo
         run: |
           cmake -G "MSYS Makefiles" -DPLATFORM_WINDOWS=ON -DOPTION_EMU=pfbneo -DCMAKE_BUILD_TYPE=Debug ..
           make pfbneo.deps
-          make -j pfbneo
+          make pfbneo
+
+      - name: Build pgen
+        run: |
+          cmake -G "MSYS Makefiles" -DPLATFORM_WINDOWS=ON -DOPTION_EMU=pgen -DCMAKE_BUILD_TYPE=Debug ..
+          make pgen
+
+      - name: Build pnes
+        run: |
+          cmake -G "MSYS Makefiles" -DPLATFORM_WINDOWS=ON -DOPTION_EMU=pnes -DCMAKE_BUILD_TYPE=Debug ..
+          make pnes
+
+      - name: Build psnes
+        run: |
+          cmake -G "MSYS Makefiles" -DPLATFORM_WINDOWS=ON -DOPTION_EMU=psnes -DCMAKE_BUILD_TYPE=Debug ..
+          make psnes
