@@ -1,0 +1,58 @@
+name: switch-dev
+
+on:
+  push:
+    branches: [ dev ]
+  workflow_dispatch:
+
+jobs:
+
+  build-switch-dev:
+    runs-on: ubuntu-latest
+    container: devkitpro/devkita64:latest
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+
+      - name: Install build dependencies
+        run: |
+          sudo apt -yq update
+          sudo apt -yq install git build-essential cmake zip
+
+      - name: Build pfbneo
+        run: |
+          cd $GITHUB_WORKSPACE
+          mkdir cmake-build-pfbneo && cd cmake-build-pfbneo
+          source /etc/profile.d/devkit-env.sh
+          cmake -G "Unix Makefiles" -DPLATFORM_SWITCH=ON -DOPTION_EMU=pfbneo -DCMAKE_BUILD_TYPE=Debug ..
+          make pfbneo.deps
+          make -j $(getconf _NPROCESSORS_ONLN) pfbneo.nro
+          
+      - name: Build pgen
+        run: |
+          cd $GITHUB_WORKSPACE
+          mkdir cmake-build-pgen && cd cmake-build-pgen
+          source /etc/profile.d/devkit-env.sh
+          cmake -G "Unix Makefiles" -DPLATFORM_SWITCH=ON -DOPTION_EMU=pgen -DCMAKE_BUILD_TYPE=Debug ..
+          make -j $(getconf _NPROCESSORS_ONLN) pgen.nro
+
+      - name: Build pnes
+        run: |
+          cd $GITHUB_WORKSPACE
+          mkdir cmake-build-pnes && cd cmake-build-pnes
+          source /etc/profile.d/devkit-env.sh
+          cmake -G "Unix Makefiles" -DPLATFORM_SWITCH=ON -DOPTION_EMU=pnes -DCMAKE_BUILD_TYPE=Debug ..
+          make -j $(getconf _NPROCESSORS_ONLN) pnes.nro
+
+      - name: Build psnes
+        run: |
+          cd $GITHUB_WORKSPACE
+          mkdir cmake-build-psnes && cd cmake-build-psnes
+          source /etc/profile.d/devkit-env.sh
+          cmake -G "Unix Makefiles" -DPLATFORM_SWITCH=ON -DOPTION_EMU=psnes -DCMAKE_BUILD_TYPE=Debug ..
+          make -j $(getconf _NPROCESSORS_ONLN) psnes.nro

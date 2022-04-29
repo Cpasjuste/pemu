@@ -1,18 +1,17 @@
-[![pfbneo-linux-release](https://github.com/Cpasjuste/pemu/actions/workflows/pfbneo-linux-release.yml/badge.svg)](https://github.com/Cpasjuste/pemu/actions/workflows/pfbneo-linux-release.yml)
-[![psnes-linux-release](https://github.com/Cpasjuste/pemu/actions/workflows/psnes-linux-release.yml/badge.svg)](https://github.com/Cpasjuste/pemu/actions/workflows/psnes-linux-release.yml)
-[![pnes-linux-release](https://github.com/Cpasjuste/pemu/actions/workflows/pnes-linux-release.yml/badge.svg)](https://github.com/Cpasjuste/pemu/actions/workflows/pnes-linux-release.yml)
+[![linux-release](https://github.com/Cpasjuste/pemu/actions/workflows/linux-release.yml/badge.svg)](https://github.com/Cpasjuste/pemu/actions/workflows/linux-release.yml)
+[![linux-dev](https://github.com/Cpasjuste/pemu/actions/workflows/linux-dev.yml/badge.svg)](https://github.com/Cpasjuste/pemu/actions/workflows/linux-dev.yml)
 
-[![pfbneo-switch-release](https://github.com/Cpasjuste/pemu/actions/workflows/pfbneo-switch-release.yml/badge.svg)](https://github.com/Cpasjuste/pemu/actions/workflows/pfbneo-switch-release.yml)
-[![psnes-switch-release](https://github.com/Cpasjuste/pemu/actions/workflows/psnes-switch-release.yml/badge.svg)](https://github.com/Cpasjuste/pemu/actions/workflows/psnes-switch-release.yml)
-[![pnes-switch-release](https://github.com/Cpasjuste/pemu/actions/workflows/pnes-switch-release.yml/badge.svg)](https://github.com/Cpasjuste/pemu/actions/workflows/pnes-switch-release.yml)
+[![windows-release](https://github.com/Cpasjuste/pemu/actions/workflows/windows-release.yml/badge.svg)](https://github.com/Cpasjuste/pemu/actions/workflows/windows-release.yml)
+[![windows-dev](https://github.com/Cpasjuste/pemu/actions/workflows/windows-dev.yml/badge.svg)](https://github.com/Cpasjuste/pemu/actions/workflows/windows-dev.yml)
 
-[![pfbneo-ps4-release](https://github.com/Cpasjuste/pemu/actions/workflows/pfbneo-ps4-release.yml/badge.svg)](https://github.com/Cpasjuste/pemu/actions/workflows/pfbneo-ps4-release.yml)
-[![psnes-ps4-release](https://github.com/Cpasjuste/pemu/actions/workflows/psnes-ps4-release.yml/badge.svg)](https://github.com/Cpasjuste/pemu/actions/workflows/psnes-ps4-release.yml)
-[![pnes-ps4-release](https://github.com/Cpasjuste/pemu/actions/workflows/pnes-ps4-release.yml/badge.svg)](https://github.com/Cpasjuste/pemu/actions/workflows/pnes-ps4-release.yml)
+[![switch-release](https://github.com/Cpasjuste/pemu/actions/workflows/switch-release.yml/badge.svg)](https://github.com/Cpasjuste/pemu/actions/workflows/switch-release.yml)
+[![switch-dev](https://github.com/Cpasjuste/pemu/actions/workflows/switch-dev.yml/badge.svg)](https://github.com/Cpasjuste/pemu/actions/workflows/switch-dev.yml)
 
-[![pfbneo-vita-release](https://github.com/Cpasjuste/pemu/actions/workflows/pfbneo-vita-release.yml/badge.svg)](https://github.com/Cpasjuste/pemu/actions/workflows/pfbneo-vita-release.yml)
-[![psnes-vita-release](https://github.com/Cpasjuste/pemu/actions/workflows/psnes-vita-release.yml/badge.svg)](https://github.com/Cpasjuste/pemu/actions/workflows/psnes-vita-release.yml)
-[![pnes-vita-release](https://github.com/Cpasjuste/pemu/actions/workflows/pnes-vita-release.yml/badge.svg)](https://github.com/Cpasjuste/pemu/actions/workflows/pnes-vita-release.yml)
+[![ps4-release](https://github.com/Cpasjuste/pemu/actions/workflows/ps4-release.yml/badge.svg)](https://github.com/Cpasjuste/pemu/actions/workflows/ps4-release.yml)
+[![ps4-dev](https://github.com/Cpasjuste/pemu/actions/workflows/ps4-dev.yml/badge.svg)](https://github.com/Cpasjuste/pemu/actions/workflows/ps4-dev.yml)
+
+[![vita-release](https://github.com/Cpasjuste/pemu/actions/workflows/vita-release.yml/badge.svg)](https://github.com/Cpasjuste/pemu/actions/workflows/vita-release.yml)
+[![vita-dev](https://github.com/Cpasjuste/pemu/actions/workflows/vita-dev.yml/badge.svg)](https://github.com/Cpasjuste/pemu/actions/workflows/vita-dev.yml)
 
 ## pEMU: Portable Emulator
 

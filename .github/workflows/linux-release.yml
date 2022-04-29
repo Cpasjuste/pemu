@@ -1,0 +1,56 @@
+name: linux-release
+
+on:
+  push:
+    branches: [ master ]
+  workflow_dispatch:
+
+jobs:
+
+  build-linux-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+
+      - name: Install build dependencies
+        run: |
+          sudo apt -yq update
+          sudo apt -yq install \
+              git zip build-essential cmake xxd \
+              liblzma-dev libsdl2-dev libconfig-dev libcurl4-openssl-dev libtinyxml2-dev \
+              libconfig-dev libglm-dev libfreetype6-dev libpng-dev libminizip-dev zlib1g-dev \
+              libvdpau-dev libva-dev libavcodec-dev libavfilter-dev libavformat-dev libavutil-dev \
+              libpostproc-dev libswresample-dev libswscale-dev libmpv-dev libass-dev libbz2-dev \
+              libfribidi-dev libzip-dev libfuse-dev
+
+      - name: Build pfbneo
+        run: |
+          cd $GITHUB_WORKSPACE
+          mkdir cmake-build-pfbneo && cd cmake-build-pfbneo
+          cmake -G "Unix Makefiles" -DPLATFORM_LINUX=ON -DOPTION_EMU=pfbneo -DCMAKE_BUILD_TYPE=Release ..
+          make pfbneo.deps
+          make -j $(getconf _NPROCESSORS_ONLN) pfbneo
+
+      - name: Build pgen
+        run: |
+          cd $GITHUB_WORKSPACE
+          mkdir cmake-build-pgen && cd cmake-build-pgen
+          cmake -G "Unix Makefiles" -DPLATFORM_LINUX=ON -DOPTION_EMU=pgen -DCMAKE_BUILD_TYPE=Release ..
+          make -j $(getconf _NPROCESSORS_ONLN) pgen
+
+      - name: Build pnes
+        run: |
+          cd $GITHUB_WORKSPACE
+          mkdir cmake-build-pnes && cd cmake-build-pnes
+          cmake -G "Unix Makefiles" -DPLATFORM_LINUX=ON -DOPTION_EMU=pnes -DCMAKE_BUILD_TYPE=Release ..
+          make -j $(getconf _NPROCESSORS_ONLN) pnes
+
+      - name: Build psnes
+        run: |
+          cd $GITHUB_WORKSPACE
+          mkdir cmake-build-psnes && cd cmake-build-psnes
+          cmake -G "Unix Makefiles" -DPLATFORM_LINUX=ON -DOPTION_EMU=psnes -DCMAKE_BUILD_TYPE=Release ..
+          make -j $(getconf _NPROCESSORS_ONLN) psnes

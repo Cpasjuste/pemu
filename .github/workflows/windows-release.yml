@@ -1,13 +1,13 @@
-name: windows-dev
+name: windows-release
 
 on:
   push:
-    branches: [ dev ]
+    branches: [ master ]
   workflow_dispatch:
 
 jobs:
 
-  build-windows-dev:
+  build-windows-release:
     runs-on: windows-latest
     defaults:
       run:
@@ -34,22 +34,22 @@ jobs:
           mkdir cmake-build-pfbneo && cd cmake-build-pfbneo
           cmake -G "MSYS Makefiles" -DPLATFORM_WINDOWS=ON -DOPTION_EMU=pfbneo -DCMAKE_BUILD_TYPE=Debug ..
           make pfbneo.deps
-          make pfbneo
+          make pfbneo_windows_release
 
       - name: Build pgen
         run: |
           mkdir cmake-build-pgen && cd cmake-build-pgen
           cmake -G "MSYS Makefiles" -DPLATFORM_WINDOWS=ON -DOPTION_EMU=pgen -DCMAKE_BUILD_TYPE=Debug ..
-          make pgen
+          make pgen_windows_release
 
       - name: Build pnes
         run: |
           mkdir cmake-build-pnes && cd cmake-build-pnes
           cmake -G "MSYS Makefiles" -DPLATFORM_WINDOWS=ON -DOPTION_EMU=pnes -DCMAKE_BUILD_TYPE=Debug ..
-          make pnes
+          make pnes_windows_release
 
       - name: Build psnes
         run: |
           mkdir cmake-build-psnes && cd cmake-build-psnes
           cmake -G "MSYS Makefiles" -DPLATFORM_WINDOWS=ON -DOPTION_EMU=psnes -DCMAKE_BUILD_TYPE=Debug ..
-          make psnes
+          make psnes_windows_release
