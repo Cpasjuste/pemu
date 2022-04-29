@@ -10,9 +10,9 @@ using namespace c2d;
 using namespace c2dui;
 
 PFBAConfig::PFBAConfig(c2d::Io *io, int version) : Config(io, version) {
-
     printf("PFBAConfig(%s, v%i)\n", getConfigPath().c_str(), version);
 
+#ifndef __PFBN_NO_CONSOLES__
     // add fba default roms paths
     roms_paths.emplace_back(io->getDataPath() + "channelf/");
     roms_paths.emplace_back(io->getDataPath() + "coleco/");
@@ -28,6 +28,7 @@ PFBAConfig::PFBAConfig(c2d::Io *io, int version) : Config(io, version) {
     roms_paths.emplace_back(io->getDataPath() + "sms/");
     roms_paths.emplace_back(io->getDataPath() + "spectrum/");
     roms_paths.emplace_back(io->getDataPath() + "tg16/");
+#endif
 
     ////////////////////////////////////////////////////////////
     /// pfba custom config

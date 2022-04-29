@@ -184,3 +184,10 @@ int AppError(TCHAR *szText, int bWarning) {
     //ui->getUiMessageBox()->show("ERROR", szText ? szText : "UNKNOW ERROR", "OK");
     return 1;
 }
+
+#ifdef __PFBN_NO_CONSOLES__
+
+void nes_add_cheat(char *code) {};
+
+void nes_remove_cheat(char *code) {};
+#endif

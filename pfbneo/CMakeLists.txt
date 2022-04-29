@@ -3,6 +3,9 @@ cmake_minimum_required(VERSION 3.0)
 
 project(pfbneo)
 
+# pfbneo became very heavy in size, we disable consoles for ps vita
+option(OPTION_DISABLE_CONSOLES "Disable consoles drivers" OFF)
+
 # handle m68k
 FILE(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/deps)
 ADD_CUSTOM_COMMAND(OUTPUT
@@ -59,33 +62,45 @@ set(DRV_DIRS
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/atari
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/capcom
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/cave
-        ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/channelf
-        ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/coleco
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/cps3
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/dataeast
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/galaxian
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/irem
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/konami
-        ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/megadrive
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/midway
-        ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/pce
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/pst90s
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/pre90s
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/neogeo
-        ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/nes
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/pgm
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/psikyo
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/sega
-        ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/sg1000
-        ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/sms
-        ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/msx
-        ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/spectrum
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/taito
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/toaplan
         )
-file(GLOB_RECURSE SRC_DRV
-        ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/*.cpp
-        )
+
+if (NOT OPTION_DISABLE_CONSOLES)
+    list(APPEND DRV_DIRS
+            ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/channelf
+            ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/coleco
+            ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/megadrive
+            ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/pce
+            ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/nes
+            ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/sg1000
+            ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/sms
+            ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/msx
+            ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/spectrum
+            )
+endif ()
+
+foreach (DIR ${DRV_DIRS})
+    file(GLOB DRV ${DIR}/*.cpp)
+    list(APPEND SRC_DRV ${DRV})
+endforeach ()
+
+if (OPTION_DISABLE_CONSOLES)
+    list(REMOVE_ITEM SRC_BURN ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/devices/vdc.cpp)
+endif ()
+
 list(REMOVE_ITEM SRC_DRV
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/capcom/ctv_make.cpp
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/pgm/pgm_sprite_create.cpp
@@ -217,6 +232,10 @@ set(FLAGS
         -Wno-format -Wno-misleading-indentation
         -Wno-restrict -Wno-unused-result
         )
+
+if (OPTION_DISABLE_CONSOLES)
+    list(APPEND FLAGS -D__PFBN_NO_CONSOLES__)
+endif ()
 
 set(CMAKE_CXX_STANDARD 17)
 
