@@ -40,8 +40,11 @@
  *
  ****************************************************************************************/
 
-#include "shared.h"
+#include <stdio.h>
+#include <string.h>
 #include <minizip/unzip.h>
+
+#include "shared.h"
 
 static int check_zip(char *filename);
 
