@@ -1,4 +1,4 @@
-name: pfbneo-windows-dev
+name: windows-dev
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 jobs:
 
-  build-pfbneo-windows-dev:
+  build-windows-dev:
     runs-on: windows-latest
     defaults:
       run:
@@ -31,21 +31,21 @@ jobs:
 
       - name: Build pfbneo
         run: |
-          cmake -G "MSYS Makefiles" -DPLATFORM_WINDOWS=ON -DOPTION_EMU=pfbneo -DCMAKE_BUILD_TYPE=Debug ..
+          cmake -G "MSYS Makefiles" -DPLATFORM_WINDOWS=ON -DOPTION_EMU=pfbneo -DCMAKE_BUILD_TYPE=Debug
           make pfbneo.deps
           make pfbneo
 
       - name: Build pgen
         run: |
-          cmake -G "MSYS Makefiles" -DPLATFORM_WINDOWS=ON -DOPTION_EMU=pgen -DCMAKE_BUILD_TYPE=Debug ..
+          cmake -G "MSYS Makefiles" -DPLATFORM_WINDOWS=ON -DOPTION_EMU=pgen -DCMAKE_BUILD_TYPE=Debug
           make pgen
 
       - name: Build pnes
         run: |
-          cmake -G "MSYS Makefiles" -DPLATFORM_WINDOWS=ON -DOPTION_EMU=pnes -DCMAKE_BUILD_TYPE=Debug ..
+          cmake -G "MSYS Makefiles" -DPLATFORM_WINDOWS=ON -DOPTION_EMU=pnes -DCMAKE_BUILD_TYPE=Debug
           make pnes
 
       - name: Build psnes
         run: |
-          cmake -G "MSYS Makefiles" -DPLATFORM_WINDOWS=ON -DOPTION_EMU=psnes -DCMAKE_BUILD_TYPE=Debug ..
+          cmake -G "MSYS Makefiles" -DPLATFORM_WINDOWS=ON -DOPTION_EMU=psnes -DCMAKE_BUILD_TYPE=Debug
           make psnes
