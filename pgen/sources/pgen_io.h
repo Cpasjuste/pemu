@@ -10,35 +10,20 @@ namespace c2d {
     class PGENIo : public c2d::C2DIo {
 
     public:
-
 #ifdef __PSP2__
-        std::string getHomePath() override {
-            return "ux0:/data/pgen/";
-        }
-
         std::string getDataPath() override {
             return "ux0:/data/pgen/";
         }
 #elif __PS4__
-
-        std::string getHomePath() override {
-            return "/data/pgen/";
-        }
-
         std::string getDataPath() override {
             return "/data/pgen/";
         }
-
 #ifndef NDEBUG
-
         std::string getRomFsPath() override {
             return "/data/pgen/";
         }
-
 #endif
-
 #endif
-
     };
 }
 
