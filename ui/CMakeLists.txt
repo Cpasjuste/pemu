@@ -28,13 +28,13 @@ if (OPTION_MPV_PLAYER)
         include(FindPkgConfig)
         pkg_search_module(MPV REQUIRED mpv)
         list(APPEND CROSS2DUI_INCLUDE ${MPV_INCLUDE_DIRS})
-        list(APPEND LDFLAGS ${MPV_LDFLAGS}) #swscale swresample avformat avfilter avcodec avutil ass freetype png bz2 fribidi pthread m z)
+        list(APPEND LDFLAGS ${MPV_LDFLAGS})
     endif ()
     list(APPEND FLAGS -D__MPV__)
 endif ()
 
 if (OPTION_BUILTIN_MINIZIP)
-    list(APPEND CROSS2DUI_INCLUDE source/external)
+    list(APPEND CROSS2DUI_INCLUDE ${CMAKE_CURRENT_SOURCE_DIR}/external)
     list(APPEND CROSS2DUI_SOURCE
             ${CMAKE_CURRENT_SOURCE_DIR}/external/minizip/ioapi.c
             ${CMAKE_CURRENT_SOURCE_DIR}/external/minizip/unzip.c)
