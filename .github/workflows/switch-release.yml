@@ -61,5 +61,5 @@ jobs:
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
-          files: $GITHUB_WORKSPACE/*.nro
+          files: '$GITHUB_WORKSPACE/*.nro'
           token: ${{ secrets.RELEASE_TOKEN }}
