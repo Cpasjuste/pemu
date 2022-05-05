@@ -14,8 +14,9 @@ PGENConfig::PGENConfig(c2d::Io *io, int version, const std::string &defaultRomsP
     roms_paths.emplace_back(io->getDataPath() + "sms/");
     roms_paths.emplace_back(io->getDataPath() + "gamegear/");
     roms_paths.emplace_back(io->getDataPath() + "megacd/");
+#if 0
     roms_paths.emplace_back(io->getDataPath() + "sg1000/");
-
+#endif
     // no need for auto-scaling mode on pgen
     get(Option::Id::ROM_SCALING_MODE)->set(
             {"SCALING_MODE", {"ASPECT", "INTEGER"}, 1,

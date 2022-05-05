@@ -23,9 +23,11 @@ void PGENRomList::build(bool addArcadeSystem) {
                      ui->getConfig()->getRomPaths().at(FBN_PATH_FDS), false, filters);
     setLoadingText("Games: %li / %li", gameList->getAvailableCount(), gameList->games.size());
 
+#if 0
     gameList->append(dataPath + "gamelist_sg1000.xml",
                      ui->getConfig()->getRomPaths().at(FBN_PATH_GAMEGEAR), false, filters);
     setLoadingText("Games: %li / %li", gameList->getAvailableCount(), gameList->games.size());
+#endif
 
     RomList::build();
 
