@@ -3,9 +3,8 @@
 //
 
 #include "c2dui.h"
-#include "c2dui_config.h"
 
-Config::Config(c2d::Io *io, int ver) {
+Config::Config(c2d::Io *io, int ver, const std::string &defaultRomsPath) {
 
     dataPath = io->getDataPath();
     configPath = dataPath + "config.cfg";
@@ -15,7 +14,7 @@ Config::Config(c2d::Io *io, int ver) {
 
     /// add default roms paths
     roms_paths.clear();
-    roms_paths.emplace_back(io->getDataPath() + "roms/");
+    roms_paths.emplace_back(io->getDataPath() + defaultRomsPath);
 
     /// default options available for all cores
     /////////////////////////////////////////////////
@@ -41,7 +40,6 @@ Config::Config(c2d::Io *io, int ver) {
     std::vector<std::string> skins;
     // add default skins from romfs
     skins.emplace_back("default");
-    skins.emplace_back("big_preview");
     // add skins from data dir
     auto files = io->getDirList(dataPath + "skins/", true);
     for (auto &file: files) {
@@ -68,9 +66,6 @@ Config::Config(c2d::Io *io, int ver) {
     get()->at(get()->size() - 1).setInfo("YOU NEED TO RESTART THE APPLICATION AFTER CHANGING THIS OPTION");
 
     append("VIDEO_SNAP_DELAY", 5, Option::Id::GUI_VIDEO_SNAP_DELAY, Option::Flags::INTEGER);
-#ifdef __SWITCH__
-    append("SINGLE_JOYCONS", {"OFF", "ON"}, 0, Option::Id::JOY_SINGLEJOYCON, Option::Flags::BOOLEAN);
-#endif
 
     /////////////////////////////////////////////////
     /// default rom config
@@ -99,16 +94,16 @@ Config::Config(c2d::Io *io, int ver) {
     append("JOY_DOWN", KEY_JOY_DOWN_DEFAULT, Option::Id::JOY_DOWN, Option::Flags::INPUT);
     append("JOY_LEFT", KEY_JOY_LEFT_DEFAULT, Option::Id::JOY_LEFT, Option::Flags::INPUT);
     append("JOY_RIGHT", KEY_JOY_RIGHT_DEFAULT, Option::Id::JOY_RIGHT, Option::Flags::INPUT);
-    append("JOY_FIRE1", KEY_JOY_FIRE1_DEFAULT, Option::Id::JOY_FIRE1, Option::Flags::INPUT);
-    append("JOY_FIRE2", KEY_JOY_FIRE2_DEFAULT, Option::Id::JOY_FIRE2, Option::Flags::INPUT);
-    append("JOY_FIRE3", KEY_JOY_FIRE3_DEFAULT, Option::Id::JOY_FIRE3, Option::Flags::INPUT);
-    append("JOY_FIRE4", KEY_JOY_FIRE4_DEFAULT, Option::Id::JOY_FIRE4, Option::Flags::INPUT);
-    append("JOY_FIRE5", KEY_JOY_FIRE5_DEFAULT, Option::Id::JOY_FIRE5, Option::Flags::INPUT);
-    append("JOY_FIRE6", KEY_JOY_FIRE6_DEFAULT, Option::Id::JOY_FIRE6, Option::Flags::INPUT);
-    append("JOY_FIRE7", KEY_JOY_FIRE7_DEFAULT, Option::Id::JOY_FIRE7, Option::Flags::INPUT);
-    append("JOY_FIRE8", KEY_JOY_FIRE8_DEFAULT, Option::Id::JOY_FIRE8, Option::Flags::INPUT);
-    append("JOY_COIN1", KEY_JOY_COIN1_DEFAULT, Option::Id::JOY_COIN1, Option::Flags::INPUT);
-    append("JOY_START1", KEY_JOY_START1_DEFAULT, Option::Id::JOY_START1, Option::Flags::INPUT);
+    append("JOY_A", KEY_JOY_A_DEFAULT, Option::Id::JOY_A, Option::Flags::INPUT);
+    append("JOY_B", KEY_JOY_B_DEFAULT, Option::Id::JOY_B, Option::Flags::INPUT);
+    append("JOY_X", KEY_JOY_X_DEFAULT, Option::Id::JOY_X, Option::Flags::INPUT);
+    append("JOY_Y", KEY_JOY_Y_DEFAULT, Option::Id::JOY_Y, Option::Flags::INPUT);
+    append("JOY_LT", KEY_JOY_LT_DEFAULT, Option::Id::JOY_LT, Option::Flags::INPUT);
+    append("JOY_RT", KEY_JOY_RT_DEFAULT, Option::Id::JOY_RT, Option::Flags::INPUT);
+    append("JOY_LB", KEY_JOY_LB_DEFAULT, Option::Id::JOY_LB, Option::Flags::INPUT);
+    append("JOY_RB", KEY_JOY_RB_DEFAULT, Option::Id::JOY_RB, Option::Flags::INPUT);
+    append("JOY_SELECT", KEY_JOY_SELECT_DEFAULT, Option::Id::JOY_SELECT, Option::Flags::INPUT);
+    append("JOY_START", KEY_JOY_START_DEFAULT, Option::Id::JOY_START, Option::Flags::INPUT);
     append("JOY_MENU1", KEY_JOY_MENU1_DEFAULT, Option::Id::JOY_MENU1, Option::Flags::INPUT);
     append("JOY_MENU2", KEY_JOY_MENU2_DEFAULT, Option::Id::JOY_MENU2, Option::Flags::INPUT);
     // TODO: add gui option for axis in option menu
@@ -127,16 +122,16 @@ Config::Config(c2d::Io *io, int ver) {
     append("KEY_DOWN", KEY_KB_DOWN_DEFAULT, Option::Id::KEY_DOWN, Option::Flags::INPUT);
     append("KEY_LEFT", KEY_KB_LEFT_DEFAULT, Option::Id::KEY_LEFT, Option::Flags::INPUT);
     append("KEY_RIGHT", KEY_KB_RIGHT_DEFAULT, Option::Id::KEY_RIGHT, Option::Flags::INPUT);
-    append("KEY_FIRE1", KEY_KB_FIRE1_DEFAULT, Option::Id::KEY_FIRE1, Option::Flags::INPUT);
-    append("KEY_FIRE2", KEY_KB_FIRE2_DEFAULT, Option::Id::KEY_FIRE2, Option::Flags::INPUT);
-    append("KEY_FIRE3", KEY_KB_FIRE3_DEFAULT, Option::Id::KEY_FIRE3, Option::Flags::INPUT);
-    append("KEY_FIRE4", KEY_KB_FIRE4_DEFAULT, Option::Id::KEY_FIRE4, Option::Flags::INPUT);
-    append("KEY_FIRE5", KEY_KB_FIRE5_DEFAULT, Option::Id::KEY_FIRE5, Option::Flags::INPUT);
-    append("KEY_FIRE6", KEY_KB_FIRE6_DEFAULT, Option::Id::KEY_FIRE6, Option::Flags::INPUT);
-    append("KEY_FIRE7", KEY_KB_FIRE7_DEFAULT, Option::Id::KEY_FIRE7, Option::Flags::INPUT);
-    append("KEY_FIRE8", KEY_KB_FIRE8_DEFAULT, Option::Id::KEY_FIRE8, Option::Flags::INPUT);
-    append("KEY_COIN1", KEY_KB_COIN1_DEFAULT, Option::Id::KEY_COIN1, Option::Flags::INPUT);
-    append("KEY_START1", KEY_KB_START1_DEFAULT, Option::Id::KEY_START1, Option::Flags::INPUT);
+    append("KEY_A", KEY_KB_A_DEFAULT, Option::Id::KEY_A, Option::Flags::INPUT);
+    append("KEY_B", KEY_KB_B_DEFAULT, Option::Id::KEY_B, Option::Flags::INPUT);
+    append("KEY_X", KEY_KB_X_DEFAULT, Option::Id::KEY_X, Option::Flags::INPUT);
+    append("KEY_Y", KEY_KB_Y_DEFAULT, Option::Id::KEY_Y, Option::Flags::INPUT);
+    append("KEY_LT", KEY_KB_LT_DEFAULT, Option::Id::KEY_LT, Option::Flags::INPUT);
+    append("KEY_RT", KEY_KB_RT_DEFAULT, Option::Id::KEY_RT, Option::Flags::INPUT);
+    append("KEY_LB", KEY_KB_LB_DEFAULT, Option::Id::KEY_LB, Option::Flags::INPUT);
+    append("KEY_RB", KEY_KB_RB_DEFAULT, Option::Id::KEY_RB, Option::Flags::INPUT);
+    append("KEY_SELECT", KEY_KB_SELECT_DEFAULT, Option::Id::KEY_SELECT, Option::Flags::INPUT);
+    append("KEY_START", KEY_KB_START_DEFAULT, Option::Id::KEY_START, Option::Flags::INPUT);
     append("KEY_MENU1", KEY_KB_MENU1_DEFAULT, Option::Id::KEY_MENU1, Option::Flags::INPUT);
     append("KEY_MENU2", KEY_KB_MENU2_DEFAULT, Option::Id::KEY_MENU2, Option::Flags::INPUT);
 #endif
@@ -383,55 +378,73 @@ bool Config::hide(int index, bool isRom) {
     return false;
 }
 
-int *Config::getPlayerInputKeys(int player, bool isRom) {
+std::vector<c2d::Input::ButtonMapping> Config::getKeyboardMapping(int player, bool isRom) {
 #ifndef NO_KEYBOARD
-    // TODO: allow per player config
-    keyboard_keys[0] = get(Option::Id::KEY_UP, isRom)->getValueInt();
-    keyboard_keys[1] = get(Option::Id::KEY_DOWN, isRom)->getValueInt();
-    keyboard_keys[2] = get(Option::Id::KEY_LEFT, isRom)->getValueInt();
-    keyboard_keys[3] = get(Option::Id::KEY_RIGHT, isRom)->getValueInt();
-    keyboard_keys[4] = get(Option::Id::KEY_COIN1, isRom)->getValueInt();
-    keyboard_keys[5] = get(Option::Id::KEY_START1, isRom)->getValueInt();
-    keyboard_keys[6] = get(Option::Id::KEY_FIRE1, isRom)->getValueInt();
-    keyboard_keys[7] = get(Option::Id::KEY_FIRE2, isRom)->getValueInt();
-    keyboard_keys[8] = get(Option::Id::KEY_FIRE3, isRom)->getValueInt();
-    keyboard_keys[9] = get(Option::Id::KEY_FIRE4, isRom)->getValueInt();
-    keyboard_keys[10] = get(Option::Id::KEY_FIRE5, isRom)->getValueInt();
-    keyboard_keys[11] = get(Option::Id::KEY_FIRE6, isRom)->getValueInt();
-    keyboard_keys[12] = get(Option::Id::KEY_FIRE7, isRom)->getValueInt();
-    keyboard_keys[13] = get(Option::Id::KEY_FIRE8, isRom)->getValueInt();
-    keyboard_keys[14] = get(Option::Id::KEY_MENU1, isRom)->getValueInt();
-    keyboard_keys[15] = get(Option::Id::KEY_MENU2, isRom)->getValueInt();
+    return {
+            {Input::Button::Up,     get(Option::Id::KEY_UP, isRom)->getValueInt()},
+            {Input::Button::Down,   get(Option::Id::KEY_DOWN, isRom)->getValueInt()},
+            {Input::Button::Left,   get(Option::Id::KEY_LEFT, isRom)->getValueInt()},
+            {Input::Button::Right,  get(Option::Id::KEY_RIGHT, isRom)->getValueInt()},
+            {Input::Button::Select, get(Option::Id::KEY_SELECT, isRom)->getValueInt()},
+            {Input::Button::Start,  get(Option::Id::KEY_START, isRom)->getValueInt()},
+            {Input::Button::A,      get(Option::Id::KEY_A, isRom)->getValueInt()},
+            {Input::Button::B,      get(Option::Id::KEY_B, isRom)->getValueInt()},
+            {Input::Button::X,      get(Option::Id::KEY_X, isRom)->getValueInt()},
+            {Input::Button::Y,      get(Option::Id::KEY_Y, isRom)->getValueInt()},
+            {Input::Button::LT,     get(Option::Id::KEY_LT, isRom)->getValueInt()},
+            {Input::Button::RT,     get(Option::Id::KEY_RT, isRom)->getValueInt()},
+            {Input::Button::LB,     get(Option::Id::KEY_LB, isRom)->getValueInt()},
+            {Input::Button::RB,     get(Option::Id::KEY_RB, isRom)->getValueInt()},
+            //{Input::Button::LS,     get(Option::Id::KEY_UP, isRom)->getValueInt()},
+            //{Input::Button::RS,     get(Option::Id::KEY_UP, isRom)->getValueInt()},
+            {Input::Button::Menu1,  get(Option::Id::KEY_MENU1, isRom)->getValueInt()},
+            {Input::Button::Menu2,  get(Option::Id::KEY_MENU2, isRom)->getValueInt()}
+    };
+#else
+    return {};
 #endif
-
-    return keyboard_keys;
 }
 
-int *Config::getPlayerInputButtons(int player, bool isRom) {
-    // TODO: allow per player config
-    joystick_keys[0] = get(Option::Id::JOY_UP, isRom)->getValueInt();
-    joystick_keys[1] = get(Option::Id::JOY_DOWN, isRom)->getValueInt();
-    joystick_keys[2] = get(Option::Id::JOY_LEFT, isRom)->getValueInt();
-    joystick_keys[3] = get(Option::Id::JOY_RIGHT, isRom)->getValueInt();
-    joystick_keys[4] = get(Option::Id::JOY_COIN1, isRom)->getValueInt();
-    joystick_keys[5] = get(Option::Id::JOY_START1, isRom)->getValueInt();
-    joystick_keys[6] = get(Option::Id::JOY_FIRE1, isRom)->getValueInt();
-    joystick_keys[7] = get(Option::Id::JOY_FIRE2, isRom)->getValueInt();
-    joystick_keys[8] = get(Option::Id::JOY_FIRE3, isRom)->getValueInt();
-    joystick_keys[9] = get(Option::Id::JOY_FIRE4, isRom)->getValueInt();
-    joystick_keys[10] = get(Option::Id::JOY_FIRE5, isRom)->getValueInt();
-    joystick_keys[11] = get(Option::Id::JOY_FIRE6, isRom)->getValueInt();
-    joystick_keys[12] = get(Option::Id::JOY_FIRE7, isRom)->getValueInt();
-    joystick_keys[13] = get(Option::Id::JOY_FIRE8, isRom)->getValueInt();
-    joystick_keys[14] = get(Option::Id::JOY_MENU1, isRom)->getValueInt();
-    joystick_keys[15] = get(Option::Id::JOY_MENU2, isRom)->getValueInt();
-    // axis
-    joystick_keys[16] = get(Option::Id::JOY_AXIS_LX, isRom)->getValueInt();
-    joystick_keys[17] = get(Option::Id::JOY_AXIS_LY, isRom)->getValueInt();
-    joystick_keys[18] = get(Option::Id::JOY_AXIS_RX, isRom)->getValueInt();
-    joystick_keys[19] = get(Option::Id::JOY_AXIS_RY, isRom)->getValueInt();
+std::vector<c2d::Input::ButtonMapping> Config::getJoystickMapping(int player, bool isRom) {
+    // TODO: allow per player config ?
+    return {
+            {Input::Button::Up,     get(Option::Id::JOY_UP, isRom)->getValueInt()},
+            {Input::Button::Down,   get(Option::Id::JOY_DOWN, isRom)->getValueInt()},
+            {Input::Button::Left,   get(Option::Id::JOY_LEFT, isRom)->getValueInt()},
+            {Input::Button::Right,  get(Option::Id::JOY_RIGHT, isRom)->getValueInt()},
+            {Input::Button::Select, get(Option::Id::JOY_SELECT, isRom)->getValueInt()},
+            {Input::Button::Start,  get(Option::Id::JOY_START, isRom)->getValueInt()},
+            {Input::Button::A,      get(Option::Id::JOY_A, isRom)->getValueInt()},
+            {Input::Button::B,      get(Option::Id::JOY_B, isRom)->getValueInt()},
+            {Input::Button::X,      get(Option::Id::JOY_X, isRom)->getValueInt()},
+            {Input::Button::Y,      get(Option::Id::JOY_Y, isRom)->getValueInt()},
+            {Input::Button::LT,     get(Option::Id::JOY_LT, isRom)->getValueInt()},
+            {Input::Button::RT,     get(Option::Id::JOY_RT, isRom)->getValueInt()},
+            {Input::Button::LB,     get(Option::Id::JOY_LB, isRom)->getValueInt()},
+            {Input::Button::RB,     get(Option::Id::JOY_RB, isRom)->getValueInt()},
+            //{Input::Button::LS,     get(Option::Id::KEY_UP, isRom)->getValueInt()},
+            //{Input::Button::RS,     get(Option::Id::KEY_UP, isRom)->getValueInt()},
+            {Input::Button::Menu1,  get(Option::Id::JOY_MENU1, isRom)->getValueInt()},
+            {Input::Button::Menu2,  get(Option::Id::JOY_MENU2, isRom)->getValueInt()}
+    };
+}
 
-    return joystick_keys;
+c2d::Vector2i Config::getJoystickAxisLeftMapping(int player, bool isRom) {
+    return {
+            get(Option::Id::JOY_AXIS_LX, isRom)->getValueInt(),
+            get(Option::Id::JOY_AXIS_LY, isRom)->getValueInt()
+    };
+}
+
+c2d::Vector2i Config::getJoystickAxisRightMapping(int player, bool isRom) {
+    return {
+            get(Option::Id::JOY_AXIS_RX, isRom)->getValueInt(),
+            get(Option::Id::JOY_AXIS_RY, isRom)->getValueInt()
+    };
+}
+
+int Config::getJoystickDeadZone(int player, bool isRom) {
+    return get(Option::Id::JOY_DEADZONE, isRom)->getValueInt();
 }
 
 c2d::Vector2f Config::getScreenSize() {

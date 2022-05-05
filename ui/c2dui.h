@@ -34,6 +34,7 @@
 #include "c2dui_ui_menu_state.h"
 #include "c2dui_status_box.h"
 #include "c2dui_ui_main.h"
+#include "c2dui_ui_help.h"
 
 using namespace c2d;
 using namespace c2dui;

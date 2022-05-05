@@ -4,15 +4,14 @@
 
 #include "c2dui.h"
 
-C2DUIVideo::C2DUIVideo(UiMain *u, void **_pixels, int *_pitch,
-                       const c2d::Vector2f &size, const c2d::Vector2i &a, Texture::Format format)
+C2DUIVideo::C2DUIVideo(UiMain *u, uint8_t **_pixels, int *_pitch,
+                       const c2d::Vector2i &size, const c2d::Vector2i &a, Texture::Format format)
         : C2DTexture(size, format) {
     ui = u;
     aspect = a;
 
     if (_pixels != nullptr) {
-        auto rect = (FloatRect) getTextureRect();
-        C2DTexture::lock(&rect, _pixels, _pitch);
+        C2DTexture::lock(_pixels, _pitch, getTextureRect());
         C2DTexture::unlock();
     }
 }
@@ -35,14 +34,14 @@ void C2DUIVideo::updateScaling(bool vertical, bool flip) {
     Vector2f scale_max;
     Vector2f scale;
 
-#ifndef __PSP2__
     if (vertical) {
         switch (rotation_cfg) {
             case 1: // ON
                 rotation = flip ? 90 : 270;
                 rotated = true;
                 break;
-            case 2: // CAB MODE
+            case 2: // FLIP
+            case 3: // CAB
                 rotation = flip ? 0 : 180;
                 break;
             default: // OFF
@@ -52,29 +51,6 @@ void C2DUIVideo::updateScaling(bool vertical, bool flip) {
     } else if (flip) {
         rotation = 180;
     }
-#else
-    // TODO: force right to left orientation on psp2,
-    // should add platform specific code
-    if ((rotation_cfg == 0 || rotation_cfg == 3) && vertical) {
-        if (!flip) {
-            rotation = 180;
-        }
-    } else if (rotation_cfg == 2 && vertical) {
-        if (flip) {
-            rotation = 180;
-        }
-    } else {
-        if (flip) {
-            rotation = 90;
-            rotated = 1;
-        } else if (vertical) {
-            rotation = -90;
-            rotated = 1;
-        } else {
-            rotation = 0;
-        }
-    }
-#endif
 
     if (rotated) {
         scale_max.x = screen.x / (float) getTextureRect().height;

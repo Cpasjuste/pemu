@@ -1,0 +1,65 @@
+name: switch-release
+
+on:
+  push:
+    tags:
+      - "v*.*"
+
+jobs:
+
+  build-switch-release:
+    runs-on: ubuntu-latest
+    container: devkitpro/devkita64:latest
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+
+      - name: Install build dependencies
+        run: |
+          sudo apt -yq update
+          sudo apt -yq install git build-essential cmake zip
+
+      - name: Build pfbneo
+        run: |
+          mkdir cmake-build-pfbneo && cd cmake-build-pfbneo
+          source /etc/profile.d/devkit-env.sh
+          cmake -G "Unix Makefiles" -DPLATFORM_SWITCH=ON -DOPTION_EMU=pfbneo -DCMAKE_BUILD_TYPE=Release ..
+          make pfbneo.deps
+          make -j $(getconf _NPROCESSORS_ONLN) pfbneo.nro
+          mv pfbneo/pfbneo.nro $GITHUB_WORKSPACE
+
+      - name: Build pgen
+        run: |
+          mkdir cmake-build-pgen && cd cmake-build-pgen
+          source /etc/profile.d/devkit-env.sh
+          cmake -G "Unix Makefiles" -DPLATFORM_SWITCH=ON -DOPTION_EMU=pgen -DCMAKE_BUILD_TYPE=Release ..
+          make -j $(getconf _NPROCESSORS_ONLN) pgen.nro
+          mv pgen/pgen.nro $GITHUB_WORKSPACE
+
+      - name: Build pnes
+        run: |
+          mkdir cmake-build-pnes && cd cmake-build-pnes
+          source /etc/profile.d/devkit-env.sh
+          cmake -G "Unix Makefiles" -DPLATFORM_SWITCH=ON -DOPTION_EMU=pnes -DCMAKE_BUILD_TYPE=Release ..
+          make -j $(getconf _NPROCESSORS_ONLN) pnes.nro
+          mv pnes/pnes.nro $GITHUB_WORKSPACE
+
+      - name: Build psnes
+        run: |
+          mkdir cmake-build-psnes && cd cmake-build-psnes
+          source /etc/profile.d/devkit-env.sh
+          cmake -G "Unix Makefiles" -DPLATFORM_SWITCH=ON -DOPTION_EMU=psnes -DCMAKE_BUILD_TYPE=Release ..
+          make -j $(getconf _NPROCESSORS_ONLN) psnes.nro
+          mv psnes/psnes.nro $GITHUB_WORKSPACE
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: '*.nro'
+          token: ${{ secrets.RELEASE_TOKEN }}

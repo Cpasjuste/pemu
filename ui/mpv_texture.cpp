@@ -9,7 +9,7 @@
 
 using namespace c2d;
 
-MpvTexture::MpvTexture(const c2d::Vector2f &size, Mpv *m) : GLTextureBuffer(size, Format::RGBA8) {
+MpvTexture::MpvTexture(const c2d::Vector2i &size, Mpv *m) : GLTextureBuffer(size, Format::RGBA8) {
     mpv = m;
 }
 

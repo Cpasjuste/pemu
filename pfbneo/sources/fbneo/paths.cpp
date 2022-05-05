@@ -19,13 +19,19 @@ void IpsApplyPatches(UINT8 *base, char *rom_name) {}
 
 bool bRunPause;
 
+// windows fix
+#undef MAX_PATH
+#define MAX_PATH 512
+
+// pfbneo
 char szAppHomePath[MAX_PATH];
 char szAppRomPath[MAX_PATH];
 char szAppSavePath[MAX_PATH];
 char szAppConfigPath[MAX_PATH];
+char szAppIconPath[MAX_PATH];
+// fbneo
 char szAppHiscorePath[MAX_PATH];
 char szAppSamplesPath[MAX_PATH];
-char szAppIconPath[MAX_PATH];
 char szAppBlendPath[MAX_PATH];
 char szAppEEPROMPath[MAX_PATH];
 char szAppHDDPath[MAX_PATH];

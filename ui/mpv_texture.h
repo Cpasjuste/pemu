@@ -13,7 +13,7 @@ class MpvTexture : public c2d::GLTextureBuffer {
 
 public:
 
-    explicit MpvTexture(const c2d::Vector2f &size, Mpv *mpv);
+    explicit MpvTexture(const c2d::Vector2i &size, Mpv *mpv);
 
 private:
 

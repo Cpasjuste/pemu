@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gameList>
-    <game id="298927">
+    <game id="72026101">
         <path>jb007a.zip</path>
         <name>007 James Bond (Jpn, v2.6, OMV)</name>
         <desc>007 James Bond is a shoot-'em-up game developed and published by Tsukuda Original for the SG-1000. It was ported from Parker Brothers's 1983 game of the same name, which was published for various American computers/consoles.
@@ -13,9 +13,11 @@
         <genreid>79</genreid>
         <players>1</players>
         <cloneof>jb007.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/jb007.png</image>
+        <video type="video">media/video/jb007.mp4</video>
     </game>
-    <game id="298927">
+    <game id="4180003203">
         <path>jb007.zip</path>
         <name>007 James Bond (Jpn, v2.7, OMV)</name>
         <desc>007 James Bond is a shoot-'em-up game developed and published by Tsukuda Original for the SG-1000. It was ported from Parker Brothers's 1983 game of the same name, which was published for various American computers/consoles.
@@ -27,11 +29,11 @@
         <genre>Shoot'em Up</genre>
         <genreid>79</genreid>
         <players>1</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/jb007.png</image>
         <video type="video">media/video/jb007.mp4</video>
     </game>
-    <game id="298927">
+    <game id="3505327808">
         <path>jb007t.zip</path>
         <name>007 James Bond (Tw)</name>
         <desc>007 James Bond is a shoot-'em-up game developed and published by Tsukuda Original for the SG-1000. It was ported from Parker Brothers's 1983 game of the same name, which was published for various American computers/consoles.
@@ -44,21 +46,23 @@
         <genreid>79</genreid>
         <players>1</players>
         <cloneof>jb007.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/jb007.png</image>
+        <video type="video">media/video/jb007.mp4</video>
     </game>
     <game id="3148712356">
         <path>arnodash.zip</path>
         <name>Arno Dash (HB)</name>
         <releasedate>20200101T000000</releasedate>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
     </game>
     <game id="1614784672">
         <path>arnodash2.zip</path>
         <name>Arno Dash 2 (HB, v1.03)</name>
         <releasedate>20200101T000000</releasedate>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
     </game>
-    <game id="197653">
+    <game id="1305589916">
         <path>bankp.zip</path>
         <name>Bank Panic (Jpn)</name>
         <desc>Bank Panic is an arcade shooting game developed by Sanritsu and manufactured by Sega in 1984. It was later ported by Sega to the SG-1000 and Sega Master System. An unlicensed clone called West Bank was released for several home computer systems. The same hardware would also be used for the later Sega/Sanritsu game Combat Hawk.
@@ -71,11 +75,11 @@ The player takes on the role of a sheriff in 19th century USA, protecting a bank
         <genre>Shooter</genre>
         <genreid>2646</genreid>
         <players>1</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/bankp.png</image>
         <video type="video">media/video/bankp.mp4</video>
     </game>
-    <game id="96392">
+    <game id="3860095233">
         <path>bombjackk2.zip</path>
         <name>Beom Jjaek (Kor)</name>
         <desc>Bomb Jack is an arcade game developed by Tehkan which was later ported to the SG-1000 by Sega in 1985. The aim of the game is to collect all the bombs in the playfield while avoiding monsters. Extra points are awarded for collecting the bombs in a specific order.</desc>
@@ -87,9 +91,11 @@ The player takes on the role of a sheriff in 19th century USA, protecting a bank
         <genreid>7</genreid>
         <players>2</players>
         <cloneof>bombjack.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/bombjack.png</image>
+        <video type="video">media/video/bombjack.mp4</video>
     </game>
-    <game id="197653">
+    <game id="327146076">
         <path>bilidada.zip</path>
         <name>Bi Li Da Dao (Tw)</name>
         <desc>Bank Panic is an arcade shooting game developed by Sanritsu and manufactured by Sega in 1984. It was later ported by Sega to the SG-1000 and Sega Master System. An unlicensed clone called West Bank was released for several home computer systems. The same hardware would also be used for the later Sega/Sanritsu game Combat Hawk.
@@ -103,9 +109,11 @@ The player takes on the role of a sheriff in 19th century USA, protecting a bank
         <genreid>2646</genreid>
         <players>1</players>
         <cloneof>bankp.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/bankp.png</image>
+        <video type="video">media/video/bankp.mp4</video>
     </game>
-    <game id="96392">
+    <game id="358198658">
         <path>bombjack.zip</path>
         <name>Bomb Jack (Jpn)</name>
         <desc>Bomb Jack is an arcade game developed by Tehkan which was later ported to the SG-1000 by Sega in 1985. The aim of the game is to collect all the bombs in the playfield while avoiding monsters. Extra points are awarded for collecting the bombs in a specific order.</desc>
@@ -116,11 +124,11 @@ The player takes on the role of a sheriff in 19th century USA, protecting a bank
         <genre>Platform</genre>
         <genreid>7</genreid>
         <players>2</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/bombjack.png</image>
         <video type="video">media/video/bombjack.mp4</video>
     </game>
-    <game id="96392">
+    <game id="2172858877">
         <path>bombjackk1.zip</path>
         <name>Bomb Jack (Kor)</name>
         <desc>Bomb Jack is an arcade game developed by Tehkan which was later ported to the SG-1000 by Sega in 1985. The aim of the game is to collect all the bombs in the playfield while avoiding monsters. Extra points are awarded for collecting the bombs in a specific order.</desc>
@@ -132,9 +140,11 @@ The player takes on the role of a sheriff in 19th century USA, protecting a bank
         <genreid>7</genreid>
         <players>2</players>
         <cloneof>bombjack.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/bombjack.png</image>
+        <video type="video">media/video/bombjack.mp4</video>
     </game>
-    <game id="96392">
+    <game id="3533324840">
         <path>bombjackt1.zip</path>
         <name>Bomb Jack (Tw)</name>
         <desc>Bomb Jack is an arcade game developed by Tehkan which was later ported to the SG-1000 by Sega in 1985. The aim of the game is to collect all the bombs in the playfield while avoiding monsters. Extra points are awarded for collecting the bombs in a specific order.</desc>
@@ -146,9 +156,11 @@ The player takes on the role of a sheriff in 19th century USA, protecting a bank
         <genreid>7</genreid>
         <players>2</players>
         <cloneof>bombjack.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/bombjack.png</image>
+        <video type="video">media/video/bombjack.mp4</video>
     </game>
-    <game id="298928">
+    <game id="2614698513">
         <path>bombmnsp.zip</path>
         <name>Bomber Man Special (Tw)</name>
         <desc>Bomberman Special is an MSX release in the Bomberman series of games. It was brought without a license to the SG-1000 in Taiwan.</desc>
@@ -159,11 +171,11 @@ The player takes on the role of a sheriff in 19th century USA, protecting a bank
         <genre>Action / Labyrinth</genre>
         <genreid>2937</genreid>
         <players>1</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/bombmnsp.png</image>
         <video type="video">media/video/bombmnsp.mp4</video>
     </game>
-    <game id="197656">
+    <game id="1343222640">
         <path>bordrlin.zip</path>
         <name>Borderline (Euro, Jpn)</name>
         <desc>Borderline is a VIC Dual arcade game developed in 1980 by Sega. It is a shoot-'em-up in which the player controls a red jeep who must destroy the enemy refineries.
@@ -175,11 +187,11 @@ Borderline was ported to the SG-1000 in 1983, and has also been released as part
         <genre>Shooter</genre>
         <genreid>2646</genreid>
         <players>1</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/bordrlin.png</image>
         <video type="video">media/video/bordrlin.mp4</video>
     </game>
-    <game id="197657">
+    <game id="2109861357">
         <path>cso.zip</path>
         <name>C_So! (Jpn)</name>
         <desc>C_So! (C-SO!) is a 1985 SG-1000 game developed by Compile and published by Sega. It is a port of an MSX game from the same year, which was published by Pony Canyon.
@@ -197,11 +209,11 @@ The game was only released in Japan.</desc>
         <genre>Platform</genre>
         <genreid>7</genreid>
         <players>1</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/cso.png</image>
         <video type="video">media/video/cso.mp4</video>
     </game>
-    <game id="864451">
+    <game id="1432515089">
         <path>cabkids.zip</path>
         <name>Cabbage Patch Kids (Tw)</name>
         <desc>It's exercise time! Anna Lee, one of the Cabbage Patch Kids, is warming up for a day of athletic adventures in the park--and she's taking you along! So stretch your muscles and get ready for a workout. This adventure is no picnic! As you stroll through the park, you'll encounter obstacles they never told you about in the Cabbage Patch. You'll leap onto floating lily pads, jump over cabbages and bouncing balls, and hop over puddles so deep they could float a ship. And that's the easy part! By the time you get back to the Park entrance, you'll know just what kind of physical shape you're really in. Are you ready for the workout?</desc>
@@ -210,11 +222,11 @@ The game was only released in Japan.</desc>
         <genre>Action</genre>
         <genreid>10</genreid>
         <players>1-2</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/cabkids.png</image>
         <video type="video">media/video/cabkids.mp4</video>
     </game>
-    <game id="197659">
+    <game id="3873154195">
         <path>chackn.zip</path>
         <name>Chack'n Pop (Jpn)</name>
         <desc>Chack'n Pop is an arcade game developed by Taito which was subsequently ported to the SG-1000 in 1985. It follows a yellow creature named Chack'n who must traverse across several mazes blowing up monsters.
@@ -230,11 +242,11 @@ Curiously this SG-1000 version uses the katakana script for writing Chack'n Pop 
         <genre>Action / Labyrinth</genre>
         <genreid>2937</genreid>
         <players>2</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/chackn.png</image>
         <video type="video">media/video/chackn.mp4</video>
     </game>
-    <game id="197660">
+    <game id="3642261173">
         <path>chaldrby.zip</path>
         <name>Challenge Derby (Jpn, OMV)</name>
         <desc>Challenge Derby is a horse racing game for the SG-1000.</desc>
@@ -244,11 +256,11 @@ Curiously this SG-1000 version uses the katakana script for writing Chack'n Pop 
         <genre>Horses race</genre>
         <genreid>2918</genreid>
         <players>1</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/chaldrby.png</image>
         <video type="video">media/video/chaldrby.mp4</video>
     </game>
-    <game id="197660">
+    <game id="1203179665">
         <path>chaldrbya.zip</path>
         <name>Challenge Derby (Jpn, OMV, Alt)</name>
         <desc>Challenge Derby is a horse racing game for the SG-1000.</desc>
@@ -259,9 +271,11 @@ Curiously this SG-1000 version uses the katakana script for writing Chack'n Pop 
         <genreid>2918</genreid>
         <players>1</players>
         <cloneof>chaldrby.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/chaldrby.png</image>
+        <video type="video">media/video/chaldrby.mp4</video>
     </game>
-    <game id="197660">
+    <game id="912655022">
         <path>chaldrbyb.zip</path>
         <name>Challenge Derby (Jpn, OMV, Hacked)</name>
         <desc>Challenge Derby is a horse racing game for the SG-1000.</desc>
@@ -272,9 +286,11 @@ Curiously this SG-1000 version uses the katakana script for writing Chack'n Pop 
         <genreid>2918</genreid>
         <players>1</players>
         <cloneof>chaldrby.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/chaldrby.png</image>
+        <video type="video">media/video/chaldrby.mp4</video>
     </game>
-    <game id="197661">
+    <game id="918161464">
         <path>champbas.zip</path>
         <name>Champion Baseball (Jpn)</name>
         <desc>Champion Baseball is an arcade baseball game developed by ADK. Sega distributed the game worldwide, and produced an SG-1000 port in 1983. Alpha Denshi also made a sequel, only released in arcades.
@@ -286,11 +302,11 @@ Champion Baseball is said to have been a hugely successful arcade game in Japan,
         <genre>Sports / Baseball</genre>
         <genreid>2853</genreid>
         <players>2</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/champbas.png</image>
         <video type="video">media/video/champbas.mp4</video>
     </game>
-    <game id="197661">
+    <game id="1662950549">
         <path>champbasa.zip</path>
         <name>Champion Baseball (Jpn, Older)</name>
         <desc>Champion Baseball is an arcade baseball game developed by ADK. Sega distributed the game worldwide, and produced an SG-1000 port in 1983. Alpha Denshi also made a sequel, only released in arcades.
@@ -303,9 +319,11 @@ Champion Baseball is said to have been a hugely successful arcade game in Japan,
         <genreid>2853</genreid>
         <players>2</players>
         <cloneof>champbas.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/champbas.png</image>
+        <video type="video">media/video/champbas.mp4</video>
     </game>
-    <game id="197661">
+    <game id="1635861762">
         <path>champbast.zip</path>
         <name>Champion Baseball (Tw)</name>
         <desc>Champion Baseball is an arcade baseball game developed by ADK. Sega distributed the game worldwide, and produced an SG-1000 port in 1983. Alpha Denshi also made a sequel, only released in arcades.
@@ -318,9 +336,11 @@ Champion Baseball is said to have been a hugely successful arcade game in Japan,
         <genreid>2853</genreid>
         <players>2</players>
         <cloneof>champbas.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/champbas.png</image>
+        <video type="video">media/video/champbas.mp4</video>
     </game>
-    <game id="197662">
+    <game id="1164320445">
         <path>champbil.zip</path>
         <name>Champion Billiards (Jpn)</name>
         <desc>Champion Billiards is a simplistic billiards game built for the SG-1000. It is the first game in Compile's "Lunar Pool" series. It was not released outside of Japan.
@@ -334,11 +354,11 @@ Trivia: Breaking open the yellow ball can release a yellow Flicky.</desc>
         <genre>Sports / Pool</genre>
         <genreid>3028</genreid>
         <players>1-2</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/champbil.png</image>
         <video type="video">media/video/champbil.mp4</video>
     </game>
-    <game id="298930">
+    <game id="3946131144">
         <path>champbox.zip</path>
         <name>Champion Boxing (Jpn)</name>
         <desc>Champion Boxing is a simplistic boxing game built for the SG-1000. It was later re-released in arcades for SG-1000-based arcade hardware. An MSX version was released in 1985, published by Pony Canyon.
@@ -352,11 +372,11 @@ Champion Boxing is also noteworthy for being the first game coded by Yu Suzuki i
         <genre>Sports / Boxing</genre>
         <genreid>2929</genreid>
         <players>2</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/champbox.png</image>
         <video type="video">media/video/champbox.mp4</video>
     </game>
-    <game id="298930">
+    <game id="4020051751">
         <path>champbox1.zip</path>
         <name>Champion Boxing (Jpn, MyCard)</name>
         <desc>Champion Boxing is a simplistic boxing game built for the SG-1000. It was later re-released in arcades for SG-1000-based arcade hardware. An MSX version was released in 1985, published by Pony Canyon.
@@ -371,9 +391,11 @@ Champion Boxing is also noteworthy for being the first game coded by Yu Suzuki i
         <genreid>2929</genreid>
         <players>2</players>
         <cloneof>champbox.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/champbox.png</image>
+        <video type="video">media/video/champbox.mp4</video>
     </game>
-    <game id="298930">
+    <game id="867468589">
         <path>champboxt.zip</path>
         <name>Champion Boxing (Tw)</name>
         <desc>Champion Boxing is a simplistic boxing game built for the SG-1000. It was later re-released in arcades for SG-1000-based arcade hardware. An MSX version was released in 1985, published by Pony Canyon.
@@ -388,9 +410,11 @@ Champion Boxing is also noteworthy for being the first game coded by Yu Suzuki i
         <genreid>2929</genreid>
         <players>2</players>
         <cloneof>champbox.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/champbox.png</image>
+        <video type="video">media/video/champbox.mp4</video>
     </game>
-    <game id="298931">
+    <game id="1407736261">
         <path>champglf.zip</path>
         <name>Champion Golf (Jpn)</name>
         <desc>If it's raining on Sunday ... it's CHAMPION GOLF day. You can enjoy hitting the ball with the appropriate club to match the shot, walking around the course with the considerate caddie over its extensive fairways, roughs, greens, ponds and bunker areas. Getting a "Birdie", "Eagle" or an amazing "Hole in One", or the even more miraculous "Albatross" will make you feel like you are on top of the world.</desc>
@@ -400,11 +424,11 @@ Champion Boxing is also noteworthy for being the first game coded by Yu Suzuki i
         <genre>Sports / Golf</genre>
         <genreid>2913</genreid>
         <players>2</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/champglf.png</image>
         <video type="video">media/video/champglf.mp4</video>
     </game>
-    <game id="298931">
+    <game id="2590043896">
         <path>champglf1.zip</path>
         <name>Champion Golf (Jpn, MyCard)</name>
         <desc>If it's raining on Sunday ... it's CHAMPION GOLF day. You can enjoy hitting the ball with the appropriate club to match the shot, walking around the course with the considerate caddie over its extensive fairways, roughs, greens, ponds and bunker areas. Getting a "Birdie", "Eagle" or an amazing "Hole in One", or the even more miraculous "Albatross" will make you feel like you are on top of the world.</desc>
@@ -415,9 +439,11 @@ Champion Boxing is also noteworthy for being the first game coded by Yu Suzuki i
         <genreid>2913</genreid>
         <players>2</players>
         <cloneof>champglf.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/champglf.png</image>
+        <video type="video">media/video/champglf.mp4</video>
     </game>
-    <game id="298931">
+    <game id="1097368159">
         <path>champglfk.zip</path>
         <name>Champion Golf (Kor)</name>
         <desc>If it's raining on Sunday ... it's CHAMPION GOLF day. You can enjoy hitting the ball with the appropriate club to match the shot, walking around the course with the considerate caddie over its extensive fairways, roughs, greens, ponds and bunker areas. Getting a "Birdie", "Eagle" or an amazing "Hole in One", or the even more miraculous "Albatross" will make you feel like you are on top of the world.</desc>
@@ -428,9 +454,11 @@ Champion Boxing is also noteworthy for being the first game coded by Yu Suzuki i
         <genreid>2913</genreid>
         <players>2</players>
         <cloneof>champglf.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/champglf.png</image>
+        <video type="video">media/video/champglf.mp4</video>
     </game>
-    <game id="197665">
+    <game id="215197108">
         <path>champice.zip</path>
         <name>Champion Ice Hockey (Jpn)</name>
         <desc>Champion Ice Hockey is a simplistic ice hockey game built for the SG-1000.
@@ -442,11 +470,11 @@ You play as the Red team vs. the Blue team. One button shoots, while the other b
         <genre>Sports / Hockey</genre>
         <genreid>2933</genreid>
         <players>2</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/champice.png</image>
         <video type="video">media/video/champice.mp4</video>
     </game>
-    <game id="197665">
+    <game id="825166813">
         <path>champicek.zip</path>
         <name>Champion Ice Hockey (Kor)</name>
         <desc>Champion Ice Hockey is a simplistic ice hockey game built for the SG-1000.
@@ -459,9 +487,11 @@ You play as the Red team vs. the Blue team. One button shoots, while the other b
         <genreid>2933</genreid>
         <players>2</players>
         <cloneof>champice.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/champice.png</image>
+        <video type="video">media/video/champice.mp4</video>
     </game>
-    <game id="197666">
+    <game id="2393586140">
         <path>champken.zip</path>
         <name>Champion Kendou (Jpn)</name>
         <desc>Champion Kendou is a simplistic kendou game built for the SG-1000 and MSX. It was only released in Japan.</desc>
@@ -471,11 +501,11 @@ You play as the Red team vs. the Blue team. One button shoots, while the other b
         <genre>Sports</genre>
         <genreid>685</genreid>
         <players>2</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/champken.png</image>
         <video type="video">media/video/champken.mp4</video>
     </game>
-    <game id="197667">
+    <game id="2934321574">
         <path>champpwr.zip</path>
         <name>Champion Pro Wrestling (Jpn)</name>
         <desc>A straightforward Pro Wrestling game from Sega in the Champion sport series. You always start at rank C and have to fight your way up to rank B and A. To play for a rank you 'll have to fight three matches. Winning two out of three matches promotes you to an higher rank. During a match several moves can be selected: chop, kick, pile driver, dropkick. The referee does a countdown when your opponent or you are down.</desc>
@@ -485,11 +515,11 @@ You play as the Red team vs. the Blue team. One button shoots, while the other b
         <genre>Sports / Wrestling</genre>
         <genreid>2861</genreid>
         <players>2</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/champpwr.png</image>
         <video type="video">media/video/champpwr.mp4</video>
     </game>
-    <game id="197668">
+    <game id="2853340466">
         <path>champscr.zip</path>
         <name>Champion Soccer (Jpn)</name>
         <desc>Champion Soccer is a simplistic football game built for the SG-1000. Pony Canyon later brought it to the MSX.</desc>
@@ -499,11 +529,11 @@ You play as the Red team vs. the Blue team. One button shoots, while the other b
         <genre>Sports / Soccer</genre>
         <genreid>2847</genreid>
         <players>2</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/champscr.png</image>
         <video type="video">media/video/champscr.mp4</video>
     </game>
-    <game id="197668">
+    <game id="634093872">
         <path>champscrt.zip</path>
         <name>Champion Soccer (Tw)</name>
         <desc>Champion Soccer is a simplistic football game built for the SG-1000. Pony Canyon later brought it to the MSX.</desc>
@@ -514,9 +544,11 @@ You play as the Red team vs. the Blue team. One button shoots, while the other b
         <genreid>2847</genreid>
         <players>2</players>
         <cloneof>champscr.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/champscr.png</image>
+        <video type="video">media/video/champscr.mp4</video>
     </game>
-    <game id="197669">
+    <game id="3851574555">
         <path>champtns.zip</path>
         <name>Champion Tennis (Jpn)</name>
         <desc>Champion Tennis is a simplistic tennis game built for the SG-1000.</desc>
@@ -526,11 +558,11 @@ You play as the Red team vs. the Blue team. One button shoots, while the other b
         <genre>Sports / Tennis</genre>
         <genreid>2867</genreid>
         <players>1-2</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/champtns.png</image>
         <video type="video">media/video/champtns.mp4</video>
     </game>
-    <game id="197670">
+    <game id="3174097347">
         <path>cloderun.zip</path>
         <name>Championship Lode Runner (Jpn)</name>
         <desc>A follow-up to the original Lode Runner, with identical gameplay. This package contained 50 of the most challenging levels ever designed, and was intended for expert players only. It did not include the level editor, you had to play through the levels in order, but a save-game option was provided (although you lost one life every time you restored).</desc>
@@ -540,11 +572,11 @@ You play as the Red team vs. the Blue team. One button shoots, while the other b
         <genre>Platform</genre>
         <genreid>7</genreid>
         <players>1</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/cloderun.png</image>
         <video type="video">media/video/cloderun.mp4</video>
     </game>
-    <game id="197728">
+    <game id="1195931128">
         <path>supertnkt.zip</path>
         <name>Chaoji Tanke (Tw)</name>
         <desc>Super Tank is a shoot-'em-up game for the SG-1000. The player drives a tank and is tasked with shooting at and destroying enemy units and structures.</desc>
@@ -555,9 +587,11 @@ You play as the Red team vs. the Blue team. One button shoots, while the other b
         <genreid>2646</genreid>
         <players>2</players>
         <cloneof>supertnk.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/supertnk.png</image>
+        <video type="video">media/video/supertnk.mp4</video>
     </game>
-    <game id="96392">
+    <game id="1758579184">
         <path>bombjackt2.zip</path>
         <name>Chaoren (Tw)</name>
         <desc>Bomb Jack is an arcade game developed by Tehkan which was later ported to the SG-1000 by Sega in 1985. The aim of the game is to collect all the bombs in the playfield while avoiding monsters. Extra points are awarded for collecting the bombs in a specific order.</desc>
@@ -569,15 +603,17 @@ You play as the Red team vs. the Blue team. One button shoots, while the other b
         <genreid>7</genreid>
         <players>2</players>
         <cloneof>bombjack.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/bombjack.png</image>
+        <video type="video">media/video/bombjack.mp4</video>
     </game>
     <game id="1601983151">
         <path>cherilp.zip</path>
         <name>Cheril Perils Classic SG-1000 (HB)</name>
         <releasedate>20180101T000000</releasedate>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
     </game>
-    <game id="197671">
+    <game id="1604722952">
         <path>choplift.zip</path>
         <name>Choplifter (Jpn)</name>
         <desc>Choplifter is a 1982 Apple II game developed by Dan Gorlin and published by Broderbund. In the game you pilot a helicopter and must rescue people from prisoner of war camps. Sega were responsible for an arcade remake on both the Sega System 1 and Sega System 2 hardware in 1985. This version was ported to a variety of platforms, including the SG-1000 in 1985 and the Sega Master System in 1986.</desc>
@@ -587,11 +623,11 @@ You play as the Red team vs. the Blue team. One button shoots, while the other b
         <genre>Shooter</genre>
         <genreid>2646</genreid>
         <players>1</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/choplift.png</image>
         <video type="video">media/video/choplift.mp4</video>
     </game>
-    <game id="197671">
+    <game id="152435160">
         <path>chopliftp.zip</path>
         <name>Choplifter (Jpn, Prototype)</name>
         <desc>Choplifter is a 1982 Apple II game developed by Dan Gorlin and published by Broderbund. In the game you pilot a helicopter and must rescue people from prisoner of war camps. Sega were responsible for an arcade remake on both the Sega System 1 and Sega System 2 hardware in 1985. This version was ported to a variety of platforms, including the SG-1000 in 1985 and the Sega Master System in 1986.</desc>
@@ -602,9 +638,11 @@ You play as the Red team vs. the Blue team. One button shoots, while the other b
         <genreid>2646</genreid>
         <players>1</players>
         <cloneof>choplift.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/choplift.png</image>
+        <video type="video">media/video/choplift.mp4</video>
     </game>
-    <game id="197671">
+    <game id="959088957">
         <path>chopliftk.zip</path>
         <name>Choplifter (Kor)</name>
         <desc>Choplifter is a 1982 Apple II game developed by Dan Gorlin and published by Broderbund. In the game you pilot a helicopter and must rescue people from prisoner of war camps. Sega were responsible for an arcade remake on both the Sega System 1 and Sega System 2 hardware in 1985. This version was ported to a variety of platforms, including the SG-1000 in 1985 and the Sega Master System in 1986.</desc>
@@ -615,9 +653,11 @@ You play as the Red team vs. the Blue team. One button shoots, while the other b
         <genreid>2646</genreid>
         <players>1</players>
         <cloneof>choplift.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/choplift.png</image>
+        <video type="video">media/video/choplift.mp4</video>
     </game>
-    <game id="197671">
+    <game id="3271176678">
         <path>chopliftt.zip</path>
         <name>Choplifter (Tw)</name>
         <desc>Choplifter is a 1982 Apple II game developed by Dan Gorlin and published by Broderbund. In the game you pilot a helicopter and must rescue people from prisoner of war camps. Sega were responsible for an arcade remake on both the Sega System 1 and Sega System 2 hardware in 1985. This version was ported to a variety of platforms, including the SG-1000 in 1985 and the Sega Master System in 1986.</desc>
@@ -628,22 +668,50 @@ You play as the Red team vs. the Blue team. One button shoots, while the other b
         <genreid>2646</genreid>
         <players>1</players>
         <cloneof>choplift.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/choplift.png</image>
+        <video type="video">media/video/choplift.mp4</video>
     </game>
-    <game id="3835745290">
+    <game id="2521689836">
         <path>circusck.zip</path>
         <name>Circus Charlie (Kor)</name>
-        <releasedate>198?0101T000000</releasedate>
+        <desc>Circus Charlie is originally an arcade game. The MSX port that was brought to the SG-1000 in Taiwan and South Korea.
+You are Charlie, a member of a circus troupe. Your job is to please the crowd by performing five death-defying stunts:
+Stunt #1: You and the lion must jump through several rings of fire. Remember to avoid the jugs that emit fire. You must do this for 100 meters.
+Stunt #2: Walk the tightrope for 70 meters, avoiding the monkeys that get in your way. Jump the cyan monkeys for 500 points.
+Stunt #3: Roll on a ball for 80 meters, jumping from ball to ball. You can move balls backwards if the target is too close to make a successful jump. Avoid contact with the ground.
+Stunt #4: Ride a horse for 200 meters, bouncing on trampolines along the way. Be careful not to miss the jump or go over the tops of trampolines. You can speed up or slow down the horse.
+Stunt #5: Finally, trapeze from swing to swing for 50 meters. If you miss, make sure that you land on the platforms below so you bounce back on a swing.
+Once you have completed all five stunts, you have to do them again and hopefully, more points will be awarded.</desc>
+        <releasedate>19840101T000000</releasedate>
+        <developer id="26">Konami</developer>
+        <publisher id="12330">Aaronix</publisher>
+        <players>1-2</players>
         <cloneof>circusc.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/circusc.png</image>
+        <video type="video">media/video/circusc.mp4</video>
     </game>
     <game id="3835745290">
         <path>circusc.zip</path>
         <name>Circus Charlie (Tw)</name>
-        <releasedate>198?0101T000000</releasedate>
-        <system id="109" parentId="2">SG-1000</system>
+        <desc>Circus Charlie is originally an arcade game. The MSX port that was brought to the SG-1000 in Taiwan and South Korea.
+You are Charlie, a member of a circus troupe. Your job is to please the crowd by performing five death-defying stunts:
+Stunt #1: You and the lion must jump through several rings of fire. Remember to avoid the jugs that emit fire. You must do this for 100 meters.
+Stunt #2: Walk the tightrope for 70 meters, avoiding the monkeys that get in your way. Jump the cyan monkeys for 500 points.
+Stunt #3: Roll on a ball for 80 meters, jumping from ball to ball. You can move balls backwards if the target is too close to make a successful jump. Avoid contact with the ground.
+Stunt #4: Ride a horse for 200 meters, bouncing on trampolines along the way. Be careful not to miss the jump or go over the tops of trampolines. You can speed up or slow down the horse.
+Stunt #5: Finally, trapeze from swing to swing for 50 meters. If you miss, make sure that you land on the platforms below so you bounce back on a swing.
+Once you have completed all five stunts, you have to do them again and hopefully, more points will be awarded.</desc>
+        <releasedate>19840101T000000</releasedate>
+        <developer id="26">Konami</developer>
+        <publisher id="12330">Aaronix</publisher>
+        <players>1-2</players>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/circusc.png</image>
+        <video type="video">media/video/circusc.mp4</video>
     </game>
-    <game id="519328">
+    <game id="32026367">
         <path>congoa.zip</path>
         <name>Congo Bongo (Euro, Jpn, v1 Alt)</name>
         <desc>Congo Bongo , originally known as Tip Top, is a 1983 arcade platformer game developed by Sega. It is often considered an isometric equivalent to Nintendo's Donkey Kong, as it stars a protagonist chasing after a large ape (in this game, called "Bongo"). However, unlike Donkey Kong, the game is set in a jungle, the graphics are more detailed and there are more enemies and traps.</desc>
@@ -654,9 +722,11 @@ You play as the Red team vs. the Blue team. One button shoots, while the other b
         <genreid>7</genreid>
         <players>1</players>
         <cloneof>congo.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/congo.png</image>
+        <video type="video">media/video/congo.mp4</video>
     </game>
-    <game id="519328">
+    <game id="92740350">
         <path>congo.zip</path>
         <name>Congo Bongo (Euro, Jpn, v1)</name>
         <desc>Congo Bongo , originally known as Tip Top, is a 1983 arcade platformer game developed by Sega. It is often considered an isometric equivalent to Nintendo's Donkey Kong, as it stars a protagonist chasing after a large ape (in this game, called "Bongo"). However, unlike Donkey Kong, the game is set in a jungle, the graphics are more detailed and there are more enemies and traps.</desc>
@@ -666,11 +736,11 @@ You play as the Red team vs. the Blue team. One button shoots, while the other b
         <genre>Platform</genre>
         <genreid>7</genreid>
         <players>1</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/congo.png</image>
         <video type="video">media/video/congo.mp4</video>
     </game>
-    <game id="519328">
+    <game id="2046723458">
         <path>congob.zip</path>
         <name>Congo Bongo (Jpn, v0)</name>
         <desc>Congo Bongo , originally known as Tip Top, is a 1983 arcade platformer game developed by Sega. It is often considered an isometric equivalent to Nintendo's Donkey Kong, as it stars a protagonist chasing after a large ape (in this game, called "Bongo"). However, unlike Donkey Kong, the game is set in a jungle, the graphics are more detailed and there are more enemies and traps.</desc>
@@ -681,9 +751,11 @@ You play as the Red team vs. the Blue team. One button shoots, while the other b
         <genreid>7</genreid>
         <players>1</players>
         <cloneof>congo.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/congo.png</image>
+        <video type="video">media/video/congo.mp4</video>
     </game>
-    <game id="519328">
+    <game id="1300789033">
         <path>congot.zip</path>
         <name>Congo Bongo (Tw)</name>
         <desc>Congo Bongo , originally known as Tip Top, is a 1983 arcade platformer game developed by Sega. It is often considered an isometric equivalent to Nintendo's Donkey Kong, as it stars a protagonist chasing after a large ape (in this game, called "Bongo"). However, unlike Donkey Kong, the game is set in a jungle, the graphics are more detailed and there are more enemies and traps.</desc>
@@ -694,9 +766,11 @@ You play as the Red team vs. the Blue team. One button shoots, while the other b
         <genreid>7</genreid>
         <players>1</players>
         <cloneof>congo.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/congo.png</image>
+        <video type="video">media/video/congo.mp4</video>
     </game>
-    <game id="197659">
+    <game id="3356480672">
         <path>dayu.zip</path>
         <name>Da Yu (Tw)</name>
         <desc>Chack'n Pop is an arcade game developed by Taito which was subsequently ported to the SG-1000 in 1985. It follows a yellow creature named Chack'n who must traverse across several mazes blowing up monsters.
@@ -713,9 +787,11 @@ Curiously this SG-1000 version uses the katakana script for writing Chack'n Pop 
         <genreid>2937</genreid>
         <players>2</players>
         <cloneof>chackn.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/chackn.png</image>
+        <video type="video">media/video/chackn.mp4</video>
     </game>
-    <game id="197679">
+    <game id="2037730026">
         <path>elevatort.zip</path>
         <name>Die Dui Die (Tw)</name>
         <desc>The player assumes the role of a spy infiltrating a 30-story building filled with elevators. The player is pursued by enemy agents who appear from behind closed doors. These agents must be dealt with via force or evasion. Successful completion of a level involves collecting all the secret documents and traversing the building from top to bottom. In the lower floors of the building, the elevator systems can be complex enough that puzzle-solving skills are needed. The controls consist of a 4-way joystick and two buttons, one to shoot and the other for jumping and kicking.</desc>
@@ -726,9 +802,11 @@ Curiously this SG-1000 version uses the katakana script for writing Chack'n Pop 
         <genreid>7</genreid>
         <players>1</players>
         <cloneof>elevator.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/elevator.png</image>
+        <video type="video">media/video/elevator.mp4</video>
     </game>
-    <game id="197676">
+    <game id="857608228">
         <path>dokidoki.zip</path>
         <name>Dokidoki Penguin Land (Jpn)</name>
         <desc>Doki Doki Penguin Land is a 1985 game initially developed by Sega for the SG-1000. It is a platform-based puzzle game, where a penguin must guide an egg down the screen making sure not to break it.
@@ -740,11 +818,11 @@ The basic aim of Doki Doki Penguin Land is to guide an egg from the top of the s
         <genre>Puzzle-Game</genre>
         <genreid>26</genreid>
         <players>1-2</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/dokidoki.png</image>
         <video type="video">media/video/dokidoki.mp4</video>
     </game>
-    <game id="298932">
+    <game id="836435379">
         <path>dragwang1.zip</path>
         <name>Dragon Wang (Jpn, v0)</name>
         <desc>The protagonist is Wang (inspired by Jackie Chan and/or his character Thomas), hence the unfortunate title Dragon Wang. Wang is Chinese for King.</desc>
@@ -755,9 +833,11 @@ The basic aim of Doki Doki Penguin Land is to guide an egg from the top of the s
         <genreid>7</genreid>
         <players>2</players>
         <cloneof>dragwang.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/dragwang.png</image>
+        <video type="video">media/video/dragwang.mp4</video>
     </game>
-    <game id="298932">
+    <game id="1909216699">
         <path>dragwang.zip</path>
         <name>Dragon Wang (Jpn, v1)</name>
         <desc>The protagonist is Wang (inspired by Jackie Chan and/or his character Thomas), hence the unfortunate title Dragon Wang. Wang is Chinese for King.</desc>
@@ -767,11 +847,11 @@ The basic aim of Doki Doki Penguin Land is to guide an egg from the top of the s
         <genre>Platform</genre>
         <genreid>7</genreid>
         <players>2</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/dragwang.png</image>
         <video type="video">media/video/dragwang.mp4</video>
     </game>
-    <game id="197678">
+    <game id="3624618019">
         <path>drol.zip</path>
         <name>Drol (Jpn)</name>
         <desc>Drol is an SG-1000 game released in 1985. Originally developed by Broderbund for various home computers in the west, it was brought to the SG-1000 by Sega and released exclusively in Japan. You play as a robot who must rescue his children.</desc>
@@ -781,11 +861,11 @@ The basic aim of Doki Doki Penguin Land is to guide an egg from the top of the s
         <genre>Platform</genre>
         <genreid>7</genreid>
         <players>1</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/drol.png</image>
         <video type="video">media/video/drol.mp4</video>
     </game>
-    <game id="197678">
+    <game id="2020148176">
         <path>drolk.zip</path>
         <name>Drol (Kor)</name>
         <desc>Drol is an SG-1000 game released in 1985. Originally developed by Broderbund for various home computers in the west, it was brought to the SG-1000 by Sega and released exclusively in Japan. You play as a robot who must rescue his children.</desc>
@@ -796,9 +876,11 @@ The basic aim of Doki Doki Penguin Land is to guide an egg from the top of the s
         <genreid>7</genreid>
         <players>1</players>
         <cloneof>drol.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/drol.png</image>
+        <video type="video">media/video/drol.mp4</video>
     </game>
-    <game id="197678">
+    <game id="341407017">
         <path>drolt.zip</path>
         <name>Drol (Tw)</name>
         <desc>Drol is an SG-1000 game released in 1985. Originally developed by Broderbund for various home computers in the west, it was brought to the SG-1000 by Sega and released exclusively in Japan. You play as a robot who must rescue his children.</desc>
@@ -809,9 +891,11 @@ The basic aim of Doki Doki Penguin Land is to guide an egg from the top of the s
         <genreid>7</genreid>
         <players>1</players>
         <cloneof>drol.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/drol.png</image>
+        <video type="video">media/video/drol.mp4</video>
     </game>
-    <game id="197679">
+    <game id="3585868085">
         <path>elevator.zip</path>
         <name>Elevator Action (Jpn)</name>
         <desc>The player assumes the role of a spy infiltrating a 30-story building filled with elevators. The player is pursued by enemy agents who appear from behind closed doors. These agents must be dealt with via force or evasion. Successful completion of a level involves collecting all the secret documents and traversing the building from top to bottom. In the lower floors of the building, the elevator systems can be complex enough that puzzle-solving skills are needed. The controls consist of a 4-way joystick and two buttons, one to shoot and the other for jumping and kicking.</desc>
@@ -821,11 +905,11 @@ The basic aim of Doki Doki Penguin Land is to guide an egg from the top of the s
         <genre>Platform</genre>
         <genreid>7</genreid>
         <players>1</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/elevator.png</image>
         <video type="video">media/video/elevator.mp4</video>
     </game>
-    <game id="96450">
+    <game id="3711827609">
         <path>exerion.zip</path>
         <name>Exerion (Euro, Jpn)</name>
         <desc>The FIGHTER EX rushed in and out attacking the monstrous enemy groups in the 6 mysterious, diferent DIMENSIONAL worlds.
@@ -839,11 +923,11 @@ See how successful you are in battling the enemy through the 6 dangerous worlds 
         <genre>Shoot'em Up</genre>
         <genreid>79</genreid>
         <players>2</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/exerion.png</image>
         <video type="video">media/video/exerion.mp4</video>
     </game>
-    <game id="96450">
+    <game id="810996499">
         <path>exerionk.zip</path>
         <name>Exerion (Kor)</name>
         <desc>The FIGHTER EX rushed in and out attacking the monstrous enemy groups in the 6 mysterious, diferent DIMENSIONAL worlds.
@@ -858,9 +942,11 @@ See how successful you are in battling the enemy through the 6 dangerous worlds 
         <genreid>79</genreid>
         <players>2</players>
         <cloneof>exerion.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/exerion.png</image>
+        <video type="video">media/video/exerion.mp4</video>
     </game>
-    <game id="96450">
+    <game id="4229641343">
         <path>exeriont.zip</path>
         <name>Exerion (Tw)</name>
         <desc>The FIGHTER EX rushed in and out attacking the monstrous enemy groups in the 6 mysterious, diferent DIMENSIONAL worlds.
@@ -875,9 +961,11 @@ See how successful you are in battling the enemy through the 6 dangerous worlds 
         <genreid>79</genreid>
         <players>2</players>
         <cloneof>exerion.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/exerion.png</image>
+        <video type="video">media/video/exerion.mp4</video>
     </game>
-    <game id="197707">
+    <game id="1035526930">
         <path>faguiqib.zip</path>
         <name>Fa Gui Qibing (Tw)</name>
         <desc>Pitfall II: The Lost Caverns is the sequel to Pitfall and was released for a variety of systems during the mid-1980s including the SG-1000 in 1985. Gameplay is similar to the original game, but the levels are more maze-like.
@@ -890,9 +978,11 @@ Sega's version of Pitfall II was tweaked significantly from its western counterp
         <genreid>7</genreid>
         <players>1-2</players>
         <cloneof>pitfall2.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/pitfall2.png</image>
+        <video type="video">media/video/pitfall2.mp4</video>
     </game>
-    <game id="197707">
+    <game id="1090153065">
         <path>faguiqiba.zip</path>
         <name>Fa Gui Qibing (Tw, Alt)</name>
         <desc>Pitfall II: The Lost Caverns is the sequel to Pitfall and was released for a variety of systems during the mid-1980s including the SG-1000 in 1985. Gameplay is similar to the original game, but the levels are more maze-like.
@@ -905,9 +995,11 @@ Sega's version of Pitfall II was tweaked significantly from its western counterp
         <genreid>7</genreid>
         <players>1-2</players>
         <cloneof>pitfall2.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/pitfall2.png</image>
+        <video type="video">media/video/pitfall2.mp4</video>
     </game>
-    <game id="197671">
+    <game id="221531807">
         <path>feilang.zip</path>
         <name>Fei Lang (Tw)</name>
         <desc>Choplifter is a 1982 Apple II game developed by Dan Gorlin and published by Broderbund. In the game you pilot a helicopter and must rescue people from prisoner of war camps. Sega were responsible for an arcade remake on both the Sega System 1 and Sega System 2 hardware in 1985. This version was ported to a variety of platforms, including the SG-1000 in 1985 and the Sega Master System in 1986.</desc>
@@ -918,9 +1010,11 @@ Sega's version of Pitfall II was tweaked significantly from its western counterp
         <genreid>2646</genreid>
         <players>1</players>
         <cloneof>choplift.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/choplift.png</image>
+        <video type="video">media/video/choplift.mp4</video>
     </game>
-    <game id="197671">
+    <game id="257943149">
         <path>feilanga.zip</path>
         <name>Fei Lang ~ Choplifter (Tw, Alt)</name>
         <desc>Choplifter is a 1982 Apple II game developed by Dan Gorlin and published by Broderbund. In the game you pilot a helicopter and must rescue people from prisoner of war camps. Sega were responsible for an arcade remake on both the Sega System 1 and Sega System 2 hardware in 1985. This version was ported to a variety of platforms, including the SG-1000 in 1985 and the Sega Master System in 1986.</desc>
@@ -931,9 +1025,11 @@ Sega's version of Pitfall II was tweaked significantly from its western counterp
         <genreid>2646</genreid>
         <players>1</players>
         <cloneof>choplift.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/choplift.png</image>
+        <video type="video">media/video/choplift.mp4</video>
     </game>
-    <game id="596263">
+    <game id="1524659982">
         <path>flickya.zip</path>
         <name>Flicky (Jpn, v0)</name>
         <desc>Little baby birds, PIOPIOes, are seen basking on the bright sunny terrace. It's now time for the little PIOPIOes to take their midafternoon snack. FLICKY, your mother, is coming to take all of you back home. Let's return skipping merrily hand in hand with mama FLICKY. Oh, oh, we've got a big problem!! The ill-natured stray cat (NYANNYAN) is coming. Escape by jumping over him and throwing hammers and mugs in an effort to hit and destroy the big bad cat. FLICKY, you'll feel really relieved when you have successfully taken all of your baby PIOPIOes back home, won't you?</desc>
@@ -944,9 +1040,11 @@ Sega's version of Pitfall II was tweaked significantly from its western counterp
         <genreid>7</genreid>
         <players>1</players>
         <cloneof>flicky.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/flicky.png</image>
+        <video type="video">media/video/flicky.mp4</video>
     </game>
-    <game id="596263">
+    <game id="124672955">
         <path>flicky.zip</path>
         <name>Flicky (Jpn, v1)</name>
         <desc>Little baby birds, PIOPIOes, are seen basking on the bright sunny terrace. It's now time for the little PIOPIOes to take their midafternoon snack. FLICKY, your mother, is coming to take all of you back home. Let's return skipping merrily hand in hand with mama FLICKY. Oh, oh, we've got a big problem!! The ill-natured stray cat (NYANNYAN) is coming. Escape by jumping over him and throwing hammers and mugs in an effort to hit and destroy the big bad cat. FLICKY, you'll feel really relieved when you have successfully taken all of your baby PIOPIOes back home, won't you?</desc>
@@ -956,11 +1054,11 @@ Sega's version of Pitfall II was tweaked significantly from its western counterp
         <genre>Platform</genre>
         <genreid>7</genreid>
         <players>1</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/flicky.png</image>
         <video type="video">media/video/flicky.mp4</video>
     </game>
-    <game id="596263">
+    <game id="4248565134">
         <path>flickyt.zip</path>
         <name>Flicky (Tw)</name>
         <desc>Little baby birds, PIOPIOes, are seen basking on the bright sunny terrace. It's now time for the little PIOPIOes to take their midafternoon snack. FLICKY, your mother, is coming to take all of you back home. Let's return skipping merrily hand in hand with mama FLICKY. Oh, oh, we've got a big problem!! The ill-natured stray cat (NYANNYAN) is coming. Escape by jumping over him and throwing hammers and mugs in an effort to hit and destroy the big bad cat. FLICKY, you'll feel really relieved when you have successfully taken all of your baby PIOPIOes back home, won't you?</desc>
@@ -971,9 +1069,11 @@ Sega's version of Pitfall II was tweaked significantly from its western counterp
         <genreid>7</genreid>
         <players>1</players>
         <cloneof>flicky.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/flicky.png</image>
+        <video type="video">media/video/flicky.mp4</video>
     </game>
-    <game id="518425">
+    <game id="158365341">
         <path>segaflipt.zip</path>
         <name>Flipper (Tw)</name>
         <desc>A catchy rhythmical flipper sound accompanies this computer pinball video game. Featuring a D.T. (drop target) that enables you to earn bonus points and a K.H. (kicker hole) that entitles you to earn bonus points X a multiplication rate! Take good aim, and shoot away! Here's wishing you success as you merrily flip your way around the playfield in search of the proverbial "high score".</desc>
@@ -984,9 +1084,11 @@ Sega's version of Pitfall II was tweaked significantly from its western counterp
         <genreid>31</genreid>
         <players>1</players>
         <cloneof>segaflip.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/segaflip.png</image>
+        <video type="video">media/video/segaflip.mp4</video>
     </game>
-    <game id="197715">
+    <game id="1974436304">
         <path>galaga.zip</path>
         <name>Galaga (Tw)</name>
         <desc>Take control of a fighter space craft and shoot down the invading aliens. Watch out for the swooping motherships, which will try to steal your fighter. Rescue captured fighters to double your firepower. Earn Perfect Bonuses as you battle your way through wave after wave in different challenging stages.</desc>
@@ -997,9 +1099,11 @@ Sega's version of Pitfall II was tweaked significantly from its western counterp
         <genreid>2851</genreid>
         <players>1-2</players>
         <cloneof>segagala.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/segagala.png</image>
+        <video type="video">media/video/segagala.mp4</video>
     </game>
-    <game id="197682">
+    <game id="91117108">
         <path>girlgard.zip</path>
         <name>Girl's Garden (Jpn)</name>
         <desc>In order to prevent her boyfriend Minto from going to another little girl named Cocco, Papri must collect ten different flowers and return them to her boyfriend's house. Flowers must be caught in full bloom so that the number of flowers in her possession will increase; catching flowers too early will consider the flowers to be wasted and flowers caught too late will be wilted. Wilted flowers will ruin the bouquet, causing the player to lose half of the flowers.
@@ -1011,11 +1115,11 @@ Bears have a taste for honey and cause the player to lose one of two hearts if o
         <genre>Adventure</genre>
         <genreid>13</genreid>
         <players>1</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/girlgard.png</image>
         <video type="video">media/video/girlgard.mp4</video>
     </game>
-    <game id="197682">
+    <game id="2379119508">
         <path>girlgardt.zip</path>
         <name>Girl's Garden (Tw)</name>
         <desc>In order to prevent her boyfriend Minto from going to another little girl named Cocco, Papri must collect ten different flowers and return them to her boyfriend's house. Flowers must be caught in full bloom so that the number of flowers in her possession will increase; catching flowers too early will consider the flowers to be wasted and flowers caught too late will be wilted. Wilted flowers will ruin the bouquet, causing the player to lose half of the flowers.
@@ -1028,9 +1132,11 @@ Bears have a taste for honey and cause the player to lose one of two hearts if o
         <genreid>13</genreid>
         <players>1</players>
         <cloneof>girlgard.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/girlgard.png</image>
+        <video type="video">media/video/girlgard.mp4</video>
     </game>
-    <game id="96459">
+    <game id="1774825246">
         <path>golgo13.zip</path>
         <name>Golgo 13 (Jpn)</name>
         <desc>Golgo 13 is a shoot-'em-up game for the SG-1000 based on the Japanese manga of the same name.
@@ -1042,11 +1148,11 @@ The game has you shoot at windows of a passing train. Hitting objects that get i
         <genre>Shooter</genre>
         <genreid>2646</genreid>
         <players>1</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/golgo13.png</image>
         <video type="video">media/video/golgo13.mp4</video>
     </game>
-    <game id="96460">
+    <game id="3873104888">
         <path>gpworlda.zip</path>
         <name>GP World (Jpn, v0)</name>
         <desc>GP World for the SG-1000 and MSX, is a loose conversion of the 1984 LaserDisc-based arcade game, GP World. It was released in 1985 exclusively in Japan.
@@ -1059,9 +1165,11 @@ Gameplay in this "8-bit" version of GP World is similar in concept to the arcade
         <genreid>28</genreid>
         <players>1</players>
         <cloneof>gpworld.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/gpworld.png</image>
+        <video type="video">media/video/gpworld.mp4</video>
     </game>
-    <game id="96460">
+    <game id="2701834245">
         <path>gpworld.zip</path>
         <name>GP World (Jpn, v1)</name>
         <desc>GP World for the SG-1000 and MSX, is a loose conversion of the 1984 LaserDisc-based arcade game, GP World. It was released in 1985 exclusively in Japan.
@@ -1073,11 +1181,11 @@ Gameplay in this "8-bit" version of GP World is similar in concept to the arcade
         <genre>Race, Driving</genre>
         <genreid>28</genreid>
         <players>1</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/gpworld.png</image>
         <video type="video">media/video/gpworld.mp4</video>
     </game>
-    <game id="96460">
+    <game id="1516152341">
         <path>gpworldt.zip</path>
         <name>GP World (Tw)</name>
         <desc>GP World for the SG-1000 and MSX, is a loose conversion of the 1984 LaserDisc-based arcade game, GP World. It was released in 1985 exclusively in Japan.
@@ -1090,9 +1198,11 @@ Gameplay in this "8-bit" version of GP World is similar in concept to the arcade
         <genreid>28</genreid>
         <players>1</players>
         <cloneof>gpworld.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/gpworld.png</image>
+        <video type="video">media/video/gpworld.mp4</video>
     </game>
-    <game id="96463">
+    <game id="3556164557">
         <path>gulkave.zip</path>
         <name>Gulkave (Jpn)</name>
         <desc>Gulkave  is an SG-1000 shoot 'em up game developed by Compile and published by Sega in 1986. It is a horizontal shooter, in which the player controls a spaceship that must destroy the 8 fortresses of the Gulbas Empire and several various enemies. Despite the limitations of the console, there are 30 "acts", and each "act" has a different background and there are numerous powerups available, setting it apart from most other SG-1000 shooters at the time.</desc>
@@ -1102,11 +1212,11 @@ Gameplay in this "8-bit" version of GP World is similar in concept to the arcade
         <genre>Shoot'em Up</genre>
         <genreid>79</genreid>
         <players>2</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/gulkave.png</image>
         <video type="video">media/video/gulkave.mp4</video>
     </game>
-    <game id="96463">
+    <game id="2188304044">
         <path>gulkavek.zip</path>
         <name>Gulkave (Kor)</name>
         <desc>Gulkave  is an SG-1000 shoot 'em up game developed by Compile and published by Sega in 1986. It is a horizontal shooter, in which the player controls a spaceship that must destroy the 8 fortresses of the Gulbas Empire and several various enemies. Despite the limitations of the console, there are 30 "acts", and each "act" has a different background and there are numerous powerups available, setting it apart from most other SG-1000 shooters at the time.</desc>
@@ -1117,9 +1227,11 @@ Gameplay in this "8-bit" version of GP World is similar in concept to the arcade
         <genreid>79</genreid>
         <players>2</players>
         <cloneof>gulkave.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/gulkave.png</image>
+        <video type="video">media/video/gulkave.mp4</video>
     </game>
-    <game id="96464">
+    <game id="907580633">
         <path>guzzler.zip</path>
         <name>Guzzler (Jpn, OMV)</name>
         <desc>Guzzler is an arcade game developed by Tehkan. It was ported to the SG-1000 by Tsukuda Original and given Othello Multivision branding. To this day the SG-1000 version stands as the only home port of Guzzler.
@@ -1133,11 +1245,11 @@ Compared to other SG-1000 games, Guzzler shows some very poor production values.
         <genre>Action / Labyrinth</genre>
         <genreid>2937</genreid>
         <players>1</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/guzzler.png</image>
         <video type="video">media/video/guzzler.mp4</video>
     </game>
-    <game id="96464">
+    <game id="4005335685">
         <path>guzzlert.zip</path>
         <name>Guzzler (Tw)</name>
         <desc>Guzzler is an arcade game developed by Tehkan. It was ported to the SG-1000 by Tsukuda Original and given Othello Multivision branding. To this day the SG-1000 version stands as the only home port of Guzzler.
@@ -1152,9 +1264,11 @@ Compared to other SG-1000 games, Guzzler shows some very poor production values.
         <genreid>2937</genreid>
         <players>1</players>
         <cloneof>guzzler.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/guzzler.png</image>
+        <video type="video">media/video/guzzler.mp4</video>
     </game>
-    <game id="197687">
+    <game id="2205233312">
         <path>hero.zip</path>
         <name>H.E.R.O. (Jpn)</name>
         <desc>H.E.R.O. is an action game originally developed and published by Activision. Sega brought it to the SG-1000 in Japan.
@@ -1166,11 +1280,11 @@ The objective of the game is to rescue trapped miners in a volcano. 1 drops a st
         <genre>Platform</genre>
         <genreid>7</genreid>
         <players>1-2</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/hero.png</image>
         <video type="video">media/video/hero.mp4</video>
     </game>
-    <game id="560325">
+    <game id="2737172032">
         <path>hangon2.zip</path>
         <name>Hang-On II (Jpn)</name>
         <desc>Hang-On II is an SG-1000 sequel to the critically acclaimed Hang-On.
@@ -1184,11 +1298,11 @@ It is compatible with the BH-400 bike handle controller, and would be the only S
         <genre>Race, Driving</genre>
         <genreid>28</genreid>
         <players>1</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/hangon2.png</image>
         <video type="video">media/video/hangon2.mp4</video>
     </game>
-    <game id="560325">
+    <game id="1533368710">
         <path>hangon2t1.zip</path>
         <name>Hang-On II (Tw)</name>
         <desc>Hang-On II is an SG-1000 sequel to the critically acclaimed Hang-On.
@@ -1203,9 +1317,11 @@ It is compatible with the BH-400 bike handle controller, and would be the only S
         <genreid>28</genreid>
         <players>1</players>
         <cloneof>hangon2.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/hangon2.png</image>
+        <video type="video">media/video/hangon2.mp4</video>
     </game>
-    <game id="96500">
+    <game id="3143761873">
         <path>heibaiqi.zip</path>
         <name>Hei Bai Qi (Tw)</name>
         <desc>Othello is an SG-1000 video game based on the board game Othello.
@@ -1218,9 +1334,11 @@ Two versions of Othello exist for the SG-1000. The first version, released in 19
         <genreid>2647</genreid>
         <players>2</players>
         <cloneof>othello.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/othello.png</image>
+        <video type="video">media/video/othello.mp4</video>
     </game>
-    <game id="197690">
+    <game id="3965043665">
         <path>homemj1.zip</path>
         <name>Home Mahjong (Jpn, v0)</name>
         <desc>Home Mahjong is a mahjong game for the SG-1000.
@@ -1233,9 +1351,11 @@ The game was sold with a plastic screen that sticks to the TV during a 2 player 
         <genreid>2647</genreid>
         <players>2</players>
         <cloneof>homemj.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/homemj.png</image>
+        <video type="video">media/video/homemj.mp4</video>
     </game>
-    <game id="197690">
+    <game id="3870474566">
         <path>homemj.zip</path>
         <name>Home Mahjong (Jpn, v1)</name>
         <desc>Home Mahjong is a mahjong game for the SG-1000.
@@ -1247,11 +1367,11 @@ The game was sold with a plastic screen that sticks to the TV during a 2 player 
         <genre>Asiatic board game</genre>
         <genreid>2647</genreid>
         <players>2</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/homemj.png</image>
         <video type="video">media/video/homemj.mp4</video>
     </game>
-    <game id="96571">
+    <game id="2717829191">
         <path>huohuli.zip</path>
         <name>Huo Hu Li (Tw)</name>
         <desc>Zoom 909 is an arcade game developed by Sega for VCO Object arcade hardware. It was released worldwide in 1982, however after obtaining a license for Buck Rogers, western versions of the game became known as Buck Rogers: Planet of Zoom. Both Zoom 909 and Buck Rogers: Planet of Zoom are largely the same game minus some minor graphical differences.
@@ -1264,9 +1384,11 @@ Though most home ports of the game are based on Planet of Zoom, Zoom 909 was bro
         <genreid>79</genreid>
         <players>1</players>
         <cloneof>zoom909.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/zoom909.png</image>
+        <video type="video">media/video/zoom909.mp4</video>
     </game>
-    <game id="298950">
+    <game id="59227307">
         <path>huojiche.zip</path>
         <name>Huojian Che (Tw)</name>
         <desc>Road Fighter is a racing game developed by Konami. Jumbo ported the MSX version of the game to the SG-1000 in Taiwan under the name Huojiàn che. It is not known if they had a license for it. Later it was released in South Korea as a cartridge for the Sega Master System under the name Paiteo Lodeu.</desc>
@@ -1276,9 +1398,11 @@ Though most home ports of the game are based on Planet of Zoom, Zoom 909 was bro
         <genreid>28</genreid>
         <players>1</players>
         <cloneof>roadfght.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/roadfght.png</image>
+        <video type="video">media/video/roadfght.mp4</video>
     </game>
-    <game id="197691">
+    <game id="2431169037">
         <path>hustle.zip</path>
         <name>Hustle Chumy (Jpn)</name>
         <desc>Hustle Chumy is an SG-1000 and MSX game developed by Compile and released in 1984.
@@ -1292,11 +1416,11 @@ There are several types of enemies in the game, most of which can be defeated wi
         <genre>Platform</genre>
         <genreid>7</genreid>
         <players>1</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/hustle.png</image>
         <video type="video">media/video/hustle.mp4</video>
     </game>
-    <game id="197692">
+    <game id="2648114515">
         <path>hyperspt.zip</path>
         <name>Hyper Sports (Jpn)</name>
         <desc>Hyper Sports is a sports game developed by Konami and released for the SG-1000 in 1985 (following a 1984 MSX launch). The game has the player compete through a number of olympic events.</desc>
@@ -1306,11 +1430,11 @@ There are several types of enemies in the game, most of which can be defeated wi
         <genre>Sports</genre>
         <genreid>685</genreid>
         <players>2</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/hyperspt.png</image>
         <video type="video">media/video/hyperspt.mp4</video>
     </game>
-    <game id="197692">
+    <game id="51088643">
         <path>hypersptk.zip</path>
         <name>Hyper Sports (Kor)</name>
         <desc>Hyper Sports is a sports game developed by Konami and released for the SG-1000 in 1985 (following a 1984 MSX launch). The game has the player compete through a number of olympic events.</desc>
@@ -1321,9 +1445,11 @@ There are several types of enemies in the game, most of which can be defeated wi
         <genreid>685</genreid>
         <players>2</players>
         <cloneof>hyperspt.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/hyperspt.png</image>
+        <video type="video">media/video/hyperspt.mp4</video>
     </game>
-    <game id="197692">
+    <game id="3481106101">
         <path>hypersptt.zip</path>
         <name>Hyper Sports (Tw)</name>
         <desc>Hyper Sports is a sports game developed by Konami and released for the SG-1000 in 1985 (following a 1984 MSX launch). The game has the player compete through a number of olympic events.</desc>
@@ -1334,9 +1460,11 @@ There are several types of enemies in the game, most of which can be defeated wi
         <genreid>685</genreid>
         <players>2</players>
         <cloneof>hyperspt.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/hyperspt.png</image>
+        <video type="video">media/video/hyperspt.mp4</video>
     </game>
-    <game id="864454">
+    <game id="872137334">
         <path>hypersp2.zip</path>
         <name>Hyper Sports 2 (Tw)</name>
         <desc>Hyper Sports 2 is the sequel to Hyper Sports. 
@@ -1347,24 +1475,34 @@ The MSX version of the game was brought to the SG-1000 in Taiwan.</desc>
         <genre>Sports</genre>
         <genreid>685</genreid>
         <players>1</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/hypersp2.png</image>
         <video type="video">media/video/hypersp2.mp4</video>
     </game>
-    <game id="472646639">
+    <game id="1911181066">
         <path>iq.zip</path>
         <name>I.Q. (Kor)</name>
+        <desc>Sokoban is a puzzle game developed by Thinking Rabbit. Sega ported it to the SG-1000 in 1985. Neither version left Japan.
+
+Sokoban is the basis for Shove It! ...The Warehouse Game, released for the Sega Mega Drive.</desc>
         <releasedate>19850101T000000</releasedate>
+        <developer id="506">Thinking Rabbit</developer>
+        <publisher id="3">SEGA</publisher>
+        <genre>Puzzle-Game</genre>
+        <genreid>26</genreid>
+        <players>1</players>
         <cloneof>sokoban.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/sokoban.png</image>
+        <video type="video">media/video/sokoban.mp4</video>
     </game>
     <game id="4140300762">
         <path>jetpaco.zip</path>
         <name>Jet Paco and Jet Puri SG-1000 (HB)</name>
         <releasedate>20180101T000000</releasedate>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
     </game>
-    <game id="197666">
+    <game id="2944172611">
         <path>champkent.zip</path>
         <name>Jiandao (Tw)</name>
         <desc>Champion Kendou is a simplistic kendou game built for the SG-1000 and MSX. It was only released in Japan.</desc>
@@ -1375,9 +1513,11 @@ The MSX version of the game was brought to the SG-1000 in Taiwan.</desc>
         <genreid>685</genreid>
         <players>2</players>
         <cloneof>champken.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/champken.png</image>
+        <video type="video">media/video/champken.mp4</video>
     </game>
-    <game id="298932">
+    <game id="1622776023">
         <path>jingwumn.zip</path>
         <name>Jing Wu Men (Tw)</name>
         <desc>The protagonist is Wang (inspired by Jackie Chan and/or his character Thomas), hence the unfortunate title Dragon Wang. Wang is Chinese for King.</desc>
@@ -1388,9 +1528,11 @@ The MSX version of the game was brought to the SG-1000 in Taiwan.</desc>
         <genreid>7</genreid>
         <players>2</players>
         <cloneof>dragwang.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/dragwang.png</image>
+        <video type="video">media/video/dragwang.mp4</video>
     </game>
-    <game id="298932">
+    <game id="3442553683">
         <path>jingwumna.zip</path>
         <name>Jing Wu Men (Tw, Alt)</name>
         <desc>The protagonist is Wang (inspired by Jackie Chan and/or his character Thomas), hence the unfortunate title Dragon Wang. Wang is Chinese for King.</desc>
@@ -1401,9 +1543,11 @@ The MSX version of the game was brought to the SG-1000 in Taiwan.</desc>
         <genreid>7</genreid>
         <players>2</players>
         <cloneof>dragwang.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/dragwang.png</image>
+        <video type="video">media/video/dragwang.mp4</video>
     </game>
-    <game id="298938">
+    <game id="193120816">
         <path>jinzita.zip</path>
         <name>King's Valley, Jinzita (Tw)</name>
         <desc>King's Valley for the SG-1000 released in Taiwan by Aaronix. This game requires a special adapter released by DahJee that extend the SG-1000 memory to 8 KB (read more about the DahJee adapter for SG-1000). Else it would work on a normal Asian Master System. King's Valley is pretty much in the vein of pre-scrolling item collecting arcade game, Think Lode Runner meet Pac-Man in Egyptian tomb adventure theme. A very game by Konami.</desc>
@@ -1413,7 +1557,7 @@ The MSX version of the game was brought to the SG-1000 in Taiwan.</desc>
         <genre>Action</genre>
         <genreid>10</genreid>
         <players>1</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/jinzita.png</image>
         <video type="video">media/video/jinzita.mp4</video>
     </game>
@@ -1421,9 +1565,9 @@ The MSX version of the game was brought to the SG-1000 in Taiwan.</desc>
         <path>ksolitaire.zip</path>
         <name>Klondike Solitaire (HB, v1.04)</name>
         <releasedate>20200101T000000</releasedate>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
     </game>
-    <game id="298939">
+    <game id="3180465514">
         <path>moyuchua.zip</path>
         <name>Knightmare, Moyu Chuanqi (Tw)</name>
         <desc>Knightmare is an MSX vertical shoot-'em-up by Konami. It was brought without a license to the SG-1000 in Taiwan. In Knightmare, the player takes control of a brave knight named Popolon, who has to rescue his sweetheart Aphrodite from the clutches of the evil Hudnos. The game is essentially a top-down shooter. Popolon can shoot arrows at his enemies, and at the end of level face bosses, such as witches, etc. Shooting monsters, avoiding obstacles, passing the bridges and collecting upgrades for his weapon leads him to glory. Digitized music and sound add more to the arcade-like gameplay. This game may also be about two brave knights - you and your friend, who does the same for the victory on one screen.</desc>
@@ -1433,11 +1577,11 @@ The MSX version of the game was brought to the SG-1000 in Taiwan.</desc>
         <genre>Shoot'em Up</genre>
         <genreid>79</genreid>
         <players>1</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/moyuchua.png</image>
         <video type="video">media/video/moyuchua.mp4</video>
     </game>
-    <game id="298941">
+    <game id="360717358">
         <path>ldrun.zip</path>
         <name>Lode Runner (Euro, Jpn)</name>
         <desc>In this game, the player is required to repeatedly "think" and "take action" to go through and clear the maze scenes by solving their mysterious riddles while averting the enemy's guards who are relentlessly in pursuit of him. After collecting all of the gold chests, you must come up with fresh new ideas in order to successfully challenge the next level scene. Although your experience gained from the previous play action will help you overcome some of the future maze scenes, you still have to constantly be on the alert. You can also enjoy creating your own games by using the keyboard. This is an intriguing game which requires intellectual depth to skillfully maneuver the unknown maze structures that consecutively develop one after another.</desc>
@@ -1447,11 +1591,11 @@ The MSX version of the game was brought to the SG-1000 in Taiwan.</desc>
         <genre>Platform</genre>
         <genreid>7</genreid>
         <players>1</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/ldrun.png</image>
         <video type="video">media/video/ldrun.mp4</video>
     </game>
-    <game id="298941">
+    <game id="2896439123">
         <path>ldrunk.zip</path>
         <name>Lode Runner (Kor)</name>
         <desc>In this game, the player is required to repeatedly "think" and "take action" to go through and clear the maze scenes by solving their mysterious riddles while averting the enemy's guards who are relentlessly in pursuit of him. After collecting all of the gold chests, you must come up with fresh new ideas in order to successfully challenge the next level scene. Although your experience gained from the previous play action will help you overcome some of the future maze scenes, you still have to constantly be on the alert. You can also enjoy creating your own games by using the keyboard. This is an intriguing game which requires intellectual depth to skillfully maneuver the unknown maze structures that consecutively develop one after another.</desc>
@@ -1462,9 +1606,11 @@ The MSX version of the game was brought to the SG-1000 in Taiwan.</desc>
         <genreid>7</genreid>
         <players>1</players>
         <cloneof>ldrun.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/ldrun.png</image>
+        <video type="video">media/video/ldrun.mp4</video>
     </game>
-    <game id="298941">
+    <game id="2741136601">
         <path>ldrunt.zip</path>
         <name>Lode Runner (Tw)</name>
         <desc>In this game, the player is required to repeatedly "think" and "take action" to go through and clear the maze scenes by solving their mysterious riddles while averting the enemy's guards who are relentlessly in pursuit of him. After collecting all of the gold chests, you must come up with fresh new ideas in order to successfully challenge the next level scene. Although your experience gained from the previous play action will help you overcome some of the future maze scenes, you still have to constantly be on the alert. You can also enjoy creating your own games by using the keyboard. This is an intriguing game which requires intellectual depth to skillfully maneuver the unknown maze structures that consecutively develop one after another.</desc>
@@ -1475,9 +1621,11 @@ The MSX version of the game was brought to the SG-1000 in Taiwan.</desc>
         <genreid>7</genreid>
         <players>1</players>
         <cloneof>ldrun.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/ldrun.png</image>
+        <video type="video">media/video/ldrun.mp4</video>
     </game>
-    <game id="298942">
+    <game id="1217078101">
         <path>mkidwiz.zip</path>
         <name>Magical Kid Wiz (Tw)</name>
         <desc>You play a little wizard with a magic staff with which you can throw small fireballs to rescue a beautiful princess.</desc>
@@ -1488,11 +1636,11 @@ The MSX version of the game was brought to the SG-1000 in Taiwan.</desc>
         <genre>Adventure</genre>
         <genreid>13</genreid>
         <players>1</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/mkidwiz.png</image>
         <video type="video">media/video/mkidwiz.mp4</video>
     </game>
-    <game id="864452">
+    <game id="3460228309">
         <path>magtree.zip</path>
         <name>Magical Tree (Tw)</name>
         <desc>Magical Tree is a vertically scrolling platform game developed by Konami for the MSX home computer, and published in 1984. The player character is an 'Indian brave' stereotype who wears a tanned vest and trousers, and a headband with a feather. The player ascends a magical tree by hopping from branch to branch and climbing vines and ladders—while also dodging larvae, owls, and lightning bolts. The player can jump and dangle from branches. He earns points by gathering apples, arrows, daggers, and coronets.</desc>
@@ -1503,11 +1651,11 @@ The MSX version of the game was brought to the SG-1000 in Taiwan.</desc>
         <genre>Platform</genre>
         <genreid>7</genreid>
         <players>1-2</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/magtree.png</image>
         <video type="video">media/video/magtree.mp4</video>
     </game>
-    <game id="96481">
+    <game id="60707516">
         <path>mahjong.zip</path>
         <name>Mahjong (Jpn)</name>
         <desc>This is the first mahjong game released for the SG-1000, developed and published by Sega in 1983. Unlike later mahjong games released for the system, this game is for one player only.</desc>
@@ -1517,11 +1665,11 @@ The MSX version of the game was brought to the SG-1000 in Taiwan.</desc>
         <genre>Asiatic board game</genre>
         <genreid>2647</genreid>
         <players>1</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/mahjong.png</image>
         <video type="video">media/video/mahjong.mp4</video>
     </game>
-    <game id="96481">
+    <game id="3755398274">
         <path>mahjonga.zip</path>
         <name>Mahjong (Jpn, Alt)</name>
         <desc>This is the first mahjong game released for the SG-1000, developed and published by Sega in 1983. Unlike later mahjong games released for the system, this game is for one player only.</desc>
@@ -1532,9 +1680,11 @@ The MSX version of the game was brought to the SG-1000 in Taiwan.</desc>
         <genreid>2647</genreid>
         <players>1</players>
         <cloneof>mahjong.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/mahjong.png</image>
+        <video type="video">media/video/mahjong.mp4</video>
     </game>
-    <game id="96481">
+    <game id="1531195191">
         <path>mahjongt.zip</path>
         <name>Mahjong (Tw)</name>
         <desc>This is the first mahjong game released for the SG-1000, developed and published by Sega in 1983. Unlike later mahjong games released for the system, this game is for one player only.</desc>
@@ -1545,15 +1695,17 @@ The MSX version of the game was brought to the SG-1000 in Taiwan.</desc>
         <genreid>2647</genreid>
         <players>1</players>
         <cloneof>mahjong.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/mahjong.png</image>
+        <video type="video">media/video/mahjong.mp4</video>
     </game>
     <game id="510801071">
         <path>msolitaire.zip</path>
         <name>Mahjong Solitaire (HB, v1.07)</name>
         <releasedate>20200101T000000</releasedate>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
     </game>
-    <game id="197710">
+    <game id="2461576329">
         <path>motianda.zip</path>
         <name>Mo Tian Da Lou (Tw)</name>
         <desc>Before you awaits the construction world's most complicated, confused mess of mind-boggling blueprints, bolts, beams and girders.
@@ -1568,9 +1720,11 @@ So, grab your hat and strap on your boots. You're about to discover how hot musi
         <genreid>26</genreid>
         <players>1-2</players>
         <cloneof>rocknbol.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/rocknbol.png</image>
+        <video type="video">media/video/rocknbol.mp4</video>
     </game>
-    <game id="96484">
+    <game id="3578263945">
         <path>monacogpb.zip</path>
         <name>Monaco GP (Jpn, v0)</name>
         <desc>A red formula car travelling at high speed through the streets, speeding up, jumping, maneuvering to the right and left to avoid the cars obstructing the way and reckless cars coming close to your machine, ........ Be on the lookout for an ambulance suddenly passing by ......... And keep an eye out for the signposts!! Thrill-packed challenges such as the slip zones, dangerous construction sites as well as sharp curves and narrow bay bridges also appear. When in the tunnel, the headlights of your car are the only thing you can rely upon. After improving your skill by going through the beginner's level 1, you can move on to the more difficult high levels 2 and 3.</desc>
@@ -1581,9 +1735,11 @@ So, grab your hat and strap on your boots. You're about to discover how hot musi
         <genreid>28</genreid>
         <players>1</players>
         <cloneof>monacogp.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/monacogp.png</image>
+        <video type="video">media/video/monacogp.mp4</video>
     </game>
-    <game id="96484">
+    <game id="3338805665">
         <path>monacogpa.zip</path>
         <name>Monaco GP (Jpn, v1)</name>
         <desc>A red formula car travelling at high speed through the streets, speeding up, jumping, maneuvering to the right and left to avoid the cars obstructing the way and reckless cars coming close to your machine, ........ Be on the lookout for an ambulance suddenly passing by ......... And keep an eye out for the signposts!! Thrill-packed challenges such as the slip zones, dangerous construction sites as well as sharp curves and narrow bay bridges also appear. When in the tunnel, the headlights of your car are the only thing you can rely upon. After improving your skill by going through the beginner's level 1, you can move on to the more difficult high levels 2 and 3.</desc>
@@ -1594,9 +1750,11 @@ So, grab your hat and strap on your boots. You're about to discover how hot musi
         <genreid>28</genreid>
         <players>1</players>
         <cloneof>monacogp.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/monacogp.png</image>
+        <video type="video">media/video/monacogp.mp4</video>
     </game>
-    <game id="96484">
+    <game id="4067686677">
         <path>monacogp.zip</path>
         <name>Monaco GP (Jpn, v2)</name>
         <desc>A red formula car travelling at high speed through the streets, speeding up, jumping, maneuvering to the right and left to avoid the cars obstructing the way and reckless cars coming close to your machine, ........ Be on the lookout for an ambulance suddenly passing by ......... And keep an eye out for the signposts!! Thrill-packed challenges such as the slip zones, dangerous construction sites as well as sharp curves and narrow bay bridges also appear. When in the tunnel, the headlights of your car are the only thing you can rely upon. After improving your skill by going through the beginner's level 1, you can move on to the more difficult high levels 2 and 3.</desc>
@@ -1606,11 +1764,11 @@ So, grab your hat and strap on your boots. You're about to discover how hot musi
         <genre>Race, Driving</genre>
         <genreid>28</genreid>
         <players>1</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/monacogp.png</image>
         <video type="video">media/video/monacogp.mp4</video>
     </game>
-    <game id="96484">
+    <game id="3804095773">
         <path>monacogpt.zip</path>
         <name>Monaco GP (Tw)</name>
         <desc>A red formula car travelling at high speed through the streets, speeding up, jumping, maneuvering to the right and left to avoid the cars obstructing the way and reckless cars coming close to your machine, ........ Be on the lookout for an ambulance suddenly passing by ......... And keep an eye out for the signposts!! Thrill-packed challenges such as the slip zones, dangerous construction sites as well as sharp curves and narrow bay bridges also appear. When in the tunnel, the headlights of your car are the only thing you can rely upon. After improving your skill by going through the beginner's level 1, you can move on to the more difficult high levels 2 and 3.</desc>
@@ -1621,9 +1779,11 @@ So, grab your hat and strap on your boots. You're about to discover how hot musi
         <genreid>28</genreid>
         <players>1</players>
         <cloneof>monacogp.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/monacogp.png</image>
+        <video type="video">media/video/monacogp.mp4</video>
     </game>
-    <game id="560325">
+    <game id="793872231">
         <path>hangon2t2.zip</path>
         <name>Motuo Feiche (Tw)</name>
         <desc>Hang-On II is an SG-1000 sequel to the critically acclaimed Hang-On.
@@ -1638,9 +1798,11 @@ It is compatible with the BH-400 bike handle controller, and would be the only S
         <genreid>28</genreid>
         <players>1</players>
         <cloneof>hangon2.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/hangon2.png</image>
+        <video type="video">media/video/hangon2.mp4</video>
     </game>
-    <game id="197658">
+    <game id="2197003910">
         <path>castlet.zip</path>
         <name>Mowang migong ~ The Castle (Tw)</name>
         <desc>The Castle is video game developed by ASCII and released for the SG-1000 in 1986. It is a port of an MSX game of the same name, and is largely identical due to the similar hardware between the two machines. Due to the decline of the SG-1000 and emergence of the Sega Master System, the game was not released in Europe or Australia like many other SG-1000 games. The game has a fairly standard plot of rescuing a princess from a castle, though the game itself was considered very large for the time. It also contains a map system similar to that of later Metroid and Castlevania games.</desc>
@@ -1651,16 +1813,18 @@ It is compatible with the BH-400 bike handle controller, and would be the only S
         <genreid>7</genreid>
         <players>1</players>
         <cloneof>castle.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/castle.png</image>
+        <video type="video">media/video/castle.mp4</video>
     </game>
-    <game id="2471604807">
+    <game id="1838342408">
         <path>musicj.zip</path>
         <name>Music (Jpn)</name>
         <releasedate>198?0101T000000</releasedate>
         <cloneof>music.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
     </game>
-    <game id="197698">
+    <game id="2164626584">
         <path>nsub.zip</path>
         <name>N-Sub (Euro?)</name>
         <desc>A big battle develops on a cobalt blue sea. Fire a torpedo when you find the enemy's ships. Avoid the destroyer's attack by using your missiles, torpedoes and depth bombs. Counterattack and sink the enemy's ships. The enemy attack becomes more intense with each new round!</desc>
@@ -1670,11 +1834,11 @@ It is compatible with the BH-400 bike handle controller, and would be the only S
         <genre>Shooter</genre>
         <genreid>2646</genreid>
         <players>1-2</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/nsub.png</image>
         <video type="video">media/video/nsub.mp4</video>
     </game>
-    <game id="197698">
+    <game id="1592653821">
         <path>nsuba.zip</path>
         <name>N-Sub (Jpn)</name>
         <desc>A big battle develops on a cobalt blue sea. Fire a torpedo when you find the enemy's ships. Avoid the destroyer's attack by using your missiles, torpedoes and depth bombs. Counterattack and sink the enemy's ships. The enemy attack becomes more intense with each new round!</desc>
@@ -1685,9 +1849,11 @@ It is compatible with the BH-400 bike handle controller, and would be the only S
         <genreid>2646</genreid>
         <players>1-2</players>
         <cloneof>nsub.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/nsub.png</image>
+        <video type="video">media/video/nsub.mp4</video>
     </game>
-    <game id="197698">
+    <game id="2579215215">
         <path>nsubb.zip</path>
         <name>N-Sub (Jpn, Alt)</name>
         <desc>A big battle develops on a cobalt blue sea. Fire a torpedo when you find the enemy's ships. Avoid the destroyer's attack by using your missiles, torpedoes and depth bombs. Counterattack and sink the enemy's ships. The enemy attack becomes more intense with each new round!</desc>
@@ -1698,9 +1864,11 @@ It is compatible with the BH-400 bike handle controller, and would be the only S
         <genreid>2646</genreid>
         <players>1-2</players>
         <cloneof>nsub.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/nsub.png</image>
+        <video type="video">media/video/nsub.mp4</video>
     </game>
-    <game id="197698">
+    <game id="1943489764">
         <path>nsubt.zip</path>
         <name>N-Sub (Tw)</name>
         <desc>A big battle develops on a cobalt blue sea. Fire a torpedo when you find the enemy's ships. Avoid the destroyer's attack by using your missiles, torpedoes and depth bombs. Counterattack and sink the enemy's ships. The enemy attack becomes more intense with each new round!</desc>
@@ -1711,9 +1879,11 @@ It is compatible with the BH-400 bike handle controller, and would be the only S
         <genreid>2646</genreid>
         <players>1-2</players>
         <cloneof>nsub.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/nsub.png</image>
+        <video type="video">media/video/nsub.mp4</video>
     </game>
-    <game id="197700">
+    <game id="2161841114">
         <path>ninjapri.zip</path>
         <name>Ninja Princess (Jpn)</name>
         <desc>Ninja Princess known as Sega Ninja in the west, is a Sega System 1 arcade game by Sega. It is a top-down shooter/action game, in which you play as a princess disguised as a ninja who is attempting to stop the evil tyrant Gyokuro.
@@ -1725,11 +1895,11 @@ The game was ported to the SG-1000 in 1986 exclusively for Japan, with an MSX po
         <genre>Shooter</genre>
         <genreid>2646</genreid>
         <players>1</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/ninjapri.png</image>
         <video type="video">media/video/ninjapri.mp4</video>
     </game>
-    <game id="524599">
+    <game id="2248009567">
         <path>matchpg.zip</path>
         <name>Okamoto Ayako no Match Play Golf (Jpn, OMV)</name>
         <desc>Okamoto Ayako no Match Play Golf is a golf game for the Othello Multivision, released by Tsukuda Original. It is also compatible with the Sega SG-1000.</desc>
@@ -1740,11 +1910,11 @@ The game was ported to the SG-1000 in 1986 exclusively for Japan, with an MSX po
         <genre>Sports / Golf</genre>
         <genreid>2913</genreid>
         <players>1</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/matchpg.png</image>
         <video type="video">media/video/matchpg.mp4</video>
     </game>
-    <game id="524599">
+    <game id="3213514966">
         <path>matchpga.zip</path>
         <name>Okamoto Ayako no Match Play Golf (Jpn, OMV, Alt)</name>
         <desc>Okamoto Ayako no Match Play Golf is a golf game for the Othello Multivision, released by Tsukuda Original. It is also compatible with the Sega SG-1000.</desc>
@@ -1756,9 +1926,11 @@ The game was ported to the SG-1000 in 1986 exclusively for Japan, with an MSX po
         <genreid>2913</genreid>
         <players>1</players>
         <cloneof>matchpg.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/matchpg.png</image>
+        <video type="video">media/video/matchpg.mp4</video>
     </game>
-    <game id="524599">
+    <game id="3556909501">
         <path>matchpgt.zip</path>
         <name>Okamoto Ayako no Match Play Golf (Tw)</name>
         <desc>Okamoto Ayako no Match Play Golf is a golf game for the Othello Multivision, released by Tsukuda Original. It is also compatible with the Sega SG-1000.</desc>
@@ -1770,9 +1942,11 @@ The game was ported to the SG-1000 in 1986 exclusively for Japan, with an MSX po
         <genreid>2913</genreid>
         <players>1</players>
         <cloneof>matchpg.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/matchpg.png</image>
+        <video type="video">media/video/matchpg.mp4</video>
     </game>
-    <game id="197702">
+    <game id="3894034103">
         <path>orguss.zip</path>
         <name>Orguss (Euro, Jpn)</name>
         <desc>Orguss is a shoot-'em-up game developed and published by Sega for the SG-1000. In the game, the player takes control of a robot which can transform into a starship. It is based on the science fiction anime series Super Dimension Century Orguss.
@@ -1784,11 +1958,11 @@ The player can swap between robot and starship modes freely, though both come wi
         <genre>Shoot'em Up</genre>
         <genreid>79</genreid>
         <players>1</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/orguss.png</image>
         <video type="video">media/video/orguss.mp4</video>
     </game>
-    <game id="96500">
+    <game id="3092995191">
         <path>othello.zip</path>
         <name>Othello (Jpn)</name>
         <desc>Othello is an SG-1000 video game based on the board game Othello.
@@ -1800,11 +1974,11 @@ Two versions of Othello exist for the SG-1000. The first version, released in 19
         <genre>Asiatic board game</genre>
         <genreid>2647</genreid>
         <players>2</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/othello.png</image>
         <video type="video">media/video/othello.mp4</video>
     </game>
-    <game id="518462">
+    <game id="3164022709">
         <path>pacar.zip</path>
         <name>Pacar (Euro, Jpn)</name>
         <desc>PACAR, a mischievous car, runs through the 3D routes freely advancing and reversing at fast and slow speeds. Try to delete all the dots on the screen while avoiding the 2 kinds of enemy cars. When you pass through the special dots, PACAR becomes more and more invincible as it increases its power and will be free from damage even when it crashes into the enemy car. Keep up the torrid pace and destroy as many of the enemy cars as possible!</desc>
@@ -1814,11 +1988,11 @@ Two versions of Othello exist for the SG-1000. The first version, released in 19
         <genre>Action / Labyrinth</genre>
         <genreid>2937</genreid>
         <players>1</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/pacar.png</image>
         <video type="video">media/video/pacar.mp4</video>
     </game>
-    <game id="518462">
+    <game id="2776559254">
         <path>pacara.zip</path>
         <name>Pacar (Jpn, Alt)</name>
         <desc>PACAR, a mischievous car, runs through the 3D routes freely advancing and reversing at fast and slow speeds. Try to delete all the dots on the screen while avoiding the 2 kinds of enemy cars. When you pass through the special dots, PACAR becomes more and more invincible as it increases its power and will be free from damage even when it crashes into the enemy car. Keep up the torrid pace and destroy as many of the enemy cars as possible!</desc>
@@ -1829,9 +2003,11 @@ Two versions of Othello exist for the SG-1000. The first version, released in 19
         <genreid>2937</genreid>
         <players>1</players>
         <cloneof>pacar.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/pacar.png</image>
+        <video type="video">media/video/pacar.mp4</video>
     </game>
-    <game id="518462">
+    <game id="2365117941">
         <path>pacart.zip</path>
         <name>Pacar (Tw)</name>
         <desc>PACAR, a mischievous car, runs through the 3D routes freely advancing and reversing at fast and slow speeds. Try to delete all the dots on the screen while avoiding the 2 kinds of enemy cars. When you pass through the special dots, PACAR becomes more and more invincible as it increases its power and will be free from damage even when it crashes into the enemy car. Keep up the torrid pace and destroy as many of the enemy cars as possible!</desc>
@@ -1842,9 +2018,11 @@ Two versions of Othello exist for the SG-1000. The first version, released in 19
         <genreid>2937</genreid>
         <players>1</players>
         <cloneof>pacar.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/pacar.png</image>
+        <video type="video">media/video/pacar.mp4</video>
     </game>
-    <game id="96505">
+    <game id="1289677257">
         <path>pachinko.zip</path>
         <name>Pachinko (Jpn)</name>
         <desc>Pachinko is an SG-1000 game developed and published by Sega in 1983. It is, as the name suggests, a video game version of Pachinko, a popular game in Japan. The game did not see an international release.
@@ -1856,11 +2034,11 @@ Pachinko is an extremely rare game for the SG-1000. Soon after release, it was r
         <genre>Casino</genre>
         <genreid>320</genreid>
         <players>1</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/pachinko.png</image>
         <video type="video">media/video/pachinko.mp4</video>
     </game>
-    <game id="197706">
+    <game id="2569409225">
         <path>pachink2.zip</path>
         <name>Pachinko II (Jpn)</name>
         <desc>Pachinko II is the bug fixed version of Pachinko and a "sequel", which was released for the SG-1000 in 1984.</desc>
@@ -1870,11 +2048,11 @@ Pachinko is an extremely rare game for the SG-1000. Soon after release, it was r
         <genre>Casino</genre>
         <genreid>320</genreid>
         <players>1</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/pachink2.png</image>
         <video type="video">media/video/pachink2.mp4</video>
     </game>
-    <game id="197706">
+    <game id="3669424105">
         <path>pachink2t.zip</path>
         <name>Pachinko II (Tw)</name>
         <desc>Pachinko II is the bug fixed version of Pachinko and a "sequel", which was released for the SG-1000 in 1984.</desc>
@@ -1885,27 +2063,29 @@ Pachinko is an extremely rare game for the SG-1000. Soon after release, it was r
         <genreid>320</genreid>
         <players>1</players>
         <cloneof>pachink2.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/pachink2.png</image>
+        <video type="video">media/video/pachink2.mp4</video>
     </game>
     <game id="1301622903">
         <path>palikat.zip</path>
         <name>Palikat (HB)</name>
         <releasedate>20200101T000000</releasedate>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
     </game>
     <game id="2044980864">
         <path>pegged.zip</path>
         <name>Pegged (HB, v1.02)</name>
         <releasedate>20210101T000000</releasedate>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
     </game>
     <game id="149599177">
         <path>pingpong.zip</path>
         <name>Ping Pong (Tw)</name>
         <releasedate>1985?0101T000000</releasedate>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
     </game>
-    <game id="197707">
+    <game id="4179953291">
         <path>pitfall2a.zip</path>
         <name>Pitfall II - The Lost Caverns (Jpn, v0)</name>
         <desc>Pitfall II: The Lost Caverns is the sequel to Pitfall and was released for a variety of systems during the mid-1980s including the SG-1000 in 1985. Gameplay is similar to the original game, but the levels are more maze-like.
@@ -1918,9 +2098,11 @@ Sega's version of Pitfall II was tweaked significantly from its western counterp
         <genreid>7</genreid>
         <players>1-2</players>
         <cloneof>pitfall2.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/pitfall2.png</image>
+        <video type="video">media/video/pitfall2.mp4</video>
     </game>
-    <game id="197707">
+    <game id="1597035998">
         <path>pitfall2.zip</path>
         <name>Pitfall II - The Lost Caverns (Jpn, v1)</name>
         <desc>Pitfall II: The Lost Caverns is the sequel to Pitfall and was released for a variety of systems during the mid-1980s including the SG-1000 in 1985. Gameplay is similar to the original game, but the levels are more maze-like.
@@ -1932,7 +2114,7 @@ Sega's version of Pitfall II was tweaked significantly from its western counterp
         <genre>Platform</genre>
         <genreid>7</genreid>
         <players>1-2</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/pitfall2.png</image>
         <video type="video">media/video/pitfall2.mp4</video>
     </game>
@@ -1940,9 +2122,9 @@ Sega's version of Pitfall II was tweaked significantly from its western counterp
         <path>pitman.zip</path>
         <name>Pitman (HB, v1.03)</name>
         <releasedate>20210101T000000</releasedate>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
     </game>
-    <game id="298947">
+    <game id="3578192654">
         <path>popflame.zip</path>
         <name>Pop Flamer (Euro, Jpn)</name>
         <desc>"POP FLAMER" is a mouse which operates a flamethrower.
@@ -1953,11 +2135,11 @@ You as a player attempt to break balloons and supply fuel for the flamethrower w
         <genre>Action / Labyrinth</genre>
         <genreid>2937</genreid>
         <players>2</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/popflame.png</image>
         <video type="video">media/video/popflame.mp4</video>
     </game>
-    <game id="298947">
+    <game id="1619160184">
         <path>popflamet.zip</path>
         <name>Pop Flamer (Tw)</name>
         <desc>"POP FLAMER" is a mouse which operates a flamethrower.
@@ -1969,9 +2151,11 @@ You as a player attempt to break balloons and supply fuel for the flamethrower w
         <genreid>2937</genreid>
         <players>2</players>
         <cloneof>popflame.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/popflame.png</image>
+        <video type="video">media/video/popflame.mp4</video>
     </game>
-    <game id="197709">
+    <game id="33818439">
         <path>qbert.zip</path>
         <name>Q*bert (Jpn, OMV)</name>
         <desc>Q*bert is an arcade game by Gottlieb. It was ported to the SG-1000 by Tsukuda Original, who marketed it for their Othello Multivision console.
@@ -1983,11 +2167,11 @@ The objective of the game is to turn all the cubes on screen to a desired colour
         <genre>Action</genre>
         <genreid>10</genreid>
         <players>1</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/qbert.png</image>
         <video type="video">media/video/qbert.mp4</video>
     </game>
-    <game id="197676">
+    <game id="3821266777">
         <path>qie.zip</path>
         <name>Qi E (Tw)</name>
         <desc>Doki Doki Penguin Land is a 1985 game initially developed by Sega for the SG-1000. It is a platform-based puzzle game, where a penguin must guide an egg down the screen making sure not to break it.
@@ -2000,9 +2184,11 @@ The basic aim of Doki Doki Penguin Land is to guide an egg from the top of the s
         <genreid>26</genreid>
         <players>1-2</players>
         <cloneof>dokidoki.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/dokidoki.png</image>
+        <video type="video">media/video/dokidoki.mp4</video>
     </game>
-    <game id="197687">
+    <game id="1624679842">
         <path>herot.zip</path>
         <name>Qing Feng Xia (Tw)</name>
         <desc>H.E.R.O. is an action game originally developed and published by Activision. Sega brought it to the SG-1000 in Japan.
@@ -2015,9 +2201,11 @@ The objective of the game is to rescue trapped miners in a volcano. 1 drops a st
         <genreid>7</genreid>
         <players>1-2</players>
         <cloneof>hero.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/hero.png</image>
+        <video type="video">media/video/hero.mp4</video>
     </game>
-    <game id="197665">
+    <game id="2095798738">
         <path>champicet.zip</path>
         <name>Qugunqiu (Tw)</name>
         <desc>Champion Ice Hockey is a simplistic ice hockey game built for the SG-1000.
@@ -2030,9 +2218,11 @@ You play as the Red team vs. the Blue team. One button shoots, while the other b
         <genreid>2933</genreid>
         <players>2</players>
         <cloneof>champice.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/champice.png</image>
+        <video type="video">media/video/champice.mp4</video>
     </game>
-    <game id="298948">
+    <game id="2033664856">
         <path>rallyx.zip</path>
         <name>Rally-X (Tw)</name>
         <desc>Rally-X is a 1980 arcade game by Namco which was brought to the MSX in 1984. It was subsequently ported to the SG-1000 in Taiwan.</desc>
@@ -2042,11 +2232,11 @@ You play as the Red team vs. the Blue team. One button shoots, while the other b
         <genre>Race, Driving</genre>
         <genreid>28</genreid>
         <players>1</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/rallyx.png</image>
         <video type="video">media/video/rallyx.mp4</video>
     </game>
-    <game id="197700">
+    <game id="1053078060">
         <path>ninjaprit.zip</path>
         <name>Renzhe Gongzhu (Tw)</name>
         <desc>Ninja Princess known as Sega Ninja in the west, is a Sega System 1 arcade game by Sega. It is a top-down shooter/action game, in which you play as a princess disguised as a ninja who is attempting to stop the evil tyrant Gyokuro.
@@ -2059,9 +2249,11 @@ The game was ported to the SG-1000 in 1986 exclusively for Japan, with an MSX po
         <genreid>2646</genreid>
         <players>1</players>
         <cloneof>ninjapri.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/ninjapri.png</image>
+        <video type="video">media/video/ninjapri.mp4</video>
     </game>
-    <game id="298950">
+    <game id="525233497">
         <path>roadfght.zip</path>
         <name>Road Fighter (Tw)</name>
         <desc>Road Fighter is a racing game developed by Konami. Jumbo ported the MSX version of the game to the SG-1000 in Taiwan under the name Huojiàn che. It is not known if they had a license for it. Later it was released in South Korea as a cartridge for the Sega Master System under the name Paiteo Lodeu.</desc>
@@ -2070,11 +2262,11 @@ The game was ported to the SG-1000 in 1986 exclusively for Japan, with an MSX po
         <genre>Race, Driving</genre>
         <genreid>28</genreid>
         <players>1</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/roadfght.png</image>
         <video type="video">media/video/roadfght.mp4</video>
     </game>
-    <game id="197710">
+    <game id="1340121567">
         <path>rocknbol.zip</path>
         <name>Rock n' Bolt (Jpn)</name>
         <desc>Before you awaits the construction world's most complicated, confused mess of mind-boggling blueprints, bolts, beams and girders.
@@ -2088,11 +2280,11 @@ So, grab your hat and strap on your boots. You're about to discover how hot musi
         <genre>Puzzle-Game</genre>
         <genreid>26</genreid>
         <players>1-2</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/rocknbol.png</image>
         <video type="video">media/video/rocknbol.mp4</video>
     </game>
-    <game id="197711">
+    <game id="424188127">
         <path>safarihu.zip</path>
         <name>Safari Hunting (Jpn)</name>
         <desc>Go deep into the jungle and hunt fierce animals. Your weapon is a mighty tranquilizer gun. Capture the sleeping snakes, gorillas, lions and elephants by putting them in a cage. Capture as many animals as possible, while considering the effective time of the tranquilizer and the available quantity of fuel.</desc>
@@ -2102,11 +2294,11 @@ So, grab your hat and strap on your boots. You're about to discover how hot musi
         <genre>Shooter</genre>
         <genreid>2646</genreid>
         <players>2</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/safarihu.png</image>
         <video type="video">media/video/safarihu.mp4</video>
     </game>
-    <game id="197711">
+    <game id="4245399255">
         <path>safarihut.zip</path>
         <name>Safari Hunting (Tw)</name>
         <desc>Go deep into the jungle and hunt fierce animals. Your weapon is a mighty tranquilizer gun. Capture the sleeping snakes, gorillas, lions and elephants by putting them in a cage. Capture as many animals as possible, while considering the effective time of the tranquilizer and the available quantity of fuel.</desc>
@@ -2117,9 +2309,11 @@ So, grab your hat and strap on your boots. You're about to discover how hot musi
         <genreid>2646</genreid>
         <players>2</players>
         <cloneof>safarihu.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/safarihu.png</image>
+        <video type="video">media/video/safarihu.mp4</video>
     </game>
-    <game id="197712">
+    <game id="2873595235">
         <path>safarirc.zip</path>
         <name>Safari Race (Euro?)</name>
         <desc>On the vast savanna plain, the SAFARI RACE has just gotten underway. Keep running at full speed, passing other cars while avoiding various wild animals that cross the road. Drive fast, ever onward, taking into consideration the limited time, fuel consumption and dangerous sharp curves. Pass through the checkpoints. Run your car at full throttle towards the goal with the engine operating at its maximum capacity.</desc>
@@ -2129,11 +2323,11 @@ So, grab your hat and strap on your boots. You're about to discover how hot musi
         <genre>Race, Driving</genre>
         <genreid>28</genreid>
         <players>1</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/safarirc.png</image>
         <video type="video">media/video/safarirc.mp4</video>
     </game>
-    <game id="197712">
+    <game id="2639588536">
         <path>safarircj.zip</path>
         <name>Safari Race (Jpn)</name>
         <desc>On the vast savanna plain, the SAFARI RACE has just gotten underway. Keep running at full speed, passing other cars while avoiding various wild animals that cross the road. Drive fast, ever onward, taking into consideration the limited time, fuel consumption and dangerous sharp curves. Pass through the checkpoints. Run your car at full throttle towards the goal with the engine operating at its maximum capacity.</desc>
@@ -2144,9 +2338,11 @@ So, grab your hat and strap on your boots. You're about to discover how hot musi
         <genreid>28</genreid>
         <players>1</players>
         <cloneof>safarirc.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/safarirc.png</image>
+        <video type="video">media/video/safarirc.mp4</video>
     </game>
-    <game id="197712">
+    <game id="3622872121">
         <path>safarirct.zip</path>
         <name>Safari Race (Tw)</name>
         <desc>On the vast savanna plain, the SAFARI RACE has just gotten underway. Keep running at full speed, passing other cars while avoiding various wild animals that cross the road. Drive fast, ever onward, taking into consideration the limited time, fuel consumption and dangerous sharp curves. Pass through the checkpoints. Run your car at full throttle towards the goal with the engine operating at its maximum capacity.</desc>
@@ -2157,9 +2353,11 @@ So, grab your hat and strap on your boots. You're about to discover how hot musi
         <genreid>28</genreid>
         <players>1</players>
         <cloneof>safarirc.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/safarirc.png</image>
+        <video type="video">media/video/safarirc.mp4</video>
     </game>
-    <game id="197713">
+    <game id="141774053">
         <path>3ninmj.zip</path>
         <name>San-nin Mahjong (Jpn, OMV)</name>
         <desc>Sannin Mahjong is a mahjong game for the SG-1000. It is sometimes also known as 3-nin Mahjong, meaning three player mahjong. This number of players is not possible in either of Sega's own versions of the game, Mahjong and Home Mahjong.</desc>
@@ -2169,11 +2367,11 @@ So, grab your hat and strap on your boots. You're about to discover how hot musi
         <genre>Asiatic board game</genre>
         <genreid>2647</genreid>
         <players>1-3</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/3ninmj.png</image>
         <video type="video">media/video/3ninmj.mp4</video>
     </game>
-    <game id="197713">
+    <game id="3813970109">
         <path>3ninmjt.zip</path>
         <name>San-nin Mahjong (Tw)</name>
         <desc>Sannin Mahjong is a mahjong game for the SG-1000. It is sometimes also known as 3-nin Mahjong, meaning three player mahjong. This number of players is not possible in either of Sega's own versions of the game, Mahjong and Home Mahjong.</desc>
@@ -2184,9 +2382,11 @@ So, grab your hat and strap on your boots. You're about to discover how hot musi
         <genreid>2647</genreid>
         <players>1-3</players>
         <cloneof>3ninmj.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/3ninmj.png</image>
+        <video type="video">media/video/3ninmj.mp4</video>
     </game>
-    <game id="518425">
+    <game id="704394243">
         <path>segaflip.zip</path>
         <name>Sega Flipper (Euro, Jpn)</name>
         <desc>A catchy rhythmical flipper sound accompanies this computer pinball video game. Featuring a D.T. (drop target) that enables you to earn bonus points and a K.H. (kicker hole) that entitles you to earn bonus points X a multiplication rate! Take good aim, and shoot away! Here's wishing you success as you merrily flip your way around the playfield in search of the proverbial "high score".</desc>
@@ -2196,11 +2396,11 @@ So, grab your hat and strap on your boots. You're about to discover how hot musi
         <genre>Pinball</genre>
         <genreid>31</genreid>
         <players>1</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/segaflip.png</image>
         <video type="video">media/video/segaflip.mp4</video>
     </game>
-    <game id="518425">
+    <game id="1123072037">
         <path>segaflipa.zip</path>
         <name>Sega Flipper (Jpn, Alt)</name>
         <desc>A catchy rhythmical flipper sound accompanies this computer pinball video game. Featuring a D.T. (drop target) that enables you to earn bonus points and a K.H. (kicker hole) that entitles you to earn bonus points X a multiplication rate! Take good aim, and shoot away! Here's wishing you success as you merrily flip your way around the playfield in search of the proverbial "high score".</desc>
@@ -2211,15 +2411,17 @@ So, grab your hat and strap on your boots. You're about to discover how hot musi
         <genreid>31</genreid>
         <players>1</players>
         <cloneof>segaflip.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/segaflip.png</image>
+        <video type="video">media/video/segaflip.mp4</video>
     </game>
     <game id="2471604807">
         <path>music.zip</path>
         <name>Sega Music Editor (Euro?)</name>
         <releasedate>198?0101T000000</releasedate>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
     </game>
-    <game id="197715">
+    <game id="2202285074">
         <path>segagala.zip</path>
         <name>Sega-Galaga (Jpn)</name>
         <desc>Take control of a fighter space craft and shoot down the invading aliens. Watch out for the swooping motherships, which will try to steal your fighter. Rescue captured fighters to double your firepower. Earn Perfect Bonuses as you battle your way through wave after wave in different challenging stages.</desc>
@@ -2229,11 +2431,11 @@ So, grab your hat and strap on your boots. You're about to discover how hot musi
         <genre>Shoot'em up / Vertical</genre>
         <genreid>2851</genreid>
         <players>1-2</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/segagala.png</image>
         <video type="video">media/video/segagala.mp4</video>
     </game>
-    <game id="197715">
+    <game id="3195744594">
         <path>segagala1.zip</path>
         <name>Sega-Galaga (Jpn, Alt)</name>
         <desc>Take control of a fighter space craft and shoot down the invading aliens. Watch out for the swooping motherships, which will try to steal your fighter. Rescue captured fighters to double your firepower. Earn Perfect Bonuses as you battle your way through wave after wave in different challenging stages.</desc>
@@ -2244,9 +2446,11 @@ So, grab your hat and strap on your boots. You're about to discover how hot musi
         <genreid>2851</genreid>
         <players>1-2</players>
         <cloneof>segagala.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/segagala.png</image>
+        <video type="video">media/video/segagala.mp4</video>
     </game>
-    <game id="197717">
+    <game id="2142431184">
         <path>serizawa.zip</path>
         <name>Serizawa Hachidan no Tsumeshogi (Jpn)</name>
         <desc>Serizawa Hachidan no Tsumeshogi is a 1982 arcade game by Sega. It was subsequently ported to the SG-1000.
@@ -2258,11 +2462,11 @@ The arcade version is extremely rare and poorly documented.</desc>
         <genre>Casual Game</genre>
         <genreid>171</genreid>
         <players>1</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/serizawa.png</image>
         <video type="video">media/video/serizawa.mp4</video>
     </game>
-    <game id="197718">
+    <game id="2606478463">
         <path>m2cp.zip</path>
         <name>SG-1000 M2 Check Program</name>
         <desc>It seems to test individual 1-bit DRAMs in the video RAM check, so it only works for a SG-1000 and not the SG-1000 II which has two 4-bit DRAMs in place of eight 1-bit ones. [...] Well I mean, the test works but the IC numbers are wrong for a SG-1000 II. </desc>
@@ -2271,10 +2475,10 @@ The arcade version is extremely rare and poorly documented.</desc>
         <genre>Various</genre>
         <genreid>39</genreid>
         <players>1</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/m2cp.png</image>
     </game>
-    <game id="197719">
+    <game id="820649689">
         <path>shinnyus.zip</path>
         <name>Shinnyushain Tooru Kun (Jpn)</name>
         <desc>Shinnyuushain Tooru-Kun is a game for the SG-1000. It was originally an arcade game by Konami known as Mikie outside Japan.
@@ -2286,11 +2490,11 @@ An unlicensed version was released for the Sega Master System in South Korea.</d
         <genre>Action / Labyrinth</genre>
         <genreid>2937</genreid>
         <players>2</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/shinnyus.png</image>
         <video type="video">media/video/shinnyus.mp4</video>
     </game>
-    <game id="197719">
+    <game id="2296522242">
         <path>shinnyust.zip</path>
         <name>Shinnyushain Tooru Kun (Tw)</name>
         <desc>Shinnyuushain Tooru-Kun is a game for the SG-1000. It was originally an arcade game by Konami known as Mikie outside Japan.
@@ -2303,9 +2507,11 @@ An unlicensed version was released for the Sega Master System in South Korea.</d
         <genreid>2937</genreid>
         <players>2</players>
         <cloneof>shinnyus.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/shinnyus.png</image>
+        <video type="video">media/video/shinnyus.mp4</video>
     </game>
-    <game id="298952">
+    <game id="621734056">
         <path>sindbadm.zip</path>
         <name>Sindbad Mystery (Euro, Jpn)</name>
         <desc>Sindbad Mystery is an arcade game developed by Sega for Sega G80 (raster) hardware in 1983. It was ported to the SG-1000 in the same year. It follows a boy named Sindbad who must avoid monsters while piecing together a treasure map, similar to Pac-Man. He can also use a digging mechanic to trap enemies, similar to Heiankyo Alien and Space Panic.</desc>
@@ -2315,11 +2521,11 @@ An unlicensed version was released for the Sega Master System in South Korea.</d
         <genre>Puzzle-Game</genre>
         <genreid>26</genreid>
         <players>1</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/sindbadm.png</image>
         <video type="video">media/video/sindbadm.mp4</video>
     </game>
-    <game id="298952">
+    <game id="3291196045">
         <path>sindbadmt.zip</path>
         <name>Sindbad Mystery (Tw)</name>
         <desc>Sindbad Mystery is an arcade game developed by Sega for Sega G80 (raster) hardware in 1983. It was ported to the SG-1000 in the same year. It follows a boy named Sindbad who must avoid monsters while piecing together a treasure map, similar to Pac-Man. He can also use a digging mechanic to trap enemies, similar to Heiankyo Alien and Space Panic.</desc>
@@ -2330,35 +2536,67 @@ An unlicensed version was released for the Sega Master System in South Korea.</d
         <genreid>26</genreid>
         <players>1</players>
         <cloneof>sindbadm.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/sindbadm.png</image>
+        <video type="video">media/video/sindbadm.mp4</video>
     </game>
     <game id="1385298208">
         <path>snake.zip</path>
         <name>Snake (HB, v1.04)</name>
         <releasedate>20210101T000000</releasedate>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
     </game>
     <game id="472646639">
         <path>sokoban.zip</path>
         <name>Soukoban (Jpn)</name>
+        <desc>Sokoban is a puzzle game developed by Thinking Rabbit. Sega ported it to the SG-1000 in 1985. Neither version left Japan.
+
+Sokoban is the basis for Shove It! ...The Warehouse Game, released for the Sega Mega Drive.</desc>
         <releasedate>19850101T000000</releasedate>
-        <system id="109" parentId="2">SG-1000</system>
+        <developer id="506">Thinking Rabbit</developer>
+        <publisher id="3">SEGA</publisher>
+        <genre>Puzzle-Game</genre>
+        <genreid>26</genreid>
+        <players>1</players>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/sokoban.png</image>
+        <video type="video">media/video/sokoban.mp4</video>
     </game>
-    <game id="472646639">
+    <game id="3031764129">
         <path>sokobank.zip</path>
         <name>Soukoban (Kor)</name>
+        <desc>Sokoban is a puzzle game developed by Thinking Rabbit. Sega ported it to the SG-1000 in 1985. Neither version left Japan.
+
+Sokoban is the basis for Shove It! ...The Warehouse Game, released for the Sega Mega Drive.</desc>
         <releasedate>19850101T000000</releasedate>
+        <developer id="506">Thinking Rabbit</developer>
+        <publisher id="3">SEGA</publisher>
+        <genre>Puzzle-Game</genre>
+        <genreid>26</genreid>
+        <players>1</players>
         <cloneof>sokoban.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/sokoban.png</image>
+        <video type="video">media/video/sokoban.mp4</video>
     </game>
-    <game id="472646639">
+    <game id="2149087896">
         <path>sokobant.zip</path>
         <name>Soukoban (Tw)</name>
+        <desc>Sokoban is a puzzle game developed by Thinking Rabbit. Sega ported it to the SG-1000 in 1985. Neither version left Japan.
+
+Sokoban is the basis for Shove It! ...The Warehouse Game, released for the Sega Mega Drive.</desc>
         <releasedate>19850101T000000</releasedate>
+        <developer id="506">Thinking Rabbit</developer>
+        <publisher id="3">SEGA</publisher>
+        <genre>Puzzle-Game</genre>
+        <genreid>26</genreid>
+        <players>1</players>
         <cloneof>sokoban.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/sokoban.png</image>
+        <video type="video">media/video/sokoban.mp4</video>
     </game>
-    <game id="298953">
+    <game id="937544024">
         <path>spacearmb.zip</path>
         <name>Space Armor (Jpn, v10, OMV)</name>
         <desc>Space Armor is a 1984 shoot-'em-up game developed and published by Tsukuda Original. It was built with the Othello Multivision in mind, but like all Multivision games, is also compatible with the SG-1000. Space Armor was not released outside of Japan.
@@ -2371,9 +2609,11 @@ The game is built similarly to Namco's Xevious, in that it is a vertical shooter
         <genreid>79</genreid>
         <players>2</players>
         <cloneof>spacearm.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/spacearm.png</image>
+        <video type="video">media/video/spacearm.mp4</video>
     </game>
-    <game id="298953">
+    <game id="974746510">
         <path>spacearm.zip</path>
         <name>Space Armor (Jpn, v20, OMV)</name>
         <desc>Space Armor is a 1984 shoot-'em-up game developed and published by Tsukuda Original. It was built with the Othello Multivision in mind, but like all Multivision games, is also compatible with the SG-1000. Space Armor was not released outside of Japan.
@@ -2385,11 +2625,11 @@ The game is built similarly to Namco's Xevious, in that it is a vertical shooter
         <genre>Shoot'em Up</genre>
         <genreid>79</genreid>
         <players>2</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/spacearm.png</image>
         <video type="video">media/video/spacearm.mp4</video>
     </game>
-    <game id="298953">
+    <game id="1384888458">
         <path>spacearma.zip</path>
         <name>Space Armor (Jpn, v20, OMV, Alt)</name>
         <desc>Space Armor is a 1984 shoot-'em-up game developed and published by Tsukuda Original. It was built with the Othello Multivision in mind, but like all Multivision games, is also compatible with the SG-1000. Space Armor was not released outside of Japan.
@@ -2402,9 +2642,11 @@ The game is built similarly to Namco's Xevious, in that it is a vertical shooter
         <genreid>79</genreid>
         <players>2</players>
         <cloneof>spacearm.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/spacearm.png</image>
+        <video type="video">media/video/spacearm.mp4</video>
     </game>
-    <game id="197723">
+    <game id="2126073303">
         <path>spaceinv.zip</path>
         <name>Space Invaders (Jpn)</name>
         <desc>Earth is under attack from rows of bomb dropping aliens, and you need to defend it! The rows of aliens begin at the top of the screen, and you control a laser cannon at the bottom of the screen. Your goal is to earn points by shooting the aliens before they can land. The aliens march back and forth, and each time the end of the screen is reached they will drop one row closer to the bottom. Shoot them all, and you move on to the next (tougher) level, but if even one of them lands the game is over. 
@@ -2418,11 +2660,11 @@ The SG-1000 version does not appear to have been released outside of Japan.</des
         <genre>Shoot'em Up</genre>
         <genreid>79</genreid>
         <players>2</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/spaceinv.png</image>
         <video type="video">media/video/spaceinv.mp4</video>
     </game>
-    <game id="197723">
+    <game id="2908520325">
         <path>spaceinvt.zip</path>
         <name>Space Invaders (Tw)</name>
         <desc>Earth is under attack from rows of bomb dropping aliens, and you need to defend it! The rows of aliens begin at the top of the screen, and you control a laser cannon at the bottom of the screen. Your goal is to earn points by shooting the aliens before they can land. The aliens march back and forth, and each time the end of the screen is reached they will drop one row closer to the bottom. Shoot them all, and you move on to the next (tougher) level, but if even one of them lands the game is over. 
@@ -2437,9 +2679,11 @@ The SG-1000 version does not appear to have been released outside of Japan.</des
         <genreid>79</genreid>
         <players>2</players>
         <cloneof>spaceinv.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/spaceinv.png</image>
+        <video type="video">media/video/spaceinv.mp4</video>
     </game>
-    <game id="197724">
+    <game id="1899060140">
         <path>spacemnt.zip</path>
         <name>Space Mountain (Jpn, OMV)</name>
         <desc>Space Mountain is an SG-1000 game developed and published by Tsukuda Original with the Othello Multivision in mind. It is a very primitive third-person space ship shooter, in which the player has to gun down enemy craft before infiltrating a base.</desc>
@@ -2449,11 +2693,11 @@ The SG-1000 version does not appear to have been released outside of Japan.</des
         <genre>Shoot'em Up</genre>
         <genreid>79</genreid>
         <players>2</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/spacemnt.png</image>
         <video type="video">media/video/spacemnt.mp4</video>
     </game>
-    <game id="197725">
+    <game id="4130517139">
         <path>spacesla.zip</path>
         <name>Space Slalom (Jpn)</name>
         <desc>Space Slalom is a video game developed by Orca and published by Sega for the SG-1000 in 1983.
@@ -2465,11 +2709,11 @@ Though on the surface it appears to be a space-themed vertical shoot-'em-up, the
         <genre>Action</genre>
         <genreid>10</genreid>
         <players>2</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/spacesla.png</image>
         <video type="video">media/video/spacesla.mp4</video>
     </game>
-    <game id="197726">
+    <game id="1010038273">
         <path>starfrce.zip</path>
         <name>Star Force (Jpn)</name>
         <desc>Star Force is a 1984 arcade vertical shoot-'em-up developed by Tehkan (now Tecmo), which was later brought to the SG-1000 in 1985.
@@ -2481,11 +2725,11 @@ The SG-1000 version of the game was released on both cartridge an on Sega Card.<
         <genre>Shoot'em Up</genre>
         <genreid>79</genreid>
         <players>1</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/starfrce.png</image>
         <video type="video">media/video/starfrce.mp4</video>
     </game>
-    <game id="197726">
+    <game id="2196670881">
         <path>starfrcet.zip</path>
         <name>Star Force (Tw)</name>
         <desc>Star Force is a 1984 arcade vertical shoot-'em-up developed by Tehkan (now Tecmo), which was later brought to the SG-1000 in 1985.
@@ -2498,9 +2742,11 @@ The SG-1000 version of the game was released on both cartridge an on Sega Card.<
         <genreid>79</genreid>
         <players>1</players>
         <cloneof>starfrce.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/starfrce.png</image>
+        <video type="video">media/video/starfrce.mp4</video>
     </game>
-    <game id="197726">
+    <game id="1902386282">
         <path>starfrceta.zip</path>
         <name>Star Force (Tw, Alt)</name>
         <desc>Star Force is a 1984 arcade vertical shoot-'em-up developed by Tehkan (now Tecmo), which was later brought to the SG-1000 in 1985.
@@ -2513,9 +2759,11 @@ The SG-1000 version of the game was released on both cartridge an on Sega Card.<
         <genreid>79</genreid>
         <players>1</players>
         <cloneof>starfrce.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/starfrce.png</image>
+        <video type="video">media/video/starfrce.mp4</video>
     </game>
-    <game id="298921">
+    <game id="1314393436">
         <path>starjack1.zip</path>
         <name>Star Jacker (Euro, Jpn, v1.1)</name>
         <desc>A "new feeling" space game. Glorious space troops fight against invading "Dester" army. Avoid UFO's continuous attacks weaving left and right, up and down. Counter-attack by using your fire button. Lead the space troops to the Carrier passing through the various mysteriy zones.</desc>
@@ -2526,9 +2774,11 @@ The SG-1000 version of the game was released on both cartridge an on Sega Card.<
         <genreid>79</genreid>
         <players>2</players>
         <cloneof>starjack.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/starjack.png</image>
+        <video type="video">media/video/starjack.mp4</video>
     </game>
-    <game id="298921">
+    <game id="2414042887">
         <path>starjack.zip</path>
         <name>Star Jacker (Euro, Jpn, v1.2)</name>
         <desc>A "new feeling" space game. Glorious space troops fight against invading "Dester" army. Avoid UFO's continuous attacks weaving left and right, up and down. Counter-attack by using your fire button. Lead the space troops to the Carrier passing through the various mysteriy zones.</desc>
@@ -2538,11 +2788,11 @@ The SG-1000 version of the game was released on both cartridge an on Sega Card.<
         <genre>Shoot'em Up</genre>
         <genreid>79</genreid>
         <players>2</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/starjack.png</image>
         <video type="video">media/video/starjack.mp4</video>
     </game>
-    <game id="298921">
+    <game id="288612324">
         <path>starjack2.zip</path>
         <name>Star Jacker (Jpn, v1.0)</name>
         <desc>A "new feeling" space game. Glorious space troops fight against invading "Dester" army. Avoid UFO's continuous attacks weaving left and right, up and down. Counter-attack by using your fire button. Lead the space troops to the Carrier passing through the various mysteriy zones.</desc>
@@ -2553,9 +2803,11 @@ The SG-1000 version of the game was released on both cartridge an on Sega Card.<
         <genreid>79</genreid>
         <players>2</players>
         <cloneof>starjack.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/starjack.png</image>
+        <video type="video">media/video/starjack.mp4</video>
     </game>
-    <game id="298921">
+    <game id="4012336625">
         <path>starjackt.zip</path>
         <name>Star Jacker (Tw)</name>
         <desc>A "new feeling" space game. Glorious space troops fight against invading "Dester" army. Avoid UFO's continuous attacks weaving left and right, up and down. Counter-attack by using your fire button. Lead the space troops to the Carrier passing through the various mysteriy zones.</desc>
@@ -2566,9 +2818,11 @@ The SG-1000 version of the game was released on both cartridge an on Sega Card.<
         <genreid>79</genreid>
         <players>2</players>
         <cloneof>starjack.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/starjack.png</image>
+        <video type="video">media/video/starjack.mp4</video>
     </game>
-    <game id="197728">
+    <game id="1870715846">
         <path>supertnk.zip</path>
         <name>Super Tank (Jpn)</name>
         <desc>Super Tank is a shoot-'em-up game for the SG-1000. The player drives a tank and is tasked with shooting at and destroying enemy units and structures.</desc>
@@ -2578,11 +2832,11 @@ The SG-1000 version of the game was released on both cartridge an on Sega Card.<
         <genre>Shooter</genre>
         <genreid>2646</genreid>
         <players>2</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/supertnk.png</image>
         <video type="video">media/video/supertnk.mp4</video>
     </game>
-    <game id="197728">
+    <game id="1147581335">
         <path>supertnkk.zip</path>
         <name>Super Tank (Kor)</name>
         <desc>Super Tank is a shoot-'em-up game for the SG-1000. The player drives a tank and is tasked with shooting at and destroying enemy units and structures.</desc>
@@ -2593,15 +2847,17 @@ The SG-1000 version of the game was released on both cartridge an on Sega Card.<
         <genreid>2646</genreid>
         <players>2</players>
         <cloneof>supertnk.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/supertnk.png</image>
+        <video type="video">media/video/supertnk.mp4</video>
     </game>
     <game id="2262931798">
         <path>superuwol.zip</path>
         <name>Super UWOL! SG-1000 (HB)</name>
         <releasedate>20160101T000000</releasedate>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
     </game>
-    <game id="197732">
+    <game id="1033590836">
         <path>wboyt.zip</path>
         <name>Taotailang (Tw)</name>
         <desc>WONDER BOY starts off a long and hazardous journey in pursuit of KING, who has kidnapped his girlfriend, TINA. KING lives in a faraway place, inhabited by monstrous creatures and full of many surprises. On the way, our hero has to collect food to increase his energy. WONDER BOY's ultimate mission is to rescue TINA and prove to one and all that true love always triumphs.
@@ -2613,9 +2869,11 @@ The SG-1000 version of the game was released on both cartridge an on Sega Card.<
         <genreid>7</genreid>
         <players>1-2</players>
         <cloneof>wboy.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/wboy.png</image>
+        <video type="video">media/video/wboy.mp4</video>
     </game>
-    <game id="197730">
+    <game id="2427387088">
         <path>terebioe.zip</path>
         <name>Terebi Oekaki (Jpn)</name>
         <desc>Terebi Oekaki  is the game packaged with the Sega Graphic Board for the SG-1000. It is a simple paint program.
@@ -2627,10 +2885,10 @@ This was the first game to feature the use of touch controls. It required the us
         <genre>Various</genre>
         <genreid>39</genreid>
         <players>1</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/terebioe.png</image>
     </game>
-    <game id="197654">
+    <game id="443051206">
         <path>blckonyx.zip</path>
         <name>The Black Onyx (Jpn)</name>
         <desc>The Black Onyx is a role-playing game developed by Bullet Proof Software. It was released, among other consoles and computers, for the SG-1000 in 1987. It was the last SG-1000 game to be released in card form, and the last to be published by Sega, but it is currently unknown as to whether it was the last SG-1000 game. PC-8801 and MSX versions had been released in 1984 and 1985, respectively, meaning this version is unusually late. The game was followed by The Black Onyx II: Search For The Fire Crystal, which saw its original MSX release in 1984.</desc>
@@ -2640,11 +2898,11 @@ This was the first game to feature the use of touch controls. It required the us
         <genre>Role playing games</genre>
         <genreid>8</genreid>
         <players>1</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/blckonyx.png</image>
         <video type="video">media/video/blckonyx.mp4</video>
     </game>
-    <game id="197658">
+    <game id="1619107388">
         <path>castle.zip</path>
         <name>The Castle (Jpn)</name>
         <desc>The Castle is video game developed by ASCII and released for the SG-1000 in 1986. It is a port of an MSX game of the same name, and is largely identical due to the similar hardware between the two machines. Due to the decline of the SG-1000 and emergence of the Sega Master System, the game was not released in Europe or Australia like many other SG-1000 games. The game has a fairly standard plot of rescuing a princess from a castle, though the game itself was considered very large for the time. It also contains a map system similar to that of later Metroid and Castlevania games.</desc>
@@ -2654,11 +2912,11 @@ This was the first game to feature the use of touch controls. It required the us
         <genre>Platform</genre>
         <genreid>7</genreid>
         <players>1</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/castle.png</image>
         <video type="video">media/video/castle.mp4</video>
     </game>
-    <game id="298923">
+    <game id="778399846">
         <path>sxpao.zip</path>
         <name>Twinbee (Tw)</name>
         <desc>TwinBee is a 1985 arcade game by Konami which was brought to the MSX in 1986. The MSX version was subsequently ported to the SG-1000 in Taiwan.</desc>
@@ -2667,7 +2925,7 @@ This was the first game to feature the use of touch controls. It required the us
         <genre>Shoot'em Up</genre>
         <genreid>79</genreid>
         <players>2</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/sxpao.png</image>
         <video type="video">media/video/sxpao.mp4</video>
     </game>
@@ -2675,9 +2933,9 @@ This was the first game to feature the use of touch controls. It required the us
         <path>vexed.zip</path>
         <name>Vexed (HB, v1.03)</name>
         <releasedate>20200101T000000</releasedate>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
     </game>
-    <game id="197657">
+    <game id="987967932">
         <path>csot.zip</path>
         <name>Wanpi Gui (Tw)</name>
         <desc>C_So! (C-SO!) is a 1985 SG-1000 game developed by Compile and published by Sega. It is a port of an MSX game from the same year, which was published by Pony Canyon.
@@ -2696,9 +2954,11 @@ The game was only released in Japan.</desc>
         <genreid>7</genreid>
         <players>1</players>
         <cloneof>cso.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/cso.png</image>
+        <video type="video">media/video/cso.mp4</video>
     </game>
-    <game id="197732">
+    <game id="3959042748">
         <path>wboya.zip</path>
         <name>Wonder Boy (Jpn, v0)</name>
         <desc>WONDER BOY starts off a long and hazardous journey in pursuit of KING, who has kidnapped his girlfriend, TINA. KING lives in a faraway place, inhabited by monstrous creatures and full of many surprises. On the way, our hero has to collect food to increase his energy. WONDER BOY's ultimate mission is to rescue TINA and prove to one and all that true love always triumphs.
@@ -2710,9 +2970,11 @@ The game was only released in Japan.</desc>
         <genreid>7</genreid>
         <players>1-2</players>
         <cloneof>wboy.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/wboy.png</image>
+        <video type="video">media/video/wboy.mp4</video>
     </game>
-    <game id="197732">
+    <game id="2795609291">
         <path>wboy.zip</path>
         <name>Wonder Boy (Jpn, v1)</name>
         <desc>WONDER BOY starts off a long and hazardous journey in pursuit of KING, who has kidnapped his girlfriend, TINA. KING lives in a faraway place, inhabited by monstrous creatures and full of many surprises. On the way, our hero has to collect food to increase his energy. WONDER BOY's ultimate mission is to rescue TINA and prove to one and all that true love always triumphs.
@@ -2723,11 +2985,11 @@ The game was only released in Japan.</desc>
         <genre>Platform</genre>
         <genreid>7</genreid>
         <players>1-2</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/wboy.png</image>
         <video type="video">media/video/wboy.mp4</video>
     </game>
-    <game id="197670">
+    <game id="1686436675">
         <path>cloderunt.zip</path>
         <name>Xun Bao Er Dai (Tw)</name>
         <desc>A follow-up to the original Lode Runner, with identical gameplay. This package contained 50 of the most challenging levels ever designed, and was intended for expert players only. It did not include the level editor, you had to play through the levels in order, but a save-game option was provided (although you lost one life every time you restored).</desc>
@@ -2738,9 +3000,11 @@ The game was only released in Japan.</desc>
         <genreid>7</genreid>
         <players>1</players>
         <cloneof>cloderun.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/cloderun.png</image>
+        <video type="video">media/video/cloderun.mp4</video>
     </game>
-    <game id="298925">
+    <game id="431472688">
         <path>yamato.zip</path>
         <name>Yamato (Euro, Jpn)</name>
         <desc>Avoid the enemy's attack by torpedoes and missiles. Shoot down the missiles. Be careful, YAMATO will explode if it is hit broadside. Aim at the enemy and fire the guns. Attack enemy's planes by using your quick-friring guuns. Can YAMATO survive through this fierce battle?</desc>
@@ -2750,11 +3014,11 @@ The game was only released in Japan.</desc>
         <genre>Shoot'em Up</genre>
         <genreid>79</genreid>
         <players>1</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/yamato.png</image>
         <video type="video">media/video/yamato.mp4</video>
     </game>
-    <game id="298925">
+    <game id="4272572002">
         <path>yamatoa.zip</path>
         <name>Yamato (Euro, Jpn, Alt)</name>
         <desc>Avoid the enemy's attack by torpedoes and missiles. Shoot down the missiles. Be careful, YAMATO will explode if it is hit broadside. Aim at the enemy and fire the guns. Attack enemy's planes by using your quick-friring guuns. Can YAMATO survive through this fierce battle?</desc>
@@ -2765,9 +3029,11 @@ The game was only released in Japan.</desc>
         <genreid>79</genreid>
         <players>1</players>
         <cloneof>yamato.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/yamato.png</image>
+        <video type="video">media/video/yamato.mp4</video>
     </game>
-    <game id="298925">
+    <game id="3280787694">
         <path>yamatot.zip</path>
         <name>Yamato (Tw)</name>
         <desc>Avoid the enemy's attack by torpedoes and missiles. Shoot down the missiles. Be careful, YAMATO will explode if it is hit broadside. Aim at the enemy and fire the guns. Attack enemy's planes by using your quick-friring guuns. Can YAMATO survive through this fierce battle?</desc>
@@ -2778,15 +3044,17 @@ The game was only released in Japan.</desc>
         <genreid>79</genreid>
         <players>1</players>
         <cloneof>yamato.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/yamato.png</image>
+        <video type="video">media/video/yamato.mp4</video>
     </game>
     <game id="1484726259">
         <path>yiear.zip</path>
         <name>Yie Ar Kung-Fu (Tw)</name>
         <releasedate>1985?0101T000000</releasedate>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
     </game>
-    <game id="298926">
+    <game id="1278325786">
         <path>dacike.zip</path>
         <name>Yie Ar Kung-Fu II, Da Cike (Tw)</name>
         <desc>Yie Ar Kung-Fu 2: The Emperor Yie-Gah is a sequel to the MSX / Famicom (NES) version of Yie Ar Kung-Fu, rather than the versions directly based on the arcade release. The game follows the quest of Lee Young, the main character from the previous game, to become a kung-fu master. This involves fighting with a wide range of opponents in a traditional one-on-one 2D environment. Lee Young has a wide range of attack moves he can use to lower his opponent's life bar, including traditional punching and kicking attacks as well as jumping ones. Opponents are well equipped with unique weapons and attacks.</desc>
@@ -2795,11 +3063,11 @@ The game was only released in Japan.</desc>
         <genre>Beat'em Up</genre>
         <genreid>1</genreid>
         <players>2</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/dacike.png</image>
         <video type="video">media/video/dacike.mp4</video>
     </game>
-    <game id="197690">
+    <game id="427513046">
         <path>homemjt.zip</path>
         <name>Yon-nin Mahjong (Tw)</name>
         <desc>Home Mahjong is a mahjong game for the SG-1000.
@@ -2812,9 +3080,11 @@ The game was sold with a plastic screen that sticks to the TV during a 2 player 
         <genreid>2647</genreid>
         <players>2</players>
         <cloneof>homemj.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/homemj.png</image>
+        <video type="video">media/video/homemj.mp4</video>
     </game>
-    <game id="596296">
+    <game id="595749917">
         <path>zaxxon.zip</path>
         <name>Zaxxon (Jpn)</name>
         <desc>The enemy has built battle fortresses in the farthest reaches of space. There's only one way in... and one way out. Your Mission: Infiltrate the enemy's defenses and destroy their motherships!</desc>
@@ -2825,11 +3095,11 @@ The game was sold with a plastic screen that sticks to the TV during a 2 player 
         <genre>Shoot'em Up</genre>
         <genreid>79</genreid>
         <players>1</players>
-        <system id="2" parentId="0">Master System</system>
+        <system id="2" parentid="0">Master System</system>
         <image type="mixrbv2">media/mixrbv2/zaxxon.png</image>
         <video type="video">media/video/zaxxon.mp4</video>
     </game>
-    <game id="596296">
+    <game id="431983573">
         <path>zaxxont.zip</path>
         <name>Zaxxon (Tw)</name>
         <desc>The enemy has built battle fortresses in the farthest reaches of space. There's only one way in... and one way out. Your Mission: Infiltrate the enemy's defenses and destroy their motherships!</desc>
@@ -2841,9 +3111,11 @@ The game was sold with a plastic screen that sticks to the TV during a 2 player 
         <genreid>79</genreid>
         <players>1</players>
         <cloneof>zaxxon.zip</cloneof>
-        <system id="2" parentId="0">Master System</system>
+        <system id="2" parentid="0">Master System</system>
+        <image type="mixrbv2">media/mixrbv2/zaxxon.png</image>
+        <video type="video">media/video/zaxxon.mp4</video>
     </game>
-    <game id="197735">
+    <game id="3591438845">
         <path>zippyrac.zip</path>
         <name>Zippy Race (Jpn)</name>
         <desc>The player takes control of a motorcyclist who's in a race to be the first to traverse the United States from the west to the east coast, starting in Los Angeles and ending up in New York City.
@@ -2857,11 +3129,11 @@ The SG-1000 version of the game is one of two SG-1000 releases to see four separ
         <genre>Race, Driving</genre>
         <genreid>28</genreid>
         <players>1</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/zippyrac.png</image>
         <video type="video">media/video/zippyrac.mp4</video>
     </game>
-    <game id="197735">
+    <game id="1568230702">
         <path>zippyract.zip</path>
         <name>Zippy Race (Tw)</name>
         <desc>The player takes control of a motorcyclist who's in a race to be the first to traverse the United States from the west to the east coast, starting in Los Angeles and ending up in New York City.
@@ -2876,9 +3148,11 @@ The SG-1000 version of the game is one of two SG-1000 releases to see four separ
         <genreid>28</genreid>
         <players>1</players>
         <cloneof>zippyrac.zip</cloneof>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
+        <image type="mixrbv2">media/mixrbv2/zippyrac.png</image>
+        <video type="video">media/video/zippyrac.mp4</video>
     </game>
-    <game id="96571">
+    <game id="1787866389">
         <path>zoom909.zip</path>
         <name>Zoom 909 (Jpn)</name>
         <desc>Zoom 909 is an arcade game developed by Sega for VCO Object arcade hardware. It was released worldwide in 1982, however after obtaining a license for Buck Rogers, western versions of the game became known as Buck Rogers: Planet of Zoom. Both Zoom 909 and Buck Rogers: Planet of Zoom are largely the same game minus some minor graphical differences.
@@ -2890,7 +3164,7 @@ Though most home ports of the game are based on Planet of Zoom, Zoom 909 was bro
         <genre>Shoot'em Up</genre>
         <genreid>79</genreid>
         <players>1</players>
-        <system id="109" parentId="2">SG-1000</system>
+        <system id="109" parentid="2">SG-1000</system>
         <image type="mixrbv2">media/mixrbv2/zoom909.png</image>
         <video type="video">media/video/zoom909.mp4</video>
     </game>

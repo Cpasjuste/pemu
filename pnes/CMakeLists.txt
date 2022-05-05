@@ -47,10 +47,6 @@ set(NESTOPIA_CFLAGS
         -Wno-format-zero-length
         )
 
-if (NOT OPTION_BUILTIN_MINIZIP)
-    set(NESTOPIA_LDFLAGS minizip)
-endif ()
-
 ##############
 # pnes
 ##############
@@ -62,7 +58,7 @@ file(GLOB PNES_SRC sources/*.c* sources/nst/*.c*)
 #####################
 if (PLATFORM_VITA)
     #####################
-    # PS VITA PLATORM
+    # PS VITA PLATFORM
     #####################
     set(TITLE_ID "PNES00001" CACHE STRING "" FORCE)
     list(APPEND PNES_INC sources/vita)
@@ -73,24 +69,26 @@ elseif (PLATFORM_PS4)
     set(PS4_PKG_TITLE "pNES - Portable Nestopia")
     set(PS4_PKG_TITLE_ID "PNES00001")
     set(PS4_PKG_VERSION "${VERSION_MAJOR}.${VERSION_MINOR}")
-    list(APPEND NESTOPIA_CFLAGS -DDATADIR="/app0/")
 elseif (PLATFORM_SWITCH)
     #####################
-    # SWITCH PLATORM
+    # SWITCH PLATFORM
     #####################
     list(APPEND NESTOPIA_SRC sources/switch/port.c)
-    list(APPEND NESTOPIA_CFLAGS -DDATADIR="romfs:/")
 elseif (PLATFORM_3DS)
     #####################
-    # 3DS PLATORM
+    # 3DS PLATFORM
     #####################
+    list(APPEND PNES_INC sources/3ds)
     list(APPEND NESTOPIA_CFLAGS -Dstrcasecmp=strcmp)
     list(APPEND NESTOPIA_SRC sources/3ds/port.c)
 elseif (PLATFORM_LINUX)
     #####################
-    # SDL2 PLATORM
+    # LINUX
     #####################
-    list(APPEND NESTOPIA_CFLAGS -DDATADIR="romfs:/")
+elseif (PLATFORM_WINDOWS)
+    #####################
+    # WINDOWS
+    #####################
 endif (PLATFORM_VITA)
 
 #####################
@@ -104,6 +102,18 @@ target_link_libraries(${PROJECT_NAME} cross2dui ${NESTOPIA_LDFLAGS})
 
 # include libcross2d targets
 include(${CMAKE_SOURCE_DIR}/libcross2d/cmake/targets.cmake)
+
+# add common skin data
+add_custom_target(${PROJECT_NAME}.data.skin
+        COMMAND ${CMAKE_COMMAND} -D SRC=${CMAKE_CURRENT_SOURCE_DIR}/../data/common/romfs -D DST=${CMAKE_CURRENT_BINARY_DIR}/data_romfs -P ${CMAKE_CURRENT_LIST_DIR}/../libcross2d/cmake/copy_directory_custom.cmake
+        COMMAND ${CMAKE_COMMAND} -D SRC=${CMAKE_CURRENT_SOURCE_DIR}/../data/${TARGET_PLATFORM}/romfs -D DST=${CMAKE_CURRENT_BINARY_DIR}/data_romfs -P ${CMAKE_CURRENT_LIST_DIR}/../libcross2d/cmake/copy_directory_custom.cmake
+        )
+add_dependencies(${PROJECT_NAME}.data.skin ${PROJECT_NAME}.data)
+if (PLATFORM_LINUX)
+    add_dependencies(${PROJECT_NAME}-romfs ${PROJECT_NAME}.data.skin)
+else ()
+    add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}.data.skin)
+endif ()
 
 # add extra data to libcross2d default targets data (nestopia database and zipped skin)
 add_custom_target(${PROJECT_NAME}.data.extra

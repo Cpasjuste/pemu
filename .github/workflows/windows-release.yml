@@ -1,0 +1,66 @@
+name: windows-release
+
+on:
+  push:
+    tags:
+      - "v*.*"
+
+jobs:
+
+  build-windows-release:
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: msys2 {0}
+
+    steps:
+      - uses: msys2/setup-msys2@v2
+        with:
+          update: true
+          install: >-
+            git zip perl make
+            mingw-w64-x86_64-binutils mingw-w64-x86_64-gcc mingw-w64-x86_64-make mingw-w64-x86_64-cmake mingw-w64-x86_64-pkgconf
+            mingw-w64-x86_64-SDL2 mingw-w64-x86_64-freetype mingw-w64-x86_64-glm
+            mingw-w64-x86_64-glew mingw-w64-x86_64-libconfig mingw-w64-x86_64-tinyxml2
+            mingw-w64-x86_64-mpv mingw-w64-x86_64-zlib mingw-w64-x86_64-minizip
+
+      - name: '🧰 Checkout'
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
+
+      - name: Build pfbneo
+        run: |
+          mkdir cmake-build-pfbneo && cd cmake-build-pfbneo
+          cmake -G "MSYS Makefiles" -DPLATFORM_WINDOWS=ON -DOPTION_EMU=pfbneo -DCMAKE_BUILD_TYPE=Debug ..
+          make pfbneo.deps
+          make pfbneo_windows_release
+          mv *.zip $GITHUB_WORKSPACE
+
+      - name: Build pgen
+        run: |
+          mkdir cmake-build-pgen && cd cmake-build-pgen
+          cmake -G "MSYS Makefiles" -DPLATFORM_WINDOWS=ON -DOPTION_EMU=pgen -DCMAKE_BUILD_TYPE=Debug ..
+          make pgen_windows_release
+          mv *.zip $GITHUB_WORKSPACE
+
+      - name: Build pnes
+        run: |
+          mkdir cmake-build-pnes && cd cmake-build-pnes
+          cmake -G "MSYS Makefiles" -DPLATFORM_WINDOWS=ON -DOPTION_EMU=pnes -DCMAKE_BUILD_TYPE=Debug ..
+          make pnes_windows_release
+          mv *.zip $GITHUB_WORKSPACE
+
+      - name: Build psnes
+        run: |
+          mkdir cmake-build-psnes && cd cmake-build-psnes
+          cmake -G "MSYS Makefiles" -DPLATFORM_WINDOWS=ON -DOPTION_EMU=psnes -DCMAKE_BUILD_TYPE=Debug ..
+          make psnes_windows_release
+          mv *.zip $GITHUB_WORKSPACE
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: '*.zip'
+          token: ${{ secrets.RELEASE_TOKEN }}

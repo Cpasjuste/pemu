@@ -89,7 +89,7 @@ void PNESUiEmu::onUpdate() {
         // update nestopia buttons
         auto *players = getUi()->getInput()->getPlayers();
 
-        if (players[0].keys & c2d::Input::Key::Fire3) {
+        if (players[0].buttons & c2d::Input::Button::X) {
             nst_set_rewind(0);
         } else if (Rewinder(emulator).GetDirection() == Rewinder::BACKWARD) {
             nst_set_rewind(1);
@@ -98,25 +98,25 @@ void PNESUiEmu::onUpdate() {
         for (int i = 0; i < NUMGAMEPADS; i++) {
             cNstPads->pad[i].buttons = 0;
 
-            cNstPads->pad[i].buttons |= (players[i].keys & c2d::Input::Key::Start) > 0 ?
+            cNstPads->pad[i].buttons |= (players[i].buttons & c2d::Input::Button::Start) > 0 ?
                                         Nes::Core::Input::Controllers::Pad::START : 0;
-            cNstPads->pad[i].buttons |= (players[i].keys & c2d::Input::Key::Select) > 0 ?
+            cNstPads->pad[i].buttons |= (players[i].buttons & c2d::Input::Button::Select) > 0 ?
                                         Nes::Core::Input::Controllers::Pad::SELECT : 0;
-            cNstPads->pad[i].buttons |= (players[i].keys & c2d::Input::Key::Up) > 0 ?
+            cNstPads->pad[i].buttons |= (players[i].buttons & c2d::Input::Button::Up) > 0 ?
                                         Nes::Core::Input::Controllers::Pad::UP : 0;
-            cNstPads->pad[i].buttons |= (players[i].keys & c2d::Input::Key::Down) > 0 ?
+            cNstPads->pad[i].buttons |= (players[i].buttons & c2d::Input::Button::Down) > 0 ?
                                         Nes::Core::Input::Controllers::Pad::DOWN : 0;
-            cNstPads->pad[i].buttons |= (players[i].keys & c2d::Input::Key::Left) > 0 ?
+            cNstPads->pad[i].buttons |= (players[i].buttons & c2d::Input::Button::Left) > 0 ?
                                         Nes::Core::Input::Controllers::Pad::LEFT : 0;
-            cNstPads->pad[i].buttons |= (players[i].keys & c2d::Input::Key::Right) > 0 ?
+            cNstPads->pad[i].buttons |= (players[i].buttons & c2d::Input::Button::Right) > 0 ?
                                         Nes::Core::Input::Controllers::Pad::RIGHT : 0;
-            cNstPads->pad[i].buttons |= (players[i].keys & c2d::Input::Key::Fire1) > 0 ?
+            cNstPads->pad[i].buttons |= (players[i].buttons & c2d::Input::Button::A) > 0 ?
                                         Nes::Core::Input::Controllers::Pad::B : 0;
-            cNstPads->pad[i].buttons |= (players[i].keys & c2d::Input::Key::Fire2) > 0 ?
+            cNstPads->pad[i].buttons |= (players[i].buttons & c2d::Input::Button::B) > 0 ?
                                         Nes::Core::Input::Controllers::Pad::A : 0;
-            cNstPads->pad[i].buttons |= (players[i].keys & c2d::Input::Key::Fire4) > 0 ?
+            cNstPads->pad[i].buttons |= (players[i].buttons & c2d::Input::Button::X) > 0 ?
                                         Nes::Core::Input::Controllers::Pad::B : 0;
-            cNstPads->pad[i].buttons |= (players[i].keys & c2d::Input::Key::Fire5) > 0 ?
+            cNstPads->pad[i].buttons |= (players[i].buttons & c2d::Input::Button::Y) > 0 ?
                                         Nes::Core::Input::Controllers::Pad::A : 0;
         }
 

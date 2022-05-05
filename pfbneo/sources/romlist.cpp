@@ -5,11 +5,11 @@
 #include "c2dui.h"
 #include "romlist.h"
 
-void PFBARomList::build() {
-#ifndef __VITA__
-    std::string dataPath = ui->getIo()->getRomFsPath();
+void PFBARomList::build(bool addArcadeSystem) {
+#ifndef __PFBN_NO_CONSOLES__
+    std::string dataPath = ui->getIo()->getDataPath();
     if (!ui->getIo()->exist(dataPath + "gamelist.xml")) {
-        dataPath = ui->getIo()->getDataPath();
+        dataPath = ui->getIo()->getRomFsPath();
     }
 
     gameList->append(dataPath + "gamelist_channelf.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_CHANNELF), false);
@@ -55,7 +55,7 @@ void PFBARomList::build() {
     setLoadingText("Games: %li / %li", gameList->getAvailableCount(), gameList->games.size());
 #endif
 
-    RomList::build();
+    RomList::build(addArcadeSystem);
 
     // remove hidden flags for pfba
     ui->getConfig()->get(Option::Id::GUI_FILTER_CLONES)->setFlags(Option::Flags::BOOLEAN);

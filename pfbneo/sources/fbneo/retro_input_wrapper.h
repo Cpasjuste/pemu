@@ -45,28 +45,28 @@ void poll_cb();
 #define RETRO_DEVICE_POINTER      6
 
 #ifdef __SWITCH__
-#define RETRO_DEVICE_ID_JOYPAD_B        c2d::Input::Key::Fire2
-#define RETRO_DEVICE_ID_JOYPAD_A        c2d::Input::Key::Fire1
-#define RETRO_DEVICE_ID_JOYPAD_Y        c2d::Input::Key::Fire4
-#define RETRO_DEVICE_ID_JOYPAD_X        c2d::Input::Key::Fire3
+#define RETRO_DEVICE_ID_JOYPAD_B        c2d::Input::Button::B
+#define RETRO_DEVICE_ID_JOYPAD_A        c2d::Input::Button::A
+#define RETRO_DEVICE_ID_JOYPAD_Y        c2d::Input::Button::Y
+#define RETRO_DEVICE_ID_JOYPAD_X        c2d::Input::Button::X
 #else
-#define RETRO_DEVICE_ID_JOYPAD_B        c2d::Input::Key::Fire1
-#define RETRO_DEVICE_ID_JOYPAD_A        c2d::Input::Key::Fire2
-#define RETRO_DEVICE_ID_JOYPAD_Y        c2d::Input::Key::Fire3
-#define RETRO_DEVICE_ID_JOYPAD_X        c2d::Input::Key::Fire4
+#define RETRO_DEVICE_ID_JOYPAD_B        c2d::Input::Button::A
+#define RETRO_DEVICE_ID_JOYPAD_A        c2d::Input::Button::B
+#define RETRO_DEVICE_ID_JOYPAD_Y        c2d::Input::Button::X
+#define RETRO_DEVICE_ID_JOYPAD_X        c2d::Input::Button::Y
 #endif
-#define RETRO_DEVICE_ID_JOYPAD_SELECT   c2d::Input::Key::Select
-#define RETRO_DEVICE_ID_JOYPAD_START    c2d::Input::Key::Start
-#define RETRO_DEVICE_ID_JOYPAD_UP       c2d::Input::Key::Up
-#define RETRO_DEVICE_ID_JOYPAD_DOWN     c2d::Input::Key::Down
-#define RETRO_DEVICE_ID_JOYPAD_LEFT     c2d::Input::Key::Left
-#define RETRO_DEVICE_ID_JOYPAD_RIGHT    c2d::Input::Key::Right
-#define RETRO_DEVICE_ID_JOYPAD_L        c2d::Input::Key::Fire5
-#define RETRO_DEVICE_ID_JOYPAD_R        c2d::Input::Key::Fire6
-#define RETRO_DEVICE_ID_JOYPAD_L2       c2d::Input::Key::Fire7
-#define RETRO_DEVICE_ID_JOYPAD_R2       c2d::Input::Key::Fire8
-#define RETRO_DEVICE_ID_JOYPAD_L3       BIT(21)
-#define RETRO_DEVICE_ID_JOYPAD_R3       BIT(22)
+#define RETRO_DEVICE_ID_JOYPAD_SELECT   c2d::Input::Button::Select
+#define RETRO_DEVICE_ID_JOYPAD_START    c2d::Input::Button::Start
+#define RETRO_DEVICE_ID_JOYPAD_UP       c2d::Input::Button::Up
+#define RETRO_DEVICE_ID_JOYPAD_DOWN     c2d::Input::Button::Down
+#define RETRO_DEVICE_ID_JOYPAD_LEFT     c2d::Input::Button::Left
+#define RETRO_DEVICE_ID_JOYPAD_RIGHT    c2d::Input::Button::Right
+#define RETRO_DEVICE_ID_JOYPAD_L        c2d::Input::Button::LT
+#define RETRO_DEVICE_ID_JOYPAD_R        c2d::Input::Button::RT
+#define RETRO_DEVICE_ID_JOYPAD_L2       c2d::Input::Button::LB
+#define RETRO_DEVICE_ID_JOYPAD_R2       c2d::Input::Button::RB
+#define RETRO_DEVICE_ID_JOYPAD_L3       c2d::Input::Button::LS
+#define RETRO_DEVICE_ID_JOYPAD_R3       c2d::Input::Button::RS
 
 #define RETRO_DEVICE_ID_JOYPAD_MASK    256
 

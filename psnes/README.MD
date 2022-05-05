@@ -30,8 +30,8 @@ pSNES: Portable Snes9x
 ### Preview images and videos
 - pSNES support preview images and videos (put files in roms media folder: png files goes in "roms/media/mixrbv2", mp4 files in "roms/media/video"). Please note that the vita port doesn't support video previews.
 You can download a near fullset mixrbv2 and video package here:
-    - preview images: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/psnes/psnes_mixrbv2.zip)
-    - preview videos: [video](http://files.mydedibox.fr/files/dev/pemu/psnes/psnes_video_hq.zip)
+    - preview images: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/psnes/psnes_mixrbv2.zip) (1.3GB)
+    - preview videos: [video](http://files.mydedibox.fr/files/dev/pemu/psnes/psnes_video.zip) (9.2GB)
 
 ### Cheat format
 - Example for "Super Mario World (USA).cht" game genie codes

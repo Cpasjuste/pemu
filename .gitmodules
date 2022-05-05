@@ -13,3 +13,6 @@
 [submodule "cores/fbneo"]
 	path = cores/fbneo
 	url = https://github.com/finalburnneo/FBNeo.git
+[submodule "cores/genesis"]
+	path = cores/genesis
+	url = https://github.com/ekeeke/Genesis-Plus-GX.git

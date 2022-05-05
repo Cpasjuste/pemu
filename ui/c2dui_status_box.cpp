@@ -15,7 +15,7 @@ UiStatusBox::UiStatusBox(UiMain *m)
     text = new Text("TIPS:", (int) (getSize().y * 0.65f), main->getSkin()->getFont());
     text->setOutlineThickness(1.0f);
     text->setOrigin(Origin::Left);
-    text->setPosition(6 * main->getScaling(), getSize().y / 2);
+    text->setPosition(6 * main->getScaling().x, getSize().y / 2);
     text->setFillColor(SkinnedRectangle::getOutlineColor());
     add(text);
 
@@ -27,8 +27,8 @@ UiStatusBox::UiStatusBox(UiMain *m)
 
 void UiStatusBox::show(const std::string &t) {
     text->setString(t);
-    text->setPosition(6 * main->getScaling(), getSize().y / 2);
-    setSize(text->getLocalBounds().width + (12 * main->getScaling()), getSize().y);
+    text->setPosition(6 * main->getScaling().x, getSize().y / 2);
+    setSize(text->getLocalBounds().width + (12 * main->getScaling().x), getSize().y);
 
     clock->restart();
     setVisibility(Visibility::Visible, true);
@@ -56,7 +56,5 @@ void UiStatusBox::onDraw(c2d::Transform &transform, bool draw) {
 }
 
 UiStatusBox::~UiStatusBox() {
-#ifndef __PSP2__ // TODO: fix
     delete (clock);
-#endif
 }

@@ -9,7 +9,7 @@ class UIRomInfo;
 
 namespace c2dui {
 
-    class UIRomList : public c2d::RectangleShape {
+    class UIRomList : public SkinnedRectangle {
 
     public:
 

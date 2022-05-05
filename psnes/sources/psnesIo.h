@@ -10,27 +10,15 @@ namespace c2d {
     class PSNESIo : public c2d::C2DIo {
 
     public:
-
 #ifdef __PSP2__
-        std::string getHomePath() override {
-            return "ux0:/data/psnes/";
-        }
-
         std::string getDataPath() override {
             return "ux0:/data/psnes/";
         }
 #elif __PS4__
-
-        std::string getHomePath() override {
-            return "/data/psnes/";
-        }
-
         std::string getDataPath() override {
             return "/data/psnes/";
         }
-
 #endif
-
     };
 }
 

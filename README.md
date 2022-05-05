@@ -1,18 +1,17 @@
-[![pfbneo-linux-release](https://github.com/Cpasjuste/pemu/actions/workflows/pfbneo-linux-release.yml/badge.svg)](https://github.com/Cpasjuste/pemu/actions/workflows/pfbneo-linux-release.yml)
-[![psnes-linux-release](https://github.com/Cpasjuste/pemu/actions/workflows/psnes-linux-release.yml/badge.svg)](https://github.com/Cpasjuste/pemu/actions/workflows/psnes-linux-release.yml)
-[![pnes-linux-release](https://github.com/Cpasjuste/pemu/actions/workflows/pnes-linux-release.yml/badge.svg)](https://github.com/Cpasjuste/pemu/actions/workflows/pnes-linux-release.yml)
+[![linux-release](https://github.com/Cpasjuste/pemu/actions/workflows/linux-release.yml/badge.svg)](https://github.com/Cpasjuste/pemu/actions/workflows/linux-release.yml)
+[![linux-dev](https://github.com/Cpasjuste/pemu/actions/workflows/linux-dev.yml/badge.svg)](https://github.com/Cpasjuste/pemu/actions/workflows/linux-dev.yml)
 
-[![pfbneo-switch-release](https://github.com/Cpasjuste/pemu/actions/workflows/pfbneo-switch-release.yml/badge.svg)](https://github.com/Cpasjuste/pemu/actions/workflows/pfbneo-switch-release.yml)
-[![psnes-switch-release](https://github.com/Cpasjuste/pemu/actions/workflows/psnes-switch-release.yml/badge.svg)](https://github.com/Cpasjuste/pemu/actions/workflows/psnes-switch-release.yml)
-[![pnes-switch-release](https://github.com/Cpasjuste/pemu/actions/workflows/pnes-switch-release.yml/badge.svg)](https://github.com/Cpasjuste/pemu/actions/workflows/pnes-switch-release.yml)
+[![windows-release](https://github.com/Cpasjuste/pemu/actions/workflows/windows-release.yml/badge.svg)](https://github.com/Cpasjuste/pemu/actions/workflows/windows-release.yml)
+[![windows-dev](https://github.com/Cpasjuste/pemu/actions/workflows/windows-dev.yml/badge.svg)](https://github.com/Cpasjuste/pemu/actions/workflows/windows-dev.yml)
 
-[![pfbneo-ps4-release](https://github.com/Cpasjuste/pemu/actions/workflows/pfbneo-ps4-release.yml/badge.svg)](https://github.com/Cpasjuste/pemu/actions/workflows/pfbneo-ps4-release.yml)
-[![psnes-ps4-release](https://github.com/Cpasjuste/pemu/actions/workflows/psnes-ps4-release.yml/badge.svg)](https://github.com/Cpasjuste/pemu/actions/workflows/psnes-ps4-release.yml)
-[![pnes-ps4-release](https://github.com/Cpasjuste/pemu/actions/workflows/pnes-ps4-release.yml/badge.svg)](https://github.com/Cpasjuste/pemu/actions/workflows/pnes-ps4-release.yml)
+[![switch-release](https://github.com/Cpasjuste/pemu/actions/workflows/switch-release.yml/badge.svg)](https://github.com/Cpasjuste/pemu/actions/workflows/switch-release.yml)
+[![switch-dev](https://github.com/Cpasjuste/pemu/actions/workflows/switch-dev.yml/badge.svg)](https://github.com/Cpasjuste/pemu/actions/workflows/switch-dev.yml)
 
-[![pfbneo-vita-release](https://github.com/Cpasjuste/pemu/actions/workflows/pfbneo-vita-release.yml/badge.svg)](https://github.com/Cpasjuste/pemu/actions/workflows/pfbneo-vita-release.yml)
-[![psnes-vita-release](https://github.com/Cpasjuste/pemu/actions/workflows/psnes-vita-release.yml/badge.svg)](https://github.com/Cpasjuste/pemu/actions/workflows/psnes-vita-release.yml)
-[![pnes-vita-release](https://github.com/Cpasjuste/pemu/actions/workflows/pnes-vita-release.yml/badge.svg)](https://github.com/Cpasjuste/pemu/actions/workflows/pnes-vita-release.yml)
+[![ps4-release](https://github.com/Cpasjuste/pemu/actions/workflows/ps4-release.yml/badge.svg)](https://github.com/Cpasjuste/pemu/actions/workflows/ps4-release.yml)
+[![ps4-dev](https://github.com/Cpasjuste/pemu/actions/workflows/ps4-dev.yml/badge.svg)](https://github.com/Cpasjuste/pemu/actions/workflows/ps4-dev.yml)
+
+[![vita-release](https://github.com/Cpasjuste/pemu/actions/workflows/vita-release.yml/badge.svg)](https://github.com/Cpasjuste/pemu/actions/workflows/vita-release.yml)
+[![vita-dev](https://github.com/Cpasjuste/pemu/actions/workflows/vita-dev.yml/badge.svg)](https://github.com/Cpasjuste/pemu/actions/workflows/vita-dev.yml)
 
 ## pEMU: Portable Emulator
 
@@ -32,7 +31,7 @@
     ```
     git clone --recursive https://github.com/Cpasjuste/pemu.git`
     ```
-- build (replace `pfbneo` with emulator target: `pfbneo`, `psnes`, `pnes`):
+- build (replace `pfbneo` with emulator target: `pfbneo`, `psnes`, `pnes`, `pgen` or remove this option for all emulators):
 	```
 	mkdir cmake-build && cd cmake-build
 	cmake -G "Unix Makefiles" -DPLATFORM_LINUX=ON -DOPTION_BUILTIN_LIBCONFIG=ON \
@@ -58,7 +57,7 @@
     ```
     git clone --recursive https://github.com/Cpasjuste/pemu.git`
     ```
-- build (replace `pfbneo` with emulator target: `pfbneo`, `psnes`, `pnes`):
+- build (replace `pfbneo` with emulator target: `pfbneo`, `psnes`, `pnes`, `pgen` or remove this option for all emulators):
     ```
     mkdir cmake-build && cd cmake-build
     source /etc/profile.d/devkit-env.sh
@@ -85,34 +84,33 @@
     ```
     git clone --recursive https://github.com/Cpasjuste/pemu.git`
     ```
-- build (replace `pfbneo` with emulator target: `pfbneo`, `psnes`, `pnes`):
+- build (replace `pfbneo` with emulator target: `pfbneo`, `psnes`, `pnes`, `pgen` or remove this option for all emulators):
     ```
     mkdir cmake-build && cd cmake-build
     export OPENORBIS=/opt/pacbrew/ps4/openorbis
-    cmake -G "Unix Makefiles" -DPLATFORM_PS4=ON -DOPTION_MPV_PLAYER=OFF \
-        -DOPTION_EMU=pfbneo -DCMAKE_BUILD_TYPE=Release ..
+    cmake -G "Unix Makefiles" -DPLATFORM_PS4=ON -DOPTION_EMU=pfbneo -DCMAKE_BUILD_TYPE=Release ..
     make pfbneo.deps
     make -j $(getconf _NPROCESSORS_ONLN) pfbneo_ps4_release
     ```
 
-**<ins>Building on windows for windows (TODO: update build instructions)</ins>**
+**<ins>Building on windows for windows</ins>**
 - download, install and update [MYSYS2](http://www.msys2.org/)
-- install msys2 dependencies:
+  - install build dependencies:
     ```
-    pacman -S git zip automake autoconf make mingw-w64-x86_64-make mingw-w64-x86_64-cmake 
-    	mingw-w64-x86_64-gcc mingw-w64-x86_64-gdb mingw-w64-x86_64-zlib mingw-w64-x86_64-perl \
-	mingw-w64-x86_64-SDL2 mingw-w64-x86_64-freetype mingw-w64-x86_64-glm mingw-w64-x86_64-glew \
-	mingw-w64-x86_64-libconfig mingw-w64-x86_64-tinyxml2 mingw-w64-x86_64-ffmpeg mingw-w64-x86_64-mpv
+      pacman -S --noconfirm --needed git zip perl make \
+        mingw-w64-x86_64-binutils mingw-w64-x86_64-gcc mingw-w64-x86_64-make mingw-w64-x86_64-cmake mingw-w64-x86_64-pkgconf \
+        mingw-w64-x86_64-SDL2 mingw-w64-x86_64-freetype mingw-w64-x86_64-glm \
+        mingw-w64-x86_64-glew mingw-w64-x86_64-libconfig mingw-w64-x86_64-tinyxml2 \
+        mingw-w64-x86_64-mpv mingw-w64-x86_64-zlib mingw-w64-x86_64-minizip
     ```
 - clone pemu repository:
     ```
     git clone --recursive https://github.com/Cpasjuste/pemu.git`
     ```
-- build (replace `pfbneo` with emulator target: `pfbneo`, `psnes`, `pnes`):
+- build (replace `pfbneo` with emulator target: `pfbneo`, `psnes`, `pnes`, `pgen` or remove this option for all emulators):
     ```
     mkdir cmake-build && cd cmake-build
-    cmake -G "MSYS Makefiles" -DPLATFORM_WINDOWS=ON -DOPTION_BUILTIN_MINIZIP=ON \
-        -DOPTION_EMU=pfbneo -DCMAKE_BUILD_TYPE=Release ..
+    cmake -G "MSYS Makefiles" -DPLATFORM_WINDOWS=ON -DOPTION_EMU=pfbneo -DCMAKE_BUILD_TYPE=Release ..
     make pfbneo.deps
     make pfbneo
     ```

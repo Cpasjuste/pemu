@@ -9,7 +9,7 @@
 using namespace c2d;
 using namespace c2dui;
 
-PFBAVideo::PFBAVideo(UiMain *ui, void **_pixels, int *_pitch, const c2d::Vector2f &size, const c2d::Vector2i &aspect)
+PFBAVideo::PFBAVideo(UiMain *ui, uint8_t **_pixels, int *_pitch, const c2d::Vector2i &size, const c2d::Vector2i &aspect)
         : C2DUIVideo(ui, _pixels, _pitch, size, aspect) {
 }
 

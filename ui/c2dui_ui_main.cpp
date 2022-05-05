@@ -59,10 +59,6 @@ void UiMain::init(UIRomList *_uiRomList, UiMenu *_uiMenu,
     uiState = _uiState;
     add(uiState);
 
-    // scaling factor mainly used for borders,
-    scaling = std::min(getSize().x / 640, 1.0f);
-    // printf("scaling: %f\n", scaling);
-
     uiMessageBox = new c2d::MessageBox(
             FloatRect(
                     getSize().x / 2,
@@ -105,17 +101,16 @@ void UiMain::setSkin(Skin *s) {
 }
 
 void UiMain::onUpdate() {
-
-    unsigned int keys = getInput()->getKeys(0);
-    if (keys & EV_QUIT) {
+    unsigned int buttons = getInput()->getButtons();
+    if (buttons & Input::Button::Quit) {
         done = true;
         return C2DRenderer::onUpdate();
     }
 
-    if (uiEmu && !uiEmu->isVisible()) {
-        if (keys != Input::Key::Delay) {
-            bool changed = (oldKeys ^ keys) != 0;
-            oldKeys = keys;
+    if (uiEmu && (!uiEmu->isVisible() || uiEmu->isPaused())) {
+        if (buttons != Input::Button::Delay) {
+            bool changed = (oldKeys ^ buttons) != 0;
+            oldKeys = buttons;
             if (!changed) {
                 if (timer.getElapsedTime().asSeconds() > 5) {
                     getInput()->setRepeatDelay(INPUT_DELAY / 20);
@@ -132,10 +127,6 @@ void UiMain::onUpdate() {
     }
 
     C2DRenderer::onUpdate();
-}
-
-float UiMain::getScaling() {
-    return scaling;
 }
 
 Skin *UiMain::getSkin() {
@@ -183,48 +174,52 @@ c2d::MessageBox *UiMain::getUiMessageBox() {
 }
 
 int UiMain::getFontSize() {
-    return (int) ((float) C2D_DEFAULT_CHAR_SIZE * scaling);
+    return (int) ((float) C2D_DEFAULT_CHAR_SIZE * skin->getScaling().y);
+}
+
+Vector2f UiMain::getScaling() {
+    return skin->getScaling();
 }
 
 void UiMain::updateInputMapping(bool isRomConfig) {
-
     if (isRomConfig) {
 #ifndef NO_KEYBOARD
-        getInput()->setKeyboardMapping(config->getPlayerInputKeys(0, true));
+        getInput()->setKeyboardMapping(config->getKeyboardMapping(0, true));
 #endif
-        int dz = config->get(Option::Id::JOY_DEADZONE, true)->getValueInt();
+        int dz = config->getJoystickDeadZone(0, true);
+        std::vector<Input::ButtonMapping> joyMapping = config->getJoystickMapping(0, true);
+        Vector2i leftAxisMapping = config->getJoystickAxisLeftMapping(0, true);
+        Vector2i rightAxisMapping = config->getJoystickAxisRightMapping(0, true);
         for (int i = 0; i < PLAYER_MAX; i++) {
-            getInput()->setJoystickMapping(i, config->getPlayerInputButtons(i, true), dz);
-            getInput()->players[i].lx.id = config->get(Option::Id::JOY_AXIS_LX, true)->getValueInt();
-            getInput()->players[i].ly.id = config->get(Option::Id::JOY_AXIS_LY, true)->getValueInt();
-            getInput()->players[i].rx.id = config->get(Option::Id::JOY_AXIS_RX, true)->getValueInt();
-            getInput()->players[i].ry.id = config->get(Option::Id::JOY_AXIS_RY, true)->getValueInt();
+            getInput()->setJoystickMapping(i, joyMapping, leftAxisMapping, rightAxisMapping, dz);
         }
     } else {
 #ifndef NO_KEYBOARD
+        std::vector<Input::ButtonMapping> keyMapping = getInput()->getKeyboardMappingDefault();
         // keep custom config for menus keys
-        int key_mapping[17];
-        memcpy(key_mapping, C2D_DEFAULT_KB_KEYS, sizeof(key_mapping));
-        key_mapping[14] = config->get(Option::Id::KEY_MENU1, false)->getValueInt();
-        key_mapping[15] = config->get(Option::Id::KEY_MENU2, false)->getValueInt();
-        getInput()->setKeyboardMapping(key_mapping);
+        for (unsigned int i = 0; i < keyMapping.size(); i++) {
+            if (keyMapping.at(i).button == Input::Button::Menu1) {
+                keyMapping.at(i).value = config->get(Option::Id::KEY_MENU1, false)->getValueInt();
+            } else if (keyMapping.at(i).button == Input::Button::Menu2) {
+                keyMapping.at(i).value = config->get(Option::Id::KEY_MENU2, false)->getValueInt();
+            }
+        }
+        getInput()->setKeyboardMapping(keyMapping);
 #endif
-        int joy_mapping[17];
-        memcpy(joy_mapping, C2D_DEFAULT_JOY_KEYS, sizeof(joy_mapping));
-        joy_mapping[14] = config->get(Option::Id::JOY_MENU1, false)->getValueInt();
-        joy_mapping[15] = config->get(Option::Id::JOY_MENU2, false)->getValueInt();
-
+        std::vector<Input::ButtonMapping> joyMapping = getInput()->getPlayer(0)->mapping_default;
+        // keep custom config for menus keys
+        for (unsigned int i = 0; i < joyMapping.size(); i++) {
+            if (joyMapping.at(i).button == Input::Button::Menu1) {
+                joyMapping.at(i).value = config->get(Option::Id::JOY_MENU1, false)->getValueInt();
+            } else if (joyMapping.at(i).button == Input::Button::Menu2) {
+                joyMapping.at(i).value = config->get(Option::Id::JOY_MENU2, false)->getValueInt();
+            }
+        }
         for (int i = 0; i < PLAYER_MAX; i++) {
-            getInput()->setJoystickMapping(i, joy_mapping);
-            //
-            getInput()->players[i].lx.id = KEY_JOY_AXIS_LX;
-            getInput()->players[i].ly.id = KEY_JOY_AXIS_LY;
-            getInput()->players[i].rx.id = KEY_JOY_AXIS_RX;
-            getInput()->players[i].ry.id = KEY_JOY_AXIS_RY;
+            getInput()->setJoystickMapping(i, joyMapping,
+                                           {KEY_JOY_AXIS_LX, KEY_JOY_AXIS_LY},
+                                           {KEY_JOY_AXIS_RX, KEY_JOY_AXIS_RY},
+                                           config->getJoystickDeadZone(0, false));
         }
     }
-#ifdef __SWITCH__
-    bool single_joy_mode = config->get(Option::Id::JOY_SINGLEJOYCON)->getValueBool();
-    ((SWITCHInput *) getInput())->setSingleJoyconMode(single_joy_mode);
-#endif
 }

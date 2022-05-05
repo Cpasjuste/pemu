@@ -11,7 +11,7 @@ namespace c2dui {
 
     public:
 
-        C2DUIVideo(UiMain *ui, void **pixels, int *pitch, const c2d::Vector2f &size,
+        C2DUIVideo(UiMain *ui, uint8_t **pixels, int *pitch, const c2d::Vector2i &size,
                    const c2d::Vector2i &aspect = {4, 3}, c2d::Texture::Format format = c2d::Texture::Format::RGB565);
 
         virtual void updateScaling(bool vertical = false, bool flip = false);

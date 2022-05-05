@@ -1,0 +1,61 @@
+name: ps4-dev
+
+on:
+  push:
+    branches: [ dev ]
+  workflow_dispatch:
+
+jobs:
+
+  build-ps4-dev:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+
+      - name: Install build dependencies
+        run: |
+          sudo apt -yq update
+          sudo apt -yq install git build-essential cmake zip libgpgme11
+
+      - name: Install ps4 toolchain
+        run: |
+          wget https://github.com/PacBrew/pacbrew-pacman/releases/download/pacbrew-release-1.0/pacbrew-pacman-1.0.deb
+          sudo dpkg -i pacbrew-pacman-1.0.deb
+          sudo pacbrew-pacman -Syu
+          sudo pacbrew-pacman --noconfirm -S ps4-openorbis ps4-openorbis-portlibs
+
+      - name: Build pfbneo
+        run: |
+          cd $GITHUB_WORKSPACE
+          mkdir cmake-build-pfbneo && cd cmake-build-pfbneo
+          export OPENORBIS=/opt/pacbrew/ps4/openorbis
+          cmake -G "Unix Makefiles" -DPLATFORM_PS4=ON -DOPTION_EMU=pfbneo -DCMAKE_BUILD_TYPE=Debug ..
+          make pfbneo.deps
+          make -j $(getconf _NPROCESSORS_ONLN) pfbneo_pkg
+
+      - name: Build pgen
+        run: |
+          cd $GITHUB_WORKSPACE
+          mkdir cmake-build-pgen && cd cmake-build-pgen
+          export OPENORBIS=/opt/pacbrew/ps4/openorbis
+          cmake -G "Unix Makefiles" -DPLATFORM_PS4=ON -DOPTION_EMU=pgen -DCMAKE_BUILD_TYPE=Debug ..
+          make -j $(getconf _NPROCESSORS_ONLN) pgen_pkg
+
+      - name: Build pnes
+        run: |
+          cd $GITHUB_WORKSPACE
+          mkdir cmake-build-pnes && cd cmake-build-pnes
+          export OPENORBIS=/opt/pacbrew/ps4/openorbis
+          cmake -G "Unix Makefiles" -DPLATFORM_PS4=ON -DOPTION_EMU=pnes -DCMAKE_BUILD_TYPE=Debug ..
+          make -j $(getconf _NPROCESSORS_ONLN) pnes_pkg
+
+      - name: Build psnes
+        run: |
+          cd $GITHUB_WORKSPACE
+          mkdir cmake-build-psnes && cd cmake-build-psnes
+          export OPENORBIS=/opt/pacbrew/ps4/openorbis
+          cmake -G "Unix Makefiles" -DPLATFORM_PS4=ON -DOPTION_EMU=psnes -DCMAKE_BUILD_TYPE=Debug ..
+          make -j $(getconf _NPROCESSORS_ONLN) psnes_pkg

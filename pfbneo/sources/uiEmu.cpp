@@ -223,7 +223,7 @@ int PFBAUiEmu::load(const ss_api::Game &game) {
     BurnRecalcPal();
     // video may already be initialized from fbneo driver (Reinitialise)
     if (!getVideo()) {
-        auto v = new PFBAVideo(ui, (void **) &pBurnDraw, &nBurnPitch, (Vector2f) size, aspect);
+        auto v = new PFBAVideo(ui, &pBurnDraw, &nBurnPitch, size, aspect);
         addVideo(v);
         printf("PFBAUiEmu::load: size: %i x %i, aspect: %i x %i, pitch: %i\n",
                size.x, size.y, aspect.x, aspect.y, nBurnPitch);
@@ -242,7 +242,7 @@ void Reinitialise(void) {
     Vector2i size, aspect;
     BurnDrvGetFullSize(&size.x, &size.y);
     BurnDrvGetAspect(&aspect.x, &aspect.y);
-    auto v = new PFBAVideo(uiInstance, (void **) &pBurnDraw, &nBurnPitch, (Vector2f) size, aspect);
+    auto v = new PFBAVideo(uiInstance, &pBurnDraw, &nBurnPitch, size, aspect);
     uiInstance->getUiEmu()->addVideo(v);
     printf("PFBAUiEmu::Reinitialise: size: %i x %i, aspect: %i x %i\n",
            size.x, size.y, aspect.x, aspect.y);
@@ -255,10 +255,28 @@ void PFBAUiEmu::stop() {
 
 bool PFBAUiEmu::onInput(c2d::Input::Player *players) {
     if (ui->getUiMenu()->isVisible() || ui->getUiStateMenu()->isVisible()) {
+        ui->getInput()->setRotation(Input::Rotation::R0, Input::Rotation::R0);
         return UiEmu::onInput(players);
     }
 
-    // TODO: cross2d: add universal input rotation support
+    // rotation config:
+    // 0 > "OFF"
+    // 1 > "ON"
+    // 2 > "FLIP"
+    // 3 > "CAB" (vita/switch)
+    int rotation = getUi()->getConfig()->get(Option::Id::ROM_ROTATION, true)->getIndex();
+    if (BurnDrvGetFlags() & BDF_ORIENTATION_VERTICAL) {
+        if (rotation == 0) {
+            ui->getInput()->setRotation(Input::Rotation::R90, Input::Rotation::R0);
+        } else if (rotation == 1) {
+            ui->getInput()->setRotation(Input::Rotation::R0, Input::Rotation::R0);
+        } else if (rotation == 2) {
+            ui->getInput()->setRotation(Input::Rotation::R270, Input::Rotation::R0);
+        } else {
+            ui->getInput()->setRotation(Input::Rotation::R270, Input::Rotation::R270);
+        }
+    }
+
 #if 0
     int rotation_config =
             getUi()->getConfig()->get(Option::Index::ROM_ROTATION, true)->getValueBool();
@@ -307,8 +325,8 @@ void PFBAUiEmu::onUpdate() {
     InputMake(true);
 
     // handle diagnostic and reset switch
-    unsigned int keys = ui->getInput()->getKeys(0);
-    if (keys & Input::Key::Select) {
+    unsigned int buttons = ui->getInput()->getButtons();
+    if (buttons & Input::Button::Select) {
         if (clock.getElapsedTime().asSeconds() > 2) {
             if (pgi_reset) {
                 ui->getUiStatusBox()->show("TIPS: PRESS START "
@@ -320,7 +338,7 @@ void PFBAUiEmu::onUpdate() {
             nFramesEmulated = 0;
             clock.restart();
         }
-    } else if (keys & Input::Key::Start) {
+    } else if (buttons & Input::Button::Start) {
         if (clock.getElapsedTime().asSeconds() > 2) {
             if (pgi_diag) {
                 ui->getUiStatusBox()->show("TIPS: PRESS COIN "
@@ -345,7 +363,7 @@ void PFBAUiEmu::onUpdate() {
     frameskip++;
 
     if (frameskip > skip) {
-        video->getTexture()->lock(nullptr, (void **) &pBurnDraw, &nBurnPitch);
+        video->getTexture()->lock(&pBurnDraw, &nBurnPitch);
         nFramesRendered++;
     }
 

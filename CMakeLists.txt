@@ -18,10 +18,10 @@ set(OPTION_UPDATE_CONFIG ON CACHE BOOL "Force config file updating")
 ####################
 
 # linux/windows screen handling options
-if (PLATFORM_LINUX)
+if (PLATFORM_LINUX OR PLATFORM_WINDOWS)
     set(OPTION_RESOLUTION ON CACHE BOOL "Add screen resolution option")
     set(OPTION_FULLSCREEN ON CACHE BOOL "Add switch to fullscreen option")
-endif (PLATFORM_LINUX)
+endif ()
 
 # add sscrap (screenscrapper scrapper!) library
 add_subdirectory(sscrap)
@@ -29,19 +29,28 @@ add_subdirectory(sscrap)
 # required for cmake toolchain setup
 project(pemu)
 set(PROJECT_AUTHOR cpasjuste)
-set(VERSION_MAJOR 5)
-set(VERSION_MINOR 2)
+set(VERSION_MAJOR 6)
+set(VERSION_MINOR 0)
 
 # pemu (ui)
 add_subdirectory(ui)
 
-# pnes
+# emulator selection
 if (OPTION_EMU STREQUAL "pnes")
+    # pnes
     add_subdirectory(pnes)
 elseif (OPTION_EMU STREQUAL "psnes")
     # psnes
     add_subdirectory(psnes)
-else ()
+elseif (OPTION_EMU STREQUAL "pgen")
+    # pgen
+    add_subdirectory(pgen)
+elseif (OPTION_EMU STREQUAL "pfbneo")
     # pfbneo
     add_subdirectory(pfbneo)
+else ()
+    add_subdirectory(pfbneo)
+    add_subdirectory(pgen)
+    add_subdirectory(pnes)
+    add_subdirectory(psnes)
 endif ()

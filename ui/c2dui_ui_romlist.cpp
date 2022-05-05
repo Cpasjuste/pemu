@@ -9,28 +9,21 @@ using namespace c2d;
 using namespace c2dui;
 using namespace ss_api;
 
-UIRomList::UIRomList(UiMain *u, RomList *rList, const c2d::Vector2f &size) : RectangleShape(size) {
+UIRomList::UIRomList(UiMain *u, RomList *rList, const c2d::Vector2f &size)
+        : SkinnedRectangle(u->getSkin(), {"MAIN"}) {
     printf("UIRomList\n");
 
     ui = u;
     romList = rList;
     Skin *skin = ui->getSkin();
 
-    // set gui main "window"
-    skin->loadRectangleShape(this, {"MAIN"});
-
     // add title image if available
-    auto *title = new RectangleShape({16, 16});
-    skin->loadRectangleShape(title, {"MAIN", "TITLE"});
+    auto *title = new SkinnedRectangle(ui->getSkin(), {"MAIN", "TITLE"});
     UIRomList::add(title);
 
-    // add help image if available
-    auto *help = new RectangleShape({16, 16});
-    if (skin->loadRectangleShape(help, {"MAIN", "HELP"})) {
-        UIRomList::add(help);
-    } else {
-        delete (help);
-    }
+    // add help
+    auto *help = new UiHelp(ui);
+    UIRomList::add(help);
 
     // add rom info ui
     romInfo = new UIRomInfo(ui, this, skin->font, ui->getFontSize());
@@ -39,13 +32,27 @@ UIRomList::UIRomList(UiMain *u, RomList *rList, const c2d::Vector2f &size) : Rec
     // add rom listing ui
     Skin::TextGroup textGroup = skin->getText({"MAIN", "ROM_LIST", "TEXT"});
     config::Group *grp = skin->getConfig()->getGroup("ROM_LIST")->getGroup("TEXT");
-    Color colorMissing = grp->getOption("color_missing")->getColor();
+    config::Option *opt = grp->getOption("color_missing");
+    Color colorMissing;
+    if (opt->getType() == config::Option::Type::String) {
+        opt = skin->getConfig()->getOption("COLORS", opt->getString());
+        if (opt) {
+            colorMissing = opt->getColor();
+        }
+    } else {
+        colorMissing = grp->getOption("color_missing")->getColor();
+    }
+
     bool highlightUseFileColors = grp->getOption("highlight_use_text_color")->getInteger() == 1;
 
     // add rom list title (system text)
-    titleText = new SkinnedText(skin, {"MAIN", "ROM_LIST", "TITLE_TEXT"});
-    if (titleText->available) {
-        UIRomList::add(titleText);
+    if (!(ui->getConfig()->get(Option::Id::GUI_FILTER_SYSTEM)->getFlags() & Option::Flags::HIDDEN)) {
+        titleText = new SkinnedText(skin, {"MAIN", "ROM_LIST", "SYSTEM_TEXT"});
+        if (titleText->available) {
+            UIRomList::add(titleText);
+        } else {
+            delete (titleText);
+        }
     }
 
     // add rom list ui
@@ -91,7 +98,7 @@ void UIRomList::updateRomList() {
     filterRomList();
     sortRomList();
 
-    if (titleText->available) {
+    if (titleText && titleText->available) {
         std::string sys = ui->getConfig()->get(Option::Id::GUI_FILTER_SYSTEM)->getValueString();
         titleText->setString(sys);
     }
@@ -127,7 +134,7 @@ Texture *UIRomList::getPreviewTexture(const ss_api::Game &game) {
         delete (texture);
         texture = nullptr;
         if (game.isClone()) {
-            Game parentGame = gameList.findGameByPath(game.cloneOf);
+            Game parentGame = romList->gameList->findGameByPath(game.cloneOf);
             if (!parentGame.path.empty()) {
                 mediaPath = parentGame.getMedia("mixrbv2").url;
                 if (mediaPath.empty()) {
@@ -143,7 +150,7 @@ Texture *UIRomList::getPreviewTexture(const ss_api::Game &game) {
             }
         } else {
             // for non arcade game, search for a "screenscraper" game with same name
-            std::vector<Game> clones = gameList.findGamesByName(game);
+            std::vector<Game> clones = romList->gameList->findGamesByName(game);
             for (const auto &g: clones) {
                 mediaPath = g.getMedia("mixrbv2").url;
                 fullPath = g.romsPath + mediaPath;
@@ -174,7 +181,7 @@ std::string UIRomList::getPreviewVideo(const ss_api::Game &game) {
     printf("getPreviewVideo(%s)\n", fullPath.c_str());
     if (!ui->getIo()->exist(fullPath)) {
         fullPath = "";
-        Game parentGame = gameList.findGameByPath(game.cloneOf);
+        Game parentGame = romList->gameList->findGameByPath(game.cloneOf);
         if (!parentGame.path.empty()) {
             mediaPath = parentGame.getMedia("video").url;
             if (mediaPath.empty()) {
@@ -187,7 +194,7 @@ std::string UIRomList::getPreviewVideo(const ss_api::Game &game) {
             }
         } else {
             // for non arcade game, search for a "screenscraper" game with same name
-            std::vector<Game> clones = gameList.findGamesByName(game);
+            std::vector<Game> clones = romList->gameList->findGamesByName(game);
             for (const auto &g: clones) {
                 mediaPath = g.getMedia("video").url;
                 fullPath = game.romsPath + mediaPath;
@@ -272,28 +279,28 @@ bool UIRomList::onInput(c2d::Input::Player *players) {
         return false;
     }
 
-    unsigned int keys = players[0].keys;
-    if (keys & Input::Key::Up) {
+    unsigned int buttons = players[0].buttons;
+    if (buttons & Input::Button::Up) {
         listBox->up();
         romInfo->load();
         timer_load_info_done = 0;
         timer_load_video_done = 0;
-    } else if (keys & Input::Key::Down) {
+    } else if (buttons & Input::Button::Down) {
         listBox->down();
         romInfo->load();
         timer_load_info_done = 0;
         timer_load_video_done = 0;
-    } else if (keys & Input::Key::Right) {
+    } else if (buttons & Input::Button::Right) {
         listBox->setSelection(listBox->getIndex() + listBox->getMaxLines());
         romInfo->load();
         timer_load_info_done = 0;
         timer_load_video_done = 0;
-    } else if (keys & Input::Key::Left) {
+    } else if (buttons & Input::Button::Left) {
         listBox->setSelection(listBox->getIndex() - listBox->getMaxLines());
         romInfo->load();
         timer_load_info_done = 0;
         timer_load_video_done = 0;
-    } else if (keys & Input::Key::Fire1) {
+    } else if (buttons & Input::Button::A) {
         Game game = getSelection();
         if (game.available) {
 #ifdef __MPV__
@@ -304,7 +311,7 @@ bool UIRomList::onInput(c2d::Input::Player *players) {
             ui->getUiEmu()->load(game);
             return true;
         }
-    } else if (keys & Input::Key::Fire3) {
+    } else if (buttons & Input::Button::X) {
         // add to favorites
         Game game = getSelection();
         if (game.id > 0 && !romList->gameListFav->exist(game.id)) {
@@ -325,24 +332,24 @@ bool UIRomList::onInput(c2d::Input::Player *players) {
                 }
             }
         }
-    } else if (keys & Input::Key::Menu1) {
+    } else if (buttons & Input::Button::Menu1) {
         ui->getUiMenu()->load();
-    } else if (keys & Input::Key::Menu2) {
+    } else if (buttons & Input::Button::Menu2) {
         if (getSelection().id > 0) {
             ui->getUiMenu()->load(true);
         }
     }
 
     // only allow system switch if skin contains romlist title
-    if (titleText->available) {
-        if (keys & Input::Key::Fire5) {
+    if (titleText && titleText->available) {
+        if (buttons & Input::Button::LT) {
             Option *sysOpt = ui->getConfig()->get(Option::Id::GUI_FILTER_SYSTEM);
             size_t sysCount = sysOpt->getValues()->size();
             if (sysCount > 1) {
                 sysOpt->prev();
                 updateRomList();
             }
-        } else if (keys & Input::Key::Fire6) {
+        } else if (buttons & Input::Button::RT) {
             Option *sysOpt = ui->getConfig()->get(Option::Id::GUI_FILTER_SYSTEM);
             size_t sysCount = sysOpt->getValues()->size();
             if (sysCount > 1) {
@@ -360,12 +367,12 @@ void UIRomList::onUpdate() {
         return;
     }
 
-    unsigned int keys = ui->getInput()->getKeys();
+    unsigned int buttons = ui->getInput()->getButtons();
 
-    if (keys > 0 && keys != Input::Delay) {
+    if (buttons > 0 && buttons != Input::Delay) {
         timer_load_info.restart();
         timer_load_video.restart();
-    } else if (keys == 0) {
+    } else {
         if ((timer_load_info_done == 0) && timer_load_info.getElapsedTime().asMilliseconds() > timer_load_info_delay) {
             romInfo->load(listBox->getSelection());
             timer_load_info_done = 1;

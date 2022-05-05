@@ -11,7 +11,7 @@ namespace c2dui {
 
     public:
 
-        PSNESVideo(UiMain *ui, void **pixels, int *pitch, const c2d::Vector2f &size);
+        PSNESVideo(UiMain *ui, uint8_t **pixels, int *pitch, const c2d::Vector2i &size);
 
         void updateScaling(bool vertical = false, bool flip = false) override;
 

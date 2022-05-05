@@ -51,8 +51,9 @@ UIRomInfo::UIRomInfo(UiMain *u, UIRomList *uiRList, Font *fnt, int fntSize)
     Rectangle::add(previewBox);
 
 #ifdef __MPV__
+    ui->getIo()->create(ui->getIo()->getDataPath() + "mpv");
     mpv = new Mpv(ui->getIo()->getDataPath() + "mpv", true);
-    mpvTexture = new MpvTexture(previewBox->getSize(), mpv);
+    mpvTexture = new MpvTexture({previewBox->getSize().x, previewBox->getSize().y}, mpv);
     mpvTexture->setOrigin(previewBox->getOrigin());
     mpvTexture->setPosition(previewBox->getPosition());
     mpvTexture->setAlpha(0);
@@ -123,8 +124,8 @@ bool UIRomInfo::loadTexture(const Game &game) {
         texture->setOrigin(Origin::Center);
         texture->setPosition(Vector2f(previewBox->getSize().x / 2, previewBox->getSize().y / 2));
         float tex_scaling = std::min(
-                previewBox->getSize().x / texture->getTextureRect().width,
-                previewBox->getSize().y / texture->getTextureRect().height);
+                previewBox->getSize().x / (float) texture->getTextureRect().width,
+                previewBox->getSize().y / (float) texture->getTextureRect().height);
         texture->setScale(tex_scaling, tex_scaling);
         texture->setAlpha(0);
         texture->add(new TweenAlpha(0, 255, 0.3f, TweenLoop::None, TweenState::Playing));
@@ -172,7 +173,8 @@ void UIRomInfo::load(const Game &game) {
         showText(playersText, "Players: " + game.players);
         showText(ratingText, "Rating: " + std::to_string(game.rating));
         showText(rotationText, "Rotation: " + std::to_string(game.rotation));
-        showText(resolutionText, "Resolution: " + (game.resolution.empty() ? "UNKNOWN" : game.resolution));
+        showText(resolutionText,
+                 "Resolution: " + (game.resolution.empty() ? "UNKNOWN" : game.resolution));
         showText(cloneofText, "Clone Of: " + (game.cloneOf.empty() ? "NONE" : game.cloneOf));
         showText(filenameText, "File: " + game.path);
         showText(synoText, game.synopsis);

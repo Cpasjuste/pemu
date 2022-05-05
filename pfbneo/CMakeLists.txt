@@ -3,6 +3,9 @@ cmake_minimum_required(VERSION 3.0)
 
 project(pfbneo)
 
+# pfbneo became very heavy in size, we disable consoles for ps vita
+option(OPTION_DISABLE_CONSOLES "Disable consoles drivers" OFF)
+
 # handle m68k
 FILE(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/deps)
 ADD_CUSTOM_COMMAND(OUTPUT
@@ -42,6 +45,7 @@ list(REMOVE_ITEM SRC_BURNER
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burner/gamc.cpp
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burner/gami.cpp
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burner/image.cpp
+        ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burner/ioapi.c
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burner/sshot.cpp
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burner/state.cpp
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burner/unzip.c
@@ -58,33 +62,45 @@ set(DRV_DIRS
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/atari
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/capcom
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/cave
-        ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/channelf
-        ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/coleco
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/cps3
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/dataeast
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/galaxian
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/irem
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/konami
-        ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/megadrive
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/midway
-        ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/pce
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/pst90s
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/pre90s
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/neogeo
-        ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/nes
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/pgm
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/psikyo
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/sega
-        ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/sg1000
-        ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/sms
-        ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/msx
-        ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/spectrum
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/taito
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/toaplan
         )
-file(GLOB_RECURSE SRC_DRV
-        ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/*.cpp
-        )
+
+if (NOT OPTION_DISABLE_CONSOLES)
+    list(APPEND DRV_DIRS
+            ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/channelf
+            ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/coleco
+            ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/megadrive
+            ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/pce
+            ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/nes
+            ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/sg1000
+            ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/sms
+            ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/msx
+            ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/spectrum
+            )
+endif ()
+
+foreach (DIR ${DRV_DIRS})
+    file(GLOB DRV ${DIR}/*.cpp)
+    list(APPEND SRC_DRV ${DRV})
+endforeach ()
+
+if (OPTION_DISABLE_CONSOLES)
+    list(REMOVE_ITEM SRC_BURN ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/devices/vdc.cpp)
+endif ()
+
 list(REMOVE_ITEM SRC_DRV
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/capcom/ctv_make.cpp
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/pgm/pgm_sprite_create.cpp
@@ -217,13 +233,11 @@ set(FLAGS
         -Wno-restrict -Wno-unused-result
         )
 
-set(CMAKE_CXX_STANDARD 17)
-
-if (OPTION_BUILTIN_MINIZIP)
-    list(REMOVE_ITEM SRC_BURNER ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burner/ioapi.c)
-else ()
-    set(LDFLAGS minizip)
+if (OPTION_DISABLE_CONSOLES)
+    list(APPEND FLAGS -D__PFBN_NO_CONSOLES__)
 endif ()
+
+set(CMAKE_CXX_STANDARD 17)
 
 #################
 # PSP2 (ps vita)
@@ -291,14 +305,15 @@ elseif (PLATFORM_SWITCH)
             -ffunction-sections -fomit-frame-pointer)
 elseif (PLATFORM_LINUX)
     ##############
-    # SDL2
+    # LINUX
     ##############
     list(APPEND FLAGS -DLSB_FIRST)
-    if (PLATFORM_WINDOWS)
-        list(APPEND LDFLAGS z -static)
-    else ()
-        list(APPEND FLAGS -D__fastcall=)
-    endif ()
+    list(APPEND FLAGS -D__fastcall=)
+elseif (PLATFORM_WINDOWS)
+    ##############
+    # WINDOWS
+    ##############
+    list(APPEND FLAGS -DLSB_FIRST)
 endif (PLATFORM_VITA)
 
 # source files
@@ -314,10 +329,21 @@ target_link_libraries(${PROJECT_NAME} cross2dui cross2d ${LDFLAGS})
 # include libcross2d targets
 include(${CMAKE_SOURCE_DIR}/libcross2d/cmake/targets.cmake)
 
+# add common skin data
+add_custom_target(${PROJECT_NAME}.data.skin
+        COMMAND ${CMAKE_COMMAND} -D SRC=${CMAKE_CURRENT_SOURCE_DIR}/../data/common/romfs -D DST=${CMAKE_CURRENT_BINARY_DIR}/data_romfs -P ${CMAKE_CURRENT_LIST_DIR}/../libcross2d/cmake/copy_directory_custom.cmake
+        COMMAND ${CMAKE_COMMAND} -D SRC=${CMAKE_CURRENT_SOURCE_DIR}/../data/${TARGET_PLATFORM}/romfs -D DST=${CMAKE_CURRENT_BINARY_DIR}/data_romfs -P ${CMAKE_CURRENT_LIST_DIR}/../libcross2d/cmake/copy_directory_custom.cmake
+        )
+add_dependencies(${PROJECT_NAME}.data.skin ${PROJECT_NAME}.data)
+if (PLATFORM_LINUX)
+    add_dependencies(${PROJECT_NAME}-romfs ${PROJECT_NAME}.data.skin)
+else ()
+    add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}.data.skin)
+endif ()
+
 # fbneo deps
 find_package(Perl REQUIRED)
 add_custom_target(${PROJECT_NAME}.deps
-        #COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_CURRENT_BINARY_DIR}/deps
         COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/deps
         # ctv.h
         COMMAND g++ ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/capcom/ctv_make.cpp -o ${CMAKE_CURRENT_BINARY_DIR}/deps/ctv_make
@@ -331,23 +357,8 @@ add_custom_target(${PROJECT_NAME}.deps
         COMMAND ${PERL_EXECUTABLE} ${CMAKE_SOURCE_DIR}/cores/fbneo/src/dep/scripts/cave_tile_func.pl -o ${CMAKE_CURRENT_BINARY_DIR}/deps/cave_tile_func.h
         COMMAND ${PERL_EXECUTABLE} ${CMAKE_SOURCE_DIR}/cores/fbneo/src/dep/scripts/cave_sprite_func.pl -o ${CMAKE_CURRENT_BINARY_DIR}/deps/cave_sprite_func.h
         COMMAND ${PERL_EXECUTABLE} ${CMAKE_SOURCE_DIR}/cores/fbneo/src/dep/scripts/psikyo_tile_func.pl -o ${CMAKE_CURRENT_BINARY_DIR}/deps/psikyo_tile_func.h
+        # driverlist.h
+        COMMAND ${PERL_EXECUTABLE} ${CMAKE_SOURCE_DIR}/cores/fbneo/src/dep/scripts/gamelist.pl -o ${CMAKE_CURRENT_BINARY_DIR}/deps/driverlist.h -l ${CMAKE_CURRENT_BINARY_DIR}/deps/gamelist.txt ${DRV_DIRS}
         )
 message("-- C2D: Be sure to build \"${PROJECT_NAME}.deps\" target before \"${PROJECT_NAME}\" target")
-# driverlist.h
-# TODO: crap, mingw64 perl can't process this on windows... ( Argument list too long)
-if (PLATFORM_WINDOWS)
-    target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/pfbneo/data/windows)
-else ()
-    add_custom_target(${PROJECT_NAME}.deps.gamelist
-            COMMAND ${PERL_EXECUTABLE} ${CMAKE_SOURCE_DIR}/cores/fbneo/src/dep/scripts/gamelist.pl -o ${CMAKE_CURRENT_BINARY_DIR}/deps/driverlist.h -l ${CMAKE_CURRENT_BINARY_DIR}/deps/gamelist.txt ${SRC_DRV}
-            )
-    add_dependencies(${PROJECT_NAME}.deps ${PROJECT_NAME}.deps.gamelist)
-endif ()
-
-if (PLATFORM_WINDOWS)
-    add_custom_command(TARGET ${PROJECT_NAME}.data POST_BUILD
-            COMMAND ${CMAKE_SOURCE_DIR}/pfbneo/data/windows/copy_deps.sh ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.exe ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/
-            COMMENT "Copying required mingw dependencies..."
-            )
-endif ()
 

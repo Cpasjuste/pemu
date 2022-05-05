@@ -65,7 +65,7 @@ namespace c2dui {
 
         int getFontSize();
 
-        float getScaling();
+        c2d::Vector2f getScaling();
 
         bool done = false;
 
@@ -83,8 +83,6 @@ namespace c2dui {
         UiStatusBox *uiStatusBox = nullptr;
         c2d::C2DClock timer;
         unsigned int oldKeys = 0;
-
-        float scaling = 1;
     };
 }
 

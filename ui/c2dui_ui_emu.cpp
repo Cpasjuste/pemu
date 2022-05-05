@@ -44,8 +44,8 @@ void UiEmu::addVideo(C2DUIVideo *v) {
     add(video);
 }
 
-void UiEmu::addVideo(void **pixels, int *pitch,
-                     const c2d::Vector2f &size, const c2d::Vector2i &aspect, Texture::Format format) {
+void UiEmu::addVideo(uint8_t **pixels, int *pitch,
+                     const c2d::Vector2i &size, const c2d::Vector2i &aspect, Texture::Format format) {
     auto *v = new C2DUIVideo(ui, pixels, pitch, size, aspect, format);
     addVideo(v);
 }
@@ -62,6 +62,7 @@ int UiEmu::load(const Game &game) {
     setVisibility(Visibility::Visible);
     ui->getUiProgressBox()->setVisibility(Visibility::Hidden);
     ui->getUiRomList()->setVisibility(Visibility::Hidden);
+    ui->getUiRomList()->getBlur()->setVisibility(Visibility::Hidden);
 
     resume();
 
@@ -120,17 +121,11 @@ bool UiEmu::onInput(c2d::Input::Player *players) {
     }
 
     // look for player 1 menu combo
-    if (((players[0].keys & Input::Key::Menu1) && (players[0].keys & Input::Key::Menu2))) {
+    if (((players[0].buttons & Input::Button::Menu1) && (players[0].buttons & Input::Button::Menu2))) {
         pause();
         ui->getUiMenu()->load(true);
         ui->getInput()->clear();
         return true;
-    }
-
-    // look for window resize event
-    if (players[0].keys & EV_RESIZE) {
-        // useful for sdl resize event
-        getVideo()->updateScaling();
     }
 
     return C2DObject::onInput(players);

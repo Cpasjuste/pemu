@@ -6,18 +6,16 @@
 
 #define STATES_COUNT 4
 
-class UiState : public RectangleShape {
+class UiState : public SkinnedRectangle {
 
 public:
 
-    UiState(UiMain *ui, const FloatRect &rect, int id) : RectangleShape(rect) {
-
+    UiState(UiMain *ui, float x, int id)
+            : SkinnedRectangle(ui->getSkin(), {"STATES_MENU", "STATES_ITEM"}) {
         this->ui = ui;
         this->id = id;
 
-        ui->getSkin()->loadRectangleShape(this, {"STATES_MENU", "STATES_ITEM"});
-        UiState::setSize(rect.width, rect.height);
-        UiState::setPosition(rect.left, rect.top);
+        UiState::setPosition(x, UiState::getPosition().y);
         outlineColor = UiState::getOutlineColor();
         outlineTickness = UiState::getOutlineThickness();
         outlineColorSelected = ui->getSkin()->getRectangleShape({"STATES_MENU"}).outlineColor;
@@ -43,7 +41,6 @@ public:
     }
 
     void loadTexture() {
-
         if (texture) {
             delete (texture);
             texture = nullptr;
@@ -77,7 +74,6 @@ public:
     }
 
     void setRom(const ss_api::Game &game) {
-
         memset(path, 0, MAX_PATH);
         memset(shot, 0, MAX_PATH);
         snprintf(path, 1023, "%ssaves/%s%i.sav",
@@ -120,14 +116,12 @@ class UiStateList : public RectangleShape {
 public:
 
     UiStateList(UiMain *ui, const FloatRect &rect) : RectangleShape(rect) {
-
         UiStateList::setFillColor(Color::Transparent);
 
         // add states items
         float width = UiStateList::getSize().x / STATES_COUNT;
         for (int i = 0; i < STATES_COUNT; i++) {
-            FloatRect r = {(width * i) + (width / 2), width / 2, width, width};
-            states[i] = new UiState(ui, r, i);
+            states[i] = new UiState(ui, (width * (float) i) + (width / 2), i);
             states[i]->setOrigin(Origin::Center);
             UiStateList::add(states[i]);
         }
@@ -146,7 +140,6 @@ public:
     }
 
     void setSelection(int idx) {
-
         if (idx < 0 || idx > STATES_COUNT) {
             return;
         }
@@ -181,26 +174,21 @@ public:
     int index = 0;
 };
 
-UiStateMenu::UiStateMenu(UiMain *u) : RectangleShape(Vector2f(16, 16)) {
-
+UiStateMenu::UiStateMenu(UiMain *u) : SkinnedRectangle(u->getSkin(), {"STATES_MENU"}) {
     printf("UIStateMenu()\n");
 
-    this->ui = u;
-    Skin *skin = ui->getSkin();
-
-    // main rect/bg
-    skin->loadRectangleShape(this, {"STATES_MENU"});
+    ui = u;
 
     // menu title
-    title = new Text("TITLE", C2D_DEFAULT_CHAR_SIZE, ui->getSkin()->font);
+    title = new SkinnedText(ui->getSkin(), {"STATES_MENU", "TITLE_TEXT"});
+    title->setString("TITLE");
     title->setStyle(Text::Underlined);
-    skin->loadText(title, {"STATES_MENU", "TITLE_TEXT"});
     UiStateMenu::add(title);
 
-    int start_y = (int) (title->getGlobalBounds().top + title->getGlobalBounds().height + 16 * ui->getScaling());
+    float start_y = title->getLocalBounds().top + title->getLocalBounds().height + (32 * ui->getScaling().y);
     uiStateList = new UiStateList(ui, {
-            UiStateMenu::getLocalBounds().left + UiStateMenu::getSize().x / 2, (float) start_y + 32,
-            UiStateMenu::getSize().x - 64, UiStateMenu::getSize().x / (STATES_COUNT + 1)
+            UiStateMenu::getLocalBounds().left + UiStateMenu::getSize().x / 2, start_y,
+            UiStateMenu::getSize().x - (64 * ui->getScaling().x), UiStateMenu::getSize().x / (STATES_COUNT + 1)
     });
     uiStateList->setOrigin(Origin::Top);
     UiStateMenu::add(uiStateList);
@@ -230,17 +218,16 @@ void UiStateMenu::setVisibility(c2d::Visibility visibility, bool tweenPlay) {
 }
 
 bool UiStateMenu::onInput(c2d::Input::Player *players) {
+    unsigned int buttons = players[0].buttons;
 
-    unsigned int key = players[0].keys;
-
-    if (key & Input::Key::Left) {
+    if (buttons & Input::Button::Left) {
         uiStateList->left();
-    } else if (key & Input::Key::Right) {
+    } else if (buttons & Input::Button::Right) {
         uiStateList->right();
     }
 
     // FIRE1
-    if (key & Input::Key::Fire1) {
+    if (buttons & Input::Button::A) {
         isEmuRunning = ui->getUiEmu()->isVisible();
         if (isEmuRunning) {
             UiState *state = uiStateList->getSelection();
@@ -278,14 +265,9 @@ bool UiStateMenu::onInput(c2d::Input::Player *players) {
     }
 
     // FIRE2
-    if (key & Input::Key::Fire2) {
+    if (buttons & Input::Button::B) {
         setVisibility(Visibility::Hidden, true);
         ui->getUiMenu()->setVisibility(Visibility::Visible, true);
-    }
-
-    // QUIT
-    if (key & EV_QUIT) {
-        return EV_QUIT;
     }
 
     return true;

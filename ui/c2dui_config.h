@@ -29,7 +29,7 @@ namespace c2dui {
 
     public:
 
-        Config(c2d::Io *io, int version);
+        Config(c2d::Io *io, int version, const std::string &defaultRomsPath = "roms/");
 
         virtual ~Config() = default;
 
@@ -60,9 +60,15 @@ namespace c2dui {
 
         bool hide(int id, bool isRom = false);
 
-        virtual int *getPlayerInputKeys(int player, bool isRom = false);
+        virtual std::vector<c2d::Input::ButtonMapping> getKeyboardMapping(int player, bool isRom = false);
 
-        virtual int *getPlayerInputButtons(int player, bool isRom = false);
+        virtual std::vector<c2d::Input::ButtonMapping> getJoystickMapping(int player, bool isRom = false);
+
+        virtual c2d::Vector2i getJoystickAxisLeftMapping(int player, bool isRom = false);
+
+        virtual c2d::Vector2i getJoystickAxisRightMapping(int player, bool isRom = false);
+
+        virtual int getJoystickDeadZone(int player, bool isRom = false);
 
         c2d::Vector2f getScreenSize();
 
@@ -76,8 +82,6 @@ namespace c2dui {
         std::string dataPath;
 
         int version;
-        int keyboard_keys[KEY_COUNT];
-        int joystick_keys[KEY_COUNT + 4]; // +4 => axis
     };
 }
 

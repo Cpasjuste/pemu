@@ -17,11 +17,8 @@
 #include <cheats.h>
 
 #ifdef __PSP2__
-
 #include <psp2/io/dirent.h>
 #include <psp2/kernel/threadmgr.h>
-
-#define mkdir(x, y) sceIoMkdir(x, 0777)
 #define usleep sceKernelDelayThread
 #endif
 
@@ -84,7 +81,6 @@ std::string getButtonId(int player, const std::string &name) {
 }
 
 PSNESUiEmu::PSNESUiEmu(UiMain *ui) : UiEmu(ui) {
-
     printf("PSNESUIEmu()\n");
     _ui = ui;
 }
@@ -114,7 +110,7 @@ int PSNESUiEmu::load(const ss_api::Game &game) {
     // audio
     Settings.SixteenBitSound = TRUE;
     Settings.Stereo = TRUE;
-    Settings.SoundSync = TRUE;
+    Settings.SoundSync = FALSE;
     Settings.SoundInputRate = 31950;
 #ifdef __VITA__
     Settings.SoundPlaybackRate = 22050;
@@ -169,8 +165,9 @@ int PSNESUiEmu::load(const ss_api::Game &game) {
         return -1;
     }
 
-    S9xInitSound(0);
+    S9xInitSound(32);
     S9xSetSoundMute(FALSE);
+    S9xSetSamplesAvailableCallback(nullptr, nullptr);
 
     //getButtonId
     S9xUnmapAllControls();
@@ -233,26 +230,26 @@ int PSNESUiEmu::load(const ss_api::Game &game) {
         memset(gfx_snes_buffer, 0, GFX.Pitch * ((SNES_HEIGHT_EXTENDED + 4) * 2));
         GFX.Screen = (uint16 *) gfx_snes_buffer;
         snes9x_game_size = {SNES_WIDTH * 2, SNES_HEIGHT_EXTENDED * 2};
-        auto v = new PSNESVideo(getUi(), (void **) &gfx_video_buffer, nullptr,
-                                Vector2f(SNES_WIDTH * 2, SNES_HEIGHT_EXTENDED * 2));
+        auto v = new PSNESVideo(getUi(), &gfx_video_buffer, nullptr,
+                                Vector2i(SNES_WIDTH * 2, SNES_HEIGHT_EXTENDED * 2));
         addVideo(v);
-        memset(gfx_video_buffer, 0, (size_t) getVideo()->getTexture()->pitch * getVideo()->getTextureRect().height);
+        memset(gfx_video_buffer, 0, (size_t) getVideo()->getTexture()->m_pitch * getVideo()->getTextureRect().height);
     } else {
         GFX.Pitch = SNES_WIDTH * 2;
         snes9x_game_size = {SNES_WIDTH, SNES_HEIGHT_EXTENDED};
-        auto v = new PSNESVideo(getUi(), (void **) &GFX.Screen, (int *) &GFX.Pitch,
-                                Vector2f(SNES_WIDTH, SNES_HEIGHT_EXTENDED));
+        auto v = new PSNESVideo(getUi(), (uint8_t **) &GFX.Screen, (int *) &GFX.Pitch,
+                                Vector2i(SNES_WIDTH, SNES_HEIGHT_EXTENDED));
         addVideo(v);
-        memset(GFX.Screen, 0, (size_t) getVideo()->getTexture()->pitch * getVideo()->getTextureRect().height);
+        memset(GFX.Screen, 0, (size_t) getVideo()->getTexture()->m_pitch * getVideo()->getTextureRect().height);
     }
 
     S9xGraphicsInit();
 
-    int samples = Audio::toSamples(Settings.SoundPlaybackRate, Memory.ROMFramesPerSecond);
-    addAudio(Settings.SoundPlaybackRate, samples);
-    audio_buffer = malloc(getAudio()->getSamplesSize());
+    int samples = Audio::toSamples((int) Settings.SoundPlaybackRate, (float) Memory.ROMFramesPerSecond);
+    addAudio((int) Settings.SoundPlaybackRate, samples);
+    audio_buffer = malloc(getAudio()->getSamplesSize() * 2);
 
-    targetFps = Memory.ROMFramesPerSecond;
+    targetFps = (float) Memory.ROMFramesPerSecond;
 
     ui->getUiProgressBox()->setProgress(1);
     ui->flip();
@@ -305,36 +302,30 @@ void PSNESUiEmu::onUpdate() {
     UiEmu::onUpdate();
 
     if (isVisible() && !isPaused()) {
-
-        S9xMainLoop();
-
         auto players = ui->getInput()->getPlayers();
 
         // update snes9x buttons
         for (uint32 i = 0; i < 4; i++) {
-            S9xReportButton(0 + (i * 12), (players[i].keys & Input::Key::Up) > 0);
-            S9xReportButton(1 + (i * 12), (players[i].keys & Input::Key::Down) > 0);
-            S9xReportButton(2 + (i * 12), (players[i].keys & Input::Key::Left) > 0);
-            S9xReportButton(3 + (i * 12), (players[i].keys & Input::Key::Right) > 0);
-            S9xReportButton(4 + (i * 12), (players[i].keys & Input::Key::Fire1) > 0);
-            S9xReportButton(5 + (i * 12), (players[i].keys & Input::Key::Fire2) > 0);
-            S9xReportButton(6 + (i * 12), (players[i].keys & Input::Key::Fire3) > 0);
-            S9xReportButton(7 + (i * 12), (players[i].keys & Input::Key::Fire4) > 0);
-            S9xReportButton(8 + (i * 12), (players[i].keys & Input::Key::Fire5) > 0);
-            S9xReportButton(9 + (i * 12), (players[i].keys & Input::Key::Fire6) > 0);
-            S9xReportButton(10 + (i * 12), (players[i].keys & Input::Key::Start) > 0);
-            S9xReportButton(11 + (i * 12), (players[i].keys & Input::Key::Select) > 0);
+            unsigned int buttons = players[i].buttons;
+            S9xReportButton(0 + (i * 12), (buttons & Input::Button::Up) > 0);
+            S9xReportButton(1 + (i * 12), (buttons & Input::Button::Down) > 0);
+            S9xReportButton(2 + (i * 12), (buttons & Input::Button::Left) > 0);
+            S9xReportButton(3 + (i * 12), (buttons & Input::Button::Right) > 0);
+            S9xReportButton(4 + (i * 12), (buttons & Input::Button::A) > 0);
+            S9xReportButton(5 + (i * 12), (buttons & Input::Button::B) > 0);
+            S9xReportButton(6 + (i * 12), (buttons & Input::Button::X) > 0);
+            S9xReportButton(7 + (i * 12), (buttons & Input::Button::Y) > 0);
+            S9xReportButton(8 + (i * 12), (buttons & Input::Button::LT) > 0);
+            S9xReportButton(9 + (i * 12), (buttons & Input::Button::RT) > 0);
+            S9xReportButton(10 + (i * 12), (buttons & Input::Button::Start) > 0);
+            S9xReportButton(11 + (i * 12), (buttons & Input::Button::Select) > 0);
         }
 
-        /*
-#ifndef NDEBUG
-        float elapsed = timer.getElapsedTime().asSeconds();
-        if (elapsed >= 0.5f) {
-            printf("delta: %f\n", _ui->getDeltaTime().asSeconds());
-            timer.restart();
-        }
-#endif
-         */
+        S9xMainLoop();
+
+        int samples = S9xGetSampleCount();
+        S9xMixSamples((uint8 *) audio_buffer, samples);
+        _ui->getUiEmu()->getAudio()->play(audio_buffer, samples >> 1, true);
     }
 }
 
@@ -448,21 +439,21 @@ bool8 S9xDeinitUpdate(int width, int height) {
             blit = S9xBlitPixSimple1x1;
         }
 
-        blit((uint8 *) GFX.Screen, GFX.Pitch, gfx_video_buffer, video->getTexture()->pitch, width, height);
+        blit((uint8 *) GFX.Screen, GFX.Pitch, gfx_video_buffer, video->getTexture()->m_pitch, width, height);
 
         if (height < snes9x_prev_height) {
-            int p = video->getTexture()->pitch >> 2;
+            int p = video->getTexture()->m_pitch >> 2;
             for (int y = SNES_HEIGHT * 2; y < SNES_HEIGHT_EXTENDED * 2; y++) {
-                auto *d = (uint32 *) (gfx_video_buffer + y * video->getTexture()->pitch);
+                auto *d = (uint32 *) (gfx_video_buffer + y * video->getTexture()->m_pitch);
                 for (int x = 0; x < p; x++)
                     *d++ = 0;
             }
         }
     } else {
         if (height < snes9x_prev_height) {
-            int p = video->getTexture()->pitch >> 2;
+            int p = video->getTexture()->m_pitch >> 2;
             for (int y = SNES_HEIGHT; y < SNES_HEIGHT_EXTENDED; y++) {
-                auto *d = (uint32 *) (GFX.Screen + y * video->getTexture()->pitch);
+                auto *d = (uint32 *) (GFX.Screen + y * video->getTexture()->m_pitch);
                 for (int x = 0; x < p; x++)
                     *d++ = 0;
             }
@@ -507,13 +498,13 @@ static int make_snes9x_dirs() {
     if (strlen(s9x_base_dir) + 1 + sizeof(dirNames[0]) > PATH_MAX + 1)
         return (-1);
 
-    mkdir(s9x_base_dir, 0755);
+    _ui->getIo()->create(s9x_base_dir);
 
     for (int i = 0; i < LAST_DIR; i++) {
         if (dirNames[i][0]) {
             char s[PATH_MAX + 1];
             snprintf(s, PATH_MAX + 1, "%s%s%s", s9x_base_dir, SLASH_STR, dirNames[i]);
-            mkdir(s, 0755);
+            _ui->getIo()->create(s);
         }
     }
 
@@ -673,87 +664,6 @@ void S9xAutoSaveSRAM() {
  * You should adjust the frame rate in this function
  */
 void S9xSyncSpeed() {
-
-    if (Settings.SoundSync == TRUE) {
-        while (S9xSyncSound() == FALSE) {
-            usleep(1);
-        }
-    }
-
-    if (Settings.DumpStreams)
-        return;
-
-    if (Settings.SkipFrames == FALSE && Settings.TurboMode == FALSE) {
-        IPPU.FrameSkip = 0;
-        IPPU.SkippedFrames = 0;
-        IPPU.RenderThisFrame = TRUE;
-        return;
-    }
-
-    if (Settings.HighSpeedSeek > 0)
-        Settings.HighSpeedSeek--;
-
-    if (Settings.TurboMode) {
-        if ((++IPPU.FrameSkip >= Settings.TurboSkipFrames) && !Settings.HighSpeedSeek) {
-            IPPU.FrameSkip = 0;
-            IPPU.SkippedFrames = 0;
-            IPPU.RenderThisFrame = TRUE;
-        } else {
-            IPPU.SkippedFrames++;
-            IPPU.RenderThisFrame = FALSE;
-        }
-
-        return;
-    }
-
-    static struct timeval next1 = {0, 0};
-    struct timeval now;
-
-    while (gettimeofday(&now, NULL) == -1);
-
-    // If there is no known "next" frame, initialize it now.
-    if (next1.tv_sec == 0) {
-        next1 = now;
-        next1.tv_usec++;
-    }
-
-    // If we're on AUTO_FRAMERATE, we'll display frames always only if there's excess time.
-    // Otherwise we'll display the defined amount of frames.
-    unsigned limit = (Settings.SkipFrames == AUTO_FRAMERATE) ? (timercmp(&next1, &now, <) ? 10 : 1)
-                                                             : Settings.SkipFrames;
-
-    IPPU.RenderThisFrame = (++IPPU.SkippedFrames >= limit) ? TRUE : FALSE;
-
-    if (IPPU.RenderThisFrame)
-        IPPU.SkippedFrames = 0;
-    else {
-        // If we were behind the schedule, check how much it is.
-        if (timercmp(&next1, &now, <)) {
-            unsigned lag = (now.tv_sec - next1.tv_sec) * 1000000 + now.tv_usec - next1.tv_usec;
-            if (lag >= 500000) {
-                // More than a half-second behind means probably pause.
-                // The next line prevents the magic fast-forward effect.
-                next1 = now;
-            }
-        }
-    }
-
-    // Delay until we're completed this frame.
-    // Can't use setitimer because the sound code already could be using it. We don't actually need it either.
-    while (timercmp(&next1, &now, >)) {
-        // If we're ahead of time, sleep a while.
-        unsigned timeleft = (next1.tv_sec - now.tv_sec) * 1000000 + next1.tv_usec - now.tv_usec;
-        usleep(timeleft);
-        while (gettimeofday(&now, NULL) == -1);
-        // Continue with a while-loop because usleep() could be interrupted by a signal.
-    }
-
-    // Calculate the timestamp of the next frame.
-    next1.tv_usec += Settings.FrameTime;
-    if (next1.tv_usec >= 1000000) {
-        next1.tv_sec += next1.tv_usec / 1000000;
-        next1.tv_usec %= 1000000;
-    }
 }
 
 /**
@@ -818,29 +728,10 @@ const char *S9xStringInput(const char *message) {
  * Use this function if your system should change its color palette to match the SNES's.
  * Otherwise let it empty.
  */
-void S9xSetPalette() {
-}
+void S9xSetPalette() {}
 
-static void samples_available(void *data) {
-    int samples = S9xGetSampleCount();
-    S9xMixSamples((uint8 *) audio_buffer, samples);
-    _ui->getUiEmu()->getAudio()->play(audio_buffer, samples >> 1, Memory.ROMFramesPerSecond < 60);
-}
-
-bool8
-S9xOpenSoundDevice() {
-    S9xSetSamplesAvailableCallback(samples_available, nullptr);
+bool8 S9xOpenSoundDevice() {
     return TRUE;
 }
 
-void
-S9xToggleSoundChannel(int c) {
-    static int sound_switch = 255;
-
-    if (c == 8)
-        sound_switch = 255;
-    else
-        sound_switch ^= 1 << c;
-
-    S9xSetSoundControl(sound_switch);
-}
+void S9xToggleSoundChannel(int c) {}

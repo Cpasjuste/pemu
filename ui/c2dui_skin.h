@@ -50,7 +50,7 @@ namespace c2dui {
             int id = -1;
         };
 
-        Skin(UiMain *ui, const std::vector<Button> &buttons);
+        Skin(UiMain *ui);
 
         ~Skin();
 
@@ -69,6 +69,8 @@ namespace c2dui {
 
         c2d::Font *getFont();
 
+        c2d::Vector2f getScaling() { return m_scaling; };
+
         std::string path;
         c2d::Font *font = nullptr;
         bool font_available = true;
@@ -77,28 +79,13 @@ namespace c2dui {
 
     private:
 
-        c2d::config::Group createRectangleShapeGroup(const std::string &name,
-                                                     const c2d::FloatRect &rect = {0, 0, 0, 0},
-                                                     const c2d::Origin &origin = {},
-                                                     const std::string &texture = {},
-                                                     const c2d::Color &color = {},
-                                                     const c2d::Color &outlineColor = {},
-                                                     float outlineSize = 0,
-                                                     c2d::Vector2f scale = {1, 1});
+        c2d::config::Group createRectangleShapeGroup(const std::string &name);
 
-        c2d::config::Group createTextGroup(const std::string &name,
-                                           int size = 0,
-                                           const c2d::FloatRect &rect = {},
-                                           const c2d::Origin &origin = {},
-                                           const c2d::Color &color = {},
-                                           const c2d::Color &outlineColor = {},
-                                           float outlineSize = 0,
-                                           const c2d::Text::Overflow &overflow = c2d::Text::Overflow::Clamp,
-                                           c2d::Vector2f scale = {1, 1});
+        c2d::config::Group createTextGroup(const std::string &name, int size = 0);
 
         UiMain *ui = nullptr;
         c2d::config::Config *config = nullptr;
-        c2d::Vector2f global_scaling = {1.0f, 1.0f};
+        c2d::Vector2f m_scaling = {1.0f, 1.0f};
     };
 }
 

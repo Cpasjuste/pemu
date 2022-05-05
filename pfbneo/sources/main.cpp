@@ -31,7 +31,9 @@ using namespace c2d;
 using namespace c2dui;
 
 #ifdef __PSP2__
+
 #include <psp2/power.h>
+
 #elif __PS4__
 extern "C" int sceSystemServiceLoadExec(const char *path, const char *args[]);
 #endif
@@ -48,6 +50,13 @@ Skin *skin;
 void BurnPathsInit(C2DIo *io);
 
 int main(int argc, char **argv) {
+#ifdef __PSP2__
+    // set max cpu speed
+    scePowerSetArmClockFrequency(444);
+    scePowerSetBusClockFrequency(222);
+    scePowerSetGpuClockFrequency(222);
+    scePowerSetGpuXbarClockFrequency(166);
+#endif
 
     // need custom io for some devices
     auto io = new PFBAIo();
@@ -62,98 +71,14 @@ int main(int argc, char **argv) {
     Vector2f screenSize = cfg->getScreenSize();
     ui = new UiMain(screenSize, io, cfg);
 
-    // skin buttons used for config menu
-    std::vector<Skin::Button> buttons;
-
-#ifdef __PSP2__
-    // set max cpu speed
-    scePowerSetArmClockFrequency(444);
-    scePowerSetBusClockFrequency(222);
-    scePowerSetGpuClockFrequency(222);
-    scePowerSetGpuXbarClockFrequency(166);
-    // see c2d.h for key id
-    buttons.emplace_back(KEY_JOY_UP_DEFAULT, "UP");
-    buttons.emplace_back(KEY_JOY_DOWN_DEFAULT, "DOWN");
-    buttons.emplace_back(KEY_JOY_LEFT_DEFAULT, "LEFT");
-    buttons.emplace_back(KEY_JOY_RIGHT_DEFAULT, "RIGHT");
-    buttons.emplace_back(KEY_JOY_FIRE1_DEFAULT, "TRIANGLE");
-    buttons.emplace_back(KEY_JOY_FIRE2_DEFAULT, "CIRCLE");
-    buttons.emplace_back(KEY_JOY_FIRE3_DEFAULT, "CROSS");
-    buttons.emplace_back(KEY_JOY_FIRE4_DEFAULT, "SQUARE");
-    buttons.emplace_back(KEY_JOY_FIRE5_DEFAULT, "L");
-    buttons.emplace_back(KEY_JOY_FIRE6_DEFAULT, "R");
-    buttons.emplace_back(KEY_JOY_FIRE7_DEFAULT, "NONE");
-    buttons.emplace_back(KEY_JOY_FIRE8_DEFAULT, "NONE");
-    buttons.emplace_back(KEY_JOY_COIN1_DEFAULT, "SELECT");
-    buttons.emplace_back(KEY_JOY_START1_DEFAULT, "START");
-    buttons.emplace_back(KEY_JOY_MENU1_DEFAULT, "START");
-    buttons.emplace_back(KEY_JOY_MENU2_DEFAULT, "SELECT");
-#elif __SWITCH__
-    // see c2d.h for key id
-    buttons.emplace_back(KEY_JOY_UP_DEFAULT, "UP");
-    buttons.emplace_back(KEY_JOY_DOWN_DEFAULT, "DOWN");
-    buttons.emplace_back(KEY_JOY_LEFT_DEFAULT, "LEFT");
-    buttons.emplace_back(KEY_JOY_RIGHT_DEFAULT, "RIGHT");
-    buttons.emplace_back(KEY_JOY_FIRE1_DEFAULT, "A");
-    buttons.emplace_back(KEY_JOY_FIRE2_DEFAULT, "B");
-    buttons.emplace_back(KEY_JOY_FIRE3_DEFAULT, "X");
-    buttons.emplace_back(KEY_JOY_FIRE4_DEFAULT, "Y");
-    buttons.emplace_back(KEY_JOY_FIRE5_DEFAULT, "ZL");
-    buttons.emplace_back(KEY_JOY_FIRE6_DEFAULT, "ZR");
-    buttons.emplace_back(KEY_JOY_FIRE7_DEFAULT, "L");
-    buttons.emplace_back(KEY_JOY_FIRE8_DEFAULT, "R");
-    buttons.emplace_back(KEY_JOY_COIN1_DEFAULT, "-");
-    buttons.emplace_back(KEY_JOY_START1_DEFAULT, "+");
-    buttons.emplace_back(KEY_JOY_MENU1_DEFAULT, "R");
-    buttons.emplace_back(KEY_JOY_MENU2_DEFAULT, "L");
-    // switch special keys
-    buttons.emplace_back(KEY_JOY_LSTICK_DEFAULT, "LSTICK");
-    buttons.emplace_back(KEY_JOY_RSTICK_DEFAULT, "RSTICK");
-#elif __PS4__
-    // see c2d.h for key id
-    buttons.emplace_back(KEY_JOY_UP_DEFAULT, "UP");
-    buttons.emplace_back(KEY_JOY_DOWN_DEFAULT, "DOWN");
-    buttons.emplace_back(KEY_JOY_LEFT_DEFAULT, "LEFT");
-    buttons.emplace_back(KEY_JOY_RIGHT_DEFAULT, "RIGHT");
-    buttons.emplace_back(KEY_JOY_FIRE1_DEFAULT, "CROSS");
-    buttons.emplace_back(KEY_JOY_FIRE2_DEFAULT, "CIRCLE");
-    buttons.emplace_back(KEY_JOY_FIRE3_DEFAULT, "SQUARE");
-    buttons.emplace_back(KEY_JOY_FIRE4_DEFAULT, "TRIANGLE");
-    buttons.emplace_back(KEY_JOY_FIRE5_DEFAULT, "L2");
-    buttons.emplace_back(KEY_JOY_FIRE6_DEFAULT, "R2");
-    buttons.emplace_back(KEY_JOY_FIRE7_DEFAULT, "L2");
-    buttons.emplace_back(KEY_JOY_FIRE8_DEFAULT, "R2");
-    buttons.emplace_back(KEY_JOY_COIN1_DEFAULT, "L1");
-    buttons.emplace_back(KEY_JOY_START1_DEFAULT, "R1");
-    buttons.emplace_back(KEY_JOY_MENU1_DEFAULT, "L1");
-    buttons.emplace_back(KEY_JOY_MENU2_DEFAULT, "R1");
-#else
-    // see c2d.h for key id
-    buttons.emplace_back(KEY_JOY_UP_DEFAULT, "UP");
-    buttons.emplace_back(KEY_JOY_DOWN_DEFAULT, "DOWN");
-    buttons.emplace_back(KEY_JOY_LEFT_DEFAULT, "LEFT");
-    buttons.emplace_back(KEY_JOY_RIGHT_DEFAULT, "RIGHT");
-    buttons.emplace_back(KEY_JOY_FIRE1_DEFAULT, "CROSS");
-    buttons.emplace_back(KEY_JOY_FIRE2_DEFAULT, "CIRCLE");
-    buttons.emplace_back(KEY_JOY_FIRE3_DEFAULT, "SQUARE");
-    buttons.emplace_back(KEY_JOY_FIRE4_DEFAULT, "TRIANGLE");
-    buttons.emplace_back(KEY_JOY_FIRE5_DEFAULT, "LT");
-    buttons.emplace_back(KEY_JOY_FIRE6_DEFAULT, "RT");
-    buttons.emplace_back(KEY_JOY_FIRE7_DEFAULT, "LT");
-    buttons.emplace_back(KEY_JOY_FIRE8_DEFAULT, "RT");
-    buttons.emplace_back(KEY_JOY_COIN1_DEFAULT, "LB");
-    buttons.emplace_back(KEY_JOY_START1_DEFAULT, "RB");
-    buttons.emplace_back(KEY_JOY_MENU1_DEFAULT, "LB");
-    buttons.emplace_back(KEY_JOY_MENU2_DEFAULT, "RB");
-#endif
-
-    skin = new Skin(ui, buttons);
+    // skin
+    skin = new Skin(ui);
     ui->setSkin(skin);
 
     // ui
     std::string fba_version = "fbneo: ";
     fba_version += szAppBurnVer;
-    romList = new PFBARomList(ui, fba_version);
+    romList = new PFBARomList(ui, fba_version, {".zip"});
     romList->build();
     uiRomList = new UIRomList(ui, romList, ui->getSize());
     uiMenu = new PFBAGuiMenu(ui);

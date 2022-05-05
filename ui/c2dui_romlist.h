@@ -15,11 +15,11 @@ namespace c2dui {
 
     public:
 
-        RomList(UiMain *ui, const std::string &emuVersion);
+        RomList(UiMain *ui, const std::string &emuVersion, const std::vector<std::string> &filters);
 
         virtual ~RomList();
 
-        virtual void build();
+        virtual void build(bool addArcadeSystem = false);
 
         void addFav(const ss_api::Game &game);
 
@@ -35,6 +35,9 @@ namespace c2dui {
         std::vector<std::string> paths;
         char icon_path[1024];
         float time_start = 0;
+
+    protected:
+        std::vector<std::string> filters;
     };
 }
 

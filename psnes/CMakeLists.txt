@@ -49,7 +49,7 @@ set(SNES9X_CFLAGS
         -pedantic -Wall -W -Wno-unused-parameter
         -DHAVE_MKSTEMP -DHAVE_STRINGS_H
         -DHAVE_SYS_IOCTL_H -DHAVE_STDINT_H -DRIGHTSHIFT_IS_SAR
-        -DGFX_MULTI_FORMAT
+        -DGFX_MULTI_FORMAT -D__LIBRETRO__
         -D__BYTE_ORDER__=__ORDER_LITTLE_ENDIAN__
         -D__PSNES__
         -D__PSNES_VERSION_MAJOR__=${VERSION_MAJOR}
@@ -113,6 +113,9 @@ elseif (PLATFORM_SWITCH)
     # NX PLATORM
     #####################
     list(APPEND SNES9X_CFLAGS -Wno-pedantic -Wno-missing-field-initializers -Wno-format-truncation)
+elseif (PLATFORM_WINDOWS)
+    list(REMOVE_ITEM SNES9X_SRC ${CMAKE_SOURCE_DIR}/cores/snes9x/compat.cpp)
+    list(APPEND SNES9X_CFLAGS -Dunztell=unzTell)
 endif ()
 
 add_executable(${PROJECT_NAME} ${PSNES_SRC} ${SNES9X_SRC} ${UNZIP_SRC} ${JMA_SRC})
@@ -123,9 +126,14 @@ target_link_libraries(${PROJECT_NAME} cross2dui ${SNES9X_LDFLAGS})
 # include libcross2d targets
 include(${CMAKE_SOURCE_DIR}/libcross2d/cmake/targets.cmake)
 
-if (PLATFORM_WINDOWS)
-    add_custom_command(TARGET ${PROJECT_NAME}.data POST_BUILD
-            COMMAND ${CMAKE_SOURCE_DIR}/pfba/data/windows/copy_deps.sh ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.exe ${CMAKE_CURRENT_BINARY_DIR}/data_datadir/
-            COMMENT "Copying required mingw dependencies..."
-            )
+# add common skin data
+add_custom_target(${PROJECT_NAME}.data.skin
+COMMAND ${CMAKE_COMMAND} -D SRC=${CMAKE_CURRENT_SOURCE_DIR}/../data/common/romfs -D DST=${CMAKE_CURRENT_BINARY_DIR}/data_romfs -P ${CMAKE_CURRENT_LIST_DIR}/../libcross2d/cmake/copy_directory_custom.cmake
+COMMAND ${CMAKE_COMMAND} -D SRC=${CMAKE_CURRENT_SOURCE_DIR}/../data/${TARGET_PLATFORM}/romfs -D DST=${CMAKE_CURRENT_BINARY_DIR}/data_romfs -P ${CMAKE_CURRENT_LIST_DIR}/../libcross2d/cmake/copy_directory_custom.cmake
+)
+add_dependencies(${PROJECT_NAME}.data.skin ${PROJECT_NAME}.data)
+if (PLATFORM_LINUX)
+add_dependencies(${PROJECT_NAME}-romfs ${PROJECT_NAME}.data.skin)
+else ()
+add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}.data.skin)
 endif ()
