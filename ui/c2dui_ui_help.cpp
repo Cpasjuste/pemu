@@ -16,9 +16,12 @@ UiHelp::UiHelp(UiMain *ui) : SkinnedRectangle(ui->getSkin(), {"MAIN", "HELP"}) {
     // favorite
     pos = addItem(true, font, {ui->getSkin()->getButton(KEY_JOY_Y_DEFAULT)},
                   "ADD / REMOVE FAVORITE", {pos + 12, getSize().y / 2});
-    // system
-    addItem(true, font, {ui->getSkin()->getButton(KEY_JOY_LT_DEFAULT), ui->getSkin()->getButton(KEY_JOY_RT_DEFAULT)},
-            "SWITCH SYSTEM", {pos + 12, getSize().y / 2});
+    if (!(ui->getConfig()->get(Option::Id::GUI_FILTER_SYSTEM)->getFlags() & Option::Flags::HIDDEN)) {
+        // system
+        addItem(true, font,
+                {ui->getSkin()->getButton(KEY_JOY_LT_DEFAULT), ui->getSkin()->getButton(KEY_JOY_RT_DEFAULT)},
+                "SWITCH SYSTEM", {pos + 12, getSize().y / 2});
+    }
 
     // main menu
     pos = addItem(false, font, {ui->getSkin()->getButton(KEY_JOY_START_DEFAULT)},
