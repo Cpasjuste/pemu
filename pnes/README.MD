@@ -30,8 +30,8 @@ pNES: Portable NES
 ### Preview images and videos
 - pNES support preview images and videos (put files in roms media folder: png files goes in "roms/media/mixrbv2", mp4 files in "roms/media/video"). Please note that the vita port doesn't support video previews.
 You can download a near fullset mixrbv2 and video package (either in high quality or low quality format) here:
-    - preview images: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pnes/pnes_mixrbv2.zip) (150 MB)
-    - preview videos: [video_hq](http://files.mydedibox.fr/files/dev/pemu/pnes/pnes_video_hq.zip) (6.2GB), [video_lq](http://files.mydedibox.fr/files/dev/pemu/pnes/pnes_video_lq.zip) (1.4GB)
+    - preview images: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pnes/pnes_mixrbv2.zip) (959 MB)
+    - preview videos: [video](http://files.mydedibox.fr/files/dev/pemu/pnes/pnes_video.zip) (6.2GB)
 
 ### Installation (switch)
 - copy "pnes" directory to "/switch/" directory on sdcard
