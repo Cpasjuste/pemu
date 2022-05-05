@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="fr.mydedibox.libcross2d_template"
+    package="fr.mydedibox.pemu"
     android:installLocation="auto">
 
     <!-- OpenGL ES 2.0 -->
@@ -39,7 +39,7 @@
         android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
 
         <activity
-            android:name="fr.mydedibox.libcross2d.Main"
+            android:name="fr.mydedibox.pemu.Main"
             android:alwaysRetainTaskState="true"
             android:configChanges="layoutDirection|locale|uiMode|screenLayout|screenSize|smallestScreenSize|keyboard|keyboardHidden|navigation"
             android:exported="true"

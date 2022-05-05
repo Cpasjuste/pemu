@@ -1,9 +1,8 @@
-package fr.mydedibox.libcross2d;
+package fr.mydedibox.pemu;
 
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
-import android.view.MotionEvent;
 
 import java.io.BufferedReader;
 import java.io.File;
