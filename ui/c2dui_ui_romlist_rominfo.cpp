@@ -51,6 +51,7 @@ UIRomInfo::UIRomInfo(UiMain *u, UIRomList *uiRList, Font *fnt, int fntSize)
     Rectangle::add(previewBox);
 
 #ifdef __MPV__
+    ui->getIo()->create(ui->getIo()->getDataPath() + "mpv");
     mpv = new Mpv(ui->getIo()->getDataPath() + "mpv", true);
     mpvTexture = new MpvTexture({previewBox->getSize().x, previewBox->getSize().y}, mpv);
     mpvTexture->setOrigin(previewBox->getOrigin());
@@ -172,7 +173,8 @@ void UIRomInfo::load(const Game &game) {
         showText(playersText, "Players: " + game.players);
         showText(ratingText, "Rating: " + std::to_string(game.rating));
         showText(rotationText, "Rotation: " + std::to_string(game.rotation));
-        showText(resolutionText, "Resolution: " + (game.resolution.empty() ? "UNKNOWN" : game.resolution));
+        showText(resolutionText,
+                 "Resolution: " + (game.resolution.empty() ? "UNKNOWN" : game.resolution));
         showText(cloneofText, "Clone Of: " + (game.cloneOf.empty() ? "NONE" : game.cloneOf));
         showText(filenameText, "File: " + game.path);
         showText(synoText, game.synopsis);

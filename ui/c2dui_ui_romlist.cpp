@@ -372,7 +372,7 @@ void UIRomList::onUpdate() {
     if (buttons > 0 && buttons != Input::Delay) {
         timer_load_info.restart();
         timer_load_video.restart();
-    } else if (buttons == 0) {
+    } else {
         if ((timer_load_info_done == 0) && timer_load_info.getElapsedTime().asMilliseconds() > timer_load_info_delay) {
             romInfo->load(listBox->getSelection());
             timer_load_info_done = 1;

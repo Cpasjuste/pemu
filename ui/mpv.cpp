@@ -29,7 +29,7 @@ Mpv::Mpv(const std::string &configPath, bool initRender) {
 
     mpv_set_option_string(handle, "config", "yes");
     mpv_set_option_string(handle, "config-dir", configPath.c_str());
-#ifndef NDEBUG
+#if !defined(NDEBUG) && !defined(ANDROID)
     mpv_set_option_string(handle, "terminal", "yes");
     mpv_set_option_string(handle, "msg-level", "all=v");
 #endif
