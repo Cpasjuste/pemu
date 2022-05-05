@@ -36,12 +36,7 @@ set(VERSION_MINOR 0)
 add_subdirectory(ui)
 
 # emulator selection
-if (OPTION_EMU STREQUAL "all")
-    add_subdirectory(pfbneo)
-    add_subdirectory(pgen)
-    add_subdirectory(pnes)
-    add_subdirectory(psnes)
-elseif (OPTION_EMU STREQUAL "pnes")
+if (OPTION_EMU STREQUAL "pnes")
     # pnes
     add_subdirectory(pnes)
 elseif (OPTION_EMU STREQUAL "psnes")
@@ -50,7 +45,12 @@ elseif (OPTION_EMU STREQUAL "psnes")
 elseif (OPTION_EMU STREQUAL "pgen")
     # pgen
     add_subdirectory(pgen)
-else ()
+elseif (OPTION_EMU STREQUAL "pfbneo")
     # pfbneo
     add_subdirectory(pfbneo)
+else ()
+    add_subdirectory(pfbneo)
+    add_subdirectory(pgen)
+    add_subdirectory(pnes)
+    add_subdirectory(psnes)
 endif ()
