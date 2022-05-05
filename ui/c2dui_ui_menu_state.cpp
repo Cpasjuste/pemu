@@ -6,18 +6,16 @@
 
 #define STATES_COUNT 4
 
-class UiState : public RectangleShape {
+class UiState : public SkinnedRectangle {
 
 public:
 
-    UiState(UiMain *ui, const FloatRect &rect, int id) : RectangleShape(rect) {
-
+    UiState(UiMain *ui, float x, int id)
+            : SkinnedRectangle(ui->getSkin(), {"STATES_MENU", "STATES_ITEM"}) {
         this->ui = ui;
         this->id = id;
 
-        ui->getSkin()->loadRectangleShape(this, {"STATES_MENU", "STATES_ITEM"});
-        UiState::setSize(rect.width, rect.height);
-        UiState::setPosition(rect.left, rect.top);
+        UiState::setPosition(x, UiState::getPosition().y);
         outlineColor = UiState::getOutlineColor();
         outlineTickness = UiState::getOutlineThickness();
         outlineColorSelected = ui->getSkin()->getRectangleShape({"STATES_MENU"}).outlineColor;
@@ -43,7 +41,6 @@ public:
     }
 
     void loadTexture() {
-
         if (texture) {
             delete (texture);
             texture = nullptr;
@@ -77,7 +74,6 @@ public:
     }
 
     void setRom(const ss_api::Game &game) {
-
         memset(path, 0, MAX_PATH);
         memset(shot, 0, MAX_PATH);
         snprintf(path, 1023, "%ssaves/%s%i.sav",
@@ -120,14 +116,12 @@ class UiStateList : public RectangleShape {
 public:
 
     UiStateList(UiMain *ui, const FloatRect &rect) : RectangleShape(rect) {
-
         UiStateList::setFillColor(Color::Transparent);
 
         // add states items
         float width = UiStateList::getSize().x / STATES_COUNT;
         for (int i = 0; i < STATES_COUNT; i++) {
-            FloatRect r = {(width * i) + (width / 2), width / 2, width, width};
-            states[i] = new UiState(ui, r, i);
+            states[i] = new UiState(ui, (width * (float) i) + (width / 2), i);
             states[i]->setOrigin(Origin::Center);
             UiStateList::add(states[i]);
         }
@@ -146,7 +140,6 @@ public:
     }
 
     void setSelection(int idx) {
-
         if (idx < 0 || idx > STATES_COUNT) {
             return;
         }
@@ -185,18 +178,17 @@ UiStateMenu::UiStateMenu(UiMain *u) : SkinnedRectangle(u->getSkin(), {"STATES_ME
     printf("UIStateMenu()\n");
 
     ui = u;
-    Skin *skin = ui->getSkin();
 
     // menu title
-    title = new SkinnedText(skin, {"STATES_MENU", "TITLE_TEXT"});
+    title = new SkinnedText(ui->getSkin(), {"STATES_MENU", "TITLE_TEXT"});
     title->setString("TITLE");
     title->setStyle(Text::Underlined);
     UiStateMenu::add(title);
 
-    float start_y = title->getLocalBounds().top + title->getLocalBounds().height + (55 * ui->getScaling());
+    float start_y = title->getLocalBounds().top + title->getLocalBounds().height + (32 * ui->getScaling().y);
     uiStateList = new UiStateList(ui, {
             UiStateMenu::getLocalBounds().left + UiStateMenu::getSize().x / 2, start_y,
-            UiStateMenu::getSize().x - 64, UiStateMenu::getSize().x / (STATES_COUNT + 1)
+            UiStateMenu::getSize().x - (64 * ui->getScaling().x), UiStateMenu::getSize().x / (STATES_COUNT + 1)
     });
     uiStateList->setOrigin(Origin::Top);
     UiStateMenu::add(uiStateList);
@@ -278,12 +270,5 @@ bool UiStateMenu::onInput(c2d::Input::Player *players) {
         ui->getUiMenu()->setVisibility(Visibility::Visible, true);
     }
 
-    // TODO: verify this
-#if 0
-    // QUIT
-    if (buttons & Input::Button::Quit) {
-        return EV_QUIT;
-    }
-#endif
     return true;
 }

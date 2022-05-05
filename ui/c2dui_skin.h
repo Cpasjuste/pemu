@@ -69,6 +69,8 @@ namespace c2dui {
 
         c2d::Font *getFont();
 
+        c2d::Vector2f getScaling() { return m_scaling; };
+
         std::string path;
         c2d::Font *font = nullptr;
         bool font_available = true;
@@ -83,7 +85,7 @@ namespace c2dui {
 
         UiMain *ui = nullptr;
         c2d::config::Config *config = nullptr;
-        c2d::Vector2f global_scaling = {1.0f, 1.0f};
+        c2d::Vector2f m_scaling = {1.0f, 1.0f};
     };
 }
 

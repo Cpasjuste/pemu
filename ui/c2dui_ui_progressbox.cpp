@@ -13,16 +13,17 @@ UIProgressBox::UIProgressBox(UiMain *gui)
     float w = getSize().x;
     float h = getSize().y;
 
-    float margin = UI_MARGIN * gui->getScaling();
+    float margin_x = UI_MARGIN * gui->getScaling().x;
+    float margin_y = UI_MARGIN * gui->getScaling().y;
 
     title = new Text("TITLE", C2D_DEFAULT_CHAR_SIZE, gui->getSkin()->getFont());
-    title->setPosition(margin, margin + 16);
-    title->setSizeMax(w - (margin * 2), 0);
+    title->setPosition(margin_x, margin_y + 16);
+    title->setSizeMax(w - (margin_x * 2), 0);
     title->setOutlineThickness(2);
     title->setOutlineColor(Color::Black);
     add(title);
 
-    progress_bg = new RectangleShape({margin, h - margin - (h / 6), w - (margin * 2), h / 6});
+    progress_bg = new RectangleShape({margin_x, h - margin_y - (h / 6), w - (margin_x * 2), h / 6});
     Color col = getFillColor();
     col.r = (uint8_t) std::max(0, col.r - 40);
     col.g = (uint8_t) std::max(0, col.g - 40);
@@ -40,8 +41,8 @@ UIProgressBox::UIProgressBox(UiMain *gui)
 
     message = new Text("MESSAGE", (unsigned int) gui->getFontSize(), gui->getSkin()->getFont());
     message->setOrigin(Origin::BottomLeft);
-    message->setPosition(margin, progress_bg->getPosition().y - margin);
-    message->setSizeMax(w - (margin * 2), 0);
+    message->setPosition(margin_x, progress_bg->getPosition().y - margin_y);
+    message->setSizeMax(w - (margin_x * 2), 0);
     message->setOutlineThickness(2);
     message->setOutlineColor(Color::Black);
     add(message);

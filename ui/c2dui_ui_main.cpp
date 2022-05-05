@@ -59,10 +59,6 @@ void UiMain::init(UIRomList *_uiRomList, UiMenu *_uiMenu,
     uiState = _uiState;
     add(uiState);
 
-    // scaling factor mainly used for borders,
-    scaling = std::min(getSize().x / 640, 1.0f);
-    // printf("scaling: %f\n", scaling);
-
     uiMessageBox = new c2d::MessageBox(
             FloatRect(
                     getSize().x / 2,
@@ -133,10 +129,6 @@ void UiMain::onUpdate() {
     C2DRenderer::onUpdate();
 }
 
-float UiMain::getScaling() {
-    return scaling;
-}
-
 Skin *UiMain::getSkin() {
     return skin;
 }
@@ -182,7 +174,11 @@ c2d::MessageBox *UiMain::getUiMessageBox() {
 }
 
 int UiMain::getFontSize() {
-    return (int) ((float) C2D_DEFAULT_CHAR_SIZE * scaling);
+    return (int) ((float) C2D_DEFAULT_CHAR_SIZE * skin->getScaling().y);
+}
+
+Vector2f UiMain::getScaling() {
+    return skin->getScaling();
 }
 
 void UiMain::updateInputMapping(bool isRomConfig) {
