@@ -330,11 +330,7 @@ void PSNESUiEmu::onUpdate() {
 
         int samples = S9xGetSampleCount();
         S9xMixSamples((uint8 *) audio_buffer, samples);
-#ifdef ANDROID
-        _ui->getUiEmu()->getAudio()->play(audio_buffer, samples >> 1, false);
-#else
         _ui->getUiEmu()->getAudio()->play(audio_buffer, samples >> 1, true);
-#endif
     }
 }
 
