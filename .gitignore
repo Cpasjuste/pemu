@@ -1,5 +1,4 @@
 cmake-build*
-build*
 .idea
 ss_dev_id.key
 ss_dev_pwd.key

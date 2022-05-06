@@ -143,13 +143,15 @@ int PSNESUiEmu::load(const ss_api::Game &game) {
     }
     printf("Settings.SkipFrames: %i\n", Settings.SkipFrames);
     Settings.TurboMode = ui->getConfig()->get(Option::ROM_PSNES_TURBO_MODE, true)->getIndex();
-    Settings.TurboSkipFrames = ui->getConfig()->get(Option::ROM_PSNES_TURBO_FRAMESKIP, true)->getIndex();
+    Settings.TurboSkipFrames = ui->getConfig()->get(Option::ROM_PSNES_TURBO_FRAMESKIP,
+                                                    true)->getIndex();
 
     Settings.CartAName[0] = 0;
     Settings.CartBName[0] = 0;
 
     // big boost when SupportHiRes disabled
-    Settings.SupportHiRes = (bool8) ui->getConfig()->get(Option::ROM_PSNES_HIGH_RES, true)->getIndex();
+    Settings.SupportHiRes = (bool8) ui->getConfig()->get(Option::ROM_PSNES_HIGH_RES,
+                                                         true)->getIndex();
     printf("Settings.SupportHiRes: %i\n", Settings.SupportHiRes);
 
     CPU.Flags = 0;
@@ -233,19 +235,22 @@ int PSNESUiEmu::load(const ss_api::Game &game) {
         auto v = new PSNESVideo(getUi(), &gfx_video_buffer, nullptr,
                                 Vector2i(SNES_WIDTH * 2, SNES_HEIGHT_EXTENDED * 2));
         addVideo(v);
-        memset(gfx_video_buffer, 0, (size_t) getVideo()->getTexture()->m_pitch * getVideo()->getTextureRect().height);
+        memset(gfx_video_buffer, 0,
+               (size_t) getVideo()->getTexture()->m_pitch * getVideo()->getTextureRect().height);
     } else {
         GFX.Pitch = SNES_WIDTH * 2;
         snes9x_game_size = {SNES_WIDTH, SNES_HEIGHT_EXTENDED};
         auto v = new PSNESVideo(getUi(), (uint8_t **) &GFX.Screen, (int *) &GFX.Pitch,
                                 Vector2i(SNES_WIDTH, SNES_HEIGHT_EXTENDED));
         addVideo(v);
-        memset(GFX.Screen, 0, (size_t) getVideo()->getTexture()->m_pitch * getVideo()->getTextureRect().height);
+        memset(GFX.Screen, 0,
+               (size_t) getVideo()->getTexture()->m_pitch * getVideo()->getTextureRect().height);
     }
 
     S9xGraphicsInit();
 
-    int samples = Audio::toSamples((int) Settings.SoundPlaybackRate, (float) Memory.ROMFramesPerSecond);
+    int samples = Audio::toSamples((int) Settings.SoundPlaybackRate,
+                                   (float) Memory.ROMFramesPerSecond);
     addAudio((int) Settings.SoundPlaybackRate, samples);
     audio_buffer = malloc(getAudio()->getSamplesSize() * 2);
 
@@ -383,7 +388,8 @@ bool8 S9xDeinitUpdate(int width, int height) {
 #ifdef __SOFT_SCALERS__
         if (effect == VIDEOMODE_BLOCKY || effect == VIDEOMODE_TV || effect == VIDEOMODE_SMOOTH) {
 #endif
-        if ((width <= SNES_WIDTH) && ((snes9x_prev_width != width) || (snes9x_prev_height != height))) {
+        if ((width <= SNES_WIDTH) &&
+            ((snes9x_prev_width != width) || (snes9x_prev_height != height))) {
             printf("S9xBlitClearDelta\n");
             S9xBlitClearDelta();
         }
@@ -439,7 +445,8 @@ bool8 S9xDeinitUpdate(int width, int height) {
             blit = S9xBlitPixSimple1x1;
         }
 
-        blit((uint8 *) GFX.Screen, GFX.Pitch, gfx_video_buffer, video->getTexture()->m_pitch, width, height);
+        blit((uint8 *) GFX.Screen, GFX.Pitch, gfx_video_buffer, video->getTexture()->m_pitch, width,
+             height);
 
         if (height < snes9x_prev_height) {
             int p = video->getTexture()->m_pitch >> 2;

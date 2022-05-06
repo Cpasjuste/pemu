@@ -105,6 +105,8 @@ include(${CMAKE_SOURCE_DIR}/libcross2d/cmake/targets.cmake)
 
 # add common skin data
 add_custom_target(${PROJECT_NAME}.data.skin
+        COMMAND ${CMAKE_COMMAND} -D SRC=${CMAKE_CURRENT_SOURCE_DIR}/../data/common/datadir -D DST=${CMAKE_CURRENT_BINARY_DIR}/data_datadir -P ${CMAKE_CURRENT_LIST_DIR}/../libcross2d/cmake/copy_directory_custom.cmake
+        COMMAND ${CMAKE_COMMAND} -D SRC=${CMAKE_CURRENT_SOURCE_DIR}/../data/${TARGET_PLATFORM}/datadir -D DST=${CMAKE_CURRENT_BINARY_DIR}/data_datadir -P ${CMAKE_CURRENT_LIST_DIR}/../libcross2d/cmake/copy_directory_custom.cmake
         COMMAND ${CMAKE_COMMAND} -D SRC=${CMAKE_CURRENT_SOURCE_DIR}/../data/common/romfs -D DST=${CMAKE_CURRENT_BINARY_DIR}/data_romfs -P ${CMAKE_CURRENT_LIST_DIR}/../libcross2d/cmake/copy_directory_custom.cmake
         COMMAND ${CMAKE_COMMAND} -D SRC=${CMAKE_CURRENT_SOURCE_DIR}/../data/${TARGET_PLATFORM}/romfs -D DST=${CMAKE_CURRENT_BINARY_DIR}/data_romfs -P ${CMAKE_CURRENT_LIST_DIR}/../libcross2d/cmake/copy_directory_custom.cmake
         )
@@ -123,24 +125,3 @@ add_custom_target(${PROJECT_NAME}.data.extra
         )
 add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}.data.extra)
 
-#[[
-if (PLATFORM_WINDOWS)
-    # TODO: fix curl/nghttp2 static linking...
-    add_custom_target(${PROJECT_NAME}.data.extra.win64
-            DEPENDS ${PROJECT_NAME}.data.extra
-            COMMAND ${CMAKE_COMMAND} -E copy "/msys64/mingw64/bin/libwinpthread-1.dll" ${CMAKE_CURRENT_BINARY_DIR}/
-            COMMAND ${CMAKE_COMMAND} -E copy "/msys64/mingw64/bin/libnghttp2-14.dll" ${CMAKE_CURRENT_BINARY_DIR}/
-            COMMAND ${CMAKE_COMMAND} -E copy "/msys64/mingw64/bin/libunistring-2.dll" ${CMAKE_CURRENT_BINARY_DIR}/
-            COMMAND ${CMAKE_COMMAND} -E copy "/msys64/mingw64/bin/libstdc++-6.dll" ${CMAKE_CURRENT_BINARY_DIR}/
-            COMMAND ${CMAKE_COMMAND} -E copy "/msys64/mingw64/bin/libiconv-2.dll" ${CMAKE_CURRENT_BINARY_DIR}/
-            COMMAND ${CMAKE_COMMAND} -E copy "/msys64/mingw64/bin/libgcc_s_seh-1.dll" ${CMAKE_CURRENT_BINARY_DIR}/
-            COMMAND ${CMAKE_COMMAND} -E copy "/msys64/mingw64/bin/libwinpthread-1.dll" ${CMAKE_CURRENT_BINARY_DIR}/data_read_write/
-            COMMAND ${CMAKE_COMMAND} -E copy "/msys64/mingw64/bin/libnghttp2-14.dll" ${CMAKE_CURRENT_BINARY_DIR}/data_read_write/
-            COMMAND ${CMAKE_COMMAND} -E copy "/msys64/mingw64/bin/libunistring-2.dll" ${CMAKE_CURRENT_BINARY_DIR}/data_read_write/
-            COMMAND ${CMAKE_COMMAND} -E copy "/msys64/mingw64/bin/libstdc++-6.dll" ${CMAKE_CURRENT_BINARY_DIR}/data_read_write/
-            COMMAND ${CMAKE_COMMAND} -E copy "/msys64/mingw64/bin/libiconv-2.dll" ${CMAKE_CURRENT_BINARY_DIR}/data_read_write/
-            COMMAND ${CMAKE_COMMAND} -E copy "/msys64/mingw64/bin/libgcc_s_seh-1.dll" ${CMAKE_CURRENT_BINARY_DIR}/data_read_write/
-            )
-    add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}.data.extra.win64)
-endif ()
-]]
