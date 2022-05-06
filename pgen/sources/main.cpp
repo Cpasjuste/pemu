@@ -63,10 +63,13 @@ int main(int argc, char **argv) {
     // create paths
     io->create(io->getDataPath());
     io->create(io->getDataPath() + "bios");
-    io->create(io->getDataPath() + "roms");
     io->create(io->getDataPath() + "rams");
     io->create(io->getDataPath() + "configs");
     io->create(io->getDataPath() + "saves");
+    io->create(io->getDataPath() + "megadrive");
+    io->create(io->getDataPath() + "sms");
+    io->create(io->getDataPath() + "gamegear");
+    io->create(io->getDataPath() + "megacd");
 
     Vector2f screenSize = cfg->getScreenSize();
     ui = new UiMain(screenSize, io, cfg);
