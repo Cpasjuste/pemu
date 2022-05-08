@@ -145,19 +145,25 @@ void audio_deinit() {
 }
 
 void audio_queue() {
-    if (uiEmu->getAudio() != nullptr) {
+    if (uiEmu->getAudio()) {
+#if 0
+        printf("play: samples: %i, queued: %i, capacity: %i\n",
+               uiEmu->getAudio()->getSamples(),
+               uiEmu->getAudio()->getSampleBufferQueued(),
+               uiEmu->getAudio()->getSampleBufferCapacity());
+#endif
         uiEmu->getAudio()->play(audio_buffer, uiEmu->getAudio()->getSamples(), nst_pal());
     }
 }
 
 void audio_pause() {
-    if (uiEmu->getAudio() != nullptr) {
+    if (uiEmu->getAudio()) {
         uiEmu->getAudio()->pause(1);
     }
 }
 
 void audio_unpause() {
-    if (uiEmu->getAudio() != nullptr) {
+    if (uiEmu->getAudio()) {
         uiEmu->getAudio()->pause(0);
     }
 }
@@ -171,7 +177,7 @@ void audio_set_params(Sound::Output *soundoutput) {
 
     Audio *aud = uiEmu->getAudio();
 
-    if (aud != nullptr) {
+    if (aud) {
         // Set audio parameters
         Sound sound(emulator);
 
@@ -184,6 +190,7 @@ void audio_set_params(Sound::Output *soundoutput) {
         audio_adj_volume();
 
         audio_buffer = malloc(aud->getSamplesSize());
+        memset(audio_buffer, 0, aud->getSamplesSize());
         soundoutput->samples[0] = audio_buffer;
         soundoutput->length[0] = (unsigned int) aud->getSamples();
         soundoutput->samples[1] = nullptr;
