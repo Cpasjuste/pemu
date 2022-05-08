@@ -4,13 +4,11 @@
 
 #include "c2dui.h"
 #include "uiEmu.h"
-#include "video.h"
 
 #include <snes9x.h>
 #include <memmap.h>
 #include <apu/apu.h>
 #include <controls.h>
-#include <filter/blit.h>
 #include <conffile.h>
 #include <display.h>
 #include <sys/stat.h>
@@ -25,56 +23,33 @@
 using namespace c2d;
 using namespace c2dui;
 
-#ifndef NDEBUG
-C2DClock timer;
-#endif
-
-static UiMain *_ui;
-
-typedef void (*Blitter)(uint8 *, int, uint8 *, int, int, int);
-
-#ifdef __SOFT_SCALERS__
-enum {
-    VIDEOMODE_BLOCKY = 0,
-    VIDEOMODE_TV,
-    VIDEOMODE_SMOOTH,
-    VIDEOMODE_SUPEREAGLE,
-    VIDEOMODE_2XSAI,
-    VIDEOMODE_SUPER2XSAI,
-    VIDEOMODE_EPX,
-    VIDEOMODE_HQ2X
-};
-#endif
+static UiMain *m_ui;
 
 static void *audio_buffer = nullptr;
-static uint8 *gfx_snes_buffer = nullptr;
-static uint8 *gfx_video_buffer = nullptr;
-static int snes9x_prev_width = 0, snes9x_prev_height = 0;
-
-Vector2f snes9x_game_size;
 
 static const char *s9x_base_dir = nullptr;
 
 static char default_dir[PATH_MAX + 1];
 
-static const char dirNames[13][32] =
-        {
-                "",             // DEFAULT_DIR
-                "",             // HOME_DIR
-                "",             // ROMFILENAME_DIR
-                "roms",          // ROM_DIR
-                "sram",         // SRAM_DIR
-                "saves",        // SNAPSHOT_DIR
-                "screenshots",  // SCREENSHOT_DIR
-                "spc",          // SPC_DIR
-                "cheat",        // CHEAT_DIR
-                "patch",        // PATCH_DIR
-                "bios",         // BIOS_DIR
-                "log",          // LOG_DIR
-                ""
-        };
+static const char dirNames[13][32] = {
+        "",             // DEFAULT_DIR
+        "",             // HOME_DIR
+        "",             // ROMFILENAME_DIR
+        "roms",          // ROM_DIR
+        "sram",         // SRAM_DIR
+        "saves",        // SNAPSHOT_DIR
+        "screenshots",  // SCREENSHOT_DIR
+        "spc",          // SPC_DIR
+        "cheat",        // CHEAT_DIR
+        "patch",        // PATCH_DIR
+        "bios",         // BIOS_DIR
+        "log",          // LOG_DIR
+        ""
+};
 
-static int make_snes9x_dirs(void);
+static int make_snes9x_dirs();
+
+static void S9xEndScreenRefreshCallback(void *);
 
 std::string getButtonId(int player, const std::string &name) {
     return "Joypad" + std::to_string(player) + " " + name;
@@ -82,11 +57,10 @@ std::string getButtonId(int player, const std::string &name) {
 
 PSNESUiEmu::PSNESUiEmu(UiMain *ui) : UiEmu(ui) {
     printf("PSNESUIEmu()\n");
-    _ui = ui;
+    m_ui = ui;
 }
 
 int PSNESUiEmu::load(const ss_api::Game &game) {
-
     ui->getUiProgressBox()->setTitle(game.name);
     ui->getUiProgressBox()->setMessage("Please wait...");
     ui->getUiProgressBox()->setProgress(0);
@@ -112,11 +86,8 @@ int PSNESUiEmu::load(const ss_api::Game &game) {
     Settings.Stereo = TRUE;
     Settings.SoundSync = FALSE;
     Settings.SoundInputRate = 31950;
-#ifdef __VITA__
-    Settings.SoundPlaybackRate = 22050;
-#else
     Settings.SoundPlaybackRate = 48000;
-#endif
+
     // audio
     Settings.Transparency =
             ui->getConfig()->get(Option::ROM_PSNES_TRANSPARENCY, true)->getIndex();
@@ -130,8 +101,10 @@ int PSNESUiEmu::load(const ss_api::Game &game) {
     Settings.WrongMovieStateProtection = TRUE;
     Settings.DumpStreamsMaxFrames = -1;
     Settings.StretchScreenshots = 1;
-    Settings.SnapshotScreenshots = TRUE;
+    Settings.SnapshotScreenshots = FALSE;
+    Settings.DontSaveOopsSnapshot = TRUE;
     Settings.FastSavestates = TRUE;
+    Settings.SeparateEchoBuffer = FALSE;
 
     int skipFramesCfg = ui->getConfig()->get(Option::ROM_PSNES_FRAMESKIP, true)->getIndex();
     if (skipFramesCfg == 0) {
@@ -145,22 +118,16 @@ int PSNESUiEmu::load(const ss_api::Game &game) {
     Settings.TurboMode = ui->getConfig()->get(Option::ROM_PSNES_TURBO_MODE, true)->getIndex();
     Settings.TurboSkipFrames = ui->getConfig()->get(Option::ROM_PSNES_TURBO_FRAMESKIP,
                                                     true)->getIndex();
-
     Settings.CartAName[0] = 0;
     Settings.CartBName[0] = 0;
-
-    // big boost when SupportHiRes disabled
-    Settings.SupportHiRes = (bool8) ui->getConfig()->get(Option::ROM_PSNES_HIGH_RES,
-                                                         true)->getIndex();
-    printf("Settings.SupportHiRes: %i\n", Settings.SupportHiRes);
 
     CPU.Flags = 0;
 
     make_snes9x_dirs();
 
-    S9xDeleteCheats();
-
     if (!Memory.Init() || !S9xInitAPU()) {
+        Memory.Deinit();
+        S9xDeinitAPU();
         printf("Could not initialize Snes9x Memory.\n");
         ui->getUiProgressBox()->setVisibility(Visibility::Hidden);
         stop();
@@ -173,7 +140,7 @@ int PSNESUiEmu::load(const ss_api::Game &game) {
 
     //getButtonId
     S9xUnmapAllControls();
-    for (uint32 i = 0; i < 4; i++) {
+    for (int i = 0; i < 4; i++) {
         S9xSetController(i, CTL_JOYPAD, (int8) i, 0, 0, 0);
         S9xMapButton(0 + (i * 12), S9xGetCommandT(getButtonId(i + 1, "Up").c_str()), false);
         S9xMapButton(1 + (i * 12), S9xGetCommandT(getButtonId(i + 1, "Down").c_str()), false);
@@ -204,11 +171,7 @@ int PSNESUiEmu::load(const ss_api::Game &game) {
 
     Memory.LoadSRAM(S9xGetFilename(".srm", SRAM_DIR));
 
-    Settings.ApplyCheats = FALSE;
-    if (ui->getConfig()->get(Option::ROM_PSNES_CHEATS, true)->getIndex() == 1) {
-        printf("Settings.ApplyCheats = TRUE\n");
-        Settings.ApplyCheats = TRUE;
-    }
+    Settings.ApplyCheats = ui->getConfig()->get(Option::ROM_PSNES_CHEATS, true)->getIndex() == 1;
     S9xDeleteCheats();
     S9xCheatsEnable();
     if (Settings.ApplyCheats) {
@@ -219,42 +182,15 @@ int PSNESUiEmu::load(const ss_api::Game &game) {
     CPU.Flags = saved_flags;
     Settings.StopEmulation = FALSE;
 
-    // Initialize filters
-    S9xBlitFilterInit();
-#ifdef __SOFT_SCALERS__
-    S9xBlit2xSaIFilterInit();
-    S9xBlitHQ2xFilterInit();
-#endif
-
-    if (Settings.SupportHiRes) {
-        GFX.Pitch = SNES_WIDTH * 2 * 2;
-        gfx_snes_buffer = (uint8 *) malloc(GFX.Pitch * ((SNES_HEIGHT_EXTENDED + 4) * 2));
-        memset(gfx_snes_buffer, 0, GFX.Pitch * ((SNES_HEIGHT_EXTENDED + 4) * 2));
-        GFX.Screen = (uint16 *) gfx_snes_buffer;
-        snes9x_game_size = {SNES_WIDTH * 2, SNES_HEIGHT_EXTENDED * 2};
-        auto v = new PSNESVideo(getUi(), &gfx_video_buffer, nullptr,
-                                Vector2i(SNES_WIDTH * 2, SNES_HEIGHT_EXTENDED * 2));
-        addVideo(v);
-        memset(gfx_video_buffer, 0,
-               (size_t) getVideo()->getTexture()->m_pitch * getVideo()->getTextureRect().height);
-    } else {
-        GFX.Pitch = SNES_WIDTH * 2;
-        snes9x_game_size = {SNES_WIDTH, SNES_HEIGHT_EXTENDED};
-        auto v = new PSNESVideo(getUi(), (uint8_t **) &GFX.Screen, (int *) &GFX.Pitch,
-                                Vector2i(SNES_WIDTH, SNES_HEIGHT_EXTENDED));
-        addVideo(v);
-        memset(GFX.Screen, 0,
-               (size_t) getVideo()->getTexture()->m_pitch * getVideo()->getTextureRect().height);
-    }
-
+    // video
     S9xGraphicsInit();
-
-    int samples = Audio::toSamples((int) Settings.SoundPlaybackRate,
-                                   (float) Memory.ROMFramesPerSecond);
-    addAudio((int) Settings.SoundPlaybackRate, samples);
-    audio_buffer = malloc(getAudio()->getSamplesSize() * 2);
-
+    S9xSetEndScreenRefreshCallback(S9xEndScreenRefreshCallback, nullptr);
+    addVideo((uint8_t **) &GFX.Screen, (int *) &GFX.Pitch, {MAX_SNES_WIDTH, MAX_SNES_HEIGHT});
     targetFps = (float) Memory.ROMFramesPerSecond;
+
+    // audio
+    addAudio((int) Settings.SoundPlaybackRate, targetFps < 60 ? 1916 : 1600);
+    audio_buffer = malloc(getAudio()->getSamplesSize() * getAudio()->getChannels() * 5);
 
     ui->getUiProgressBox()->setProgress(1);
     ui->flip();
@@ -265,33 +201,16 @@ int PSNESUiEmu::load(const ss_api::Game &game) {
 }
 
 void PSNESUiEmu::stop() {
-
     Settings.StopEmulation = TRUE;
 
     Memory.SaveSRAM(S9xGetFilename(".srm", SRAM_DIR));
-    //S9xResetSaveTimer(FALSE);
-    //S9xSaveCheatFile(S9xGetFilename(".bml", CHEAT_DIR));
-
-    S9xBlitFilterDeinit();
-#ifdef __SOFT_SCALERS__
-    S9xBlit2xSaIFilterDeinit();
-    S9xBlitHQ2xFilterDeinit();
-#endif
 
     S9xUnmapAllControls();
     S9xGraphicsDeinit();
     Memory.Deinit();
     S9xDeinitAPU();
 
-    if (gfx_snes_buffer != nullptr) {
-        free(gfx_snes_buffer);
-        gfx_snes_buffer = nullptr;
-    }
-
-    snes9x_prev_width = 0;
-    snes9x_prev_height = 0;
-
-    if (audio_buffer != nullptr) {
+    if (audio_buffer) {
         free(audio_buffer);
     }
 
@@ -303,7 +222,6 @@ bool PSNESUiEmu::onInput(c2d::Input::Player *players) {
 }
 
 void PSNESUiEmu::onUpdate() {
-
     UiEmu::onUpdate();
 
     if (isVisible() && !isPaused()) {
@@ -327,10 +245,6 @@ void PSNESUiEmu::onUpdate() {
         }
 
         S9xMainLoop();
-
-        int samples = S9xGetSampleCount();
-        S9xMixSamples((uint8 *) audio_buffer, samples);
-        _ui->getUiEmu()->getAudio()->play(audio_buffer, samples >> 1, true);
     }
 }
 
@@ -348,6 +262,24 @@ void PSNESUiEmu::resume() {
 // Functions called by Snes9x below
 ///////////////////////////////////////////////////////////////////////////////
 
+static void S9xEndScreenRefreshCallback(void *) {
+    if (Settings.Mute) {
+        S9xClearSamples();
+        return;
+    }
+
+    int samples = S9xGetSampleCount();
+    S9xMixSamples((uint8 *) audio_buffer, samples);
+#if 0
+    printf("play: samples: %i, queued: %i, capacity: %i (fps: %i)\n",
+           samples,
+           m_ui->getUiEmu()->getAudio()->getSampleBufferQueued(),
+           m_ui->getUiEmu()->getAudio()->getSampleBufferCapacity(),
+           Memory.ROMFramesPerSecond);
+#endif
+    m_ui->getUiEmu()->getAudio()->play(audio_buffer, samples >> 1, true);
+}
+
 /**
  * Called just before Snes9x begins to render an SNES screen.
  * Use this function if you should prepare before drawing, otherwise let it empty.
@@ -363,114 +295,17 @@ bool8 S9xInitUpdate() {
  * 256*224, 256*239, 512*224, 512*239, 512*448 and 512*478.
  */
 bool8 S9xDeinitUpdate(int width, int height) {
+    //printf("S9xDeinitUpdate(%i, %i\n", width, height);
+    C2DUIVideo *video = m_ui->getUiEmu()->getVideo();
+    auto rect = video->getTextureRect();
 
-    Blitter blit = nullptr;
-#ifdef __SOFT_SCALERS__
-    int effect = _ui->getConfig()->getValue(Option::ROM_SHADER, true);
-#else
-    int effect = 0;
-#endif
-    // for video.cpp scaling
-    //printf("S9xDeinitUpdate: %i x %i\n", width, height);
-    C2DUIVideo *video = _ui->getUiEmu()->getVideo();
-
-    if (snes9x_prev_height != height) {
-        if (Settings.SupportHiRes) {
-            snes9x_game_size = {(float) width * 2, (float) height * 2};
-        } else {
-            snes9x_game_size = {(float) width, (float) height};
-        }
-        printf("video->updateScaling: res: %i x %i\n", width, height);
+    if (rect.width != width || rect.height != height) {
+        video->setTextureRect({0, 0, width, height});
+        video->setSize((float) width, (float) height);
         video->updateScaling();
     }
 
-    if (Settings.SupportHiRes) {
-#ifdef __SOFT_SCALERS__
-        if (effect == VIDEOMODE_BLOCKY || effect == VIDEOMODE_TV || effect == VIDEOMODE_SMOOTH) {
-#endif
-        if ((width <= SNES_WIDTH) &&
-            ((snes9x_prev_width != width) || (snes9x_prev_height != height))) {
-            printf("S9xBlitClearDelta\n");
-            S9xBlitClearDelta();
-        }
-#ifdef __SOFT_SCALERS__
-        }
-#endif
-
-        if (width <= SNES_WIDTH) {
-            if (height > SNES_HEIGHT_EXTENDED) {
-                blit = S9xBlitPixSimple2x1;
-            } else {
-                switch (effect) {
-#ifdef __SOFT_SCALERS__
-                    case VIDEOMODE_TV:
-                        blit = S9xBlitPixTV2x2;
-                        break;
-                    case VIDEOMODE_SMOOTH:
-                        blit = S9xBlitPixSmooth2x2;
-                        break;
-                    case VIDEOMODE_SUPEREAGLE:
-                        blit = S9xBlitPixSuperEagle16;
-                        break;
-                    case VIDEOMODE_2XSAI:
-                        blit = S9xBlitPix2xSaI16;
-                        break;
-                    case VIDEOMODE_SUPER2XSAI:
-                        blit = S9xBlitPixSuper2xSaI16;
-                        break;
-                    case VIDEOMODE_EPX:
-                        blit = S9xBlitPixEPX16;
-                        break;
-                    case VIDEOMODE_HQ2X:
-                        blit = S9xBlitPixHQ2x16;
-                        break;
-#endif
-                    default:
-                        blit = S9xBlitPixSimple2x2;
-                        break;
-                }
-            }
-        } else if (height <= SNES_HEIGHT_EXTENDED) {
-            switch (effect) {
-                default:
-                    blit = S9xBlitPixSimple1x2;
-                    break;
-#ifdef __SOFT_SCALERS__
-                    case VIDEOMODE_TV:
-                        blit = S9xBlitPixTV1x2;
-                        break;
-#endif
-            }
-        } else {
-            blit = S9xBlitPixSimple1x1;
-        }
-
-        blit((uint8 *) GFX.Screen, GFX.Pitch, gfx_video_buffer, video->getTexture()->m_pitch, width,
-             height);
-
-        if (height < snes9x_prev_height) {
-            int p = video->getTexture()->m_pitch >> 2;
-            for (int y = SNES_HEIGHT * 2; y < SNES_HEIGHT_EXTENDED * 2; y++) {
-                auto *d = (uint32 *) (gfx_video_buffer + y * video->getTexture()->m_pitch);
-                for (int x = 0; x < p; x++)
-                    *d++ = 0;
-            }
-        }
-    } else {
-        if (height < snes9x_prev_height) {
-            int p = video->getTexture()->m_pitch >> 2;
-            for (int y = SNES_HEIGHT; y < SNES_HEIGHT_EXTENDED; y++) {
-                auto *d = (uint32 *) (GFX.Screen + y * video->getTexture()->m_pitch);
-                for (int x = 0; x < p; x++)
-                    *d++ = 0;
-            }
-        }
-    }
-
-    snes9x_prev_width = width;
-    snes9x_prev_height = height;
-
-    video->getTexture()->unlock();
+    video->unlock();
 
     return TRUE;
 }
@@ -479,6 +314,8 @@ bool8 S9xDeinitUpdate(int width, int height) {
  * Called at the end of screen refresh if GFX.DoInterlace && GFX.InterlaceFrame == 0 is true (?).
  */
 bool8 S9xContinueUpdate(int width, int height) {
+    //printf("S9xContinueUpdate\n");
+    S9xDeinitUpdate(width, height);
     return TRUE;
 }
 
@@ -505,13 +342,13 @@ static int make_snes9x_dirs() {
     if (strlen(s9x_base_dir) + 1 + sizeof(dirNames[0]) > PATH_MAX + 1)
         return (-1);
 
-    _ui->getIo()->create(s9x_base_dir);
+    m_ui->getIo()->create(s9x_base_dir);
 
     for (int i = 0; i < LAST_DIR; i++) {
         if (dirNames[i][0]) {
             char s[PATH_MAX + 1];
             snprintf(s, PATH_MAX + 1, "%s%s%s", s9x_base_dir, SLASH_STR, dirNames[i]);
-            _ui->getIo()->create(s);
+            m_ui->getIo()->create(s);
         }
     }
 
@@ -704,7 +541,7 @@ void S9xHandlePortCommand(s9xcommand_t cmd, int16 data1, int16 data2) {
  * Called when some fatal error situation arises or when the “q” debugger command is used.
  */
 void S9xExit() {
-    _ui->getUiEmu()->stop();
+    m_ui->getUiEmu()->stop();
 }
 
 /**
