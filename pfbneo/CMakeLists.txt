@@ -158,6 +158,7 @@ set(CPU_DIRS
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/cpu/tlcs90
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/cpu/tlcs900
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/cpu/sh2
+        ${CMAKE_SOURCE_DIR}/cores/fbneo/src/cpu/sh4
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/cpu/tms32010
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/cpu/tms34
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/cpu/upd7725
