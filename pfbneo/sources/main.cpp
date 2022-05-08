@@ -51,7 +51,7 @@ void BurnPathsInit(C2DIo *io);
 
 INT32 GetIpsesMaxLen(char *)
 {
-	return 0;
+    return 0;
 }
 
 int main(int argc, char **argv) {
