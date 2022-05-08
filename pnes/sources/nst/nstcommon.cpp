@@ -35,6 +35,9 @@
 #include <sys/types.h>
 
 #ifdef __PNES__
+#ifdef __WINDOWS__
+#define mkdir(x, y) mkdir(x)
+#endif
 #include <minizip/unzip.h>
 #else
 #include <archive.h>
