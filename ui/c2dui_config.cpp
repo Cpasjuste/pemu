@@ -65,7 +65,8 @@ Config::Config(c2d::Io *io, int ver, const std::string &defaultRomsPath) {
     }
     get()->at(get()->size() - 1).setInfo("YOU NEED TO RESTART THE APPLICATION AFTER CHANGING THIS OPTION");
 
-    append("VIDEO_SNAP_DELAY", 5, Option::Id::GUI_VIDEO_SNAP_DELAY, Option::Flags::INTEGER);
+    append("VIDEO_SNAP_DELAY", {"3", "5", "7", "10"}, 1,
+           Option::Id::GUI_VIDEO_SNAP_DELAY, Option::Flags::STRING);
 
     /////////////////////////////////////////////////
     /// default rom config
@@ -113,8 +114,8 @@ Config::Config(c2d::Io *io, int ver, const std::string &defaultRomsPath) {
     append("JOY_AXIS_RY", KEY_JOY_AXIS_RY, Option::Id::JOY_AXIS_RY, Option::Flags::INPUT | Option::Flags::HIDDEN);
     append("JOY_DEADZONE",
            {"2000", "4000", "6000", "8000", "10000", "12000", "14000", "16000",
-            "18000", "20000", "22000", "24000", "26000", "28000", "30000"}, 3, Option::Id::JOY_DEADZONE,
-           Option::Flags::INTEGER);
+            "18000", "20000", "22000", "24000", "26000", "28000", "30000"}, 3,
+           Option::Id::JOY_DEADZONE, Option::Flags::STRING);
 #ifndef NO_KEYBOARD
     // keyboard
     append("KEYBOARD", {"KEYBOARD"}, 0, Option::Id::MENU_KEYBOARD, Option::Flags::MENU);
