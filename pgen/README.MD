@@ -44,24 +44,24 @@ You can download full-set mixrbv2 and video packages here:
 - copy gamegear roms to "/switch/pgen/gamegear/" directory on sdcard
 - copy megadrive roms to "/switch/pgen/megadrive/" directory on sdcard
 - copy master system roms to "/switch/pgen/sms/" directory on sdcard
-- copy mega-cd roms to "/switch/pgen/megacd/" directory on sdcard
+- copy mega-cd roms (unzipped cue/bin) to "/switch/pgen/megacd/" directory on sdcard
 
 ### Installation (ps4)
 - install pkg
 - copy gamegear roms to "/data/pgen/gamegear/" directory on sdcard
 - copy megadrive roms to "/data/pgen/megadrive/" directory on sdcard
 - copy master system roms to "/data/pgen/sms/" directory on sdcard
-- copy mega-cd roms to "/data/pgen/megacd/" directory on sdcard
+- copy mega-cd roms (unzipped cue/bin) to "/data/pgen/megacd/" directory on sdcard
 
 ### Installation (vita)
 - install vpk
 - copy gamegear roms to "ux0:/data/pgen/gamegear/" directory on sdcard
 - copy megadrive roms to "ux0:/data/pgen/megadrive/" directory on sdcard
 - copy master system roms to "ux0:/data/pgen/sms/" directory on sdcard
-- copy mega-cd roms to "ux0:/data/pgen/megacd/" directory on sdcard
+- copy mega-cd roms (unzipped cue/bin) to "ux0:/data/pgen/megacd/" directory on sdcard
 
 ### Bios
-You should put these sega bios in the "pgen/bios" directory:
+You need to put sega bios in the "pgen/bios" directory:
 ggenie.bin, areplay.bin, sk.bin, sk2chip.bin, bios_CD_U.bin, bios_CD_E.bin, bios_CD_J.bin, bios_MD.bin, bios_U.sms, bios_E.sms, bios_J.sms, bios.gg
 
 ### Usage (switch)
