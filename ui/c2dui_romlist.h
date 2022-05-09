@@ -19,7 +19,7 @@ namespace c2dui {
 
         virtual ~RomList();
 
-        virtual void build(bool addArcadeSystem = false);
+        virtual void build(bool addArcadeSystem = false, const ss_api::System &system = {});
 
         void addFav(const ss_api::Game &game);
 

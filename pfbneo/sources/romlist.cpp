@@ -5,7 +5,7 @@
 #include "c2dui.h"
 #include "romlist.h"
 
-void PFBARomList::build(bool addArcadeSystem) {
+void PFBARomList::build(bool addArcadeSystem, const ss_api::System &system) {
 #ifndef __PFBN_NO_CONSOLES__
     std::string dataPath = ui->getIo()->getDataPath();
     if (!ui->getIo()->exist(dataPath + "gamelist.xml")) {

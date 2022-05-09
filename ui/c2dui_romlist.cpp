@@ -70,7 +70,7 @@ void RomList::setLoadingText(const char *format, ...) {
     ui->flip();
 }
 
-void RomList::build(bool addArcadeSystem) {
+void RomList::build(bool addArcadeSystem, const ss_api::System &system) {
     std::string romPath = ui->getConfig()->getRomPaths().at(FBN_PATH_ARCADE);
     printf("RomList::build(): ROM_PATH_0: %s\n", romPath.c_str());
 
@@ -80,7 +80,7 @@ void RomList::build(bool addArcadeSystem) {
     }
 
     gameList->append(gameListPath,
-                     ui->getConfig()->getRomPaths().at(FBN_PATH_ARCADE), false, filters);
+                     ui->getConfig()->getRomPaths().at(FBN_PATH_ARCADE), false, filters, system);
 
     setLoadingText("Games: %li / %li", gameList->getAvailableCount(), gameList->games.size());
     printf("RomList::build: games: %li / %li\n", gameList->getAvailableCount(), gameList->games.size());
