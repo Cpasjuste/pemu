@@ -30,7 +30,7 @@ add_subdirectory(sscrap)
 project(pemu)
 set(PROJECT_AUTHOR cpasjuste)
 set(VERSION_MAJOR 6)
-set(VERSION_MINOR 2)
+set(VERSION_MINOR 3)
 
 # pemu (ui)
 add_subdirectory(ui)
