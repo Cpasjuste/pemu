@@ -46,6 +46,8 @@ int PGENUiEmu::load(const ss_api::Game &game) {
     // video init
     memset(&bitmap, 0, sizeof(bitmap));
     addVideo(&bitmap.data, &bitmap.pitch, {512, 512});
+    // game gear "special" resolution handling
+    resizeVideo(true);
 
     // load rom
     std::string path = game.romsPath + game.path;
@@ -118,21 +120,24 @@ void PGENUiEmu::onUpdate() {
 
         }
 
-        if (bitmap.viewport.changed & 4) {
-            printf("interlaced mode change: {%i, %i, %i, %i}\n",
-                   bitmap.viewport.x, bitmap.viewport.y, bitmap.viewport.w, bitmap.viewport.h);
-            resizeVideo();
-            bitmap.viewport.changed &= ~4;
-        } else if (bitmap.viewport.changed & 1) {
-            printf("video mode change: {%i, %i, %i, %i}\n",
-                   bitmap.viewport.x, bitmap.viewport.y, bitmap.viewport.w, bitmap.viewport.h);
-            resizeVideo();
-            bitmap.viewport.changed &= ~1;
-        } else if (video->getTextureRect().width != bitmap.viewport.w ||
-                   video->getTextureRect().height != bitmap.viewport.h) {
-            printf("video rect {%i, %i} != bitmap size: {%i, %i}\n",
-                   video->getTextureRect().width, video->getTextureRect().height, bitmap.viewport.w, bitmap.viewport.h);
-            resizeVideo();
+        if (system_hw != SYSTEM_GG && system_hw != SYSTEM_GGMS) {
+            if (bitmap.viewport.changed & 4) {
+                printf("interlaced mode change: {%i, %i, %i, %i}\n",
+                       bitmap.viewport.x, bitmap.viewport.y, bitmap.viewport.w, bitmap.viewport.h);
+                resizeVideo();
+                bitmap.viewport.changed &= ~4;
+            } else if (bitmap.viewport.changed & 1) {
+                printf("video mode change: {%i, %i, %i, %i}\n",
+                       bitmap.viewport.x, bitmap.viewport.y, bitmap.viewport.w, bitmap.viewport.h);
+                resizeVideo();
+                bitmap.viewport.changed &= ~1;
+            } else if (video->getTextureRect().width != bitmap.viewport.w ||
+                       video->getTextureRect().height != bitmap.viewport.h) {
+                printf("video rect {%i, %i} != viewport size: {%i, %i}\n",
+                       video->getTextureRect().width, video->getTextureRect().height, bitmap.viewport.w,
+                       bitmap.viewport.h);
+                resizeVideo();
+            }
         }
 
         // genesis frame step
@@ -155,10 +160,16 @@ void PGENUiEmu::onUpdate() {
     return UiEmu::onUpdate();
 }
 
-void PGENUiEmu::resizeVideo() {
-    video->setTextureRect({0, 0, bitmap.viewport.w, bitmap.viewport.h});
-    video->setSize((float) bitmap.viewport.w, (float) bitmap.viewport.h);
-    video->lock(&bitmap.data, &bitmap.pitch, {0, 0, bitmap.viewport.w, bitmap.viewport.h});
+void PGENUiEmu::resizeVideo(bool isGameGear) {
+    if (isGameGear) {
+        video->setTextureRect({0, 0, 160, 144});
+        video->setSize(160, 144);
+        video->lock(&bitmap.data, &bitmap.pitch, {0, 0, 160, 144});
+    } else {
+        video->setTextureRect({0, 0, bitmap.viewport.w, bitmap.viewport.h});
+        video->setSize((float) bitmap.viewport.w, (float) bitmap.viewport.h);
+        video->lock(&bitmap.data, &bitmap.pitch, {0, 0, bitmap.viewport.w, bitmap.viewport.h});
+    }
     video->updateScaling();
 }
 

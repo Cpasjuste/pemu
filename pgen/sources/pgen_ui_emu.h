@@ -21,7 +21,7 @@ public:
 
     void onUpdate() override;
 
-    void resizeVideo();
+    void resizeVideo(bool isGameGear = false);
 
 private:
     void loadBios();
