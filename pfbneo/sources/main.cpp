@@ -49,6 +49,11 @@ Skin *skin;
 
 void BurnPathsInit(C2DIo *io);
 
+INT32 GetIpsesMaxLen(char *)
+{
+    return 0;
+}
+
 int main(int argc, char **argv) {
 #ifdef __PSP2__
     // set max cpu speed
