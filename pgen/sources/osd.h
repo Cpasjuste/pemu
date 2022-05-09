@@ -9,6 +9,7 @@
 extern "C" {
 #endif
 
+#include <zlib.h>
 #include <types.h>
 
 #define MAX_INPUTS 4

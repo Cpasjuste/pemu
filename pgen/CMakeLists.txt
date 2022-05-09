@@ -3,6 +3,8 @@ cmake_minimum_required(VERSION 3.0)
 
 project(pgen)
 
+set(OPTION_CHD ON CACHE STRING "build with CHD support")
+
 ##################
 # GENESIS PLUS GX
 ##################
@@ -38,6 +40,22 @@ set(GENESIS_CFLAGS
         -D__PGEN__ -D__PGEN_VERSION_MAJOR__=${VERSION_MAJOR} -D__PGEN_VERSION_MINOR__=${VERSION_MINOR}
         )
 
+if (OPTION_CHD)
+    list(APPEND GENESIS_INC
+            ${CMAKE_SOURCE_DIR}/cores/genesis/core/cd_hw/libchdr/src
+            ${CMAKE_SOURCE_DIR}/cores/genesis/core/cd_hw/libchdr/deps/libFLAC/include
+            ${CMAKE_SOURCE_DIR}/cores/genesis/core/cd_hw/libchdr/deps/lzma
+            )
+    file(GLOB CHD_SRC ${CMAKE_SOURCE_DIR}/cores/genesis/core/cd_hw/libchdr/src/*.c)
+    file(GLOB FLAC_SRC ${CMAKE_SOURCE_DIR}/cores/genesis/core/cd_hw/libchdr/deps/libFLAC/*.c)
+    file(GLOB LZMA_SRC ${CMAKE_SOURCE_DIR}/cores/genesis/core/cd_hw/libchdr/deps/lzma/*.c)
+    list(APPEND GENESIS_SRC ${CHD_SRC} ${FLAC_SRC} ${LZMA_SRC})
+    list(APPEND GENESIS_CFLAGS
+            -DUSE_LIBCHDR -DPACKAGE_VERSION=\"1.3.2\"
+            -DFLAC_API_EXPORTS -DFLAC__HAS_OGG=0
+            -DHAVE_LROUND -DHAVE_STDINT_H -D_7ZIP_ST)
+endif ()
+
 ##############
 # pgen
 ##############
@@ -60,6 +78,7 @@ elseif (PLATFORM_PS4)
     set(PS4_PKG_TITLE "pGEN - Portable Genesis Plus GX")
     set(PS4_PKG_TITLE_ID "PGEN00001")
     set(PS4_PKG_VERSION "${VERSION_MAJOR}.${VERSION_MINOR}")
+    list(APPEND GENESIS_CFLAGS -DHAVE_SYS_PARAM_H)
 elseif (PLATFORM_SWITCH)
     #####################
     # SWITCH PLATORM
