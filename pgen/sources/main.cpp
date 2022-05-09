@@ -81,8 +81,8 @@ int main(int argc, char **argv) {
     // ui
     std::string genesis_version = "Genesis Plus GX";
     romList = new PGENRomList(ui, genesis_version,
-                              {".zip", ".md", ".smd", ".gen", ".bin", ".mdx",
-                               ".cue", ".iso", ".sms", ".gg", ".sg", ".68k", ".chd"});
+                              {".zip", ".md", ".smd", ".gen", ".bin",
+                               ".mdx", ".sms", ".gg", ".sg", ".68k", ".chd"});
     romList->build();
     uiRomList = new UIRomList(ui, romList, ui->getSize());
     uiMenu = new UiMenu(ui);

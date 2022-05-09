@@ -20,7 +20,7 @@ void PGENRomList::build(bool addArcadeSystem) {
     setLoadingText("Games: %li / %li", gameList->getAvailableCount(), gameList->games.size());
 
     gameList->append(dataPath + "gamelist_megacd.xml",
-                     ui->getConfig()->getRomPaths().at(FBN_PATH_FDS), false, filters);
+                     ui->getConfig()->getRomPaths().at(FBN_PATH_FDS), false, {".cue", ".iso"});
     setLoadingText("Games: %li / %li", gameList->getAvailableCount(), gameList->games.size());
 
 #if 0
