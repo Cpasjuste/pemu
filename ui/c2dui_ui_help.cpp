@@ -5,29 +5,36 @@
 #include "c2dui.h"
 
 UiHelp::UiHelp(UiMain *ui) : SkinnedRectangle(ui->getSkin(), {"MAIN", "HELP"}) {
+    int button1, button2;
     auto font = ui->getSkin()->getFont();
 
     // navigation
     float pos = addItem(true, font, {ui->getSkin()->getButton(100)},
                         "NAVIGATION", {4, getSize().y / 2});
     // run
-    pos = addItem(true, font, {ui->getSkin()->getButton(KEY_JOY_A_DEFAULT)},
+    button1 = ui->getConfig()->get(Option::Id::JOY_A)->getValueInt();
+    pos = addItem(true, font, {ui->getSkin()->getButton(button1)},
                   "RUN", {pos + 12, getSize().y / 2});
     // favorite
-    pos = addItem(true, font, {ui->getSkin()->getButton(KEY_JOY_Y_DEFAULT)},
+    button1 = ui->getConfig()->get(Option::Id::JOY_X)->getValueInt();
+    pos = addItem(true, font, {ui->getSkin()->getButton(button1)},
                   "ADD / REMOVE FAVORITE", {pos + 12, getSize().y / 2});
     if (!(ui->getConfig()->get(Option::Id::GUI_FILTER_SYSTEM)->getFlags() & Option::Flags::HIDDEN)) {
         // system
+        button1 = ui->getConfig()->get(Option::Id::JOY_LT)->getValueInt();
+        button2 = ui->getConfig()->get(Option::Id::JOY_RT)->getValueInt();
         addItem(true, font,
-                {ui->getSkin()->getButton(KEY_JOY_LT_DEFAULT), ui->getSkin()->getButton(KEY_JOY_RT_DEFAULT)},
+                {ui->getSkin()->getButton(button1), ui->getSkin()->getButton(button2)},
                 "SWITCH SYSTEM", {pos + 12, getSize().y / 2});
     }
 
     // main menu
-    pos = addItem(false, font, {ui->getSkin()->getButton(KEY_JOY_START_DEFAULT)},
+    button1 = ui->getConfig()->get(Option::Id::JOY_MENU1)->getValueInt();
+    pos = addItem(false, font, {ui->getSkin()->getButton(button1)},
                   "MAIN MENU", {getSize().x - 4, getSize().y / 2});
 
-    addItem(false, font, {ui->getSkin()->getButton(KEY_JOY_SELECT_DEFAULT)},
+    button1 = ui->getConfig()->get(Option::Id::JOY_MENU2)->getValueInt();
+    addItem(false, font, {ui->getSkin()->getButton(button1)},
             "ROM MENU", {pos - 12, getSize().y / 2});
 }
 
