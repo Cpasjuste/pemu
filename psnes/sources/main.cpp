@@ -1,6 +1,5 @@
 #include "c2dui.h"
 #include "uiEmu.h"
-#include "uiMenu.h"
 #include "uiStateMenu.h"
 #include "config.h"
 #include "psnesIo.h"
@@ -16,11 +15,11 @@
 extern "C" int sceSystemServiceLoadExec(const char *path, const char *args[]);
 #endif
 
-PSNESUIMenu *uiMenu;
 PSNESUiEmu *uiEmu;
 PSNESConfig *cfg;
 PSNESUIStateMenu *uiState;
 RomList *romList;
+UiMenu *uiMenu;
 
 UiMain *ui;
 Skin *skin;
@@ -72,7 +71,7 @@ int main(int argc, char **argv) {
     romList = new RomList(ui, snes9x_version, {".zip", ".sfc", ".smc", ".swc", ".fig"});
     romList->build();
     uiRomList = new UIRomList(ui, romList, ui->getSize());
-    uiMenu = new PSNESUIMenu(ui);
+    uiMenu = new UiMenu(ui);
     uiEmu = new PSNESUiEmu(ui);
     uiState = new PSNESUIStateMenu(ui);
     ui->init(uiRomList, uiMenu, uiEmu, uiState);

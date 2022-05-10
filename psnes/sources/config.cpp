@@ -12,12 +12,7 @@ PSNESConfig::PSNESConfig(c2d::Io *io, int version) : Config(io, version) {
 
     printf("PSNESConfig(%s, v%i)\n", getConfigPath().c_str(), version);
 
-    add(Option::Id::ROM_SHOW_FPS, "HIGH_RES", {"OFF", "ON"}, 0,
-        Option::Id::ROM_PSNES_HIGH_RES, Option::Flags::BOOLEAN);
-    get(Option::Id::ROM_PSNES_HIGH_RES)->setInfo(
-            "ENABLE HIGH RES FOR GAMES LIKE SECRET OF MANA - NEEDS A RESTART");
-
-    add(Option::Id::ROM_PSNES_HIGH_RES, "CHEATS", {"OFF", "ON"}, 1,
+    add(Option::Id::ROM_SHOW_FPS, "CHEATS", {"OFF", "ON"}, 1,
         Option::Id::ROM_PSNES_CHEATS, Option::Flags::BOOLEAN);
 
     add(Option::Id::ROM_PSNES_CHEATS, "BLOCk_INVALID_VRAM", {"OFF", "ON"}, 1,
