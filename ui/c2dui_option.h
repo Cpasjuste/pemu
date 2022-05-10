@@ -50,6 +50,9 @@ namespace c2dui {
             ROM_SCALING_MODE,
             ROM_FILTER,
             ROM_SHADER,
+#ifdef __VITA__
+            ROM_WAIT_RENDERING,
+#endif
             ROM_FORCE_60HZ,
             ROM_AUDIO_FREQ,
             ROM_AUDIO_INTERPOLATION,

@@ -87,6 +87,9 @@ Config::Config(c2d::Io *io, int ver, const std::string &defaultRomsPath) {
     append("SCALING_MODE", {"AUTO", "ASPECT", "INTEGER"}, 0,
            Option::Id::ROM_SCALING_MODE, Option::Flags::STRING);
     append("FILTER", {"POINT", "LINEAR"}, 0, Option::Id::ROM_FILTER, Option::Flags::STRING);
+#ifdef __VITA__
+    append("WAIT_RENDERING", {"OFF", "ON"}, 1, Option::Id::ROM_WAIT_RENDERING, Option::Flags::BOOLEAN);
+#endif
     append("SHOW_FPS", {"OFF", "ON"}, 0, Option::Id::ROM_SHOW_FPS, Option::Flags::BOOLEAN);
 
     /// joysticks config
