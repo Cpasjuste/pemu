@@ -24,8 +24,13 @@ bool PGENUIStateMenu::loadStateCore(const char *path) {
 }
 
 bool PGENUIStateMenu::saveStateCore(const char *path) {
-    uint8 buf[STATE_SIZE];
-    int len = state_save(buf);
+    auto buf = (uint8 *) malloc(STATE_SIZE);
+    bool ret = false;
+    if (buf) {
+        int len = state_save(buf);
+        ret = getUi()->getIo()->write(path, (const char *) buf, len);
+        free(buf);
+    }
 
-    return getUi()->getIo()->write(path, (const char *) buf, len);
+    return ret;
 }
