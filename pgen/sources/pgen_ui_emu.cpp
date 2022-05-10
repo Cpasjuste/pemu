@@ -21,11 +21,6 @@ static uint8 brm_format[0x40] = {
         0x52, 0x41, 0x4d, 0x5f, 0x43, 0x41, 0x52, 0x54, 0x52, 0x49, 0x44, 0x47, 0x45, 0x5f, 0x5f, 0x5f
 };
 
-#define CD_BRAM_EU "scd_bram_e.brm"
-#define CD_BRAM_US "scd_bram_u.brm"
-#define CD_BRAM_JP "scd_bram_j.brm"
-#define CD_BRAM_CART "scd_bram_cart.brm"
-
 PGENUiEmu::PGENUiEmu(UiMain *ui) : UiEmu(ui) {
     printf("PGENUiEmu()\n");
     set_config_defaults();
@@ -225,24 +220,8 @@ void PGENUiEmu::loadBram() {
     }
 
     char *data;
-    size_t size;
     std::string ramPath = ui->getIo()->getDataPath() + "rams/";
-
-    /* automatically load internal backup RAM */
-    switch (region_code) {
-        case REGION_JAPAN_NTSC:
-            size = getUi()->getIo()->read(ramPath + CD_BRAM_JP, &data, 0x2000);
-            break;
-        case REGION_EUROPE:
-            size = getUi()->getIo()->read(ramPath + CD_BRAM_EU, &data, 0x2000);
-            break;
-        case REGION_USA:
-            size = getUi()->getIo()->read(ramPath + CD_BRAM_US, &data, 0x2000);
-            break;
-        default:
-            return;
-    }
-
+    size_t size = getUi()->getIo()->read(ramPath + Utility::removeExt(currentGame.path) + ".brm", &data, 0x2000);
     if (data && size == 0x2000) {
         memcpy(scd.bram, data, 0x2000);
         free(data);
@@ -314,20 +293,8 @@ void PGENUiEmu::saveBram() {
     if (crc32(0, scd.bram, 0x2000) != brm_crc[0]) {
         /* check if it is correctly formatted before saving */
         if (!memcmp(scd.bram + 0x2000 - 0x20, brm_format + 0x20, 0x20)) {
-            switch (region_code) {
-                case REGION_JAPAN_NTSC:
-                    ui->getIo()->write(ramPath + CD_BRAM_JP, (const char *) scd.bram, 0x2000);
-                    break;
-                case REGION_EUROPE:
-                    ui->getIo()->write(ramPath + CD_BRAM_EU, (const char *) scd.bram, 0x2000);
-                    break;
-                case REGION_USA:
-                    ui->getIo()->write(ramPath + CD_BRAM_US, (const char *) scd.bram, 0x2000);
-                    break;
-                default:
-                    return;
-            }
-
+            ui->getIo()->write(ramPath + Utility::removeExt(currentGame.path) + ".brm", (const char *) scd.bram,
+                               0x2000);
             /* update CRC */
             brm_crc[0] = crc32(0, scd.bram, 0x2000);
         }

@@ -87,6 +87,8 @@ extern char MS_BIOS_US[256];
 extern char MS_BIOS_EU[256];
 extern char MS_BIOS_JP[256];
 
+#define CD_BRAM_CART "scd_bram_cart.brm"
+
 extern void osd_input_update(void);
 
 extern int load_archive(char *filename, unsigned char *buffer, int maxsize, char *extension);

@@ -11,7 +11,7 @@
 class PGENUIStateMenu : public c2dui::UiStateMenu {
 
 public:
-    PGENUIStateMenu(c2dui::UiMain *ui);
+    PGENUIStateMenu(c2dui::UiMain *ui) : c2dui::UiStateMenu(ui) {};
 
     bool loadStateCore(const char *path);
 

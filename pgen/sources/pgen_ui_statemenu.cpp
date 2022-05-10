@@ -9,10 +9,6 @@ extern "C" {
 #include "shared.h"
 }
 
-PGENUIStateMenu::PGENUIStateMenu(c2dui::UiMain *ui) : c2dui::UiStateMenu(ui) {
-
-}
-
 bool PGENUIStateMenu::loadStateCore(const char *path) {
     unsigned char *buf = nullptr;
     bool success = getUi()->getIo()->read(path, (char **) &buf, STATE_SIZE);
