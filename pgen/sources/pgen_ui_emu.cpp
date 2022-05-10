@@ -40,20 +40,32 @@ int PGENUiEmu::load(const ss_api::Game &game) {
     getUi()->getUiProgressBox()->setLayer(1000);
     getUi()->flip();
 
+    // check for mega-cd bios before loading a rom
+    if (game.system.id == 20) {
+        if (!ui->getIo()->exist(CD_BIOS_EU)
+            || !ui->getIo()->exist(CD_BIOS_US)
+            || !ui->getIo()->exist(CD_BIOS_JP)) {
+            getUi()->getUiProgressBox()->setVisibility(Visibility::Hidden);
+            getUi()->getUiMessageBox()->show(
+                    "WARNING",
+                    "MISSING MEGA-CD BIOS DETECTED, EMULATION WILL LIKELY NOT WORK...",
+                    "OK");
+        }
+    }
+
     // load genesis bios
     loadBios();
 
     // video init
     memset(&bitmap, 0, sizeof(bitmap));
     addVideo(&bitmap.data, &bitmap.pitch, {512, 512});
-    // game gear "special" resolution handling
-    resizeVideo(true);
 
     // load rom
     std::string path = game.romsPath + game.path;
     if (!load_rom((char *) path.c_str())) {
         getUi()->getUiProgressBox()->setVisibility(Visibility::Hidden);
-        getUi()->getUiMessageBox()->show("ERROR", "INVALID FILE", "OK");
+        getUi()->getUiMessageBox()->show(
+                "ERROR", "INVALID FILE OR MISSING BIOS...", "OK");
         stop();
         return -1;
     }
@@ -61,6 +73,11 @@ int PGENUiEmu::load(const ss_api::Game &game) {
     // system init
     audio_init(48000, 0);
     system_init();
+
+    // game gear "special" resolution handling
+    if (system_hw == SYSTEM_GG || system_hw == SYSTEM_GGMS) {
+        resizeVideo(true);
+    }
 
     // load mega-cd ram if needed
     loadBram();
