@@ -227,11 +227,9 @@ set(FLAGS
         -DBUILD_SDL2 -DBUILD_M68K
         -fomit-frame-pointer -Wno-write-strings
         -Wall -Wno-long-long -Wno-sign-compare -Wno-uninitialized -Wno-unused
-        -Wno-conversion -Wno-attributes
-        -Wno-unused-parameter -Wno-unused-value
-        -Wno-format-truncation -Wno-parentheses -Wno-sequence-point
-        -Wno-format -Wno-misleading-indentation
-        -Wno-restrict -Wno-unused-result
+        -Wno-conversion -Wno-attributes -Wno-unused-parameter -Wno-unused-value
+        -Wno-format-truncation -Wno-parentheses -Wno-sequence-point -Wno-format
+        -Wno-misleading-indentation -Wno-restrict -Wno-unused-result
         )
 
 if (OPTION_DISABLE_CONSOLES)
@@ -246,13 +244,10 @@ set(CMAKE_CXX_STANDARD 17)
 if (PLATFORM_VITA)
     enable_language(ASM)
     set(TITLE_ID "PFBN00001" CACHE STRING "" FORCE)
+    list(APPEND INC sources/cpu/cyclone)
     list(REMOVE_ITEM SRC_CPU ${CMAKE_SOURCE_DIR}/cores/fbneo/src/cpu/m68000_intf.cpp)
-    list(APPEND INC
-            sources/cpu/cyclone
-            ${VITASDK}/arm-vita-eabi/include/SDL2/
-            )
     list(APPEND SRC_PFBA sources/cpu/c68000_intf.cpp sources/cpu/cyclone/Cyclone.s)
-    list(APPEND FLAGS -DBUILD_C68K -DUSE_FILE32API -DLSB_FIRST -DUSE_SPEEDHACKS -D__PFBA_ARM__ -Os)
+    list(APPEND FLAGS -DBUILD_C68K -DUSE_FILE32API -DLSB_FIRST -DUSE_SPEEDHACKS -D__PFBA_ARM__)
     list(APPEND LDFLAGS ScePower_stub pthread)
 elseif (PLATFORM_PS4)
     set(PS4_PKG_TITLE "pFBN - Portable Final Burn Neo")
