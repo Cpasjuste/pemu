@@ -264,9 +264,9 @@ void PGENUiEmu::loadBram() {
     /* automatically load cartridge backup RAM (if enabled) */
     if (scd.cartridge.id) {
         // TODO: read chunks
-        size = getUi()->getIo()->read(ramPath + CD_BRAM_CART, &data, 0x810000);
-        if (data && size == 0x810000) {
-            memcpy(scd.cartridge.area, data, 0x810000);
+        size = getUi()->getIo()->read(ramPath + CD_BRAM_CART, &data, scd.cartridge.mask + 1);
+        if (data && size == scd.cartridge.mask + 1) {
+            memcpy(scd.cartridge.area, data, scd.cartridge.mask + 1);
             free(data);
             brm_crc[1] = crc32(0, scd.cartridge.area, scd.cartridge.mask + 1);
         } else if (data) {
@@ -301,8 +301,8 @@ void PGENUiEmu::saveBram() {
     if (crc32(0, scd.bram, 0x2000) != brm_crc[0]) {
         /* check if it is correctly formatted before saving */
         if (!memcmp(scd.bram + 0x2000 - 0x20, brm_format + 0x20, 0x20)) {
-            ui->getIo()->write(ramPath + Utility::removeExt(currentGame.path) + ".brm", (const char *) scd.bram,
-                               0x2000);
+            ui->getIo()->write(ramPath + Utility::removeExt(currentGame.path) + ".brm",
+                               (const char *) scd.bram, 0x2000);
             /* update CRC */
             brm_crc[0] = crc32(0, scd.bram, 0x2000);
         }
@@ -312,7 +312,7 @@ void PGENUiEmu::saveBram() {
     if (scd.cartridge.id && (crc32(0, scd.cartridge.area, scd.cartridge.mask + 1) != brm_crc[1])) {
         /* check if it is correctly formatted before saving */
         if (!memcmp(scd.cartridge.area + scd.cartridge.mask + 1 - 0x20, brm_format + 0x20, 0x20)) {
-            ui->getIo()->write(ramPath + CD_BRAM_CART, (const char *) scd.cartridge.area, 0x810000);
+            ui->getIo()->write(ramPath + CD_BRAM_CART, (const char *) scd.cartridge.area, scd.cartridge.mask + 1);
             /* update CRC */
             brm_crc[1] = crc32(0, scd.cartridge.area, scd.cartridge.mask + 1);
         }
