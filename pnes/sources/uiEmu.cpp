@@ -145,14 +145,19 @@ void audio_deinit() {
 }
 
 void audio_queue() {
-    if (uiEmu->getAudio()) {
+    Audio *audio = uiEmu->getAudio();
+    if (audio) {
 #if 0
-        printf("play: samples: %i, queued: %i, capacity: %i\n",
-               uiEmu->getAudio()->getSamples(),
-               uiEmu->getAudio()->getSampleBufferQueued(),
-               uiEmu->getAudio()->getSampleBufferCapacity());
+        int samples = uiEmu->getAudio()->getSamples();
+        int queued = audio->getSampleBufferQueued();
+        int capacity = audio->getSampleBufferCapacity();
+        if (samples + queued > capacity) {
+            printf("WARNING: samples: %i, queued: %i, capacity: %i (fps: %i)\n",
+                   samples, queued, capacity, nst_pal() ? 50 : 60);
+        }
 #endif
-        uiEmu->getAudio()->play(audio_buffer, uiEmu->getAudio()->getSamples(), nst_pal());
+        uiEmu->getAudio()->play(audio_buffer, uiEmu->getAudio()->getSamples(),
+                                nst_pal() ? Audio::SyncMode::LowLatency : Audio::SyncMode::None);
     }
 }
 

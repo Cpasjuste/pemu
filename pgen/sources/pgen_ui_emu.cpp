@@ -79,8 +79,7 @@ int PGENUiEmu::load(const ss_api::Game &game) {
 
     // audio init
     targetFps = vdp_pal ? 50 : 60;
-    int samples = 48000 / (int) targetFps;
-    addAudio(48000, samples);
+    addAudio(48000, vdp_pal ? 966 : 801);
 
     getUi()->getUiProgressBox()->setProgress(1);
     getUi()->flip();
@@ -166,7 +165,16 @@ void PGENUiEmu::onUpdate() {
 
         // audio
         int samples = audio_update(sound_buffer);
-        getAudio()->play(sound_buffer, samples, vdp_pal);
+#if 0
+        int queued = audio->getSampleBufferQueued();
+        int capacity = audio->getSampleBufferCapacity();
+        if (samples + queued > capacity) {
+            printf("WARNING: samples: %i, queued: %i, capacity: %i (fps: %i)\n",
+                   samples, queued, capacity, vdp_pal ? 50 : 60);
+        }
+#endif
+        getAudio()->play(sound_buffer, samples,
+                         vdp_pal ? Audio::SyncMode::Safe : Audio::SyncMode::None);
     }
 
     return UiEmu::onUpdate();

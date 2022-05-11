@@ -59,7 +59,6 @@ namespace c2dui {
         char fpsString[32];
         float targetFps = 60;
         bool paused = true;
-        float frameDuration = 0;
     };
 }
 

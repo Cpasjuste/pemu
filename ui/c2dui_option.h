@@ -54,6 +54,7 @@ namespace c2dui {
             ROM_WAIT_RENDERING,
 #endif
             ROM_FORCE_60HZ,
+            ROM_AUDIO_SYNC,
             ROM_AUDIO_FREQ,
             ROM_AUDIO_INTERPOLATION,
             ROM_AUDIO_FMINTERPOLATION,

@@ -9,10 +9,13 @@ using namespace c2d;
 using namespace c2dui;
 
 PSNESConfig::PSNESConfig(c2d::Io *io, int version) : Config(io, version) {
-
     printf("PSNESConfig(%s, v%i)\n", getConfigPath().c_str(), version);
 
-    add(Option::Id::ROM_SHOW_FPS, "CHEATS", {"OFF", "ON"}, 1,
+    add(Option::Id::ROM_SHOW_FPS, "AUDIO_SYNC", {"OFF", "ON"}, 0,
+        Option::Id::ROM_AUDIO_SYNC, Option::Flags::BOOLEAN);
+    get(Option::Id::ROM_AUDIO_SYNC)->setInfo("ON: PERFECT AUDIO - OFF: MINOR AUDIO STUTTERING (FAVOR FPS)");
+
+    add(Option::Id::ROM_AUDIO_SYNC, "CHEATS", {"OFF", "ON"}, 1,
         Option::Id::ROM_PSNES_CHEATS, Option::Flags::BOOLEAN);
 
     add(Option::Id::ROM_PSNES_CHEATS, "BLOCk_INVALID_VRAM", {"OFF", "ON"}, 1,

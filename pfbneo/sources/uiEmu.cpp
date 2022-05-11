@@ -205,9 +205,8 @@ int PFBAUiEmu::load(const ss_api::Game &game) {
         pBurnSoundOut = (INT16 *) malloc(audio->getSamplesSize());
     }
     audio_sync = !bForce60Hz;
-    targetFps = (float) nBurnFPS / 100;
-    printf("PFBAUiEmu::load: FORCE_60HZ: %i, AUDIO_SYNC: %i, FPS: %f (BURNFPS: %f)\n",
-           bForce60Hz, audio_sync, (float) nBurnFPS / 100.0f, targetFps);
+    targetFps = (float) nBurnFPS / 100.0f;
+    printf("PFBAUiEmu::load: FORCE_60HZ: %i, AUDIO_SYNC: %i, FPS: %f\n", bForce60Hz, audio_sync, targetFps);
     ///////////
     // AUDIO
     //////////
@@ -375,8 +374,17 @@ void PFBAUiEmu::onUpdate() {
         frameskip = 0;
     }
 
-    if (audio && audio->isAvailable()) {
-        audio->play(pBurnSoundOut, audio->getSamples(), audio_sync);
+    if (audio) {
+#if 0
+        int queued = audio->getSampleBufferQueued();
+        int capacity = audio->getSampleBufferCapacity();
+        if (audio->getSamples() + queued > capacity) {
+            printf("WARNING: samples: %i, queued: %i, capacity: %i (fps: %f)\n",
+                   audio->getSamples(), queued, capacity, targetFps);
+        }
+#endif
+        audio->play(pBurnSoundOut, audio->getSamples(),
+                    audio_sync ? Audio::SyncMode::LowLatency : Audio::SyncMode::None);
     }
 
     UiEmu::onUpdate();
