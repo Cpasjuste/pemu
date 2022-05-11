@@ -29,6 +29,10 @@ private:
     void loadBram();
 
     void saveBram();
+
+    void loadSram();
+
+    void saveSram();
 };
 
 #endif //PGEN_UI_EMU_H

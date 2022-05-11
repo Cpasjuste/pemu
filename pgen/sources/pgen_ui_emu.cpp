@@ -77,6 +77,8 @@ int PGENUiEmu::load(const ss_api::Game &game) {
     // load mega-cd ram if needed
     loadBram();
 
+    loadSram();
+
     // audio init
     targetFps = vdp_pal ? 50 : 60;
     addAudio(48000, vdp_pal ? 966 : 801);
@@ -94,6 +96,7 @@ int PGENUiEmu::load(const ss_api::Game &game) {
 
 void PGENUiEmu::stop() {
     saveBram();
+    saveSram();
     audio_shutdown();
     UiEmu::stop();
 }
@@ -316,5 +319,27 @@ void PGENUiEmu::saveBram() {
             /* update CRC */
             brm_crc[1] = crc32(0, scd.cartridge.area, scd.cartridge.mask + 1);
         }
+    }
+}
+
+void PGENUiEmu::loadSram() {
+    if (sram.on) {
+        char *data;
+        std::string ramPath = ui->getIo()->getDataPath() + "rams/";
+        size_t size = getUi()->getIo()->read(ramPath + Utility::removeExt(currentGame.path) + ".srm", &data, 0x10000);
+        if (data && size == 0x10000) {
+            memcpy(sram.sram, data, 0x10000);
+        }
+        if (data) {
+            free(data);
+        }
+    }
+}
+
+void PGENUiEmu::saveSram() {
+    if (sram.on) {
+        std::string ramPath = ui->getIo()->getDataPath() + "rams/";
+        ui->getIo()->write(ramPath + Utility::removeExt(currentGame.path) + ".srm",
+                           (const char *) sram.sram, 0x10000);
     }
 }
