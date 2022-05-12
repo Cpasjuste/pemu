@@ -24,8 +24,8 @@ file(GLOB NESTOPIA_SRC
         ${CMAKE_SOURCE_DIR}/cores/nestopia/source/fltkui/cheats.cpp
         ${CMAKE_SOURCE_DIR}/cores/nestopia/source/fltkui/homebrew.cpp
         ${CMAKE_SOURCE_DIR}/cores/nestopia/source/fltkui/samples.cpp
+        ${CMAKE_SOURCE_DIR}/cores/nestopia/source/fltkui/nstcommon.cpp
         )
-
 list(REMOVE_ITEM NESTOPIA_SRC
         ${CMAKE_SOURCE_DIR}/cores/nestopia/source/core/NstVideoFilter2xSaI.cpp
         ${CMAKE_SOURCE_DIR}/cores/nestopia/source/core/NstVideoFilterHqX.cpp
@@ -50,8 +50,15 @@ set(NESTOPIA_CFLAGS
 ##############
 # pnes
 ##############
-set(PNES_INC sources sources/nst)
-file(GLOB PNES_SRC sources/*.c* sources/nst/*.c*)
+set(PNES_INC sources)
+file(GLOB PNES_SRC sources/*.c*)
+
+##############
+# deps
+##############
+include(FindPkgConfig)
+pkg_search_module(LIBARCHIVE REQUIRED libarchive)
+list(APPEND NESTOPIA_LDFLAGS ${LIBARCHIVE_LIBRARIES})
 
 #####################
 # PLATORM SPECIFIC
@@ -63,32 +70,36 @@ if (PLATFORM_VITA)
     set(TITLE_ID "PNES00001" CACHE STRING "" FORCE)
     list(APPEND PNES_INC sources/vita)
     list(APPEND NESTOPIA_SRC sources/vita/port.c)
-    list(APPEND NESTOPIA_CFLAGS -Dstrcasecmp=strcmp)
+    list(APPEND NESTOPIA_CFLAGS -Dstrcasecmp=strcmp -DDATADIR="app0:/")
     list(APPEND NESTOPIA_LDFLAGS ScePower_stub)
 elseif (PLATFORM_PS4)
     set(PS4_PKG_TITLE "pNES - Portable Nestopia")
     set(PS4_PKG_TITLE_ID "PNES00001")
     set(PS4_PKG_VERSION "${VERSION_MAJOR}.${VERSION_MINOR}")
+    list(APPEND NESTOPIA_CFLAGS -DDATADIR="/app0/")
 elseif (PLATFORM_SWITCH)
     #####################
     # SWITCH PLATFORM
     #####################
     list(APPEND NESTOPIA_SRC sources/switch/port.c)
+    list(APPEND NESTOPIA_CFLAGS -DDATADIR="romfs:/")
 elseif (PLATFORM_3DS)
     #####################
     # 3DS PLATFORM
     #####################
     list(APPEND PNES_INC sources/3ds)
-    list(APPEND NESTOPIA_CFLAGS -Dstrcasecmp=strcmp)
+    list(APPEND NESTOPIA_CFLAGS -Dstrcasecmp=strcmp -DDATADIR="romfs:/")
     list(APPEND NESTOPIA_SRC sources/3ds/port.c)
 elseif (PLATFORM_LINUX)
     #####################
     # LINUX
     #####################
+    list(APPEND NESTOPIA_CFLAGS -DDATADIR="/tmp/c2d_romfs/")
 elseif (PLATFORM_WINDOWS)
     #####################
     # WINDOWS
     #####################
+    list(APPEND NESTOPIA_CFLAGS -DDATADIR="data_romfs/")
 endif (PLATFORM_VITA)
 
 #####################

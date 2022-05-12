@@ -25,7 +25,7 @@
         libconfig-dev libglm-dev libfreetype6-dev libpng-dev libminizip-dev zlib1g-dev \
         libvdpau-dev libva-dev libavcodec-dev libavfilter-dev libavformat-dev libavutil-dev \
         libpostproc-dev libswresample-dev libswscale-dev libmpv-dev libass-dev libbz2-dev \
-        libfribidi-dev libzip-dev libfuse-dev
+        libfribidi-dev libzip-dev libarchive-dev libfuse-dev
     ```
 - clone pemu repository:
     ```
@@ -101,7 +101,7 @@
         mingw-w64-x86_64-binutils mingw-w64-x86_64-gcc mingw-w64-x86_64-make mingw-w64-x86_64-cmake mingw-w64-x86_64-pkgconf \
         mingw-w64-x86_64-SDL2 mingw-w64-x86_64-freetype mingw-w64-x86_64-glm \
         mingw-w64-x86_64-glew mingw-w64-x86_64-libconfig mingw-w64-x86_64-tinyxml2 \
-        mingw-w64-x86_64-mpv mingw-w64-x86_64-zlib mingw-w64-x86_64-minizip
+        mingw-w64-x86_64-mpv mingw-w64-x86_64-zlib mingw-w64-x86_64-minizip mingw-w64-x86_64-libarchive
     ```
 - clone pemu repository:
     ```
