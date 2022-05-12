@@ -28,6 +28,7 @@ PGENUiEmu::PGENUiEmu(UiMain *ui) : UiEmu(ui) {
 }
 
 int PGENUiEmu::load(const ss_api::Game &game) {
+    currentGame = game;
     getUi()->getUiProgressBox()->setTitle(game.name);
     getUi()->getUiProgressBox()->setMessage("Please wait...");
     getUi()->getUiProgressBox()->setProgress(0);
