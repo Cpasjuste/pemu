@@ -12,6 +12,7 @@ extern "C" {
 #include <zlib.h>
 #include <types.h>
 
+#define VERSION "Genesis Plus GX 1.7.5"
 #define MAX_INPUTS 4
 
 typedef struct {

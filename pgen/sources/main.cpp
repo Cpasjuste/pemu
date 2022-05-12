@@ -23,6 +23,7 @@
 #include "pgen_config.h"
 #include "pgen_romlist.h"
 #include "pgen_ui_statemenu.h"
+#include "osd.h"
 
 using namespace c2d;
 using namespace c2dui;
@@ -79,7 +80,7 @@ int main(int argc, char **argv) {
     ui->setSkin(skin);
 
     // ui
-    std::string genesis_version = "Genesis Plus GX";
+    std::string genesis_version = VERSION;
     romList = new PGENRomList(ui, genesis_version,
                               {".zip", ".md", ".smd", ".gen", ".bin",
                                ".mdx", ".sms", ".gg", ".sg", ".68k"});
