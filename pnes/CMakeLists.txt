@@ -98,8 +98,10 @@ elseif (PLATFORM_LINUX)
 elseif (PLATFORM_WINDOWS)
     #####################
     # WINDOWS
-    list(APPEND NESTOPIA_CFLAGS -DNST_DATADIR="data_romfs")
     list(APPEND PNES_INC sources/windows)
+    list(APPEND NESTOPIA_CFLAGS -DNST_DATADIR="data_romfs")
+    # for libarchive...
+    list(APPEND NESTOPIA_LDFLAGS expat b2 ssl bcrypt lzma lz4)
 endif (PLATFORM_VITA)
 
 #####################
