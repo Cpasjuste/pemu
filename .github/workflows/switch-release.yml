@@ -37,7 +37,7 @@ jobs:
           wget https://github.com/Cpasjuste/pacman-packages/raw/switch-libarchive/switch/libarchive/libarchive-3.3.2.patch
           chown -R nobody ../libarchive
           sudo -E -u nobody dkp-makepkg
-          dkp-pacman -U *.pkg.tar.xz
+          dkp-pacman -U --noconfirm *.pkg.tar.xz
 
       - name: Update SDL2
         run: |
