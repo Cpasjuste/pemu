@@ -31,6 +31,7 @@ jobs:
       # TODO: remove when merged
       - name: Install libarchive
         run: |
+          dpk-pacman -S --noconfirm dkp-toolchain-vars
           mkdir libarchive && cd libarchive
           wget https://github.com/Cpasjuste/pacman-packages/raw/switch-libarchive/switch/libarchive/PKGBUILD
           wget https://github.com/Cpasjuste/pacman-packages/raw/switch-libarchive/switch/libarchive/libarchive-3.3.2.patch
