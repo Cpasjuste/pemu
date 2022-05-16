@@ -26,7 +26,7 @@ jobs:
 
       - name: Update pacman packages
         run: |
-          dkp-pacman -Syyu
+          dkp-pacman -Syyu --noconfirm
 
       # TODO: remove when merged
       - name: Install libarchive
