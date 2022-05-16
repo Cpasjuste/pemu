@@ -8,7 +8,7 @@ on:
 jobs:
 
   build-switch-release:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     container: devkitpro/devkita64:latest
     defaults:
       run:
@@ -34,7 +34,9 @@ jobs:
           mkdir libarchive && cd libarchive
           wget https://github.com/Cpasjuste/pacman-packages/raw/switch-libarchive/switch/libarchive/PKGBUILD
           wget https://github.com/Cpasjuste/pacman-packages/raw/switch-libarchive/switch/libarchive/libarchive-3.3.2.patch
-          dkp-makepkg && dkp-pacman -U *.pkg.tar.xz
+          chown -R nobody ../libarchive
+          sudo -E -u nobody dkp-makepkg
+          dkp-pacman -U *.pkg.tar.xz
 
       - name: Update SDL2
         run: |
