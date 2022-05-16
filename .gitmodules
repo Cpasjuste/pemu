@@ -3,7 +3,7 @@
 	url = https://github.com/Cpasjuste/snes9x.git
 [submodule "cores/nestopia"]
 	path = cores/nestopia
-	url = https://github.com/0ldsk00l/nestopia
+	url = https://github.com/Cpasjuste/nestopia.git
 [submodule "sscrap"]
 	path = sscrap
 	url = https://github.com/Cpasjuste/sscrap.git

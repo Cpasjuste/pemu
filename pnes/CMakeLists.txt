@@ -70,36 +70,38 @@ if (PLATFORM_VITA)
     set(TITLE_ID "PNES00001" CACHE STRING "" FORCE)
     list(APPEND PNES_INC sources/vita)
     list(APPEND NESTOPIA_SRC sources/vita/port.c)
-    list(APPEND NESTOPIA_CFLAGS -Dstrcasecmp=strcmp -DDATADIR="app0:/")
+    list(APPEND NESTOPIA_CFLAGS -Dstrcasecmp=strcmp -DNST_DATADIR="app0:")
     list(APPEND NESTOPIA_LDFLAGS ScePower_stub)
 elseif (PLATFORM_PS4)
     set(PS4_PKG_TITLE "pNES - Portable Nestopia")
     set(PS4_PKG_TITLE_ID "PNES00001")
     set(PS4_PKG_VERSION "${VERSION_MAJOR}.${VERSION_MINOR}")
-    list(APPEND NESTOPIA_CFLAGS -DDATADIR="/app0/")
+    list(APPEND NESTOPIA_CFLAGS -DNST_DATADIR="/app0")
 elseif (PLATFORM_SWITCH)
     #####################
     # SWITCH PLATFORM
     #####################
     list(APPEND NESTOPIA_SRC sources/switch/port.c)
-    list(APPEND NESTOPIA_CFLAGS -DDATADIR="romfs:/")
+    list(APPEND NESTOPIA_CFLAGS -DNST_DATADIR="romfs:")
 elseif (PLATFORM_3DS)
     #####################
     # 3DS PLATFORM
     #####################
     list(APPEND PNES_INC sources/3ds)
-    list(APPEND NESTOPIA_CFLAGS -Dstrcasecmp=strcmp -DDATADIR="romfs:/")
+    list(APPEND NESTOPIA_CFLAGS -Dstrcasecmp=strcmp -DNST_DATADIR="romfs:")
     list(APPEND NESTOPIA_SRC sources/3ds/port.c)
 elseif (PLATFORM_LINUX)
     #####################
     # LINUX
     #####################
-    list(APPEND NESTOPIA_CFLAGS -DDATADIR="/tmp/c2d_romfs/")
+    list(APPEND NESTOPIA_CFLAGS -DNST_DATADIR="/tmp/c2d_romfs")
 elseif (PLATFORM_WINDOWS)
     #####################
     # WINDOWS
-    #####################
-    list(APPEND NESTOPIA_CFLAGS -DDATADIR="data_romfs/")
+    list(APPEND PNES_INC sources/windows)
+    list(APPEND NESTOPIA_CFLAGS -DNST_DATADIR="data_romfs")
+    # for libarchive...
+    list(APPEND NESTOPIA_LDFLAGS expat b2 ssl bcrypt lzma lz4)
 endif (PLATFORM_VITA)
 
 #####################
