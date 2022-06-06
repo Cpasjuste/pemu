@@ -24,21 +24,6 @@ jobs:
           sudo apt -yq update
           sudo apt -yq install git build-essential cmake zip
 
-      - name: Update pacman packages
-        run: |
-          dkp-pacman -Syyu --noconfirm
-
-      # TODO: remove when merged
-      - name: Install libarchive
-        run: |
-          dkp-pacman -S --noconfirm dkp-toolchain-vars
-          mkdir libarchive && cd libarchive
-          wget https://github.com/Cpasjuste/pacman-packages/raw/switch-libarchive/switch/libarchive/PKGBUILD
-          wget https://github.com/Cpasjuste/pacman-packages/raw/switch-libarchive/switch/libarchive/libarchive-3.3.2.patch
-          chown -R nobody ../libarchive
-          sudo -E -u nobody dkp-makepkg
-          dkp-pacman -U --noconfirm *.pkg.tar.xz
-
       - name: Update SDL2
         run: |
           git clone --depth 1 --branch switch-sdl2-2.0.14-dev https://github.com/devkitPro/SDL.git
