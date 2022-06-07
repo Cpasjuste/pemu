@@ -7,10 +7,22 @@
 using namespace c2dui;
 
 extern UiMain *ui;
+
 extern UINT8 NeoSystem;
-int bDrvOkay = 0;   // 1 if the Driver has been initted okay, and it's okay to use the BurnDrv functions
+int bDrvOkay = 0;
 int kNetGame = 0;
 int nIpsMaxFileLen = 0;
+
+INT32 GetIpsesMaxLen(char *) { return 0; }
+
+bool GetIpsDrvProtection() { return false; }
+
+// replaces ips_manager.cpp
+bool bDoIpsPatch = false;
+
+void IpsApplyPatches(UINT8 *base, char *rom_name) {}
+
+bool bRunPause;
 
 // burner/state.cpp
 bool bReplayReadOnly;
