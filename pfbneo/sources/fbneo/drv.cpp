@@ -8,15 +8,27 @@ using namespace c2dui;
 
 extern UiMain *ui;
 extern UINT8 NeoSystem;
-int bDrvOkay = 0;                        // 1 if the Driver has been initted okay, and it's okay to use the BurnDrv functions
+int bDrvOkay = 0;   // 1 if the Driver has been initted okay, and it's okay to use the BurnDrv functions
 int kNetGame = 0;
 int nIpsMaxFileLen = 0;
 
-static int ProgressCreate();
+// burner/state.cpp
+bool bReplayReadOnly;
+INT32 nReplayStatus = 0;
+INT32 nReplayUndoCount = 0;
+UINT32 nReplayCurrentFrame = 0;
+UINT32 nStartFrame = 0;
+
+INT32 FreezeInput(UINT8 **buf, INT32 *size) { return 0; }
+
+INT32 UnfreezeInput(const UINT8 *buf, INT32 size) { return 0; }
+// burner/state.cpp
 
 bool is_netgame_or_recording() {
     return false;
 }
+
+static int ProgressCreate();
 
 static UINT8 NeoSystemList[] = {
         0x13, // "Universe BIOS ver. 4.0"

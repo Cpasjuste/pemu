@@ -47,7 +47,6 @@ list(REMOVE_ITEM SRC_BURNER
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burner/image.cpp
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burner/ioapi.c
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burner/sshot.cpp
-        ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burner/state.cpp
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burner/unzip.c
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burner/zipfn.cpp
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burner/luaengine.cpp
