@@ -276,42 +276,6 @@ bool PFBAUiEmu::onInput(c2d::Input::Player *players) {
         }
     }
 
-#if 0
-    int rotation_config =
-            getUi()->getConfig()->get(Option::Index::ROM_ROTATION, true)->getValueBool();
-    int rotate_input = 0;
-#ifdef __PSP2__
-    // TODO: find a way to unify platforms,
-    // or allow rotation config from main.cpp
-    if (BurnDrvGetFlags() & BDF_ORIENTATION_VERTICAL) {
-        if (rotation_config == 0) {
-            //rotate controls by 90 degrees
-            rotate_input = 1;
-        } else if (rotation_config == 2) {
-            //rotate controls by 270 degrees
-            rotate_input = 3;
-        }
-    }
-#elif __SWITCH__
-    if (BurnDrvGetFlags() & BDF_ORIENTATION_VERTICAL) {
-        if (rotation_config == 0) {             // OFF
-            //rotate controls by 270 degrees
-            rotate_input = 3;
-        } else if (rotation_config == 1) {      // ON
-            //rotate controls by 270 degrees
-            rotate_input = 0;
-        } else if (rotation_config == 2) {      // FLIP
-            //rotate controls by 270 degrees
-            rotate_input = 1;
-        }
-    }
-#else
-    if (BurnDrvGetFlags() & BDF_ORIENTATION_VERTICAL) {
-        rotate_input = rotation_config ? 0 : 3;
-    }
-#endif
-#endif
-
     return UiEmu::onInput(players);
 }
 
