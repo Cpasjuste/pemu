@@ -249,6 +249,9 @@ void Reinitialise(void) {
 
 void PFBAUiEmu::stop() {
     DrvExit();
+    if (pBurnSoundOut) {
+        free(pBurnSoundOut);
+    }
     UiEmu::stop();
 }
 
