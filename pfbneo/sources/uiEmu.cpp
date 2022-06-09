@@ -108,7 +108,6 @@ int PFBAUiEmu::getSekCpuCore() {
 #endif
 
 int PFBAUiEmu::load(const ss_api::Game &game) {
-
     currentGame = game;
     std::string zipName = Utility::removeExt(game.path);
 
@@ -221,7 +220,7 @@ int PFBAUiEmu::load(const ss_api::Game &game) {
     BurnHighCol = myHighCol16;
     BurnRecalcPal();
     // video may already be initialized from fbneo driver (Reinitialise)
-    if (!getVideo()) {
+    if (!video) {
         auto v = new PFBAVideo(ui, &pBurnDraw, &nBurnPitch, size, aspect);
         addVideo(v);
         printf("PFBAUiEmu::load: size: %i x %i, aspect: %i x %i, pitch: %i\n",

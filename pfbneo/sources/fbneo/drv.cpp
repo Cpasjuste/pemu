@@ -64,8 +64,7 @@ static UINT8 NeoSystemList[] = {
         0x11, // "Development Kit"
 };
 
-static int DoLibInit()                    // Do Init of Burn library driver
-{
+static int DoLibInit() {
     int nRet;
 
     ProgressCreate();
@@ -95,18 +94,15 @@ static int DoLibInit()                    // Do Init of Burn library driver
 // Catch calls to BurnLoadRom() once the emulation has started;
 // Intialise the zip module before forwarding the call, and exit cleanly.
 static int DrvLoadRom(unsigned char *Dest, int *pnWrote, int i) {
-
     int nRet;
 
     BzipOpen(false);
 
     if ((nRet = BurnExtLoadRom(Dest, pnWrote, i)) != 0) {
+        char szText[256];
         char *pszFilename;
-
         BurnDrvGetRomName(&pszFilename, i, 0);
-        char szText[256] = "";
-        sprintf(szText,
-                "Error loading %s for %s.\nEmulation will likely have problems.",
+        sprintf(szText, "Error loading %s for %s.\nEmulation will likely have problems.",
                 pszFilename, BurnDrvGetTextA(DRV_NAME));
         printf("DrvLoadRom: %s\n", szText);
         ui->getUiMessageBox()->show("ERROR", szText, "OK");
@@ -120,7 +116,6 @@ static int DrvLoadRom(unsigned char *Dest, int *pnWrote, int i) {
 }
 
 int DrvInit(int nDrvNum, bool bRestore) {
-
     printf("DrvInit(%i, %i)\n", nDrvNum, bRestore);
     DrvExit();
 
@@ -148,16 +143,17 @@ int DrvInit(int nDrvNum, bool bRestore) {
 
     char path[1024];
     snprintf(path, 1023, "%s%s.fs", szAppEEPROMPath, BurnDrvGetTextA(DRV_NAME));
-    BurnStateLoad(path, 0, NULL);
+    BurnStateLoad(path, 0, nullptr);
 
-    bDrvOkay = 1;                    // Okay to use all BurnDrv functions
-    nBurnLayer = 0xFF;                // show all layers
+    bDrvOkay = 1;
+    nBurnLayer = 0xff;
+    nSpriteEnable = 0xff;
 
     return 0;
 }
 
 int DrvInitCallback() {
-    return DrvInit(nBurnDrvSelect[0], false);
+    return DrvInit((int) nBurnDrvSelect[0], false);
 }
 
 int DrvExit() {
@@ -167,13 +163,13 @@ int DrvExit() {
             snprintf(path, 1023, "%s%s.fs", szAppEEPROMPath, BurnDrvGetTextA(DRV_NAME));
             BurnStateSave(path, 0);
             InputExit();
-            BurnDrvExit();                // Exit the driver
+            BurnDrvExit();
         }
     }
 
     BurnExtLoadRom = nullptr;
-    bDrvOkay = 0;                    // Stop using the BurnDrv functions
-    nBurnDrvSelect[0] = ~0U;            // no driver selected
+    bDrvOkay = 0;
+    nBurnDrvSelect[0] = ~0U;
 
     return 0;
 }
@@ -188,7 +184,6 @@ static int ProgressCreate() {
 }
 
 int ProgressUpdateBurner(double dProgress, const TCHAR *pszText, bool bAbs) {
-
     ui->getUiProgressBox()->setTitle(BurnDrvGetTextA(DRV_FULLNAME));
 
     if (pszText) {
