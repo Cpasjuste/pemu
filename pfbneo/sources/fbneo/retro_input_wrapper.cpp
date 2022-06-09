@@ -32,8 +32,8 @@ int16_t input_cb(unsigned port, unsigned device, unsigned index, unsigned id) {
 
 void poll_cb() {}
 
-static void InpDIPSWGetOffset(void) {
-    BurnDIPInfo bdi;
+static void InpDIPSWGetOffset() {
+    BurnDIPInfo bdi{};
     nDIPOffset = 0;
 
     for (int i = 0; BurnDrvGetDIPInfo(&bdi, i) == 0; i++) {
@@ -45,18 +45,23 @@ static void InpDIPSWGetOffset(void) {
     }
 }
 
-void InpDIPSWResetDIPs(void) {
+void InpDIPSWResetDIPs() {
     int i = 0;
-    BurnDIPInfo bdi;
-    struct GameInp *pgi = NULL;
+    BurnDIPInfo bdi{};
+    struct GameInp *pgi;
 
     InpDIPSWGetOffset();
 
     while (BurnDrvGetDIPInfo(&bdi, i) == 0) {
         if (bdi.nFlags == 0xFF) {
             pgi = GameInp + bdi.nInput + nDIPOffset;
-            if (pgi)
-                pgi->Input.Constant.nConst = (pgi->Input.Constant.nConst & ~bdi.nMask) | (bdi.nSetting & bdi.nMask);
+            if (pgi) {
+                pgi->Input.Constant.nConst = pgi->Input.nVal =
+                        (pgi->Input.Constant.nConst & ~bdi.nMask) | (bdi.nSetting & bdi.nMask);
+                if (pgi->Input.pVal) {
+                    *(pgi->Input.pVal) = pgi->Input.nVal;
+                }
+            }
         }
         i++;
     }

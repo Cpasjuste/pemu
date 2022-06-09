@@ -152,6 +152,7 @@ int DrvInit(int nDrvNum, bool bRestore) {
     return 0;
 }
 
+// for uiStateMenu.cpp (BurnStateLoad)
 int DrvInitCallback() {
     return DrvInit((int) nBurnDrvSelect[0], false);
 }
