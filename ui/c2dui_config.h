@@ -76,6 +76,7 @@ namespace c2dui {
         std::vector<std::string> roms_paths;
 
     private:
+        c2d::Io *m_io;
         std::vector<Option> options_gui;
         std::vector<Option> options_rom;
         std::string configPath;

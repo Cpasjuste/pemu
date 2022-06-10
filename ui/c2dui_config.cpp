@@ -5,7 +5,7 @@
 #include "c2dui.h"
 
 Config::Config(c2d::Io *io, int ver, const std::string &defaultRomsPath) {
-
+    m_io = io;
     dataPath = io->getDataPath();
     configPath = dataPath + "config.cfg";
     version = ver;
@@ -179,15 +179,19 @@ void Config::load(const ss_api::Game &game) {
             if (!isRomCfg) {
                 settings = config_setting_lookup(settings_root, "ROMS_PATHS");
                 if (settings != nullptr) {
+                    char p[MAX_PATH];
                     for (size_t i = 0; i < roms_paths.size(); i++) {
-                        char p[MAX_PATH];
+                        memset(p, 0, MAX_PATH);
                         snprintf(p, MAX_PATH, "ROMS_PATH%i", (int) i);
                         const char *value = nullptr;
                         if (config_setting_lookup_string(settings, p, &value) != 0) {
-                            roms_paths[i] = value;
-                            if (!roms_paths[i].empty() && roms_paths[i].back() != '/')
-                                roms_paths[i] += '/';
-                            printf("%s: %s\n", p, value);
+                            if (m_io->exist(value)) {
+                                roms_paths[i] = value;
+                                if (!roms_paths[i].empty() && roms_paths[i].back() != '/') {
+                                    roms_paths[i] += '/';
+                                }
+                            }
+                            printf("%s: %s\n", p, roms_paths[i].c_str());
                         }
                     }
                 }
