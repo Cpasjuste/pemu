@@ -91,6 +91,11 @@ elseif (PLATFORM_LINUX OR PLATFORM_WINDOWS)
     # SDL2 PLATORM
     #####################
     list(APPEND PGEN_CFLAGS)
+elseif (PLATFORM_ANDROID)
+    #####################
+    # ANDROID PLATORM
+    #####################
+    list(APPEND GENESIS_CFLAGS -DHAVE_SYS_PARAM_H)
 endif (PLATFORM_VITA)
 
 #####################

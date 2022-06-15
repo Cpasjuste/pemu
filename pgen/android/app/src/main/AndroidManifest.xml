@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="fr.mydedibox.pnes"
+    package="fr.mydedibox.pgen"
     android:installLocation="preferExternal">
 
     <application
         tools:replace="android:label"
-        android:label="pnes">
+        android:label="pgen">
 
         <activity
-            android:name="fr.mydedibox.pnes.Main"
+            android:name="fr.mydedibox.pgen.Main"
             android:alwaysRetainTaskState="true"
             android:configChanges="layoutDirection|locale|uiMode|screenLayout|screenSize|smallestScreenSize|keyboard|keyboardHidden|navigation"
             android:exported="true"
