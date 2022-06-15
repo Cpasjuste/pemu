@@ -5,6 +5,12 @@
 #ifndef GUI_H
 #define GUI_H
 
+#ifdef __FTP_SERVER__
+
+#include "fineftp/server.h"
+
+#endif
+
 #define UI_KEY_FILTER_ROMS      100
 #define UI_KEY_SHOW_ROMLIST     101
 #define UI_KEY_SHOW_MEMU_UI     102
@@ -69,6 +75,14 @@ namespace c2dui {
 
         bool done = false;
 
+#ifdef __FTP_SERVER__
+
+        void ftpServerStart();
+
+        void ftpServerStop();
+
+#endif
+
     private:
 
         Config *config = nullptr;
@@ -83,6 +97,9 @@ namespace c2dui {
         UiStatusBox *uiStatusBox = nullptr;
         c2d::C2DClock timer;
         unsigned int oldKeys = 0;
+#ifdef __FTP_SERVER__
+        fineftp::FtpServer *ftpServer = nullptr;
+#endif
     };
 }
 

@@ -19,7 +19,7 @@ android {
         externalNativeBuild {
             cmake {
                 cppFlags '-std=c++17'
-                arguments "-DPLATFORM_ANDROID=ON", "-DOPTION_EMU=pgen", "-DANDROID_ASSETS_PATH=${sourceSets.main.assets.srcDirs[0]}"
+                arguments "-DOPTION_EMU=pgen", "-DPLATFORM_ANDROID=ON", "-DOPTION_FTP_SERVER=ON", "-DANDROID_ASSETS_PATH=${sourceSets.main.assets.srcDirs[0]}"
             }
         }
     }

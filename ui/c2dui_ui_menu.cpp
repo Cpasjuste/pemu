@@ -348,15 +348,24 @@ bool UiMenu::onInput(c2d::Input::Player *players) {
                 }
                 break;
 #ifdef __VITA__
-            case Option::Id::ROM_WAIT_RENDERING:
-                if (isEmuRunning) {
-                    ((PSP2Renderer *) ui)->setWaitRendering(option.getValueBool());
-                }
-                break;
+                case Option::Id::ROM_WAIT_RENDERING:
+                    if (isEmuRunning) {
+                        ((PSP2Renderer *) ui)->setWaitRendering(option.getValueBool());
+                    }
+                    break;
 #endif
             case Option::Id::GUI_VIDEO_SNAP_DELAY:
                 ui->getUiRomList()->setVideoSnapDelay(option.getValueInt());
                 break;
+#ifdef __FTP_SERVER__
+            case Option::Id::GUI_FTP_SERVER:
+                if (option.getValueBool()) {
+                    ui->ftpServerStart();
+                } else {
+                    ui->ftpServerStop();
+                }
+                break;
+#endif
             default:
                 break;
         }
