@@ -15,5 +15,5 @@
 local.properties
 
 # assets are handled by libcross2d
-app/src/main/assets/romfs
-app/src/main/assets/data
+*/src/main/assets/romfs
+*/src/main/assets/data
