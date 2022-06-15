@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="fr.mydedibox.psnes"
+    package="fr.mydedibox.pnes"
     android:installLocation="preferExternal">
 
     <application
@@ -9,7 +9,7 @@
         android:label="psnes">
 
         <activity
-            android:name="fr.mydedibox.psnes.Main"
+            android:name="fr.mydedibox.pnes.Main"
             android:alwaysRetainTaskState="true"
             android:configChanges="layoutDirection|locale|uiMode|screenLayout|screenSize|smallestScreenSize|keyboard|keyboardHidden|navigation"
             android:exported="true"
