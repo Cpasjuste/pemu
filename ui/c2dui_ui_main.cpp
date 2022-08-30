@@ -4,6 +4,8 @@
 
 #include <algorithm>
 #include "c2dui.h"
+#include "c2dui_ui_main.h"
+
 
 UiMain::UiMain(const Vector2f &size, c2d::Io *io, Config *cfg) : C2DRenderer(size) {
     printf("UiMain(%ix%i)\n", (int) UiMain::getSize().x, (int) UiMain::getSize().y);
@@ -22,8 +24,9 @@ UiMain::UiMain(const Vector2f &size, c2d::Io *io, Config *cfg) : C2DRenderer(siz
 }
 
 UiMain::~UiMain() {
-    // ui elements (C2DObject)
-    // are deleted by the renderer
+#ifdef __FTP_SERVER__
+    delete (ftpServer);
+#endif
 #if 0
     delete (scrapper);
 #endif
@@ -70,7 +73,8 @@ void UiMain::init(UIRomList *_uiRomList, UiMenu *_uiMenu,
     float fontSize = uiMessageBox->getTitleText()->getSize().y * 1.5f;
     uiMessageBox->getTitleText()->setSize(
             uiMessageBox->getTitleText()->getSize().x * 1.5f, fontSize);
-    uiMessageBox->getTitleText()->setSizeMax(uiMessageBox->getSize().x - (float) fontSize * 2, (float) fontSize + 4);
+    uiMessageBox->getTitleText()->setSizeMax(uiMessageBox->getSize().x - (float) fontSize * 2,
+                                             (float) fontSize + 4);
     uiMessageBox->setSelectedColor(uiMessageBox->getFillColor(), uiMessageBox->getOutlineColor());
     Color c = uiMessageBox->getOutlineColor();
     c.a -= 150;
@@ -90,6 +94,13 @@ void UiMain::init(UIRomList *_uiRomList, UiMenu *_uiMenu,
 
     updateInputMapping(false);
     getInput()->setRepeatDelay(INPUT_DELAY);
+
+#ifdef __FTP_SERVER__
+    bool startFtp = config->get(Option::Id::GUI_FTP_SERVER)->getValueBool();
+    if (startFtp) {
+        ftpServerStart();
+    }
+#endif
 
 #if 0
     scrapper = new Scrapper(this);
@@ -223,3 +234,22 @@ void UiMain::updateInputMapping(bool isRomConfig) {
         }
     }
 }
+
+#ifdef __FTP_SERVER__
+
+void UiMain::ftpServerStart() {
+    if (!ftpServer) {
+        ftpServer = new fineftp::FtpServer(3333);
+        ftpServer->addUser("pemu", "pemu", getIo()->getDataPath(), fineftp::Permission::All);
+        ftpServer->start(2);
+    }
+}
+
+void UiMain::ftpServerStop() {
+    if (ftpServer) {
+        delete (ftpServer);
+        ftpServer = nullptr;
+    }
+}
+
+#endif

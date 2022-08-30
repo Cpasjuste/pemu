@@ -102,6 +102,8 @@ elseif (PLATFORM_WINDOWS)
     list(APPEND NESTOPIA_CFLAGS -DNST_DATADIR="data_romfs")
     # for libarchive...
     list(APPEND NESTOPIA_LDFLAGS expat b2 ssl bcrypt lzma lz4)
+elseif (PLATFORM_ANDROID)
+    list(APPEND NESTOPIA_CFLAGS -DNST_DATADIR=".")
 endif (PLATFORM_VITA)
 
 #####################

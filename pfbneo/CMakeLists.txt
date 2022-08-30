@@ -47,7 +47,6 @@ list(REMOVE_ITEM SRC_BURNER
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burner/image.cpp
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burner/ioapi.c
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burner/sshot.cpp
-        ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burner/state.cpp
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burner/unzip.c
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burner/zipfn.cpp
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burner/luaengine.cpp
@@ -358,5 +357,8 @@ add_custom_target(${PROJECT_NAME}.deps
         # driverlist.h
         COMMAND ${PERL_EXECUTABLE} ${CMAKE_SOURCE_DIR}/cores/fbneo/src/dep/scripts/gamelist.pl -o ${CMAKE_CURRENT_BINARY_DIR}/deps/driverlist.h -l ${CMAKE_CURRENT_BINARY_DIR}/deps/gamelist.txt ${DRV_DIRS}
         )
+if (PLATFORM_ANDROID)
+    add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}.deps)
+endif ()
 message("-- C2D: Be sure to build \"${PROJECT_NAME}.deps\" target before \"${PROJECT_NAME}\" target")
 

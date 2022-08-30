@@ -13,6 +13,7 @@ set(OPTION_BUILTIN_LIBCONFIG OFF CACHE BOOL "Build libconfig from sources")
 set(OPTION_BUILTIN_MINIZIP OFF CACHE BOOL "Build minizip from sources")
 set(OPTION_MPV_PLAYER ON CACHE BOOL "Add support for video snaps (mpv)")
 set(OPTION_UPDATE_CONFIG OFF CACHE BOOL "Force config file updating")
+set(OPTION_FTP_SERVER OFF CACHE BOOL "Embedded ftp server")
 ####################
 # BUILD OPTIONS
 ####################

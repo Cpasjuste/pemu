@@ -1,0 +1,4 @@
+@PACKAGE_INIT@
+
+INCLUDE("@PACKAGE_FINEFTP_INSTALL_CMAKE_DIR@/fineftpTargets.cmake")
+find_package(Threads)
