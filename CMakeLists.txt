@@ -49,9 +49,13 @@ elseif (OPTION_EMU STREQUAL "pgen")
 elseif (OPTION_EMU STREQUAL "pfbneo")
     # pfbneo
     add_subdirectory(pfbneo)
+ elseif (OPTION_EMU STREQUAL "pgba")
+    # pgba
+    add_subdirectory(pgba)
 else ()
     add_subdirectory(pfbneo)
     add_subdirectory(pgen)
     add_subdirectory(pnes)
     add_subdirectory(psnes)
+    add_subdirectory(pgba)
 endif ()
