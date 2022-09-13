@@ -60,8 +60,8 @@ public:
                     sprite->setVisibility(Visibility::Visible);
                     value->setVisibility(Visibility::Hidden);
                     float scaling = std::min(
-                            getSize().x / (float) sprite->getTextureRect().width,
-                            getSize().y / (float) sprite->getTextureRect().height);
+                            getSize().x / (float) sprite->getSize().x,
+                            getSize().y / (float) sprite->getSize().y);
                     sprite->setScale(scaling, scaling);
                     sprite->setPosition((MenuLine::getSize().x * 0.56f), MenuLine::getSize().y / 2);
                     sprite->setOrigin(Origin::Left);

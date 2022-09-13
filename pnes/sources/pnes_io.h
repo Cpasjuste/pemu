@@ -25,6 +25,10 @@ namespace c2d {
             return "/data/pnes/";
         }
 #endif
+#elif __3DS__
+        std::string getDataPath() override {
+            return "/3ds/pnes/";
+        }
 #endif
     };
 }

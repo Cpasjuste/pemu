@@ -23,6 +23,10 @@ namespace c2d {
             return "/data/pgen/";
         }
 #endif
+#elif __3DS__
+        std::string getDataPath() override {
+            return "/3ds/pgen/";
+        }
 #endif
     };
 }

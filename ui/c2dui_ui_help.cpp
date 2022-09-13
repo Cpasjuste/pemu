@@ -47,8 +47,8 @@ UiHelp::addItem(bool left, c2d::Font *font, const std::vector<Skin::Button *> &b
     for (const auto &button: buttons) {
         if (button && button->texture) {
             auto sprite = new Sprite(button->texture);
-            float scaling = std::min((getSize().x - 4) / (float) button->texture->getTextureRect().width,
-                                     (getSize().y - 4) / (float) button->texture->getTextureRect().height);
+            float scaling = std::min((getSize().x - 4) / (float) sprite->getSize().x,
+                                     (getSize().y - 4) / (float) sprite->getSize().y);
             sprite->setScale(scaling, scaling);
             sprite->setOrigin(left ? Origin::Left : Origin::Right);
             sprite->setPosition(pos);
