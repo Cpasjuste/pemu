@@ -38,14 +38,13 @@ UiHelp::UiHelp(UiMain *ui) : SkinnedRectangle(ui->getSkin(), {"MAIN", "HELP"}) {
             "ROM MENU", {pos - 12, getSize().y / 2});
 }
 
-float
-UiHelp::addItem(bool left, c2d::Font *font, const std::vector<Skin::Button *> &buttons,
-                const std::string &name, const c2d::Vector2f &position) {
+float UiHelp::addItem(bool left, c2d::Font *font, const std::vector<Skin::Button *> &buttons,
+                      const std::string &name, const c2d::Vector2f &position) {
     FloatRect bounds;
     Vector2f pos = position;
 
     for (const auto &button: buttons) {
-        if (button && button->texture) {
+        if (button && button->texture && button->texture->available) {
             auto sprite = new Sprite(button->texture);
             float scaling = std::min((getSize().x - 4) / (float) sprite->getSize().x,
                                      (getSize().y - 4) / (float) sprite->getSize().y);
@@ -56,11 +55,11 @@ UiHelp::addItem(bool left, c2d::Font *font, const std::vector<Skin::Button *> &b
             bounds = sprite->getGlobalBounds();
             pos.x += left ? bounds.width : -bounds.width;
         } else {
-            // TODO
-            //auto text = new Text("NAVIGATION", (unsigned int) navigationSpriteBounds.height - 10);
+            // dummy button (TODO)
         }
     }
 
+    printf("UiHelp::addItem: %s, size: %i\n", name.c_str(), (unsigned int) bounds.height - 12);
     auto text = new Text(name, (unsigned int) bounds.height - 12, font);
     text->setOutlineThickness(1);
     text->setOrigin(left ? Origin::Left : Origin::Right);

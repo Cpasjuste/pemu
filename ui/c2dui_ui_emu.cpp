@@ -20,10 +20,7 @@ UiEmu::UiEmu(UiMain *u) : RectangleShape(u->getSize()) {
 }
 
 void UiEmu::addAudio(c2d::Audio *_audio) {
-    if (audio != nullptr) {
-        delete (audio);
-    }
-
+    delete (audio);
     audio = _audio;
 }
 
@@ -33,10 +30,7 @@ void UiEmu::addAudio(int rate, int samples, Audio::C2DAudioCallback cb) {
 }
 
 void UiEmu::addVideo(C2DUIVideo *v) {
-    if (video) {
-        delete (video);
-    }
-
+    delete (video);
     video = v;
     video->setShader(ui->getConfig()->get(Option::Id::ROM_SHADER, true)->getIndex());
     video->setFilter((Texture::Filter) ui->getConfig()->get(Option::Id::ROM_FILTER, true)->getIndex());

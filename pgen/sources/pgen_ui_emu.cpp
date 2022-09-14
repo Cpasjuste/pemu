@@ -102,10 +102,6 @@ void PGENUiEmu::stop() {
     UiEmu::stop();
 }
 
-bool PGENUiEmu::onInput(c2d::Input::Player *players) {
-    return UiEmu::onInput(players);
-}
-
 void PGENUiEmu::onUpdate() {
     if (!isPaused()) {
         // inputs
