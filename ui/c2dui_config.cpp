@@ -43,8 +43,8 @@ Config::Config(c2d::Io *io, int ver, const std::string &defaultRomsPath) {
     std::vector<std::string> skins;
     // add default skins from romfs
     skins.emplace_back("default");
-    // add skins from data dir
-    auto files = io->getDirList(dataPath + "skins/", true);
+    // add skins from romfs dir
+    auto files = io->getDirList(io->getRomFsPath() + "skins/", true);
     for (auto &file: files) {
         if (file.type != c2d::Io::Type::Directory || file.name[0] == '.') {
             continue;
@@ -55,7 +55,18 @@ Config::Config(c2d::Io *io, int ver, const std::string &defaultRomsPath) {
             printf("skin found: %s\n", file.path.c_str());
         }
     }
-
+    // add skins from data dir
+    files = io->getDirList(dataPath + "skins/", true);
+    for (auto &file: files) {
+        if (file.type != c2d::Io::Type::Directory || file.name[0] == '.') {
+            continue;
+        }
+        // only append skin name if it
+        if (std::find(skins.begin(), skins.end(), file.name) == skins.end()) {
+            skins.emplace_back(file.name);
+            printf("skin found: %s\n", file.path.c_str());
+        }
+    }
     // set default skin index
     if (!get(Option::Id::GUI_SKIN)) {
         int index = 0;

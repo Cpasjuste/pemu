@@ -18,6 +18,12 @@ namespace c2d {
         std::string getDataPath() override {
             return "/data/psnes/";
         }
+#elif __3DS__
+#ifndef NDEBUG
+        std::string getDataPath() override {
+            return "/3ds/psnes/";
+        }
+#endif
 #endif
     };
 }
