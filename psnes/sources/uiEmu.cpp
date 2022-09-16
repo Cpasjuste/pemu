@@ -298,15 +298,15 @@ bool8 S9xInitUpdate() {
 bool8 S9xDeinitUpdate(int width, int height) {
     //printf("S9xDeinitUpdate(%i, %i\n", width, height);
     C2DUIVideo *video = m_ui->getUiEmu()->getVideo();
-    auto rect = video->getTextureRect();
-
-    if (rect.width != width || rect.height != height) {
-        video->setTextureRect({0, 0, width, height});
-        video->setSize((float) width, (float) height);
-        video->updateScaling();
+    if (video) {
+        auto rect = video->getTextureRect();
+        if (rect.width != width || rect.height != height) {
+            video->setSize((float) width, (float) height);
+            video->setTextureRect({0, 0, width, height});
+            video->updateScaling();
+        }
+        video->unlock();
     }
-
-    video->unlock();
 
     return TRUE;
 }

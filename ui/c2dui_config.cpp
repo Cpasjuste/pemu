@@ -71,8 +71,14 @@ Config::Config(c2d::Io *io, int ver, const std::string &defaultRomsPath) {
     if (!get(Option::Id::GUI_SKIN)) {
         int index = 0;
         for (size_t i = 0; i < skins.size(); i++) {
-            if (skins.at(i) == "default") {
-                index = (int) i;
+            if (C2D_SCREEN_HEIGHT > 240) {
+                if (skins.at(i) == "default") {
+                    index = (int) i;
+                }
+            } else {
+                if (skins.at(i) == "big") {
+                    index = (int) i;
+                }
             }
         }
         append("SKIN", skins, index, Option::Id::GUI_SKIN, Option::Flags::STRING);
