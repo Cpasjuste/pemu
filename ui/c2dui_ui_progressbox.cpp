@@ -4,73 +4,68 @@
 
 #include "c2dui.h"
 
-UIProgressBox::UIProgressBox(UiMain *gui)
-        : RectangleShape(Vector2f(gui->getSize().x / 2,
-                                  gui->getSize().y / 2)) {
-
-    gui->getSkin()->loadRectangleShape(this, {"SKIN_CONFIG", "MESSAGEBOX"});
-
+UIProgressBox::UIProgressBox(UiMain *ui)
+        : SkinnedRectangle(ui->getSkin(), {"SKIN_CONFIG", "MESSAGEBOX"}) {
     float w = getSize().x;
     float h = getSize().y;
 
-    float margin_x = UI_MARGIN * gui->getScaling().x;
-    float margin_y = UI_MARGIN * gui->getScaling().y;
+    float font_size = h / 15.0f;
+    float margin_x = font_size * ui->getScaling().x;
+    float margin_y = font_size * ui->getScaling().y;
 
-    title = new Text("TITLE", C2D_DEFAULT_CHAR_SIZE, gui->getSkin()->getFont());
-    title->setPosition(margin_x, margin_y + 16);
-    title->setSizeMax(w - (margin_x * 2), 0);
-    title->setOutlineThickness(2);
-    title->setOutlineColor(Color::Black);
-    add(title);
+    m_title = new Text("TITLE", (unsigned int) (font_size * 1.3f), ui->getSkin()->getFont());
+    m_title->setPosition(margin_x, margin_y);
+    m_title->setSizeMax(w - (margin_x * 2), 0);
+    m_title->setOutlineThickness(2);
+    m_title->setOutlineColor(Color::Black);
+    add(m_title);
 
-    progress_bg = new RectangleShape({margin_x, h - margin_y - (h / 6), w - (margin_x * 2), h / 6});
+    m_progress_bg = new RectangleShape({margin_x, h - margin_y - (h / 6), w - (margin_x * 2), h / 6});
     Color col = getFillColor();
     col.r = (uint8_t) std::max(0, col.r - 40);
     col.g = (uint8_t) std::max(0, col.g - 40);
     col.b = (uint8_t) std::max(0, col.b - 40);
-    progress_bg->setFillColor(col);
-    progress_bg->setOutlineColor(getOutlineColor());
-    progress_bg->setOutlineThickness(2);
-    add(progress_bg);
+    m_progress_bg->setFillColor(col);
+    m_progress_bg->setOutlineColor(getOutlineColor());
+    m_progress_bg->setOutlineThickness(2);
+    add(m_progress_bg);
 
-    progress_fg = new RectangleShape(
-            FloatRect(progress_bg->getPosition().x + 1, progress_bg->getPosition().y + 1,
-                      2, progress_bg->getSize().y - 2));
-    progress_fg->setFillColor(getOutlineColor());
-    add(progress_fg);
+    m_progress_fg = new RectangleShape(
+            FloatRect(m_progress_bg->getPosition().x + 1, m_progress_bg->getPosition().y + 1,
+                      2, m_progress_bg->getSize().y - 2));
+    m_progress_fg->setFillColor(getOutlineColor());
+    add(m_progress_fg);
 
-    message = new Text("MESSAGE", (unsigned int) gui->getFontSize(), gui->getSkin()->getFont());
-    message->setOrigin(Origin::BottomLeft);
-    message->setPosition(margin_x, progress_bg->getPosition().y - margin_y);
-    message->setSizeMax(w - (margin_x * 2), 0);
-    message->setOutlineThickness(2);
-    message->setOutlineColor(Color::Black);
-    add(message);
+    m_message = new Text("MESSAGE", (unsigned int) font_size, ui->getSkin()->getFont());
+    m_message->setOrigin(Origin::BottomLeft);
+    m_message->setPosition(margin_x, m_progress_bg->getPosition().y - margin_y);
+    m_message->setSizeMax(w - (margin_x * 2), 0);
+    m_message->setOutlineThickness(2);
+    m_message->setOutlineColor(Color::Black);
+    add(m_message);
 
     setVisibility(Visibility::Hidden);
 }
 
-void UIProgressBox::setTitle(std::string title) {
-    this->title->setString(title);
+void UIProgressBox::setTitle(const std::string &title) {
+    m_title->setString(title);
 }
 
 void UIProgressBox::setProgress(float progress) {
-
-    float width = progress * (progress_bg->getSize().x - 2);
-    progress_fg->setSize(
-            std::min(width, progress_bg->getSize().x - 2),
-            progress_fg->getSize().y);
+    float width = progress * (m_progress_bg->getSize().x - 2);
+    m_progress_fg->setSize(
+            std::min(width, m_progress_bg->getSize().x - 2),
+            m_progress_fg->getSize().y);
 }
 
-void UIProgressBox::setMessage(std::string message) {
-
-    this->message->setString(message);
+void UIProgressBox::setMessage(const std::string &message) {
+    m_message->setString(message);
 }
 
 c2d::Text *UIProgressBox::getTitleText() {
-    return title;
+    return m_title;
 }
 
 c2d::Text *UIProgressBox::getMessageText() {
-    return message;
+    return m_message;
 }

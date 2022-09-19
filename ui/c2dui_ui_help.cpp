@@ -46,8 +46,8 @@ float UiHelp::addItem(bool left, c2d::Font *font, const std::vector<Skin::Button
     for (const auto &button: buttons) {
         if (button && button->texture && button->texture->available) {
             auto sprite = new Sprite(button->texture);
-            float scaling = std::min((getSize().x - 4) / (float) sprite->getSize().x,
-                                     (getSize().y - 4) / (float) sprite->getSize().y);
+            float scaling = std::min(getSize().x / (float) sprite->getSize().x,
+                                     getSize().y / (float) sprite->getSize().y);
             sprite->setScale(scaling, scaling);
             sprite->setOrigin(left ? Origin::Left : Origin::Right);
             sprite->setPosition(pos);
@@ -59,11 +59,10 @@ float UiHelp::addItem(bool left, c2d::Font *font, const std::vector<Skin::Button
         }
     }
 
-    printf("UiHelp::addItem: %s, size: %i\n", name.c_str(), (unsigned int) bounds.height - 12);
-    auto text = new Text(name, (unsigned int) bounds.height - 12, font);
+    auto text = new Text(name, (unsigned int) ((getSize().y / 3) * 2), font);
     text->setOutlineThickness(1);
     text->setOrigin(left ? Origin::Left : Origin::Right);
-    float x = left ? bounds.left + bounds.width + 4 : bounds.left - 4;
+    float x = left ? bounds.left + bounds.width : bounds.left;
     text->setPosition({x, getSize().y / 2});
     add(text);
 
