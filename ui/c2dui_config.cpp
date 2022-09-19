@@ -67,7 +67,7 @@ Config::Config(c2d::Io *io, int ver, const std::string &defaultRomsPath) {
             printf("skin found: %s\n", file.path.c_str());
         }
     }
-    // set default skin index
+    // set "default" skin index (or "big" skin on screen height < 240)
     if (!get(Option::Id::GUI_SKIN)) {
         int index = 0;
         for (size_t i = 0; i < skins.size(); i++) {
@@ -162,7 +162,6 @@ Config::Config(c2d::Io *io, int ver, const std::string &defaultRomsPath) {
 }
 
 void Config::load(const ss_api::Game &game) {
-
     config_t cfg;
     config_init(&cfg);
 
@@ -260,7 +259,6 @@ void Config::load(const ss_api::Game &game) {
 }
 
 void Config::save(const ss_api::Game &game) {
-
     config_t cfg{};
     config_init(&cfg);
 
@@ -318,7 +316,6 @@ void Config::save(const ss_api::Game &game) {
 }
 
 void Config::reset() {
-
     options_rom.clear();
 
     size_t start = 0, end = options_gui.size();
@@ -355,7 +352,6 @@ std::vector<Option> *Config::get(bool isRom) {
 }
 
 Option *Config::get(int index, bool isRom) {
-
     std::vector<Option> *options = get(isRom);
 
     for (auto &option: *options) {
@@ -366,10 +362,8 @@ Option *Config::get(int index, bool isRom) {
     return nullptr;
 }
 
-bool Config::add(int target,
-                 const std::string &text, const std::vector<std::string> &values,
+bool Config::add(int target, const std::string &text, const std::vector<std::string> &values,
                  int defaultValue, int index, unsigned int flags) {
-
     for (unsigned int i = 0; i < options_gui.size(); i++) {
         if (options_gui[i].getId() == target) {
             options_gui.insert(options_gui.begin() + i + 1,
@@ -391,7 +385,6 @@ void Config::append(const std::string &text, int value, int id, unsigned int fla
 }
 
 bool Config::hide(int index, bool isRom) {
-
     std::vector<Option> *options = get(isRom);
 
     for (auto &option: *options) {
