@@ -206,7 +206,7 @@ Skin::Skin(UiMain *u) {
     font->setFilter((Texture::Filter) fntGroup->getOption("filtering")->getInteger());
     Vector2f offset = fntGroup->getOption("offset")->getVector2f();
 #ifdef __3DS__
-    offset.y += 2;
+    offset.y += 1.6f;
 #endif
     font->setOffset(offset);
 }
