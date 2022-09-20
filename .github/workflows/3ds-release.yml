@@ -38,12 +38,13 @@ jobs:
           cmake -G "Unix Makefiles" -DPLATFORM_3DS=ON -DOPTION_MPV_PLAYER=OFF -DOPTION_EMU=pnes -DCMAKE_BUILD_TYPE=Release ..
           make -j $(getconf _NPROCESSORS_ONLN) pnes.3dsx
 
-      - name: Build psnes
-        run: |
-          mkdir cmake-build-psnes && cd cmake-build-psnes
-          source /etc/profile.d/devkit-env.sh
-          cmake -G "Unix Makefiles" -DPLATFORM_3DS=ON -DOPTION_MPV_PLAYER=OFF -DOPTION_EMU=psnes -DCMAKE_BUILD_TYPE=Release ..
-          make -j $(getconf _NPROCESSORS_ONLN) psnes.3dsx
+      # too slow for 3ds for now...
+      #- name: Build psnes
+        #run: |
+          #mkdir cmake-build-psnes && cd cmake-build-psnes
+          #source /etc/profile.d/devkit-env.sh
+          #cmake -G "Unix Makefiles" -DPLATFORM_3DS=ON -DOPTION_MPV_PLAYER=OFF -DOPTION_EMU=psnes -DCMAKE_BUILD_TYPE=Release ..
+          #make -j $(getconf _NPROCESSORS_ONLN) psnes.3dsx
 
       - name: Release
         uses: softprops/action-gh-release@v1
