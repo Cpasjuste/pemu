@@ -123,14 +123,14 @@ std::string UIRomList::getPreview(const Game &game, UIRomList::PreviewType type)
     // try media path from database
     std::string path = game.romsPath + game.getMedia(mediaType).url;
     printf("getPreview(%s)\n", path.c_str());
-    if (ui->getIo()->exist(path)) {
+    if (ui->getIo()->getFile(path).isFile()) {
         return path;
     }
 
     // try from filename
     path = game.romsPath + "media/" + mediaType + "/" + Utility::removeExt(game.path) + mediaExt;
     printf("getPreview(%s)\n", path.c_str());
-    if (ui->getIo()->exist(path)) {
+    if (ui->getIo()->getFile(path).isFile()) {
         return path;
     }
 
@@ -140,7 +140,7 @@ std::string UIRomList::getPreview(const Game &game, UIRomList::PreviewType type)
         for (const auto &g: clones) {
             path = g.romsPath + g.getMedia(mediaType).url;
             printf("getPreview(%s)\n", path.c_str());
-            if (ui->getIo()->exist(path)) {
+            if (ui->getIo()->getFile(path).isFile()) {
                 return path;
             }
         }
@@ -151,7 +151,7 @@ std::string UIRomList::getPreview(const Game &game, UIRomList::PreviewType type)
         Game parent = romList->gameList->findGameByPath(game.cloneOf);
         path = parent.romsPath + parent.getMedia(mediaType).url;
         printf("getPreview(%s)\n", path.c_str());
-        if (ui->getIo()->exist(path)) {
+        if (ui->getIo()->getFile(path).isFile()) {
             return path;
         }
     }
