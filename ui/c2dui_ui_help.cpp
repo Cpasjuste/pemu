@@ -17,8 +17,14 @@ UiHelp::UiHelp(UiMain *ui) : SkinnedRectangle(ui->getSkin(), {"MAIN", "HELP"}) {
                   "RUN", {pos + 12, getSize().y / 2});
     // favorite
     button1 = ui->getConfig()->get(Option::Id::JOY_X)->getValueInt();
-    pos = addItem(true, font, {ui->getSkin()->getButton(button1)},
-                  "ADD / REMOVE FAVORITE", {pos + 12, getSize().y / 2});
+    if (ui->getSize().y < 240) {
+        pos = addItem(true, font, {ui->getSkin()->getButton(button1)},
+                      "ADD / REMOVE FAVORITE", {pos + 12, getSize().y / 2});
+    } else {
+        pos = addItem(true, font, {ui->getSkin()->getButton(button1)},
+                      "FAVORITE", {pos + 12, getSize().y / 2});
+    }
+
     if (!(ui->getConfig()->get(Option::Id::GUI_FILTER_SYSTEM)->getFlags() & Option::Flags::HIDDEN)) {
         // system
         button1 = ui->getConfig()->get(Option::Id::JOY_LT)->getValueInt();
@@ -59,7 +65,7 @@ float UiHelp::addItem(bool left, c2d::Font *font, const std::vector<Skin::Button
         }
     }
 
-    auto text = new Text(name, (unsigned int) ((getSize().y / 3) * 2), font);
+    auto text = new Text(name, (unsigned int) (getSize().y * 0.85f), font);
     text->setOutlineThickness(1);
     text->setOrigin(left ? Origin::Left : Origin::Right);
     float x = left ? bounds.left + bounds.width : bounds.left;

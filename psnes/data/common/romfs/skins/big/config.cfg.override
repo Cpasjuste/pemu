@@ -1,0 +1,61 @@
+SKIN_CONFIG :
+{
+  COLORS :
+  {
+    color0 = [ 0, 114, 67, 255 ];       // HIGHLIGHT > color
+    color1 = [ 247, 186, 11, 255 ];     // HIGHLIGHT > outline_color
+    color2 = [ 0, 56, 123, 240 ];       // MESSAGEBOX > color
+    color3 = [ 193, 18, 28, 255 ];     // MESSAGEBOX > outline_color
+    color4 = [ 0, 56, 123, 240 ];       // STATUSBOX > color
+    color5 = [ 193, 18, 28, 255 ];     // STATUSBOX > outline_color
+    color6 = [ 178, 180, 178, 255 ];       // MAIN > color
+    color7 = [ 193, 18, 28, 255 ];      // MAIN > outline_color
+    color8 = [ 255, 255, 255, 255 ];    // MAIN > TITLE > color
+    color9 = [ 0, 0, 0, 255 ];          // MAIN > TITLE > outline_color
+    color10 = [ 0, 56, 123, 255 ];   // MAIN > HELP > color
+    color11 = [ 193, 18, 28, 255 ];     // MAIN > HELP > outline_color
+    color12 = [ 0, 56, 123, 255 ];      // MAIN > ROM_LIST > color
+    color13 = [ 247, 186, 11, 255 ];    // MAIN > ROM_LIST > outline_color
+    color14 = [ 40, 40, 40, 255 ];      // MAIN > ROM_LIST > TITLE_TEXT > color
+    color15 = [ 153, 255, 51, 255 ];    // MAIN > ROM_LIST > TITLE_TEXT > outline_color
+    color16 = [ 200, 200, 200, 255 ];    // MAIN > ROM_LIST > TEXT > color
+    color17 = [ 193, 18, 28, 255 ];     // MAIN > ROM_LIST > TEXT > color_missing
+    color18 = [ 0, 0, 0, 255 ];         // MAIN > ROM_LIST > TEXT > outline_color
+    color19 = [ 0, 114, 67, 255 ];      // MAIN > ROM_IMAGE > color
+    color20 = [ 247, 186, 11, 255 ];    // MAIN > ROM_IMAGE > outline_color
+    color21 = [ 0, 114, 67, 255 ];      // MAIN > ROM_INFOS > color
+    color22 = [ 193, 18, 28, 255 ];    // MAIN > ROM_INFOS > outline_color
+    color23 = [ 193, 18, 28, 255 ];    // MAIN > ROM_INFOS > TEXT_1 > color
+    color24 = [ 0, 0, 0, 255 ];         // MAIN > ROM_INFOS > TEXT_1 > outline_color
+    color25 = [ 247, 186, 11, 255 ];    // MAIN > ROM_INFOS > TEXT_2 > color
+    color26 = [ 0, 0, 0, 255 ];         // MAIN > ROM_INFOS > TEXT_2 > outline_color
+    color27 = [ 193, 18, 28, 255 ];      // MAIN > ROM_SYNOPSIS > color
+    color28 = [ 0, 56, 123, 255 ];    // MAIN > ROM_SYNOPSIS > outline_color
+    color29 = [ 247, 186, 11, 255 ];    // MAIN > ROM_SYNOPSIS > TEXT > color
+    color30 = [ 0, 56, 123, 255 ];         // MAIN > ROM_SYNOPSIS > TEXT > outline_color
+    color31 = [ 0, 56, 123, 240 ];   // OPTIONS_MENU > color
+    color32 = [ 193, 18, 28, 255 ];       // OPTIONS_MENU > outline_color
+    color33 = [ 200, 200, 200, 255 ];   // OPTIONS_MENU > TITLE_TEXT > color
+    color34 = [ 193, 18, 28, 255 ];       // OPTIONS_MENU > TITLE_TEXT > outline_color
+    color35 = [ 200, 200, 200, 255 ];   // OPTIONS_MENU > ITEMS_TEXT > color
+    color36 = [ 0, 0, 0, 255 ];         // OPTIONS_MENU > ITEMS_TEXT > outline_color
+    color37 = [ 0, 56, 123, 220 ];   // STATES_MENU > color
+    color38 = [ 193, 18, 28, 255 ];     // STATES_MENU > outline_color
+    color39 = [ 200, 200, 200, 255 ];   // STATES_MENU > TITLE_TEXT > color
+    color40 = [ 220, 0, 0, 255 ];       // STATES_MENU > TITLE_TEXT > outline_color
+    color41 = [ 200, 200, 200, 255 ];      // STATES_MENU > STATES_ITEM > color
+    color42 = [ 0, 0, 0, 255 ];    // STATES_MENU > STATES_ITEM > outline_color
+    color43 = [ 200, 200, 200, 255 ];   // STATES_MENU > STATES_ITEM > STATE_TEXT > color
+    color44 = [ 0, 0, 0, 255 ];         // STATES_MENU > STATES_ITEM > STATE_TEXT > outline_color
+  };
+  MAIN :
+  {
+    ROM_LIST :
+    {
+      TEXT :
+      {
+        highlight_use_text_color = 0;
+      };
+    };
+  };
+};
