@@ -11,6 +11,9 @@ UiEmu::UiEmu(UiMain *u) : RectangleShape(u->getSize()) {
     RectangleShape::setFillColor(Color::Transparent);
 
     fpsText = new Text("0123456789", (unsigned int) ui->getFontSize(), ui->getSkin()->font);
+    fpsText->setFillColor(Color::Yellow);
+    fpsText->setOutlineColor(Color::Black);
+    fpsText->setOutlineThickness(1);
     fpsText->setString("FPS: 00/60");
     fpsText->setPosition(16, 16);
     fpsText->setVisibility(Visibility::Hidden);
