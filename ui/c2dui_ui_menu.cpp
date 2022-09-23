@@ -33,8 +33,8 @@ public:
         value->setOutlineThickness(textGroup.outlineSize);
         value->setOutlineColor(textGroup.outlineColor);
         value->setOrigin(Origin::Left);
-        value->setPosition((MenuLine::getSize().x * 0.57f), MenuLine::getSize().y / 2);
-        value->setSizeMax(MenuLine::getSize().x * 0.40f, 0);
+        value->setPosition((MenuLine::getSize().x * 0.6f), MenuLine::getSize().y / 2);
+        value->setSizeMax(MenuLine::getSize().x * 0.38f, 0);
         MenuLine::add(value);
 
         sprite = new Sprite();
@@ -63,7 +63,7 @@ public:
                             getSize().x / (float) sprite->getSize().x,
                             getSize().y / (float) sprite->getSize().y);
                     sprite->setScale(scaling, scaling);
-                    sprite->setPosition((MenuLine::getSize().x * 0.56f), MenuLine::getSize().y / 2);
+                    sprite->setPosition((MenuLine::getSize().x * 0.6f), MenuLine::getSize().y / 2);
                     sprite->setOrigin(Origin::Left);
                 } else {
                     sprite->setVisibility(Visibility::Hidden);
