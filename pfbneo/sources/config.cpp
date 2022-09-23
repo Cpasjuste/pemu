@@ -12,7 +12,7 @@ using namespace c2dui;
 PFBAConfig::PFBAConfig(c2d::Io *io, int version) : Config(io, version) {
     printf("PFBAConfig(%s, v%i)\n", getConfigPath().c_str(), version);
 
-#ifndef __PFBN_NO_CONSOLES__
+#ifndef __PFBN_LIGHT__
     // add fba default roms paths
     roms_paths.emplace_back(io->getDataPath() + "channelf/");
     roms_paths.emplace_back(io->getDataPath() + "coleco/");
@@ -73,7 +73,7 @@ PFBAConfig::PFBAConfig(c2d::Io *io, int version) : Config(io, version) {
          "DECK_V6", "DEVKIT"},
         0, Option::Id::ROM_NEOBIOS, Option::Flags::STRING);
     get(Option::Id::ROM_NEOBIOS)->setInfo("YOU NEED TO RESTART EMULATION AFTER CHANGING THIS OPTION");
-#ifdef __VITA__
+#ifdef __PFBA_ARM__
     // do not use unibios as default on vita for cyclone asm compatibility
     get(Option::Id::ROM_NEOBIOS)->setIndex(4);
 

@@ -205,7 +205,7 @@ int AppError(TCHAR *szText, int bWarning) {
     return 1;
 }
 
-#ifdef __PFBN_NO_CONSOLES__
+#ifdef __PFBN_LIGHT__
 
 void nes_add_cheat(char *code) {};
 

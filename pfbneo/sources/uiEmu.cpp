@@ -48,7 +48,6 @@ PFBAUiEmu::PFBAUiEmu(UiMain *ui) : UiEmu(ui) {
 #ifdef __PFBA_ARM__
 
 int PFBAUiEmu::getSekCpuCore() {
-
     int sekCpuCore = 0; // SEK_CORE_C68K: USE CYCLONE ARM ASM M68K CORE
 
     std::vector<std::string> zipList;
@@ -76,17 +75,17 @@ int PFBAUiEmu::getSekCpuCore() {
                                "TO ENABLE CYCLONE ASM CORE (FASTER)", "OK");
         }
     } else if (isHardware(hardware, HARDWARE_PREFIX_TOAPLAN)) {
-        zipList.push_back("batrider");
-        zipList.push_back("bbakraid");
-        zipList.push_back("bgaregga");
+        zipList.emplace_back("batrider");
+        zipList.emplace_back("bbakraid");
+        zipList.emplace_back("bgaregga");
     } else if (isHardware(hardware, HARDWARE_PREFIX_SNK)) {
-        zipList.push_back("kof97");
-        zipList.push_back("kof98");
-        zipList.push_back("kof99");
-        zipList.push_back("kof2000");
-        zipList.push_back("kof2001");
-        zipList.push_back("kof2002");
-        zipList.push_back("kf2k3pcb");
+        zipList.emplace_back("kof97");
+        zipList.emplace_back("kof98");
+        zipList.emplace_back("kof99");
+        zipList.emplace_back("kof2000");
+        zipList.emplace_back("kof2001");
+        zipList.emplace_back("kof2002");
+        zipList.emplace_back("kf2k3pcb");
         //zipList.push_back("kof2003"); // WORKS
     }
 
