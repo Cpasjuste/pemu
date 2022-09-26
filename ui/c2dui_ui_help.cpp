@@ -25,13 +25,15 @@ UiHelp::UiHelp(UiMain *ui) : SkinnedRectangle(ui->getSkin(), {"MAIN", "HELP"}) {
                       "FAVORITE", {pos + 12, getSize().y / 2});
     }
 
-    if (!(ui->getConfig()->get(Option::Id::GUI_FILTER_SYSTEM)->getFlags() & Option::Flags::HIDDEN)) {
-        // system
-        button1 = ui->getConfig()->get(Option::Id::JOY_LT)->getValueInt();
-        button2 = ui->getConfig()->get(Option::Id::JOY_RT)->getValueInt();
-        addItem(true, font,
-                {ui->getSkin()->getButton(button1), ui->getSkin()->getButton(button2)},
-                "SWITCH SYSTEM", {pos + 12, getSize().y / 2});
+    if (ui->getSize().x > 400) {
+        if (!(ui->getConfig()->get(Option::Id::GUI_FILTER_SYSTEM)->getFlags() & Option::Flags::HIDDEN)) {
+            // system
+            button1 = ui->getConfig()->get(Option::Id::JOY_LT)->getValueInt();
+            button2 = ui->getConfig()->get(Option::Id::JOY_RT)->getValueInt();
+            addItem(true, font,
+                    {ui->getSkin()->getButton(button1), ui->getSkin()->getButton(button2)},
+                    "SWITCH SYSTEM", {pos + 12, getSize().y / 2});
+        }
     }
 
     // main menu

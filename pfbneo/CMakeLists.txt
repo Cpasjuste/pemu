@@ -323,7 +323,6 @@ elseif (PLATFORM_3DS)
             ${DEVKITPRO}/portlibs/armv6k/include)
     list(APPEND FLAGS -DUSE_FILE32API -DLSB_FIRST -DUSE_SPEEDHACKS -D__PFBA_ARM__
             -ffunction-sections -fomit-frame-pointer)
-    list(APPEND LDFLAGS)
 elseif (PLATFORM_SWITCH)
     ##############
     # NX (SWITCH)
@@ -366,16 +365,10 @@ add_custom_target(${PROJECT_NAME}.data.skin
         )
 add_dependencies(${PROJECT_NAME}.data.skin ${PROJECT_NAME}.data)
 if (OPTION_LIGHT)
-    if (PLATFORM_3DS)
-        add_custom_target(${PROJECT_NAME}.data.light
-                COMMAND rm -rf "${CMAKE_CURRENT_BINARY_DIR}/data_romfs/gamelist_*"
-                COMMAND mv "${CMAKE_CURRENT_BINARY_DIR}/data_romfs/gamelist.xml" "${CMAKE_CURRENT_BINARY_DIR}/data_datadir/gamelist.xml"
-                )
-    else ()
-        add_custom_target(${PROJECT_NAME}.data.light
-                COMMAND rm -rf "${CMAKE_CURRENT_BINARY_DIR}/data_romfs/gamelist_*"
-                )
-    endif ()
+    add_custom_target(${PROJECT_NAME}.data.light
+            COMMAND rm -rf "${CMAKE_CURRENT_BINARY_DIR}/data_romfs/gamelist*"
+            COMMAND cp -f "${CMAKE_CURRENT_SOURCE_DIR}/data/light/gamelist-light.xml" "${CMAKE_CURRENT_BINARY_DIR}/data_romfs/gamelist.xml"
+            )
     add_dependencies(${PROJECT_NAME}.data.light ${PROJECT_NAME}.data)
 endif ()
 if (PLATFORM_LINUX)
