@@ -83,7 +83,7 @@ void RomList::build(bool addArcadeSystem, const ss_api::System &system) {
                      ui->getConfig()->getRomPaths().at(FBN_PATH_ARCADE), false, filters, system);
 
     setLoadingText("Games: %li / %li", gameList->getAvailableCount(), gameList->games.size());
-    printf("RomList::build: games: %li / %li\n", gameList->getAvailableCount(), gameList->games.size());
+    printf("RomList::build: games: %zu / %zu\n", gameList->getAvailableCount(), gameList->games.size());
 
     // sort lists
     std::sort(gameList->systemList.systems.begin(), gameList->systemList.systems.end(), Api::sortSystemByName);
@@ -144,7 +144,7 @@ void RomList::build(bool addArcadeSystem, const ss_api::System &system) {
             gameListFav->games[i].romsPath = game.romsPath;
         }
     }
-    printf("RomList::build: %lu favorites\n", gameListFav->games.size());
+    printf("RomList::build: %zu favorites\n", gameListFav->games.size());
 
     float time_spent = ui->getElapsedTime().asSeconds() - time_start;
     printf("RomList::build(): list built in %f\n", time_spent);

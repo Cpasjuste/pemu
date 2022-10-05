@@ -68,7 +68,7 @@ Skin::Skin(UiMain *u) {
     /// FONT
     config::Group font_group("FONT");
     font_group.addOption({"path", "default.ttf"});
-    font_group.addOption({"offset", Vector2f{0, -3}});
+    font_group.addOption({"offset", Vector2f{0, -4}});
     font_group.addOption({"filtering", 0});
     config->addGroup(font_group);
 
@@ -204,7 +204,11 @@ Skin::Skin(UiMain *u) {
         font = ui->getFont();
     }
     font->setFilter((Texture::Filter) fntGroup->getOption("filtering")->getInteger());
-    font->setOffset(fntGroup->getOption("offset")->getVector2f());
+    Vector2f offset = fntGroup->getOption("offset")->getVector2f();
+#ifdef __3DS__
+    offset.y += 1.6f;
+#endif
+    font->setOffset(offset);
 }
 
 config::Config *Skin::getConfig() {

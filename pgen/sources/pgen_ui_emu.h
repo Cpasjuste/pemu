@@ -17,8 +17,6 @@ public:
 
     void stop() override;
 
-    bool onInput(c2d::Input::Player *players) override;
-
     void onUpdate() override;
 
     void resizeVideo(bool isGameGear = false);

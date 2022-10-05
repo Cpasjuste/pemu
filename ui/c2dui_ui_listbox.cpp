@@ -34,7 +34,7 @@ UIListBoxLine::UIListBoxLine(
         text->setPosition(iconRect->getSize().x + 8, UIListBoxLine::getSize().y / 2);
         text->setSizeMax(UIListBoxLine::getSize().x - (float) fontSize - iconRect->getSize().x, 0);
     } else {
-        text->setPosition(2, UIListBoxLine::getSize().y / 2);
+        text->setPosition(0, UIListBoxLine::getSize().y / 2);
         text->setSizeMax(UIListBoxLine::getSize().x - (float) fontSize, 0);
     }
 

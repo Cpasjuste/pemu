@@ -11,6 +11,9 @@ UiEmu::UiEmu(UiMain *u) : RectangleShape(u->getSize()) {
     RectangleShape::setFillColor(Color::Transparent);
 
     fpsText = new Text("0123456789", (unsigned int) ui->getFontSize(), ui->getSkin()->font);
+    fpsText->setFillColor(Color::Yellow);
+    fpsText->setOutlineColor(Color::Black);
+    fpsText->setOutlineThickness(1);
     fpsText->setString("FPS: 00/60");
     fpsText->setPosition(16, 16);
     fpsText->setVisibility(Visibility::Hidden);
@@ -20,10 +23,7 @@ UiEmu::UiEmu(UiMain *u) : RectangleShape(u->getSize()) {
 }
 
 void UiEmu::addAudio(c2d::Audio *_audio) {
-    if (audio != nullptr) {
-        delete (audio);
-    }
-
+    delete (audio);
     audio = _audio;
 }
 
@@ -33,10 +33,7 @@ void UiEmu::addAudio(int rate, int samples, Audio::C2DAudioCallback cb) {
 }
 
 void UiEmu::addVideo(C2DUIVideo *v) {
-    if (video) {
-        delete (video);
-    }
-
+    delete (video);
     video = v;
     video->setShader(ui->getConfig()->get(Option::Id::ROM_SHADER, true)->getIndex());
     video->setFilter((Texture::Filter) ui->getConfig()->get(Option::Id::ROM_FILTER, true)->getIndex());

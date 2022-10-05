@@ -91,7 +91,7 @@ void UIRomInfo::hideText(Text *text) {
 bool UIRomInfo::loadVideo(const Game &game) {
 #ifdef __MPV__
     int res = -1;
-    std::string videoPath = uiRomList->getPreviewVideo(game);
+    std::string videoPath = uiRomList->getPreview(game, UIRomList::PreviewType::Vid);
     if (!videoPath.empty()) {
         res = mpv->load(videoPath, Mpv::LoadType::Replace, "loop=yes");
         if (res == 0) {
@@ -113,14 +113,11 @@ bool UIRomInfo::loadVideo(const Game &game) {
 }
 
 bool UIRomInfo::loadTexture(const Game &game) {
-
-    auto *tex = game.path.empty() ? nullptr : (C2DTexture *) uiRomList->getPreviewTexture(game);
+    std::string path = game.path.empty() ? "" : uiRomList->getPreview(game, UIRomList::PreviewType::Tex);
     // set image
-    if (tex) {
-        if (texture) {
-            delete (texture);
-        }
-        texture = tex;
+    if (!path.empty()) {
+        delete (texture);
+        texture = new C2DTexture(path);
         texture->setOrigin(Origin::Center);
         texture->setPosition(Vector2f(previewBox->getSize().x / 2, previewBox->getSize().y / 2));
         float tex_scaling = std::min(

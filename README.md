@@ -7,6 +7,9 @@
 [![switch-release](https://github.com/Cpasjuste/pemu/actions/workflows/switch-release.yml/badge.svg)](https://github.com/Cpasjuste/pemu/actions/workflows/switch-release.yml)
 [![switch-dev](https://github.com/Cpasjuste/pemu/actions/workflows/switch-dev.yml/badge.svg)](https://github.com/Cpasjuste/pemu/actions/workflows/switch-dev.yml)
 
+[![3ds-release](https://github.com/Cpasjuste/pemu/actions/workflows/3ds-release.yml/badge.svg)](https://github.com/Cpasjuste/pemu/actions/workflows/3ds-release.yml)
+[![3ds-dev](https://github.com/Cpasjuste/pemu/actions/workflows/3ds-dev.yml/badge.svg)](https://github.com/Cpasjuste/pemu/actions/workflows/3ds-dev.yml)
+
 [![ps4-release](https://github.com/Cpasjuste/pemu/actions/workflows/ps4-release.yml/badge.svg)](https://github.com/Cpasjuste/pemu/actions/workflows/ps4-release.yml)
 [![ps4-dev](https://github.com/Cpasjuste/pemu/actions/workflows/ps4-dev.yml/badge.svg)](https://github.com/Cpasjuste/pemu/actions/workflows/ps4-dev.yml)
 

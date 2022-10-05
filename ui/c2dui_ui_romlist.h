@@ -12,6 +12,10 @@ namespace c2dui {
     class UIRomList : public SkinnedRectangle {
 
     public:
+        enum PreviewType {
+            Tex,
+            Vid
+        };
 
         UIRomList(UiMain *ui, RomList *romList, const c2d::Vector2f &size);
 
@@ -29,9 +33,7 @@ namespace c2dui {
 
         virtual RectangleShape *getBlur() { return blur; };
 
-        virtual c2d::Texture *getPreviewTexture(const ss_api::Game &game);
-
-        virtual std::string getPreviewVideo(const ss_api::Game &game);
+        virtual std::string getPreview(const ss_api::Game &game, PreviewType type);
 
         virtual void setVideoSnapDelay(int delay);
 
@@ -52,7 +54,11 @@ namespace c2dui {
         SkinnedText *titleText = nullptr;
 
         c2d::C2DClock timer_load_info;
+#ifdef __3DS__
+        int timer_load_info_delay = 1000;
+#else
         int timer_load_info_delay = 300;
+#endif
         int timer_load_info_done = 0;
 
         c2d::C2DClock timer_load_video;

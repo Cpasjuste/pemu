@@ -6,7 +6,7 @@
 #include "romlist.h"
 
 void PFBARomList::build(bool addArcadeSystem, const ss_api::System &system) {
-#ifndef __PFBN_NO_CONSOLES__
+#ifndef __PFBN_LIGHT__
     std::string dataPath = ui->getIo()->getDataPath();
     if (!ui->getIo()->exist(dataPath + "gamelist.xml")) {
         dataPath = ui->getIo()->getRomFsPath();

@@ -4,6 +4,19 @@
 
 #include <libgen.h>
 #include <string.h>
+#include <sys/types.h>
+
+pid_t waitpid(pid_t pid, int *status, int options) {
+    return 0;
+}
+
+void __archive_check_child(int in, int out) {
+
+}
+
+int __archive_create_child(const char *cmd, int *child_stdin, int *child_stdout, pid_t *out_child) {
+    return 0;
+}
 
 char *dirname(char *path) {
     char *p;

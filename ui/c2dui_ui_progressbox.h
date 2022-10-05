@@ -7,15 +7,15 @@
 
 namespace c2dui {
 
-    class UIProgressBox : public c2d::RectangleShape {
+    class UIProgressBox : public SkinnedRectangle {
 
     public:
 
-        UIProgressBox(UiMain *gui);
+        explicit UIProgressBox(UiMain *ui);
 
-        void setTitle(std::string title);
+        void setTitle(const std::string& title);
 
-        void setMessage(std::string message);
+        void setMessage(const std::string& message);
 
         void setProgress(float progress);
 
@@ -25,10 +25,10 @@ namespace c2dui {
 
     private:
 
-        c2d::Text *title;
-        c2d::Text *message;
-        c2d::RectangleShape *progress_bg;
-        c2d::RectangleShape *progress_fg;
+        c2d::Text *m_title;
+        c2d::Text *m_message;
+        c2d::RectangleShape *m_progress_bg;
+        c2d::RectangleShape *m_progress_fg;
     };
 }
 

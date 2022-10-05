@@ -51,7 +51,6 @@ void UiStatusBox::onDraw(c2d::Transform &transform, bool draw) {
     if (isVisible() && clock->getElapsedTime().asSeconds() > 5) {
         setVisibility(Visibility::Hidden, true);
     }
-
     SkinnedRectangle::onDraw(transform, draw);
 }
 

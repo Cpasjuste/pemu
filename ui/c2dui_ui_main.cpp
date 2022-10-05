@@ -32,22 +32,7 @@ UiMain::~UiMain() {
 #endif
 }
 
-void UiMain::init(UIRomList *_uiRomList, UiMenu *_uiMenu,
-                  UiEmu *_uiEmu, UiStateMenu *_uiState) {
-#if 0
-    uiHighlight = new UIHighlight();
-    skin->loadRectangleShape(uiHighlight, {"SKIN_CONFIG", "HIGHLIGHT"});
-    float alpha = uiHighlight->getAlpha();
-    if (alpha > 0) {
-        uiHighlight->add(new TweenAlpha((float) uiHighlight->getAlpha() * 0.5f,
-                                        uiHighlight->getAlpha(), 0.5f, TweenLoop::PingPong));
-    }
-    uiHighlight->setOrigin(Origin::Center);
-    uiHighlight->setLayer(1);
-    uiHighlight->setVisibility(Visibility::Hidden);
-    add(uiHighlight);
-#endif
-
+void UiMain::init(UIRomList *_uiRomList, UiMenu *_uiMenu, UiEmu *_uiEmu, UiStateMenu *_uiState) {
     uiRomList = _uiRomList;
     uiRomList->updateRomList();
     add(uiRomList);
@@ -62,19 +47,12 @@ void UiMain::init(UIRomList *_uiRomList, UiMenu *_uiMenu,
     uiState = _uiState;
     add(uiState);
 
-    uiMessageBox = new c2d::MessageBox(
-            FloatRect(
-                    getSize().x / 2,
-                    getSize().y / 2,
-                    getSize().x / 2,
-                    getSize().y / 2),
-            getInput(), skin->font, getFontSize());
+    // message box
+    Skin::TextGroup textGroup = skin->getText(
+            {"MAIN", "ROM_LIST", "TEXT"}); // use rom list text size for message box font size
+    Skin::RectangleShapeGroup shape = skin->getRectangleShape({"SKIN_CONFIG", "MESSAGEBOX"});
+    uiMessageBox = new c2d::MessageBox(shape.rect, getInput(), skin->font, (int) textGroup.size);
     skin->loadRectangleShape(uiMessageBox, {"SKIN_CONFIG", "MESSAGEBOX"});
-    float fontSize = uiMessageBox->getTitleText()->getSize().y * 1.5f;
-    uiMessageBox->getTitleText()->setSize(
-            uiMessageBox->getTitleText()->getSize().x * 1.5f, fontSize);
-    uiMessageBox->getTitleText()->setSizeMax(uiMessageBox->getSize().x - (float) fontSize * 2,
-                                             (float) fontSize + 4);
     uiMessageBox->setSelectedColor(uiMessageBox->getFillColor(), uiMessageBox->getOutlineColor());
     Color c = uiMessageBox->getOutlineColor();
     c.a -= 150;
