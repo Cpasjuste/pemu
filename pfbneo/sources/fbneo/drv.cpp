@@ -12,8 +12,10 @@ extern UINT8 NeoSystem;
 int bDrvOkay = 0;
 int kNetGame = 0;
 int nIpsMaxFileLen = 0;
+INT32 nInputIntfMouseDivider = 1;
 
 INT32 GetIpsesMaxLen(char *) { return 0; }
+UINT32 GetIpsDrvDefine() { return 0; }
 
 bool GetIpsDrvProtection() { return false; }
 
