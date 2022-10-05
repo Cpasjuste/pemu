@@ -200,7 +200,7 @@ if (OPTION_LIGHT)
     list(FILTER SRC_DRV EXCLUDE REGEX
             d_msx.cpp|d_nes.cpp|d_pce.cpp|pce.cpp|d_pgm.cpp|pgm_asic25.cpp|pgm_asic27a_type1.cpp|pgm_asic27a_type2.cpp|pgm_asic27a_type3.cpp|pgm_asic3.cpp)
     list(FILTER SRC_DRV EXCLUDE REGEX
-            pgm_crypt.cpp|pgm_draw.cpp|pgm_run.cpp|d_exterm.cpp|d_madmotor.cpp|d_psikyo4.cpp|d_psikyosh.cpp|psikyosh_render.cpp|d_ms32.cpp|d_ssv.cpp)
+            pgm_crypt.cpp|pgm_draw.cpp|pgm_run.cpp|d_exterm.cpp|d_madmotor.cpp|d_mcr68.cpp|d_psikyo4.cpp|d_psikyosh.cpp|psikyosh_render.cpp|d_ms32.cpp|d_ssv.cpp)
     list(FILTER SRC_DRV EXCLUDE REGEX
             d_namcona1.cpp|d_namconb1.cpp|d_btoads.cpp|d_artmagic.cpp|d_eolith16.cpp|d_gstream.cpp|d_vegaeo.cpp|d_limenko.cpp|d_pasha2.cpp|d_eolith.cpp)
     list(FILTER SRC_DRV EXCLUDE REGEX
