@@ -148,14 +148,13 @@ void UIListBox::updateLines() {
     bool useZipName = ui->getConfig()->get(Option::Id::GUI_SHOW_ZIP_NAMES)->getValueBool();
 
     for (unsigned int i = 0; i < (unsigned int) max_lines; i++) {
-
         if (file_index + i >= games.size()) {
             lines[i]->setVisibility(Visibility::Hidden);
         } else {
             // set file
             Game game = games[file_index + i];
             lines[i]->setVisibility(Visibility::Visible);
-            lines[i]->setString(useZipName ? game.path : game.name);
+            lines[i]->setString(useZipName ? Utility::removeExt(game.path) : game.name);
             // TODO: ICON
             //lines[i]->setIcon(file->icon);
             lines[i]->setColor(game.available ? colorAvailable : colorMissing);
