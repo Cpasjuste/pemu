@@ -17,7 +17,7 @@ UiHelp::UiHelp(UiMain *ui) : SkinnedRectangle(ui->getSkin(), {"MAIN", "HELP"}) {
                   "RUN", {pos + 12, getSize().y / 2});
     // favorite
     button1 = ui->getConfig()->get(Option::Id::JOY_X)->getValueInt();
-    if (ui->getSize().y < 240) {
+    if (ui->getSize().x > 640) {
         pos = addItem(true, font, {ui->getSkin()->getButton(button1)},
                       "ADD / REMOVE FAVORITE", {pos + 12, getSize().y / 2});
     } else {
@@ -25,7 +25,7 @@ UiHelp::UiHelp(UiMain *ui) : SkinnedRectangle(ui->getSkin(), {"MAIN", "HELP"}) {
                       "FAVORITE", {pos + 12, getSize().y / 2});
     }
 
-    if (ui->getSize().x > 400) {
+    if (ui->getSize().x > 640) {
         if (!(ui->getConfig()->get(Option::Id::GUI_FILTER_SYSTEM)->getFlags() & Option::Flags::HIDDEN)) {
             // system
             button1 = ui->getConfig()->get(Option::Id::JOY_LT)->getValueInt();

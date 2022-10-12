@@ -256,6 +256,7 @@ set(FLAGS
         -D__PFBA__
         -D__PFBA_VERSION_MAJOR__=${VERSION_MAJOR}
         -D__PFBA_VERSION_MINOR__=${VERSION_MINOR}
+        -DLSB_FIRST
         -DINCLUDE_7Z_SUPPORT -DMINIZIP_LIB
         -DBUILD_SDL2 -DBUILD_M68K
         -fomit-frame-pointer -Wno-write-strings
@@ -280,13 +281,13 @@ if (PLATFORM_VITA)
     list(APPEND INC sources/cpu/cyclone)
     list(REMOVE_ITEM SRC_CPU ${CMAKE_SOURCE_DIR}/cores/fbneo/src/cpu/m68000_intf.cpp)
     list(APPEND SRC_PFBA sources/cpu/c68000_intf.cpp sources/cpu/cyclone/Cyclone.s)
-    list(APPEND FLAGS -DBUILD_C68K -DUSE_FILE32API -DLSB_FIRST -DUSE_SPEEDHACKS -D__PFBA_ARM__)
+    list(APPEND FLAGS -DBUILD_C68K -DUSE_FILE32API -DUSE_SPEEDHACKS -D__PFBA_ARM__)
     list(APPEND LDFLAGS ScePower_stub pthread)
 elseif (PLATFORM_PS4)
     set(PS4_PKG_TITLE "pFBN - Portable Final Burn Neo")
     set(PS4_PKG_TITLE_ID "PFBN00001")
     set(PS4_PKG_VERSION "${VERSION_MAJOR}.${VERSION_MINOR}")
-    list(APPEND FLAGS -D__fastcall= -DLSB_FIRST)
+    list(APPEND FLAGS -D__fastcall=)
     list(APPEND LDFLAGS)
 elseif (PLATFORM_PS3)
     ##############
@@ -321,26 +322,30 @@ elseif (PLATFORM_3DS)
             sources/cpu/cyclone
             ${DEVKITPRO}/libctru/include
             ${DEVKITPRO}/portlibs/armv6k/include)
-    list(APPEND FLAGS -DUSE_FILE32API -DLSB_FIRST -DUSE_SPEEDHACKS -D__PFBA_ARM__
+    list(APPEND FLAGS -DLSB_FIRST -DUSE_SPEEDHACKS -D__PFBA_ARM__
             -ffunction-sections -fomit-frame-pointer)
 elseif (PLATFORM_SWITCH)
     ##############
     # NX (SWITCH)
     ##############
-    list(APPEND FLAGS
-            -DUSE_FILE32API -DLSB_FIRST
-            -ffunction-sections -fomit-frame-pointer)
+    list(APPEND FLAGS -DUSE_FILE32API -ffunction-sections -fomit-frame-pointer)
 elseif (PLATFORM_LINUX)
     ##############
     # LINUX
     ##############
-    list(APPEND FLAGS -DLSB_FIRST)
     list(APPEND FLAGS -D__fastcall=)
 elseif (PLATFORM_WINDOWS)
     ##############
     # WINDOWS
     ##############
-    list(APPEND FLAGS -DLSB_FIRST)
+    list(APPEND FLAGS)
+elseif (PLATFORM_ANDROID)
+    if (ANDROID_ABI STREQUAL armeabi-v7a)
+        list(APPEND FLAGS -DUSE_SPEEDHACKS
+                -ffunction-sections -fomit-frame-pointer
+                -ffast-math -frounding-math -marm -mcpu=cortex-a7 -mfpu=neon)
+    endif ()
+    list(APPEND FLAGS -O3)
 endif (PLATFORM_VITA)
 
 # source files

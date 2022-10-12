@@ -4,3 +4,6 @@ ss_dev_id.key
 ss_dev_pwd.key
 ss_user_id.key
 ss_user_pwd.key
+
+# android
+keystore.properties

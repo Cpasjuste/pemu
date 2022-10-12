@@ -340,7 +340,7 @@ void PFBAUiEmu::onUpdate() {
     }
 
     if (audio) {
-#if 0
+#if 1
         int queued = audio->getSampleBufferQueued();
         int capacity = audio->getSampleBufferCapacity();
         if (audio->getSamples() + queued > capacity) {

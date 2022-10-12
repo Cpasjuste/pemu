@@ -62,8 +62,12 @@ void set_config_defaults() {
     config.lp_range = 0x9999; /* 0.6 in 0.16 fixed point */
     config.ym2612 = YM2612_DISCRETE;
     config.ym2413 = 2; /* = AUTO (0 = always OFF, 1 = always ON) */
+#if HAVE_YM3438_CORE
     config.ym3438 = 0;
+#endif
+#if HAVE_OPLL_CORE
     config.opll = 0;
+#endif
     config.mono = 0;
 
     /* system options */
