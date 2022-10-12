@@ -43,12 +43,6 @@ else ()
     list(APPEND LDFLAGS minizip)
 endif ()
 
-if (OPTION_FTP_SERVER)
-    add_subdirectory(external/fineftp-server)
-    list(APPEND FLAGS -D__FTP_SERVER__)
-    list(APPEND LDFLAGS fineftp::server)
-endif ()
-
 if (PLATFORM_LINUX OR PLATFORM_WINDOWS)
     set(CMAKE_THREAD_PREFER_PTHREAD TRUE)
     find_package(Threads REQUIRED)

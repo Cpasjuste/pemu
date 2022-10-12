@@ -48,9 +48,6 @@ Config::Config(c2d::Io *io, int ver, const std::string &defaultRomsPath) {
     append("FULLSCREEN", {"OFF", "ON"}, 0, Option::Id::GUI_FULLSCREEN, Option::Flags::BOOLEAN);
     get()->at(get()->size() - 1).setInfo("YOU NEED TO RESTART THE APPLICATION AFTER CHANGING THIS OPTION");
 #endif
-#ifdef __FTP_SERVER__
-    append("FTP_SERVER", {"OFF", "ON"}, 0, Option::Id::GUI_FTP_SERVER, Option::Flags::BOOLEAN);
-#endif
 
     // build  skin list
     std::vector<std::string> skins;

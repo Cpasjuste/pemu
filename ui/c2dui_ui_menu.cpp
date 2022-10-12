@@ -357,15 +357,7 @@ bool UiMenu::onInput(c2d::Input::Player *players) {
             case Option::Id::GUI_VIDEO_SNAP_DELAY:
                 ui->getUiRomList()->setVideoSnapDelay(option.getValueInt());
                 break;
-#ifdef __FTP_SERVER__
-            case Option::Id::GUI_FTP_SERVER:
-                if (option.getValueBool()) {
-                    ui->ftpServerStart();
-                } else {
-                    ui->ftpServerStop();
-                }
-                break;
-#endif
+
             default:
                 break;
         }

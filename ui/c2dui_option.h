@@ -43,7 +43,6 @@ namespace c2dui {
             GUI_SCREEN_WIDTH,
             GUI_SCREEN_HEIGHT,
             GUI_FULLSCREEN,
-            GUI_FTP_SERVER,
             GUI_SKIN,
             GUI_VIDEO_SNAP_DELAY,
             MENU_ROM_OPTIONS,

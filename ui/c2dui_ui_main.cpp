@@ -23,15 +23,6 @@ UiMain::UiMain(const Vector2f &size, c2d::Io *io, Config *cfg) : C2DRenderer(siz
     }
 }
 
-UiMain::~UiMain() {
-#ifdef __FTP_SERVER__
-    delete (ftpServer);
-#endif
-#if 0
-    delete (scrapper);
-#endif
-}
-
 void UiMain::init(UIRomList *_uiRomList, UiMenu *_uiMenu, UiEmu *_uiEmu, UiStateMenu *_uiState) {
     uiRomList = _uiRomList;
     uiRomList->updateRomList();
@@ -72,17 +63,6 @@ void UiMain::init(UIRomList *_uiRomList, UiMenu *_uiMenu, UiEmu *_uiEmu, UiState
 
     updateInputMapping(false);
     getInput()->setRepeatDelay(INPUT_DELAY);
-
-#ifdef __FTP_SERVER__
-    bool startFtp = config->get(Option::Id::GUI_FTP_SERVER)->getValueBool();
-    if (startFtp) {
-        ftpServerStart();
-    }
-#endif
-
-#if 0
-    scrapper = new Scrapper(this);
-#endif
 }
 
 void UiMain::setSkin(Skin *s) {
@@ -212,22 +192,3 @@ void UiMain::updateInputMapping(bool isRomConfig) {
         }
     }
 }
-
-#ifdef __FTP_SERVER__
-
-void UiMain::ftpServerStart() {
-    if (!ftpServer) {
-        ftpServer = new fineftp::FtpServer(3333);
-        ftpServer->addUser("pemu", "pemu", getIo()->getDataPath(), fineftp::Permission::All);
-        ftpServer->start(2);
-    }
-}
-
-void UiMain::ftpServerStop() {
-    if (ftpServer) {
-        delete (ftpServer);
-        ftpServer = nullptr;
-    }
-}
-
-#endif
