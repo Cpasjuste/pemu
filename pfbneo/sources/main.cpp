@@ -60,18 +60,19 @@ int main(int argc, char **argv) {
 
     // need custom io for some devices
     auto io = new PFBAIo();
-    // load configuration
-    int version = (__PFBA_VERSION_MAJOR__ * 100) + __PFBA_VERSION_MINOR__;
-    cfg = new PFBAConfig(io, version);
-
     // fbneo init
     BurnPathsInit(io);
     BurnLibInit();
 
-    Vector2f screenSize = cfg->getScreenSize();
-    ui = new UiMain(screenSize, io, cfg);
+    // create main ui
+    ui = new UiMain(io);
 
-    // skin
+    // load custom configuration
+    int version = (__PFBA_VERSION_MAJOR__ * 100) + __PFBA_VERSION_MINOR__;
+    cfg = new PFBAConfig(ui, version);
+    ui->setConfig(cfg);
+
+    // load skin configuration
     skin = new Skin(ui);
     ui->setSkin(skin);
 

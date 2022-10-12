@@ -12,7 +12,7 @@ namespace c2dui {
     class UiMain : public c2d::C2DRenderer {
 
     public:
-        explicit UiMain(const c2d::Vector2f &size, c2d::Io *io, Config *cfg);
+        explicit UiMain(c2d::Io *io);
 
         void init(UIRomList *uiRomList, UiMenu *uiMenu,
                   UiEmu *uiEmu, UiStateMenu *uiState);

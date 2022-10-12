@@ -6,21 +6,9 @@
 #include "c2dui.h"
 #include "c2dui_ui_main.h"
 
-
-UiMain::UiMain(const Vector2f &size, c2d::Io *io, Config *cfg) : C2DRenderer(size) {
+UiMain::UiMain(c2d::Io *io) : C2DRenderer() {
     printf("UiMain(%ix%i)\n", (int) UiMain::getSize().x, (int) UiMain::getSize().y);
-
     setIo(io);
-    setConfig(cfg);
-
-    // add shaders, if any
-    if (getShaderList() != nullptr) {
-        config->add(Option::Id::ROM_FILTER, "EFFECT", getShaderList()->getNames(), 0,
-                    Option::Id::ROM_SHADER, Option::Flags::STRING);
-    } else {
-        config->add(Option::Id::ROM_FILTER, "EFFECT", {"NONE"}, 0,
-                    Option::Id::ROM_SHADER, Option::Flags::STRING | Option::Flags::HIDDEN);
-    }
 }
 
 void UiMain::init(UIRomList *_uiRomList, UiMenu *_uiMenu, UiEmu *_uiEmu, UiStateMenu *_uiState) {
@@ -49,10 +37,10 @@ void UiMain::init(UIRomList *_uiRomList, UiMenu *_uiMenu, UiEmu *_uiEmu, UiState
     c.a -= 150;
     uiMessageBox->setNotSelectedColor(uiMessageBox->getFillColor(), c);
     uiMessageBox->setOrigin(Origin::Center);
-#if C2D_SCREEN_WIDTH <= 400
-    uiMessageBox->getTitleText()->setOutlineThickness(1);
-    uiMessageBox->getMessageText()->setOutlineThickness(1);
-#endif
+    if (getSize().x <= 400) {
+        uiMessageBox->getTitleText()->setOutlineThickness(1);
+        uiMessageBox->getMessageText()->setOutlineThickness(1);
+    }
     add(uiMessageBox);
 
     uiProgressBox = new UIProgressBox(this);
@@ -104,6 +92,16 @@ Skin *UiMain::getSkin() {
 
 void UiMain::setConfig(Config *cfg) {
     config = cfg;
+
+    // add shaders, if any
+    auto shaderList = getShaderList();
+    if (shaderList) {
+        config->add(Option::Id::ROM_FILTER, "EFFECT", shaderList->getNames(), 0,
+                    Option::Id::ROM_SHADER, Option::Flags::STRING);
+    } else {
+        config->add(Option::Id::ROM_FILTER, "EFFECT", {"NONE"}, 0,
+                    Option::Id::ROM_SHADER, Option::Flags::STRING | Option::Flags::HIDDEN);
+    }
 }
 
 Config *UiMain::getConfig() {

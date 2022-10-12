@@ -1,21 +1,6 @@
-/*
- * FinalBurn Alpha
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- *
- */
+//
+// Created by cpasjuste on 22/11/16.
+//
 
 #include "c2dui.h"
 #include "pgen_ui_emu.h"
@@ -57,10 +42,6 @@ int main(int argc, char **argv) {
 
     // need custom io for some devices
     auto *io = new PGENIo();
-    // load configuration
-    int pgen_version = (__PGEN_VERSION_MAJOR__ * 100) + __PGEN_VERSION_MINOR__;
-    cfg = new PGENConfig(io, pgen_version);
-
     // create paths
     io->create(io->getDataPath());
     io->create(io->getDataPath() + "bios");
@@ -72,10 +53,15 @@ int main(int argc, char **argv) {
     io->create(io->getDataPath() + "gamegear");
     io->create(io->getDataPath() + "megacd");
 
-    Vector2f screenSize = cfg->getScreenSize();
-    ui = new UiMain(screenSize, io, cfg);
+    // create main ui
+    ui = new UiMain(io);
 
-    // skin
+    // load custom configuration
+    int pgen_version = (__PGEN_VERSION_MAJOR__ * 100) + __PGEN_VERSION_MINOR__;
+    cfg = new PGENConfig(ui, pgen_version);
+    ui->setConfig(cfg);
+
+    // load skin configuration
     skin = new Skin(ui);
     ui->setSkin(skin);
 

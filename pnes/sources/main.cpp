@@ -55,20 +55,21 @@ int main(int argc, char **argv) {
 
     // need custom io for some devices
     auto *io = new PNESIo();
-    // load configuration
-    int pnes_version = (__PNES_VERSION_MAJOR__ * 100) + __PNES_VERSION_MINOR__;
-    cfg = new PNESConfig(io, pnes_version);
-
     // create paths
     io->create(io->getDataPath());
     io->create(io->getDataPath() + "roms");
     io->create(io->getDataPath() + "configs");
     io->create(io->getDataPath() + "saves");
 
-    Vector2f screenSize = cfg->getScreenSize();
-    ui = new UiMain(screenSize, io, cfg);
+    // create main ui
+    ui = new UiMain(io);
 
-    // skin
+    // load custom configuration
+    int pnes_version = (__PNES_VERSION_MAJOR__ * 100) + __PNES_VERSION_MINOR__;
+    cfg = new PNESConfig(ui, pnes_version);
+    ui->setConfig(cfg);
+
+    // load skin configuration
     skin = new Skin(ui);
     ui->setSkin(skin);
 

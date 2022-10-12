@@ -8,10 +8,10 @@
 using namespace c2d;
 using namespace c2dui;
 
-PNESConfig::PNESConfig(c2d::Io *io, int version) : Config(io, version) {
+PNESConfig::PNESConfig(UiMain *ui, int version) : Config(ui, version) {
     // no need for auto-scaling mode on pnes
     get(Option::Id::ROM_SCALING_MODE)->set(
-            {"SCALING_MODE", {"ASPECT", "INTEGER"}, 1,
+            {"SCALING_MODE", {"ASPECT", "INTEGER"}, 0,
              Option::Id::ROM_SCALING_MODE, Option::Flags::STRING});
 
     // "c2dui_romlist" will also reload config, but we need new roms paths

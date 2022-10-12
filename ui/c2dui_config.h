@@ -2,8 +2,8 @@
 // Created by cpasjuste on 05/12/16.
 //
 
-#ifndef _C2DUI_CONFIG_H_
-#define _C2DUI_CONFIG_H_
+#ifndef C2DUI_CONFIG_H
+#define C2DUI_CONFIG_H
 
 #include "libconfig.h"
 
@@ -29,7 +29,7 @@ namespace c2dui {
 
     public:
 
-        Config(c2d::Io *io, int version, const std::string &defaultRomsPath = "roms/");
+        Config(UiMain *iu, int version, const std::string &defaultRomsPath = "roms/");
 
         virtual ~Config() = default;
 
@@ -43,26 +43,26 @@ namespace c2dui {
 
         std::string getRomPath(int n = 0);
 
-        std::vector<std::string> getRomPaths();
+        std::vector <std::string> getRomPaths();
 
-        std::vector<Option> *get(bool isRom = false);
+        std::vector <Option> *get(bool isRom = false);
 
         Option *get(int id, bool isRom = false);
 
         bool add(int target,
-                 const std::string &text, const std::vector<std::string> &values,
+                 const std::string &text, const std::vector <std::string> &values,
                  int defaultValue, int id, unsigned int flags);
 
-        void append(const std::string &text, const std::vector<std::string> &values,
+        void append(const std::string &text, const std::vector <std::string> &values,
                     int defaultValue, int id, unsigned int flags);
 
         void append(const std::string &text, int value, int id, unsigned int flags);
 
         bool hide(int id, bool isRom = false);
 
-        virtual std::vector<c2d::Input::ButtonMapping> getKeyboardMapping(int player, bool isRom = false);
+        virtual std::vector <c2d::Input::ButtonMapping> getKeyboardMapping(int player, bool isRom = false);
 
-        virtual std::vector<c2d::Input::ButtonMapping> getJoystickMapping(int player, bool isRom = false);
+        virtual std::vector <c2d::Input::ButtonMapping> getJoystickMapping(int player, bool isRom = false);
 
         virtual c2d::Vector2i getJoystickAxisLeftMapping(int player, bool isRom = false);
 
@@ -70,15 +70,16 @@ namespace c2dui {
 
         virtual int getJoystickDeadZone(int player, bool isRom = false);
 
-        c2d::Vector2f getScreenSize();
+        // TODO
+        //c2d::Vector2f getScreenSize();
 
     protected:
-        std::vector<std::string> roms_paths;
+        std::vector <std::string> roms_paths;
 
     private:
-        c2d::Io *m_io;
-        std::vector<Option> options_gui;
-        std::vector<Option> options_rom;
+        UiMain *m_ui;
+        std::vector <Option> options_gui;
+        std::vector <Option> options_rom;
         std::string configPath;
         std::string dataPath;
 
@@ -86,4 +87,4 @@ namespace c2dui {
     };
 }
 
-#endif //_C2DUI_CONFIG_H_
+#endif //C2DUI_CONFIG_H
