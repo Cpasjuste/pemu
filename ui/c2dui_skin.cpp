@@ -22,12 +22,12 @@ Skin::Skin(UiMain *u) {
         }
     }
 
+    config = new config::Config("SKIN_CONFIG", path + "config.cfg");
+    printf("Skin path: %s\n", path.c_str());
+
     // get default font scaling
     m_font_scaling = (float) ui->getConfig()->get(Option::GUI_FONT_SCALING)->getValueInt(0);
     m_font_scaling = m_font_scaling > 0 ? 1 + (m_font_scaling / 10) : 1;
-
-    config = new config::Config("SKIN_CONFIG", path + "config.cfg");
-    printf("Skin path: %s\n", path.c_str());
 
     // load buttons textures
     // see c2d.h for key id
@@ -168,10 +168,18 @@ Skin::Skin(UiMain *u) {
     ///
 
     // load config
+    printf("Skin: loading skin configuration (%s)\n", config->getPath().c_str());
     config->load();
 
-    // load config override
+    // load skin config override
+    printf("Skin: loading skin configuration override (%s.override)\n", config->getPath().c_str());
     config->load(config->getPath() + ".override");
+
+    // load 4/3 skin config override if needed
+    if (ui->getConfig()->get(Option::Id::GUI_SKIN_ASPECT)->getIndex() == 1) {
+        printf("Skin: loading skin configuration override (%s.override.43)\n", config->getPath().c_str());
+        config->load(config->getPath() + ".override.43");
+    }
 
     ///
     /// compute global scaling from loaded configuration

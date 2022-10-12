@@ -381,6 +381,9 @@ bool UiMenu::onInput(c2d::Input::Player *players) {
                 ui->getUiRomList()->setVisibility(Visibility::Visible);
                 ui->getInput()->clear();
             } else {
+                // be sure options are saved before exiting
+                ui->getConfig()->save(isRomMenu ? ui->getUiRomList()->getSelection() : ss_api::Game());
+                needSave = false;
                 ui->done = true;
             }
         } else if (option.getId() == OPTION_ID_STATES) {

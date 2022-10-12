@@ -96,6 +96,12 @@ Config::Config(UiMain *ui, int ver, const std::string &defaultRomsPath) {
     get()->at(get()->size() - 1).setInfo(
             "YOU NEED TO RESTART THE APPLICATION AFTER CHANGING THIS OPTION");
 
+    int aspect_index = ui->getSize().x / ui->getSize().y > 1.33 ? 0 : 1;
+    append("SKIN_ASPECT", {"16/9", "4/3"},
+           aspect_index, Option::Id::GUI_SKIN_ASPECT, Option::Flags::STRING);
+    get()->at(get()->size() - 1).setInfo(
+            "YOU NEED TO RESTART THE APPLICATION AFTER CHANGING THIS OPTION");
+
     append("FONT_SCALING", {"0", "1", "2", "3", "4", "5"},
            0, Option::Id::GUI_FONT_SCALING, Option::Flags::STRING);
     get()->at(get()->size() - 1).setInfo(
