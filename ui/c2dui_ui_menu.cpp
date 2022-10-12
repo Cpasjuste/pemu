@@ -12,9 +12,7 @@
 class MenuLine : public c2d::RectangleShape {
 
 public:
-
     MenuLine(UiMain *u, FloatRect &rect, Skin::TextGroup &tg) : RectangleShape(rect) {
-
         ui = u;
         textGroup = tg;
         Font *font = ui->getSkin()->font;
@@ -94,7 +92,6 @@ public:
 };
 
 UiMenu::UiMenu(UiMain *uiMain) : SkinnedRectangle(uiMain->getSkin(), {"OPTIONS_MENU"}) {
-
     ui = uiMain;
     alpha = UiMenu::getAlpha();
 
