@@ -59,7 +59,7 @@ Config::Config(UiMain *ui, int ver, const std::string &defaultRomsPath) {
         if (file.type != c2d::Io::Type::Directory || file.name[0] == '.') {
             continue;
         }
-        // only append skin name if it
+        // only append skin if it doesn't exist yet
         if (std::find(skins.begin(), skins.end(), file.name) == skins.end()) {
             skins.emplace_back(file.name);
             printf("skin found: %s\n", file.path.c_str());
@@ -77,18 +77,12 @@ Config::Config(UiMain *ui, int ver, const std::string &defaultRomsPath) {
             printf("skin found: %s\n", file.path.c_str());
         }
     }
-    // set "default" skin index (or "big" skin on screen height < 240)
+    // set "default" skin index
     if (!get(Option::Id::GUI_SKIN)) {
         int index = 0;
         for (size_t i = 0; i < skins.size(); i++) {
-            if (m_ui->getSize().y > 240) {
-                if (skins.at(i) == "default") {
-                    index = (int) i;
-                }
-            } else {
-                if (skins.at(i) == "big") {
-                    index = (int) i;
-                }
+            if (skins.at(i) == "default") {
+                index = (int) i;
             }
         }
         append("SKIN", skins, index, Option::Id::GUI_SKIN, Option::Flags::STRING);
