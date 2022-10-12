@@ -22,6 +22,10 @@ Skin::Skin(UiMain *u) {
         }
     }
 
+    // get default font scaling
+    m_font_scaling = (float) ui->getConfig()->get(Option::GUI_FONT_SCALING)->getValueInt(0);
+    m_font_scaling = m_font_scaling > 0 ? 1 + (m_font_scaling / 10) : 1;
+
     config = new config::Config("SKIN_CONFIG", path + "config.cfg");
     printf("Skin path: %s\n", path.c_str());
 
@@ -62,7 +66,6 @@ Skin::Skin(UiMain *u) {
     ///
     config::Group gen("GENERAL");
     gen.addOption({"resolution", Vector2f{1280.0f, 720.0f}});
-    gen.addOption({"global_scaling", Vector2f{1.0f, 1.0f}});
     config->addGroup(gen);
 
     /// FONT
@@ -171,15 +174,11 @@ Skin::Skin(UiMain *u) {
     config->load(config->getPath() + ".override");
 
     ///
-    /// load global scaling from loaded configuration
+    /// compute global scaling from loaded configuration
     ///
     c2d::config::Group *genGrp = config->getGroup("GENERAL");
     if (genGrp) {
-        c2d::config::Option *opt = genGrp->getOption("global_scaling");
-        if (opt) {
-            m_scaling = opt->getVector2f();
-        }
-        opt = genGrp->getOption("resolution");
+        c2d::config::Option *opt = genGrp->getOption("resolution");
         if (opt) {
             Vector2f uiRes = ui->getSize();
             Vector2f skinRes = opt->getVector2f();
@@ -410,7 +409,7 @@ Skin::TextGroup Skin::getText(const std::vector<std::string> &tree) {
         if (option->getInteger() <= 0) {
             return textGroup;
         }
-        textGroup.size = (unsigned int) ((float) option->getInteger() * m_scaling.y);
+        textGroup.size = (unsigned int) ((float) (option->getInteger() * m_scaling.y) * m_font_scaling);
     }
     option = group->getOption("string");
     if (option) {

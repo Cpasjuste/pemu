@@ -44,6 +44,7 @@ namespace c2dui {
             GUI_SCREEN_HEIGHT,
             GUI_FULLSCREEN,
             GUI_SKIN,
+            GUI_FONT_SCALING,
             GUI_VIDEO_SNAP_DELAY,
             MENU_ROM_OPTIONS,
             ROM_SCALING,

@@ -24,7 +24,7 @@ public:
         name->setOutlineThickness(textGroup.outlineSize);
         name->setOutlineColor(textGroup.outlineColor);
         name->setOrigin(Origin::Left);
-        name->setPosition(0, MenuLine::getSize().y / 2);
+        name->setPosition(2 * ui->getScaling().x, MenuLine::getSize().y / 2);
         name->setSizeMax((MenuLine::getSize().x * 0.55f), 0);
         MenuLine::add(name);
 
@@ -104,25 +104,25 @@ UiMenu::UiMenu(UiMain *uiMain) : SkinnedRectangle(uiMain->getSkin(), {"OPTIONS_M
 
     // retrieve skin config for options items
     textGroup = ui->getSkin()->getText({"OPTIONS_MENU", "ITEMS_TEXT"});
+
     // calculate number of items shown
-    float height = UiMenu::getSize().y - textGroup.rect.top;
-    lineHeight = (float) (textGroup.rect.height);
-    maxLines = (int) (height / lineHeight);
-    if ((float) maxLines * lineHeight < height) {
-        lineHeight = height / (float) maxLines;
+    lineHeight = (float) textGroup.size + (2 * ui->getScaling().y);
+    maxLines = (int) (getSize().y / lineHeight);
+    if ((float) maxLines * lineHeight < getSize().y) {
+        lineHeight = getSize().y / (float) maxLines;
     }
 
     // add selection rectangle (highlight)
     highlight = new RectangleShape({16, 16});
     ui->getSkin()->loadRectangleShape(highlight, {"SKIN_CONFIG", "HIGHLIGHT"});
-    highlight->setSize(UiMenu::getSize().x, lineHeight);
+    highlight->setSize(UiMenu::getSize().x - 2, lineHeight);
+    highlight->move(1, 0);
     UiMenu::add(highlight);
 
     // add options items
     for (unsigned int i = 0; i < (unsigned int) maxLines; i++) {
-        FloatRect rect = {textGroup.rect.left, (lineHeight * (float) i) + textGroup.rect.top,
-                          UiMenu::getSize().x, lineHeight};
-        auto line = new MenuLine(ui, rect, textGroup);
+        FloatRect r = {0, lineHeight * (float) i, getSize().x, lineHeight};
+        auto line = new MenuLine(ui, r, textGroup);
         lines.push_back(line);
         UiMenu::add(line);
     }
@@ -196,7 +196,6 @@ void UiMenu::updateLines() {
 }
 
 void UiMenu::onKeyUp() {
-
     int index = optionIndex + highlightIndex;
     int middle = maxLines / 2;
 
@@ -221,11 +220,10 @@ void UiMenu::onKeyUp() {
 }
 
 void UiMenu::onKeyDown() {
-
     int index = optionIndex + highlightIndex;
     int middle = maxLines / 2;
 
-    if (highlightIndex >= middle && index + middle < (int) options.size()) {
+    if (highlightIndex >= middle && index + (maxLines - middle) < (int) options.size()) {
         optionIndex++;
     } else {
         highlightIndex++;
@@ -245,7 +243,6 @@ void UiMenu::onKeyDown() {
 }
 
 bool UiMenu::onInput(c2d::Input::Player *players) {
-
     unsigned int buttons = players[0].buttons;
 
     if (ui->getUiStateMenu()->isVisible()) {

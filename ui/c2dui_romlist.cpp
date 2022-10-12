@@ -9,7 +9,6 @@
 
 RomList::RomList(UiMain *_ui, const std::string &emuVersion, const std::vector<std::string> &_filters) {
     printf("RomList()\n");
-
     ui = _ui;
     paths = ui->getConfig()->getRomPaths();
     filters = _filters;
@@ -59,7 +58,6 @@ RomList::RomList(UiMain *_ui, const std::string &emuVersion, const std::vector<s
 }
 
 void RomList::setLoadingText(const char *format, ...) {
-
     char buffer[512];
     va_list arg;
     va_start(arg, format);

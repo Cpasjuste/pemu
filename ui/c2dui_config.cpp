@@ -96,6 +96,11 @@ Config::Config(UiMain *ui, int ver, const std::string &defaultRomsPath) {
     get()->at(get()->size() - 1).setInfo(
             "YOU NEED TO RESTART THE APPLICATION AFTER CHANGING THIS OPTION");
 
+    append("FONT_SCALING", {"0", "1", "2", "3", "4", "5"},
+           0, Option::Id::GUI_FONT_SCALING, Option::Flags::STRING);
+    get()->at(get()->size() - 1).setInfo(
+            "YOU NEED TO RESTART THE APPLICATION AFTER CHANGING THIS OPTION");
+
     append("VIDEO_SNAP_DELAY", {"3", "5", "7", "10"}, 1,
            Option::Id::GUI_VIDEO_SNAP_DELAY, Option::Flags::STRING);
 

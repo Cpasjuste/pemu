@@ -83,9 +83,10 @@ namespace c2dui {
 
         c2d::config::Group createTextGroup(const std::string &name, int size = 0);
 
-        UiMain *ui = nullptr;
-        c2d::config::Config *config = nullptr;
+        UiMain *ui;
+        c2d::config::Config *config;
         c2d::Vector2f m_scaling = {1.0f, 1.0f};
+        float m_font_scaling = 1.0f;
     };
 }
 
