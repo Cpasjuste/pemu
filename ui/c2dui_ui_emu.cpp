@@ -87,9 +87,9 @@ void UiEmu::resume() {
     pMain->getInput()->setRepeatDelay(0);
 
 #ifdef __VITA__
-    Option *option = ui->getConfig()->get(Option::Id::ROM_WAIT_RENDERING, true);
+    Option *option = pMain->getConfig()->get(Option::Id::ROM_WAIT_RENDERING, true);
     if (option) {
-        ((PSP2Renderer *) ui)->setWaitRendering(option->getValueBool());
+        ((PSP2Renderer *) pMain)->setWaitRendering(option->getValueBool());
     }
 #endif
 
@@ -116,7 +116,7 @@ void UiEmu::stop() {
     }
 
 #ifdef __VITA__
-    ((PSP2Renderer *) ui)->setWaitRendering(true);
+    ((PSP2Renderer *) pMain)->setWaitRendering(true);
 #endif
 
     pMain->updateInputMapping(false);
