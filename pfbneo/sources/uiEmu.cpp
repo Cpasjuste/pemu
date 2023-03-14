@@ -53,10 +53,10 @@ int PFBAUiEmu::getSekCpuCore() {
     std::vector<std::string> zipList;
     int hardware = BurnDrvGetHardwareCode();
 
-    std::string bios = ui->getConfig()->get(Option::Id::ROM_NEOBIOS, true)->getValueString();
+    std::string bios = pMain->getConfig()->get(Option::Id::ROM_NEOBIOS, true)->getValueString();
     if (isHardware(hardware, HARDWARE_PREFIX_SNK) && Utility::contains(bios, "UNIBIOS")) {
         sekCpuCore = 1; // SEK_CORE_M68K: USE C M68K CORE
-        ui->getUiMessageBox()->show(
+        pMain->getUiMessageBox()->show(
                 "WARNING", "UNIBIOS DOESNT SUPPORT THE M68K ASM CORE\n"
                            "CYCLONE ASM CORE DISABLED", "OK");
     }
@@ -70,7 +70,7 @@ int PFBAUiEmu::getSekCpuCore() {
             || hardware & HARDWARE_SEGA_FD1094_ENC
             || hardware & HARDWARE_SEGA_FD1094_ENC_CPU2) {
             sekCpuCore = 1; // SEK_CORE_M68K: USE C M68K CORE
-            ui->getUiMessageBox()->show(
+            pMain->getUiMessageBox()->show(
                     "WARNING", "ROM IS CRYPTED, USE DECRYPTED ROM (CLONE)\n"
                                "TO ENABLE CYCLONE ASM CORE (FASTER)", "OK");
         }
@@ -92,7 +92,7 @@ int PFBAUiEmu::getSekCpuCore() {
     std::string zip = BurnDrvGetTextA(DRV_NAME);
     for (unsigned int i = 0; i < zipList.size(); i++) {
         if (zipList[i].compare(0, zip.length(), zip) == 0) {
-            ui->getUiStatusBox()->show("THIS GAME DOES NOT SUPPORT THE M68K ASM CORE\n"
+            pMain->getUiStatusBox()->show("THIS GAME DOES NOT SUPPORT THE M68K ASM CORE\n"
                                        "CYCLONE ASM CORE DISABLED");
             sekCpuCore = 1; // SEK_CORE_M68K: USE C M68K CORE
             break;
@@ -318,7 +318,7 @@ void PFBAUiEmu::onUpdate() {
 
     // update fbneo video buffer and audio
 #ifdef __VITA__
-    int skip = ui->getConfig()->get(Option::Id::ROM_FRAMESKIP, true)->getIndex();
+    int skip = pMain->getConfig()->get(Option::Id::ROM_FRAMESKIP, true)->getIndex();
 #else
     int skip = 0;
 #endif
