@@ -30,7 +30,7 @@ bool SkinnedRectangle::load() {
 
     // load texture if any
     auto option = group->getOption("texture");
-    if (option) {
+    if (option && !option->getString().empty()) {
         std::string path = pSkin->getPath() + option->getString();
         printf("path: %s\n", path.c_str());
         if (!pTex || pTex->m_path != path) {
