@@ -39,10 +39,6 @@ int PNESUiEmu::load(const ss_api::Game &game) {
     getUi()->getUiProgressBox()->setLayer(1000);
     getUi()->flip();
 
-    // default paths
-    snprintf(nstpaths.nstconfdir, sizeof(nstpaths.nstconfdir), "%s", pMain->getIo()->getDataPath().c_str());
-    strncpy(nstpaths.nstdir, nstpaths.nstconfdir, sizeof(nstpaths.nstdir));
-
     // default config
     nestopia_config_init();
 
@@ -292,8 +288,18 @@ void PNESUiEmu::nestopia_config_init() {
 // NESTOPIA CORE INIT
 int PNESUiEmu::nestopia_core_init(const char *rom_path) {
 
-    // Set up directories
-    nst_set_dirs();
+    // Set up directories (nst_set_dirs)
+    std::string data_path = pMain->getIo()->getDataPath();
+    strncpy(nstpaths.nstdir, data_path.c_str(), sizeof(nstpaths.nstdir));
+    strncpy(nstpaths.nstconfdir, data_path.c_str(), sizeof(nstpaths.nstconfdir));
+    snprintf(nstpaths.palettepath, sizeof(nstpaths.palettepath), "%s%s", nstpaths.nstdir, "custom.pal");
+    // Create directories
+    pMain->getIo()->create(data_path);
+    pMain->getIo()->create(data_path + "save");
+    pMain->getIo()->create(data_path + "state");
+    pMain->getIo()->create(data_path + "cheats");
+    pMain->getIo()->create(data_path + "screenshots");
+    pMain->getIo()->create(data_path + "samples");
 
     // Set up callbacks
     nst_set_callbacks();
