@@ -157,10 +157,10 @@ int PFBAUiEmu::load(const ss_api::Game &game) {
     printf("nSekCpuCore: %s\n", nSekCpuCore > 0 ? "M68K" : "C68K (ASM)");
 #endif
 
-    int audio_freq = ui->getConfig()->get(Option::Id::ROM_AUDIO_FREQ, true)->getValueInt(44100);
-    nInterpolation = ui->getConfig()->get(Option::Id::ROM_AUDIO_INTERPOLATION, true)->getValueInt();
-    nFMInterpolation = ui->getConfig()->get(Option::Id::ROM_AUDIO_FMINTERPOLATION, true)->getValueInt();
-    bForce60Hz = ui->getConfig()->get(Option::Id::ROM_FORCE_60HZ, true)->getValueBool();
+    int audio_freq = pMain->getConfig()->get(Option::Id::ROM_AUDIO_FREQ, true)->getValueInt(44100);
+    nInterpolation = pMain->getConfig()->get(Option::Id::ROM_AUDIO_INTERPOLATION, true)->getValueInt();
+    nFMInterpolation = pMain->getConfig()->get(Option::Id::ROM_AUDIO_FMINTERPOLATION, true)->getValueInt();
+    bForce60Hz = pMain->getConfig()->get(Option::Id::ROM_FORCE_60HZ, true)->getValueBool();
     if (bForce60Hz) {
         nBurnFPS = 6000;
     }
@@ -179,8 +179,8 @@ int PFBAUiEmu::load(const ss_api::Game &game) {
     if (DrvInit((int) nBurnDrvActive, false) != 0) {
         printf("\nPFBAUiEmu::load: driver initialisation failed\n");
         delete (aud);
-        ui->getUiProgressBox()->setVisibility(Visibility::Hidden);
-        ui->getUiMessageBox()->show("ERROR", "DRIVER INIT FAILED", "OK");
+        pMain->getUiProgressBox()->setVisibility(Visibility::Hidden);
+        pMain->getUiMessageBox()->show("ERROR", "DRIVER INIT FAILED", "OK");
         stop();
         return -1;
     }
@@ -220,7 +220,7 @@ int PFBAUiEmu::load(const ss_api::Game &game) {
     BurnRecalcPal();
     // video may already be initialized from fbneo driver (Reinitialise)
     if (!video) {
-        auto v = new PFBAVideo(ui, &pBurnDraw, &nBurnPitch, size, aspect);
+        auto v = new PFBAVideo(pMain, &pBurnDraw, &nBurnPitch, size, aspect);
         addVideo(v);
         printf("PFBAUiEmu::load: size: %i x %i, aspect: %i x %i, pitch: %i\n",
                size.x, size.y, aspect.x, aspect.y, nBurnPitch);
@@ -254,8 +254,8 @@ void PFBAUiEmu::stop() {
 }
 
 bool PFBAUiEmu::onInput(c2d::Input::Player *players) {
-    if (ui->getUiMenu()->isVisible() || ui->getUiStateMenu()->isVisible()) {
-        ui->getInput()->setRotation(Input::Rotation::R0, Input::Rotation::R0);
+    if (pMain->getUiMenu()->isVisible() || pMain->getUiStateMenu()->isVisible()) {
+        pMain->getInput()->setRotation(Input::Rotation::R0, Input::Rotation::R0);
         return UiEmu::onInput(players);
     }
 
@@ -267,13 +267,13 @@ bool PFBAUiEmu::onInput(c2d::Input::Player *players) {
     int rotation = getUi()->getConfig()->get(Option::Id::ROM_ROTATION, true)->getIndex();
     if (BurnDrvGetFlags() & BDF_ORIENTATION_VERTICAL) {
         if (rotation == 0) {
-            ui->getInput()->setRotation(Input::Rotation::R90, Input::Rotation::R0);
+            pMain->getInput()->setRotation(Input::Rotation::R90, Input::Rotation::R0);
         } else if (rotation == 1) {
-            ui->getInput()->setRotation(Input::Rotation::R0, Input::Rotation::R0);
+            pMain->getInput()->setRotation(Input::Rotation::R0, Input::Rotation::R0);
         } else if (rotation == 2) {
-            ui->getInput()->setRotation(Input::Rotation::R270, Input::Rotation::R0);
+            pMain->getInput()->setRotation(Input::Rotation::R270, Input::Rotation::R0);
         } else {
-            ui->getInput()->setRotation(Input::Rotation::R270, Input::Rotation::R270);
+            pMain->getInput()->setRotation(Input::Rotation::R270, Input::Rotation::R270);
         }
     }
 
@@ -289,11 +289,11 @@ void PFBAUiEmu::onUpdate() {
     InputMake(true);
 
     // handle diagnostic and reset switch
-    unsigned int buttons = ui->getInput()->getButtons();
+    unsigned int buttons = pMain->getInput()->getButtons();
     if (buttons & Input::Button::Select) {
         if (clock.getElapsedTime().asSeconds() > 2) {
             if (pgi_reset) {
-                ui->getUiStatusBox()->show("TIPS: PRESS START "
+                pMain->getUiStatusBox()->show("TIPS: PRESS START "
                                            "BUTTON 2 SECONDS FOR DIAG MENU...");
                 pgi_reset->Input.nVal = 1;
                 *(pgi_reset->Input.pVal) = pgi_reset->Input.nVal;
@@ -305,7 +305,7 @@ void PFBAUiEmu::onUpdate() {
     } else if (buttons & Input::Button::Start) {
         if (clock.getElapsedTime().asSeconds() > 2) {
             if (pgi_diag) {
-                ui->getUiStatusBox()->show("TIPS: PRESS COIN "
+                pMain->getUiStatusBox()->show("TIPS: PRESS COIN "
                                            "BUTTON 2 SECONDS TO RESET CURRENT GAME...");
                 pgi_diag->Input.nVal = 1;
                 *(pgi_diag->Input.pVal) = pgi_diag->Input.nVal;

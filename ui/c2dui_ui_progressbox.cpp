@@ -5,7 +5,7 @@
 #include "c2dui.h"
 
 UIProgressBox::UIProgressBox(UiMain *ui)
-        : SkinnedRectangle(ui->getSkin(), {"SKIN_CONFIG", "MESSAGEBOX"}) {
+        : SkinnedRectangle(ui, {"SKIN_CONFIG", "MESSAGEBOX"}) {
     float w = getSize().x;
     float h = getSize().y;
 

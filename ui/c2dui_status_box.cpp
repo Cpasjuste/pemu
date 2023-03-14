@@ -5,7 +5,7 @@
 #include "c2dui.h"
 
 UiStatusBox::UiStatusBox(UiMain *m)
-        : SkinnedRectangle(m->getSkin(), {"SKIN_CONFIG", "STATUSBOX"}) {
+        : SkinnedRectangle(m, {"SKIN_CONFIG", "STATUSBOX"}) {
     main = m;
     clock = new C2DClock();
 

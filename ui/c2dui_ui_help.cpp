@@ -4,7 +4,7 @@
 
 #include "c2dui.h"
 
-UiHelp::UiHelp(UiMain *ui) : SkinnedRectangle(ui->getSkin(), {"MAIN", "HELP"}) {
+UiHelp::UiHelp(UiMain *ui) : SkinnedRectangle(ui, {"MAIN", "HELP"}) {
     int button1, button2;
     auto font = ui->getSkin()->getFont();
 

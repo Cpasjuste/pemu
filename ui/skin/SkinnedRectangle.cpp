@@ -3,24 +3,74 @@
 //
 
 #include "c2dui.h"
-#include "SkinnedRectangle.h"
 
-SkinnedRectangle::SkinnedRectangle(c2dui::Skin *skin, const std::vector<std::string> &cfgTree)
+SkinnedRectangle::SkinnedRectangle(UiMain *main, const std::vector<std::string> &cfgTree)
         : RectangleShape({0, 0}) {
+    pMain = main;
+    pIo = pMain->getIo();
+    pSkin = pMain->getSkin();
+    mTree = cfgTree;
+    available = load();
+}
 
-#if 0
-    printf("SkinnedRectangle: ");
-    for (const auto &i: cfgTree) {
-        printf("=> %s ", i.c_str());
-    }
-    printf("\n");
-#endif
-
-    if (!skin->loadRectangleShape(this, cfgTree)) {
-        //printf("SkinnedRectangle: tree not found in config file...\n");
-        available = false;
-        return;
+bool SkinnedRectangle::load() {
+    auto group = pSkin->getGroup(mTree);
+    if (!group) {
+        return false;
     }
 
-    available = true;
+    // load shape rectangle
+    auto rect = pSkin->getRectangle(group);
+    if (rect.width <= 0 || rect.height <= 0) {
+        printf("SkinnedRectangle::load: width or height is equal to zero, skipping\n");
+        return false;
+    }
+    setPosition(rect.left, rect.top);
+    setSize(rect.width, rect.height);
+
+    // load texture if any
+    auto option = group->getOption("texture");
+    if (option) {
+        std::string path = pSkin->getPath() + option->getString();
+        printf("path: %s\n", path.c_str());
+        if (!pTex || pTex->m_path != path) {
+            if (pIo->exist(path)) {
+                pTex = new C2DTexture(path);
+                if (pTex->available) {
+                    // set texture ratio
+                    float scaling = std::min(
+                            getSize().x / pTex->getSize().x,
+                            getSize().y / pTex->getSize().y);
+                    pTex->setScale(scaling, scaling);
+                    // set texture filtering
+                    option = group->getOption("texture_filtering");
+                    if (option) {
+                        pTex->setFilter((Texture::Filter) option->getInteger());
+                    }
+                    // set texture color
+                    pTex->setFillColor(pSkin->getColor(group, "texture_color"));
+                    // add to the shape
+                    add(pTex);
+                } else {
+                    delete (pTex);
+                }
+            }
+        } else {
+            delete (pTex);
+        }
+    }
+
+    // load shape color
+    setFillColor(pSkin->getFillColor(group));
+
+    // load shape outline color
+    setOutlineColor(pSkin->getOutlineColor(group));
+
+    // load shape outline thickness
+    setOutlineThickness(pSkin->getOutlineThickness(group));
+
+    // load shape origin
+    setOrigin(pSkin->getOrigin(group));
+
+    return true;
 }

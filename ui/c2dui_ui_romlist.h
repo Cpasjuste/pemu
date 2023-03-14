@@ -31,7 +31,7 @@ namespace c2dui {
 
         virtual RomList *getRomList();
 
-        virtual RectangleShape *getBlur() { return blur; };
+        virtual RectangleShape *getBlur() { return pBlur; };
 
         virtual std::string getPreview(const ss_api::Game &game, PreviewType type);
 
@@ -45,25 +45,24 @@ namespace c2dui {
 
         void onUpdate() override;
 
-        UiMain *ui = nullptr;
-        RomList *romList = nullptr;
-        ss_api::GameList gameList;
-        UIRomInfo *romInfo = nullptr;
-        UIListBox *listBox = nullptr;
-        RectangleShape *blur = nullptr;
-        SkinnedText *titleText = nullptr;
+        UiMain *pMain = nullptr;
+        RomList *pRomList = nullptr;
+        UIRomInfo *pRomInfo = nullptr;
+        UIListBox *pListBox = nullptr;
+        RectangleShape *pBlur = nullptr;
+        SkinnedText *pTitleText = nullptr;
+        ss_api::GameList mGameList;
 
-        c2d::C2DClock timer_load_info;
+        c2d::C2DClock mTimerLoadInfo;
 #ifdef __3DS__
-        int timer_load_info_delay = 1000;
+        int mTimerLoadInfoDelay = 1000;
 #else
-        int timer_load_info_delay = 300;
+        int mTimerLoadInfoDelay = 300;
 #endif
-        int timer_load_info_done = 0;
-
-        c2d::C2DClock timer_load_video;
-        int timer_load_video_delay = 5000;
-        int timer_load_video_done = 0;
+        int mTimerLoadInfoDone = 0;
+        c2d::C2DClock mTimerLoadVideo;
+        int mTimerLoadVideoDelay = 5000;
+        int mTimerLoadVideoDone = 0;
     };
 }
 

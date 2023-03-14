@@ -40,7 +40,7 @@ int PNESUiEmu::load(const ss_api::Game &game) {
     getUi()->flip();
 
     // default paths
-    snprintf(nstpaths.nstconfdir, sizeof(nstpaths.nstconfdir), "%s", ui->getIo()->getDataPath().c_str());
+    snprintf(nstpaths.nstconfdir, sizeof(nstpaths.nstconfdir), "%s", pMain->getIo()->getDataPath().c_str());
     strncpy(nstpaths.nstdir, nstpaths.nstconfdir, sizeof(nstpaths.nstdir));
 
     // default config

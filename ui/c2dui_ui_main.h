@@ -14,8 +14,8 @@ namespace c2dui {
     public:
         explicit UiMain(c2d::Io *io);
 
-        void init(UIRomList *uiRomList, UiMenu *uiMenu,
-                  UiEmu *uiEmu, UiStateMenu *uiState);
+        void init(UIRomList *romList, UiMenu *menu,
+                  UiEmu *emu, UiStateMenu *state);
 
         void setConfig(Config *cfg);
 
@@ -52,18 +52,18 @@ namespace c2dui {
         bool done = false;
 
     private:
-        Config *config = nullptr;
-        Skin *skin = nullptr;
-        UIHighlight *uiHighlight = nullptr;
-        UiMenu *uiMenu = nullptr;
-        UIRomList *uiRomList = nullptr;
-        UiEmu *uiEmu = nullptr;
-        UiStateMenu *uiState = nullptr;
-        UIProgressBox *uiProgressBox = nullptr;
-        c2d::MessageBox *uiMessageBox = nullptr;
-        UiStatusBox *uiStatusBox = nullptr;
-        c2d::C2DClock timer;
-        unsigned int oldKeys = 0;
+        Config *pConfig = nullptr;
+        Skin *pSkin = nullptr;
+        UIHighlight *pHighlight = nullptr;
+        UiMenu *pMenu = nullptr;
+        UIRomList *pRomList = nullptr;
+        UiEmu *pEmu = nullptr;
+        UiStateMenu *pState = nullptr;
+        UIProgressBox *pProgressBox = nullptr;
+        c2d::MessageBox *pMessageBox = nullptr;
+        UiStatusBox *pStatusBox = nullptr;
+        c2d::C2DClock mTimer;
+        unsigned int mOldKeys = 0;
     };
 }
 

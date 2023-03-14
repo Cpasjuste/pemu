@@ -5,54 +5,57 @@
 #include "c2dui.h"
 
 Skin::Skin(UiMain *u) {
-    ui = u;
+    pMain = u;
 
     // try to load skin from data directory first
-    path = ui->getIo()->getDataPath() + "skins/" + ui->getConfig()->get(Option::GUI_SKIN)->getValueString() + "/";
-    if (!ui->getIo()->exist(path + "config.cfg")) {
+    mPath = pMain->getIo()->getDataPath() + "skins/" + pMain->getConfig()->get(Option::GUI_SKIN)->getValueString() +
+            "/";
+    if (!pMain->getIo()->exist(mPath + "config.cfg")) {
         // now try from romfs
-        path = ui->getIo()->getRomFsPath() + "skins/" + ui->getConfig()->get(Option::GUI_SKIN)->getValueString() + "/";
-        printf("Skin::Skin: skin config do not exist, trying from romfs... (%s)\n", (path + "config.cfg").c_str());
-        if (!ui->getIo()->exist(path + "config.cfg")) {
+        mPath = pMain->getIo()->getRomFsPath() + "skins/" +
+                pMain->getConfig()->get(Option::GUI_SKIN)->getValueString() +
+                "/";
+        printf("Skin::Skin: skin config do not exist, trying from romfs... (%s)\n", (mPath + "config.cfg").c_str());
+        if (!pMain->getIo()->exist(mPath + "config.cfg")) {
             // restore defaults
-            ui->getConfig()->get(Option::GUI_SKIN)->setValueString("default");
-            path = ui->getIo()->getRomFsPath() + "skins/default/";
+            pMain->getConfig()->get(Option::GUI_SKIN)->setValueString("default");
+            mPath = pMain->getIo()->getRomFsPath() + "skins/default/";
             printf("Skin::Skin: skin config do not exist, reverting to default skin (%s)\n",
-                   (path + "config.cfg").c_str());
+                   (mPath + "config.cfg").c_str());
         }
     }
 
-    config = new config::Config("SKIN_CONFIG", path + "config.cfg");
-    printf("Skin path: %s\n", path.c_str());
+    pConfig = new config::Config("SKIN_CONFIG", mPath + "config.cfg");
+    printf("Skin path: %s\n", mPath.c_str());
 
     // get default font scaling
-    m_font_scaling = (float) ui->getConfig()->get(Option::GUI_FONT_SCALING)->getValueInt(0);
-    m_font_scaling = m_font_scaling > 0 ? 1 + (m_font_scaling / 10) : 1;
+    mFontScaling = (float) pMain->getConfig()->get(Option::GUI_FONT_SCALING)->getValueInt(0);
+    mFontScaling = mFontScaling > 0 ? 1 + (mFontScaling / 10) : 1;
 
     // load buttons textures
     // see c2d.h for key id
-    buttons.emplace_back(KEY_JOY_UP_DEFAULT, "UP");
-    buttons.emplace_back(KEY_JOY_DOWN_DEFAULT, "DOWN");
-    buttons.emplace_back(KEY_JOY_LEFT_DEFAULT, "LEFT");
-    buttons.emplace_back(KEY_JOY_RIGHT_DEFAULT, "RIGHT");
-    buttons.emplace_back(KEY_JOY_A_DEFAULT, "A");
-    buttons.emplace_back(KEY_JOY_B_DEFAULT, "B");
-    buttons.emplace_back(KEY_JOY_X_DEFAULT, "X");
-    buttons.emplace_back(KEY_JOY_Y_DEFAULT, "Y");
-    buttons.emplace_back(KEY_JOY_LT_DEFAULT, "LT");
-    buttons.emplace_back(KEY_JOY_RT_DEFAULT, "RT");
-    buttons.emplace_back(KEY_JOY_LB_DEFAULT, "LB");
-    buttons.emplace_back(KEY_JOY_RB_DEFAULT, "RB");
-    buttons.emplace_back(KEY_JOY_LS_DEFAULT, "LS");
-    buttons.emplace_back(KEY_JOY_RS_DEFAULT, "RS");
-    buttons.emplace_back(KEY_JOY_SELECT_DEFAULT, "SELECT");
-    buttons.emplace_back(KEY_JOY_START_DEFAULT, "START");
-    buttons.emplace_back(KEY_JOY_MENU1_DEFAULT, "LB");
-    buttons.emplace_back(KEY_JOY_MENU2_DEFAULT, "RB");
-    buttons.emplace_back(100, "DPAD"); // dpad for help
-    for (auto &button: buttons) {
-        std::string buttonPath = path + "buttons/" + std::to_string(button.id) + ".png";
-        if (ui->getIo()->exist(buttonPath)) {
+    mButtons.emplace_back(KEY_JOY_UP_DEFAULT, "UP");
+    mButtons.emplace_back(KEY_JOY_DOWN_DEFAULT, "DOWN");
+    mButtons.emplace_back(KEY_JOY_LEFT_DEFAULT, "LEFT");
+    mButtons.emplace_back(KEY_JOY_RIGHT_DEFAULT, "RIGHT");
+    mButtons.emplace_back(KEY_JOY_A_DEFAULT, "A");
+    mButtons.emplace_back(KEY_JOY_B_DEFAULT, "B");
+    mButtons.emplace_back(KEY_JOY_X_DEFAULT, "X");
+    mButtons.emplace_back(KEY_JOY_Y_DEFAULT, "Y");
+    mButtons.emplace_back(KEY_JOY_LT_DEFAULT, "LT");
+    mButtons.emplace_back(KEY_JOY_RT_DEFAULT, "RT");
+    mButtons.emplace_back(KEY_JOY_LB_DEFAULT, "LB");
+    mButtons.emplace_back(KEY_JOY_RB_DEFAULT, "RB");
+    mButtons.emplace_back(KEY_JOY_LS_DEFAULT, "LS");
+    mButtons.emplace_back(KEY_JOY_RS_DEFAULT, "RS");
+    mButtons.emplace_back(KEY_JOY_SELECT_DEFAULT, "SELECT");
+    mButtons.emplace_back(KEY_JOY_START_DEFAULT, "START");
+    mButtons.emplace_back(KEY_JOY_MENU1_DEFAULT, "LB");
+    mButtons.emplace_back(KEY_JOY_MENU2_DEFAULT, "RB");
+    mButtons.emplace_back(100, "DPAD"); // dpad for help
+    for (auto &button: mButtons) {
+        std::string buttonPath = mPath + "buttons/" + std::to_string(button.id) + ".png";
+        if (pMain->getIo()->exist(buttonPath)) {
             button.texture = new C2DTexture(buttonPath);
             if (button.texture && !button.texture->available) {
                 delete (button.texture);
@@ -66,33 +69,33 @@ Skin::Skin(UiMain *u) {
     ///
     config::Group gen("GENERAL");
     gen.addOption({"resolution", Vector2f{1280.0f, 720.0f}});
-    config->addGroup(gen);
+    pConfig->addGroup(gen);
 
     /// FONT
     config::Group font_group("FONT");
     font_group.addOption({"path", "default.ttf"});
     font_group.addOption({"offset", Vector2f{0, -4}});
-    font_group.addOption({"filtering", 0});
-    config->addGroup(font_group);
+    font_group.addOption({"texture_filtering", 0});
+    pConfig->addGroup(font_group);
 
     /// COLORS
     config::Group colors_group("COLORS");
     for (int i = 0; i < 50; i++) {
         colors_group.addOption({"color" + std::to_string(i), Color()});
     }
-    config->addGroup(colors_group);
+    pConfig->addGroup(colors_group);
 
     /// HIGHLIGHT
     config::Group highlight = createRectangleShapeGroup("HIGHLIGHT");
-    config->addGroup(highlight);
+    pConfig->addGroup(highlight);
 
     /// MESSAGEBOX
     config::Group mbox = createRectangleShapeGroup("MESSAGEBOX");
-    config->addGroup(mbox);
+    pConfig->addGroup(mbox);
 
     /// STATUSBOX
     config::Group statusBox = createRectangleShapeGroup("STATUSBOX");
-    config->addGroup(statusBox);
+    pConfig->addGroup(statusBox);
 
     /// MAIN (ROM LIST)
     config::Group main = createRectangleShapeGroup("MAIN");
@@ -134,7 +137,7 @@ Skin::Skin(UiMain *u) {
     config::Group previewBox = createRectangleShapeGroup("ROM_IMAGE");
     previewBox.addGroup(createTextGroup("TEXT"));
     main.addGroup(previewBox);
-    config->addGroup(main);
+    pConfig->addGroup(main);
     ///
     /// MAIN (ROM LIST) (END)
     ///
@@ -147,7 +150,7 @@ Skin::Skin(UiMain *u) {
     options_menu.addGroup(options_menu_title);
     config::Group options_menu_text = createTextGroup("ITEMS_TEXT");
     options_menu.addGroup(options_menu_text);
-    config->addGroup(options_menu);
+    pConfig->addGroup(options_menu);
     ///
     /// OPTIONS_MENU (END)
     ///
@@ -162,70 +165,98 @@ Skin::Skin(UiMain *u) {
     config::Group states_item_text = createTextGroup("STATES_TEXT");
     states_item.addGroup(states_item_text);
     states_menu.addGroup(states_item);
-    config->addGroup(states_menu);
+    pConfig->addGroup(states_menu);
     ///
     /// STATES_MENU (END
     ///
 
     // load config
-    printf("Skin: loading skin configuration (%s)\n", config->getPath().c_str());
-    config->load();
+    printf("Skin: loading skin configuration (%s)\n", pConfig->getPath().c_str());
+    pConfig->load();
 
     // load skin config override
-    printf("Skin: loading skin configuration override (%s.override)\n", config->getPath().c_str());
-    config->load(config->getPath() + ".override");
+    printf("Skin: loading skin configuration override (%s.override)\n", pConfig->getPath().c_str());
+    pConfig->load(pConfig->getPath() + ".override");
 
     // load 4/3 skin config override if needed
-    if (ui->getConfig()->get(Option::Id::GUI_SKIN_ASPECT)->getIndex() == 1) {
-        printf("Skin: loading skin configuration override (%s.override.43)\n", config->getPath().c_str());
-        config->load(config->getPath() + ".override.43");
+    if (pMain->getConfig()->get(Option::Id::GUI_SKIN_ASPECT)->getIndex() == 1) {
+        printf("Skin: loading skin configuration override (%s.override.43)\n", pConfig->getPath().c_str());
+        pConfig->load(pConfig->getPath() + ".override.43");
     }
 
     ///
     /// compute global scaling from loaded configuration
     ///
-    c2d::config::Group *genGrp = config->getGroup("GENERAL");
+    c2d::config::Group *genGrp = pConfig->getGroup("GENERAL");
     if (genGrp) {
         c2d::config::Option *opt = genGrp->getOption("resolution");
         if (opt) {
-            Vector2f uiRes = ui->getSize();
+            Vector2f uiRes = pMain->getSize();
             Vector2f skinRes = opt->getVector2f();
-            m_scaling.x *= uiRes.x / skinRes.x;
-            m_scaling.y *= uiRes.y / skinRes.y;
+            mScaling.x *= uiRes.x / skinRes.x;
+            mScaling.y *= uiRes.y / skinRes.y;
         }
     }
 
     ///
     /// load skin font from loaded configuration
     ///
-    font_available = false;
-    font = new C2DFont();
-    c2d::config::Group *fntGroup = config->getGroup("FONT");
-    std::string fontPath = path + fntGroup->getOption("path")->getString();
+    mFontAvailable = false;
+    pFont = new C2DFont();
+    c2d::config::Group *fntGroup = pConfig->getGroup("FONT");
+    std::string fontPath = mPath + fntGroup->getOption("path")->getString();
     //printf("font path: %s\n", fontPath.c_str());
-    if (font->loadFromFile(fontPath)) {
-        font_available = true;
+    if (pFont->loadFromFile(fontPath)) {
+        mFontAvailable = true;
     }
-    if (!font_available) {
-        delete (font);
-        font = ui->getFont();
+    if (!mFontAvailable) {
+        delete (pFont);
+        pFont = pMain->getFont();
     }
-    font->setFilter((Texture::Filter) fntGroup->getOption("filtering")->getInteger());
+    pFont->setFilter((Texture::Filter) fntGroup->getOption("texture_filtering")->getInteger());
     Vector2f offset = fntGroup->getOption("offset")->getVector2f();
 #ifdef __3DS__
     offset.y += 1.6f;
 #endif
-    font->setOffset(offset);
+    pFont->setOffset(offset);
 }
 
 config::Config *Skin::getConfig() {
-    return config;
+    return pConfig;
+}
+
+config::Group *Skin::getGroup(const std::vector<std::string> &tree) {
+    config::Group *group = nullptr;
+
+    if (tree.empty()) {
+        return group;
+    }
+
+    group = pConfig->getGroup(tree[0]);
+    if (!group) {
+        printf("Skin::getGroup: config group not found: \"%s\"\n", tree[0].c_str());
+        return group;
+    }
+
+    if (tree.size() > 1) {
+        for (unsigned int i = 1; i < tree.size(); i++) {
+            group = group->getGroup(tree[i]);
+            if (!group) {
+                printf("Skin::getGroup: config group not found: \"%s\"\n", tree[i].c_str());
+                return nullptr;
+            }
+        }
+    }
+
+    return group;
 }
 
 config::Group Skin::createRectangleShapeGroup(const std::string &name) {
     config::Group group(name);
     group.addOption({"texture", ""});
-    group.addOption({"filtering", 1});
+    group.addOption({"texture_ratio", "free"});
+    group.addOption({"texture_filtering", 1});
+    group.addOption({"texture_color", Color()});
     group.addOption({"color", Color()});
     group.addOption({"outline_color", Color()});
     group.addOption({"outline_size", (float) 0});
@@ -239,7 +270,7 @@ Skin::RectangleShapeGroup Skin::getRectangleShape(const std::vector<std::string>
     config::Option *option;
     RectangleShapeGroup rectangleShapeGroup{};
 
-    c2d::config::Group *group = config->getGroup(tree[0]);
+    c2d::config::Group *group = pConfig->getGroup(tree[0]);
     if (!group) {
         printf("Skin::getRectangleShape: config group not found: \"%s\"\n", tree[0].c_str());
         return rectangleShapeGroup;
@@ -261,10 +292,10 @@ Skin::RectangleShapeGroup Skin::getRectangleShape(const std::vector<std::string>
             return rectangleShapeGroup;
         }
         rectangleShapeGroup.rect = option->getFloatRect();
-        rectangleShapeGroup.rect.left *= m_scaling.x;
-        rectangleShapeGroup.rect.top *= m_scaling.y;
-        rectangleShapeGroup.rect.width *= m_scaling.x;
-        rectangleShapeGroup.rect.height *= m_scaling.y;
+        rectangleShapeGroup.rect.left *= mScaling.x;
+        rectangleShapeGroup.rect.top *= mScaling.y;
+        rectangleShapeGroup.rect.width *= mScaling.x;
+        rectangleShapeGroup.rect.height *= mScaling.y;
         rectangleShapeGroup.rect.width *= rectangleShapeGroup.scaling.x;
         rectangleShapeGroup.rect.height *= rectangleShapeGroup.scaling.y;
     }
@@ -274,16 +305,38 @@ Skin::RectangleShapeGroup Skin::getRectangleShape(const std::vector<std::string>
         rectangleShapeGroup.texture = option->getString();
     }
 
-    option = group->getOption("filtering");
+    option = group->getOption("texture_ratio");
+    if (option && option->getString() != "free") {
+        rectangleShapeGroup.textureRatio =
+                option->getString() == "keep_width" ? RectangleShapeGroup::TextureRatio::KeepWidth
+                                                    : RectangleShapeGroup::TextureRatio::KeepHeight;
+    }
+
+    option = group->getOption("texture_filtering");
     if (option) {
         rectangleShapeGroup.filtering = option->getInteger();
+    }
+
+    option = group->getOption("texture_color");
+    if (option) {
+        if (option->getType() == config::Option::Type::String) {
+            // retrieve color from variable string
+            config::Option *opt = pConfig->getOption("COLORS", option->getString());
+            if (opt) {
+                rectangleShapeGroup.color = opt->getColor();
+                option->setType(config::Option::Type::Color);
+                option->setColor(opt->getColor());
+            }
+        } else {
+            rectangleShapeGroup.color = option->getColor();
+        }
     }
 
     option = group->getOption("color");
     if (option) {
         if (option->getType() == config::Option::Type::String) {
             // retrieve color from variable string
-            config::Option *opt = config->getOption("COLORS", option->getString());
+            config::Option *opt = pConfig->getOption("COLORS", option->getString());
             if (opt) {
                 rectangleShapeGroup.color = opt->getColor();
                 option->setType(config::Option::Type::Color);
@@ -298,7 +351,7 @@ Skin::RectangleShapeGroup Skin::getRectangleShape(const std::vector<std::string>
     if (option) {
         if (option->getType() == config::Option::Type::String) {
             // retrieve color from variable string
-            config::Option *opt = config->getOption("COLORS", option->getString());
+            config::Option *opt = pConfig->getOption("COLORS", option->getString());
             if (opt) {
                 rectangleShapeGroup.outlineColor = opt->getColor();
                 option->setType(config::Option::Type::Color);
@@ -312,7 +365,7 @@ Skin::RectangleShapeGroup Skin::getRectangleShape(const std::vector<std::string>
     option = group->getOption("outline_size");
     if (option) {
         rectangleShapeGroup.outlineSize = option->getFloat();
-        rectangleShapeGroup.outlineSize *= m_scaling.y;
+        rectangleShapeGroup.outlineSize *= mScaling.y;
         if (rectangleShapeGroup.outlineSize > 0 && rectangleShapeGroup.outlineSize < 1) {
             rectangleShapeGroup.outlineSize = 1;
         }
@@ -357,14 +410,22 @@ Skin::loadRectangleShape(c2d::RectangleShape *shape, const std::vector<std::stri
 
     C2DTexture *tex;
     if (!rectangleShapeGroup.texture.empty()) {
-        std::string bg_path = path + rectangleShapeGroup.texture;
-        if (ui->getIo()->exist(bg_path)) {
+        std::string bg_path = mPath + rectangleShapeGroup.texture;
+        if (pMain->getIo()->exist(bg_path)) {
             tex = new C2DTexture(bg_path);
             if (tex->available) {
+                if (rectangleShapeGroup.textureRatio == RectangleShapeGroup::TextureRatio::KeepWidth) {
+                    float scaling = rectangleShapeGroup.rect.width / tex->getSize().x;
+                    tex->setScale(scaling, scaling);
+                } else if (rectangleShapeGroup.textureRatio == RectangleShapeGroup::TextureRatio::KeepHeight) {
+                    float scaling = rectangleShapeGroup.rect.height / tex->getSize().y;
+                    tex->setScale(scaling, scaling);
+                } else {
+                    tex->setScale(rectangleShapeGroup.rect.width / tex->getSize().x,
+                                  rectangleShapeGroup.rect.height / tex->getSize().y);
+                }
                 tex->setFilter((Texture::Filter) rectangleShapeGroup.filtering);
-                tex->setScale(rectangleShapeGroup.rect.width / tex->getSize().x,
-                              rectangleShapeGroup.rect.height / tex->getSize().y);
-                shape->setTexture(tex, true);
+                shape->add(tex);
             } else {
                 delete (tex);
             }
@@ -396,7 +457,7 @@ Skin::TextGroup Skin::getText(const std::vector<std::string> &tree) {
     config::Option *option = nullptr;
     TextGroup textGroup{};
 
-    c2d::config::Group *group = config->getGroup(tree[0]);
+    c2d::config::Group *group = pConfig->getGroup(tree[0]);
     if (!group) {
         printf("Skin::getText: config group not found: \"%s\"\n", tree[0].c_str());
         return textGroup;
@@ -417,7 +478,7 @@ Skin::TextGroup Skin::getText(const std::vector<std::string> &tree) {
         if (option->getInteger() <= 0) {
             return textGroup;
         }
-        textGroup.size = (unsigned int) ((float) (option->getInteger() * m_scaling.y) * m_font_scaling);
+        textGroup.size = (unsigned int) ((float) (option->getInteger() * mScaling.y) * mFontScaling);
     }
     option = group->getOption("string");
     if (option) {
@@ -427,7 +488,7 @@ Skin::TextGroup Skin::getText(const std::vector<std::string> &tree) {
     if (option) {
         if (option->getType() == config::Option::Type::String) {
             // retrieve color from variable string
-            config::Option *opt = config->getOption("COLORS", option->getString());
+            config::Option *opt = pConfig->getOption("COLORS", option->getString());
             if (opt) {
                 textGroup.color = opt->getColor();
                 option->setType(config::Option::Type::Color);
@@ -441,7 +502,7 @@ Skin::TextGroup Skin::getText(const std::vector<std::string> &tree) {
     if (option) {
         if (option->getType() == config::Option::Type::String) {
             // retrieve color from variable string
-            config::Option *opt = config->getOption("COLORS", option->getString());
+            config::Option *opt = pConfig->getOption("COLORS", option->getString());
             if (opt) {
                 textGroup.outlineColor = opt->getColor();
                 option->setType(config::Option::Type::Color);
@@ -454,7 +515,7 @@ Skin::TextGroup Skin::getText(const std::vector<std::string> &tree) {
     option = group->getOption("outline_size");
     if (option) {
         textGroup.outlineSize = option->getFloat();
-        textGroup.outlineSize *= m_scaling.y;
+        textGroup.outlineSize *= mScaling.y;
         textGroup.outlineSize = ceil(textGroup.outlineSize);
     }
     option = group->getOption("origin");
@@ -468,10 +529,10 @@ Skin::TextGroup Skin::getText(const std::vector<std::string> &tree) {
     option = group->getOption("rectangle");
     if (option) {
         textGroup.rect = option->getFloatRect();
-        textGroup.rect.left *= m_scaling.x;
-        textGroup.rect.top *= m_scaling.y;
-        textGroup.rect.width *= m_scaling.x;
-        textGroup.rect.height *= m_scaling.y;
+        textGroup.rect.left *= mScaling.x;
+        textGroup.rect.top *= mScaling.y;
+        textGroup.rect.width *= mScaling.x;
+        textGroup.rect.height *= mScaling.y;
         textGroup.rect.width *= textGroup.scaling.x;
         textGroup.rect.height *= textGroup.scaling.y;
     }
@@ -507,8 +568,7 @@ bool Skin::loadText(c2d::Text *text, const std::vector<std::string> &tree) {
 }
 
 Skin::Button *Skin::getButton(int id) {
-
-    for (auto &button: buttons) {
+    for (auto &button: mButtons) {
         if (button.id == id) {
             return &button;
         }
@@ -516,29 +576,116 @@ Skin::Button *Skin::getButton(int id) {
     return nullptr;
 }
 
-c2d::Font *Skin::getFont() {
-    return font;
+Vector2f Skin::getScale(c2d::config::Group *group) {
+    auto option = group->getOption("scaling");
+    return option ? option->getVector2f() : Vector2f(1, 1);
+}
+
+FloatRect Skin::getRectangle(c2d::config::Group *group) {
+    auto option = group->getOption("rectangle");
+    auto rect = option ? option->getFloatRect() : FloatRect();
+    if (option && rect.width > 0 && rect.height > 0) {
+        auto local_scale = getScale(group);
+        rect.left *= mScaling.x;
+        rect.top *= mScaling.y;
+        rect.width *= mScaling.x;
+        rect.height *= mScaling.y;
+        rect.width *= local_scale.x;
+        rect.height *= local_scale.y;
+    }
+
+    return rect;
+}
+
+Color Skin::getColor(c2d::config::Group *group, const std::string &name) {
+    auto option = group->getOption(name);
+    if (option) {
+        if (option->getType() == config::Option::Type::String) {
+            // retrieve color from variable string
+            auto opt = pConfig->getOption("COLORS", option->getString());
+            if (opt) {
+                return opt->getColor();
+            }
+        } else {
+            return option->getColor();
+
+        }
+    }
+
+    return name == "texture_color" ? Color::White : Color::Transparent;
+}
+
+Color Skin::getFillColor(c2d::config::Group *group) {
+    return getColor(group, "color");
+}
+
+Color Skin::getOutlineColor(c2d::config::Group *group) {
+    return getColor(group, "outline_color");
+}
+
+float Skin::getOutlineThickness(c2d::config::Group *group) {
+    auto option = group->getOption("outline_size");
+    if (option) {
+        return option->getFloat() * mScaling.y;
+        /* TODO: test this again to see if it's really needed...
+        float outline = option->getFloat() * mScaling.y;
+        if (outline > 0 && outline < 1) {
+            outline = 1;
+        }
+        return outline;
+        */
+    }
+
+    return 0;
+}
+
+Origin Skin::getOrigin(c2d::config::Group *group) {
+    auto option = group->getOption("origin");
+    if (option) {
+        return (Origin) option->getInteger();
+    }
+
+    return Origin::TopLeft;
+}
+
+unsigned int Skin::getCharacterSize(c2d::config::Group *group) {
+    auto option = group->getOption("size");
+    if (option && option->getInteger() > 0) {
+        auto local_scale = getScale(group);
+        return (unsigned int) ((float) option->getInteger() * local_scale.y * getFontScaling());
+    }
+
+    return 0;
+}
+
+std::string Skin::getString(c2d::config::Group *group) {
+    auto option = group->getOption("string");
+    if (option) {
+        return option->getString();
+    }
+
+    return {};
+}
+
+Text::Overflow Skin::getOverflow(c2d::config::Group *group) {
+    auto option = group->getOption("overflow");
+    if (option) {
+        return (Text::Overflow) option->getInteger();
+    }
+
+    return Text::Overflow::Clamp;
 }
 
 Skin::~Skin() {
-
-    for (auto &button: buttons) {
-        if (button.texture != nullptr) {
-            delete (button.texture);
-        }
+    for (auto &button: mButtons) {
+        delete (button.texture);
     }
-    buttons.clear();
 
-    if (font != nullptr) {
-        delete (font);
-    }
+    delete (pFont);
+    delete (pConfig);
 
     // delete font data if loaded from zipped skin
-    if (font_data != nullptr) {
-        free(font_data);
-    }
-
-    if (config != nullptr) {
-        delete (config);
+    if (pFontData) {
+        free(pFontData);
     }
 }

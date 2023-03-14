@@ -13,16 +13,16 @@ class MenuLine : public c2d::RectangleShape {
 
 public:
     MenuLine(UiMain *u, FloatRect &rect, Skin::TextGroup &tg) : RectangleShape(rect) {
-        ui = u;
+        pMain = u;
         textGroup = tg;
-        Font *font = ui->getSkin()->font;
+        Font *font = pMain->getSkin()->getFont();
 
         name = new Text("OPTION NAME", textGroup.size, font);
         name->setFillColor(textGroup.color);
         name->setOutlineThickness(textGroup.outlineSize);
         name->setOutlineColor(textGroup.outlineColor);
         name->setOrigin(Origin::Left);
-        name->setPosition(2 * ui->getScaling().x, MenuLine::getSize().y / 2);
+        name->setPosition(2 * pMain->getScaling().x, MenuLine::getSize().y / 2);
         name->setSizeMax((MenuLine::getSize().x * 0.55f), 0);
         MenuLine::add(name);
 
@@ -51,7 +51,7 @@ public:
         setFillColor(Color::Transparent);
 
         if (option.getFlags() & Option::Flags::INPUT) {
-            Skin::Button *button = ui->getSkin()->getButton(option.getValueInt());
+            Skin::Button *button = pMain->getSkin()->getButton(option.getValueInt());
             if (button && option.getId() < Option::Id::JOY_DEADZONE) {
                 if (button->texture) {
                     sprite->setTexture(button->texture, true);
@@ -76,14 +76,14 @@ public:
             }
         } else if (option.getFlags() & Option::Flags::MENU) {
             value->setVisibility(Visibility::Hidden);
-            setFillColor(ui->getUiMenu()->getOutlineColor());
+            setFillColor(pMain->getUiMenu()->getOutlineColor());
         } else {
             value->setVisibility(Visibility::Visible);
             value->setString(option.getValueString());
         }
     }
 
-    UiMain *ui = nullptr;
+    UiMain *pMain = nullptr;
     Text *name = nullptr;
     Text *value = nullptr;
     Sprite *sprite = nullptr;
@@ -91,12 +91,12 @@ public:
     Option option;
 };
 
-UiMenu::UiMenu(UiMain *uiMain) : SkinnedRectangle(uiMain->getSkin(), {"OPTIONS_MENU"}) {
+UiMenu::UiMenu(UiMain *uiMain) : SkinnedRectangle(uiMain, {"OPTIONS_MENU"}) {
     ui = uiMain;
     alpha = UiMenu::getAlpha();
 
     // menu title
-    title = new SkinnedText(uiMain->getSkin(), {"OPTIONS_MENU", "TITLE_TEXT"});
+    title = new SkinnedText(uiMain, {"OPTIONS_MENU", "TITLE_TEXT"});
     UiMenu::add(title);
 
     // retrieve skin config for options items

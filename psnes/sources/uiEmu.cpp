@@ -63,14 +63,14 @@ PSNESUiEmu::PSNESUiEmu(UiMain *ui) : UiEmu(ui) {
 }
 
 int PSNESUiEmu::load(const ss_api::Game &game) {
-    ui->getUiProgressBox()->setTitle(game.name);
-    ui->getUiProgressBox()->setMessage("Please wait...");
-    ui->getUiProgressBox()->setProgress(0);
-    ui->getUiProgressBox()->setVisibility(Visibility::Visible);
-    ui->getUiProgressBox()->setLayer(1000);
-    ui->flip();
+    pMain->getUiProgressBox()->setTitle(game.name);
+    pMain->getUiProgressBox()->setMessage("Please wait...");
+    pMain->getUiProgressBox()->setProgress(0);
+    pMain->getUiProgressBox()->setVisibility(Visibility::Visible);
+    pMain->getUiProgressBox()->setLayer(1000);
+    pMain->flip();
 
-    strncpy(default_dir, ui->getIo()->getDataPath().c_str(), PATH_MAX);
+    strncpy(default_dir, pMain->getIo()->getDataPath().c_str(), PATH_MAX);
     s9x_base_dir = default_dir;
 
     memset(&Settings, 0, sizeof(Settings));
@@ -92,13 +92,13 @@ int PSNESUiEmu::load(const ss_api::Game &game) {
 
     // audio
     Settings.Transparency =
-            ui->getConfig()->get(Option::ROM_PSNES_TRANSPARENCY, true)->getIndex();
+            pMain->getConfig()->get(Option::ROM_PSNES_TRANSPARENCY, true)->getIndex();
     Settings.AutoDisplayMessages =
-            ui->getConfig()->get(Option::ROM_PSNES_DISPLAY_MESSAGES, true)->getIndex();
+            pMain->getConfig()->get(Option::ROM_PSNES_DISPLAY_MESSAGES, true)->getIndex();
     Settings.InitialInfoStringTimeout = 120;
     Settings.HDMATimingHack = 100;
     Settings.BlockInvalidVRAMAccessMaster =
-            ui->getConfig()->get(Option::ROM_PSNES_BLOCK_VRAM, true)->getIndex();
+            pMain->getConfig()->get(Option::ROM_PSNES_BLOCK_VRAM, true)->getIndex();
     Settings.StopEmulation = TRUE;
     Settings.WrongMovieStateProtection = TRUE;
     Settings.DumpStreamsMaxFrames = -1;
@@ -108,7 +108,7 @@ int PSNESUiEmu::load(const ss_api::Game &game) {
     Settings.FastSavestates = TRUE;
     Settings.SeparateEchoBuffer = FALSE;
 
-    int skipFramesCfg = ui->getConfig()->get(Option::ROM_PSNES_FRAMESKIP, true)->getIndex();
+    int skipFramesCfg = pMain->getConfig()->get(Option::ROM_PSNES_FRAMESKIP, true)->getIndex();
     if (skipFramesCfg == 0) {
         Settings.SkipFrames = 0;
     } else if (skipFramesCfg == 1) {
@@ -117,9 +117,9 @@ int PSNESUiEmu::load(const ss_api::Game &game) {
         Settings.SkipFrames = skipFramesCfg - 1;
     }
     printf("Settings.SkipFrames: %i\n", Settings.SkipFrames);
-    Settings.TurboMode = ui->getConfig()->get(Option::ROM_PSNES_TURBO_MODE, true)->getIndex();
-    Settings.TurboSkipFrames = ui->getConfig()->get(Option::ROM_PSNES_TURBO_FRAMESKIP,
-                                                    true)->getIndex();
+    Settings.TurboMode = pMain->getConfig()->get(Option::ROM_PSNES_TURBO_MODE, true)->getIndex();
+    Settings.TurboSkipFrames = pMain->getConfig()->get(Option::ROM_PSNES_TURBO_FRAMESKIP,
+                                                       true)->getIndex();
     Settings.CartAName[0] = 0;
     Settings.CartBName[0] = 0;
 
@@ -131,7 +131,7 @@ int PSNESUiEmu::load(const ss_api::Game &game) {
         Memory.Deinit();
         S9xDeinitAPU();
         printf("Could not initialize Snes9x Memory.\n");
-        ui->getUiProgressBox()->setVisibility(Visibility::Hidden);
+        pMain->getUiProgressBox()->setVisibility(Visibility::Hidden);
         stop();
         return -1;
     }
@@ -165,15 +165,15 @@ int PSNESUiEmu::load(const ss_api::Game &game) {
     printf("Memory.LoadROM: %s\n", fullPath.c_str());
     if (!Memory.LoadROM(fullPath.c_str())) {
         printf("Could not open ROM: %s\n", fullPath.c_str());
-        ui->getUiProgressBox()->setVisibility(Visibility::Hidden);
-        ui->getUiMessageBox()->show("ERROR", "INVALID ROM", "OK");
+        pMain->getUiProgressBox()->setVisibility(Visibility::Hidden);
+        pMain->getUiMessageBox()->show("ERROR", "INVALID ROM", "OK");
         stop();
         return -1;
     }
 
     Memory.LoadSRAM(S9xGetFilename(".srm", SRAM_DIR));
 
-    Settings.ApplyCheats = ui->getConfig()->get(Option::ROM_PSNES_CHEATS, true)->getIndex() == 1;
+    Settings.ApplyCheats = pMain->getConfig()->get(Option::ROM_PSNES_CHEATS, true)->getIndex() == 1;
     S9xDeleteCheats();
     S9xCheatsEnable();
     if (Settings.ApplyCheats) {
@@ -189,7 +189,7 @@ int PSNESUiEmu::load(const ss_api::Game &game) {
                                    (float) Memory.ROMFramesPerSecond);
     addAudio((int) Settings.SoundPlaybackRate, samples * 2);
     audio_buffer = malloc(getAudio()->getSamplesSize() * getAudio()->getChannels() * 5);
-    optionAudioSync = ui->getConfig()->get(Option::Id::ROM_AUDIO_SYNC, true);
+    optionAudioSync = pMain->getConfig()->get(Option::Id::ROM_AUDIO_SYNC, true);
 
     // video
     S9xGraphicsInit();
@@ -198,10 +198,10 @@ int PSNESUiEmu::load(const ss_api::Game &game) {
     addVideo((uint8_t **) &GFX.Screen, (int *) &GFX.Pitch, {MAX_SNES_WIDTH, MAX_SNES_HEIGHT});
     targetFps = (float) Memory.ROMFramesPerSecond;
 
-    ui->getUiProgressBox()->setProgress(1);
-    ui->flip();
-    ui->delay(500);
-    ui->getUiProgressBox()->setVisibility(Visibility::Hidden);
+    pMain->getUiProgressBox()->setProgress(1);
+    pMain->flip();
+    pMain->delay(500);
+    pMain->getUiProgressBox()->setVisibility(Visibility::Hidden);
 
     return UiEmu::load(game);
 }
@@ -231,7 +231,7 @@ void PSNESUiEmu::onUpdate() {
     UiEmu::onUpdate();
 
     if (isVisible() && !isPaused()) {
-        auto players = ui->getInput()->getPlayers();
+        auto players = pMain->getInput()->getPlayers();
 
         // update snes9x buttons
         for (uint32 i = 0; i < 4; i++) {
