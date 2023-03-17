@@ -6,7 +6,11 @@
 #include "c2dui.h"
 #include "c2dui_ui_main.h"
 
+#ifdef __SWITCH__
+UiMain::UiMain(c2d::Io *io) : C2DRenderer({1280, 720}) {
+#else
 UiMain::UiMain(c2d::Io *io) : C2DRenderer() {
+#endif
     printf("UiMain(%ix%i)\n", (int) UiMain::getSize().x, (int) UiMain::getSize().y);
     setIo(io);
 }
