@@ -184,11 +184,11 @@ if (OPTION_LIGHT)
     list(FILTER SRC_CPU EXCLUDE REGEX
             adsp2100_intf.cpp|arm_intf.cpp|arm7_intf.cpp|h6280_intf.cpp|mips3_intf.cpp|pic16c5x_intf.cpp|tms34_intf.cpp|arm.cpp|e132xs.cpp)
     list(FILTER SRC_CPU EXCLUDE REGEX
-            h6280.cpp|m37710.cpp|cop0.cpp|cop1.cpp|mips3.cpp|pic16c5x.cpp|sh2.cpp|sh4.cpp|tms34010.cpp|upd7725.cpp|v60.cpp|arm7.cpp|adsp2100.cpp|i386.cpp)
+            h6280.cpp|m37710.cpp|cop0.cpp|cop1.cpp|mips3.cpp|pic16c5x.cpp|sh4.cpp|tms34010.cpp|upd7725.cpp|v60.cpp|arm7.cpp|adsp2100.cpp|i386.cpp)
     list(FILTER SRC_CPU EXCLUDE REGEX mips3_dasm.cpp|tms34010_optable.cpp)
     # drivers
     list(FILTER SRC_DRV EXCLUDE REGEX
-            d_cv1k.cpp|cps3run.cpp|cps3snd.cpp|d_cps3.cpp|d_decomlc.cpp|d_deco156.cpp|d_simpl156.cpp|d_deco32.cpp|d_backfire.cpp|d_vaportra.cpp)
+            d_cv1k.cpp|d_decomlc.cpp|d_deco156.cpp|d_simpl156.cpp|d_deco32.cpp|d_backfire.cpp|d_vaportra.cpp)
     list(FILTER SRC_DRV EXCLUDE REGEX
             d_tumblep.cpp|d_supbtime.cpp|d_funkyjet.cpp|deco16ic.cpp|d_dietgogo.cpp|d_dec0.cpp|d_dassault.cpp|d_darkseal.cpp|d_cninja.cpp)
     list(FILTER SRC_DRV EXCLUDE REGEX
