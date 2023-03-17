@@ -179,7 +179,7 @@ void PGENUiEmu::onUpdate() {
         }
 #endif
         getAudio()->play(sound_buffer, samples,
-                         vdp_pal ? Audio::SyncMode::Safe : Audio::SyncMode::None);
+                         vdp_pal ? Audio::SyncMode::LowLatency : Audio::SyncMode::None);
     }
 
     return UiEmu::onUpdate();
@@ -321,7 +321,7 @@ void PGENUiEmu::saveBram() {
         /* check if it is correctly formatted before saving */
         if (!memcmp(scd.cartridge.area + scd.cartridge.mask + 1 - 0x20, brm_format + 0x20, 0x20)) {
             pMain->getIo()->write(ramPath + CD_BRAM_CART, (const char *) scd.cartridge.area,
-                               scd.cartridge.mask + 1);
+                                  scd.cartridge.mask + 1);
             /* update CRC */
             brm_crc[1] = crc32(0, scd.cartridge.area, scd.cartridge.mask + 1);
         }

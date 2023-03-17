@@ -34,6 +34,7 @@ typedef struct {
 #ifdef HAVE_OPLL_CORE
     uint8 opll;
 #endif
+    uint8 cd_latency;
     uint8 mono;
     int16 psg_preamp;
     int16 fm_preamp;
@@ -71,6 +72,8 @@ typedef struct {
     int32 md_ch_volumes[6];
     signed int sms_fm_ch_volumes[9];
 #endif
+    uint8 enhanced_vscroll;
+    uint8 enhanced_vscroll_limit;
 } t_config;
 
 extern t_config config;
