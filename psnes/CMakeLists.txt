@@ -115,7 +115,6 @@ elseif (PLATFORM_SWITCH)
     list(APPEND SNES9X_CFLAGS -Wno-pedantic -Wno-missing-field-initializers -Wno-format-truncation)
 elseif (PLATFORM_WINDOWS)
     list(REMOVE_ITEM SNES9X_SRC ${CMAKE_SOURCE_DIR}/cores/snes9x/compat.cpp)
-    list(APPEND SNES9X_CFLAGS -Dunztell=unzTell)
 elseif (PLATFORM_ANDROID)
     #####################
     # ANDROID PLATORM
