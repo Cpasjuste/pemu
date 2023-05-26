@@ -31,32 +31,35 @@ bool SkinnedRectangle::load() {
     // load texture if any
     auto option = group->getOption("texture");
     if (option && !option->getString().empty()) {
-        std::string path = pSkin->getPath() + option->getString();
-        printf("path: %s\n", path.c_str());
-        if (!pTex || pTex->m_path != path) {
-            if (pIo->exist(path)) {
-                pTex = new C2DTexture(path);
-                if (pTex->available) {
-                    // set texture ratio
-                    float scaling = std::min(
-                            getSize().x / pTex->getSize().x,
-                            getSize().y / pTex->getSize().y);
-                    pTex->setScale(scaling, scaling);
-                    // set texture filtering
-                    option = group->getOption("texture_filtering");
-                    if (option) {
-                        pTex->setFilter((Texture::Filter) option->getInteger());
+        for (const auto &skinPath: pSkin->getPaths()) {
+            std::string texPath = skinPath + option->getString();
+            if (!pTex || pTex->m_path != texPath) {
+                if (pIo->exist(texPath)) {
+                    printf("SkinnedRectangle::load: %s\n", texPath.c_str());
+                    pTex = new C2DTexture(texPath);
+                    if (pTex->available) {
+                        // set texture ratio
+                        float scaling = std::min(
+                                getSize().x / pTex->getSize().x,
+                                getSize().y / pTex->getSize().y);
+                        pTex->setScale(scaling, scaling);
+                        // set texture filtering
+                        option = group->getOption("texture_filtering");
+                        if (option) {
+                            pTex->setFilter((Texture::Filter) option->getInteger());
+                        }
+                        // set texture color
+                        pTex->setFillColor(pSkin->getColor(group, "texture_color"));
+                        // add to the shape
+                        add(pTex);
+                    } else {
+                        delete (pTex);
                     }
-                    // set texture color
-                    pTex->setFillColor(pSkin->getColor(group, "texture_color"));
-                    // add to the shape
-                    add(pTex);
-                } else {
-                    delete (pTex);
+                    break;
                 }
+            } else {
+                delete (pTex);
             }
-        } else {
-            delete (pTex);
         }
     }
 

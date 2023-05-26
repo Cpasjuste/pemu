@@ -3,30 +3,32 @@
 //
 
 #include "c2dui.h"
+#include "c2dui_skin.h"
 
 Skin::Skin(UiMain *u) {
     pMain = u;
 
-    // try to load skin from data directory first
-    mPath = pMain->getIo()->getDataPath() + "skins/" + pMain->getConfig()->get(Option::GUI_SKIN)->getValueString() +
-            "/";
-    if (!pMain->getIo()->exist(mPath + "config.cfg")) {
-        // now try from romfs
-        mPath = pMain->getIo()->getRomFsPath() + "skins/" +
-                pMain->getConfig()->get(Option::GUI_SKIN)->getValueString() +
-                "/";
-        printf("Skin::Skin: skin config do not exist, trying from romfs... (%s)\n", (mPath + "config.cfg").c_str());
-        if (!pMain->getIo()->exist(mPath + "config.cfg")) {
-            // restore defaults
-            pMain->getConfig()->get(Option::GUI_SKIN)->setValueString("default");
-            mPath = pMain->getIo()->getRomFsPath() + "skins/default/";
-            printf("Skin::Skin: skin config do not exist, reverting to default skin (%s)\n",
-                   (mPath + "config.cfg").c_str());
-        }
-    }
+    // setup skin paths (data path first then romfs path)
+    mSkinPath[0] = pMain->getIo()->getDataPath() + "skins/"
+                   + pMain->getConfig()->get(Option::GUI_SKIN)->getValueString() + "/";
+    mSkinPath[1] = pMain->getIo()->getRomFsPath() + "skins/" +
+                   pMain->getConfig()->get(Option::GUI_SKIN)->getValueString() + "/";
 
-    pConfig = new config::Config("SKIN_CONFIG", mPath + "config.cfg");
-    printf("Skin path: %s\n", mPath.c_str());
+    // try to load skin from data directory first
+    if (pMain->getIo()->exist(mSkinPath[0] + "config.cfg")) {
+        pConfig = new config::Config("SKIN_CONFIG", mSkinPath[0] + "config.cfg");
+        printf("Skin: config loaded from data dir (%s)\n", (mSkinPath[0] + "config.cfg").c_str());
+    } else if (pMain->getIo()->exist(mSkinPath[1] + "config.cfg")) {
+        pConfig = new config::Config("SKIN_CONFIG", mSkinPath[1] + "config.cfg");
+        printf("Skin: config loaded from romfs (%s)\n", (mSkinPath[1] + "config.cfg").c_str());
+    } else {
+        // restore defaults
+        pMain->getConfig()->get(Option::GUI_SKIN)->setValueString("default");
+        mSkinPath[0] = mSkinPath[1] = pMain->getIo()->getRomFsPath() + "skins/default/";
+        printf("Skin: config file not found, reverted to default skin (%s)\n",
+               (mSkinPath[0] + "config.cfg").c_str());
+        pConfig = new config::Config("SKIN_CONFIG", mSkinPath[0] + "config.cfg");
+    }
 
     // get default font scaling
     mFontScaling = (float) pMain->getConfig()->get(Option::GUI_FONT_SCALING)->getValueInt(0);
@@ -54,12 +56,15 @@ Skin::Skin(UiMain *u) {
     mButtons.emplace_back(KEY_JOY_MENU2_DEFAULT, "RB");
     mButtons.emplace_back(100, "DPAD"); // dpad for help
     for (auto &button: mButtons) {
-        std::string buttonPath = mPath + "buttons/" + std::to_string(button.id) + ".png";
-        if (pMain->getIo()->exist(buttonPath)) {
-            button.texture = new C2DTexture(buttonPath);
-            if (button.texture && !button.texture->available) {
-                delete (button.texture);
-                button.texture = nullptr;
+        for (const auto &path: mSkinPath) {
+            std::string buttonPath = path + "buttons/" + std::to_string(button.id) + ".png";
+            if (pMain->getIo()->exist(buttonPath)) {
+                button.texture = new C2DTexture(buttonPath);
+                if (!button.texture->available) {
+                    delete (button.texture);
+                    button.texture = nullptr;
+                }
+                break;
             }
         }
     }
@@ -174,14 +179,26 @@ Skin::Skin(UiMain *u) {
     printf("Skin: loading skin configuration (%s)\n", pConfig->getPath().c_str());
     pConfig->load();
 
-    // load skin config override
-    printf("Skin: loading skin configuration override (%s.override)\n", pConfig->getPath().c_str());
-    pConfig->load(pConfig->getPath() + ".override");
+    // load skin configuration override
+    for (const auto &path: mSkinPath) {
+        std::string cfgPath = path + "config.cfg.override";
+        if (pMain->getIo()->exist(cfgPath)) {
+            printf("Skin: loading configuration override (%s)\n", cfgPath.c_str());
+            pConfig->load(cfgPath);
+            break;
+        }
+    }
 
     // load 4/3 skin config override if needed
     if (pMain->getConfig()->get(Option::Id::GUI_SKIN_ASPECT)->getIndex() == 1) {
-        printf("Skin: loading skin configuration override (%s.override.43)\n", pConfig->getPath().c_str());
-        pConfig->load(pConfig->getPath() + ".override.43");
+        for (const auto &path: mSkinPath) {
+            std::string cfgPath = path + "config.cfg.override.43";
+            if (pMain->getIo()->exist(cfgPath)) {
+                printf("Skin: loading configuration override for 4/3 ar (%s)\n", cfgPath.c_str());
+                pConfig->load(cfgPath);
+                break;
+            }
+        }
     }
 
     ///
@@ -201,24 +218,22 @@ Skin::Skin(UiMain *u) {
     ///
     /// load skin font from loaded configuration
     ///
-    mFontAvailable = false;
-    pFont = new C2DFont();
-    c2d::config::Group *fntGroup = pConfig->getGroup("FONT");
-    std::string fontPath = mPath + fntGroup->getOption("path")->getString();
-    //printf("font path: %s\n", fontPath.c_str());
-    if (pFont->loadFromFile(fontPath)) {
-        mFontAvailable = true;
+    auto fntGroup = pConfig->getGroup("FONT");
+    for (const auto &path: mSkinPath) {
+        std::string fontPath = path + fntGroup->getOption("path")->getString();
+        if (pMain->getIo()->exist(fontPath)) {
+            pFont = new C2DFont();
+            pFont->loadFromFile(fontPath);
+            break;
+        }
     }
-    if (!mFontAvailable) {
-        delete (pFont);
-        pFont = pMain->getFont();
-    }
-    pFont->setFilter((Texture::Filter) fntGroup->getOption("texture_filtering")->getInteger());
+
+    getFont()->setFilter((Texture::Filter) fntGroup->getOption("texture_filtering")->getInteger());
     Vector2f offset = fntGroup->getOption("offset")->getVector2f();
 #ifdef __3DS__
     offset.y += 1.6f;
 #endif
-    pFont->setOffset(offset);
+    getFont()->setOffset(offset);
 }
 
 config::Config *Skin::getConfig() {
@@ -410,24 +425,27 @@ Skin::loadRectangleShape(c2d::RectangleShape *shape, const std::vector<std::stri
 
     C2DTexture *tex;
     if (!rectangleShapeGroup.texture.empty()) {
-        std::string bg_path = mPath + rectangleShapeGroup.texture;
-        if (pMain->getIo()->exist(bg_path)) {
-            tex = new C2DTexture(bg_path);
-            if (tex->available) {
-                if (rectangleShapeGroup.textureRatio == RectangleShapeGroup::TextureRatio::KeepWidth) {
-                    float scaling = rectangleShapeGroup.rect.width / tex->getSize().x;
-                    tex->setScale(scaling, scaling);
-                } else if (rectangleShapeGroup.textureRatio == RectangleShapeGroup::TextureRatio::KeepHeight) {
-                    float scaling = rectangleShapeGroup.rect.height / tex->getSize().y;
-                    tex->setScale(scaling, scaling);
+        for (const auto &path: mSkinPath) {
+            std::string texPath = path + rectangleShapeGroup.texture;
+            if (pMain->getIo()->exist(texPath)) {
+                tex = new C2DTexture(texPath);
+                if (tex->available) {
+                    if (rectangleShapeGroup.textureRatio == RectangleShapeGroup::TextureRatio::KeepWidth) {
+                        float scaling = rectangleShapeGroup.rect.width / tex->getSize().x;
+                        tex->setScale(scaling, scaling);
+                    } else if (rectangleShapeGroup.textureRatio == RectangleShapeGroup::TextureRatio::KeepHeight) {
+                        float scaling = rectangleShapeGroup.rect.height / tex->getSize().y;
+                        tex->setScale(scaling, scaling);
+                    } else {
+                        tex->setScale(rectangleShapeGroup.rect.width / tex->getSize().x,
+                                      rectangleShapeGroup.rect.height / tex->getSize().y);
+                    }
+                    tex->setFilter((Texture::Filter) rectangleShapeGroup.filtering);
+                    shape->add(tex);
                 } else {
-                    tex->setScale(rectangleShapeGroup.rect.width / tex->getSize().x,
-                                  rectangleShapeGroup.rect.height / tex->getSize().y);
+                    delete (tex);
                 }
-                tex->setFilter((Texture::Filter) rectangleShapeGroup.filtering);
-                shape->add(tex);
-            } else {
-                delete (tex);
+                break;
             }
         }
     }
@@ -478,7 +496,7 @@ Skin::TextGroup Skin::getText(const std::vector<std::string> &tree) {
         if (option->getInteger() <= 0) {
             return textGroup;
         }
-        textGroup.size = (unsigned int) ((float) (option->getInteger() * mScaling.y) * mFontScaling);
+        textGroup.size = (unsigned int) ((float) option->getInteger() * mScaling.y * mFontScaling);
     }
     option = group->getOption("string");
     if (option) {
@@ -676,6 +694,10 @@ Text::Overflow Skin::getOverflow(c2d::config::Group *group) {
     return Text::Overflow::Clamp;
 }
 
+c2d::Font *Skin::getFont() {
+    return pFont ? pFont : pMain->getFont();
+}
+
 Skin::~Skin() {
     for (auto &button: mButtons) {
         delete (button.texture);
@@ -683,9 +705,4 @@ Skin::~Skin() {
 
     delete (pFont);
     delete (pConfig);
-
-    // delete font data if loaded from zipped skin
-    if (pFontData) {
-        free(pFontData);
-    }
 }

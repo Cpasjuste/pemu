@@ -61,7 +61,7 @@ namespace c2dui {
 
         c2d::config::Config *getConfig();
 
-        std::string getPath() { return mPath; };
+        std::array<std::string, 2> getPaths() { return mSkinPath; };
 
         c2d::config::Group *getGroup(const std::vector<std::string> &tree);
 
@@ -76,7 +76,7 @@ namespace c2dui {
 
         Button *getButton(int id);
 
-        c2d::Font *getFont() { return pFont; }
+        c2d::Font *getFont();
 
         c2d::Vector2f getScaling() { return mScaling; };
 
@@ -111,11 +111,9 @@ namespace c2dui {
         c2d::config::Config *pConfig;
         c2d::Vector2f mScaling = {1.0f, 1.0f};
         float mFontScaling = 1.0f;
-        bool mFontAvailable = true;
-        char *pFontData = nullptr;
         c2d::Font *pFont = nullptr;
         std::vector<Button> mButtons;
-        std::string mPath;
+        std::array<std::string, 2> mSkinPath;
     };
 }
 
