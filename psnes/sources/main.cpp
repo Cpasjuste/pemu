@@ -2,7 +2,7 @@
 #include "uiEmu.h"
 #include "uiStateMenu.h"
 #include "config.h"
-#include "psnesIo.h"
+#include "psnes_io.h"
 #include "snes9x.h"
 
 #ifdef __PSP2__

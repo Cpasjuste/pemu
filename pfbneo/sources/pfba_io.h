@@ -30,6 +30,12 @@ namespace c2d {
             return "/3ds/pfbn/";
         }
 #endif
+#elif __SWITCH__
+#if __DEBUG_SVC__
+        std::string getDataPath() override {
+            return "/switch/pfbn/";
+        }
+#endif
 #endif
     };
 }

@@ -2,8 +2,8 @@
 // Created by cpasjuste on 03/04/2020.
 //
 
-#ifndef PEMU_PSNESIO_H
-#define PEMU_PSNESIO_H
+#ifndef PEMU_PSNES_IO_H
+#define PEMU_PSNES_IO_H
 
 namespace c2d {
 
@@ -24,8 +24,14 @@ namespace c2d {
             return "/3ds/psnes/";
         }
 #endif
+#elif __SWITCH__
+#if __DEBUG_SVC__
+        std::string getDataPath() override {
+            return "/switch/psnes/";
+        }
+#endif
 #endif
     };
 }
 
-#endif //PEMU_PSNESIO_H
+#endif //PEMU_PSNES_IO_H
