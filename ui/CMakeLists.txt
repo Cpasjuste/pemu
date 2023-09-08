@@ -49,8 +49,6 @@ if (PLATFORM_LINUX OR PLATFORM_WINDOWS)
     if (NOT PLATFORM_WINDOWS)
         list(APPEND LDFLAGS ${CMAKE_THREAD_LIBS_INIT} lzma dl)
     endif ()
-elseif (PLATFORM_SWITCH)
-    list(APPEND LDFLAGS opus vpx lzma)
 elseif (PLATFORM_3DS)
 endif ()
 
