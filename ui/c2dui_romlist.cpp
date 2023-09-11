@@ -78,8 +78,9 @@ void RomList::build(bool addArcadeSystem, const ss_api::System &system) {
         gameListPath = ui->getIo()->getRomFsPath() + "gamelist.xml";
     }
 
+    bool showAvailableOnly = ui->getConfig()->get(Option::Id::GUI_SHOW_AVAILABLE)->getValueBool();
     gameList->append(gameListPath,
-                     ui->getConfig()->getRomPaths().at(FBN_PATH_ARCADE), false, filters, system);
+                     ui->getConfig()->getRomPaths().at(FBN_PATH_ARCADE), false, filters, system, showAvailableOnly);
 
     setLoadingText("Games: %li / %li", gameList->getAvailableCount(), gameList->games.size());
     printf("RomList::build: %s, games found: %zu / %zu\n",
@@ -98,7 +99,7 @@ void RomList::build(bool addArcadeSystem, const ss_api::System &system) {
 
     gameList->resolutions.insert(gameList->resolutions.begin(), "ALL");
     gameList->dates.insert(gameList->dates.begin(), "ALL");
-    if (addArcadeSystem) {
+    if (addArcadeSystem && !gameList->findGamesBySystem(75).empty()) {
         gameList->systemList.systems.insert(gameList->systemList.systems.begin(), {9999, 0, "ARCADE"});
     }
 

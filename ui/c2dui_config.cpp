@@ -28,8 +28,12 @@ Config::Config(UiMain *ui, int ver, const std::string &defaultRomsPath) {
     /// main/gui config
     /////////////////////////////////////////////////
     append("MAIN", {"MAIN"}, 0, Option::Id::MENU_MAIN, Option::Flags::MENU);
-    append("SHOW", {"ALL", "AVAILABLE", "FAVORITES"}, 0, Option::Id::GUI_SHOW_ALL,
-           Option::Flags::STRING);
+    append("SHOW_FAVORITES", {"OFF", "ON"}, 0, Option::Id::GUI_SHOW_FAVORITES,
+           Option::Flags::BOOLEAN);
+    append("SHOW_AVAILABLE", {"OFF", "ON"}, 0, Option::Id::GUI_SHOW_AVAILABLE,
+           Option::Flags::BOOLEAN);
+    get()->at(get()->size() - 1).setInfo(
+            "YOU NEED TO RESTART THE APPLICATION AFTER CHANGING THIS OPTION");
     append("SHOW_CLONES", {"OFF", "ON"}, 0,
            Option::Id::GUI_FILTER_CLONES, Option::Flags::BOOLEAN | Option::Flags::HIDDEN);
     append("SHOW_ZIP_NAMES", {"OFF", "ON"}, 1, Option::Id::GUI_SHOW_ZIP_NAMES,

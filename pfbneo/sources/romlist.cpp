@@ -24,14 +24,17 @@ void PFBARomList::build(bool addArcadeSystem, const ss_api::System &system) {
             "gamelist_tg16.xml"
     };
 
-    for (int i = 0; i < gameLists.size(); i++) {
+    bool showAvailableOnly = ui->getConfig()->get(Option::Id::GUI_SHOW_AVAILABLE)->getValueBool();
+
+    for (size_t i = 0; i < gameLists.size(); i++) {
         // look for a "gamelist.xml" file inside rom folder, if none found use embedded (romfs) "gamelist.xml"
         std::string gameListPath = ui->getConfig()->getRomPaths().at(i + 1) + "gamelist.xml";
         if (!ui->getIo()->exist(gameListPath)) {
             gameListPath = ui->getIo()->getRomFsPath() + gameLists.at(i);
             if (!ui->getIo()->exist(gameListPath)) continue;
         }
-        gameList->append(gameListPath, ui->getConfig()->getRomPaths().at(i + 1), false);
+        gameList->append(gameListPath, ui->getConfig()->getRomPaths().at(i + 1),
+                         false, filters, system, showAvailableOnly);
         setLoadingText("Games: %li / %li", gameList->getAvailableCount(), gameList->games.size());
         printf("RomList::build: %s, games found: %zu / %zu\n",
                gameListPath.c_str(), gameList->getAvailableCount(), gameList->games.size());

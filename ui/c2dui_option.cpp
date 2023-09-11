@@ -75,6 +75,7 @@ void Option::setFlags(unsigned int _flags) {
 }
 
 void Option::next() {
+    bool found = false;
 
     if (flags & Flags::INPUT) {
         return;
@@ -94,12 +95,19 @@ void Option::next() {
             } else {
                 current_option = options.at(0);
             }
+            found = true;
             break;
         }
+    }
+
+    // fallback
+    if (!found) {
+        current_option = options.at(0);
     }
 }
 
 void Option::prev() {
+    bool found = false;
 
     if (flags & Flags::INPUT) {
         return;
@@ -119,8 +127,14 @@ void Option::prev() {
             } else {
                 current_option = options.at(size - 1);
             }
+            found = true;
             break;
         }
+    }
+
+    // fallback
+    if (!found) {
+        current_option = options.at(0);
     }
 }
 

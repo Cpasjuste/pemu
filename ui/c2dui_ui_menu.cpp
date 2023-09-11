@@ -278,7 +278,8 @@ bool UiMenu::onInput(c2d::Input::Player *players) {
         }
 
         switch (option.getId()) {
-            case Option::Id::GUI_SHOW_ALL:
+            case Option::Id::GUI_SHOW_FAVORITES:
+            case Option::Id::GUI_SHOW_AVAILABLE:
             case Option::Id::GUI_SHOW_ZIP_NAMES:
             case Option::Id::GUI_FILTER_CLONES:
             case Option::Id::GUI_FILTER_SYSTEM:
@@ -292,7 +293,9 @@ bool UiMenu::onInput(c2d::Input::Player *players) {
             case Option::Id::GUI_FILTER_GENRE: {
                 std::string name = Utility::toUpper(option.getName());
                 std::string value = Utility::toUpper(option.getValueString());
-                ui->getUiStatusBox()->show("%s: %s", name.c_str(), value.c_str());
+                if (option.getInfo().empty()) {
+                    ui->getUiStatusBox()->show("%s: %s", name.c_str(), value.c_str());
+                }
                 ui->getUiRomList()->updateRomList();
                 break;
             }

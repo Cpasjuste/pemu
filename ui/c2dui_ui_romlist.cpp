@@ -159,10 +159,8 @@ std::string UIRomList::getPreview(const Game &game, UIRomList::PreviewType type)
 }
 
 void UIRomList::filterRomList() {
-    Option *opt = pMain->getConfig()->get(Option::Id::GUI_SHOW_ALL);
-    ss_api::GameList *list = opt->getValueString() == "FAVORITES" ? pRomList->gameListFav : pRomList->gameList;
-
-    bool available = opt->getValueString() == "FAVORITES" ? false : opt->getValueString() == "AVAILABLE";
+    ss_api::GameList *list = pMain->getConfig()->get(Option::Id::GUI_SHOW_FAVORITES)->getValueBool() ?
+                             pRomList->gameListFav : pRomList->gameList;
     bool showClones = pMain->getConfig()->get(Option::Id::GUI_FILTER_CLONES)->getValueBool();
     std::string system = pMain->getConfig()->get(Option::Id::GUI_FILTER_SYSTEM)->getValueString();
     int systemId;
@@ -183,7 +181,7 @@ void UIRomList::filterRomList() {
     int genreId = genre == "ALL" ? -1 : list->findGenreByName(genre).id;
 
     mGameList = list->filter(
-            available, showClones, systemId == 9999 ? -1 : systemId, systemId == 9999 ? 75 : -1,
+            false, showClones, systemId == 9999 ? -1 : systemId, systemId == 9999 ? 75 : -1,
             editorId, devId, players, rating, rotation, genreId,
             pMain->getConfig()->get(Option::Id::GUI_FILTER_RESOLUTION)->getValueString(),
             pMain->getConfig()->get(Option::Id::GUI_FILTER_DATE)->getValueString()
@@ -273,8 +271,7 @@ bool UIRomList::onInput(c2d::Input::Player *players) {
                     "FAVORITES", "Remove from favorites ?", "OK", "CANCEL");
             if (res == MessageBox::LEFT) {
                 pRomList->removeFav(game);
-                Option *opt = pMain->getConfig()->get(Option::Id::GUI_SHOW_ALL);
-                if (opt->getValueString() == "FAVORITES") {
+                if (pMain->getConfig()->get(Option::Id::GUI_SHOW_FAVORITES)->getValueBool()) {
                     // update list if we are in favorites
                     updateRomList();
                 }
