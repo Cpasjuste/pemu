@@ -22,6 +22,7 @@
 #define FBN_PATH_SMS        12
 #define FBN_PATH_SPECTRUM   13
 #define FBN_PATH_TG16       14
+#define FBN_PATH_MAX        15
 
 namespace c2dui {
 

@@ -72,7 +72,8 @@ void RomList::build(bool addArcadeSystem, const ss_api::System &system) {
     std::string romPath = ui->getConfig()->getRomPaths().at(FBN_PATH_ARCADE);
     printf("RomList::build(): ROM_PATH_0: %s\n", romPath.c_str());
 
-    std::string gameListPath = ui->getIo()->getDataPath() + "gamelist.xml";
+    // look for a "gamelist.xml" file inside rom folder, if none found use embedded (romfs) "gamelist.xml"
+    std::string gameListPath = ui->getConfig()->getRomPaths().at(FBN_PATH_ARCADE) + "gamelist.xml";
     if (!ui->getIo()->exist(gameListPath)) {
         gameListPath = ui->getIo()->getRomFsPath() + "gamelist.xml";
     }
@@ -81,7 +82,8 @@ void RomList::build(bool addArcadeSystem, const ss_api::System &system) {
                      ui->getConfig()->getRomPaths().at(FBN_PATH_ARCADE), false, filters, system);
 
     setLoadingText("Games: %li / %li", gameList->getAvailableCount(), gameList->games.size());
-    printf("RomList::build: games: %zu / %zu\n", gameList->getAvailableCount(), gameList->games.size());
+    printf("RomList::build: %s, games found: %zu / %zu\n",
+           gameListPath.c_str(), gameList->getAvailableCount(), gameList->games.size());
 
     // sort lists
     std::sort(gameList->systemList.systems.begin(), gameList->systemList.systems.end(), Api::sortSystemByName);
