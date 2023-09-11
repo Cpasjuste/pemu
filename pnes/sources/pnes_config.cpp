@@ -14,6 +14,12 @@ PNESConfig::PNESConfig(UiMain *ui, int version) : Config(ui, version) {
             {"SCALING_MODE", {"ASPECT", "INTEGER"}, 0,
              Option::Id::ROM_SCALING_MODE, Option::Flags::STRING});
 
+#ifdef __SWITCH__
+    // on nintendo switch invert A/B buttons
+    get(Option::Id::JOY_A)->setValueInt(KEY_JOY_B_DEFAULT);
+    get(Option::Id::JOY_B)->setValueInt(KEY_JOY_A_DEFAULT);
+#endif
+
     // "c2dui_romlist" will also reload config, but we need new roms paths
     reset();
     load();
