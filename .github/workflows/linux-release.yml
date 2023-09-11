@@ -60,4 +60,4 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: '*-linux'
-          token: ${{ secrets.RELEASE_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}

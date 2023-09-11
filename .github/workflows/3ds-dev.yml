@@ -38,7 +38,7 @@ jobs:
           mkdir cmake-build-pgen && cd cmake-build-pgen
           source /etc/profile.d/devkit-env.sh
           cmake -G "Unix Makefiles" -DPLATFORM_3DS=ON -DOPTION_EMU=pgen \
-            -DOPTION_LIGHT=ON -DOPTION_MPV_PLAYER=OFF -DCMAKE_BUILD_TYPE=Debug ..
+            -DOPTION_MPV_PLAYER=OFF -DCMAKE_BUILD_TYPE=Debug ..
           make -j $(getconf _NPROCESSORS_ONLN) pgen.3dsx
 
       - name: Build pnes

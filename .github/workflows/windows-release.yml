@@ -63,4 +63,4 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: '*.zip'
-          token: ${{ secrets.RELEASE_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
