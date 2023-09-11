@@ -62,4 +62,4 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: '*.nro'
-          token: ${{ secrets.RELEASE_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
