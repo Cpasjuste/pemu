@@ -6,31 +6,30 @@
 #include "pgen_romlist.h"
 
 void PGENRomList::build(bool addArcadeSystem, const ss_api::System &system) {
-    std::string dataPath = ui->getIo()->getDataPath();
-    if (!ui->getIo()->exist(dataPath + "gamelist.xml")) {
-        dataPath = ui->getIo()->getRomFsPath();
-    }
-
-    gameList->append(dataPath + "gamelist_sms.xml",
-                     ui->getConfig()->getRomPaths().at(FBN_PATH_CHANNELF), false,
-                     filters, {2, 0, "Master System"});
-    setLoadingText("Games: %li / %li", gameList->getAvailableCount(), gameList->games.size());
-
-    gameList->append(dataPath + "gamelist_gamegear.xml",
-                     ui->getConfig()->getRomPaths().at(FBN_PATH_COLECO), false,
-                     filters, {21, 0, "Game Gear"});
-    setLoadingText("Games: %li / %li", gameList->getAvailableCount(), gameList->games.size());
-
-    gameList->append(dataPath + "gamelist_megacd.xml",
-                     ui->getConfig()->getRomPaths().at(FBN_PATH_FDS), false,
-                     {".cue", ".iso", ".chd"}, {20, 0, "Mega-CD"});
-    setLoadingText("Games: %li / %li", gameList->getAvailableCount(), gameList->games.size());
-
+    std::vector<std::string> gameLists = {
+            "gamelist_sms.xml",
+            "gamelist_gamegear.xml",
+            "gamelist_megacd.xml",
 #if 0
-    gameList->append(dataPath + "gamelist_sg1000.xml",
-                     ui->getConfig()->getRomPaths().at(FBN_PATH_GAMEGEAR), false, filters);
-    setLoadingText("Games: %li / %li", gameList->getAvailableCount(), gameList->games.size());
+            "gamelist_sg1000.xml"
 #endif
+    };
+
+    bool showAvailableOnly = ui->getConfig()->get(Option::Id::GUI_SHOW_AVAILABLE)->getValueBool();
+
+    for (size_t i = 0; i < gameLists.size(); i++) {
+        // look for a "gamelist.xml" file inside rom folder, if none found use embedded (romfs) "gamelist.xml"
+        std::string gameListPath = ui->getConfig()->getRomPaths().at(i + 1) + "gamelist.xml";
+        if (!ui->getIo()->exist(gameListPath)) {
+            gameListPath = ui->getIo()->getRomFsPath() + gameLists.at(i);
+            if (!ui->getIo()->exist(gameListPath)) continue;
+        }
+        gameList->append(gameListPath, ui->getConfig()->getRomPaths().at(i + 1),
+                         false, filters, system, showAvailableOnly);
+        setLoadingText("Games: %li / %li", gameList->getAvailableCount(), gameList->games.size());
+        printf("RomList::build: %s, games found: %zu / %zu\n",
+               gameListPath.c_str(), gameList->getAvailableCount(), gameList->games.size());
+    }
 
     RomList::build(addArcadeSystem, {1, 0, "Megadrive"});
 

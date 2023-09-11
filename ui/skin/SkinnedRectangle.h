@@ -7,7 +7,16 @@
 
 class SkinnedRectangle : public c2d::RectangleShape {
 public:
-    explicit SkinnedRectangle(c2dui::Skin *skin, const std::vector<std::string> &cfgTree);
+    explicit SkinnedRectangle(c2dui::UiMain *main, const std::vector<std::string> &cfgTree);
+
+    bool load();
+
+private:
+    std::vector<std::string> mTree;
+    c2dui::UiMain *pMain;
+    c2dui::Skin *pSkin;
+    c2d::Io *pIo;
+    c2d::Texture *pTex = nullptr;
 };
 
 #endif //PEMU_SKINNEDRECTANGLE_H

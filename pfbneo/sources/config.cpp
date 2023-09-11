@@ -9,25 +9,25 @@
 using namespace c2d;
 using namespace c2dui;
 
-PFBAConfig::PFBAConfig(c2d::Io *io, int version) : Config(io, version) {
+PFBAConfig::PFBAConfig(UiMain *ui, int version) : Config(ui, version) {
     printf("PFBAConfig(%s, v%i)\n", getConfigPath().c_str(), version);
 
-#ifndef __PFBN_NO_CONSOLES__
+#ifndef __PFBN_LIGHT__
     // add fba default roms paths
-    roms_paths.emplace_back(io->getDataPath() + "channelf/");
-    roms_paths.emplace_back(io->getDataPath() + "coleco/");
-    roms_paths.emplace_back(io->getDataPath() + "fds/");
-    roms_paths.emplace_back(io->getDataPath() + "gamegear/");
-    roms_paths.emplace_back(io->getDataPath() + "megadrive/");
-    roms_paths.emplace_back(io->getDataPath() + "msx/");
-    roms_paths.emplace_back(io->getDataPath() + "nes/");
-    roms_paths.emplace_back(io->getDataPath() + "ngp/");
-    roms_paths.emplace_back(io->getDataPath() + "pce/");
-    roms_paths.emplace_back(io->getDataPath() + "sg1000/");
-    roms_paths.emplace_back(io->getDataPath() + "sgx/");
-    roms_paths.emplace_back(io->getDataPath() + "sms/");
-    roms_paths.emplace_back(io->getDataPath() + "spectrum/");
-    roms_paths.emplace_back(io->getDataPath() + "tg16/");
+    roms_paths.emplace_back(ui->getIo()->getDataPath() + "channelf/");
+    roms_paths.emplace_back(ui->getIo()->getDataPath() + "coleco/");
+    roms_paths.emplace_back(ui->getIo()->getDataPath() + "fds/");
+    roms_paths.emplace_back(ui->getIo()->getDataPath() + "gamegear/");
+    roms_paths.emplace_back(ui->getIo()->getDataPath() + "megadrive/");
+    roms_paths.emplace_back(ui->getIo()->getDataPath() + "msx/");
+    roms_paths.emplace_back(ui->getIo()->getDataPath() + "nes/");
+    roms_paths.emplace_back(ui->getIo()->getDataPath() + "ngp/");
+    roms_paths.emplace_back(ui->getIo()->getDataPath() + "pce/");
+    roms_paths.emplace_back(ui->getIo()->getDataPath() + "sg1000/");
+    roms_paths.emplace_back(ui->getIo()->getDataPath() + "sgx/");
+    roms_paths.emplace_back(ui->getIo()->getDataPath() + "sms/");
+    roms_paths.emplace_back(ui->getIo()->getDataPath() + "spectrum/");
+    roms_paths.emplace_back(ui->getIo()->getDataPath() + "tg16/");
 #endif
 
     ////////////////////////////////////////////////////////////
@@ -73,7 +73,7 @@ PFBAConfig::PFBAConfig(c2d::Io *io, int version) : Config(io, version) {
          "DECK_V6", "DEVKIT"},
         0, Option::Id::ROM_NEOBIOS, Option::Flags::STRING);
     get(Option::Id::ROM_NEOBIOS)->setInfo("YOU NEED TO RESTART EMULATION AFTER CHANGING THIS OPTION");
-#ifdef __VITA__
+#ifdef __PFBA_ARM__
     // do not use unibios as default on vita for cyclone asm compatibility
     get(Option::Id::ROM_NEOBIOS)->setIndex(4);
 
@@ -82,8 +82,8 @@ PFBAConfig::PFBAConfig(c2d::Io *io, int version) : Config(io, version) {
         0, Option::Id::ROM_FRAMESKIP, Option::Flags::STRING);
 #endif
 
-#ifdef __PS4__
-    // PS4: force 48000hz audio output
+#if defined(__PS4__) || defined(ANDROID)
+    // force 48000hz audio output
     get(Option::Id::ROM_AUDIO_FREQ)->setIndex(4);
     get(Option::Id::ROM_AUDIO_FREQ)->setFlags(Option::Flags::STRING | Option::Flags::HIDDEN);
 #endif

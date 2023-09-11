@@ -4,7 +4,7 @@
 
 #include "c2dui.h"
 
-UiHelp::UiHelp(UiMain *ui) : SkinnedRectangle(ui->getSkin(), {"MAIN", "HELP"}) {
+UiHelp::UiHelp(UiMain *ui) : SkinnedRectangle(ui, {"MAIN", "HELP"}) {
     int button1, button2;
     auto font = ui->getSkin()->getFont();
 
@@ -17,15 +17,23 @@ UiHelp::UiHelp(UiMain *ui) : SkinnedRectangle(ui->getSkin(), {"MAIN", "HELP"}) {
                   "RUN", {pos + 12, getSize().y / 2});
     // favorite
     button1 = ui->getConfig()->get(Option::Id::JOY_X)->getValueInt();
-    pos = addItem(true, font, {ui->getSkin()->getButton(button1)},
-                  "ADD / REMOVE FAVORITE", {pos + 12, getSize().y / 2});
-    if (!(ui->getConfig()->get(Option::Id::GUI_FILTER_SYSTEM)->getFlags() & Option::Flags::HIDDEN)) {
-        // system
-        button1 = ui->getConfig()->get(Option::Id::JOY_LT)->getValueInt();
-        button2 = ui->getConfig()->get(Option::Id::JOY_RT)->getValueInt();
-        addItem(true, font,
-                {ui->getSkin()->getButton(button1), ui->getSkin()->getButton(button2)},
-                "SWITCH SYSTEM", {pos + 12, getSize().y / 2});
+    if (ui->getSize().x > 640) {
+        pos = addItem(true, font, {ui->getSkin()->getButton(button1)},
+                      "ADD / REMOVE FAVORITE", {pos + 12, getSize().y / 2});
+    } else {
+        pos = addItem(true, font, {ui->getSkin()->getButton(button1)},
+                      "FAVORITE", {pos + 12, getSize().y / 2});
+    }
+
+    if (ui->getSize().x > 640) {
+        if (!(ui->getConfig()->get(Option::Id::GUI_FILTER_SYSTEM)->getFlags() & Option::Flags::HIDDEN)) {
+            // system
+            button1 = ui->getConfig()->get(Option::Id::JOY_LT)->getValueInt();
+            button2 = ui->getConfig()->get(Option::Id::JOY_RT)->getValueInt();
+            addItem(true, font,
+                    {ui->getSkin()->getButton(button1), ui->getSkin()->getButton(button2)},
+                    "SWITCH SYSTEM", {pos + 12, getSize().y / 2});
+        }
     }
 
     // main menu
@@ -38,17 +46,16 @@ UiHelp::UiHelp(UiMain *ui) : SkinnedRectangle(ui->getSkin(), {"MAIN", "HELP"}) {
             "ROM MENU", {pos - 12, getSize().y / 2});
 }
 
-float
-UiHelp::addItem(bool left, c2d::Font *font, const std::vector<Skin::Button *> &buttons,
-                const std::string &name, const c2d::Vector2f &position) {
+float UiHelp::addItem(bool left, c2d::Font *font, const std::vector<Skin::Button *> &buttons,
+                      const std::string &name, const c2d::Vector2f &position) {
     FloatRect bounds;
     Vector2f pos = position;
 
     for (const auto &button: buttons) {
-        if (button && button->texture) {
+        if (button && button->texture && button->texture->available) {
             auto sprite = new Sprite(button->texture);
-            float scaling = std::min((getSize().x - 4) / (float) button->texture->getTextureRect().width,
-                                     (getSize().y - 4) / (float) button->texture->getTextureRect().height);
+            float scaling = std::min(getSize().x / (float) sprite->getSize().x,
+                                     getSize().y / (float) sprite->getSize().y);
             sprite->setScale(scaling, scaling);
             sprite->setOrigin(left ? Origin::Left : Origin::Right);
             sprite->setPosition(pos);
@@ -56,15 +63,14 @@ UiHelp::addItem(bool left, c2d::Font *font, const std::vector<Skin::Button *> &b
             bounds = sprite->getGlobalBounds();
             pos.x += left ? bounds.width : -bounds.width;
         } else {
-            // TODO
-            //auto text = new Text("NAVIGATION", (unsigned int) navigationSpriteBounds.height - 10);
+            // dummy button (TODO)
         }
     }
 
-    auto text = new Text(name, (unsigned int) bounds.height - 12, font);
+    auto text = new Text(name, (unsigned int) (getSize().y * 0.85f), font);
     text->setOutlineThickness(1);
     text->setOrigin(left ? Origin::Left : Origin::Right);
-    float x = left ? bounds.left + bounds.width + 4 : bounds.left - 4;
+    float x = left ? bounds.left + bounds.width : bounds.left;
     text->setPosition({x, getSize().y / 2});
     add(text);
 

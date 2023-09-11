@@ -12,8 +12,10 @@ extern UINT8 NeoSystem;
 int bDrvOkay = 0;
 int kNetGame = 0;
 int nIpsMaxFileLen = 0;
+INT32 nInputIntfMouseDivider = 1;
 
 INT32 GetIpsesMaxLen(char *) { return 0; }
+UINT32 GetIpsDrvDefine() { return 0; }
 
 bool GetIpsDrvProtection() { return false; }
 
@@ -205,7 +207,7 @@ int AppError(TCHAR *szText, int bWarning) {
     return 1;
 }
 
-#ifdef __PFBN_NO_CONSOLES__
+#ifdef __PFBN_LIGHT__
 
 void nes_add_cheat(char *code) {};
 

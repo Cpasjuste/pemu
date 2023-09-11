@@ -39,10 +39,6 @@ int PNESUiEmu::load(const ss_api::Game &game) {
     getUi()->getUiProgressBox()->setLayer(1000);
     getUi()->flip();
 
-    // default paths
-    snprintf(nstpaths.nstconfdir, sizeof(nstpaths.nstconfdir), "%s", ui->getIo()->getDataPath().c_str());
-    strncpy(nstpaths.nstdir, nstpaths.nstconfdir, sizeof(nstpaths.nstdir));
-
     // default config
     nestopia_config_init();
 
@@ -108,6 +104,16 @@ void PNESUiEmu::onUpdate() {
                                         Nes::Core::Input::Controllers::Pad::LEFT : 0;
             cNstPads->pad[i].buttons |= (players[i].buttons & c2d::Input::Button::Right) > 0 ?
                                         Nes::Core::Input::Controllers::Pad::RIGHT : 0;
+#ifdef __3DS__
+            cNstPads->pad[i].buttons |= (players[i].buttons & c2d::Input::Button::A) > 0 ?
+                                        Nes::Core::Input::Controllers::Pad::A : 0;
+            cNstPads->pad[i].buttons |= (players[i].buttons & c2d::Input::Button::B) > 0 ?
+                                        Nes::Core::Input::Controllers::Pad::B : 0;
+            cNstPads->pad[i].buttons |= (players[i].buttons & c2d::Input::Button::X) > 0 ?
+                                        Nes::Core::Input::Controllers::Pad::A : 0;
+            cNstPads->pad[i].buttons |= (players[i].buttons & c2d::Input::Button::Y) > 0 ?
+                                        Nes::Core::Input::Controllers::Pad::B : 0;
+#else
             cNstPads->pad[i].buttons |= (players[i].buttons & c2d::Input::Button::A) > 0 ?
                                         Nes::Core::Input::Controllers::Pad::B : 0;
             cNstPads->pad[i].buttons |= (players[i].buttons & c2d::Input::Button::B) > 0 ?
@@ -116,6 +122,7 @@ void PNESUiEmu::onUpdate() {
                                         Nes::Core::Input::Controllers::Pad::B : 0;
             cNstPads->pad[i].buttons |= (players[i].buttons & c2d::Input::Button::Y) > 0 ?
                                         Nes::Core::Input::Controllers::Pad::A : 0;
+#endif
         }
 
         // step nestopia core
@@ -184,7 +191,6 @@ void audio_set_params(Sound::Output *soundoutput) {
         // Set audio parameters
         Sound sound(emulator);
 
-        sound.SetSampleBits(16);
         sound.SetSampleRate((unsigned long) conf.audio_sample_rate);
 
         sound.SetSpeaker(Sound::SPEAKER_STEREO);
@@ -282,8 +288,18 @@ void PNESUiEmu::nestopia_config_init() {
 // NESTOPIA CORE INIT
 int PNESUiEmu::nestopia_core_init(const char *rom_path) {
 
-    // Set up directories
-    nst_set_dirs();
+    // Set up directories (nst_set_dirs)
+    std::string data_path = pMain->getIo()->getDataPath();
+    strncpy(nstpaths.nstdir, data_path.c_str(), sizeof(nstpaths.nstdir));
+    strncpy(nstpaths.nstconfdir, data_path.c_str(), sizeof(nstpaths.nstconfdir));
+    snprintf(nstpaths.palettepath, sizeof(nstpaths.palettepath), "%s%s", nstpaths.nstdir, "custom.pal");
+    // Create directories
+    pMain->getIo()->create(data_path);
+    pMain->getIo()->create(data_path + "save");
+    pMain->getIo()->create(data_path + "state");
+    pMain->getIo()->create(data_path + "cheats");
+    pMain->getIo()->create(data_path + "screenshots");
+    pMain->getIo()->create(data_path + "samples");
 
     // Set up callbacks
     nst_set_callbacks();

@@ -5,6 +5,8 @@
 #ifndef PEMU_C2DUI_UI_ROMLIST_ROMINFO_H
 #define PEMU_C2DUI_UI_ROMLIST_ROMINFO_H
 
+#include "c2dui.h"
+
 class UIRomInfo : public c2d::Rectangle {
 
 public:
@@ -25,7 +27,7 @@ public:
 
     void load(const ss_api::Game &game = ss_api::Game());
 
-    c2dui::UiMain *ui = nullptr;
+    c2dui::UiMain *main = nullptr;
     c2dui::UIRomList *uiRomList = nullptr;
     c2d::C2DTexture *texture = nullptr;
     c2d::Font *font;

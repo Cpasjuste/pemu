@@ -10,10 +10,9 @@ using namespace ss_api;
 
 UIListBoxLine::UIListBoxLine(
         const FloatRect &rect, const std::string &str,
-        Font *font, unsigned int fontSize, Texture *i, bool use_ic) : RectangleShape(rect) {
-
+        Font *font, unsigned int fontSize, const c2d::Vector2f &scaling, Texture *i, bool use_ic) : RectangleShape(
+        rect) {
     //printf("ListBoxLine(%p)\n", this);
-
     icon = i;
     use_icons = use_ic;
     text = new Text(str, fontSize, font);
@@ -34,8 +33,8 @@ UIListBoxLine::UIListBoxLine(
         text->setPosition(iconRect->getSize().x + 8, UIListBoxLine::getSize().y / 2);
         text->setSizeMax(UIListBoxLine::getSize().x - (float) fontSize - iconRect->getSize().x, 0);
     } else {
-        text->setPosition(2, UIListBoxLine::getSize().y / 2);
-        text->setSizeMax(UIListBoxLine::getSize().x - (float) fontSize, 0);
+        text->setPosition(2 * scaling.x, UIListBoxLine::getSize().y / 2);
+        text->setSizeMax(UIListBoxLine::getSize().x - text->getSize().x - (2 * scaling.x) - 2, 0);
     }
 
     UIListBoxLine::add(text);
@@ -55,7 +54,6 @@ void UIListBoxLine::setString(const std::string &string) {
 }
 
 void UIListBoxLine::setColor(const Color &color) {
-
     text->setFillColor(color);
     if (iconRect != nullptr) {
         iconRect->setOutlineColor(color);
@@ -66,7 +64,6 @@ void UIListBoxLine::setColor(const Color &color) {
 }
 
 void UIListBoxLine::setIcon(Texture *i) {
-
     if (use_icons) {
         if (icon != nullptr) {
             remove(icon);
@@ -104,7 +101,6 @@ UIListBoxLine::~UIListBoxLine() {
 
 UIListBox::UIListBox(UiMain *_ui, Font *font, int fontSize, const FloatRect &rect,
                      const std::vector<ss_api::Game> &g, bool useIcons) : RectangleShape(rect) {
-
     //printf("ListBox(%p)\n", this);
     ui = _ui;
     setGames(g);
@@ -113,7 +109,6 @@ UIListBox::UIListBox(UiMain *_ui, Font *font, int fontSize, const FloatRect &rec
 };
 
 void UIListBox::init(Font *font, int fontSize, bool useIcons) {
-
     use_icons = useIcons;
     // set default bg colors
     setFillColor(Color::GrayLight);
@@ -122,7 +117,7 @@ void UIListBox::init(Font *font, int fontSize, bool useIcons) {
     if (use_icons) {
         line_height = 34; // 32px + 2px margin
     } else {
-        line_height = (float) fontSize + 2;
+        line_height = (float) fontSize + (2 * ui->getScaling().y);
     }
     max_lines = (int) (getSize().y / line_height);
     if ((float) max_lines * line_height < getSize().y) {
@@ -130,44 +125,43 @@ void UIListBox::init(Font *font, int fontSize, bool useIcons) {
     }
 
     // add selection rectangle (highlight)
-    highlight = new RectangleShape(Vector2f(getSize().x - 2, line_height - 2));
+    highlight = new RectangleShape(Vector2f(getSize().x - 2, line_height));
     add(highlight);
 
     // add lines of text
     for (unsigned int i = 0; i < (unsigned int) max_lines; i++) {
-        FloatRect r = {1, (line_height * i), getSize().x - 2, line_height - 2};
+        FloatRect r = {0, line_height * (float) i, getSize().x, line_height};
         Texture *icon = nullptr;
-        /*
-         * TODO: fix icons
+        /* TODO: add back icon support ?
         if (use_icons) {
             icon = files.size() > i ? files[i]->icon : nullptr;
         }
         */
-        auto *line = new UIListBoxLine(r, "", font, (unsigned int) fontSize, icon, use_icons);
+        auto *line = new UIListBoxLine(r, "W", font, (unsigned int) fontSize,
+                                       ui->getScaling(), icon, use_icons);
         lines.push_back(line);
         add(line);
     }
 }
 
 void UIListBox::updateLines() {
-
     bool useZipName = ui->getConfig()->get(Option::Id::GUI_SHOW_ZIP_NAMES)->getValueBool();
 
     for (unsigned int i = 0; i < (unsigned int) max_lines; i++) {
-
         if (file_index + i >= games.size()) {
             lines[i]->setVisibility(Visibility::Hidden);
         } else {
             // set file
             Game game = games[file_index + i];
             lines[i]->setVisibility(Visibility::Visible);
-            lines[i]->setString(useZipName ? game.path : game.name);
+            lines[i]->setString(useZipName ? Utility::removeExt(game.path) : game.name);
             // TODO: ICON
             //lines[i]->setIcon(file->icon);
             lines[i]->setColor(game.available ? colorAvailable : colorMissing);
             // set highlight position and color
             if ((int) i == highlight_index) {
                 highlight->setPosition(lines[i]->getPosition());
+                highlight->move(1, 0);
                 Color color = highlight_use_files_color ?
                               lines[i]->getText()->getFillColor() : highlight->getFillColor();
                 color.a = highlight->getAlpha();
@@ -190,7 +184,6 @@ void UIListBox::updateLines() {
 }
 
 void UIListBox::up() {
-
     int index = file_index + highlight_index;
     int middle = max_lines / 2;
 
@@ -209,11 +202,10 @@ void UIListBox::up() {
 }
 
 void UIListBox::down() {
-
     int index = file_index + highlight_index;
     int middle = max_lines / 2;
 
-    if (highlight_index >= middle && index + middle < (int) games.size()) {
+    if (highlight_index >= middle && index + (max_lines - middle) < (int) games.size()) {
         file_index++;
     } else {
         highlight_index++;
@@ -228,7 +220,6 @@ void UIListBox::down() {
 }
 
 void UIListBox::setSelection(int new_index) {
-
     if (new_index < max_lines / 2) {
         file_index = 0;
         highlight_index = 0;
@@ -260,7 +251,6 @@ void UIListBox::setSize(float width, float height) {
 }
 
 void UIListBox::setGames(const std::vector<ss_api::Game> &g) {
-
     games = g;
 
     if (!lines.empty()) {

@@ -53,7 +53,7 @@ namespace c2dui {
 
         ss_api::Game currentGame;
         c2d::Text *fpsText = nullptr;
-        UiMain *ui = nullptr;
+        UiMain *pMain = nullptr;
         C2DUIVideo *video = nullptr;
         c2d::Audio *audio = nullptr;
         char fpsString[32];

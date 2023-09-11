@@ -6,19 +6,18 @@
 
 UIRomInfo::UIRomInfo(UiMain *u, UIRomList *uiRList, Font *fnt, int fntSize)
         : Rectangle(u->getSize()) {
-
     printf("UIRomInfo\n");
 
-    ui = u;
+    main = u;
     uiRomList = uiRList;
     font = fnt;
     fontSize = fntSize;
 
     // synopsis box
     synoBox = new RectangleShape({16, 16});
-    if (ui->getSkin()->loadRectangleShape(synoBox, {"MAIN", "ROM_SYNOPSIS"})) {
+    if (main->getSkin()->loadRectangleShape(synoBox, {"MAIN", "ROM_SYNOPSIS"})) {
         synoText = new Text("", (unsigned int) fontSize, font);
-        ui->getSkin()->loadText(synoText, {"MAIN", "ROM_SYNOPSIS", "TEXT"});
+        main->getSkin()->loadText(synoText, {"MAIN", "ROM_SYNOPSIS", "TEXT"});
         synoBox->add(synoText);
         Rectangle::add(synoBox);
     } else {
@@ -27,7 +26,7 @@ UIRomInfo::UIRomInfo(UiMain *u, UIRomList *uiRList, Font *fnt, int fntSize)
 
     // info box
     infoBox = new RectangleShape({16, 16});
-    if (ui->getSkin()->loadRectangleShape(infoBox, {"MAIN", "ROM_INFOS"})) {
+    if (main->getSkin()->loadRectangleShape(infoBox, {"MAIN", "ROM_INFOS"})) {
         systemText = addInfoBoxText({"MAIN", "ROM_INFOS", "SYSTEM_TEXT"});
         developerText = addInfoBoxText({"MAIN", "ROM_INFOS", "DEVELOPER_TEXT"});
         editorText = addInfoBoxText({"MAIN", "ROM_INFOS", "EDITOR_TEXT"});
@@ -45,14 +44,12 @@ UIRomInfo::UIRomInfo(UiMain *u, UIRomList *uiRList, Font *fnt, int fntSize)
     }
 
     // preview box
-    previewBox = new RectangleShape(FloatRect(0, 0,
-                                              Rectangle::getSize().x, Rectangle::getSize().y / 2));
-    ui->getSkin()->loadRectangleShape(previewBox, {"MAIN", "ROM_IMAGE"}, true);
+    previewBox = new SkinnedRectangle(main, {"SKIN_CONFIG", "MAIN", "ROM_IMAGE"});
     Rectangle::add(previewBox);
 
 #ifdef __MPV__
-    ui->getIo()->create(ui->getIo()->getDataPath() + "mpv");
-    mpv = new Mpv(ui->getIo()->getDataPath() + "mpv", true);
+    main->getIo()->create(main->getIo()->getDataPath() + "mpv");
+    mpv = new Mpv(main->getIo()->getDataPath() + "mpv", true);
     mpvTexture = new MpvTexture({previewBox->getSize().x, previewBox->getSize().y}, mpv);
     mpvTexture->setOrigin(previewBox->getOrigin());
     mpvTexture->setPosition(previewBox->getPosition());
@@ -65,7 +62,7 @@ UIRomInfo::UIRomInfo(UiMain *u, UIRomList *uiRList, Font *fnt, int fntSize)
 
 Text *UIRomInfo::addInfoBoxText(const std::vector<std::string> &tree) {
     Text *text = new Text("", (unsigned int) fontSize, font);
-    if (ui->getSkin()->loadText(text, tree)) {
+    if (main->getSkin()->loadText(text, tree)) {
         infoBox->add(text);
     } else {
         delete text;
@@ -91,7 +88,7 @@ void UIRomInfo::hideText(Text *text) {
 bool UIRomInfo::loadVideo(const Game &game) {
 #ifdef __MPV__
     int res = -1;
-    std::string videoPath = uiRomList->getPreviewVideo(game);
+    std::string videoPath = uiRomList->getPreview(game, UIRomList::PreviewType::Vid);
     if (!videoPath.empty()) {
         res = mpv->load(videoPath, Mpv::LoadType::Replace, "loop=yes");
         if (res == 0) {
@@ -113,14 +110,11 @@ bool UIRomInfo::loadVideo(const Game &game) {
 }
 
 bool UIRomInfo::loadTexture(const Game &game) {
-
-    auto *tex = game.path.empty() ? nullptr : (C2DTexture *) uiRomList->getPreviewTexture(game);
+    std::string path = game.path.empty() ? "" : uiRomList->getPreview(game, UIRomList::PreviewType::Tex);
     // set image
-    if (tex) {
-        if (texture) {
-            delete (texture);
-        }
-        texture = tex;
+    if (!path.empty()) {
+        delete (texture);
+        texture = new C2DTexture(path);
         texture->setOrigin(Origin::Center);
         texture->setPosition(Vector2f(previewBox->getSize().x / 2, previewBox->getSize().y / 2));
         float tex_scaling = std::min(

@@ -12,19 +12,17 @@
 class MenuLine : public c2d::RectangleShape {
 
 public:
-
     MenuLine(UiMain *u, FloatRect &rect, Skin::TextGroup &tg) : RectangleShape(rect) {
-
-        ui = u;
+        pMain = u;
         textGroup = tg;
-        Font *font = ui->getSkin()->font;
+        Font *font = pMain->getSkin()->getFont();
 
         name = new Text("OPTION NAME", textGroup.size, font);
         name->setFillColor(textGroup.color);
         name->setOutlineThickness(textGroup.outlineSize);
         name->setOutlineColor(textGroup.outlineColor);
         name->setOrigin(Origin::Left);
-        name->setPosition(0, MenuLine::getSize().y / 2);
+        name->setPosition(2 * pMain->getScaling().x, MenuLine::getSize().y / 2);
         name->setSizeMax((MenuLine::getSize().x * 0.55f), 0);
         MenuLine::add(name);
 
@@ -33,8 +31,8 @@ public:
         value->setOutlineThickness(textGroup.outlineSize);
         value->setOutlineColor(textGroup.outlineColor);
         value->setOrigin(Origin::Left);
-        value->setPosition((MenuLine::getSize().x * 0.57f), MenuLine::getSize().y / 2);
-        value->setSizeMax(MenuLine::getSize().x * 0.40f, 0);
+        value->setPosition((MenuLine::getSize().x * 0.6f), MenuLine::getSize().y / 2);
+        value->setSizeMax(MenuLine::getSize().x * 0.38f, 0);
         MenuLine::add(value);
 
         sprite = new Sprite();
@@ -53,17 +51,17 @@ public:
         setFillColor(Color::Transparent);
 
         if (option.getFlags() & Option::Flags::INPUT) {
-            Skin::Button *button = ui->getSkin()->getButton(option.getValueInt());
+            Skin::Button *button = pMain->getSkin()->getButton(option.getValueInt());
             if (button && option.getId() < Option::Id::JOY_DEADZONE) {
                 if (button->texture) {
                     sprite->setTexture(button->texture, true);
                     sprite->setVisibility(Visibility::Visible);
                     value->setVisibility(Visibility::Hidden);
                     float scaling = std::min(
-                            getSize().x / (float) sprite->getTextureRect().width,
-                            getSize().y / (float) sprite->getTextureRect().height);
+                            getSize().x / (float) sprite->getSize().x,
+                            getSize().y / (float) sprite->getSize().y);
                     sprite->setScale(scaling, scaling);
-                    sprite->setPosition((MenuLine::getSize().x * 0.56f), MenuLine::getSize().y / 2);
+                    sprite->setPosition((MenuLine::getSize().x * 0.6f), MenuLine::getSize().y / 2);
                     sprite->setOrigin(Origin::Left);
                 } else {
                     sprite->setVisibility(Visibility::Hidden);
@@ -78,14 +76,14 @@ public:
             }
         } else if (option.getFlags() & Option::Flags::MENU) {
             value->setVisibility(Visibility::Hidden);
-            setFillColor(ui->getUiMenu()->getOutlineColor());
+            setFillColor(pMain->getUiMenu()->getOutlineColor());
         } else {
             value->setVisibility(Visibility::Visible);
             value->setString(option.getValueString());
         }
     }
 
-    UiMain *ui = nullptr;
+    UiMain *pMain = nullptr;
     Text *name = nullptr;
     Text *value = nullptr;
     Sprite *sprite = nullptr;
@@ -93,36 +91,35 @@ public:
     Option option;
 };
 
-UiMenu::UiMenu(UiMain *uiMain) : SkinnedRectangle(uiMain->getSkin(), {"OPTIONS_MENU"}) {
-
+UiMenu::UiMenu(UiMain *uiMain) : SkinnedRectangle(uiMain, {"OPTIONS_MENU"}) {
     ui = uiMain;
     alpha = UiMenu::getAlpha();
 
     // menu title
-    title = new SkinnedText(uiMain->getSkin(), {"OPTIONS_MENU", "TITLE_TEXT"});
+    title = new SkinnedText(uiMain, {"OPTIONS_MENU", "TITLE_TEXT"});
     UiMenu::add(title);
 
     // retrieve skin config for options items
     textGroup = ui->getSkin()->getText({"OPTIONS_MENU", "ITEMS_TEXT"});
+
     // calculate number of items shown
-    float height = UiMenu::getSize().y - textGroup.rect.top;
-    lineHeight = (float) (textGroup.rect.height);
-    maxLines = (int) (height / lineHeight);
-    if ((float) maxLines * lineHeight < height) {
-        lineHeight = height / (float) maxLines;
+    lineHeight = (float) textGroup.size + (2 * ui->getScaling().y);
+    maxLines = (int) (getSize().y / lineHeight);
+    if ((float) maxLines * lineHeight < getSize().y) {
+        lineHeight = getSize().y / (float) maxLines;
     }
 
     // add selection rectangle (highlight)
     highlight = new RectangleShape({16, 16});
     ui->getSkin()->loadRectangleShape(highlight, {"SKIN_CONFIG", "HIGHLIGHT"});
-    highlight->setSize(UiMenu::getSize().x, lineHeight);
+    highlight->setSize(UiMenu::getSize().x - 2, lineHeight);
+    highlight->move(1, 0);
     UiMenu::add(highlight);
 
     // add options items
     for (unsigned int i = 0; i < (unsigned int) maxLines; i++) {
-        FloatRect rect = {textGroup.rect.left, (lineHeight * (float) i) + textGroup.rect.top,
-                          UiMenu::getSize().x, lineHeight};
-        auto line = new MenuLine(ui, rect, textGroup);
+        FloatRect r = {0, lineHeight * (float) i, getSize().x, lineHeight};
+        auto line = new MenuLine(ui, r, textGroup);
         lines.push_back(line);
         UiMenu::add(line);
     }
@@ -196,7 +193,6 @@ void UiMenu::updateLines() {
 }
 
 void UiMenu::onKeyUp() {
-
     int index = optionIndex + highlightIndex;
     int middle = maxLines / 2;
 
@@ -221,11 +217,10 @@ void UiMenu::onKeyUp() {
 }
 
 void UiMenu::onKeyDown() {
-
     int index = optionIndex + highlightIndex;
     int middle = maxLines / 2;
 
-    if (highlightIndex >= middle && index + middle < (int) options.size()) {
+    if (highlightIndex >= middle && index + (maxLines - middle) < (int) options.size()) {
         optionIndex++;
     } else {
         highlightIndex++;
@@ -245,7 +240,6 @@ void UiMenu::onKeyDown() {
 }
 
 bool UiMenu::onInput(c2d::Input::Player *players) {
-
     unsigned int buttons = players[0].buttons;
 
     if (ui->getUiStateMenu()->isVisible()) {
@@ -284,7 +278,8 @@ bool UiMenu::onInput(c2d::Input::Player *players) {
         }
 
         switch (option.getId()) {
-            case Option::Id::GUI_SHOW_ALL:
+            case Option::Id::GUI_SHOW_FAVORITES:
+            case Option::Id::GUI_SHOW_AVAILABLE:
             case Option::Id::GUI_SHOW_ZIP_NAMES:
             case Option::Id::GUI_FILTER_CLONES:
             case Option::Id::GUI_FILTER_SYSTEM:
@@ -298,7 +293,9 @@ bool UiMenu::onInput(c2d::Input::Player *players) {
             case Option::Id::GUI_FILTER_GENRE: {
                 std::string name = Utility::toUpper(option.getName());
                 std::string value = Utility::toUpper(option.getValueString());
-                ui->getUiStatusBox()->show("%s: %s", name.c_str(), value.c_str());
+                if (option.getInfo().empty()) {
+                    ui->getUiStatusBox()->show("%s: %s", name.c_str(), value.c_str());
+                }
                 ui->getUiRomList()->updateRomList();
                 break;
             }
@@ -357,15 +354,7 @@ bool UiMenu::onInput(c2d::Input::Player *players) {
             case Option::Id::GUI_VIDEO_SNAP_DELAY:
                 ui->getUiRomList()->setVideoSnapDelay(option.getValueInt());
                 break;
-#ifdef __FTP_SERVER__
-            case Option::Id::GUI_FTP_SERVER:
-                if (option.getValueBool()) {
-                    ui->ftpServerStart();
-                } else {
-                    ui->ftpServerStop();
-                }
-                break;
-#endif
+
             default:
                 break;
         }
@@ -392,6 +381,9 @@ bool UiMenu::onInput(c2d::Input::Player *players) {
                 ui->getUiRomList()->setVisibility(Visibility::Visible);
                 ui->getInput()->clear();
             } else {
+                // be sure options are saved before exiting
+                ui->getConfig()->save(isRomMenu ? ui->getUiRomList()->getSelection() : ss_api::Game());
+                needSave = false;
                 ui->done = true;
             }
         } else if (option.getId() == OPTION_ID_STATES) {

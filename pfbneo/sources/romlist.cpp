@@ -6,58 +6,44 @@
 #include "romlist.h"
 
 void PFBARomList::build(bool addArcadeSystem, const ss_api::System &system) {
-#ifndef __PFBN_NO_CONSOLES__
-    std::string dataPath = ui->getIo()->getDataPath();
-    if (!ui->getIo()->exist(dataPath + "gamelist.xml")) {
-        dataPath = ui->getIo()->getRomFsPath();
+#ifndef __PFBN_LIGHT__
+    std::vector<std::string> gameLists = {
+            "gamelist_channelf.xml",
+            "gamelist_coleco.xml",
+            "gamelist_fds.xml",
+            "gamelist_gamegear.xml",
+            "gamelist_megadrive.xml",
+            "gamelist_msx.xml",
+            "gamelist_nes.xml",
+            "gamelist_ngp.xml",
+            "gamelist_pce.xml",
+            "gamelist_sg1000.xml",
+            "gamelist_sgx.xml",
+            "gamelist_sms.xml",
+            "gamelist_spectrum.xml",
+            "gamelist_tg16.xml"
+    };
+
+    bool showAvailableOnly = ui->getConfig()->get(Option::Id::GUI_SHOW_AVAILABLE)->getValueBool();
+
+    for (size_t i = 0; i < gameLists.size(); i++) {
+        // look for a "gamelist.xml" file inside rom folder, if none found use embedded (romfs) "gamelist.xml"
+        std::string gameListPath = ui->getConfig()->getRomPaths().at(i + 1) + "gamelist.xml";
+        if (!ui->getIo()->exist(gameListPath)) {
+            gameListPath = ui->getIo()->getRomFsPath() + gameLists.at(i);
+            if (!ui->getIo()->exist(gameListPath)) continue;
+        }
+        gameList->append(gameListPath, ui->getConfig()->getRomPaths().at(i + 1),
+                         false, filters, system, showAvailableOnly);
+        setLoadingText("Games: %li / %li", gameList->getAvailableCount(), gameList->games.size());
+        printf("RomList::build: %s, games found: %zu / %zu\n",
+               gameListPath.c_str(), gameList->getAvailableCount(), gameList->games.size());
     }
-
-    gameList->append(dataPath + "gamelist_channelf.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_CHANNELF), false);
-    setLoadingText("Games: %li / %li", gameList->getAvailableCount(), gameList->games.size());
-
-    gameList->append(dataPath + "gamelist_coleco.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_COLECO), false);
-    setLoadingText("Games: %li / %li", gameList->getAvailableCount(), gameList->games.size());
-
-    gameList->append(dataPath + "gamelist_fds.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_FDS), false);
-    setLoadingText("Games: %li / %li", gameList->getAvailableCount(), gameList->games.size());
-
-    gameList->append(dataPath + "gamelist_gamegear.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_GAMEGEAR), false);
-    setLoadingText("Games: %li / %li", gameList->getAvailableCount(), gameList->games.size());
-
-    gameList->append(dataPath + "gamelist_megadrive.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_MEGADRIVE), false);
-    setLoadingText("Games: %li / %li", gameList->getAvailableCount(), gameList->games.size());
-
-    gameList->append(dataPath + "gamelist_msx.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_MSX), false);
-    setLoadingText("Games: %li / %li", gameList->getAvailableCount(), gameList->games.size());
-
-    gameList->append(dataPath + "gamelist_nes.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_NES), false);
-    setLoadingText("Games: %li / %li", gameList->getAvailableCount(), gameList->games.size());
-
-    gameList->append(dataPath + "gamelist_ngp.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_NGP), false);
-    setLoadingText("Games: %li / %li", gameList->getAvailableCount(), gameList->games.size());
-
-    gameList->append(dataPath + "gamelist_pce.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_PCE), false);
-    setLoadingText("Games: %li / %li", gameList->getAvailableCount(), gameList->games.size());
-
-    gameList->append(dataPath + "gamelist_sg1000.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_SG1000), false);
-    setLoadingText("Games: %li / %li", gameList->getAvailableCount(), gameList->games.size());
-
-    gameList->append(dataPath + "gamelist_sgx.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_SGX), false);
-    setLoadingText("Games: %li / %li", gameList->getAvailableCount(), gameList->games.size());
-
-    gameList->append(dataPath + "gamelist_sms.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_SMS), false);
-    setLoadingText("Games: %li / %li", gameList->getAvailableCount(), gameList->games.size());
-
-    gameList->append(dataPath + "gamelist_spectrum.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_SPECTRUM), false);
-    setLoadingText("Games: %li / %li", gameList->getAvailableCount(), gameList->games.size());
-
-    gameList->append(dataPath + "gamelist_tg16.xml", ui->getConfig()->getRomPaths().at(FBN_PATH_TG16), false);
-    setLoadingText("Games: %li / %li", gameList->getAvailableCount(), gameList->games.size());
 #endif
 
     RomList::build(addArcadeSystem);
 
-    // remove hidden flags for pfba
+    // remove hidden flags for pfbn
     ui->getConfig()->get(Option::Id::GUI_FILTER_CLONES)->setFlags(Option::Flags::BOOLEAN);
     ui->getConfig()->get(Option::Id::GUI_FILTER_SYSTEM)->setFlags(Option::Flags::STRING);
     ui->getConfig()->get(Option::Id::GUI_FILTER_ROTATION)->setFlags(Option::Flags::STRING);

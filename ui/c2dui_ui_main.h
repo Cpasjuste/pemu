@@ -5,41 +5,17 @@
 #ifndef GUI_H
 #define GUI_H
 
-#ifdef __FTP_SERVER__
-
-#include "fineftp/server.h"
-
-#endif
-
-#define UI_KEY_FILTER_ROMS      100
-#define UI_KEY_SHOW_ROMLIST     101
-#define UI_KEY_SHOW_MEMU_UI     102
-#define UI_KEY_SHOW_MEMU_ROM    103
-#define UI_KEY_SHOW_MEMU_STATE  104
-#define UI_KEY_RUN_ROM          105
-#define UI_KEY_RESUME_ROM       106
-#define UI_KEY_STOP_ROM         107
-
-#define UI_MARGIN   16
 #define INPUT_DELAY 200
-
-#define COL_GREEN   Color(153, 255, 51)
-#define COL_YELLOW  Color(255, 225, 51)
-#define COL_ORANGE  Color(255, 153, 51)
-#define COL_RED     Color(255, 51, 51)
 
 namespace c2dui {
 
     class UiMain : public c2d::C2DRenderer {
 
     public:
+        explicit UiMain(c2d::Io *io);
 
-        explicit UiMain(const c2d::Vector2f &size, c2d::Io *io, Config *cfg);
-
-        ~UiMain() override;
-
-        void init(UIRomList *uiRomList, UiMenu *uiMenu,
-                  UiEmu *uiEmu, UiStateMenu *uiState);
+        void init(UIRomList *romList, UiMenu *menu,
+                  UiEmu *emu, UiStateMenu *state);
 
         void setConfig(Config *cfg);
 
@@ -75,31 +51,19 @@ namespace c2dui {
 
         bool done = false;
 
-#ifdef __FTP_SERVER__
-
-        void ftpServerStart();
-
-        void ftpServerStop();
-
-#endif
-
     private:
-
-        Config *config = nullptr;
-        Skin *skin = nullptr;
-        UIHighlight *uiHighlight = nullptr;
-        UiMenu *uiMenu = nullptr;
-        UIRomList *uiRomList = nullptr;
-        UiEmu *uiEmu = nullptr;
-        UiStateMenu *uiState = nullptr;
-        UIProgressBox *uiProgressBox = nullptr;
-        c2d::MessageBox *uiMessageBox = nullptr;
-        UiStatusBox *uiStatusBox = nullptr;
-        c2d::C2DClock timer;
-        unsigned int oldKeys = 0;
-#ifdef __FTP_SERVER__
-        fineftp::FtpServer *ftpServer = nullptr;
-#endif
+        Config *pConfig = nullptr;
+        Skin *pSkin = nullptr;
+        UIHighlight *pHighlight = nullptr;
+        UiMenu *pMenu = nullptr;
+        UIRomList *pRomList = nullptr;
+        UiEmu *pEmu = nullptr;
+        UiStateMenu *pState = nullptr;
+        UIProgressBox *pProgressBox = nullptr;
+        c2d::MessageBox *pMessageBox = nullptr;
+        UiStatusBox *pStatusBox = nullptr;
+        c2d::C2DClock mTimer;
+        unsigned int mOldKeys = 0;
     };
 }
 

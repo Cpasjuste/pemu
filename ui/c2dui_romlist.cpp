@@ -9,7 +9,6 @@
 
 RomList::RomList(UiMain *_ui, const std::string &emuVersion, const std::vector<std::string> &_filters) {
     printf("RomList()\n");
-
     ui = _ui;
     paths = ui->getConfig()->getRomPaths();
     filters = _filters;
@@ -59,7 +58,6 @@ RomList::RomList(UiMain *_ui, const std::string &emuVersion, const std::vector<s
 }
 
 void RomList::setLoadingText(const char *format, ...) {
-
     char buffer[512];
     va_list arg;
     va_start(arg, format);
@@ -74,16 +72,19 @@ void RomList::build(bool addArcadeSystem, const ss_api::System &system) {
     std::string romPath = ui->getConfig()->getRomPaths().at(FBN_PATH_ARCADE);
     printf("RomList::build(): ROM_PATH_0: %s\n", romPath.c_str());
 
-    std::string gameListPath = ui->getIo()->getDataPath() + "gamelist.xml";
+    // look for a "gamelist.xml" file inside rom folder, if none found use embedded (romfs) "gamelist.xml"
+    std::string gameListPath = ui->getConfig()->getRomPaths().at(FBN_PATH_ARCADE) + "gamelist.xml";
     if (!ui->getIo()->exist(gameListPath)) {
         gameListPath = ui->getIo()->getRomFsPath() + "gamelist.xml";
     }
 
+    bool showAvailableOnly = ui->getConfig()->get(Option::Id::GUI_SHOW_AVAILABLE)->getValueBool();
     gameList->append(gameListPath,
-                     ui->getConfig()->getRomPaths().at(FBN_PATH_ARCADE), false, filters, system);
+                     ui->getConfig()->getRomPaths().at(FBN_PATH_ARCADE), false, filters, system, showAvailableOnly);
 
     setLoadingText("Games: %li / %li", gameList->getAvailableCount(), gameList->games.size());
-    printf("RomList::build: games: %li / %li\n", gameList->getAvailableCount(), gameList->games.size());
+    printf("RomList::build: %s, games found: %zu / %zu\n",
+           gameListPath.c_str(), gameList->getAvailableCount(), gameList->games.size());
 
     // sort lists
     std::sort(gameList->systemList.systems.begin(), gameList->systemList.systems.end(), Api::sortSystemByName);
@@ -98,7 +99,7 @@ void RomList::build(bool addArcadeSystem, const ss_api::System &system) {
 
     gameList->resolutions.insert(gameList->resolutions.begin(), "ALL");
     gameList->dates.insert(gameList->dates.begin(), "ALL");
-    if (addArcadeSystem) {
+    if (addArcadeSystem && !gameList->findGamesBySystem(75).empty()) {
         gameList->systemList.systems.insert(gameList->systemList.systems.begin(), {9999, 0, "ARCADE"});
     }
 
@@ -144,7 +145,7 @@ void RomList::build(bool addArcadeSystem, const ss_api::System &system) {
             gameListFav->games[i].romsPath = game.romsPath;
         }
     }
-    printf("RomList::build: %lu favorites\n", gameListFav->games.size());
+    printf("RomList::build: %zu favorites\n", gameListFav->games.size());
 
     float time_spent = ui->getElapsedTime().asSeconds() - time_start;
     printf("RomList::build(): list built in %f\n", time_spent);

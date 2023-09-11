@@ -1,0 +1,16 @@
+# 4/3 skin override
+
+SKIN_CONFIG :
+{
+  MAIN :
+  {
+    ROM_IMAGE :
+    {
+      rectangle = [ 530.0, 8.0, 739.0, 426.0 ];
+    };
+    ROM_INFOS :
+    {
+      color = [ 0, 0, 0, 0 ];
+    };
+  };
+};

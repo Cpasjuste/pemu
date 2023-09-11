@@ -51,19 +51,28 @@ void set_config_defaults() {
     config.fm_preamp = 100;
     config.cdda_volume = 100;
     config.pcm_volume = 100;
+#ifdef __VITA__
+    config.hq_fm = 0;
+    config.hq_psg = 0;
+#else
     config.hq_fm = 1;
     config.hq_psg = 1;
+#endif
     config.filter = 1;
-    config.low_freq = 880;
-    config.high_freq = 5000;
+    config.low_freq = 200;
+    config.high_freq = 8000;
     config.lg = 100;
     config.mg = 100;
     config.hg = 100;
     config.lp_range = 0x9999; /* 0.6 in 0.16 fixed point */
     config.ym2612 = YM2612_DISCRETE;
     config.ym2413 = 2; /* = AUTO (0 = always OFF, 1 = always ON) */
+#if HAVE_YM3438_CORE
     config.ym3438 = 0;
+#endif
+#if HAVE_OPLL_CORE
     config.opll = 0;
+#endif
     config.mono = 0;
 
     /* system options */
@@ -78,6 +87,9 @@ void set_config_defaults() {
     config.add_on = 0; /* = HW_ADDON_AUTO (or HW_ADDON_MEGACD, HW_ADDON_MEGASD & HW_ADDON_ONE) */
     config.ntsc = 0;
     config.lcd = 0; /* 0.8 fixed point */
+    config.cd_latency = 1;
+    config.enhanced_vscroll = 0;
+    config.enhanced_vscroll_limit = 8;
 
     /* display options */
     config.overscan = 0;       /* 3 = all borders (0 = no borders , 1 = vertical borders only, 2 = horizontal borders only) */

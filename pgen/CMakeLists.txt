@@ -35,7 +35,8 @@ file(GLOB GENESIS_SRC
         )
 
 set(GENESIS_CFLAGS
-        -DUSE_16BPP_RENDERING -DHAVE_YM3438_CORE -DHAVE_OPLL_CORE
+        -DUSE_16BPP_RENDERING
+        -DHAVE_YM3438_CORE -DHAVE_OPLL_CORE
         -DLSB_FIRST -DMAXROMSIZE=33554432
         -D__PGEN__ -D__PGEN_VERSION_MAJOR__=${VERSION_MAJOR} -D__PGEN_VERSION_MINOR__=${VERSION_MINOR}
         )
@@ -95,6 +96,10 @@ elseif (PLATFORM_ANDROID)
     #####################
     # ANDROID PLATORM
     #####################
+    if (ANDROID_ABI STREQUAL armeabi-v7a)
+        list(APPEND PGEN_CFLAGS -marm -mcpu=cortex-a7 -mfpu=neon
+                -ffunction-sections -fomit-frame-pointer) # fix crash with release optimizations
+    endif ()
     list(APPEND GENESIS_CFLAGS -DHAVE_SYS_PARAM_H)
 endif (PLATFORM_VITA)
 

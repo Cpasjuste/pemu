@@ -7,7 +7,15 @@
 
 class SkinnedText : public c2d::Text {
 public:
-    explicit SkinnedText(c2dui::Skin *skin, const std::vector<std::string> &cfgTree);
+    explicit SkinnedText(c2dui::UiMain *main, const std::vector<std::string> &cfgTree);
+
+    bool load();
+
+private:
+    std::vector<std::string> mTree;
+    c2dui::UiMain *pMain;
+    c2dui::Skin *pSkin;
+    c2d::Io *pIo;
 };
 
 #endif //PEMU_SKINNEDTEXT_H

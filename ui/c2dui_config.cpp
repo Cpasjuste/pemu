@@ -4,47 +4,73 @@
 
 #include "c2dui.h"
 
-Config::Config(c2d::Io *io, int ver, const std::string &defaultRomsPath) {
-    m_io = io;
-    dataPath = io->getDataPath();
+Config::Config(UiMain *ui, int ver, const std::string &defaultRomsPath) {
+    m_ui = ui;
+    dataPath = m_ui->getIo()->getDataPath();
     configPath = dataPath + "config.cfg";
     version = ver;
 
     printf("Config(%s, v%i)\n", configPath.c_str(), ver);
 
+    /// custom screens size
+    int joyDeadZoneIndex = 3;
+    std::string device = C2DDevice::getName();
+    if (device == "pocket2") {
+        joyDeadZoneIndex = 11;
+    }
+
     /// add default roms paths
     roms_paths.clear();
-    roms_paths.emplace_back(io->getDataPath() + defaultRomsPath);
+    roms_paths.emplace_back(m_ui->getIo()->getDataPath() + defaultRomsPath);
 
     /// default options available for all cores
     /////////////////////////////////////////////////
     /// main/gui config
     /////////////////////////////////////////////////
     append("MAIN", {"MAIN"}, 0, Option::Id::MENU_MAIN, Option::Flags::MENU);
-    append("SHOW", {"ALL", "AVAILABLE", "FAVORITES"}, 0, Option::Id::GUI_SHOW_ALL, Option::Flags::STRING);
+    append("SHOW_FAVORITES", {"OFF", "ON"}, 0, Option::Id::GUI_SHOW_FAVORITES,
+           Option::Flags::BOOLEAN);
+    append("SHOW_AVAILABLE", {"OFF", "ON"}, 0, Option::Id::GUI_SHOW_AVAILABLE,
+           Option::Flags::BOOLEAN);
+    get()->at(get()->size() - 1).setInfo(
+            "YOU NEED TO RESTART THE APPLICATION AFTER CHANGING THIS OPTION");
     append("SHOW_CLONES", {"OFF", "ON"}, 0,
            Option::Id::GUI_FILTER_CLONES, Option::Flags::BOOLEAN | Option::Flags::HIDDEN);
-    append("SHOW_ZIP_NAMES", {"OFF", "ON"}, 1, Option::Id::GUI_SHOW_ZIP_NAMES, Option::Flags::BOOLEAN);
-    append("SHOW_ICONS", {"OFF", "ON"}, 0, Option::Id::GUI_SHOW_ICONS, Option::Flags::BOOLEAN | Option::Flags::HIDDEN);
-    get()->at(get()->size() - 1).setInfo("YOU NEED TO RESTART THE APPLICATION AFTER CHANGING THIS OPTION");
-    append("SCREEN_WIDTH", C2D_SCREEN_WIDTH, Option::Id::GUI_SCREEN_WIDTH,
+    append("SHOW_ZIP_NAMES", {"OFF", "ON"}, 1, Option::Id::GUI_SHOW_ZIP_NAMES,
+           Option::Flags::BOOLEAN);
+    append("SHOW_ICONS", {"OFF", "ON"}, 0, Option::Id::GUI_SHOW_ICONS,
+           Option::Flags::BOOLEAN | Option::Flags::HIDDEN);
+    get()->at(get()->size() - 1).setInfo(
+            "YOU NEED TO RESTART THE APPLICATION AFTER CHANGING THIS OPTION");
+#if 0 // TODO
+    append("SCREEN_WIDTH", (int) C2DDevice::getResolution().x, Option::Id::GUI_SCREEN_WIDTH,
            Option::Flags::INTEGER | Option::Flags::HIDDEN);
-    append("SCREEN_HEIGHT", C2D_SCREEN_HEIGHT, Option::Id::GUI_SCREEN_HEIGHT,
+    append("SCREEN_HEIGHT", (int) C2DDevice::getResolution().y, Option::Id::GUI_SCREEN_HEIGHT,
            Option::Flags::INTEGER | Option::Flags::HIDDEN);
+#endif
 #ifdef __FULLSCREEN__
     append("FULLSCREEN", {"OFF", "ON"}, 0, Option::Id::GUI_FULLSCREEN, Option::Flags::BOOLEAN);
     get()->at(get()->size() - 1).setInfo("YOU NEED TO RESTART THE APPLICATION AFTER CHANGING THIS OPTION");
-#endif
-#ifdef __FTP_SERVER__
-    append("FTP_SERVER", {"OFF", "ON"}, 0, Option::Id::GUI_FTP_SERVER, Option::Flags::BOOLEAN);
 #endif
 
     // build  skin list
     std::vector<std::string> skins;
     // add default skins from romfs
     skins.emplace_back("default");
+    // add skins from romfs dir
+    auto files = m_ui->getIo()->getDirList(m_ui->getIo()->getRomFsPath() + "skins/", true);
+    for (auto &file: files) {
+        if (file.type != c2d::Io::Type::Directory || file.name[0] == '.') {
+            continue;
+        }
+        // only append skin if it doesn't exist yet
+        if (std::find(skins.begin(), skins.end(), file.name) == skins.end()) {
+            skins.emplace_back(file.name);
+            printf("skin found: %s\n", file.path.c_str());
+        }
+    }
     // add skins from data dir
-    auto files = io->getDirList(dataPath + "skins/", true);
+    files = m_ui->getIo()->getDirList(dataPath + "skins/", true);
     for (auto &file: files) {
         if (file.type != c2d::Io::Type::Directory || file.name[0] == '.') {
             continue;
@@ -55,8 +81,7 @@ Config::Config(c2d::Io *io, int ver, const std::string &defaultRomsPath) {
             printf("skin found: %s\n", file.path.c_str());
         }
     }
-
-    // set default skin index
+    // set "default" skin index
     if (!get(Option::Id::GUI_SKIN)) {
         int index = 0;
         for (size_t i = 0; i < skins.size(); i++) {
@@ -66,7 +91,19 @@ Config::Config(c2d::Io *io, int ver, const std::string &defaultRomsPath) {
         }
         append("SKIN", skins, index, Option::Id::GUI_SKIN, Option::Flags::STRING);
     }
-    get()->at(get()->size() - 1).setInfo("YOU NEED TO RESTART THE APPLICATION AFTER CHANGING THIS OPTION");
+    get()->at(get()->size() - 1).setInfo(
+            "YOU NEED TO RESTART THE APPLICATION AFTER CHANGING THIS OPTION");
+
+    int aspect_index = ui->getSize().x / ui->getSize().y > 1.33 ? 0 : 1;
+    append("SKIN_ASPECT", {"16/9", "4/3"},
+           aspect_index, Option::Id::GUI_SKIN_ASPECT, Option::Flags::STRING);
+    get()->at(get()->size() - 1).setInfo(
+            "YOU NEED TO RESTART THE APPLICATION AFTER CHANGING THIS OPTION");
+
+    append("FONT_SCALING", {"0", "1", "2", "3", "4", "5"},
+           0, Option::Id::GUI_FONT_SCALING, Option::Flags::STRING);
+    get()->at(get()->size() - 1).setInfo(
+            "YOU NEED TO RESTART THE APPLICATION AFTER CHANGING THIS OPTION");
 
     append("VIDEO_SNAP_DELAY", {"3", "5", "7", "10"}, 1,
            Option::Id::GUI_VIDEO_SNAP_DELAY, Option::Flags::STRING);
@@ -75,19 +112,23 @@ Config::Config(c2d::Io *io, int ver, const std::string &defaultRomsPath) {
     /// default rom config
     /////////////////////////////////////////////////
     append("EMULATION", {"EMULATION"}, 0, Option::Id::MENU_ROM_OPTIONS, Option::Flags::MENU);
-    if (C2D_SCREEN_HEIGHT > 720) {
-        append("SCALING", {"NONE", "2X", "3X", "4X", "FIT", "FULL"}, 3,
-               Option::Id::ROM_SCALING, Option::Flags::STRING);
-    } else if (C2D_SCREEN_HEIGHT > 544) {
-        append("SCALING", {"NONE", "2X", "3X", "FIT", "FULL"}, 2,
-               Option::Id::ROM_SCALING, Option::Flags::STRING);
-    } else if (C2D_SCREEN_HEIGHT > 240) {
-        append("SCALING", {"NONE", "2X", "FIT", "FULL"}, 1,
-               Option::Id::ROM_SCALING, Option::Flags::STRING);
+    if (m_ui->getSize().y > 1080) {
+        append("SCALING", {"NONE", "2X", "3X", "4X", "5", "6", "7", "8", "9", "FIT", "FULL"},
+               6, Option::Id::ROM_SCALING, Option::Flags::STRING);
+    } else if (m_ui->getSize().y > 720) {
+        append("SCALING", {"NONE", "2X", "3X", "4X", "FIT", "FULL"},
+               4, Option::Id::ROM_SCALING, Option::Flags::STRING);
+    } else if (m_ui->getSize().y > 544) {
+        append("SCALING", {"NONE", "2X", "3X", "FIT", "FULL"},
+               3, Option::Id::ROM_SCALING, Option::Flags::STRING);
+    } else if (m_ui->getSize().y > 240) {
+        append("SCALING", {"NONE", "2X", "FIT", "FULL"},
+               2, Option::Id::ROM_SCALING, Option::Flags::STRING);
     } else {
-        append("SCALING", {"NONE", "FIT", "FULL"}, 0, Option::Id::ROM_SCALING, Option::Flags::STRING);
+        append("SCALING", {"NONE", "FIT", "FULL"},
+               1, Option::Id::ROM_SCALING, Option::Flags::STRING);
     }
-    append("SCALING_MODE", {"AUTO", "ASPECT", "INTEGER"}, 0,
+    append("SCALING_MODE", {"AUTO", "ASPECT", "INTEGER"}, 1,
            Option::Id::ROM_SCALING_MODE, Option::Flags::STRING);
     append("FILTER", {"POINT", "LINEAR"}, 0, Option::Id::ROM_FILTER, Option::Flags::STRING);
 #ifdef __VITA__
@@ -114,13 +155,17 @@ Config::Config(c2d::Io *io, int ver, const std::string &defaultRomsPath) {
     append("JOY_MENU1", KEY_JOY_MENU1_DEFAULT, Option::Id::JOY_MENU1, Option::Flags::INPUT);
     append("JOY_MENU2", KEY_JOY_MENU2_DEFAULT, Option::Id::JOY_MENU2, Option::Flags::INPUT);
     // TODO: add gui option for axis in option menu
-    append("JOY_AXIS_LX", KEY_JOY_AXIS_LX, Option::Id::JOY_AXIS_LX, Option::Flags::INPUT | Option::Flags::HIDDEN);
-    append("JOY_AXIS_LY", KEY_JOY_AXIS_LY, Option::Id::JOY_AXIS_LY, Option::Flags::INPUT | Option::Flags::HIDDEN);
-    append("JOY_AXIS_RX", KEY_JOY_AXIS_RX, Option::Id::JOY_AXIS_RX, Option::Flags::INPUT | Option::Flags::HIDDEN);
-    append("JOY_AXIS_RY", KEY_JOY_AXIS_RY, Option::Id::JOY_AXIS_RY, Option::Flags::INPUT | Option::Flags::HIDDEN);
+    append("JOY_AXIS_LX", KEY_JOY_AXIS_LX, Option::Id::JOY_AXIS_LX,
+           Option::Flags::INPUT | Option::Flags::HIDDEN);
+    append("JOY_AXIS_LY", KEY_JOY_AXIS_LY, Option::Id::JOY_AXIS_LY,
+           Option::Flags::INPUT | Option::Flags::HIDDEN);
+    append("JOY_AXIS_RX", KEY_JOY_AXIS_RX, Option::Id::JOY_AXIS_RX,
+           Option::Flags::INPUT | Option::Flags::HIDDEN);
+    append("JOY_AXIS_RY", KEY_JOY_AXIS_RY, Option::Id::JOY_AXIS_RY,
+           Option::Flags::INPUT | Option::Flags::HIDDEN);
     append("JOY_DEADZONE",
            {"2000", "4000", "6000", "8000", "10000", "12000", "14000", "16000",
-            "18000", "20000", "22000", "24000", "26000", "28000", "30000"}, 3,
+            "18000", "20000", "22000", "24000", "26000", "28000", "30000"}, joyDeadZoneIndex,
            Option::Id::JOY_DEADZONE, Option::Flags::STRING);
 #ifndef NO_KEYBOARD
     // keyboard
@@ -145,7 +190,6 @@ Config::Config(c2d::Io *io, int ver, const std::string &defaultRomsPath) {
 }
 
 void Config::load(const ss_api::Game &game) {
-
     config_t cfg;
     config_init(&cfg);
 
@@ -188,7 +232,7 @@ void Config::load(const ss_api::Game &game) {
                         snprintf(p, MAX_PATH, "ROMS_PATH%i", (int) i);
                         const char *value = nullptr;
                         if (config_setting_lookup_string(settings, p, &value) != 0) {
-                            if (m_io->exist(value)) {
+                            if (m_ui->getIo()->exist(value)) {
                                 roms_paths[i] = value;
                                 if (!roms_paths[i].empty() && roms_paths[i].back() != '/') {
                                     roms_paths[i] += '/';
@@ -208,14 +252,16 @@ void Config::load(const ss_api::Game &game) {
                 if (settings != nullptr) {
                     if (flags & Option::Flags::INTEGER || flags & Option::Flags::INPUT) {
                         int value = 0;
-                        if (config_setting_lookup_int(settings, option.getName().c_str(), &value) != 0) {
+                        if (config_setting_lookup_int(settings, option.getName().c_str(), &value) !=
+                            0) {
                             option.setValueInt(value);
                             //printf("Config::load: OPTION: %s, VALUE: %i\n", option.getName().c_str(),
                             //       option.getValueInt());
                         }
                     } else {
                         const char *value;
-                        if (config_setting_lookup_string(settings, option.getName().c_str(), &value) != 0) {
+                        if (config_setting_lookup_string(settings, option.getName().c_str(),
+                                                         &value) != 0) {
                             option.setValueString(value);
                             //printf("Config::load: OPTION: %s, VALUE: %s\n", option.getName().c_str(),
                             //       option.getValueString().c_str());
@@ -243,7 +289,6 @@ void Config::load(const ss_api::Game &game) {
 }
 
 void Config::save(const ss_api::Game &game) {
-
     config_t cfg{};
     config_init(&cfg);
 
@@ -283,15 +328,18 @@ void Config::save(const ss_api::Game &game) {
     for (auto &option: *options) {
         unsigned int flags = option.getFlags();
         if (flags & Option::Flags::MENU) {
-            sub_setting = config_setting_add(setting_fba, option.getName().c_str(), CONFIG_TYPE_GROUP);
+            sub_setting = config_setting_add(setting_fba, option.getName().c_str(),
+                                             CONFIG_TYPE_GROUP);
             continue;
         }
 
         if (flags & Option::Flags::INTEGER || flags & Option::Flags::INPUT) {
-            config_setting_t *setting = config_setting_add(sub_setting, option.getName().c_str(), CONFIG_TYPE_INT);
+            config_setting_t *setting = config_setting_add(sub_setting, option.getName().c_str(),
+                                                           CONFIG_TYPE_INT);
             config_setting_set_int(setting, option.getValueInt());
         } else {
-            config_setting_t *setting = config_setting_add(sub_setting, option.getName().c_str(), CONFIG_TYPE_STRING);
+            config_setting_t *setting = config_setting_add(sub_setting, option.getName().c_str(),
+                                                           CONFIG_TYPE_STRING);
             config_setting_set_string(setting, option.getValueString().c_str());
         }
     }
@@ -301,7 +349,6 @@ void Config::save(const ss_api::Game &game) {
 }
 
 void Config::reset() {
-
     options_rom.clear();
 
     size_t start = 0, end = options_gui.size();
@@ -338,7 +385,6 @@ std::vector<Option> *Config::get(bool isRom) {
 }
 
 Option *Config::get(int index, bool isRom) {
-
     std::vector<Option> *options = get(isRom);
 
     for (auto &option: *options) {
@@ -349,10 +395,8 @@ Option *Config::get(int index, bool isRom) {
     return nullptr;
 }
 
-bool Config::add(int target,
-                 const std::string &text, const std::vector<std::string> &values,
+bool Config::add(int target, const std::string &text, const std::vector<std::string> &values,
                  int defaultValue, int index, unsigned int flags) {
-
     for (unsigned int i = 0; i < options_gui.size(); i++) {
         if (options_gui[i].getId() == target) {
             options_gui.insert(options_gui.begin() + i + 1,
@@ -374,7 +418,6 @@ void Config::append(const std::string &text, int value, int id, unsigned int fla
 }
 
 bool Config::hide(int index, bool isRom) {
-
     std::vector<Option> *options = get(isRom);
 
     for (auto &option: *options) {
@@ -458,6 +501,8 @@ int Config::getJoystickDeadZone(int player, bool isRom) {
     return get(Option::Id::JOY_DEADZONE, isRom)->getValueInt();
 }
 
+// TODO
+/*
 c2d::Vector2f Config::getScreenSize() {
     Option *opt = get(Option::Id::GUI_FULLSCREEN);
     if (opt && opt->getValueBool()) {
@@ -469,3 +514,4 @@ c2d::Vector2f Config::getScreenSize() {
         };
     }
 }
+*/

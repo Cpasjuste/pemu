@@ -5,7 +5,7 @@
 #include "c2dui.h"
 
 UiStatusBox::UiStatusBox(UiMain *m)
-        : SkinnedRectangle(m->getSkin(), {"SKIN_CONFIG", "STATUSBOX"}) {
+        : SkinnedRectangle(m, {"SKIN_CONFIG", "STATUSBOX"}) {
     main = m;
     clock = new C2DClock();
 
@@ -51,7 +51,6 @@ void UiStatusBox::onDraw(c2d::Transform &transform, bool draw) {
     if (isVisible() && clock->getElapsedTime().asSeconds() > 5) {
         setVisibility(Visibility::Hidden, true);
     }
-
     SkinnedRectangle::onDraw(transform, draw);
 }
 

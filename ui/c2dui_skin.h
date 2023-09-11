@@ -15,9 +15,14 @@ namespace c2dui {
     public:
 
         struct RectangleShapeGroup {
+            enum TextureRatio {
+                Free, KeepWidth, KeepHeight
+            };
+
             c2d::FloatRect rect;
             c2d::Origin origin;
             std::string texture;
+            TextureRatio textureRatio = Free;
             int filtering = 1;
             c2d::Color color;
             c2d::Color outlineColor;
@@ -50,11 +55,15 @@ namespace c2dui {
             int id = -1;
         };
 
-        Skin(UiMain *ui);
+        explicit Skin(UiMain *ui);
 
         ~Skin();
 
         c2d::config::Config *getConfig();
+
+        std::array<std::string, 2> getPaths() { return mSkinPath; };
+
+        c2d::config::Group *getGroup(const std::vector<std::string> &tree);
 
         bool loadRectangleShape(c2d::RectangleShape *shape, const std::vector<std::string> &tree,
                                 bool textureUseFillColors = false);
@@ -69,23 +78,42 @@ namespace c2dui {
 
         c2d::Font *getFont();
 
-        c2d::Vector2f getScaling() { return m_scaling; };
+        c2d::Vector2f getScaling() { return mScaling; };
 
-        std::string path;
-        c2d::Font *font = nullptr;
-        bool font_available = true;
-        char *font_data = nullptr;
-        std::vector<Button> buttons;
+        float getFontScaling() { return mFontScaling; };
+
+        c2d::FloatRect getRectangle(c2d::config::Group *group);
+
+        c2d::Color getColor(c2d::config::Group *group, const std::string &name);
+
+        c2d::Color getFillColor(c2d::config::Group *group);
+
+        c2d::Color getOutlineColor(c2d::config::Group *group);
+
+        float getOutlineThickness(c2d::config::Group *group);
+
+        c2d::Vector2f getScale(c2d::config::Group *group);
+
+        c2d::Origin getOrigin(c2d::config::Group *group);
+
+        unsigned int getCharacterSize(c2d::config::Group *group);
+
+        std::string getString(c2d::config::Group *group);
+
+        c2d::Text::Overflow getOverflow(c2d::config::Group *group);
 
     private:
-
         c2d::config::Group createRectangleShapeGroup(const std::string &name);
 
         c2d::config::Group createTextGroup(const std::string &name, int size = 0);
 
-        UiMain *ui = nullptr;
-        c2d::config::Config *config = nullptr;
-        c2d::Vector2f m_scaling = {1.0f, 1.0f};
+        UiMain *pMain;
+        c2d::config::Config *pConfig;
+        c2d::Vector2f mScaling = {1.0f, 1.0f};
+        float mFontScaling = 1.0f;
+        c2d::Font *pFont = nullptr;
+        std::vector<Button> mButtons;
+        std::array<std::string, 2> mSkinPath;
     };
 }
 

@@ -27,7 +27,8 @@ namespace c2dui {
 
         enum Id {
             MENU_MAIN = 0,
-            GUI_SHOW_ALL,
+            GUI_SHOW_FAVORITES,
+            GUI_SHOW_AVAILABLE,
             GUI_SHOW_ZIP_NAMES,
             GUI_FILTER_CLONES,
             GUI_FILTER_SYSTEM,
@@ -43,8 +44,9 @@ namespace c2dui {
             GUI_SCREEN_WIDTH,
             GUI_SCREEN_HEIGHT,
             GUI_FULLSCREEN,
-            GUI_FTP_SERVER,
             GUI_SKIN,
+            GUI_SKIN_ASPECT,
+            GUI_FONT_SCALING,
             GUI_VIDEO_SNAP_DELAY,
             MENU_ROM_OPTIONS,
             ROM_SCALING,

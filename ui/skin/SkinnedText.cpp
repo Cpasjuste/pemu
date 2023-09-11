@@ -3,23 +3,58 @@
 //
 
 #include "c2dui.h"
-#include "SkinnedText.h"
 
-SkinnedText::SkinnedText(c2dui::Skin *skin, const std::vector<std::string> &cfgTree) : Text() {
+SkinnedText::SkinnedText(UiMain *main, const std::vector<std::string> &cfgTree) : Text() {
+    pMain = main;
+    pIo = pMain->getIo();
+    pSkin = pMain->getSkin();
+    mTree = cfgTree;
+    available = load();
+}
 
-#if 0
-    printf("SkinnedText: ");
-    for (const auto & i : cfgTree) {
-        printf("=> %s ", i.c_str());
-    }
-    printf("\n");
-#endif
-
-    if (!skin->loadText(this, cfgTree)) {
-        //printf("SkinnedText: tree not found in config file...\n");
-        available = false;
-        return;
+bool SkinnedText::load() {
+    auto group = pSkin->getGroup(mTree);
+    if (!group) {
+        return false;
     }
 
-    available = true;
+    // load text rectangle
+    auto rect = pSkin->getRectangle(group);
+    if (rect.width <= 0 || rect.height <= 0) {
+        printf("SkinnedText::load: width or height is equal to zero, skipping\n");
+        return false;
+    }
+    setPosition(rect.left, rect.top);
+    setSizeMax(rect.width, rect.height);
+
+    // load text character size
+    auto size = pSkin->getCharacterSize(group);
+    if (size > 0) {
+        setCharacterSize(size);
+    } else {
+        return false;
+    }
+
+    // set text font
+    setFont(pSkin->getFont());
+
+    // set text string
+    setString(pSkin->getString(group));
+
+    // load text color
+    setFillColor(pSkin->getFillColor(group));
+
+    // load text outline color
+    setOutlineColor(pSkin->getOutlineColor(group));
+
+    // load text outline thickness
+    setOutlineThickness(pSkin->getOutlineThickness(group));
+
+    // load text origin
+    setOrigin(pSkin->getOrigin(group));
+
+    // load text overflow
+    setOverflow(pSkin->getOverflow(group));
+
+    return true;
 }

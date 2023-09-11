@@ -11,7 +11,7 @@ class UiState : public SkinnedRectangle {
 public:
 
     UiState(UiMain *ui, float x, int id)
-            : SkinnedRectangle(ui->getSkin(), {"STATES_MENU", "STATES_ITEM"}) {
+            : SkinnedRectangle(ui, {"STATES_MENU", "STATES_ITEM"}) {
         this->ui = ui;
         this->id = id;
 
@@ -174,13 +174,13 @@ public:
     int index = 0;
 };
 
-UiStateMenu::UiStateMenu(UiMain *u) : SkinnedRectangle(u->getSkin(), {"STATES_MENU"}) {
+UiStateMenu::UiStateMenu(UiMain *u) : SkinnedRectangle(u, {"STATES_MENU"}) {
     printf("UIStateMenu()\n");
 
     ui = u;
 
     // menu title
-    title = new SkinnedText(ui->getSkin(), {"STATES_MENU", "TITLE_TEXT"});
+    title = new SkinnedText(ui, {"STATES_MENU", "TITLE_TEXT"});
     title->setString("TITLE");
     title->setStyle(Text::Underlined);
     UiStateMenu::add(title);

@@ -55,25 +55,26 @@ int main(int argc, char **argv) {
 
     // need custom io for some devices
     auto *io = new PNESIo();
-    // load configuration
-    int pnes_version = (__PNES_VERSION_MAJOR__ * 100) + __PNES_VERSION_MINOR__;
-    cfg = new PNESConfig(io, pnes_version);
-
     // create paths
     io->create(io->getDataPath());
     io->create(io->getDataPath() + "roms");
     io->create(io->getDataPath() + "configs");
     io->create(io->getDataPath() + "saves");
 
-    Vector2f screenSize = cfg->getScreenSize();
-    ui = new UiMain(screenSize, io, cfg);
+    // create main ui
+    ui = new UiMain(io);
 
-    // skin
+    // load custom configuration
+    int pnes_version = (__PNES_VERSION_MAJOR__ * 100) + __PNES_VERSION_MINOR__;
+    cfg = new PNESConfig(ui, pnes_version);
+    ui->setConfig(cfg);
+
+    // load skin configuration
     skin = new Skin(ui);
     ui->setSkin(skin);
 
     // ui
-    std::string nestopia_version = "Nestopia 1.51.1+";
+    std::string nestopia_version = "Nestopia 1.52.0";
     romList = new RomList(ui, nestopia_version, {".zip", ".nes", ".nez", ".unf", ".unif"});
     romList->build();
     uiRomList = new UIRomList(ui, romList, ui->getSize());

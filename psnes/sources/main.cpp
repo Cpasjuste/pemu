@@ -2,7 +2,7 @@
 #include "uiEmu.h"
 #include "uiStateMenu.h"
 #include "config.h"
-#include "psnesIo.h"
+#include "psnes_io.h"
 #include "snes9x.h"
 
 #ifdef __PSP2__
@@ -36,30 +36,19 @@ int main(int argc, char **argv) {
 
     // need custom io for some devices
     auto *io = new PSNESIo();
-    // load configuration
-    int version = (__PSNES_VERSION_MAJOR__ * 100) + __PSNES_VERSION_MINOR__;
-    cfg = new PSNESConfig(io, version);
-
     // create paths
     io->create(io->getDataPath());
     io->create(io->getDataPath() + "roms");
     io->create(io->getDataPath() + "configs");
     io->create(io->getDataPath() + "saves");
 
-    Vector2f screenSize = cfg->getScreenSize();
-    ui = new UiMain(screenSize, io, cfg);
+    // create main ui
+    ui = new UiMain(io);
 
-#ifdef __SOFT_SCALERS__
-    // TODO: fix
-    ui->setShaderList(new ShaderList());
-    ui->getShaderList()->add("TV2X", nullptr);
-    ui->getShaderList()->add("SMOOTH", nullptr);
-    ui->getShaderList()->add("SUPEREAGLE", nullptr);
-    ui->getShaderList()->add("2XSAI", nullptr);
-    ui->getShaderList()->add("SUPER2XSAI", nullptr);
-    ui->getShaderList()->add("EPX", nullptr);
-    ui->getShaderList()->add("HQ2X", nullptr);
-#endif
+    // load custom configuration
+    int version = (__PSNES_VERSION_MAJOR__ * 100) + __PSNES_VERSION_MINOR__;
+    cfg = new PSNESConfig(ui, version);
+    ui->setConfig(cfg);
 
     // skin
     skin = new Skin(ui);

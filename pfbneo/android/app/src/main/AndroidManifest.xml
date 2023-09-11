@@ -5,8 +5,11 @@
     android:installLocation="preferExternal">
 
     <application
-        tools:replace="android:label"
-        android:label="pfbneo">
+        android:label="pfbneo"
+        android:icon="@mipmap/ic_launcher"
+        android:isGame="true"
+        android:requestLegacyExternalStorage="true"
+        tools:replace="android:label">
 
         <activity
             android:name="fr.mydedibox.pfbneo.Main"
@@ -15,15 +18,15 @@
             android:exported="true"
             android:launchMode="singleInstance"
             android:preferMinimalPostProcessing="true"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
+            tools:targetApi="r">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <intent-filter>
-                <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" />
-            </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

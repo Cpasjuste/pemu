@@ -15,10 +15,14 @@ static short sound_buffer[2048];
 
 static uint32_t brm_crc[2];
 static uint8 brm_format[0x40] = {
-        0x5f, 0x5f, 0x5f, 0x5f, 0x5f, 0x5f, 0x5f, 0x5f, 0x5f, 0x5f, 0x5f, 0x00, 0x00, 0x00, 0x00, 0x40,
-        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-        0x53, 0x45, 0x47, 0x41, 0x5f, 0x43, 0x44, 0x5f, 0x52, 0x4f, 0x4d, 0x00, 0x01, 0x00, 0x00, 0x00,
-        0x52, 0x41, 0x4d, 0x5f, 0x43, 0x41, 0x52, 0x54, 0x52, 0x49, 0x44, 0x47, 0x45, 0x5f, 0x5f, 0x5f
+        0x5f, 0x5f, 0x5f, 0x5f, 0x5f, 0x5f, 0x5f, 0x5f, 0x5f, 0x5f, 0x5f, 0x00, 0x00, 0x00, 0x00,
+        0x40,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00,
+        0x53, 0x45, 0x47, 0x41, 0x5f, 0x43, 0x44, 0x5f, 0x52, 0x4f, 0x4d, 0x00, 0x01, 0x00, 0x00,
+        0x00,
+        0x52, 0x41, 0x4d, 0x5f, 0x43, 0x41, 0x52, 0x54, 0x52, 0x49, 0x44, 0x47, 0x45, 0x5f, 0x5f,
+        0x5f
 };
 
 PGENUiEmu::PGENUiEmu(UiMain *ui) : UiEmu(ui) {
@@ -38,9 +42,9 @@ int PGENUiEmu::load(const ss_api::Game &game) {
 
     // check for mega-cd bios before loading a rom
     if (game.system.id == 20) {
-        if (!ui->getIo()->exist(CD_BIOS_EU)
-            || !ui->getIo()->exist(CD_BIOS_US)
-            || !ui->getIo()->exist(CD_BIOS_JP)) {
+        if (!pMain->getIo()->exist(CD_BIOS_EU)
+            || !pMain->getIo()->exist(CD_BIOS_US)
+            || !pMain->getIo()->exist(CD_BIOS_JP)) {
             getUi()->getUiProgressBox()->setVisibility(Visibility::Hidden);
             getUi()->getUiMessageBox()->show(
                     "WARNING",
@@ -67,8 +71,12 @@ int PGENUiEmu::load(const ss_api::Game &game) {
     }
 
     // system init
-    audio_init(48000, 0);
     system_init();
+
+    // audio init
+    targetFps = vdp_pal ? 50 : 60;
+    addAudio(48000, vdp_pal ? 966 : 801);
+    audio_init(audio->getSampleRate(), targetFps);
 
     // game gear "special" resolution handling
     if (system_hw == SYSTEM_GG || system_hw == SYSTEM_GGMS) {
@@ -79,10 +87,6 @@ int PGENUiEmu::load(const ss_api::Game &game) {
     loadBram();
 
     loadSram();
-
-    // audio init
-    targetFps = vdp_pal ? 50 : 60;
-    addAudio(48000, vdp_pal ? 966 : 801);
 
     getUi()->getUiProgressBox()->setProgress(1);
     getUi()->flip();
@@ -100,10 +104,6 @@ void PGENUiEmu::stop() {
     saveSram();
     audio_shutdown();
     UiEmu::stop();
-}
-
-bool PGENUiEmu::onInput(c2d::Input::Player *players) {
-    return UiEmu::onInput(players);
 }
 
 void PGENUiEmu::onUpdate() {
@@ -149,7 +149,8 @@ void PGENUiEmu::onUpdate() {
             } else if (video->getTextureRect().width != bitmap.viewport.w ||
                        video->getTextureRect().height != bitmap.viewport.h) {
                 printf("video rect {%i, %i} != viewport size: {%i, %i}\n",
-                       video->getTextureRect().width, video->getTextureRect().height, bitmap.viewport.w,
+                       video->getTextureRect().width, video->getTextureRect().height,
+                       bitmap.viewport.w,
                        bitmap.viewport.h);
                 resizeVideo();
             }
@@ -178,7 +179,7 @@ void PGENUiEmu::onUpdate() {
         }
 #endif
         getAudio()->play(sound_buffer, samples,
-                         vdp_pal ? Audio::SyncMode::Safe : Audio::SyncMode::None);
+                         vdp_pal ? Audio::SyncMode::LowLatency : Audio::SyncMode::None);
     }
 
     return UiEmu::onUpdate();
@@ -232,8 +233,9 @@ void PGENUiEmu::loadBram() {
     }
 
     char *data;
-    std::string ramPath = ui->getIo()->getDataPath() + "rams/";
-    size_t size = getUi()->getIo()->read(ramPath + Utility::removeExt(currentGame.path) + ".brm", &data, 0x2000);
+    std::string ramPath = pMain->getIo()->getDataPath() + "rams/";
+    size_t size = getUi()->getIo()->read(ramPath + Utility::removeExt(currentGame.path) + ".brm",
+                                         &data, 0x2000);
     if (data && size == 0x2000) {
         memcpy(scd.bram, data, 0x2000);
         free(data);
@@ -256,7 +258,8 @@ void PGENUiEmu::loadBram() {
 
         /* internal Backup RAM size fields */
         brm_format[0x10] = brm_format[0x12] = brm_format[0x14] = brm_format[0x16] = 0x00;
-        brm_format[0x11] = brm_format[0x13] = brm_format[0x15] = brm_format[0x17] = (sizeof(scd.bram) / 64) - 3;
+        brm_format[0x11] = brm_format[0x13] = brm_format[0x15] = brm_format[0x17] =
+                (sizeof(scd.bram) / 64) - 3;
 
         /* format internal backup RAM */
         memcpy(scd.bram + 0x2000 - 0x40, brm_format, 0x40);
@@ -278,7 +281,8 @@ void PGENUiEmu::loadBram() {
         }
 
         /* check if cartridge backup RAM is correctly formatted */
-        if (memcmp(scd.cartridge.area + scd.cartridge.mask + 1 - 0x20, brm_format + 0x20, 0x20) != 0) {
+        if (memcmp(scd.cartridge.area + scd.cartridge.mask + 1 - 0x20, brm_format + 0x20, 0x20) !=
+            0) {
             /* clear cartridge backup RAM */
             memset(scd.cartridge.area, 0x00, scd.cartridge.mask + 1);
 
@@ -299,14 +303,14 @@ void PGENUiEmu::saveBram() {
         return;
     }
 
-    std::string ramPath = ui->getIo()->getDataPath() + "rams/";
+    std::string ramPath = pMain->getIo()->getDataPath() + "rams/";
 
     /* verify that internal backup RAM has been modified */
     if (crc32(0, scd.bram, 0x2000) != brm_crc[0]) {
         /* check if it is correctly formatted before saving */
         if (!memcmp(scd.bram + 0x2000 - 0x20, brm_format + 0x20, 0x20)) {
-            ui->getIo()->write(ramPath + Utility::removeExt(currentGame.path) + ".brm",
-                               (const char *) scd.bram, 0x2000);
+            pMain->getIo()->write(ramPath + Utility::removeExt(currentGame.path) + ".brm",
+                                  (const char *) scd.bram, 0x2000);
             /* update CRC */
             brm_crc[0] = crc32(0, scd.bram, 0x2000);
         }
@@ -316,7 +320,8 @@ void PGENUiEmu::saveBram() {
     if (scd.cartridge.id && (crc32(0, scd.cartridge.area, scd.cartridge.mask + 1) != brm_crc[1])) {
         /* check if it is correctly formatted before saving */
         if (!memcmp(scd.cartridge.area + scd.cartridge.mask + 1 - 0x20, brm_format + 0x20, 0x20)) {
-            ui->getIo()->write(ramPath + CD_BRAM_CART, (const char *) scd.cartridge.area, scd.cartridge.mask + 1);
+            pMain->getIo()->write(ramPath + CD_BRAM_CART, (const char *) scd.cartridge.area,
+                                  scd.cartridge.mask + 1);
             /* update CRC */
             brm_crc[1] = crc32(0, scd.cartridge.area, scd.cartridge.mask + 1);
         }
@@ -326,8 +331,9 @@ void PGENUiEmu::saveBram() {
 void PGENUiEmu::loadSram() {
     if (sram.on) {
         char *data;
-        std::string ramPath = ui->getIo()->getDataPath() + "rams/";
-        size_t size = getUi()->getIo()->read(ramPath + Utility::removeExt(currentGame.path) + ".srm", &data, 0x10000);
+        std::string ramPath = pMain->getIo()->getDataPath() + "rams/";
+        size_t size = getUi()->getIo()->read(
+                ramPath + Utility::removeExt(currentGame.path) + ".srm", &data, 0x10000);
         if (data && size == 0x10000) {
             memcpy(sram.sram, data, 0x10000);
         }
@@ -339,8 +345,8 @@ void PGENUiEmu::loadSram() {
 
 void PGENUiEmu::saveSram() {
     if (sram.on) {
-        std::string ramPath = ui->getIo()->getDataPath() + "rams/";
-        ui->getIo()->write(ramPath + Utility::removeExt(currentGame.path) + ".srm",
-                           (const char *) sram.sram, 0x10000);
+        std::string ramPath = pMain->getIo()->getDataPath() + "rams/";
+        pMain->getIo()->write(ramPath + Utility::removeExt(currentGame.path) + ".srm",
+                              (const char *) sram.sram, 0x10000);
     }
 }

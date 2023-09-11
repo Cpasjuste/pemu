@@ -12,7 +12,8 @@ namespace c2dui {
     public:
 
         UIListBoxLine(const c2d::FloatRect &rect, const std::string &str, c2d::Font *font,
-                      unsigned int fontSize, c2d::Texture *icon = nullptr, bool use_icons = false);
+                      unsigned int fontSize, const c2d::Vector2f &scaling,
+                      c2d::Texture *icon = nullptr, bool use_icons = false);
 
         ~UIListBoxLine() override;
 

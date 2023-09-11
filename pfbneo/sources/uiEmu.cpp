@@ -48,16 +48,15 @@ PFBAUiEmu::PFBAUiEmu(UiMain *ui) : UiEmu(ui) {
 #ifdef __PFBA_ARM__
 
 int PFBAUiEmu::getSekCpuCore() {
-
     int sekCpuCore = 0; // SEK_CORE_C68K: USE CYCLONE ARM ASM M68K CORE
 
     std::vector<std::string> zipList;
     int hardware = BurnDrvGetHardwareCode();
 
-    std::string bios = ui->getConfig()->get(Option::Id::ROM_NEOBIOS, true)->getValueString();
+    std::string bios = pMain->getConfig()->get(Option::Id::ROM_NEOBIOS, true)->getValueString();
     if (isHardware(hardware, HARDWARE_PREFIX_SNK) && Utility::contains(bios, "UNIBIOS")) {
         sekCpuCore = 1; // SEK_CORE_M68K: USE C M68K CORE
-        ui->getUiMessageBox()->show(
+        pMain->getUiMessageBox()->show(
                 "WARNING", "UNIBIOS DOESNT SUPPORT THE M68K ASM CORE\n"
                            "CYCLONE ASM CORE DISABLED", "OK");
     }
@@ -71,29 +70,29 @@ int PFBAUiEmu::getSekCpuCore() {
             || hardware & HARDWARE_SEGA_FD1094_ENC
             || hardware & HARDWARE_SEGA_FD1094_ENC_CPU2) {
             sekCpuCore = 1; // SEK_CORE_M68K: USE C M68K CORE
-            ui->getUiMessageBox()->show(
+            pMain->getUiMessageBox()->show(
                     "WARNING", "ROM IS CRYPTED, USE DECRYPTED ROM (CLONE)\n"
                                "TO ENABLE CYCLONE ASM CORE (FASTER)", "OK");
         }
     } else if (isHardware(hardware, HARDWARE_PREFIX_TOAPLAN)) {
-        zipList.push_back("batrider");
-        zipList.push_back("bbakraid");
-        zipList.push_back("bgaregga");
+        zipList.emplace_back("batrider");
+        zipList.emplace_back("bbakraid");
+        zipList.emplace_back("bgaregga");
     } else if (isHardware(hardware, HARDWARE_PREFIX_SNK)) {
-        zipList.push_back("kof97");
-        zipList.push_back("kof98");
-        zipList.push_back("kof99");
-        zipList.push_back("kof2000");
-        zipList.push_back("kof2001");
-        zipList.push_back("kof2002");
-        zipList.push_back("kf2k3pcb");
+        zipList.emplace_back("kof97");
+        zipList.emplace_back("kof98");
+        zipList.emplace_back("kof99");
+        zipList.emplace_back("kof2000");
+        zipList.emplace_back("kof2001");
+        zipList.emplace_back("kof2002");
+        zipList.emplace_back("kf2k3pcb");
         //zipList.push_back("kof2003"); // WORKS
     }
 
     std::string zip = BurnDrvGetTextA(DRV_NAME);
     for (unsigned int i = 0; i < zipList.size(); i++) {
         if (zipList[i].compare(0, zip.length(), zip) == 0) {
-            ui->getUiStatusBox()->show("THIS GAME DOES NOT SUPPORT THE M68K ASM CORE\n"
+            pMain->getUiStatusBox()->show("THIS GAME DOES NOT SUPPORT THE M68K ASM CORE\n"
                                        "CYCLONE ASM CORE DISABLED");
             sekCpuCore = 1; // SEK_CORE_M68K: USE C M68K CORE
             break;
@@ -158,10 +157,10 @@ int PFBAUiEmu::load(const ss_api::Game &game) {
     printf("nSekCpuCore: %s\n", nSekCpuCore > 0 ? "M68K" : "C68K (ASM)");
 #endif
 
-    int audio_freq = ui->getConfig()->get(Option::Id::ROM_AUDIO_FREQ, true)->getValueInt(44100);
-    nInterpolation = ui->getConfig()->get(Option::Id::ROM_AUDIO_INTERPOLATION, true)->getValueInt();
-    nFMInterpolation = ui->getConfig()->get(Option::Id::ROM_AUDIO_FMINTERPOLATION, true)->getValueInt();
-    bForce60Hz = ui->getConfig()->get(Option::Id::ROM_FORCE_60HZ, true)->getValueBool();
+    int audio_freq = pMain->getConfig()->get(Option::Id::ROM_AUDIO_FREQ, true)->getValueInt(44100);
+    nInterpolation = pMain->getConfig()->get(Option::Id::ROM_AUDIO_INTERPOLATION, true)->getValueInt();
+    nFMInterpolation = pMain->getConfig()->get(Option::Id::ROM_AUDIO_FMINTERPOLATION, true)->getValueInt();
+    bForce60Hz = pMain->getConfig()->get(Option::Id::ROM_FORCE_60HZ, true)->getValueBool();
     if (bForce60Hz) {
         nBurnFPS = 6000;
     }
@@ -180,8 +179,8 @@ int PFBAUiEmu::load(const ss_api::Game &game) {
     if (DrvInit((int) nBurnDrvActive, false) != 0) {
         printf("\nPFBAUiEmu::load: driver initialisation failed\n");
         delete (aud);
-        ui->getUiProgressBox()->setVisibility(Visibility::Hidden);
-        ui->getUiMessageBox()->show("ERROR", "DRIVER INIT FAILED", "OK");
+        pMain->getUiProgressBox()->setVisibility(Visibility::Hidden);
+        pMain->getUiMessageBox()->show("ERROR", "DRIVER INIT FAILED", "OK");
         stop();
         return -1;
     }
@@ -221,7 +220,7 @@ int PFBAUiEmu::load(const ss_api::Game &game) {
     BurnRecalcPal();
     // video may already be initialized from fbneo driver (Reinitialise)
     if (!video) {
-        auto v = new PFBAVideo(ui, &pBurnDraw, &nBurnPitch, size, aspect);
+        auto v = new PFBAVideo(pMain, &pBurnDraw, &nBurnPitch, size, aspect);
         addVideo(v);
         printf("PFBAUiEmu::load: size: %i x %i, aspect: %i x %i, pitch: %i\n",
                size.x, size.y, aspect.x, aspect.y, nBurnPitch);
@@ -255,8 +254,8 @@ void PFBAUiEmu::stop() {
 }
 
 bool PFBAUiEmu::onInput(c2d::Input::Player *players) {
-    if (ui->getUiMenu()->isVisible() || ui->getUiStateMenu()->isVisible()) {
-        ui->getInput()->setRotation(Input::Rotation::R0, Input::Rotation::R0);
+    if (pMain->getUiMenu()->isVisible() || pMain->getUiStateMenu()->isVisible()) {
+        pMain->getInput()->setRotation(Input::Rotation::R0, Input::Rotation::R0);
         return UiEmu::onInput(players);
     }
 
@@ -268,13 +267,13 @@ bool PFBAUiEmu::onInput(c2d::Input::Player *players) {
     int rotation = getUi()->getConfig()->get(Option::Id::ROM_ROTATION, true)->getIndex();
     if (BurnDrvGetFlags() & BDF_ORIENTATION_VERTICAL) {
         if (rotation == 0) {
-            ui->getInput()->setRotation(Input::Rotation::R90, Input::Rotation::R0);
+            pMain->getInput()->setRotation(Input::Rotation::R90, Input::Rotation::R0);
         } else if (rotation == 1) {
-            ui->getInput()->setRotation(Input::Rotation::R0, Input::Rotation::R0);
+            pMain->getInput()->setRotation(Input::Rotation::R0, Input::Rotation::R0);
         } else if (rotation == 2) {
-            ui->getInput()->setRotation(Input::Rotation::R270, Input::Rotation::R0);
+            pMain->getInput()->setRotation(Input::Rotation::R270, Input::Rotation::R0);
         } else {
-            ui->getInput()->setRotation(Input::Rotation::R270, Input::Rotation::R270);
+            pMain->getInput()->setRotation(Input::Rotation::R270, Input::Rotation::R270);
         }
     }
 
@@ -290,11 +289,11 @@ void PFBAUiEmu::onUpdate() {
     InputMake(true);
 
     // handle diagnostic and reset switch
-    unsigned int buttons = ui->getInput()->getButtons();
+    unsigned int buttons = pMain->getInput()->getButtons();
     if (buttons & Input::Button::Select) {
         if (clock.getElapsedTime().asSeconds() > 2) {
             if (pgi_reset) {
-                ui->getUiStatusBox()->show("TIPS: PRESS START "
+                pMain->getUiStatusBox()->show("TIPS: PRESS START "
                                            "BUTTON 2 SECONDS FOR DIAG MENU...");
                 pgi_reset->Input.nVal = 1;
                 *(pgi_reset->Input.pVal) = pgi_reset->Input.nVal;
@@ -306,7 +305,7 @@ void PFBAUiEmu::onUpdate() {
     } else if (buttons & Input::Button::Start) {
         if (clock.getElapsedTime().asSeconds() > 2) {
             if (pgi_diag) {
-                ui->getUiStatusBox()->show("TIPS: PRESS COIN "
+                pMain->getUiStatusBox()->show("TIPS: PRESS COIN "
                                            "BUTTON 2 SECONDS TO RESET CURRENT GAME...");
                 pgi_diag->Input.nVal = 1;
                 *(pgi_diag->Input.pVal) = pgi_diag->Input.nVal;
@@ -319,7 +318,7 @@ void PFBAUiEmu::onUpdate() {
 
     // update fbneo video buffer and audio
 #ifdef __VITA__
-    int skip = ui->getConfig()->get(Option::Id::ROM_FRAMESKIP, true)->getIndex();
+    int skip = pMain->getConfig()->get(Option::Id::ROM_FRAMESKIP, true)->getIndex();
 #else
     int skip = 0;
 #endif
