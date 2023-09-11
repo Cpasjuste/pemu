@@ -51,8 +51,6 @@ static const char dirNames[13][32] = {
 
 static int S9xCreateDirectory();
 
-static void S9xEndScreenRefreshCallback(void *);
-
 std::string getButtonId(int player, const std::string &name) {
     return "Joypad" + std::to_string(player) + " " + name;
 }
@@ -171,13 +169,13 @@ int PSNESUiEmu::load(const ss_api::Game &game) {
         return -1;
     }
 
-    Memory.LoadSRAM(S9xGetFilename(".srm", SRAM_DIR));
+    Memory.LoadSRAM(S9xGetFilename(".srm", SRAM_DIR).c_str());
 
     Settings.ApplyCheats = pMain->getConfig()->get(Option::ROM_PSNES_CHEATS, true)->getIndex() == 1;
     S9xDeleteCheats();
     S9xCheatsEnable();
     if (Settings.ApplyCheats) {
-        printf("S9xLoadCheatFile(%s)\n", S9xGetFilename(".cht", CHEAT_DIR));
+        printf("S9xLoadCheatFile(%s)\n", S9xGetFilename(".cht", CHEAT_DIR).c_str());
         S9xLoadCheatFile(S9xGetFilename(".cht", CHEAT_DIR));
     }
 
@@ -193,7 +191,6 @@ int PSNESUiEmu::load(const ss_api::Game &game) {
 
     // video
     S9xGraphicsInit();
-    S9xSetEndScreenRefreshCallback(S9xEndScreenRefreshCallback, getAudio());
 
     addVideo((uint8_t **) &GFX.Screen, (int *) &GFX.Pitch, {MAX_SNES_WIDTH, MAX_SNES_HEIGHT});
     targetFps = (float) Memory.ROMFramesPerSecond;
@@ -209,7 +206,7 @@ int PSNESUiEmu::load(const ss_api::Game &game) {
 void PSNESUiEmu::stop() {
     Settings.StopEmulation = TRUE;
 
-    Memory.SaveSRAM(S9xGetFilename(".srm", SRAM_DIR));
+    Memory.SaveSRAM(S9xGetFilename(".srm", SRAM_DIR).c_str());
 
     S9xUnmapAllControls();
     S9xGraphicsDeinit();
@@ -269,13 +266,13 @@ void PSNESUiEmu::resume() {
 // Functions called by snes9x below
 ///////////////////////////////////////////////////////////////////////////////
 
-static void S9xEndScreenRefreshCallback(void *data) {
+void S9xSyncSpeed() {
     if (Settings.Mute) {
         S9xClearSamples();
         return;
     }
 
-    auto audio = (Audio *) data;
+    auto audio = m_ui->getUiEmu()->getAudio();
     int samples = S9xGetSampleCount();
     S9xMixSamples((uint8 *) audio_buffer, samples);
 #if 0
@@ -333,81 +330,13 @@ static int S9xCreateDirectory() {
     return (0);
 }
 
-const char *S9xGetDirectory(s9x_getdirtype dirtype) {
-    static char s[PATH_MAX + 1];
-
-    if (dirNames[dirtype][0])
-        snprintf(s, PATH_MAX + 1, "%s%s%s", s9x_base_dir, SLASH_STR, dirNames[dirtype]);
-    else {
-        switch (dirtype) {
-
-            case DEFAULT_DIR:
-                strncpy(s, s9x_base_dir, PATH_MAX + 1);
-                s[PATH_MAX] = 0;
-                break;
-
-            case HOME_DIR:
-                strncpy(s, s9x_base_dir, PATH_MAX + 1);
-                s[PATH_MAX] = 0;
-                break;
-
-            case ROMFILENAME_DIR:
-                strncpy(s, Memory.ROMFilename, PATH_MAX + 1);
-                s[PATH_MAX] = 0;
-
-                for (int i = (int) strlen(s); i >= 0; i--) {
-                    if (s[i] == SLASH_CHAR) {
-                        s[i] = 0;
-                        break;
-                    }
-                }
-                break;
-
-            default:
-                s[0] = 0;
-                break;
-        }
+std::string S9xGetDirectory(s9x_getdirtype type) {
+    switch (type) {
+        case ROMFILENAME_DIR:
+            return Memory.ROMFilename;
+        default:
+            return s9x_base_dir;
     }
-
-    return (s);
-}
-
-const char *S9xGetFilename(const char *ex, s9x_getdirtype dirtype) {
-    static char s[PATH_MAX + 1];
-    char drive[_MAX_DRIVE + 1], dir[_MAX_DIR + 1], fname[_MAX_FNAME + 1], ext[_MAX_EXT + 1];
-
-    _splitpath(Memory.ROMFilename, drive, dir, fname, ext);
-    snprintf(s, PATH_MAX + 1, "%s%s%s%s", S9xGetDirectory(dirtype), SLASH_STR, fname, ex);
-
-    return (s);
-}
-
-const char *S9xGetFilenameInc(const char *ex, s9x_getdirtype dirtype) {
-    static char s[PATH_MAX + 1];
-    char drive[_MAX_DRIVE + 1], dir[_MAX_DIR + 1], fname[_MAX_FNAME + 1], ext[_MAX_EXT + 1];
-
-    unsigned int i = 0;
-    const char *d;
-    struct stat buf = {};
-
-    _splitpath(Memory.ROMFilename, drive, dir, fname, ext);
-    d = S9xGetDirectory(dirtype);
-
-    do
-        snprintf(s, PATH_MAX + 1, "%s%s%s.%03d%s", d, SLASH_STR, fname, i++, ex);
-    while (stat(s, &buf) == 0 && i < 1000);
-
-    return (s);
-
-}
-
-const char *S9xBasename(const char *f) {
-    const char *p;
-
-    if ((p = strrchr(f, '/')) != NULL || (p = strrchr(f, '\\')) != NULL)
-        return (p + 1);
-
-    return (f);
 }
 
 bool8 S9xOpenSnapshotFile(const char *filename, bool8 read_only, STREAM*file) {
@@ -420,7 +349,7 @@ void S9xCloseSnapshotFile(STREAM file) {
 }
 
 void S9xAutoSaveSRAM() {
-    Memory.SaveSRAM(S9xGetFilename(".srm", SRAM_DIR));
+    Memory.SaveSRAM(S9xGetFilename(".srm", SRAM_DIR).c_str());
 }
 
 void S9xExit() {
@@ -436,6 +365,8 @@ void S9xMessage(int type, int number, const char *message) {
     S9xSetInfoString(buffer);
 }
 
+std::string S9xGetFilenameInc(std::string in, s9x_getdirtype) { return ""; }
+
 const char *S9xStringInput(const char *message) { return nullptr; }
 
 void S9xSetPalette() {}
@@ -445,8 +376,6 @@ bool8 S9xOpenSoundDevice() { return TRUE; }
 void S9xToggleSoundChannel(int c) {}
 
 void S9xHandlePortCommand(s9xcommand_t cmd, int16 data1, int16 data2) {}
-
-void S9xSyncSpeed() {}
 
 void S9xExtraUsage() {}
 
