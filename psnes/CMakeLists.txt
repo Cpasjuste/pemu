@@ -21,7 +21,7 @@ set(SNES9X_INC
         ${CMAKE_SOURCE_DIR}/cores/snes9x/apu
         ${CMAKE_SOURCE_DIR}/cores/snes9x/apu/bapu
         ${CMAKE_SOURCE_DIR}/cores/snes9x/filter
-        )
+)
 
 file(GLOB SNES9X_SRC
         ${CMAKE_SOURCE_DIR}/cores/snes9x/*.c*
@@ -30,7 +30,7 @@ file(GLOB SNES9X_SRC
         ${CMAKE_SOURCE_DIR}/cores/snes9x/apu/bapu/dsp/*.c*
         ${CMAKE_SOURCE_DIR}/cores/snes9x/apu/bapu/smp/*.c*
         ${CMAKE_SOURCE_DIR}/cores/snes9x/filter/*.c*
-        )
+)
 
 list(REMOVE_ITEM SNES9X_SRC
         ${CMAKE_SOURCE_DIR}/cores/snes9x/spc7110dec.cpp
@@ -42,7 +42,7 @@ list(REMOVE_ITEM SNES9X_SRC
         ${CMAKE_SOURCE_DIR}/cores/snes9x/apu/bapu/smp/timing.cpp
         ${CMAKE_SOURCE_DIR}/cores/snes9x/apu/bapu/smp/iplrom.cpp
         ${CMAKE_SOURCE_DIR}/cores/snes9x/apu/bapu/dsp/SPC_DSP.cpp
-        )
+)
 
 set(SNES9X_CFLAGS
         -fomit-frame-pointer -fno-exceptions
@@ -54,7 +54,7 @@ set(SNES9X_CFLAGS
         -D__PSNES__
         -D__PSNES_VERSION_MAJOR__=${VERSION_MAJOR}
         -D__PSNES_VERSION_MINOR__=${VERSION_MINOR}
-        )
+)
 
 set(SNES9X_LDFLAGS m z)
 
@@ -136,14 +136,10 @@ include(${CMAKE_SOURCE_DIR}/libcross2d/cmake/targets.cmake)
 
 # add common skin data
 add_custom_target(${PROJECT_NAME}.data.skin
-        COMMAND ${CMAKE_COMMAND} -D SRC=${CMAKE_CURRENT_SOURCE_DIR}/../data/common/datadir -D DST=${CMAKE_CURRENT_BINARY_DIR}/data_datadir -P ${CMAKE_CURRENT_LIST_DIR}/../libcross2d/cmake/copy_directory_custom.cmake
-        COMMAND ${CMAKE_COMMAND} -D SRC=${CMAKE_CURRENT_SOURCE_DIR}/../data/${TARGET_PLATFORM}/datadir -D DST=${CMAKE_CURRENT_BINARY_DIR}/data_datadir -P ${CMAKE_CURRENT_LIST_DIR}/../libcross2d/cmake/copy_directory_custom.cmake
-        COMMAND ${CMAKE_COMMAND} -D SRC=${CMAKE_CURRENT_SOURCE_DIR}/../data/common/romfs -D DST=${CMAKE_CURRENT_BINARY_DIR}/data_romfs -P ${CMAKE_CURRENT_LIST_DIR}/../libcross2d/cmake/copy_directory_custom.cmake
-        COMMAND ${CMAKE_COMMAND} -D SRC=${CMAKE_CURRENT_SOURCE_DIR}/../data/${TARGET_PLATFORM}/romfs -D DST=${CMAKE_CURRENT_BINARY_DIR}/data_romfs -P ${CMAKE_CURRENT_LIST_DIR}/../libcross2d/cmake/copy_directory_custom.cmake
-        )
+        COMMAND ${CMAKE_COMMAND} -D SRC=${CMAKE_CURRENT_SOURCE_DIR}/../data/common/datadir -D DST=${CMAKE_CURRENT_BINARY_DIR}/data_datadir -P ${CMAKE_CURRENT_LIST_DIR}/../libcross2d/cmake/copy_custom.cmake
+        COMMAND ${CMAKE_COMMAND} -D SRC=${CMAKE_CURRENT_SOURCE_DIR}/../data/${TARGET_PLATFORM}/datadir -D DST=${CMAKE_CURRENT_BINARY_DIR}/data_datadir -P ${CMAKE_CURRENT_LIST_DIR}/../libcross2d/cmake/copy_custom.cmake
+        COMMAND ${CMAKE_COMMAND} -D SRC=${CMAKE_CURRENT_SOURCE_DIR}/../data/common/romfs -D DST=${CMAKE_CURRENT_BINARY_DIR}/data_romfs -P ${CMAKE_CURRENT_LIST_DIR}/../libcross2d/cmake/copy_custom.cmake
+        COMMAND ${CMAKE_COMMAND} -D SRC=${CMAKE_CURRENT_SOURCE_DIR}/../data/${TARGET_PLATFORM}/romfs -D DST=${CMAKE_CURRENT_BINARY_DIR}/data_romfs -P ${CMAKE_CURRENT_LIST_DIR}/../libcross2d/cmake/copy_custom.cmake
+)
 add_dependencies(${PROJECT_NAME}.data.skin ${PROJECT_NAME}.data)
-if (PLATFORM_LINUX)
-    add_dependencies(${PROJECT_NAME}-romfs ${PROJECT_NAME}.data.skin)
-else ()
-    add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}.data.skin)
-endif ()
+add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}.data.skin)

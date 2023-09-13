@@ -13,7 +13,7 @@ set(NESTOPIA_INC
         ${CMAKE_SOURCE_DIR}/cores/nestopia/source/core/board
         ${CMAKE_SOURCE_DIR}/cores/nestopia/source/core/input
         ${CMAKE_SOURCE_DIR}/cores/nestopia/source/core/vssystem
-        )
+)
 
 file(GLOB NESTOPIA_SRC
         ${CMAKE_SOURCE_DIR}/cores/nestopia/source/core/*.c*
@@ -25,14 +25,14 @@ file(GLOB NESTOPIA_SRC
         ${CMAKE_SOURCE_DIR}/cores/nestopia/source/fltkui/homebrew.cpp
         ${CMAKE_SOURCE_DIR}/cores/nestopia/source/fltkui/samples.cpp
         ${CMAKE_SOURCE_DIR}/cores/nestopia/source/fltkui/nstcommon.cpp
-        )
+)
 list(REMOVE_ITEM NESTOPIA_SRC
         ${CMAKE_SOURCE_DIR}/cores/nestopia/source/core/NstVideoFilter2xSaI.cpp
         ${CMAKE_SOURCE_DIR}/cores/nestopia/source/core/NstVideoFilterHqX.cpp
         ${CMAKE_SOURCE_DIR}/cores/nestopia/source/core/NstVideoFilterScaleX.cpp
         ${CMAKE_SOURCE_DIR}/cores/nestopia/source/core/NstVideoFilterxBR.cpp
         ${CMAKE_SOURCE_DIR}/cores/nestopia/source/core/NstVideoFilterNtsc.cpp
-        )
+)
 
 set(NESTOPIA_CFLAGS
         -DVERSION="1.51.1+"
@@ -45,7 +45,7 @@ set(NESTOPIA_CFLAGS
         -Wno-parentheses -Wno-unknown-pragmas
         -Wno-format-truncation -Wno-unused-but-set-variable
         -Wno-format-zero-length
-        )
+)
 
 ##############
 # pnes
@@ -120,23 +120,18 @@ include(${CMAKE_SOURCE_DIR}/libcross2d/cmake/targets.cmake)
 
 # add common skin data
 add_custom_target(${PROJECT_NAME}.data.skin
-        COMMAND ${CMAKE_COMMAND} -D SRC=${CMAKE_CURRENT_SOURCE_DIR}/../data/common/datadir -D DST=${CMAKE_CURRENT_BINARY_DIR}/data_datadir -P ${CMAKE_CURRENT_LIST_DIR}/../libcross2d/cmake/copy_directory_custom.cmake
-        COMMAND ${CMAKE_COMMAND} -D SRC=${CMAKE_CURRENT_SOURCE_DIR}/../data/${TARGET_PLATFORM}/datadir -D DST=${CMAKE_CURRENT_BINARY_DIR}/data_datadir -P ${CMAKE_CURRENT_LIST_DIR}/../libcross2d/cmake/copy_directory_custom.cmake
-        COMMAND ${CMAKE_COMMAND} -D SRC=${CMAKE_CURRENT_SOURCE_DIR}/../data/common/romfs -D DST=${CMAKE_CURRENT_BINARY_DIR}/data_romfs -P ${CMAKE_CURRENT_LIST_DIR}/../libcross2d/cmake/copy_directory_custom.cmake
-        COMMAND ${CMAKE_COMMAND} -D SRC=${CMAKE_CURRENT_SOURCE_DIR}/../data/${TARGET_PLATFORM}/romfs -D DST=${CMAKE_CURRENT_BINARY_DIR}/data_romfs -P ${CMAKE_CURRENT_LIST_DIR}/../libcross2d/cmake/copy_directory_custom.cmake
-        )
+        COMMAND ${CMAKE_COMMAND} -D SRC=${CMAKE_CURRENT_SOURCE_DIR}/../data/common/datadir -D DST=${CMAKE_CURRENT_BINARY_DIR}/data_datadir -P ${CMAKE_CURRENT_LIST_DIR}/../libcross2d/cmake/copy_custom.cmake
+        COMMAND ${CMAKE_COMMAND} -D SRC=${CMAKE_CURRENT_SOURCE_DIR}/../data/${TARGET_PLATFORM}/datadir -D DST=${CMAKE_CURRENT_BINARY_DIR}/data_datadir -P ${CMAKE_CURRENT_LIST_DIR}/../libcross2d/cmake/copy_custom.cmake
+        COMMAND ${CMAKE_COMMAND} -D SRC=${CMAKE_CURRENT_SOURCE_DIR}/../data/common/romfs -D DST=${CMAKE_CURRENT_BINARY_DIR}/data_romfs -P ${CMAKE_CURRENT_LIST_DIR}/../libcross2d/cmake/copy_custom.cmake
+        COMMAND ${CMAKE_COMMAND} -D SRC=${CMAKE_CURRENT_SOURCE_DIR}/../data/${TARGET_PLATFORM}/romfs -D DST=${CMAKE_CURRENT_BINARY_DIR}/data_romfs -P ${CMAKE_CURRENT_LIST_DIR}/../libcross2d/cmake/copy_custom.cmake
+)
 add_dependencies(${PROJECT_NAME}.data.skin ${PROJECT_NAME}.data)
-if (PLATFORM_LINUX)
-    add_dependencies(${PROJECT_NAME}-romfs ${PROJECT_NAME}.data.skin)
-else ()
-    add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}.data.skin)
-endif ()
+add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}.data.skin)
 
 # add extra data to libcross2d default targets data (nestopia database and zipped skin)
 add_custom_target(${PROJECT_NAME}.data.extra
         DEPENDS ${PROJECT_NAME}.data
         # copy nst database from nestopia
         COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/cores/nestopia/NstDatabase.xml ${CMAKE_CURRENT_BINARY_DIR}/data_romfs/
-        )
+)
 add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}.data.extra)
-

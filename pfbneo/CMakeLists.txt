@@ -20,24 +20,24 @@ set(BURN_DIRS
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/devices
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/snd
-        )
+)
 file(GLOB SRC_BURN
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/*.c*
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/devices/*.c*
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/snd/*.c*
-        )
+)
 ##############
 # burner
 ##############
 set(BURNER_DIRS
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burner
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burner/sdl
-        )
+)
 file(GLOB SRC_BURNER
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burner/*.c*
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burner/sdl/neocdlist.cpp
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burner/sdl/stringset.cpp
-        )
+)
 list(REMOVE_ITEM SRC_BURNER
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burner/conc.cpp
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burner/cong.cpp
@@ -51,7 +51,7 @@ list(REMOVE_ITEM SRC_BURNER
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burner/zipfn.cpp
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burner/luaengine.cpp
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burner/luasav.cpp
-        )
+)
 
 ##############
 # drivers
@@ -75,7 +75,7 @@ set(DRV_DIRS
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/sega
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/taito
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/toaplan
-        )
+)
 
 if (NOT OPTION_LIGHT)
     list(APPEND DRV_DIRS
@@ -88,7 +88,7 @@ if (NOT OPTION_LIGHT)
             ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/sms
             ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/msx
             ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/spectrum
-            )
+    )
 endif ()
 
 foreach (DIR ${DRV_DIRS})
@@ -99,7 +99,7 @@ endforeach ()
 list(REMOVE_ITEM SRC_DRV
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/capcom/ctv_make.cpp
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/burn/drv/pgm/pgm_sprite_create.cpp
-        )
+)
 
 ##############
 # interfaces
@@ -110,17 +110,17 @@ set(INTF_DIRS
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/intf/cd
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/intf/cd/sdl
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/intf/audio
-        )
+)
 file(GLOB SRC_INTF
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/intf/*.cpp
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/intf/cd/*.cpp
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/intf/cd/sdl/*.cpp
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/intf/audio/*.cpp
-        )
+)
 list(REMOVE_ITEM SRC_INTF
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/intf/audio/aud_dsp.cpp
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/intf/audio/aud_interface.cpp
-        )
+)
 
 ##############
 # cpu
@@ -161,17 +161,17 @@ set(CPU_DIRS
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/cpu/v60
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/cpu/z80
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/cpu/z180
-        )
+)
 file(GLOB_RECURSE SRC_CPU
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/cpu/*.cpp
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/cpu/m68k/m68kcpu.c
-        )
+)
 list(REMOVE_ITEM SRC_CPU
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/cpu/tms34010_intf.cpp
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/cpu/tms34010/tms34010_newdasm.cpp
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/cpu/tms34010/tms34010_dasm.cpp
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/cpu/mips3/x64/mips3_x64.cpp
-        )
+)
 
 if (OPTION_LIGHT)
     # devices
@@ -216,7 +216,7 @@ endif ()
 ##############
 set(7Z_DIRS
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/dep/libs/lib7z
-        )
+)
 file(GLOB SRC_7Z
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/dep/libs/lib7z/7zDec.c
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/dep/libs/lib7z/7zArcIn.c
@@ -232,7 +232,7 @@ file(GLOB SRC_7Z
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/dep/libs/lib7z/7zCrc.c
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/dep/libs/lib7z/7zCrcOpt.c
         ${CMAKE_SOURCE_DIR}/cores/fbneo/src/dep/libs/lib7z/CpuArch.c
-        )
+)
 
 ##############
 # pfbneo
@@ -249,7 +249,7 @@ set(INC ${PFBA_DIRS}
         ${CPU_DIRS}
         ${INTF_DIRS}
         ${CMAKE_CURRENT_BINARY_DIR}/deps
-        )
+)
 
 # flags
 set(FLAGS
@@ -264,7 +264,7 @@ set(FLAGS
         -Wno-conversion -Wno-attributes -Wno-unused-parameter -Wno-unused-value
         -Wno-format-truncation -Wno-parentheses -Wno-sequence-point -Wno-format
         -Wno-misleading-indentation -Wno-restrict -Wno-unused-result
-        )
+)
 
 if (OPTION_LIGHT)
     list(APPEND FLAGS -D__PFBN_LIGHT__)
@@ -363,29 +363,22 @@ include(${CMAKE_SOURCE_DIR}/libcross2d/cmake/targets.cmake)
 
 # add common skin data
 add_custom_target(${PROJECT_NAME}.data.skin
-        COMMAND ${CMAKE_COMMAND} -D SRC=${CMAKE_CURRENT_SOURCE_DIR}/../data/common/datadir -D DST=${CMAKE_CURRENT_BINARY_DIR}/data_datadir -P ${CMAKE_CURRENT_LIST_DIR}/../libcross2d/cmake/copy_directory_custom.cmake
-        COMMAND ${CMAKE_COMMAND} -D SRC=${CMAKE_CURRENT_SOURCE_DIR}/../data/${TARGET_PLATFORM}/datadir -D DST=${CMAKE_CURRENT_BINARY_DIR}/data_datadir -P ${CMAKE_CURRENT_LIST_DIR}/../libcross2d/cmake/copy_directory_custom.cmake
-        COMMAND ${CMAKE_COMMAND} -D SRC=${CMAKE_CURRENT_SOURCE_DIR}/../data/common/romfs -D DST=${CMAKE_CURRENT_BINARY_DIR}/data_romfs -P ${CMAKE_CURRENT_LIST_DIR}/../libcross2d/cmake/copy_directory_custom.cmake
-        COMMAND ${CMAKE_COMMAND} -D SRC=${CMAKE_CURRENT_SOURCE_DIR}/../data/${TARGET_PLATFORM}/romfs -D DST=${CMAKE_CURRENT_BINARY_DIR}/data_romfs -P ${CMAKE_CURRENT_LIST_DIR}/../libcross2d/cmake/copy_directory_custom.cmake
-        )
+        COMMAND ${CMAKE_COMMAND} -D SRC=${CMAKE_CURRENT_SOURCE_DIR}/../data/common/datadir -D DST=${CMAKE_CURRENT_BINARY_DIR}/data_datadir -P ${CMAKE_CURRENT_LIST_DIR}/../libcross2d/cmake/copy_custom.cmake
+        COMMAND ${CMAKE_COMMAND} -D SRC=${CMAKE_CURRENT_SOURCE_DIR}/../data/${TARGET_PLATFORM}/datadir -D DST=${CMAKE_CURRENT_BINARY_DIR}/data_datadir -P ${CMAKE_CURRENT_LIST_DIR}/../libcross2d/cmake/copy_custom.cmake
+        COMMAND ${CMAKE_COMMAND} -D SRC=${CMAKE_CURRENT_SOURCE_DIR}/../data/common/romfs -D DST=${CMAKE_CURRENT_BINARY_DIR}/data_romfs -P ${CMAKE_CURRENT_LIST_DIR}/../libcross2d/cmake/copy_custom.cmake
+        COMMAND ${CMAKE_COMMAND} -D SRC=${CMAKE_CURRENT_SOURCE_DIR}/../data/${TARGET_PLATFORM}/romfs -D DST=${CMAKE_CURRENT_BINARY_DIR}/data_romfs -P ${CMAKE_CURRENT_LIST_DIR}/../libcross2d/cmake/copy_custom.cmake
+)
 add_dependencies(${PROJECT_NAME}.data.skin ${PROJECT_NAME}.data)
 if (OPTION_LIGHT)
     add_custom_target(${PROJECT_NAME}.data.light
             COMMAND rm -rf "${CMAKE_CURRENT_BINARY_DIR}/data_romfs/gamelist*"
             COMMAND cp -f "${CMAKE_CURRENT_SOURCE_DIR}/data/light/gamelist-light.xml" "${CMAKE_CURRENT_BINARY_DIR}/data_romfs/gamelist.xml"
-            )
+    )
     add_dependencies(${PROJECT_NAME}.data.light ${PROJECT_NAME}.data)
 endif ()
-if (PLATFORM_LINUX)
-    add_dependencies(${PROJECT_NAME}-romfs ${PROJECT_NAME}.data.skin)
-    if (OPTION_LIGHT)
-        add_dependencies(${PROJECT_NAME}-romfs ${PROJECT_NAME}.data.light)
-    endif ()
-else ()
-    add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}.data.skin)
-    if (OPTION_LIGHT)
-        add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}.data.light)
-    endif ()
+add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}.data.skin)
+if (OPTION_LIGHT)
+    add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}.data.light)
 endif ()
 
 # fbneo deps
@@ -406,7 +399,7 @@ add_custom_target(${PROJECT_NAME}.deps
         COMMAND ${PERL_EXECUTABLE} ${CMAKE_SOURCE_DIR}/cores/fbneo/src/dep/scripts/psikyo_tile_func.pl -o ${CMAKE_CURRENT_BINARY_DIR}/deps/psikyo_tile_func.h
         # driverlist.h
         COMMAND ${PERL_EXECUTABLE} ${CMAKE_SOURCE_DIR}/cores/fbneo/src/dep/scripts/gamelist.pl -o ${CMAKE_CURRENT_BINARY_DIR}/deps/driverlist.h -l ${CMAKE_CURRENT_BINARY_DIR}/deps/gamelist.txt ${SRC_DRV}
-        )
+)
 if (PLATFORM_ANDROID)
     add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}.deps)
 endif ()
