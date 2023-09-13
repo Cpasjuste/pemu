@@ -53,12 +53,17 @@ int main(int argc, char **argv) {
     io->create(io->getDataPath() + "gamegear");
     io->create(io->getDataPath() + "megacd");
 
-    // create main ui
-    ui = new UiMain(io);
-
     // load custom configuration
     int pgen_version = (__PGEN_VERSION_MAJOR__ * 100) + __PGEN_VERSION_MINOR__;
-    cfg = new PGENConfig(ui, pgen_version);
+    cfg = new PGENConfig(io, pgen_version);
+
+    // create main ui
+    Option *fs = cfg->get(Option::Id::GUI_FULLSCREEN);
+    if (fs && !fs->getValueBool()) {
+        ui = new UiMain(io, {1280, 720});
+    } else {
+        ui = new UiMain(io);
+    }
     ui->setConfig(cfg);
 
     // load skin configuration

@@ -10,7 +10,7 @@
 class PSNESConfig : public c2dui::Config {
 
 public:
-    PSNESConfig(UiMain *ui, int version);
+    PSNESConfig(c2d::Io *io, int version);
 
 };
 

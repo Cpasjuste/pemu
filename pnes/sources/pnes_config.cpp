@@ -8,7 +8,7 @@
 using namespace c2d;
 using namespace c2dui;
 
-PNESConfig::PNESConfig(UiMain *ui, int version) : Config(ui, version) {
+PNESConfig::PNESConfig(c2d::Io *io, int version) : Config(io, version) {
     // no need for auto-scaling mode on pnes
     get(Option::Id::ROM_SCALING_MODE)->set(
             {"SCALING_MODE", {"ASPECT", "INTEGER"}, 0,

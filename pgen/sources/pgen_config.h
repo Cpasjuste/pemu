@@ -11,7 +11,7 @@ class PGENConfig : public c2dui::Config {
 
 public:
 
-    PGENConfig(UiMain *iu, int version, const std::string &defaultRomsPath = "megadrive/");
+    PGENConfig(c2d::Io *io, int version, const std::string &defaultRomsPath = "megadrive/");
 
 };
 

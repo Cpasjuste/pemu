@@ -30,7 +30,7 @@ namespace c2dui {
 
     public:
 
-        Config(UiMain *iu, int version, const std::string &defaultRomsPath = "roms/");
+        Config(c2d::Io *io, int version, const std::string &defaultRomsPath = "roms/");
 
         virtual ~Config() = default;
 
@@ -78,7 +78,7 @@ namespace c2dui {
         std::vector <std::string> roms_paths;
 
     private:
-        UiMain *m_ui;
+        c2d::Io *p_io;
         std::vector <Option> options_gui;
         std::vector <Option> options_rom;
         std::string configPath;

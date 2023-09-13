@@ -11,7 +11,7 @@ class PFBAConfig : public c2dui::Config {
 
 public:
 
-    PFBAConfig(UiMain *ui, int version);
+    PFBAConfig(c2d::Io *io, int version);
 
 };
 

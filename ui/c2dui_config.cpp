@@ -4,9 +4,9 @@
 
 #include "c2dui.h"
 
-Config::Config(UiMain *ui, int ver, const std::string &defaultRomsPath) {
-    m_ui = ui;
-    dataPath = m_ui->getIo()->getDataPath();
+Config::Config(c2d::Io *io, int ver, const std::string &defaultRomsPath) {
+    p_io = io;
+    dataPath = p_io->getDataPath();
     configPath = dataPath + "config.cfg";
     version = ver;
 
@@ -21,7 +21,7 @@ Config::Config(UiMain *ui, int ver, const std::string &defaultRomsPath) {
 
     /// add default roms paths
     roms_paths.clear();
-    roms_paths.emplace_back(m_ui->getIo()->getDataPath() + defaultRomsPath);
+    roms_paths.emplace_back(p_io->getDataPath() + defaultRomsPath);
 
     /// default options available for all cores
     /////////////////////////////////////////////////
@@ -42,14 +42,8 @@ Config::Config(UiMain *ui, int ver, const std::string &defaultRomsPath) {
            Option::Flags::BOOLEAN | Option::Flags::HIDDEN);
     get()->at(get()->size() - 1).setInfo(
             "YOU NEED TO RESTART THE APPLICATION AFTER CHANGING THIS OPTION");
-#if 0 // TODO
-    append("SCREEN_WIDTH", (int) C2DDevice::getResolution().x, Option::Id::GUI_SCREEN_WIDTH,
-           Option::Flags::INTEGER | Option::Flags::HIDDEN);
-    append("SCREEN_HEIGHT", (int) C2DDevice::getResolution().y, Option::Id::GUI_SCREEN_HEIGHT,
-           Option::Flags::INTEGER | Option::Flags::HIDDEN);
-#endif
 #ifdef __FULLSCREEN__
-    append("FULLSCREEN", {"OFF", "ON"}, 0, Option::Id::GUI_FULLSCREEN, Option::Flags::BOOLEAN);
+    append("FULLSCREEN", {"OFF", "ON"}, 1, Option::Id::GUI_FULLSCREEN, Option::Flags::BOOLEAN);
     get()->at(get()->size() - 1).setInfo("YOU NEED TO RESTART THE APPLICATION AFTER CHANGING THIS OPTION");
 #endif
 
@@ -58,7 +52,7 @@ Config::Config(UiMain *ui, int ver, const std::string &defaultRomsPath) {
     // add default skins from romfs
     skins.emplace_back("default");
     // add skins from romfs dir
-    auto files = m_ui->getIo()->getDirList(m_ui->getIo()->getRomFsPath() + "skins/", true);
+    auto files = p_io->getDirList(p_io->getRomFsPath() + "skins/", true);
     for (auto &file: files) {
         if (file.type != c2d::Io::Type::Directory || file.name[0] == '.') {
             continue;
@@ -70,7 +64,7 @@ Config::Config(UiMain *ui, int ver, const std::string &defaultRomsPath) {
         }
     }
     // add skins from data dir
-    files = m_ui->getIo()->getDirList(dataPath + "skins/", true);
+    files = p_io->getDirList(dataPath + "skins/", true);
     for (auto &file: files) {
         if (file.type != c2d::Io::Type::Directory || file.name[0] == '.') {
             continue;
@@ -94,7 +88,8 @@ Config::Config(UiMain *ui, int ver, const std::string &defaultRomsPath) {
     get()->at(get()->size() - 1).setInfo(
             "YOU NEED TO RESTART THE APPLICATION AFTER CHANGING THIS OPTION");
 
-    int aspect_index = ui->getSize().x / ui->getSize().y > 1.33 ? 0 : 1;
+    Vector2i displaySize = C2DDevice::getDisplaySize();
+    int aspect_index = (float) displaySize.x / (float) displaySize.y > 1.33f ? 0 : 1;
     append("SKIN_ASPECT", {"16/9", "4/3"},
            aspect_index, Option::Id::GUI_SKIN_ASPECT, Option::Flags::STRING);
     get()->at(get()->size() - 1).setInfo(
@@ -112,16 +107,16 @@ Config::Config(UiMain *ui, int ver, const std::string &defaultRomsPath) {
     /// default rom config
     /////////////////////////////////////////////////
     append("EMULATION", {"EMULATION"}, 0, Option::Id::MENU_ROM_OPTIONS, Option::Flags::MENU);
-    if (m_ui->getSize().y > 1080) {
-        append("SCALING", {"NONE", "2X", "3X", "4X", "5", "6", "7", "8", "9", "FIT", "FULL"},
+    if (displaySize.y > 1080) {
+        append("SCALING", {"NONE", "2X", "3X", "4X", "5X", "6X", "7X", "8X", "9X", "FIT", "FULL"},
                6, Option::Id::ROM_SCALING, Option::Flags::STRING);
-    } else if (m_ui->getSize().y > 720) {
+    } else if (displaySize.y > 720) {
         append("SCALING", {"NONE", "2X", "3X", "4X", "FIT", "FULL"},
                4, Option::Id::ROM_SCALING, Option::Flags::STRING);
-    } else if (m_ui->getSize().y > 544) {
+    } else if (displaySize.y > 544) {
         append("SCALING", {"NONE", "2X", "3X", "FIT", "FULL"},
                3, Option::Id::ROM_SCALING, Option::Flags::STRING);
-    } else if (m_ui->getSize().y > 240) {
+    } else if (displaySize.y > 240) {
         append("SCALING", {"NONE", "2X", "FIT", "FULL"},
                2, Option::Id::ROM_SCALING, Option::Flags::STRING);
     } else {
@@ -232,7 +227,7 @@ void Config::load(const ss_api::Game &game) {
                         snprintf(p, MAX_PATH, "ROMS_PATH%i", (int) i);
                         const char *value = nullptr;
                         if (config_setting_lookup_string(settings, p, &value) != 0) {
-                            if (m_ui->getIo()->exist(value)) {
+                            if (p_io->exist(value)) {
                                 roms_paths[i] = value;
                                 if (!roms_paths[i].empty() && roms_paths[i].back() != '/') {
                                     roms_paths[i] += '/';
@@ -460,7 +455,7 @@ std::vector<c2d::Input::ButtonMapping> Config::getKeyboardMapping(int player, bo
 }
 
 std::vector<c2d::Input::ButtonMapping> Config::getJoystickMapping(int player, bool isRom) {
-    // TODO: allow per player config ?
+    // TODO: allow per player config
     return {
             {Input::Button::Up,     get(Option::Id::JOY_UP, isRom)->getValueInt()},
             {Input::Button::Down,   get(Option::Id::JOY_DOWN, isRom)->getValueInt()},

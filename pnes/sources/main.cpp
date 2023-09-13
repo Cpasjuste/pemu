@@ -61,12 +61,17 @@ int main(int argc, char **argv) {
     io->create(io->getDataPath() + "configs");
     io->create(io->getDataPath() + "saves");
 
-    // create main ui
-    ui = new UiMain(io);
-
     // load custom configuration
     int pnes_version = (__PNES_VERSION_MAJOR__ * 100) + __PNES_VERSION_MINOR__;
-    cfg = new PNESConfig(ui, pnes_version);
+    cfg = new PNESConfig(io, pnes_version);
+
+    // create main ui
+    Option *fs = cfg->get(Option::Id::GUI_FULLSCREEN);
+    if (fs && !fs->getValueBool()) {
+        ui = new UiMain(io, {1280, 720});
+    } else {
+        ui = new UiMain(io);
+    }
     ui->setConfig(cfg);
 
     // load skin configuration

@@ -8,7 +8,7 @@
 using namespace c2d;
 using namespace c2dui;
 
-PSNESConfig::PSNESConfig(UiMain *ui, int version) : Config(ui, version) {
+PSNESConfig::PSNESConfig(c2d::Io *io, int version) : Config(io, version) {
     printf("PSNESConfig(%s, v%i)\n", getConfigPath().c_str(), version);
 
     add(Option::Id::ROM_SHOW_FPS, "AUDIO_SYNC", {"OFF", "ON"}, 0,

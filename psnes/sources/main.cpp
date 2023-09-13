@@ -42,12 +42,17 @@ int main(int argc, char **argv) {
     io->create(io->getDataPath() + "configs");
     io->create(io->getDataPath() + "saves");
 
-    // create main ui
-    ui = new UiMain(io);
-
     // load custom configuration
     int version = (__PSNES_VERSION_MAJOR__ * 100) + __PSNES_VERSION_MINOR__;
-    cfg = new PSNESConfig(ui, version);
+    cfg = new PSNESConfig(io, version);
+
+    // create main ui
+    Option *fs = cfg->get(Option::Id::GUI_FULLSCREEN);
+    if (fs && !fs->getValueBool()) {
+        ui = new UiMain(io, {1280, 720});
+    } else {
+        ui = new UiMain(io);
+    }
     ui->setConfig(cfg);
 
     // skin
