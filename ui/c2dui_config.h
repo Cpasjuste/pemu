@@ -44,26 +44,26 @@ namespace c2dui {
 
         std::string getRomPath(int n = 0);
 
-        std::vector <std::string> getRomPaths();
+        std::vector<std::string> getRomPaths();
 
-        std::vector <Option> *get(bool isRom = false);
+        std::vector<Option> *get(bool isRom = false);
 
         Option *get(int id, bool isRom = false);
 
         bool add(int target,
-                 const std::string &text, const std::vector <std::string> &values,
+                 const std::string &text, const std::vector<std::string> &values,
                  int defaultValue, int id, unsigned int flags);
 
-        void append(const std::string &text, const std::vector <std::string> &values,
+        void append(const std::string &text, const std::vector<std::string> &values,
                     int defaultValue, int id, unsigned int flags);
 
         void append(const std::string &text, int value, int id, unsigned int flags);
 
         bool hide(int id, bool isRom = false);
 
-        virtual std::vector <c2d::Input::ButtonMapping> getKeyboardMapping(int player, bool isRom = false);
+        virtual std::vector<c2d::Input::ButtonMapping> getKeyboardMapping(int player, bool isRom = false);
 
-        virtual std::vector <c2d::Input::ButtonMapping> getJoystickMapping(int player, bool isRom = false);
+        virtual std::vector<c2d::Input::ButtonMapping> getJoystickMapping(int player, bool isRom = false);
 
         virtual c2d::Vector2i getJoystickAxisLeftMapping(int player, bool isRom = false);
 
@@ -71,16 +71,13 @@ namespace c2dui {
 
         virtual int getJoystickDeadZone(int player, bool isRom = false);
 
-        // TODO
-        //c2d::Vector2f getScreenSize();
-
     protected:
-        std::vector <std::string> roms_paths;
+        std::vector<std::string> roms_paths;
 
     private:
         c2d::Io *p_io;
-        std::vector <Option> options_gui;
-        std::vector <Option> options_rom;
+        std::vector<Option> options_gui;
+        std::vector<Option> options_rom;
         std::string configPath;
         std::string dataPath;
 

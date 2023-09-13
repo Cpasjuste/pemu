@@ -495,18 +495,3 @@ c2d::Vector2i Config::getJoystickAxisRightMapping(int player, bool isRom) {
 int Config::getJoystickDeadZone(int player, bool isRom) {
     return get(Option::Id::JOY_DEADZONE, isRom)->getValueInt();
 }
-
-// TODO
-/*
-c2d::Vector2f Config::getScreenSize() {
-    Option *opt = get(Option::Id::GUI_FULLSCREEN);
-    if (opt && opt->getValueBool()) {
-        return {0, 0};
-    } else {
-        return {
-                (float) get(Option::Id::GUI_SCREEN_WIDTH)->getValueInt(),
-                (float) get(Option::Id::GUI_SCREEN_HEIGHT)->getValueInt()
-        };
-    }
-}
-*/
