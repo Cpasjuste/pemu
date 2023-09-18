@@ -8,7 +8,7 @@
 using namespace c2d::config;
 using namespace ss_api;
 
-ConfigNew::ConfigNew(c2d::Io *io, const std::string &name, int version)
+PEMUConfig::PEMUConfig(c2d::Io *io, const std::string &name, int version)
         : Config(name, io->getDataPath() + "config-new.cfg", version) {
     p_io = io;
 
@@ -73,7 +73,7 @@ ConfigNew::ConfigNew(c2d::Io *io, const std::string &name, int version)
             index = (int) i;
         }
     }
-    main.addOption({"SKIN", skins, index, ConfigNew::Id::GUI_SKIN});
+    main.addOption({"SKIN", skins, index, PEMUConfig::Id::GUI_SKIN});
     addGroup(main);
 
     /*
@@ -152,7 +152,7 @@ ConfigNew::ConfigNew(c2d::Io *io, const std::string &name, int version)
 #endif
 }
 
-bool ConfigNew::loadGame(const Game &game) {
+bool PEMUConfig::loadGame(const Game &game) {
     Group group;
 
     // free game config if needed
@@ -181,7 +181,7 @@ bool ConfigNew::loadGame(const Game &game) {
     return true;
 }
 
-bool ConfigNew::save(bool isGame) {
+bool PEMUConfig::save(bool isGame) {
     if (isGame) {
         if (!p_game_config) return false;
         return p_game_config->save();
@@ -190,7 +190,7 @@ bool ConfigNew::save(bool isGame) {
     return Config::save();
 }
 
-c2d::config::Option *ConfigNew::getOption(int id, bool isGame) {
+c2d::config::Option *PEMUConfig::getOption(int id, bool isGame) {
     if (isGame && p_game_config) {
         return p_game_config->getOption(id);
     }
@@ -198,11 +198,11 @@ c2d::config::Option *ConfigNew::getOption(int id, bool isGame) {
     return Config::getOption(id);
 }
 
-c2d::config::Option *ConfigNew::get(int id, bool isGame) {
+c2d::config::Option *PEMUConfig::get(int id, bool isGame) {
     return getOption(id, isGame);
 }
 
-std::string ConfigNew::getRomPath(const std::string &name) {
+std::string PEMUConfig::getRomPath(const std::string &name) {
     auto group = getGroup(CFG_ID_ROMS);
     if (!group) return "";
 
@@ -211,7 +211,7 @@ std::string ConfigNew::getRomPath(const std::string &name) {
     return option->getString();
 }
 
-std::vector<c2d::Input::ButtonMapping> ConfigNew::getKeyboardMapping(int player, bool isGame) {
+std::vector<c2d::Input::ButtonMapping> PEMUConfig::getKeyboardMapping(int player, bool isGame) {
 #ifndef NO_KEYBOARD
     return {
             {Input::Button::Up,     getOption(Id::KEY_UP, isGame)->getInteger()},
@@ -236,7 +236,7 @@ std::vector<c2d::Input::ButtonMapping> ConfigNew::getKeyboardMapping(int player,
 #endif
 }
 
-std::vector<c2d::Input::ButtonMapping> ConfigNew::getJoystickMapping(int player, bool isGame) {
+std::vector<c2d::Input::ButtonMapping> PEMUConfig::getJoystickMapping(int player, bool isGame) {
     // TODO: allow per player config
     return {
             {Input::Button::Up,     getOption(Id::JOY_UP, isGame)->getInteger()},
@@ -258,24 +258,24 @@ std::vector<c2d::Input::ButtonMapping> ConfigNew::getJoystickMapping(int player,
     };
 }
 
-c2d::Vector2i ConfigNew::getJoystickAxisLeftMapping(int player, bool isGame) {
+c2d::Vector2i PEMUConfig::getJoystickAxisLeftMapping(int player, bool isGame) {
     return {
             getOption(Id::JOY_AXIS_LX, isGame)->getInteger(),
             getOption(Id::JOY_AXIS_LY, isGame)->getInteger()
     };
 }
 
-c2d::Vector2i ConfigNew::getJoystickAxisRightMapping(int player, bool isGame) {
+c2d::Vector2i PEMUConfig::getJoystickAxisRightMapping(int player, bool isGame) {
     return {
             getOption(Id::JOY_AXIS_RX, isGame)->getInteger(),
             getOption(Id::JOY_AXIS_RY, isGame)->getInteger()
     };
 }
 
-int ConfigNew::getJoystickDeadZone(int player, bool isGame) {
+int PEMUConfig::getJoystickDeadZone(int player, bool isGame) {
     return getOption(Id::JOY_DEADZONE, isGame)->getInteger();
 }
 
-ConfigNew::~ConfigNew() {
+PEMUConfig::~PEMUConfig() {
     delete (p_game_config);
 }

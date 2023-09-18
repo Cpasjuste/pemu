@@ -7,7 +7,7 @@
 
 #include "c2dui_config.h"
 
-class PFBAConfig : public c2dui::ConfigNew {
+class PFBAConfig : public c2dui::PEMUConfig {
 public:
     PFBAConfig(c2d::Io *io, int version);
 };

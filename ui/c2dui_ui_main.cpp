@@ -95,21 +95,21 @@ Skin *UiMain::getSkin() {
     return pSkin;
 }
 
-void UiMain::setConfig(ConfigNew *cfg) {
+void UiMain::setConfig(PEMUConfig *cfg) {
     pConfig = cfg;
 
     // add shaders, if any
     auto shaderList = getShaderList();
     if (shaderList) {
-        pConfig->getGroup(ConfigNew::Id::MENU_ROM_OPTIONS)->addOption(
-                {"EFFECT", shaderList->getNames(), 0, ConfigNew::Id::ROM_SHADER});
+        pConfig->getGroup(PEMUConfig::Id::MENU_ROM_OPTIONS)->addOption(
+                {"EFFECT", shaderList->getNames(), 0, PEMUConfig::Id::ROM_SHADER});
     } else {
-        pConfig->getGroup(ConfigNew::Id::MENU_ROM_OPTIONS)->addOption(
-                {"EFFECT", {"NONE"}, 0, ConfigNew::Id::ROM_SHADER})->setFlags(ConfigNew::Flags::HIDDEN);
+        pConfig->getGroup(PEMUConfig::Id::MENU_ROM_OPTIONS)->addOption(
+                {"EFFECT", {"NONE"}, 0, PEMUConfig::Id::ROM_SHADER})->setFlags(PEMUConfig::Flags::HIDDEN);
     }
 }
 
-ConfigNew *UiMain::getConfig() {
+PEMUConfig *UiMain::getConfig() {
     return pConfig;
 }
 
@@ -171,9 +171,9 @@ void UiMain::updateInputMapping(bool isRomConfig) {
         // keep custom config for menus keys
         for (unsigned int i = 0; i < keyMapping.size(); i++) {
             if (keyMapping.at(i).button == Input::Button::Menu1) {
-                keyMapping.at(i).value = pConfig->get(ConfigNew::Id::KEY_MENU1, false)->getInteger();
+                keyMapping.at(i).value = pConfig->get(PEMUConfig::Id::KEY_MENU1, false)->getInteger();
             } else if (keyMapping.at(i).button == Input::Button::Menu2) {
-                keyMapping.at(i).value = pConfig->get(ConfigNew::Id::KEY_MENU2, false)->getInteger();
+                keyMapping.at(i).value = pConfig->get(PEMUConfig::Id::KEY_MENU2, false)->getInteger();
             }
         }
         getInput()->setKeyboardMapping(keyMapping);
@@ -182,9 +182,9 @@ void UiMain::updateInputMapping(bool isRomConfig) {
         // keep custom config for menus keys
         for (unsigned int i = 0; i < joyMapping.size(); i++) {
             if (joyMapping.at(i).button == Input::Button::Menu1) {
-                joyMapping.at(i).value = pConfig->get(ConfigNew::Id::JOY_MENU1, false)->getInteger();
+                joyMapping.at(i).value = pConfig->get(PEMUConfig::Id::JOY_MENU1, false)->getInteger();
             } else if (joyMapping.at(i).button == Input::Button::Menu2) {
-                joyMapping.at(i).value = pConfig->get(ConfigNew::Id::JOY_MENU2, false)->getInteger();
+                joyMapping.at(i).value = pConfig->get(PEMUConfig::Id::JOY_MENU2, false)->getInteger();
             }
         }
         for (int i = 0; i < PLAYER_MAX; i++) {

@@ -7,7 +7,7 @@
 
 #include "c2dui_config.h"
 
-class PSNESConfig : public c2dui::ConfigNew {
+class PSNESConfig : public c2dui::PEMUConfig {
 
 public:
     PSNESConfig(c2d::Io *io, int version);

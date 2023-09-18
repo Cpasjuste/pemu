@@ -7,7 +7,7 @@
 
 #include "c2dui_config.h"
 
-class PGENConfig : public c2dui::ConfigNew {
+class PGENConfig : public c2dui::PEMUConfig {
 public:
     PGENConfig(c2d::Io *io, int version);
 };

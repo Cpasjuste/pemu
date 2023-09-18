@@ -12,11 +12,11 @@ UiHelp::UiHelp(UiMain *ui) : SkinnedRectangle(ui, {"MAIN", "HELP"}) {
     float pos = addItem(true, font, {ui->getSkin()->getButton(100)},
                         "NAVIGATION", {4, getSize().y / 2});
     // run
-    button1 = ui->getConfig()->getOption(ConfigNew::Id::JOY_A)->getInteger();
+    button1 = ui->getConfig()->getOption(PEMUConfig::Id::JOY_A)->getInteger();
     pos = addItem(true, font, {ui->getSkin()->getButton(button1)},
                   "RUN", {pos + 12, getSize().y / 2});
     // favorite
-    button1 = ui->getConfig()->getOption(ConfigNew::Id::JOY_X)->getInteger();
+    button1 = ui->getConfig()->getOption(PEMUConfig::Id::JOY_X)->getInteger();
     if (ui->getSize().x > 640) {
         pos = addItem(true, font, {ui->getSkin()->getButton(button1)},
                       "ADD / REMOVE FAVORITE", {pos + 12, getSize().y / 2});
@@ -26,10 +26,10 @@ UiHelp::UiHelp(UiMain *ui) : SkinnedRectangle(ui, {"MAIN", "HELP"}) {
     }
 
     if (ui->getSize().x > 640) {
-        if (!(ui->getConfig()->get(ConfigNew::Id::GUI_FILTER_SYSTEM)->getFlags() & ConfigNew::Flags::HIDDEN)) {
+        if (!(ui->getConfig()->get(PEMUConfig::Id::GUI_FILTER_SYSTEM)->getFlags() & PEMUConfig::Flags::HIDDEN)) {
             // system
-            button1 = ui->getConfig()->getOption(ConfigNew::Id::JOY_LT)->getInteger();
-            button2 = ui->getConfig()->getOption(ConfigNew::Id::JOY_RT)->getInteger();
+            button1 = ui->getConfig()->getOption(PEMUConfig::Id::JOY_LT)->getInteger();
+            button2 = ui->getConfig()->getOption(PEMUConfig::Id::JOY_RT)->getInteger();
             addItem(true, font,
                     {ui->getSkin()->getButton(button1), ui->getSkin()->getButton(button2)},
                     "SWITCH SYSTEM", {pos + 12, getSize().y / 2});
@@ -37,11 +37,11 @@ UiHelp::UiHelp(UiMain *ui) : SkinnedRectangle(ui, {"MAIN", "HELP"}) {
     }
 
     // main menu
-    button1 = ui->getConfig()->getOption(ConfigNew::Id::JOY_MENU1)->getInteger();
+    button1 = ui->getConfig()->getOption(PEMUConfig::Id::JOY_MENU1)->getInteger();
     pos = addItem(false, font, {ui->getSkin()->getButton(button1)},
                   "MAIN MENU", {getSize().x - 4, getSize().y / 2});
 
-    button1 = ui->getConfig()->getOption(ConfigNew::Id::JOY_MENU2)->getInteger();
+    button1 = ui->getConfig()->getOption(PEMUConfig::Id::JOY_MENU2)->getInteger();
     addItem(false, font, {ui->getSkin()->getButton(button1)},
             "ROM MENU", {pos - 12, getSize().y / 2});
 }

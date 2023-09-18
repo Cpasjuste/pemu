@@ -8,7 +8,7 @@
 using namespace c2d;
 using namespace c2dui;
 
-PGENConfig::PGENConfig(c2d::Io *io, int version) : ConfigNew(io, "PGEN", version) {
+PGENConfig::PGENConfig(c2d::Io *io, int version) : PEMUConfig(io, "PGEN", version) {
     // change default rom path name in config file
     getGroup(CFG_ID_ROMS)->getOptions()->at(0).setName("MEGADRIVE");
     getGroup(CFG_ID_ROMS)->getOptions()->at(0).setString(io->getDataPath() + "megadrive/");
@@ -19,7 +19,7 @@ PGENConfig::PGENConfig(c2d::Io *io, int version) : ConfigNew(io, "PGEN", version
     //getGroup(CFG_ID_ROMS)->addOption({"SG1000", io->getDataPath() + "sg1000/"});
 
     // no need for auto-scaling mode
-    getOption(ConfigNew::Id::ROM_SCALING_MODE)->setArray({"ASPECT", "INTEGER"}, 0);
+    getOption(PEMUConfig::Id::ROM_SCALING_MODE)->setArray({"ASPECT", "INTEGER"}, 0);
 
     // "c2dui_romlist" will also reload config, but we need new roms paths
     load();

@@ -10,9 +10,9 @@ Skin::Skin(UiMain *u) {
 
     // setup skin paths (data path first then romfs path)
     mSkinPath[0] = pMain->getIo()->getDataPath() + "skins/"
-                   + pMain->getConfig()->get(ConfigNew::Id::GUI_SKIN)->getString() + "/";
+                   + pMain->getConfig()->get(PEMUConfig::Id::GUI_SKIN)->getString() + "/";
     mSkinPath[1] = pMain->getIo()->getRomFsPath() + "skins/" +
-                   pMain->getConfig()->get(ConfigNew::Id::GUI_SKIN)->getString() + "/";
+                   pMain->getConfig()->get(PEMUConfig::Id::GUI_SKIN)->getString() + "/";
 
     // try to load skin from data directory first
     if (pMain->getIo()->exist(mSkinPath[0] + "config.cfg")) {
@@ -23,7 +23,7 @@ Skin::Skin(UiMain *u) {
         printf("Skin: config loaded from romfs (%s)\n", (mSkinPath[1] + "config.cfg").c_str());
     } else {
         // restore defaults
-        pMain->getConfig()->get(ConfigNew::Id::GUI_SKIN)->setString("default");
+        pMain->getConfig()->get(PEMUConfig::Id::GUI_SKIN)->setString("default");
         mSkinPath[0] = mSkinPath[1] = pMain->getIo()->getRomFsPath() + "skins/default/";
         printf("Skin: config file not found, reverted to default skin (%s)\n",
                (mSkinPath[0] + "config.cfg").c_str());
@@ -31,7 +31,7 @@ Skin::Skin(UiMain *u) {
     }
 
     // get default font scaling
-    mFontScaling = (float) pMain->getConfig()->get(ConfigNew::Id::GUI_FONT_SCALING)->getInteger();
+    mFontScaling = (float) pMain->getConfig()->get(PEMUConfig::Id::GUI_FONT_SCALING)->getInteger();
     mFontScaling = mFontScaling > 0 ? 1 + (mFontScaling / 10) : 1;
 
     // load buttons textures
@@ -190,7 +190,7 @@ Skin::Skin(UiMain *u) {
     }
 
     // load 4/3 skin config override if needed
-    if (pMain->getConfig()->get(ConfigNew::Id::GUI_SKIN_ASPECT)->getArrayIndex() == 1) {
+    if (pMain->getConfig()->get(PEMUConfig::Id::GUI_SKIN_ASPECT)->getArrayIndex() == 1) {
         for (const auto &path: mSkinPath) {
             std::string cfgPath = path + "config.cfg.override.43";
             if (pMain->getIo()->exist(cfgPath)) {

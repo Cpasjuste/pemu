@@ -65,9 +65,9 @@ public:
         }
 
         // this is an option
-        if (option->getFlags() & ConfigNew::Flags::INPUT) {
+        if (option->getFlags() & PEMUConfig::Flags::INPUT) {
             Skin::Button *button = pMain->getSkin()->getButton(option->getInteger());
-            if (button && option->getId() < ConfigNew::Id::JOY_DEADZONE) {
+            if (button && option->getId() < PEMUConfig::Id::JOY_DEADZONE) {
                 if (button->texture) {
                     p_sprite->setTexture(button->texture, true);
                     p_sprite->setVisibility(Visibility::Visible);
@@ -154,7 +154,7 @@ void UiMenu::load(bool isGame) {
 
     if (isRomMenu) {
         ui->getConfig()->loadGame(game);
-        bool useZipName = ui->getConfig()->getOption(ConfigNew::Id::GUI_SHOW_ZIP_NAMES)->getInteger();
+        bool useZipName = ui->getConfig()->getOption(PEMUConfig::Id::GUI_SHOW_ZIP_NAMES)->getInteger();
         title->setString(useZipName ? Utility::removeExt(game.path) : game.name);
     } else {
         title->setString("MAIN OPTIONS");
@@ -173,7 +173,7 @@ void UiMenu::load(bool isGame) {
         auto options = group.getOptions();
         for (auto &option: *options) {
             // skip hidden options
-            if (option.getFlags() & ConfigNew::Flags::HIDDEN) continue;
+            if (option.getFlags() & PEMUConfig::Flags::HIDDEN) continue;
             // push option
             auto opt = ui->getConfig()->get(option.getId(), isGame);
             menu_options.push_back({option.getName(), opt});
@@ -299,19 +299,19 @@ bool UiMenu::onInput(c2d::Input::Player *players) {
         }
 
         switch (option->getId()) {
-            case ConfigNew::Id::GUI_SHOW_FAVORITES:
-            case ConfigNew::Id::GUI_SHOW_AVAILABLE:
-            case ConfigNew::Id::GUI_SHOW_ZIP_NAMES:
-            case ConfigNew::Id::GUI_FILTER_CLONES:
-            case ConfigNew::Id::GUI_FILTER_SYSTEM:
-            case ConfigNew::Id::GUI_FILTER_EDITOR:
-            case ConfigNew::Id::GUI_FILTER_DEVELOPER:
-            case ConfigNew::Id::GUI_FILTER_PLAYERS:
-            case ConfigNew::Id::GUI_FILTER_RATING:
-            case ConfigNew::Id::GUI_FILTER_ROTATION:
-            case ConfigNew::Id::GUI_FILTER_RESOLUTION:
-            case ConfigNew::Id::GUI_FILTER_DATE:
-            case ConfigNew::Id::GUI_FILTER_GENRE: {
+            case PEMUConfig::Id::GUI_SHOW_FAVORITES:
+            case PEMUConfig::Id::GUI_SHOW_AVAILABLE:
+            case PEMUConfig::Id::GUI_SHOW_ZIP_NAMES:
+            case PEMUConfig::Id::GUI_FILTER_CLONES:
+            case PEMUConfig::Id::GUI_FILTER_SYSTEM:
+            case PEMUConfig::Id::GUI_FILTER_EDITOR:
+            case PEMUConfig::Id::GUI_FILTER_DEVELOPER:
+            case PEMUConfig::Id::GUI_FILTER_PLAYERS:
+            case PEMUConfig::Id::GUI_FILTER_RATING:
+            case PEMUConfig::Id::GUI_FILTER_ROTATION:
+            case PEMUConfig::Id::GUI_FILTER_RESOLUTION:
+            case PEMUConfig::Id::GUI_FILTER_DATE:
+            case PEMUConfig::Id::GUI_FILTER_GENRE: {
                 std::string name = Utility::toUpper(option->getName());
                 std::string value = Utility::toUpper(option->getString());
                 if (option->getComment().empty()) {
@@ -321,8 +321,8 @@ bool UiMenu::onInput(c2d::Input::Player *players) {
                 break;
             }
 
-            case ConfigNew::Id::ROM_ROTATION:
-            case ConfigNew::Id::ROM_SCALING:
+            case PEMUConfig::Id::ROM_ROTATION:
+            case PEMUConfig::Id::ROM_SCALING:
                 if (isEmuRunning) {
                     ui->getUiEmu()->getVideo()->updateScaling();
                     auto gw = (float) ui->getUiEmu()->getVideo()->getTextureRect().width;
@@ -341,7 +341,7 @@ bool UiMenu::onInput(c2d::Input::Player *players) {
                             ui->getUiEmu()->getVideo()->getScale().x, ui->getUiEmu()->getVideo()->getScale().y);
                 }
                 break;
-            case ConfigNew::Id::ROM_SCALING_MODE:
+            case PEMUConfig::Id::ROM_SCALING_MODE:
                 if (option->getString() == "AUTO") {
                     ui->getUiStatusBox()->show("TRY TO KEEP INTEGER SCALING IF ASPECT RATIO IS NOT TOO DIVERGENT");
                 } else if (option->getString() == "ASPECT") {
@@ -354,12 +354,12 @@ bool UiMenu::onInput(c2d::Input::Player *players) {
                     ui->getUiEmu()->getVideo()->updateScaling();
                 }
                 break;
-            case ConfigNew::Id::ROM_FILTER:
+            case PEMUConfig::Id::ROM_FILTER:
                 if (isEmuRunning) {
                     ui->getUiEmu()->getVideo()->setFilter((Texture::Filter) option->getArrayIndex());
                 }
                 break;
-            case ConfigNew::Id::ROM_SHADER:
+            case PEMUConfig::Id::ROM_SHADER:
                 if (isEmuRunning) {
                     ui->getUiEmu()->getVideo()->setShader(option->getArrayIndex());
                     ui->getUiStatusBox()->show(option->getString());
@@ -372,7 +372,7 @@ bool UiMenu::onInput(c2d::Input::Player *players) {
                     }
                     break;
 #endif
-            case ConfigNew::Id::GUI_VIDEO_SNAP_DELAY:
+            case PEMUConfig::Id::GUI_VIDEO_SNAP_DELAY:
                 ui->getUiRomList()->setVideoSnapDelay(option->getInteger());
                 break;
 
@@ -384,7 +384,7 @@ bool UiMenu::onInput(c2d::Input::Player *players) {
     // FIRE1 (ENTER)
     if (buttons & Input::Button::A) {
         auto option = lines.at(highlightIndex)->p_option;
-        if (option && option->getFlags() == ConfigNew::Flags::INPUT) {
+        if (option && option->getFlags() == PEMUConfig::Flags::INPUT) {
             int new_key = 0;
             int res = ui->getUiMessageBox()->show("NEW INPUT", "PRESS A BUTTON", "", "", &new_key, 9);
             if (res != MessageBox::TIMEOUT) {

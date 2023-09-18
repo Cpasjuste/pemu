@@ -76,7 +76,7 @@ void RomList::build(bool addArcadeSystem, const ss_api::System &system) {
         gameListPath = ui->getIo()->getRomFsPath() + "gamelist.xml";
     }
 
-    bool showAvailableOnly = ui->getConfig()->get(ConfigNew::Id::GUI_SHOW_AVAILABLE)->getArrayIndex();
+    bool showAvailableOnly = ui->getConfig()->get(PEMUConfig::Id::GUI_SHOW_AVAILABLE)->getArrayIndex();
     gameList->append(gameListPath, romPath, false, filters, system, showAvailableOnly);
 
     setLoadingText("Games: %li / %li", gameList->getAvailableCount(), gameList->games.size());
@@ -100,27 +100,27 @@ void RomList::build(bool addArcadeSystem, const ss_api::System &system) {
         gameList->systemList.systems.insert(gameList->systemList.systems.begin(), {9999, 0, "ARCADE"});
     }
 
-    ui->getConfig()->getGroup(ConfigNew::Id::MENU_MAIN)->addOption(
-            {"FILTER_SYSTEM", gameList->systemList.getNames(), 0, ConfigNew::Id::GUI_FILTER_SYSTEM})->setFlags(
-            ConfigNew::Flags::HIDDEN);
-    ui->getConfig()->getGroup(ConfigNew::Id::MENU_MAIN)->addOption(
-            {"FILTER_GENRE", gameList->getGenreNames(), 0, ConfigNew::Id::GUI_FILTER_GENRE});
-    ui->getConfig()->getGroup(ConfigNew::Id::MENU_MAIN)->addOption(
-            {"FILTER_DATE", gameList->dates, 0, ConfigNew::Id::GUI_FILTER_DATE});
-    ui->getConfig()->getGroup(ConfigNew::Id::MENU_MAIN)->addOption(
-            {"FILTER_EDITOR", gameList->getEditorNames(), 0, ConfigNew::Id::GUI_FILTER_EDITOR});
-    ui->getConfig()->getGroup(ConfigNew::Id::MENU_MAIN)->addOption(
-            {"FILTER_DEVELOPER", gameList->getDeveloperNames(), 0, ConfigNew::Id::GUI_FILTER_DEVELOPER});
-    ui->getConfig()->getGroup(ConfigNew::Id::MENU_MAIN)->addOption(
-            {"FILTER_PLAYERS", gameList->getPlayersNames(), 0, ConfigNew::Id::GUI_FILTER_PLAYERS});
-    ui->getConfig()->getGroup(ConfigNew::Id::MENU_MAIN)->addOption(
-            {"FILTER_RATING", gameList->getRatingNames(), 0, ConfigNew::Id::GUI_FILTER_RATING});
-    ui->getConfig()->getGroup(ConfigNew::Id::MENU_MAIN)->addOption(
-            {"FILTER_ROTATION", gameList->getRotationNames(), 0, ConfigNew::Id::GUI_FILTER_ROTATION})->setFlags(
-            ConfigNew::Flags::HIDDEN);
-    ui->getConfig()->getGroup(ConfigNew::Id::MENU_MAIN)->addOption(
-            {"FILTER_RESOLUTION", gameList->resolutions, 0, ConfigNew::Id::GUI_FILTER_RESOLUTION})->setFlags(
-            ConfigNew::Flags::HIDDEN);
+    ui->getConfig()->getGroup(PEMUConfig::Id::MENU_MAIN)->addOption(
+            {"FILTER_SYSTEM", gameList->systemList.getNames(), 0, PEMUConfig::Id::GUI_FILTER_SYSTEM})->setFlags(
+            PEMUConfig::Flags::HIDDEN);
+    ui->getConfig()->getGroup(PEMUConfig::Id::MENU_MAIN)->addOption(
+            {"FILTER_GENRE", gameList->getGenreNames(), 0, PEMUConfig::Id::GUI_FILTER_GENRE});
+    ui->getConfig()->getGroup(PEMUConfig::Id::MENU_MAIN)->addOption(
+            {"FILTER_DATE", gameList->dates, 0, PEMUConfig::Id::GUI_FILTER_DATE});
+    ui->getConfig()->getGroup(PEMUConfig::Id::MENU_MAIN)->addOption(
+            {"FILTER_EDITOR", gameList->getEditorNames(), 0, PEMUConfig::Id::GUI_FILTER_EDITOR});
+    ui->getConfig()->getGroup(PEMUConfig::Id::MENU_MAIN)->addOption(
+            {"FILTER_DEVELOPER", gameList->getDeveloperNames(), 0, PEMUConfig::Id::GUI_FILTER_DEVELOPER});
+    ui->getConfig()->getGroup(PEMUConfig::Id::MENU_MAIN)->addOption(
+            {"FILTER_PLAYERS", gameList->getPlayersNames(), 0, PEMUConfig::Id::GUI_FILTER_PLAYERS});
+    ui->getConfig()->getGroup(PEMUConfig::Id::MENU_MAIN)->addOption(
+            {"FILTER_RATING", gameList->getRatingNames(), 0, PEMUConfig::Id::GUI_FILTER_RATING});
+    ui->getConfig()->getGroup(PEMUConfig::Id::MENU_MAIN)->addOption(
+            {"FILTER_ROTATION", gameList->getRotationNames(), 0, PEMUConfig::Id::GUI_FILTER_ROTATION})->setFlags(
+            PEMUConfig::Flags::HIDDEN);
+    ui->getConfig()->getGroup(PEMUConfig::Id::MENU_MAIN)->addOption(
+            {"FILTER_RESOLUTION", gameList->resolutions, 0, PEMUConfig::Id::GUI_FILTER_RESOLUTION})->setFlags(
+            PEMUConfig::Flags::HIDDEN);
 
     // we need to reload config to update new options we just added
     ui->getConfig()->load();

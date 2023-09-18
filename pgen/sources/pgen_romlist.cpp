@@ -20,7 +20,7 @@ void PGENRomList::build(bool addArcadeSystem, const ss_api::System &system) {
 #endif
     };
 
-    bool showAvailableOnly = ui->getConfig()->get(ConfigNew::Id::GUI_SHOW_AVAILABLE)->getInteger();
+    bool showAvailableOnly = ui->getConfig()->get(PEMUConfig::Id::GUI_SHOW_AVAILABLE)->getInteger();
     for (size_t i = 0; i < gameLists.size(); i++) {
         // look for a "gamelist.xml" file inside rom folder, if none found use embedded (romfs) "gamelist.xml"
         std::string gameListPath = ui->getConfig()->getRomPath(gameLists[i].name) + "gamelist.xml";
@@ -38,5 +38,5 @@ void PGENRomList::build(bool addArcadeSystem, const ss_api::System &system) {
     RomList::build(addArcadeSystem, {1, 0, "Megadrive"});
 
     // enable system filtering
-    ui->getConfig()->get(ConfigNew::Id::GUI_FILTER_SYSTEM)->setFlags(0);
+    ui->getConfig()->get(PEMUConfig::Id::GUI_FILTER_SYSTEM)->setFlags(0);
 }

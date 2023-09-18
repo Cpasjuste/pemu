@@ -69,7 +69,7 @@ int main(int argc, char **argv) {
     cfg = new PFBAConfig(io, version);
 
     // create main ui/renderer
-    c2d::config::Option *fs = cfg->get(ConfigNew::Id::GUI_FULLSCREEN);
+    c2d::config::Option *fs = cfg->get(PEMUConfig::Id::GUI_FULLSCREEN);
     if (fs && !fs->getInteger()) {
         ui = new UiMain(io, {1280, 720});
     } else {

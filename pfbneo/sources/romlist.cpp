@@ -29,7 +29,7 @@ void PFBARomList::build(bool addArcadeSystem, const ss_api::System &system) {
             {"TG16",      "gamelist_tg16.xml"}
     };
 
-    bool showAvailableOnly = ui->getConfig()->get(ConfigNew::Id::GUI_SHOW_AVAILABLE)->getInteger();
+    bool showAvailableOnly = ui->getConfig()->get(PEMUConfig::Id::GUI_SHOW_AVAILABLE)->getInteger();
     for (size_t i = 0; i < gameLists.size(); i++) {
         // look for a "gamelist.xml" file inside rom folder, if none found use embedded (romfs) "gamelist.xml"
         std::string gameListPath = ui->getConfig()->getRomPath(gameLists[i].name) + "gamelist.xml";
@@ -48,8 +48,8 @@ void PFBARomList::build(bool addArcadeSystem, const ss_api::System &system) {
     RomList::build(addArcadeSystem);
 
     // remove hidden flags for pfbneo
-    ui->getConfig()->get(ConfigNew::Id::GUI_FILTER_CLONES)->setFlags(0);
-    ui->getConfig()->get(ConfigNew::Id::GUI_FILTER_SYSTEM)->setFlags(0);
-    ui->getConfig()->get(ConfigNew::Id::GUI_FILTER_ROTATION)->setFlags(0);
-    ui->getConfig()->get(ConfigNew::Id::GUI_FILTER_RESOLUTION)->setFlags(0);
+    ui->getConfig()->get(PEMUConfig::Id::GUI_FILTER_CLONES)->setFlags(0);
+    ui->getConfig()->get(PEMUConfig::Id::GUI_FILTER_SYSTEM)->setFlags(0);
+    ui->getConfig()->get(PEMUConfig::Id::GUI_FILTER_ROTATION)->setFlags(0);
+    ui->getConfig()->get(PEMUConfig::Id::GUI_FILTER_RESOLUTION)->setFlags(0);
 }

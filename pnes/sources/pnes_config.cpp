@@ -8,11 +8,11 @@
 using namespace c2d;
 using namespace c2dui;
 
-PNESConfig::PNESConfig(c2d::Io *io, int version) : ConfigNew(io, "PNES", version) {
+PNESConfig::PNESConfig(c2d::Io *io, int version) : PEMUConfig(io, "PNES", version) {
     printf("PNESConfig(%s, v%i)\n", getPath().c_str(), version);
 
     // no need for auto-scaling mode on pnes
-    getOption(ConfigNew::Id::ROM_SCALING_MODE)->setArray({"ASPECT", "INTEGER"}, 0);
+    getOption(PEMUConfig::Id::ROM_SCALING_MODE)->setArray({"ASPECT", "INTEGER"}, 0);
 
 #ifdef __SWITCH__
     // on nintendo switch invert A/B buttons

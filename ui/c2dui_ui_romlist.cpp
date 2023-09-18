@@ -30,7 +30,7 @@ UIRomList::UIRomList(UiMain *main, RomList *romList, const c2d::Vector2f &size)
     UIRomList::add(pRomInfo);
 
     // add rom list title (system text)
-    if (!(pMain->getConfig()->getOption(ConfigNew::Id::GUI_FILTER_SYSTEM)->getFlags() & ConfigNew::Flags::HIDDEN)) {
+    if (!(pMain->getConfig()->getOption(PEMUConfig::Id::GUI_FILTER_SYSTEM)->getFlags() & PEMUConfig::Flags::HIDDEN)) {
         pTitleText = new SkinnedText(pMain, {"SKIN_CONFIG", "MAIN", "ROM_LIST", "SYSTEM_TEXT"});
         if (pTitleText->available) {
             UIRomList::add(pTitleText);
@@ -83,7 +83,7 @@ UIRomList::UIRomList(UiMain *main, RomList *romList, const c2d::Vector2f &size)
     pBlur->setVisibility(Visibility::Hidden);
     UIRomList::add(pBlur);
 
-    int delay = pMain->getConfig()->get(ConfigNew::Id::GUI_VIDEO_SNAP_DELAY)->getInteger();
+    int delay = pMain->getConfig()->get(PEMUConfig::Id::GUI_VIDEO_SNAP_DELAY)->getInteger();
     UIRomList::setVideoSnapDelay(delay);
 
     // filter roms
@@ -95,7 +95,7 @@ void UIRomList::updateRomList() {
     sortRomList();
 
     if (pTitleText && pTitleText->available) {
-        std::string sys = pMain->getConfig()->get(ConfigNew::Id::GUI_FILTER_SYSTEM)->getString();
+        std::string sys = pMain->getConfig()->get(PEMUConfig::Id::GUI_FILTER_SYSTEM)->getString();
         pTitleText->setString(sys);
     }
 
@@ -157,10 +157,10 @@ std::string UIRomList::getPreview(const Game &game, UIRomList::PreviewType type)
 
 void UIRomList::filterRomList() {
     printf("UIRomList::filterRomList\n");
-    ss_api::GameList *list = pMain->getConfig()->get(ConfigNew::Id::GUI_SHOW_FAVORITES)->getInteger() ?
+    ss_api::GameList *list = pMain->getConfig()->get(PEMUConfig::Id::GUI_SHOW_FAVORITES)->getInteger() ?
                              pRomList->gameListFav : pRomList->gameList;
-    bool showClones = pMain->getConfig()->get(ConfigNew::Id::GUI_FILTER_CLONES)->getInteger();
-    std::string system = pMain->getConfig()->get(ConfigNew::Id::GUI_FILTER_SYSTEM)->getString();
+    bool showClones = pMain->getConfig()->get(PEMUConfig::Id::GUI_FILTER_CLONES)->getInteger();
+    std::string system = pMain->getConfig()->get(PEMUConfig::Id::GUI_FILTER_SYSTEM)->getString();
     int systemId;
     // custom arcade system (mame sscrap id 75)
     if (system == "ARCADE") {
@@ -168,26 +168,26 @@ void UIRomList::filterRomList() {
     } else {
         systemId = system == "ALL" ? -1 : list->systemList.findByName(system).id;
     }
-    std::string editor = pMain->getConfig()->get(ConfigNew::Id::GUI_FILTER_EDITOR)->getString();
+    std::string editor = pMain->getConfig()->get(PEMUConfig::Id::GUI_FILTER_EDITOR)->getString();
     int editorId = editor == "ALL" ? -1 : list->findEditorByName(editor).id;
-    std::string dev = pMain->getConfig()->get(ConfigNew::Id::GUI_FILTER_DEVELOPER)->getString();
+    std::string dev = pMain->getConfig()->get(PEMUConfig::Id::GUI_FILTER_DEVELOPER)->getString();
     int devId = dev == "ALL" ? -1 : list->findDeveloperByName(dev).id;
-    int players = Utility::parseInt(pMain->getConfig()->get(ConfigNew::Id::GUI_FILTER_PLAYERS)->getString(), -1);
-    int rating = Utility::parseInt(pMain->getConfig()->get(ConfigNew::Id::GUI_FILTER_RATING)->getString(), -1);
-    int rotation = Utility::parseInt(pMain->getConfig()->get(ConfigNew::Id::GUI_FILTER_ROTATION)->getString(), -1);
-    std::string genre = pMain->getConfig()->get(ConfigNew::Id::GUI_FILTER_GENRE)->getString();
+    int players = Utility::parseInt(pMain->getConfig()->get(PEMUConfig::Id::GUI_FILTER_PLAYERS)->getString(), -1);
+    int rating = Utility::parseInt(pMain->getConfig()->get(PEMUConfig::Id::GUI_FILTER_RATING)->getString(), -1);
+    int rotation = Utility::parseInt(pMain->getConfig()->get(PEMUConfig::Id::GUI_FILTER_ROTATION)->getString(), -1);
+    std::string genre = pMain->getConfig()->get(PEMUConfig::Id::GUI_FILTER_GENRE)->getString();
     int genreId = genre == "ALL" ? -1 : list->findGenreByName(genre).id;
 
     mGameList = list->filter(
             false, showClones, systemId == 9999 ? -1 : systemId, systemId == 9999 ? 75 : -1,
             editorId, devId, players, rating, rotation, genreId,
-            pMain->getConfig()->get(ConfigNew::Id::GUI_FILTER_RESOLUTION)->getString(),
-            pMain->getConfig()->get(ConfigNew::Id::GUI_FILTER_DATE)->getString()
+            pMain->getConfig()->get(PEMUConfig::Id::GUI_FILTER_RESOLUTION)->getString(),
+            pMain->getConfig()->get(PEMUConfig::Id::GUI_FILTER_DATE)->getString()
     );
 }
 
 void UIRomList::sortRomList() {
-    bool byZipName = pMain->getConfig()->get(ConfigNew::Id::GUI_SHOW_ZIP_NAMES)->getInteger();
+    bool byZipName = pMain->getConfig()->get(PEMUConfig::Id::GUI_SHOW_ZIP_NAMES)->getInteger();
     mGameList.sortAlpha(byZipName);
 }
 
@@ -269,7 +269,7 @@ bool UIRomList::onInput(c2d::Input::Player *players) {
                     "FAVORITES", "Remove from favorites ?", "OK", "CANCEL");
             if (res == MessageBox::LEFT) {
                 pRomList->removeFav(game);
-                if (pMain->getConfig()->get(ConfigNew::Id::GUI_SHOW_FAVORITES)->getInteger()) {
+                if (pMain->getConfig()->get(PEMUConfig::Id::GUI_SHOW_FAVORITES)->getInteger()) {
                     // update list if we are in favorites
                     updateRomList();
                 }
@@ -286,14 +286,14 @@ bool UIRomList::onInput(c2d::Input::Player *players) {
     // only allow system switch if skin contains romlist title
     if (pTitleText && pTitleText->available) {
         if (buttons & Input::Button::LT) {
-            Option *sysOpt = pMain->getConfig()->get(ConfigNew::Id::GUI_FILTER_SYSTEM);
+            Option *sysOpt = pMain->getConfig()->get(PEMUConfig::Id::GUI_FILTER_SYSTEM);
             size_t sysCount = sysOpt->getArray().size();
             if (sysCount > 1) {
                 sysOpt->setArrayMovePrev();
                 updateRomList();
             }
         } else if (buttons & Input::Button::RT) {
-            Option *sysOpt = pMain->getConfig()->get(ConfigNew::Id::GUI_FILTER_SYSTEM);
+            Option *sysOpt = pMain->getConfig()->get(PEMUConfig::Id::GUI_FILTER_SYSTEM);
             size_t sysCount = sysOpt->getArray().size();
             if (sysCount > 1) {
                 sysOpt->setArrayMoveNext();

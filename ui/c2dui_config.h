@@ -8,7 +8,7 @@
 #define C2D_CONFIG_RESTART_NEEDED "YOU NEED TO RESTART THE APPLICATION AFTER CHANGING THIS OPTION"
 
 namespace c2dui {
-    class ConfigNew : public c2d::config::Config {
+    class PEMUConfig : public c2d::config::Config {
     public:
         enum Flags {
             INPUT = BIT(1),
@@ -106,9 +106,9 @@ namespace c2dui {
             END
         };
 
-        ConfigNew(c2d::Io *io, const std::string &name, int version = 1);
+        PEMUConfig(c2d::Io *io, const std::string &name, int version = 1);
 
-        ~ConfigNew();
+        ~PEMUConfig();
 
         bool loadGame(const ss_api::Game &game);
 
@@ -136,6 +136,6 @@ namespace c2dui {
     };
 }
 
-#define CFG_ID_ROMS (ConfigNew::Id::END + 1)
+#define CFG_ID_ROMS (PEMUConfig::Id::END + 1)
 
 #endif //C2DUI_CONFIG_NEW_H
