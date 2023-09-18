@@ -18,7 +18,7 @@
 #include "c2dui_romlist.h"
 #include "c2dui_skin.h"
 #include "c2dui_video.h"
-#include "c2dui_config_new.h"
+#include "c2dui_config.h"
 
 #include "skin/SkinnedRectangle.h"
 #include "skin/SkinnedText.h"

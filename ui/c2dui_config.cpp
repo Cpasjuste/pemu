@@ -3,7 +3,7 @@
 //
 
 #include "c2dui.h"
-#include "c2dui_config_new.h"
+#include "c2dui_config.h"
 
 using namespace c2d::config;
 using namespace ss_api;

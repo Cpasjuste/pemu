@@ -5,7 +5,7 @@
 #ifndef PFBA_CONFIG_H
 #define PFBA_CONFIG_H
 
-#include "c2dui_config_new.h"
+#include "c2dui_config.h"
 
 class PFBAConfig : public c2dui::ConfigNew {
 public:

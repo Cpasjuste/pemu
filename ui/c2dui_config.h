@@ -5,25 +5,6 @@
 #ifndef C2DUI_CONFIG_NEW_H
 #define C2DUI_CONFIG_NEW_H
 
-/*
-#define FBN_PATH_ARCADE     0
-#define FBN_PATH_CHANNELF   1
-#define FBN_PATH_COLECO     2
-#define FBN_PATH_FDS        3
-#define FBN_PATH_GAMEGEAR   4
-#define FBN_PATH_MEGADRIVE  5
-#define FBN_PATH_MSX        6
-#define FBN_PATH_NES        7
-#define FBN_PATH_NGP        8
-#define FBN_PATH_PCE        9
-#define FBN_PATH_SG1000     10
-#define FBN_PATH_SGX        11
-#define FBN_PATH_SMS        12
-#define FBN_PATH_SPECTRUM   13
-#define FBN_PATH_TG16       14
-#define FBN_PATH_MAX        15
-*/
-
 #define C2D_CONFIG_RESTART_NEEDED "YOU NEED TO RESTART THE APPLICATION AFTER CHANGING THIS OPTION"
 
 namespace c2dui {

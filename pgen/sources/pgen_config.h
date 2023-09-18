@@ -5,7 +5,7 @@
 #ifndef PGEN_CONFIG_H
 #define PGEN_CONFIG_H
 
-#include "c2dui_config_new.h"
+#include "c2dui_config.h"
 
 class PGENConfig : public c2dui::ConfigNew {
 public:

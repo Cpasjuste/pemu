@@ -5,7 +5,7 @@
 #ifndef PSNES_CONFIG_H
 #define PSNES_CONFIG_H
 
-#include "c2dui_config_new.h"
+#include "c2dui_config.h"
 
 class PSNESConfig : public c2dui::ConfigNew {
 
