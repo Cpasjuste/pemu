@@ -7,31 +7,31 @@ project(pnes)
 # NESTOPIA
 ##############
 set(NESTOPIA_INC
-        ${CMAKE_SOURCE_DIR}/cores/nestopia/source
-        ${CMAKE_SOURCE_DIR}/cores/nestopia/source/core
-        ${CMAKE_SOURCE_DIR}/cores/nestopia/source/core/api
-        ${CMAKE_SOURCE_DIR}/cores/nestopia/source/core/board
-        ${CMAKE_SOURCE_DIR}/cores/nestopia/source/core/input
-        ${CMAKE_SOURCE_DIR}/cores/nestopia/source/core/vssystem
+        ${CMAKE_SOURCE_DIR}/external/cores/nestopia/source
+        ${CMAKE_SOURCE_DIR}/external/cores/nestopia/source/core
+        ${CMAKE_SOURCE_DIR}/external/cores/nestopia/source/core/api
+        ${CMAKE_SOURCE_DIR}/external/cores/nestopia/source/core/board
+        ${CMAKE_SOURCE_DIR}/external/cores/nestopia/source/core/input
+        ${CMAKE_SOURCE_DIR}/external/cores/nestopia/source/core/vssystem
 )
 
 file(GLOB NESTOPIA_SRC
-        ${CMAKE_SOURCE_DIR}/cores/nestopia/source/core/*.c*
-        ${CMAKE_SOURCE_DIR}/cores/nestopia/source/core/api/*.c*
-        ${CMAKE_SOURCE_DIR}/cores/nestopia/source/core/board/*.c*
-        ${CMAKE_SOURCE_DIR}/cores/nestopia/source/core/input/*.c*
-        ${CMAKE_SOURCE_DIR}/cores/nestopia/source/core/vssystem/*.c*
-        ${CMAKE_SOURCE_DIR}/cores/nestopia/source/fltkui/cheats.cpp
-        ${CMAKE_SOURCE_DIR}/cores/nestopia/source/fltkui/homebrew.cpp
-        ${CMAKE_SOURCE_DIR}/cores/nestopia/source/fltkui/samples.cpp
-        ${CMAKE_SOURCE_DIR}/cores/nestopia/source/fltkui/nstcommon.cpp
+        ${CMAKE_SOURCE_DIR}/external/cores/nestopia/source/core/*.c*
+        ${CMAKE_SOURCE_DIR}/external/cores/nestopia/source/core/api/*.c*
+        ${CMAKE_SOURCE_DIR}/external/cores/nestopia/source/core/board/*.c*
+        ${CMAKE_SOURCE_DIR}/external/cores/nestopia/source/core/input/*.c*
+        ${CMAKE_SOURCE_DIR}/external/cores/nestopia/source/core/vssystem/*.c*
+        ${CMAKE_SOURCE_DIR}/external/cores/nestopia/source/fltkui/cheats.cpp
+        ${CMAKE_SOURCE_DIR}/external/cores/nestopia/source/fltkui/homebrew.cpp
+        ${CMAKE_SOURCE_DIR}/external/cores/nestopia/source/fltkui/samples.cpp
+        ${CMAKE_SOURCE_DIR}/external/cores/nestopia/source/fltkui/nstcommon.cpp
 )
 list(REMOVE_ITEM NESTOPIA_SRC
-        ${CMAKE_SOURCE_DIR}/cores/nestopia/source/core/NstVideoFilter2xSaI.cpp
-        ${CMAKE_SOURCE_DIR}/cores/nestopia/source/core/NstVideoFilterHqX.cpp
-        ${CMAKE_SOURCE_DIR}/cores/nestopia/source/core/NstVideoFilterScaleX.cpp
-        ${CMAKE_SOURCE_DIR}/cores/nestopia/source/core/NstVideoFilterxBR.cpp
-        ${CMAKE_SOURCE_DIR}/cores/nestopia/source/core/NstVideoFilterNtsc.cpp
+        ${CMAKE_SOURCE_DIR}/external/cores/nestopia/source/core/NstVideoFilter2xSaI.cpp
+        ${CMAKE_SOURCE_DIR}/external/cores/nestopia/source/core/NstVideoFilterHqX.cpp
+        ${CMAKE_SOURCE_DIR}/external/cores/nestopia/source/core/NstVideoFilterScaleX.cpp
+        ${CMAKE_SOURCE_DIR}/external/cores/nestopia/source/core/NstVideoFilterxBR.cpp
+        ${CMAKE_SOURCE_DIR}/external/cores/nestopia/source/core/NstVideoFilterNtsc.cpp
 )
 
 set(NESTOPIA_CFLAGS
@@ -132,6 +132,6 @@ add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}.data.skin)
 add_custom_target(${PROJECT_NAME}.data.extra
         DEPENDS ${PROJECT_NAME}.data
         # copy nst database from nestopia
-        COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/cores/nestopia/NstDatabase.xml ${CMAKE_CURRENT_BINARY_DIR}/data_romfs/
+        COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/external/cores/nestopia/NstDatabase.xml ${CMAKE_CURRENT_BINARY_DIR}/data_romfs/
 )
 add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}.data.extra)

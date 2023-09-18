@@ -17,31 +17,31 @@ set(OPTION_JMA OFF CACHE BOOL "Build with jma support")
 set(OPTION_DEBUGGER OFF CACHE BOOL "Build with debugger support")
 
 set(SNES9X_INC
-        ${CMAKE_SOURCE_DIR}/cores/snes9x
-        ${CMAKE_SOURCE_DIR}/cores/snes9x/apu
-        ${CMAKE_SOURCE_DIR}/cores/snes9x/apu/bapu
-        ${CMAKE_SOURCE_DIR}/cores/snes9x/filter
+        ${CMAKE_SOURCE_DIR}/external/cores/snes9x
+        ${CMAKE_SOURCE_DIR}/external/cores/snes9x/apu
+        ${CMAKE_SOURCE_DIR}/external/cores/snes9x/apu/bapu
+        ${CMAKE_SOURCE_DIR}/external/cores/snes9x/filter
 )
 
 file(GLOB SNES9X_SRC
-        ${CMAKE_SOURCE_DIR}/cores/snes9x/*.c*
-        ${CMAKE_SOURCE_DIR}/cores/snes9x/apu/*.c*
-        ${CMAKE_SOURCE_DIR}/cores/snes9x/apu/bapu/*.c*
-        ${CMAKE_SOURCE_DIR}/cores/snes9x/apu/bapu/dsp/*.c*
-        ${CMAKE_SOURCE_DIR}/cores/snes9x/apu/bapu/smp/*.c*
-        ${CMAKE_SOURCE_DIR}/cores/snes9x/filter/*.c*
+        ${CMAKE_SOURCE_DIR}/external/cores/snes9x/*.c*
+        ${CMAKE_SOURCE_DIR}/external/cores/snes9x/apu/*.c*
+        ${CMAKE_SOURCE_DIR}/external/cores/snes9x/apu/bapu/*.c*
+        ${CMAKE_SOURCE_DIR}/external/cores/snes9x/apu/bapu/dsp/*.c*
+        ${CMAKE_SOURCE_DIR}/external/cores/snes9x/apu/bapu/smp/*.c*
+        ${CMAKE_SOURCE_DIR}/external/cores/snes9x/filter/*.c*
 )
 
 list(REMOVE_ITEM SNES9X_SRC
-        ${CMAKE_SOURCE_DIR}/cores/snes9x/spc7110dec.cpp
-        ${CMAKE_SOURCE_DIR}/cores/snes9x/spc7110emu.cpp
-        ${CMAKE_SOURCE_DIR}/cores/snes9x/srtcemu.cpp
-        ${CMAKE_SOURCE_DIR}/cores/snes9x/apu/bapu/smp/algorithms.cpp
-        ${CMAKE_SOURCE_DIR}/cores/snes9x/apu/bapu/smp/core.cpp
-        ${CMAKE_SOURCE_DIR}/cores/snes9x/apu/bapu/smp/memory.cpp
-        ${CMAKE_SOURCE_DIR}/cores/snes9x/apu/bapu/smp/timing.cpp
-        ${CMAKE_SOURCE_DIR}/cores/snes9x/apu/bapu/smp/iplrom.cpp
-        ${CMAKE_SOURCE_DIR}/cores/snes9x/apu/bapu/dsp/SPC_DSP.cpp
+        ${CMAKE_SOURCE_DIR}/external/cores/snes9x/spc7110dec.cpp
+        ${CMAKE_SOURCE_DIR}/external/cores/snes9x/spc7110emu.cpp
+        ${CMAKE_SOURCE_DIR}/external/cores/snes9x/srtcemu.cpp
+        ${CMAKE_SOURCE_DIR}/external/cores/snes9x/apu/bapu/smp/algorithms.cpp
+        ${CMAKE_SOURCE_DIR}/external/cores/snes9x/apu/bapu/smp/core.cpp
+        ${CMAKE_SOURCE_DIR}/external/cores/snes9x/apu/bapu/smp/memory.cpp
+        ${CMAKE_SOURCE_DIR}/external/cores/snes9x/apu/bapu/smp/timing.cpp
+        ${CMAKE_SOURCE_DIR}/external/cores/snes9x/apu/bapu/smp/iplrom.cpp
+        ${CMAKE_SOURCE_DIR}/external/cores/snes9x/apu/bapu/dsp/SPC_DSP.cpp
 )
 
 set(SNES9X_CFLAGS
@@ -82,8 +82,8 @@ if (OPTION_ZIP)
     list(APPEND SNES9X_CFLAGS -DUNZIP_SUPPORT -DSYSTEM_ZIP)
 endif (OPTION_ZIP)
 if (OPTION_JMA)
-    set(JMA_INC ${CMAKE_SOURCE_DIR}/cores/snes9x/jma)
-    file(GLOB JMA_SRC ${CMAKE_SOURCE_DIR}/cores/snes9x/jma/*.c*)
+    set(JMA_INC ${CMAKE_SOURCE_DIR}/external/cores/snes9x/jma)
+    file(GLOB JMA_SRC ${CMAKE_SOURCE_DIR}/external/cores/snes9x/jma/*.c*)
     list(APPEND SNES9X_CFLAGS -DJMA_SUPPORT)
 endif (OPTION_JMA)
 if (OPTION_DEBUGGER)
@@ -114,7 +114,7 @@ elseif (PLATFORM_SWITCH)
     #####################
     list(APPEND SNES9X_CFLAGS -Wno-pedantic -Wno-missing-field-initializers -Wno-format-truncation)
 elseif (PLATFORM_WINDOWS)
-    list(REMOVE_ITEM SNES9X_SRC ${CMAKE_SOURCE_DIR}/cores/snes9x/compat.cpp)
+    list(REMOVE_ITEM SNES9X_SRC ${CMAKE_SOURCE_DIR}/external/cores/snes9x/compat.cpp)
 elseif (PLATFORM_ANDROID)
     #####################
     # ANDROID PLATORM
