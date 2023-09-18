@@ -157,10 +157,10 @@ int PFBAUiEmu::load(const ss_api::Game &game) {
     printf("nSekCpuCore: %s\n", nSekCpuCore > 0 ? "M68K" : "C68K (ASM)");
 #endif
 
-    int audio_freq = pMain->getConfig()->get(Option::Id::ROM_AUDIO_FREQ, true)->getValueInt(44100);
-    nInterpolation = pMain->getConfig()->get(Option::Id::ROM_AUDIO_INTERPOLATION, true)->getValueInt();
-    nFMInterpolation = pMain->getConfig()->get(Option::Id::ROM_AUDIO_FMINTERPOLATION, true)->getValueInt();
-    bForce60Hz = pMain->getConfig()->get(Option::Id::ROM_FORCE_60HZ, true)->getValueBool();
+    int audio_freq = pMain->getConfig()->get(ConfigNew::Id::ROM_AUDIO_FREQ, true)->getInteger();
+    nInterpolation = pMain->getConfig()->get(ConfigNew::Id::ROM_AUDIO_INTERPOLATION, true)->getInteger();
+    nFMInterpolation = pMain->getConfig()->get(ConfigNew::Id::ROM_AUDIO_FMINTERPOLATION, true)->getInteger();
+    bForce60Hz = pMain->getConfig()->get(ConfigNew::Id::ROM_FORCE_60HZ, true)->getInteger();
     if (bForce60Hz) {
         nBurnFPS = 6000;
     }
@@ -264,7 +264,7 @@ bool PFBAUiEmu::onInput(c2d::Input::Player *players) {
     // 1 > "ON"
     // 2 > "FLIP"
     // 3 > "CAB" (vita/switch)
-    int rotation = getUi()->getConfig()->get(Option::Id::ROM_ROTATION, true)->getIndex();
+    int rotation = getUi()->getConfig()->get(ConfigNew::Id::ROM_ROTATION, true)->getArrayIndex();
     if (BurnDrvGetFlags() & BDF_ORIENTATION_VERTICAL) {
         if (rotation == 0) {
             pMain->getInput()->setRotation(Input::Rotation::R90, Input::Rotation::R0);

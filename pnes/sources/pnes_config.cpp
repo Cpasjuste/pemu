@@ -8,19 +8,18 @@
 using namespace c2d;
 using namespace c2dui;
 
-PNESConfig::PNESConfig(c2d::Io *io, int version) : Config(io, version) {
+PNESConfig::PNESConfig(c2d::Io *io, int version) : ConfigNew(io, "PNES", version) {
+    printf("PNESConfig(%s, v%i)\n", getPath().c_str(), version);
+
     // no need for auto-scaling mode on pnes
-    get(Option::Id::ROM_SCALING_MODE)->set(
-            {"SCALING_MODE", {"ASPECT", "INTEGER"}, 0,
-             Option::Id::ROM_SCALING_MODE, Option::Flags::STRING});
+    getOption(ConfigNew::Id::ROM_SCALING_MODE)->setArray({"ASPECT", "INTEGER"}, 0);
 
 #ifdef __SWITCH__
     // on nintendo switch invert A/B buttons
-    get(Option::Id::JOY_A)->setValueInt(KEY_JOY_B_DEFAULT);
-    get(Option::Id::JOY_B)->setValueInt(KEY_JOY_A_DEFAULT);
+    getOption(ConfigNew::Id::JOY_A)->setInteger(KEY_JOY_B_DEFAULT);
+    getOption(ConfigNew::Id::JOY_B)->setInteger(KEY_JOY_A_DEFAULT);
 #endif
 
     // "c2dui_romlist" will also reload config, but we need new roms paths
-    reset();
     load();
 }

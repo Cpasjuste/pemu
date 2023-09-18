@@ -9,6 +9,7 @@
 #ifdef __SWITCH__
 UiMain::UiMain(c2d::Io *io, const c2d::Vector2f &size) : C2DRenderer({1280, 720}) {
 #else
+
 UiMain::UiMain(c2d::Io *io, const c2d::Vector2f &size) : C2DRenderer(size) {
 #endif
     printf("UiMain(%ix%i)\n", (int) UiMain::getSize().x, (int) UiMain::getSize().y);
@@ -94,21 +95,21 @@ Skin *UiMain::getSkin() {
     return pSkin;
 }
 
-void UiMain::setConfig(Config *cfg) {
+void UiMain::setConfig(ConfigNew *cfg) {
     pConfig = cfg;
 
     // add shaders, if any
     auto shaderList = getShaderList();
     if (shaderList) {
-        pConfig->add(Option::Id::ROM_FILTER, "EFFECT", shaderList->getNames(), 0,
-                     Option::Id::ROM_SHADER, Option::Flags::STRING);
+        pConfig->getGroup(ConfigNew::Id::MENU_ROM_OPTIONS)->addOption(
+                {"EFFECT", shaderList->getNames(), 0, ConfigNew::Id::ROM_SHADER});
     } else {
-        pConfig->add(Option::Id::ROM_FILTER, "EFFECT", {"NONE"}, 0,
-                     Option::Id::ROM_SHADER, Option::Flags::STRING | Option::Flags::HIDDEN);
+        pConfig->getGroup(ConfigNew::Id::MENU_ROM_OPTIONS)->addOption(
+                {"EFFECT", {"NONE"}, 0, ConfigNew::Id::ROM_SHADER})->setFlags(ConfigNew::Flags::HIDDEN);
     }
 }
 
-Config *UiMain::getConfig() {
+ConfigNew *UiMain::getConfig() {
     return pConfig;
 }
 
@@ -170,9 +171,9 @@ void UiMain::updateInputMapping(bool isRomConfig) {
         // keep custom config for menus keys
         for (unsigned int i = 0; i < keyMapping.size(); i++) {
             if (keyMapping.at(i).button == Input::Button::Menu1) {
-                keyMapping.at(i).value = pConfig->get(Option::Id::KEY_MENU1, false)->getValueInt();
+                keyMapping.at(i).value = pConfig->get(ConfigNew::Id::KEY_MENU1, false)->getInteger();
             } else if (keyMapping.at(i).button == Input::Button::Menu2) {
-                keyMapping.at(i).value = pConfig->get(Option::Id::KEY_MENU2, false)->getValueInt();
+                keyMapping.at(i).value = pConfig->get(ConfigNew::Id::KEY_MENU2, false)->getInteger();
             }
         }
         getInput()->setKeyboardMapping(keyMapping);
@@ -181,9 +182,9 @@ void UiMain::updateInputMapping(bool isRomConfig) {
         // keep custom config for menus keys
         for (unsigned int i = 0; i < joyMapping.size(); i++) {
             if (joyMapping.at(i).button == Input::Button::Menu1) {
-                joyMapping.at(i).value = pConfig->get(Option::Id::JOY_MENU1, false)->getValueInt();
+                joyMapping.at(i).value = pConfig->get(ConfigNew::Id::JOY_MENU1, false)->getInteger();
             } else if (joyMapping.at(i).button == Input::Button::Menu2) {
-                joyMapping.at(i).value = pConfig->get(Option::Id::JOY_MENU2, false)->getValueInt();
+                joyMapping.at(i).value = pConfig->get(ConfigNew::Id::JOY_MENU2, false)->getInteger();
             }
         }
         for (int i = 0; i < PLAYER_MAX; i++) {

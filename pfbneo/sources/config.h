@@ -5,14 +5,11 @@
 #ifndef PFBA_CONFIG_H
 #define PFBA_CONFIG_H
 
-#include "c2dui_config.h"
+#include "c2dui_config_new.h"
 
-class PFBAConfig : public c2dui::Config {
-
+class PFBAConfig : public c2dui::ConfigNew {
 public:
-
     PFBAConfig(c2d::Io *io, int version);
-
 };
 
 #endif //PFBA_CONFIG_H

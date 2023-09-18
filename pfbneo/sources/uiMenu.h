@@ -6,12 +6,10 @@
 #define PFBA_UIMENU_H
 
 class PFBAGuiMenu : public c2dui::UiMenu {
-
 public:
-
     explicit PFBAGuiMenu(c2dui::UiMain *ui) : UiMenu(ui) {};
 
-    bool isOptionHidden(c2dui::Option *option) override;
+    bool isOptionHidden(c2d::config::Option *option) override;
 
 };
 

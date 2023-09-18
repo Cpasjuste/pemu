@@ -42,7 +42,7 @@ namespace c2dui {
     public:
 
         UIListBox(UiMain *ui, c2d::Font *font, int fontSize, const c2d::FloatRect &rect,
-                  const std::vector<ss_api::Game> &games, bool useIcons = false);
+                  const std::vector<ss_api::Game> &games);
 
         ~UIListBox() override;
 
@@ -83,7 +83,7 @@ namespace c2dui {
 
     private:
 
-        void init(c2d::Font *font, int fontSize, bool useIcons);
+        void init(c2d::Font *font, int fontSize);
 
         void updateLines();
 
@@ -95,7 +95,6 @@ namespace c2dui {
         int max_lines;
         int file_index = 0;
         int highlight_index = 0;
-        bool use_icons = false;
         bool use_highlight = true;
         bool highlight_use_files_color = false;
     };

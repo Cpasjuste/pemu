@@ -9,86 +9,79 @@
 using namespace c2d;
 using namespace c2dui;
 
-PFBAConfig::PFBAConfig(c2d::Io *io, int version) : Config(io, version) {
-    printf("PFBAConfig(%s, v%i)\n", getConfigPath().c_str(), version);
+#define C2D_CONFIG_RESTART_EMU_NEEDED "YOU NEED TO RESTART EMULATION AFTER CHANGING THIS OPTION"
 
+PFBAConfig::PFBAConfig(c2d::Io *io, int version) : ConfigNew(io, "PFBNEO", version) {
+    printf("PFBNConfig(%s, v%i)\n", getPath().c_str(), version);
+
+    // change default rom path name in config file
+    getGroup(CFG_ID_ROMS)->getOptions()->at(0).setName("ARCADE");
+    getGroup(CFG_ID_ROMS)->getOptions()->at(0).setString(io->getDataPath() + "arcade/");
 #ifndef __PFBN_LIGHT__
-    // add fba default roms paths
-    roms_paths.emplace_back(io->getDataPath() + "channelf/");
-    roms_paths.emplace_back(io->getDataPath() + "coleco/");
-    roms_paths.emplace_back(io->getDataPath() + "fds/");
-    roms_paths.emplace_back(io->getDataPath() + "gamegear/");
-    roms_paths.emplace_back(io->getDataPath() + "megadrive/");
-    roms_paths.emplace_back(io->getDataPath() + "msx/");
-    roms_paths.emplace_back(io->getDataPath() + "nes/");
-    roms_paths.emplace_back(io->getDataPath() + "ngp/");
-    roms_paths.emplace_back(io->getDataPath() + "pce/");
-    roms_paths.emplace_back(io->getDataPath() + "sg1000/");
-    roms_paths.emplace_back(io->getDataPath() + "sgx/");
-    roms_paths.emplace_back(io->getDataPath() + "sms/");
-    roms_paths.emplace_back(io->getDataPath() + "spectrum/");
-    roms_paths.emplace_back(io->getDataPath() + "tg16/");
+    // add fbneo consoles paths
+    getGroup(CFG_ID_ROMS)->addOption({"CHANNELF", io->getDataPath() + "channelf/"});
+    getGroup(CFG_ID_ROMS)->addOption({"COLECO", io->getDataPath() + "coleco/"});
+    getGroup(CFG_ID_ROMS)->addOption({"FDS", io->getDataPath() + "fds/"});
+    getGroup(CFG_ID_ROMS)->addOption({"GAMEGEAR", io->getDataPath() + "gamegear/"});
+    getGroup(CFG_ID_ROMS)->addOption({"MEGADRIVE", io->getDataPath() + "megadrive/"});
+    getGroup(CFG_ID_ROMS)->addOption({"MSX", io->getDataPath() + "msx/"});
+    getGroup(CFG_ID_ROMS)->addOption({"NES", io->getDataPath() + "nes/"});
+    getGroup(CFG_ID_ROMS)->addOption({"NGP", io->getDataPath() + "ngp/"});
+    getGroup(CFG_ID_ROMS)->addOption({"PCE", io->getDataPath() + "pce/"});
+    getGroup(CFG_ID_ROMS)->addOption({"SG1000", io->getDataPath() + "sg1000/"});
+    getGroup(CFG_ID_ROMS)->addOption({"SGX", io->getDataPath() + "sgx/"});
+    getGroup(CFG_ID_ROMS)->addOption({"SMS", io->getDataPath() + "sms/"});
+    getGroup(CFG_ID_ROMS)->addOption({"SPECTRUM", io->getDataPath() + "spectrum/"});
+    getGroup(CFG_ID_ROMS)->addOption({"TG16", io->getDataPath() + "tg16/"});
 #endif
 
     ////////////////////////////////////////////////////////////
-    /// pfba custom config
+    /// pfbneo custom config
     ////////////////////////////////////////////////////////////
 
     /// MAIN OPTIONS
-    get(Option::Id::GUI_SHOW_ZIP_NAMES)->setValueBool(false);
+    get(ConfigNew::Id::GUI_SHOW_ZIP_NAMES)->setArrayIndex(0);
 
     /// ROMS OPTIONS
-    add(Option::Id::ROM_FILTER, "FORCE_60HZ",
-        {"OFF", "ON"}, 1, Option::Id::ROM_FORCE_60HZ, Option::Flags::BOOLEAN);
-    get(Option::Id::ROM_FORCE_60HZ)->setInfo("YOU NEED TO RESTART EMULATION AFTER CHANGING THIS OPTION");
-
-    // audio
-    add(Option::Id::ROM_FORCE_60HZ, "AUDIO_FREQUENCY",
-        {"11025", "22050", "32000", "44100", "48000"}, 3, Option::Id::ROM_AUDIO_FREQ, Option::Flags::STRING);
-    get(Option::Id::ROM_AUDIO_FREQ)->setInfo("YOU NEED TO RESTART EMULATION AFTER CHANGING THIS OPTION");
-
-    add(Option::Id::ROM_AUDIO_FREQ, "AUDIO_INTERPOLATION",
-        {"0", "1", "3"}, 2, Option::Id::ROM_AUDIO_INTERPOLATION, Option::Flags::STRING);
-    get(Option::Id::ROM_AUDIO_INTERPOLATION)->setInfo(
-            "YOU NEED TO RESTART EMULATION AFTER CHANGING THIS OPTION");
-    add(Option::Id::ROM_AUDIO_INTERPOLATION, "AUDIO_FM_INTERPOLATION",
-        {"0", "1", "3"}, 2, Option::Id::ROM_AUDIO_FMINTERPOLATION, Option::Flags::STRING);
-    get(Option::Id::ROM_AUDIO_FMINTERPOLATION)->setInfo(
-            "YOU NEED TO RESTART EMULATION AFTER CHANGING THIS OPTION");
-
+    auto group = getGroup(ConfigNew::Id::MENU_ROM_OPTIONS);
+    if (!group) {
+        printf("PFBNConfig: error, group not found (MENU_ROM_OPTIONS)\n");
+        return;
+    }
+    group->addOption({"FORCE_60HZ", {"OFF", "ON"}, 1, ConfigNew::Id::ROM_FORCE_60HZ, C2D_CONFIG_RESTART_EMU_NEEDED});
+    group->addOption({"AUDIO_FREQUENCY", {"11025", "22050", "32000", "44100", "48000"},
+                      3, ConfigNew::Id::ROM_AUDIO_FREQ, C2D_CONFIG_RESTART_EMU_NEEDED});
+    group->addOption({"AUDIO_INTERPOLATION", {"0", "1", "3"},
+                      2, ConfigNew::Id::ROM_AUDIO_INTERPOLATION, C2D_CONFIG_RESTART_EMU_NEEDED});
+    group->addOption({"AUDIO_FM_INTERPOLATION", {"0", "1", "3"},
+                      2, ConfigNew::Id::ROM_AUDIO_FMINTERPOLATION, C2D_CONFIG_RESTART_EMU_NEEDED});
 #ifdef __VITA__
-    add(Option::Id::ROM_AUDIO_FMINTERPOLATION, "ROTATION",
-        {"OFF", "ON", "FLIP", "CAB MODE"}, 1, Option::Id::ROM_ROTATION, Option::Flags::STRING);
+    group->addOption({"ROTATION", {"OFF", "ON", "FLIP", "CAB MODE"},
+                      1, ConfigNew::Id::ROM_ROTATION, C2D_CONFIG_RESTART_EMU_NEEDED});
 #else
-    add(Option::Id::ROM_AUDIO_FMINTERPOLATION, "ROTATION",
-        {"OFF", "ON", "FLIP"}, 1, Option::Id::ROM_ROTATION, Option::Flags::STRING);
+    group->addOption({"ROTATION", {"OFF", "ON", "FLIP"},
+                      1, ConfigNew::Id::ROM_ROTATION, C2D_CONFIG_RESTART_EMU_NEEDED});
 #endif
-    add(Option::Id::ROM_ROTATION, "NEOBIOS",
-        {"UNIBIOS_4_0", "UNIBIOS_3_3", "UNIBIOS_3_2", "UNIBIOS_3_1",
-         "MVS_ASIA_EUR_V6S1", "MVS_ASIA_EUR_V5S1", "MVS_ASIA_EUR_V3S4",
-         "MVS_USA_V5S2", "MVS_USA_V5S4", "MVS_USA_V5S6",
-         "MVS_JPN_V6", "MVS_JPN_V5", "MVS_JPN_V3S4", "MVS_JPN_J3",
-         "AES_ASIA", "AES_JAPAN",
-         "NEO_MVH_MV1CA", "NEO_MVH_MV1CJ",
-         "DECK_V6", "DEVKIT"},
-        0, Option::Id::ROM_NEOBIOS, Option::Flags::STRING);
-    get(Option::Id::ROM_NEOBIOS)->setInfo("YOU NEED TO RESTART EMULATION AFTER CHANGING THIS OPTION");
+    group->addOption(
+            {"NEOBIOS", {"UNIBIOS_4_0", "UNIBIOS_3_3", "UNIBIOS_3_2", "UNIBIOS_3_1",
+                         "MVS_ASIA_EUR_V6S1", "MVS_ASIA_EUR_V5S1", "MVS_ASIA_EUR_V3S4",
+                         "MVS_USA_V5S2", "MVS_USA_V5S4", "MVS_USA_V5S6", "MVS_JPN_V6",
+                         "MVS_JPN_V5", "MVS_JPN_V3S4", "MVS_JPN_J3", "AES_ASIA",
+                         "AES_JAPAN", "NEO_MVH_MV1CA", "NEO_MVH_MV1CJ", "DECK_V6", "DEVKIT"},
+             0, ConfigNew::Id::ROM_NEOBIOS, C2D_CONFIG_RESTART_EMU_NEEDED});
 #ifdef __PFBA_ARM__
     // do not use unibios as default on vita for cyclone asm compatibility
-    get(Option::Id::ROM_NEOBIOS)->setIndex(4);
-
-    add(Option::Id::ROM_NEOBIOS, "FRAMESKIP",
-        {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"},
-        0, Option::Id::ROM_FRAMESKIP, Option::Flags::STRING);
+    group->getOption(ConfigNew::Id::ROM_NEOBIOS)->setArrayIndex(4);
+    group->addOption({"FRAMESKIP", {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"},
+                      0, ConfigNew::Id::ROM_FRAMESKIP, C2D_CONFIG_RESTART_EMU_NEEDED});
 #endif
 
 #if defined(__PS4__) || defined(ANDROID)
     // force 48000hz audio output
-    get(Option::Id::ROM_AUDIO_FREQ)->setIndex(4);
-    get(Option::Id::ROM_AUDIO_FREQ)->setFlags(Option::Flags::STRING | Option::Flags::HIDDEN);
+    get(ConfigNew::Id::ROM_AUDIO_FREQ)->setArrayIndex(4);
+    get(ConfigNew::Id::ROM_AUDIO_FREQ)->setFlags(ConfigNew::Flags::HIDDEN);
 #endif
 
     // "c2dui_romlist" will also reload config, but we need new roms paths
-    reset();
     load();
 }

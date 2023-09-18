@@ -78,7 +78,7 @@ static int DoLibInit() {
         return 1;
     }
 
-    NeoSystem = NeoSystemList[ui->getConfig()->get(Option::Id::ROM_NEOBIOS, true)->getIndex()];
+    NeoSystem = NeoSystemList[ui->getConfig()->get(ConfigNew::Id::ROM_NEOBIOS, true)->getArrayIndex()];
 
     nRet = BurnDrvInit();
     printf("DoLibInit: BurnDrvInit = %i\n", nRet);

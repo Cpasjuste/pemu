@@ -8,21 +8,19 @@
 using namespace c2d;
 using namespace c2dui;
 
-PGENConfig::PGENConfig(c2d::Io *io, int version, const std::string &defaultRomsPath)
-        : Config(io, version, defaultRomsPath) {
-    // add default roms paths
-    roms_paths.emplace_back(io->getDataPath() + "sms/");
-    roms_paths.emplace_back(io->getDataPath() + "gamegear/");
-    roms_paths.emplace_back(io->getDataPath() + "megacd/");
-#if 0
-    roms_paths.emplace_back(io->getDataPath() + "sg1000/");
-#endif
-    // no need for auto-scaling mode on pgen
-    get(Option::Id::ROM_SCALING_MODE)->set(
-            {"SCALING_MODE", {"ASPECT", "INTEGER"}, 0,
-             Option::Id::ROM_SCALING_MODE, Option::Flags::STRING});
+PGENConfig::PGENConfig(c2d::Io *io, int version) : ConfigNew(io, "PGEN", version) {
+    // change default rom path name in config file
+    getGroup(CFG_ID_ROMS)->getOptions()->at(0).setName("MEGADRIVE");
+    getGroup(CFG_ID_ROMS)->getOptions()->at(0).setString(io->getDataPath() + "megadrive/");
+    // add pgen roms paths
+    getGroup(CFG_ID_ROMS)->addOption({"SMS", io->getDataPath() + "sms/"});
+    getGroup(CFG_ID_ROMS)->addOption({"GAMEGEAR", io->getDataPath() + "gamegear/"});
+    getGroup(CFG_ID_ROMS)->addOption({"MEGACD", io->getDataPath() + "megacd/"});
+    //getGroup(CFG_ID_ROMS)->addOption({"SG1000", io->getDataPath() + "sg1000/"});
+
+    // no need for auto-scaling mode
+    getOption(ConfigNew::Id::ROM_SCALING_MODE)->setArray({"ASPECT", "INTEGER"}, 0);
 
     // "c2dui_romlist" will also reload config, but we need new roms paths
-    reset();
     load();
 }

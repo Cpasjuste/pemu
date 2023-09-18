@@ -100,25 +100,20 @@ UIListBoxLine::~UIListBoxLine() {
 }
 
 UIListBox::UIListBox(UiMain *_ui, Font *font, int fontSize, const FloatRect &rect,
-                     const std::vector<ss_api::Game> &g, bool useIcons) : RectangleShape(rect) {
+                     const std::vector<ss_api::Game> &g) : RectangleShape(rect) {
     //printf("ListBox(%p)\n", this);
     ui = _ui;
     setGames(g);
-    init(font, fontSize, useIcons);
+    init(font, fontSize);
     setSelection(0);
 };
 
-void UIListBox::init(Font *font, int fontSize, bool useIcons) {
-    use_icons = useIcons;
+void UIListBox::init(Font *font, int fontSize) {
     // set default bg colors
     setFillColor(Color::GrayLight);
 
     // calculate number of lines shown
-    if (use_icons) {
-        line_height = 34; // 32px + 2px margin
-    } else {
-        line_height = (float) fontSize + (2 * ui->getScaling().y);
-    }
+    line_height = (float) fontSize + (2 * ui->getScaling().y);
     max_lines = (int) (getSize().y / line_height);
     if ((float) max_lines * line_height < getSize().y) {
         line_height = getSize().y / (float) max_lines;
@@ -137,15 +132,14 @@ void UIListBox::init(Font *font, int fontSize, bool useIcons) {
             icon = files.size() > i ? files[i]->icon : nullptr;
         }
         */
-        auto *line = new UIListBoxLine(r, "W", font, (unsigned int) fontSize,
-                                       ui->getScaling(), icon, use_icons);
+        auto *line = new UIListBoxLine(r, "W", font, (unsigned int) fontSize, ui->getScaling(), icon);
         lines.push_back(line);
         add(line);
     }
 }
 
 void UIListBox::updateLines() {
-    bool useZipName = ui->getConfig()->get(Option::Id::GUI_SHOW_ZIP_NAMES)->getValueBool();
+    bool useZipName = ui->getConfig()->getOption(ConfigNew::Id::GUI_SHOW_ZIP_NAMES)->getInteger();
 
     for (unsigned int i = 0; i < (unsigned int) max_lines; i++) {
         if (file_index + i >= games.size()) {

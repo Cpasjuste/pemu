@@ -12,6 +12,10 @@ namespace c2dui {
     class UiMenu : public SkinnedRectangle {
 
     public:
+        struct MenuOption {
+            std::string name;
+            c2d::config::Option *option = nullptr;
+        };
 
         explicit UiMenu(UiMain *uiMain);
 
@@ -23,7 +27,7 @@ namespace c2dui {
 
         bool isRom() const { return isRomMenu; };
 
-        virtual bool isOptionHidden(Option *option) { return false; };
+        virtual bool isOptionHidden(c2d::config::Option *option) { return false; };
 
         void onKeyUp();
 
@@ -34,7 +38,6 @@ namespace c2dui {
         void setVisibility(c2d::Visibility visibility, bool tweenPlay = false) override;
 
     private:
-
         void updateLines();
 
         UiMain *ui = nullptr;
@@ -43,7 +46,7 @@ namespace c2dui {
         std::vector<MenuLine *> lines;
         float alpha = 230;
 
-        std::vector<Option> options;
+        std::vector<MenuOption> menu_options;
         c2d::TweenPosition *tweenPosition;
         Skin::TextGroup textGroup;
 

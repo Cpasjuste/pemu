@@ -20,14 +20,14 @@ void C2DUIVideo::updateScaling(bool vertical, bool flip) {
     bool rotated = false;
     float rotation = 0;
     int rotation_cfg = 0;
-    std::string scale_value = ui->getConfig()->get(Option::Id::ROM_SCALING, true)->getValueString();
-    float scale_value_float = (float) ui->getConfig()->get(Option::Id::ROM_SCALING, true)->getIndex() + 1;
-    std::string scaling_mode = ui->getConfig()->get(Option::Id::ROM_SCALING_MODE, true)->getValueString();
+    std::string scale_value = ui->getConfig()->get(ConfigNew::Id::ROM_SCALING, true)->getString();
+    float scale_value_float = (float) ui->getConfig()->get(ConfigNew::Id::ROM_SCALING, true)->getArrayIndex() + 1;
+    std::string scaling_mode = ui->getConfig()->get(ConfigNew::Id::ROM_SCALING_MODE, true)->getString();
     float game_aspect_ratio = vertical ? (float) aspect.y / (float) aspect.x
                                        : (float) aspect.x / (float) aspect.y;
-    Option *rotationOpt = ui->getConfig()->get(Option::Id::ROM_ROTATION, true);
+    c2d::config::Option *rotationOpt = ui->getConfig()->get(ConfigNew::Id::ROM_ROTATION, true);
     if (rotationOpt) {
-        rotation_cfg = rotationOpt->getIndex();
+        rotation_cfg = rotationOpt->getArrayIndex();
     }
 
     Vector2f screen = ui->getSize();

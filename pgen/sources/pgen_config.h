@@ -5,14 +5,11 @@
 #ifndef PGEN_CONFIG_H
 #define PGEN_CONFIG_H
 
-#include "c2dui_config.h"
+#include "c2dui_config_new.h"
 
-class PGENConfig : public c2dui::Config {
-
+class PGENConfig : public c2dui::ConfigNew {
 public:
-
-    PGENConfig(c2d::Io *io, int version, const std::string &defaultRomsPath = "megadrive/");
-
+    PGENConfig(c2d::Io *io, int version);
 };
 
 #endif //PGEN_CONFIG_H

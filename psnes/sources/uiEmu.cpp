@@ -21,6 +21,7 @@
 #endif
 
 using namespace c2d;
+using namespace c2d::config;
 using namespace c2dui;
 
 static UiMain *m_ui;
@@ -90,13 +91,13 @@ int PSNESUiEmu::load(const ss_api::Game &game) {
 
     // audio
     Settings.Transparency =
-            pMain->getConfig()->get(Option::ROM_PSNES_TRANSPARENCY, true)->getIndex();
+            pMain->getConfig()->get(ConfigNew::Id::ROM_PSNES_TRANSPARENCY, true)->getInteger();
     Settings.AutoDisplayMessages =
-            pMain->getConfig()->get(Option::ROM_PSNES_DISPLAY_MESSAGES, true)->getIndex();
+            pMain->getConfig()->get(ConfigNew::Id::ROM_PSNES_DISPLAY_MESSAGES, true)->getInteger();
     Settings.InitialInfoStringTimeout = 120;
     Settings.HDMATimingHack = 100;
     Settings.BlockInvalidVRAMAccessMaster =
-            pMain->getConfig()->get(Option::ROM_PSNES_BLOCK_VRAM, true)->getIndex();
+            pMain->getConfig()->get(ConfigNew::Id::ROM_PSNES_BLOCK_VRAM, true)->getInteger();
     Settings.StopEmulation = TRUE;
     Settings.WrongMovieStateProtection = TRUE;
     Settings.DumpStreamsMaxFrames = -1;
@@ -106,7 +107,7 @@ int PSNESUiEmu::load(const ss_api::Game &game) {
     Settings.FastSavestates = TRUE;
     Settings.SeparateEchoBuffer = FALSE;
 
-    int skipFramesCfg = pMain->getConfig()->get(Option::ROM_PSNES_FRAMESKIP, true)->getIndex();
+    int skipFramesCfg = pMain->getConfig()->get(ConfigNew::Id::ROM_PSNES_FRAMESKIP, true)->getArrayIndex();
     if (skipFramesCfg == 0) {
         Settings.SkipFrames = 0;
     } else if (skipFramesCfg == 1) {
@@ -115,9 +116,9 @@ int PSNESUiEmu::load(const ss_api::Game &game) {
         Settings.SkipFrames = skipFramesCfg - 1;
     }
     printf("Settings.SkipFrames: %i\n", Settings.SkipFrames);
-    Settings.TurboMode = pMain->getConfig()->get(Option::ROM_PSNES_TURBO_MODE, true)->getIndex();
-    Settings.TurboSkipFrames = pMain->getConfig()->get(Option::ROM_PSNES_TURBO_FRAMESKIP,
-                                                       true)->getIndex();
+    Settings.TurboMode = pMain->getConfig()->get(ConfigNew::Id::ROM_PSNES_TURBO_MODE, true)->getInteger();
+    Settings.TurboSkipFrames = pMain->getConfig()->get(ConfigNew::Id::ROM_PSNES_TURBO_FRAMESKIP,
+                                                       true)->getArrayIndex();
     Settings.CartAName[0] = 0;
     Settings.CartBName[0] = 0;
 
@@ -171,7 +172,7 @@ int PSNESUiEmu::load(const ss_api::Game &game) {
 
     Memory.LoadSRAM(S9xGetFilename(".srm", SRAM_DIR).c_str());
 
-    Settings.ApplyCheats = pMain->getConfig()->get(Option::ROM_PSNES_CHEATS, true)->getIndex() == 1;
+    Settings.ApplyCheats = pMain->getConfig()->get(ConfigNew::Id::ROM_PSNES_CHEATS, true)->getInteger();
     S9xDeleteCheats();
     S9xCheatsEnable();
     if (Settings.ApplyCheats) {
@@ -187,7 +188,7 @@ int PSNESUiEmu::load(const ss_api::Game &game) {
                                    (float) Memory.ROMFramesPerSecond);
     addAudio((int) Settings.SoundPlaybackRate, samples * 2);
     audio_buffer = malloc(getAudio()->getSamplesSize() * getAudio()->getChannels() * 5);
-    optionAudioSync = pMain->getConfig()->get(Option::Id::ROM_AUDIO_SYNC, true);
+    optionAudioSync = pMain->getConfig()->get(ConfigNew::Id::ROM_AUDIO_SYNC, true);
 
     // video
     S9xGraphicsInit();
@@ -283,7 +284,7 @@ void S9xSyncSpeed() {
                samples, queued, capacity, Memory.ROMFramesPerSecond);
     }
 #endif
-    Audio::SyncMode mode = Memory.ROMFramesPerSecond < 60 || optionAudioSync->getValueBool() ?
+    Audio::SyncMode mode = Memory.ROMFramesPerSecond < 60 || optionAudioSync->getInteger() ?
                            Audio::SyncMode::Safe : Audio::SyncMode::None;
     audio->play(audio_buffer, samples >> 1, mode);
 }

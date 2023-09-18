@@ -8,46 +8,36 @@
 using namespace c2d;
 using namespace c2dui;
 
-PSNESConfig::PSNESConfig(c2d::Io *io, int version) : Config(io, version) {
-    printf("PSNESConfig(%s, v%i)\n", getConfigPath().c_str(), version);
+PSNESConfig::PSNESConfig(c2d::Io *io, int version) : ConfigNew(io, "PSNES", version) {
+    printf("PSNESConfig(%s, v%i)\n", getPath().c_str(), version);
 
-    add(Option::Id::ROM_SHOW_FPS, "AUDIO_SYNC", {"OFF", "ON"}, 0,
-        Option::Id::ROM_AUDIO_SYNC, Option::Flags::BOOLEAN);
-    get(Option::Id::ROM_AUDIO_SYNC)->setInfo("ON: PERFECT AUDIO - OFF: MINOR AUDIO STUTTERING (FAVOR FPS)");
+    auto group = getGroup(ConfigNew::Id::MENU_ROM_OPTIONS);
+    if (!group) {
+        printf("PSNESConfig: error, group not found (MENU_ROM_OPTIONS)\n");
+        return;
+    }
 
-    add(Option::Id::ROM_AUDIO_SYNC, "CHEATS", {"OFF", "ON"}, 1,
-        Option::Id::ROM_PSNES_CHEATS, Option::Flags::BOOLEAN);
-
-    add(Option::Id::ROM_PSNES_CHEATS, "BLOCk_INVALID_VRAM", {"OFF", "ON"}, 1,
-        Option::Id::ROM_PSNES_BLOCK_VRAM, Option::Flags::BOOLEAN);
-
-    add(Option::Id::ROM_PSNES_BLOCK_VRAM, "TRANSPARENCY", {"OFF", "ON"}, 1,
-        Option::Id::ROM_PSNES_TRANSPARENCY, Option::Flags::BOOLEAN);
-
-    add(Option::Id::ROM_PSNES_TRANSPARENCY, "DISPLAY_MESSAGES", {"OFF", "ON"}, 1,
-        Option::Id::ROM_PSNES_DISPLAY_MESSAGES, Option::Flags::BOOLEAN);
-
-    add(Option::Id::ROM_PSNES_DISPLAY_MESSAGES, "FRAMESKIP",
-        {"OFF", "AUTO", "1", "2", "3", "4", "5", "6", "7", "8", "9"}, 0,
-        Option::Id::ROM_PSNES_FRAMESKIP, Option::Flags::STRING);
+    group->addOption({"AUDIO_SYNC", {"OFF", "ON"}, 0, ConfigNew::Id::ROM_AUDIO_SYNC,
+                      "ON: PERFECT AUDIO - OFF: MINOR AUDIO STUTTERING (FAVOR FPS)"});
+    group->addOption({"CHEATS", {"OFF", "ON"}, 1, ConfigNew::Id::ROM_PSNES_CHEATS});
+    group->addOption({"BLOCk_INVALID_VRAM", {"OFF", "ON"}, 1, ConfigNew::Id::ROM_PSNES_BLOCK_VRAM});
+    group->addOption({"TRANSPARENCY", {"OFF", "ON"}, 1, ConfigNew::Id::ROM_PSNES_TRANSPARENCY});
+    group->addOption({"DISPLAY_MESSAGES", {"OFF", "ON"}, 1, ConfigNew::Id::ROM_PSNES_DISPLAY_MESSAGES});
+    group->addOption({"FRAMESKIP",
+                      {"OFF", "AUTO", "1", "2", "3", "4", "5", "6", "7", "8", "9"},
+                      0, ConfigNew::Id::ROM_PSNES_FRAMESKIP});
 #ifdef __VITA__
-    get(Option::Id::ROM_PSNES_FRAMESKIP)->setValueString("2");
+    get(ConfigNew::Id::ROM_PSNES_FRAMESKIP)->setArrayIndex(3);
 #endif
+    group->addOption({"TURBO_MODE", {"OFF", "ON"}, 0, ConfigNew::Id::ROM_PSNES_TURBO_MODE});
+    group->addOption({"TURBO_FRAMESKIP",
+                      {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10",
+                       "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25"},
+                      15, ConfigNew::Id::ROM_PSNES_TURBO_FRAMESKIP});
 
-    add(Option::Id::ROM_PSNES_FRAMESKIP, "TURBO_MODE", {"OFF", "ON"}, 0,
-        Option::Id::ROM_PSNES_TURBO_MODE, Option::Flags::BOOLEAN);
-
-    add(Option::Id::ROM_PSNES_TURBO_MODE, "TURBO_FRAMESKIP",
-        {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10",
-         "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25"}, 15,
-        Option::Id::ROM_PSNES_TURBO_FRAMESKIP, Option::Flags::STRING);
-
-    // no need for auto-scaling mode on psnes
-    get(Option::Id::ROM_SCALING_MODE)->set(
-            {"SCALING_MODE", {"ASPECT", "INTEGER"}, 0,
-             Option::Id::ROM_SCALING_MODE, Option::Flags::STRING});
+    // no need for auto-scaling mode
+    getOption(ConfigNew::Id::ROM_SCALING_MODE)->setArray({"ASPECT", "INTEGER"}, 0);
 
     // "c2dui_romlist" will also reload config, but we need new roms paths
-    reset();
     load();
 }

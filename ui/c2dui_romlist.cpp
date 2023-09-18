@@ -10,7 +10,6 @@
 RomList::RomList(UiMain *_ui, const std::string &emuVersion, const std::vector<std::string> &_filters) {
     printf("RomList()\n");
     ui = _ui;
-    paths = ui->getConfig()->getRomPaths();
     filters = _filters;
 
     // UI
@@ -69,18 +68,16 @@ void RomList::setLoadingText(const char *format, ...) {
 }
 
 void RomList::build(bool addArcadeSystem, const ss_api::System &system) {
-    std::string romPath = ui->getConfig()->getRomPaths().at(FBN_PATH_ARCADE);
-    printf("RomList::build(): ROM_PATH_0: %s\n", romPath.c_str());
+    std::string romPath = ui->getConfig()->getRomPath();
 
     // look for a "gamelist.xml" file inside rom folder, if none found use embedded (romfs) "gamelist.xml"
-    std::string gameListPath = ui->getConfig()->getRomPaths().at(FBN_PATH_ARCADE) + "gamelist.xml";
+    std::string gameListPath = romPath + "gamelist.xml";
     if (!ui->getIo()->exist(gameListPath)) {
         gameListPath = ui->getIo()->getRomFsPath() + "gamelist.xml";
     }
 
-    bool showAvailableOnly = ui->getConfig()->get(Option::Id::GUI_SHOW_AVAILABLE)->getValueBool();
-    gameList->append(gameListPath,
-                     ui->getConfig()->getRomPaths().at(FBN_PATH_ARCADE), false, filters, system, showAvailableOnly);
+    bool showAvailableOnly = ui->getConfig()->get(ConfigNew::Id::GUI_SHOW_AVAILABLE)->getArrayIndex();
+    gameList->append(gameListPath, romPath, false, filters, system, showAvailableOnly);
 
     setLoadingText("Games: %li / %li", gameList->getAvailableCount(), gameList->games.size());
     printf("RomList::build: %s, games found: %zu / %zu\n",
@@ -103,38 +100,29 @@ void RomList::build(bool addArcadeSystem, const ss_api::System &system) {
         gameList->systemList.systems.insert(gameList->systemList.systems.begin(), {9999, 0, "ARCADE"});
     }
 
-    ui->getConfig()->add(
-            Option::Id::GUI_SHOW_ZIP_NAMES, "FILTER_SYSTEM",
-            gameList->systemList.getNames(), 0, Option::Id::GUI_FILTER_SYSTEM,
-            Option::Flags::STRING | Option::Flags::HIDDEN);
-    ui->getConfig()->add(
-            Option::Id::GUI_FILTER_SYSTEM, "FILTER_GENRE",
-            gameList->getGenreNames(), 0, Option::Id::GUI_FILTER_GENRE, Option::Flags::STRING);
-    ui->getConfig()->add(
-            Option::Id::GUI_FILTER_GENRE, "FILTER_DATE",
-            gameList->dates, 0, Option::Id::GUI_FILTER_DATE, Option::Flags::STRING);
-    ui->getConfig()->add(
-            Option::Id::GUI_FILTER_DATE, "FILTER_EDITOR",
-            gameList->getEditorNames(), 0, Option::Id::GUI_FILTER_EDITOR, Option::Flags::STRING);
-    ui->getConfig()->add(
-            Option::Id::GUI_FILTER_EDITOR, "FILTER_DEVELOPER",
-            gameList->getDeveloperNames(), 0, Option::Id::GUI_FILTER_DEVELOPER, Option::Flags::STRING);
-    ui->getConfig()->add(
-            Option::Id::GUI_FILTER_DEVELOPER, "FILTER_PLAYERS",
-            gameList->getPlayersNames(), 0, Option::Id::GUI_FILTER_PLAYERS, Option::Flags::STRING);
-    ui->getConfig()->add(
-            Option::Id::GUI_FILTER_PLAYERS, "FILTER_RATING",
-            gameList->getRatingNames(), 0, Option::Id::GUI_FILTER_RATING, Option::Flags::STRING);
-    ui->getConfig()->add(
-            Option::Id::GUI_FILTER_RATING, "FILTER_ROTATION",
-            gameList->getRotationNames(), 0, Option::Id::GUI_FILTER_ROTATION,
-            Option::Flags::STRING | Option::Flags::HIDDEN);
-    ui->getConfig()->add(
-            Option::Id::GUI_FILTER_ROTATION, "FILTER_RESOLUTION",
-            gameList->resolutions, 0, Option::Id::GUI_FILTER_RESOLUTION, Option::Flags::STRING | Option::Flags::HIDDEN);
+    ui->getConfig()->getGroup(ConfigNew::Id::MENU_MAIN)->addOption(
+            {"FILTER_SYSTEM", gameList->systemList.getNames(), 0, ConfigNew::Id::GUI_FILTER_SYSTEM})->setFlags(
+            ConfigNew::Flags::HIDDEN);
+    ui->getConfig()->getGroup(ConfigNew::Id::MENU_MAIN)->addOption(
+            {"FILTER_GENRE", gameList->getGenreNames(), 0, ConfigNew::Id::GUI_FILTER_GENRE});
+    ui->getConfig()->getGroup(ConfigNew::Id::MENU_MAIN)->addOption(
+            {"FILTER_DATE", gameList->dates, 0, ConfigNew::Id::GUI_FILTER_DATE});
+    ui->getConfig()->getGroup(ConfigNew::Id::MENU_MAIN)->addOption(
+            {"FILTER_EDITOR", gameList->getEditorNames(), 0, ConfigNew::Id::GUI_FILTER_EDITOR});
+    ui->getConfig()->getGroup(ConfigNew::Id::MENU_MAIN)->addOption(
+            {"FILTER_DEVELOPER", gameList->getDeveloperNames(), 0, ConfigNew::Id::GUI_FILTER_DEVELOPER});
+    ui->getConfig()->getGroup(ConfigNew::Id::MENU_MAIN)->addOption(
+            {"FILTER_PLAYERS", gameList->getPlayersNames(), 0, ConfigNew::Id::GUI_FILTER_PLAYERS});
+    ui->getConfig()->getGroup(ConfigNew::Id::MENU_MAIN)->addOption(
+            {"FILTER_RATING", gameList->getRatingNames(), 0, ConfigNew::Id::GUI_FILTER_RATING});
+    ui->getConfig()->getGroup(ConfigNew::Id::MENU_MAIN)->addOption(
+            {"FILTER_ROTATION", gameList->getRotationNames(), 0, ConfigNew::Id::GUI_FILTER_ROTATION})->setFlags(
+            ConfigNew::Flags::HIDDEN);
+    ui->getConfig()->getGroup(ConfigNew::Id::MENU_MAIN)->addOption(
+            {"FILTER_RESOLUTION", gameList->resolutions, 0, ConfigNew::Id::GUI_FILTER_RESOLUTION})->setFlags(
+            ConfigNew::Flags::HIDDEN);
 
     // we need to reload config to update new options we just added
-    ui->getConfig()->reset();
     ui->getConfig()->load();
 
     gameListFav->append(ui->getIo()->getDataPath() + "favorites.xml");

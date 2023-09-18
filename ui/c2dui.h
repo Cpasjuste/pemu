@@ -15,11 +15,10 @@
 
 #endif
 
-#include "c2dui_option.h"
 #include "c2dui_romlist.h"
 #include "c2dui_skin.h"
 #include "c2dui_video.h"
-#include "c2dui_config.h"
+#include "c2dui_config_new.h"
 
 #include "skin/SkinnedRectangle.h"
 #include "skin/SkinnedText.h"

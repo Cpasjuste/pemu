@@ -32,8 +32,8 @@ namespace c2dui {
         c2d::Text *text;
         ss_api::GameList *gameList = nullptr;
         ss_api::GameList *gameListFav = nullptr;
-        std::vector<std::string> paths;
-        char icon_path[1024];
+        //std::vector<std::string> paths;
+        //char icon_path[1024];
         float time_start = 0;
 
     protected:

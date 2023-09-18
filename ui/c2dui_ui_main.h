@@ -16,7 +16,7 @@ namespace c2dui {
 
         void init(UIRomList *romList, UiMenu *menu, UiEmu *emu, UiStateMenu *state);
 
-        void setConfig(Config *cfg);
+        void setConfig(ConfigNew *cfg);
 
         void setSkin(Skin *skin);
 
@@ -26,7 +26,7 @@ namespace c2dui {
 
         Skin *getSkin();
 
-        Config *getConfig();
+        ConfigNew *getConfig();
 
         UIHighlight *getUiHighlight();
 
@@ -51,7 +51,7 @@ namespace c2dui {
         bool done = false;
 
     private:
-        Config *pConfig = nullptr;
+        ConfigNew *pConfig = nullptr;
         Skin *pSkin = nullptr;
         UIHighlight *pHighlight = nullptr;
         UiMenu *pMenu = nullptr;

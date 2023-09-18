@@ -68,9 +68,9 @@ int main(int argc, char **argv) {
     int version = (__PFBA_VERSION_MAJOR__ * 100) + __PFBA_VERSION_MINOR__;
     cfg = new PFBAConfig(io, version);
 
-    // create main ui
-    Option *fs = cfg->get(Option::Id::GUI_FULLSCREEN);
-    if (fs && !fs->getValueBool()) {
+    // create main ui/renderer
+    c2d::config::Option *fs = cfg->get(ConfigNew::Id::GUI_FULLSCREEN);
+    if (fs && !fs->getInteger()) {
         ui = new UiMain(io, {1280, 720});
     } else {
         ui = new UiMain(io);

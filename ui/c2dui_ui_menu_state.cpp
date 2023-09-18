@@ -254,7 +254,7 @@ bool UiStateMenu::onInput(c2d::Input::Player *players) {
             if (game.available) {
                 UiState *state = uiStateList->getSelection();
                 if (state->exist) {
-                    ui->getConfig()->load(game);
+                    ui->getConfig()->loadGame(game);
                     ui->getUiEmu()->load(game);
                     state->load();
                     setVisibility(Visibility::Hidden);

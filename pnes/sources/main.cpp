@@ -66,8 +66,8 @@ int main(int argc, char **argv) {
     cfg = new PNESConfig(io, pnes_version);
 
     // create main ui
-    Option *fs = cfg->get(Option::Id::GUI_FULLSCREEN);
-    if (fs && !fs->getValueBool()) {
+    c2d::config::Option *fs = cfg->get(ConfigNew::Id::GUI_FULLSCREEN);
+    if (fs && !fs->getInteger()) {
         ui = new UiMain(io, {1280, 720});
     } else {
         ui = new UiMain(io);
@@ -87,6 +87,9 @@ int main(int argc, char **argv) {
     uiEmu = new PNESUiEmu(ui);
     uiState = new PNESUIStateMenu(ui);
     ui->init(uiRomList, uiMenu, uiEmu, uiState);
+
+    // save default config
+    cfg->save();
 
     while (!ui->done) {
         ui->flip();

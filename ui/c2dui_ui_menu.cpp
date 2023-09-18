@@ -5,90 +5,102 @@
 #include "c2dui.h"
 #include "c2dui_ui_menu.h"
 
-#define OPTION_ID_QUIT (-1)
-#define OPTION_ID_STATES (-2)
-#define OPTION_ID_OTHER (-3)
+using namespace c2d::config;
 
 class MenuLine : public c2d::RectangleShape {
 
 public:
     MenuLine(UiMain *u, FloatRect &rect, Skin::TextGroup &tg) : RectangleShape(rect) {
         pMain = u;
-        textGroup = tg;
+        m_textGroup = tg;
         Font *font = pMain->getSkin()->getFont();
 
-        name = new Text("OPTION NAME", textGroup.size, font);
-        name->setFillColor(textGroup.color);
-        name->setOutlineThickness(textGroup.outlineSize);
-        name->setOutlineColor(textGroup.outlineColor);
-        name->setOrigin(Origin::Left);
-        name->setPosition(2 * pMain->getScaling().x, MenuLine::getSize().y / 2);
-        name->setSizeMax((MenuLine::getSize().x * 0.55f), 0);
-        MenuLine::add(name);
+        p_name = new Text("OPTION NAME", m_textGroup.size, font);
+        p_name->setFillColor(m_textGroup.color);
+        p_name->setOutlineThickness(m_textGroup.outlineSize);
+        p_name->setOutlineColor(m_textGroup.outlineColor);
+        p_name->setOrigin(Origin::Left);
+        p_name->setPosition(2 * pMain->getScaling().x, MenuLine::getSize().y / 2);
+        p_name->setSizeMax((MenuLine::getSize().x * 0.55f), 0);
+        MenuLine::add(p_name);
 
-        value = new Text("OPTION VALUE", textGroup.size, font);
-        value->setFillColor(textGroup.color);
-        value->setOutlineThickness(textGroup.outlineSize);
-        value->setOutlineColor(textGroup.outlineColor);
-        value->setOrigin(Origin::Left);
-        value->setPosition((MenuLine::getSize().x * 0.6f), MenuLine::getSize().y / 2);
-        value->setSizeMax(MenuLine::getSize().x * 0.38f, 0);
-        MenuLine::add(value);
+        p_value = new Text("OPTION VALUE", m_textGroup.size, font);
+        p_value->setFillColor(m_textGroup.color);
+        p_value->setOutlineThickness(m_textGroup.outlineSize);
+        p_value->setOutlineColor(m_textGroup.outlineColor);
+        p_value->setOrigin(Origin::Left);
+        p_value->setPosition((MenuLine::getSize().x * 0.6f), MenuLine::getSize().y / 2);
+        p_value->setSizeMax(MenuLine::getSize().x * 0.38f, 0);
+        MenuLine::add(p_value);
 
-        sprite = new Sprite();
-        MenuLine::add(sprite);
+        p_sprite = new Sprite();
+        MenuLine::add(p_sprite);
     }
 
-    void set(const Option &opt) {
-        option = opt;
+    void refresh() {
+        set(p_name->getString(), p_option);
+    }
 
-        setVisibility(Visibility::Visible);
-        sprite->setVisibility(Visibility::Hidden);
+    void set(const std::string &name, Option *option) {
+        p_option = option;
 
         // reset
-        name->setString(option.getName());
-        value->setVisibility(Visibility::Visible);
+        setVisibility(Visibility::Visible);
+        p_sprite->setVisibility(Visibility::Hidden);
+        p_name->setString(name);
+        p_value->setVisibility(Visibility::Visible);
         setFillColor(Color::Transparent);
 
-        if (option.getFlags() & Option::Flags::INPUT) {
-            Skin::Button *button = pMain->getSkin()->getButton(option.getValueInt());
-            if (button && option.getId() < Option::Id::JOY_DEADZONE) {
+        // this is a menu title (or custom option)
+        if (!option) {
+            // custom options
+            if (name == "STATES" || name == "QUIT") {
+                p_value->setVisibility(Visibility::Visible);
+                p_value->setString("GO");
+                return;
+            }
+            p_value->setVisibility(Visibility::Hidden);
+            setFillColor(pMain->getUiMenu()->getOutlineColor());
+            return;
+        }
+
+        // this is an option
+        if (option->getFlags() & ConfigNew::Flags::INPUT) {
+            Skin::Button *button = pMain->getSkin()->getButton(option->getInteger());
+            if (button && option->getId() < ConfigNew::Id::JOY_DEADZONE) {
                 if (button->texture) {
-                    sprite->setTexture(button->texture, true);
-                    sprite->setVisibility(Visibility::Visible);
-                    value->setVisibility(Visibility::Hidden);
+                    p_sprite->setTexture(button->texture, true);
+                    p_sprite->setVisibility(Visibility::Visible);
+                    p_value->setVisibility(Visibility::Hidden);
                     float scaling = std::min(
-                            getSize().x / (float) sprite->getSize().x,
-                            getSize().y / (float) sprite->getSize().y);
-                    sprite->setScale(scaling, scaling);
-                    sprite->setPosition((MenuLine::getSize().x * 0.6f), MenuLine::getSize().y / 2);
-                    sprite->setOrigin(Origin::Left);
+                            getSize().x / (float) p_sprite->getSize().x,
+                            getSize().y / (float) p_sprite->getSize().y);
+                    p_sprite->setScale(scaling, scaling);
+                    p_sprite->setPosition((MenuLine::getSize().x * 0.6f), MenuLine::getSize().y / 2);
+                    p_sprite->setOrigin(Origin::Left);
                 } else {
-                    sprite->setVisibility(Visibility::Hidden);
-                    value->setVisibility(Visibility::Visible);
-                    value->setString(button->name);
+                    p_sprite->setVisibility(Visibility::Hidden);
+                    p_value->setVisibility(Visibility::Visible);
+                    p_value->setString(button->name);
                 }
             } else {
                 char btn[16];
-                snprintf(btn, 16, "%i", option.getValueInt());
-                value->setVisibility(Visibility::Visible);
-                value->setString(btn);
+                snprintf(btn, 16, "%i", option->getInteger());
+                p_value->setVisibility(Visibility::Visible);
+                p_value->setString(btn);
             }
-        } else if (option.getFlags() & Option::Flags::MENU) {
-            value->setVisibility(Visibility::Hidden);
-            setFillColor(pMain->getUiMenu()->getOutlineColor());
         } else {
-            value->setVisibility(Visibility::Visible);
-            value->setString(option.getValueString());
+            p_value->setVisibility(Visibility::Visible);
+            p_value->setString(option->getString());
         }
     }
 
     UiMain *pMain = nullptr;
-    Text *name = nullptr;
-    Text *value = nullptr;
-    Sprite *sprite = nullptr;
-    Skin::TextGroup textGroup;
-    Option option;
+    Text *p_name = nullptr;
+    Text *p_value = nullptr;
+    Sprite *p_sprite = nullptr;
+    Option *p_option = nullptr;
+    Skin::TextGroup m_textGroup;
 };
 
 UiMenu::UiMenu(UiMain *uiMain) : SkinnedRectangle(uiMain, {"OPTIONS_MENU"}) {
@@ -104,9 +116,9 @@ UiMenu::UiMenu(UiMain *uiMain) : SkinnedRectangle(uiMain, {"OPTIONS_MENU"}) {
 
     // calculate number of items shown
     lineHeight = (float) textGroup.size + (2 * ui->getScaling().y);
-    maxLines = (int) (getSize().y / lineHeight);
-    if ((float) maxLines * lineHeight < getSize().y) {
-        lineHeight = getSize().y / (float) maxLines;
+    maxLines = (int) (UiMenu::getSize().y / lineHeight);
+    if ((float) maxLines * lineHeight < UiMenu::getSize().y) {
+        lineHeight = UiMenu::getSize().y / (float) maxLines;
     }
 
     // add selection rectangle (highlight)
@@ -118,7 +130,7 @@ UiMenu::UiMenu(UiMain *uiMain) : SkinnedRectangle(uiMain, {"OPTIONS_MENU"}) {
 
     // add options items
     for (unsigned int i = 0; i < (unsigned int) maxLines; i++) {
-        FloatRect r = {0, lineHeight * (float) i, getSize().x, lineHeight};
+        FloatRect r = {0, lineHeight * (float) i, UiMenu::getSize().x, lineHeight};
         auto line = new MenuLine(ui, r, textGroup);
         lines.push_back(line);
         UiMenu::add(line);
@@ -135,31 +147,43 @@ UiMenu::UiMenu(UiMain *uiMain) : SkinnedRectangle(uiMain, {"OPTIONS_MENU"}) {
     UiMenu::setVisibility(Visibility::Hidden);
 }
 
-void UiMenu::load(bool isRom) {
-
-    isRomMenu = isRom;
+void UiMenu::load(bool isGame) {
+    isRomMenu = isGame;
     isEmuRunning = ui->getUiEmu()->isVisible();
     Game game = ui->getUiRomList()->getSelection();
 
     if (isRomMenu) {
-        ui->getConfig()->load(game);
-        title->setString(game.name);
+        ui->getConfig()->loadGame(game);
+        bool useZipName = ui->getConfig()->getOption(ConfigNew::Id::GUI_SHOW_ZIP_NAMES)->getInteger();
+        title->setString(useZipName ? Utility::removeExt(game.path) : game.name);
     } else {
         title->setString("MAIN OPTIONS");
     }
 
-    // set options items (remove hidden options)
+    // set options items
     optionIndex = highlightIndex = 0;
-    options.clear();
-    std::vector<Option> *opts = ui->getConfig()->get(isRomMenu);
-    remove_copy_if(opts->begin(), opts->end(),
-                   back_inserter(options), [this](Option &opt) {
-                return isOptionHidden(&opt) || opt.getFlags() & Option::Flags::HIDDEN;
-            });
+    menu_options.clear();
+    auto groups = ui->getConfig()->getGroups();
+    for (auto &group: *groups) {
+        // skip some options if needed
+        if (group.getName() == "ROMS") continue;
+        if (isRomMenu && group.getName() == "UI") continue;
+        // push group title
+        menu_options.push_back({group.getName(), nullptr});
+        auto options = group.getOptions();
+        for (auto &option: *options) {
+            // skip hidden options
+            if (option.getFlags() & ConfigNew::Flags::HIDDEN) continue;
+            // push option
+            auto opt = ui->getConfig()->get(option.getId(), isGame);
+            menu_options.push_back({option.getName(), opt});
+        }
+    }
 
-    options.push_back({"OTHER", {}, 0, OPTION_ID_OTHER, Option::Flags::MENU});
-    if (isRomMenu) options.push_back({"STATES", {"GO"}, 0, OPTION_ID_STATES, Option::Flags::STRING});
-    options.push_back({"QUIT", {"GO"}, 0, OPTION_ID_QUIT, Option::Flags::STRING});
+    // add "OTHER" option menu
+    menu_options.push_back({"OTHER", nullptr});
+    if (isRomMenu) menu_options.push_back({"STATES", nullptr});
+    menu_options.push_back({"QUIT", nullptr});
 
     setAlpha(isEmuRunning ? (uint8_t) (alpha - 50) : (uint8_t) alpha);
 
@@ -175,19 +199,19 @@ void UiMenu::load(bool isRom) {
 
 void UiMenu::updateLines() {
     for (unsigned int i = 0; i < (unsigned int) maxLines; i++) {
-        if (optionIndex + i >= options.size()) {
+        if (optionIndex + i >= menu_options.size()) {
             lines[i]->setVisibility(Visibility::Hidden);
             continue;
         }
         // set line data
-        const Option option = options.at(optionIndex + i);
-        lines[i]->set(option);
+        auto menuOption = menu_options.at(optionIndex + i);
+        lines[i]->set(menuOption.name, menuOption.option);
         // set highlight position and color
         if ((int) i == highlightIndex) {
             highlight->setPosition({highlight->getPosition().x, lines[i]->getPosition().y});
-            lines[i]->value->setOutlineColor(getOutlineColor());
+            lines[i]->p_value->setOutlineColor(getOutlineColor());
         } else {
-            lines[i]->value->setOutlineColor(textGroup.outlineColor);
+            lines[i]->p_value->setOutlineColor(textGroup.outlineColor);
         }
     }
 }
@@ -204,12 +228,13 @@ void UiMenu::onKeyUp() {
 
     if (highlightIndex < 0) {
         highlightIndex = maxLines - 1;
-        highlightIndex = (int) options.size() < maxLines - 1 ? (int) options.size() - 1 : maxLines - 1;
-        optionIndex = ((int) options.size() - 1) - highlightIndex;
+        highlightIndex = (int) menu_options.size() < maxLines - 1 ? (int) menu_options.size() - 1 : maxLines - 1;
+        optionIndex = ((int) menu_options.size() - 1) - highlightIndex;
     }
 
     // skip menus
-    if (options.at(optionIndex + highlightIndex).getFlags() & Option::Flags::MENU) {
+    auto opt = menu_options.at(optionIndex + highlightIndex);
+    if (opt.option == nullptr && opt.name != "STATES" && opt.name != "QUIT") {
         return onKeyUp();
     }
 
@@ -220,19 +245,20 @@ void UiMenu::onKeyDown() {
     int index = optionIndex + highlightIndex;
     int middle = maxLines / 2;
 
-    if (highlightIndex >= middle && index + (maxLines - middle) < (int) options.size()) {
+    if (highlightIndex >= middle && index + (maxLines - middle) < (int) menu_options.size()) {
         optionIndex++;
     } else {
         highlightIndex++;
     }
 
-    if (highlightIndex >= maxLines || optionIndex + highlightIndex >= (int) options.size()) {
+    if (highlightIndex >= maxLines || optionIndex + highlightIndex >= (int) menu_options.size()) {
         optionIndex = 0;
         highlightIndex = 0;
     }
 
     // skip menus
-    if (options.at(optionIndex + highlightIndex).getFlags() & Option::Flags::MENU) {
+    auto opt = menu_options.at(optionIndex + highlightIndex);
+    if (opt.option == nullptr && opt.name != "STATES" && opt.name != "QUIT") {
         return onKeyDown();
     }
 
@@ -258,50 +284,45 @@ bool UiMenu::onInput(c2d::Input::Player *players) {
 
     // LEFT /RIGHT
     if (buttons & Input::Button::Left || buttons & Input::Button::Right) {
-        Option option = lines.at(highlightIndex)->option;
-        if (option.getValues()->size() <= 1) {
-            return true;
-        }
+        auto option = lines.at(highlightIndex)->p_option;
+        if (!option || option->getArray().size() <= 1) return true;
         needSave = true;
         if (buttons & Input::Button::Left) {
-            option.prev();
+            option->setArrayMovePrev();
         } else {
-            option.next();
-        }
-        // update option everywhere (todo: simplify)
-        options.at(optionIndex + highlightIndex).set(option);
-        lines.at(highlightIndex)->set(option);
-        ui->getConfig()->get(option.getId(), isRomMenu)->set(option);
-
-        if (!option.getInfo().empty()) {
-            ui->getUiStatusBox()->show(option.getInfo());
+            option->setArrayMoveNext();
         }
 
-        switch (option.getId()) {
-            case Option::Id::GUI_SHOW_FAVORITES:
-            case Option::Id::GUI_SHOW_AVAILABLE:
-            case Option::Id::GUI_SHOW_ZIP_NAMES:
-            case Option::Id::GUI_FILTER_CLONES:
-            case Option::Id::GUI_FILTER_SYSTEM:
-            case Option::Id::GUI_FILTER_EDITOR:
-            case Option::Id::GUI_FILTER_DEVELOPER:
-            case Option::Id::GUI_FILTER_PLAYERS:
-            case Option::Id::GUI_FILTER_RATING:
-            case Option::Id::GUI_FILTER_ROTATION:
-            case Option::Id::GUI_FILTER_RESOLUTION:
-            case Option::Id::GUI_FILTER_DATE:
-            case Option::Id::GUI_FILTER_GENRE: {
-                std::string name = Utility::toUpper(option.getName());
-                std::string value = Utility::toUpper(option.getValueString());
-                if (option.getInfo().empty()) {
+        lines.at(highlightIndex)->refresh();
+        if (!option->getComment().empty()) {
+            ui->getUiStatusBox()->show(option->getComment());
+        }
+
+        switch (option->getId()) {
+            case ConfigNew::Id::GUI_SHOW_FAVORITES:
+            case ConfigNew::Id::GUI_SHOW_AVAILABLE:
+            case ConfigNew::Id::GUI_SHOW_ZIP_NAMES:
+            case ConfigNew::Id::GUI_FILTER_CLONES:
+            case ConfigNew::Id::GUI_FILTER_SYSTEM:
+            case ConfigNew::Id::GUI_FILTER_EDITOR:
+            case ConfigNew::Id::GUI_FILTER_DEVELOPER:
+            case ConfigNew::Id::GUI_FILTER_PLAYERS:
+            case ConfigNew::Id::GUI_FILTER_RATING:
+            case ConfigNew::Id::GUI_FILTER_ROTATION:
+            case ConfigNew::Id::GUI_FILTER_RESOLUTION:
+            case ConfigNew::Id::GUI_FILTER_DATE:
+            case ConfigNew::Id::GUI_FILTER_GENRE: {
+                std::string name = Utility::toUpper(option->getName());
+                std::string value = Utility::toUpper(option->getString());
+                if (option->getComment().empty()) {
                     ui->getUiStatusBox()->show("%s: %s", name.c_str(), value.c_str());
                 }
                 ui->getUiRomList()->updateRomList();
                 break;
             }
 
-            case Option::ROM_ROTATION:
-            case Option::Id::ROM_SCALING:
+            case ConfigNew::Id::ROM_ROTATION:
+            case ConfigNew::Id::ROM_SCALING:
                 if (isEmuRunning) {
                     ui->getUiEmu()->getVideo()->updateScaling();
                     auto gw = (float) ui->getUiEmu()->getVideo()->getTextureRect().width;
@@ -320,10 +341,10 @@ bool UiMenu::onInput(c2d::Input::Player *players) {
                             ui->getUiEmu()->getVideo()->getScale().x, ui->getUiEmu()->getVideo()->getScale().y);
                 }
                 break;
-            case Option::Id::ROM_SCALING_MODE:
-                if (option.getValueString() == "AUTO") {
+            case ConfigNew::Id::ROM_SCALING_MODE:
+                if (option->getString() == "AUTO") {
                     ui->getUiStatusBox()->show("TRY TO KEEP INTEGER SCALING IF ASPECT RATIO IS NOT TOO DIVERGENT");
-                } else if (option.getValueString() == "ASPECT") {
+                } else if (option->getString() == "ASPECT") {
                     ui->getUiStatusBox()->show("KEEP GAME ASPECT RATIO - SOME SHADERS MAY NOT RENDER CORRECTLY");
                 } else {
                     ui->getUiStatusBox()->show(
@@ -333,26 +354,26 @@ bool UiMenu::onInput(c2d::Input::Player *players) {
                     ui->getUiEmu()->getVideo()->updateScaling();
                 }
                 break;
-            case Option::Id::ROM_FILTER:
+            case ConfigNew::Id::ROM_FILTER:
                 if (isEmuRunning) {
-                    ui->getUiEmu()->getVideo()->setFilter((Texture::Filter) option.getIndex());
+                    ui->getUiEmu()->getVideo()->setFilter((Texture::Filter) option->getArrayIndex());
                 }
                 break;
-            case Option::Id::ROM_SHADER:
+            case ConfigNew::Id::ROM_SHADER:
                 if (isEmuRunning) {
-                    ui->getUiEmu()->getVideo()->setShader(option.getIndex());
-                    ui->getUiStatusBox()->show(option.getValueString());
+                    ui->getUiEmu()->getVideo()->setShader(option->getArrayIndex());
+                    ui->getUiStatusBox()->show(option->getString());
                 }
                 break;
 #ifdef __VITA__
-                case Option::Id::ROM_WAIT_RENDERING:
+                case ConfigNew::Id::ROM_WAIT_RENDERING:
                     if (isEmuRunning) {
                         ((PSP2Renderer *) ui)->setWaitRendering(option.getValueBool());
                     }
                     break;
 #endif
-            case Option::Id::GUI_VIDEO_SNAP_DELAY:
-                ui->getUiRomList()->setVideoSnapDelay(option.getValueInt());
+            case ConfigNew::Id::GUI_VIDEO_SNAP_DELAY:
+                ui->getUiRomList()->setVideoSnapDelay(option->getInteger());
                 break;
 
             default:
@@ -362,19 +383,19 @@ bool UiMenu::onInput(c2d::Input::Player *players) {
 
     // FIRE1 (ENTER)
     if (buttons & Input::Button::A) {
-        Option option = lines.at(highlightIndex)->option;
-        if (option.getFlags() == Option::Flags::INPUT) {
+        auto option = lines.at(highlightIndex)->p_option;
+        if (option && option->getFlags() == ConfigNew::Flags::INPUT) {
             int new_key = 0;
             int res = ui->getUiMessageBox()->show("NEW INPUT", "PRESS A BUTTON", "", "", &new_key, 9);
             if (res != MessageBox::TIMEOUT) {
                 needSave = true;
-                // update option everywhere (todo: simplify)
-                option.setValueInt(new_key);
-                options.at(optionIndex + highlightIndex).setValueInt(new_key);
-                lines.at(highlightIndex)->set(option);
-                ui->getConfig()->get(option.getId(), isRomMenu)->set(option);
+                option->setInteger(new_key);
+                lines.at(highlightIndex)->refresh();
             }
-        } else if (option.getId() == OPTION_ID_QUIT) {
+        } else if (lines.at(highlightIndex)->p_name->getString() == "STATES") {
+            setVisibility(Visibility::Hidden, true);
+            ui->getUiStateMenu()->setVisibility(Visibility::Visible, true);
+        } else if (lines.at(highlightIndex)->p_name->getString() == "QUIT") {
             if (isEmuRunning) {
                 setVisibility(Visibility::Hidden, true);
                 ui->getUiEmu()->stop();
@@ -382,13 +403,10 @@ bool UiMenu::onInput(c2d::Input::Player *players) {
                 ui->getInput()->clear();
             } else {
                 // be sure options are saved before exiting
-                ui->getConfig()->save(isRomMenu ? ui->getUiRomList()->getSelection() : ss_api::Game());
+                ui->getConfig()->save(isRomMenu);
                 needSave = false;
                 ui->done = true;
             }
-        } else if (option.getId() == OPTION_ID_STATES) {
-            setVisibility(Visibility::Hidden, true);
-            ui->getUiStateMenu()->setVisibility(Visibility::Visible, true);
         }
     }
 
@@ -407,8 +425,9 @@ void UiMenu::setVisibility(Visibility visibility, bool tweenPlay) {
     if (ui->getUiRomList() && ui->getUiRomList()->isVisible()) {
         ui->getUiRomList()->getBlur()->setVisibility(visibility, true);
     }
+
     if (visibility == Visibility::Hidden && needSave) {
-        ui->getConfig()->save(isRomMenu ? ui->getUiRomList()->getSelection() : ss_api::Game());
+        ui->getConfig()->save(isRomMenu);
         needSave = false;
     }
 
@@ -418,4 +437,3 @@ void UiMenu::setVisibility(Visibility visibility, bool tweenPlay) {
 UiMenu::~UiMenu() {
     printf("~UIMenuNew\n");
 }
-
