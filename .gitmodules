@@ -5,10 +5,10 @@
 	path = external/cores/nestopia
 	url = https://github.com/Cpasjuste/nestopia.git
 [submodule "sscrap"]
-	path = sscrap
+	path = external/sscrap
 	url = https://github.com/Cpasjuste/sscrap.git
 [submodule "libcross2d"]
-	path = libcross2d
+	path = external/libcross2d
 	url = https://github.com/Cpasjuste/libcross2d.git
 [submodule "cores/fbneo"]
 	path = external/cores/FBNeo

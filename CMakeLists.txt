@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.5)
 
 # add libcross2d library. If you want to port pfba to another platform,
 # you should (may) only need to port libcross2d library.
-add_subdirectory(libcross2d)
+add_subdirectory(external/libcross2d)
 
 ####################
 # BUILD OPTIONS
@@ -25,7 +25,7 @@ if (PLATFORM_LINUX OR PLATFORM_WINDOWS)
 endif ()
 
 # add sscrap (screenscrapper scrapper!) library
-add_subdirectory(sscrap)
+add_subdirectory(external/sscrap)
 
 # required for cmake toolchain setup
 project(pemu)
