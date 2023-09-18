@@ -34,7 +34,7 @@ set(VERSION_MAJOR 6)
 set(VERSION_MINOR 7)
 
 # pemu (ui)
-add_subdirectory(ui)
+add_subdirectory(src)
 
 # emulator selection
 if (OPTION_EMU STREQUAL "pnes")
