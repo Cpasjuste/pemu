@@ -373,7 +373,7 @@ add_dependencies(${PROJECT_NAME}.data.skin ${PROJECT_NAME}.data)
 if (OPTION_LIGHT)
     add_custom_target(${PROJECT_NAME}.data.light
             COMMAND rm -rf "${CMAKE_CURRENT_BINARY_DIR}/data_romfs/gamelist*"
-            COMMAND cp -f "data/light/gamelist-light.xml" "${CMAKE_CURRENT_BINARY_DIR}/data_romfs/gamelist.xml"
+            COMMAND cp -f "${CMAKE_CURRENT_SOURCE_DIR}/data/light/gamelist-light.xml" "${CMAKE_CURRENT_BINARY_DIR}/data_romfs/gamelist.xml"
     )
     add_dependencies(${PROJECT_NAME}.data.light ${PROJECT_NAME}.data)
 endif ()
