@@ -5,7 +5,7 @@
 #ifndef PNES_CONFIG_H
 #define PNES_CONFIG_H
 
-#include "c2dui_config.h"
+#include "pemu_config.h"
 
 class PNESConfig : public c2dui::PEMUConfig {
 public:

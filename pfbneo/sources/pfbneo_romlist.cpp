@@ -3,21 +3,30 @@
 //
 
 #include "pemu.h"
-#include "pgen_romlist.h"
+#include "pfbneo_romlist.h"
 
 struct GameListInfo {
     std::string name;
     std::string path;
 };
 
-void PGENRomList::build(bool addArcadeSystem, const ss_api::System &system) {
+void PFBARomList::build(bool addArcadeSystem, const ss_api::System &system) {
+#ifndef __PFBN_LIGHT__
     std::vector<GameListInfo> gameLists = {
-            {"SMS", "gamelist_sms.xml"},
-            {"GAMEGEAR", "gamelist_gamegear.xml"},
-            {"MEGACD", "gamelist_megacd.xml"},
-#if 0
-            {"SG1000","gamelist_sg1000.xml}"
-#endif
+            {"CHANNELF",  "gamelist_channelf.xml"},
+            {"COLECO",    "gamelist_coleco.xml"},
+            {"FDS",       "gamelist_fds.xml"},
+            {"GAMEGEAR",  "gamelist_gamegear.xml"},
+            {"MEGADRIVE", "gamelist_megadrive.xml"},
+            {"MSX",       "gamelist_msx.xml"},
+            {"NES",       "gamelist_nes.xml"},
+            {"NGP",       "gamelist_ngp.xml"},
+            {"PCE",       "gamelist_pce.xml"},
+            {"SG1000",    "gamelist_sg1000.xml"},
+            {"SGX",       "gamelist_sgx.xml"},
+            {"SMS",       "gamelist_sms.xml"},
+            {"SPECTRUM",  "gamelist_spectrum.xml"},
+            {"TG16",      "gamelist_tg16.xml"}
     };
 
     bool showAvailableOnly = ui->getConfig()->get(PEMUConfig::Id::GUI_SHOW_AVAILABLE)->getInteger();
@@ -34,9 +43,13 @@ void PGENRomList::build(bool addArcadeSystem, const ss_api::System &system) {
         printf("RomList::build: %s, games found: %zu / %zu\n",
                gameListPath.c_str(), gameList->getAvailableCount(), gameList->games.size());
     }
+#endif
 
-    RomList::build(addArcadeSystem, {1, 0, "Megadrive"});
+    RomList::build(addArcadeSystem);
 
-    // enable system filtering
+    // remove hidden flags for pfbneo
+    ui->getConfig()->get(PEMUConfig::Id::GUI_FILTER_CLONES)->setFlags(0);
     ui->getConfig()->get(PEMUConfig::Id::GUI_FILTER_SYSTEM)->setFlags(0);
+    ui->getConfig()->get(PEMUConfig::Id::GUI_FILTER_ROTATION)->setFlags(0);
+    ui->getConfig()->get(PEMUConfig::Id::GUI_FILTER_RESOLUTION)->setFlags(0);
 }

@@ -19,13 +19,13 @@
 
 #include "burner.h"
 
-#include "c2dui.h"
-#include "uiEmu.h"
-#include "uiMenu.h"
-#include "config.h"
-#include "uiStateMenu.h"
-#include "pfba_io.h"
-#include "romlist.h"
+#include "pemu.h"
+#include "pfbneo_ui_emu.h"
+#include "pfbneo_ui_menu.h"
+#include "pfbneo_config.h"
+#include "pfbneo_ui_menu_state.h"
+#include "pfbneo_io.h"
+#include "pfbneo_romlist.h"
 
 using namespace c2d;
 using namespace c2dui;

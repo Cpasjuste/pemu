@@ -1,7 +1,7 @@
-#include "c2dui.h"
-#include "uiEmu.h"
-#include "uiStateMenu.h"
-#include "config.h"
+#include "pemu.h"
+#include "psnes_ui_emu.h"
+#include "psnes_ui_menu_state.h"
+#include "psnes_config.h"
 #include "psnes_io.h"
 #include "snes9x.h"
 

@@ -2,12 +2,12 @@
 // Created by cpasjuste on 22/11/16.
 //
 
-#include "c2dui.h"
+#include "pemu.h"
 #include "pgen_ui_emu.h"
 #include "pgen_io.h"
 #include "pgen_config.h"
 #include "pgen_romlist.h"
-#include "pgen_ui_statemenu.h"
+#include "pgen_ui_menu_state.h"
 #include "osd.h"
 
 using namespace c2d;

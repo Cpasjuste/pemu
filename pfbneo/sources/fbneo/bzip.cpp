@@ -1,6 +1,6 @@
 // Burner Zip module
 
-#include "c2dui.h"
+#include "pemu.h"
 #include "burner.h"
 
 int nBzipError = 0;                                                // non-zero if there is a problem with the opened romset

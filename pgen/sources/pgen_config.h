@@ -5,7 +5,7 @@
 #ifndef PGEN_CONFIG_H
 #define PGEN_CONFIG_H
 
-#include "c2dui_config.h"
+#include "pemu_config.h"
 
 class PGENConfig : public c2dui::PEMUConfig {
 public:

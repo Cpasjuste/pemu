@@ -1,6 +1,6 @@
 // Driver Init module
 
-#include "c2dui.h"
+#include "pemu.h"
 #include "burner.h"
 #include "retro_input.h"
 

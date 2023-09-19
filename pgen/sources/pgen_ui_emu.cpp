@@ -3,7 +3,7 @@
 //
 
 #include <zlib.h>
-#include "c2dui.h"
+#include "pemu.h"
 #include "pgen_ui_emu.h"
 #include "osd.h"
 

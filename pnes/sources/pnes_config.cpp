@@ -2,7 +2,7 @@
 // Created by cpasjuste on 29/05/18.
 //
 
-#include "c2dui.h"
+#include "pemu.h"
 #include "pnes_config.h"
 
 using namespace c2d;

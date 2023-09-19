@@ -17,9 +17,9 @@
  *
  */
 
-#include "c2dui.h"
-#include "uiEmu.h"
-#include "uiStateMenu.h"
+#include "pemu.h"
+#include "pnes_ui_emu.h"
+#include "pnes_ui_menu_state.h"
 #include "pnes_config.h"
 #include "pnes_io.h"
 

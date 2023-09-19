@@ -2,7 +2,7 @@
 // Created by cpasjuste on 13/12/2021.
 //
 
-#include "c2dui.h"
+#include "pemu.h"
 
 SkinnedText::SkinnedText(UiMain *main, const std::vector<std::string> &cfgTree) : Text() {
     pMain = main;
