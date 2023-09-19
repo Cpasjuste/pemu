@@ -34,24 +34,24 @@ set(VERSION_MAJOR 6)
 set(VERSION_MINOR 7)
 
 # pemu (ui)
-add_subdirectory(src)
+add_subdirectory(src/skeleton)
 
 # emulator selection
-if (OPTION_EMU STREQUAL "pnes")
+if (OPTION_EMU STREQUAL "src/cores/pnes")
     # pnes
-    add_subdirectory(pnes)
-elseif (OPTION_EMU STREQUAL "psnes")
+    add_subdirectory(src/cores/pnes)
+elseif (OPTION_EMU STREQUAL "src/cores/psnes")
     # psnes
-    add_subdirectory(psnes)
-elseif (OPTION_EMU STREQUAL "pgen")
+    add_subdirectory(src/cores/psnes)
+elseif (OPTION_EMU STREQUAL "src/cores/pgen")
     # pgen
-    add_subdirectory(pgen)
-elseif (OPTION_EMU STREQUAL "pfbneo")
+    add_subdirectory(src/cores/pgen)
+elseif (OPTION_EMU STREQUAL "src/cores/pfbneo")
     # pfbneo
-    add_subdirectory(pfbneo)
+    add_subdirectory(src/cores/pfbneo)
 else ()
-    add_subdirectory(pfbneo)
-    add_subdirectory(pgen)
-    add_subdirectory(pnes)
-    add_subdirectory(psnes)
+    add_subdirectory(src/cores/pfbneo)
+    add_subdirectory(src/cores/pgen)
+    add_subdirectory(src/cores/pnes)
+    add_subdirectory(src/cores/psnes)
 endif ()
