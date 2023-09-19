@@ -9,7 +9,7 @@ using namespace c2d::config;
 using namespace ss_api;
 
 PEMUConfig::PEMUConfig(c2d::Io *io, const std::string &name, int version)
-        : Config(name, io->getDataPath() + "config-new.cfg", version) {
+        : Config(name, io->getDataPath() + "config.cfg", version) {
     p_io = io;
 
     /*
