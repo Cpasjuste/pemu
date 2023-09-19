@@ -366,11 +366,11 @@ bool UiMenu::onInput(c2d::Input::Player *players) {
                 }
                 break;
 #ifdef __VITA__
-                case ConfigNew::Id::ROM_WAIT_RENDERING:
-                    if (isEmuRunning) {
-                        ((PSP2Renderer *) ui)->setWaitRendering(option.getValueBool());
-                    }
-                    break;
+            case PEMUConfig::Id::ROM_WAIT_RENDERING:
+                if (isEmuRunning) {
+                    ((PSP2Renderer *) ui)->setWaitRendering(option->getInteger());
+                }
+                break;
 #endif
             case PEMUConfig::Id::GUI_VIDEO_SNAP_DELAY:
                 ui->getUiRomList()->setVideoSnapDelay(option->getInteger());

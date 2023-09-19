@@ -16,8 +16,8 @@ PNESConfig::PNESConfig(c2d::Io *io, int version) : PEMUConfig(io, "PNES", versio
 
 #ifdef __SWITCH__
     // on nintendo switch invert A/B buttons
-    getOption(ConfigNew::Id::JOY_A)->setInteger(KEY_JOY_B_DEFAULT);
-    getOption(ConfigNew::Id::JOY_B)->setInteger(KEY_JOY_A_DEFAULT);
+    getOption(PEMUConfig::Id::JOY_A)->setInteger(KEY_JOY_B_DEFAULT);
+    getOption(PEMUConfig::Id::JOY_B)->setInteger(KEY_JOY_A_DEFAULT);
 #endif
 
     // "c2dui_romlist" will also reload config, but we need new roms paths

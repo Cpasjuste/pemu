@@ -57,7 +57,7 @@ PFBAConfig::PFBAConfig(c2d::Io *io, int version) : PEMUConfig(io, "PFBNEO", vers
                       2, PEMUConfig::Id::ROM_AUDIO_FMINTERPOLATION, C2D_CONFIG_RESTART_EMU_NEEDED});
 #ifdef __VITA__
     group->addOption({"ROTATION", {"OFF", "ON", "FLIP", "CAB MODE"},
-                      1, ConfigNew::Id::ROM_ROTATION, C2D_CONFIG_RESTART_EMU_NEEDED});
+                      1, PEMUConfig::Id::ROM_ROTATION, C2D_CONFIG_RESTART_EMU_NEEDED});
 #else
     group->addOption({"ROTATION", {"OFF", "ON", "FLIP"},
                       1, PEMUConfig::Id::ROM_ROTATION, C2D_CONFIG_RESTART_EMU_NEEDED});
@@ -71,15 +71,15 @@ PFBAConfig::PFBAConfig(c2d::Io *io, int version) : PEMUConfig(io, "PFBNEO", vers
              0, PEMUConfig::Id::ROM_NEOBIOS, C2D_CONFIG_RESTART_EMU_NEEDED});
 #ifdef __PFBA_ARM__
     // do not use unibios as default on vita for cyclone asm compatibility
-    group->getOption(ConfigNew::Id::ROM_NEOBIOS)->setArrayIndex(4);
+    group->getOption(PEMUConfig::Id::ROM_NEOBIOS)->setArrayIndex(4);
     group->addOption({"FRAMESKIP", {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"},
-                      0, ConfigNew::Id::ROM_FRAMESKIP, C2D_CONFIG_RESTART_EMU_NEEDED});
+                      0, PEMUConfig::Id::ROM_FRAMESKIP, C2D_CONFIG_RESTART_EMU_NEEDED});
 #endif
 
 #if defined(__PS4__) || defined(ANDROID)
     // force 48000hz audio output
-    get(ConfigNew::Id::ROM_AUDIO_FREQ)->setArrayIndex(4);
-    get(ConfigNew::Id::ROM_AUDIO_FREQ)->setFlags(ConfigNew::Flags::HIDDEN);
+    get(PEMUConfig::Id::ROM_AUDIO_FREQ)->setArrayIndex(4);
+    get(PEMUConfig::Id::ROM_AUDIO_FREQ)->setFlags(PEMUConfig::Flags::HIDDEN);
 #endif
 
     // "c2dui_romlist" will also reload config, but we need new roms paths

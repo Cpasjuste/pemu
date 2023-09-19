@@ -53,7 +53,7 @@ int PFBAUiEmu::getSekCpuCore() {
     std::vector<std::string> zipList;
     int hardware = BurnDrvGetHardwareCode();
 
-    std::string bios = pMain->getConfig()->get(Option::Id::ROM_NEOBIOS, true)->getValueString();
+    std::string bios = pMain->getConfig()->get(PEMUConfig::Id::ROM_NEOBIOS, true)->getString();
     if (isHardware(hardware, HARDWARE_PREFIX_SNK) && Utility::contains(bios, "UNIBIOS")) {
         sekCpuCore = 1; // SEK_CORE_M68K: USE C M68K CORE
         pMain->getUiMessageBox()->show(
@@ -318,7 +318,7 @@ void PFBAUiEmu::onUpdate() {
 
     // update fbneo video buffer and audio
 #ifdef __VITA__
-    int skip = pMain->getConfig()->get(Option::Id::ROM_FRAMESKIP, true)->getIndex();
+    int skip = pMain->getConfig()->get(PEMUConfig::Id::ROM_FRAMESKIP, true)->getInteger();
 #else
     int skip = 0;
 #endif
