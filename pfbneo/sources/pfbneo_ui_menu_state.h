@@ -8,10 +8,10 @@
 #include "ui_main.h"
 #include "ui_menu_state.h"
 
-class PFBAUIStateMenu : public c2dui::UiMenuState {
+class PFBAUIStateMenu : public pemu::UiMenuState {
 
 public:
-    PFBAUIStateMenu(c2dui::UiMain *ui);
+    PFBAUIStateMenu(pemu::UiMain *ui);
 
     bool loadStateCore(const char *path);
 

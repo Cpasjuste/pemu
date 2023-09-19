@@ -5,7 +5,7 @@
 #ifndef C2D_UI_PROGRESSBOX_H
 #define C2D_UI_PROGRESSBOX_H
 
-namespace c2dui {
+namespace pemu {
 
     class UIProgressBox : public SkinnedRectangle {
 

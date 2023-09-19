@@ -11,7 +11,7 @@ extern int BurnStateSave(char *szName, int bAll);
 
 extern int DrvInitCallback();
 
-PFBAUIStateMenu::PFBAUIStateMenu(c2dui::UiMain *ui) : c2dui::UiMenuState(ui) {
+PFBAUIStateMenu::PFBAUIStateMenu(pemu::UiMain *ui) : pemu::UiMenuState(ui) {
 
 }
 

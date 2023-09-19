@@ -5,7 +5,7 @@
 #ifndef C2DUI_VIDEO_H_
 #define C2DUI_VIDEO_H_
 
-namespace c2dui {
+namespace pemu {
 
     class C2DUIVideo : public c2d::C2DTexture {
 

@@ -5,7 +5,7 @@
 #ifndef PFBN_VIDEO_H
 #define PFBN_VIDEO_H
 
-namespace c2dui {
+namespace pemu {
 
     class PFBAVideo : public C2DUIVideo {
 

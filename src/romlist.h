@@ -7,7 +7,7 @@
 
 #include <vector>
 
-namespace c2dui {
+namespace pemu {
 
     class UiMain;
 

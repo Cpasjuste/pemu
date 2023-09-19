@@ -5,7 +5,7 @@
 #ifndef C2DUI_HELP_H
 #define C2DUI_HELP_H
 
-namespace c2dui {
+namespace pemu {
 
     class UiHelp : public SkinnedRectangle {
 

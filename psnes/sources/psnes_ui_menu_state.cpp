@@ -6,7 +6,7 @@
 #include "psnes_ui_menu_state.h"
 #include "snapshot.h"
 
-PSNESUIStateMenu::PSNESUIStateMenu(c2dui::UiMain *ui) : c2dui::UiMenuState(ui) {
+PSNESUIStateMenu::PSNESUIStateMenu(pemu::UiMain *ui) : pemu::UiMenuState(ui) {
 
 }
 

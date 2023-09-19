@@ -22,7 +22,7 @@
 
 using namespace c2d;
 using namespace c2d::config;
-using namespace c2dui;
+using namespace pemu;
 
 static UiMain *m_ui;
 

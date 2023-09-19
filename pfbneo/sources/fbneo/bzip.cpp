@@ -23,7 +23,7 @@ static int nZipsFound = 0;
 StringSet BzipText;                                                // Text which describes any problems with loading the zip
 StringSet BzipDetail;                                            // Text which describes in detail any problems with loading the zip
 
-extern c2dui::UiMain *ui;
+extern pemu::UiMain *ui;
 
 void BzipListFree() {
     if (List) {

@@ -6,7 +6,7 @@
 #include "pgen_config.h"
 
 using namespace c2d;
-using namespace c2dui;
+using namespace pemu;
 
 PGENConfig::PGENConfig(c2d::Io *io, int version) : PEMUConfig(io, "PGEN", version) {
     // change default rom path name in config file

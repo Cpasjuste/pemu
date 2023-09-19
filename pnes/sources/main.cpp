@@ -24,7 +24,7 @@
 #include "pnes_io.h"
 
 using namespace c2d;
-using namespace c2dui;
+using namespace pemu;
 
 #ifdef __PSP2__
 #include <psp2/power.h>

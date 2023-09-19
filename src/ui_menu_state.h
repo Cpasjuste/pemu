@@ -7,7 +7,7 @@
 
 class UiStateList;
 
-namespace c2dui {
+namespace pemu {
 
     class UiMenuState : public SkinnedRectangle {
 

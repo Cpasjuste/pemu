@@ -5,7 +5,7 @@
 #ifndef C2DUI_STATUS_BOX_H
 #define C2DUI_STATUS_BOX_H
 
-namespace c2dui {
+namespace pemu {
 
     class UiStatusBox : public SkinnedRectangle {
 

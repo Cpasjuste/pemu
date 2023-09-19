@@ -5,12 +5,12 @@
 #ifndef PFBA_ROMLIST_H
 #define PFBA_ROMLIST_H
 
-class PFBARomList : public c2dui::RomList {
+class PFBARomList : public pemu::RomList {
 
 public:
 
-    PFBARomList(c2dui::UiMain *ui, const std::string &emuVersion, const std::vector<std::string> &filters)
-            : c2dui::RomList(ui, emuVersion, filters) {};
+    PFBARomList(pemu::UiMain *ui, const std::string &emuVersion, const std::vector<std::string> &filters)
+            : pemu::RomList(ui, emuVersion, filters) {};
 
     void build(bool addArcadeSystem = true, const ss_api::System &system = {}) override;
 };

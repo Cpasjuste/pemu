@@ -7,7 +7,7 @@
 
 using namespace c2d;
 using namespace c2d::config;
-using namespace c2dui;
+using namespace pemu;
 using namespace ss_api;
 
 UIRomList::UIRomList(UiMain *main, RomList *romList, const c2d::Vector2f &size)

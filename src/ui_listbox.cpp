@@ -5,7 +5,7 @@
 #include "pemu.h"
 
 using namespace c2d;
-using namespace c2dui;
+using namespace pemu;
 using namespace ss_api;
 
 UIListBoxLine::UIListBoxLine(

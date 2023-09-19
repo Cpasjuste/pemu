@@ -5,7 +5,7 @@
 #ifndef C2DUI_UI_EMU_H
 #define C2DUI_UI_EMU_H
 
-namespace c2dui {
+namespace pemu {
 
     class UiEmu : public c2d::RectangleShape {
 

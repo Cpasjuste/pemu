@@ -7,7 +7,7 @@
 
 class MenuLine;
 
-namespace c2dui {
+namespace pemu {
 
     class UiMenu : public SkinnedRectangle {
 

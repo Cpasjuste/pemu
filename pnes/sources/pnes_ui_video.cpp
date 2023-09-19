@@ -38,7 +38,7 @@
 #include "fltkui/font.h"
 
 using namespace c2d;
-using namespace c2dui;
+using namespace pemu;
 using namespace Nes::Api;
 
 static int overscan_offset, overscan_height;
@@ -54,7 +54,7 @@ extern void *custompalette;
 extern nstpaths_t nstpaths;
 extern Emulator emulator;
 
-// C2DUI
+// pemu
 extern PNESUiEmu *uiEmu;
 
 void nst_ogl_init() {

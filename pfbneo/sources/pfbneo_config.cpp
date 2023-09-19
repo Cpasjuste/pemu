@@ -7,7 +7,7 @@
 #include "pfbneo_config.h"
 
 using namespace c2d;
-using namespace c2dui;
+using namespace pemu;
 
 #define C2D_CONFIG_RESTART_EMU_NEEDED "YOU NEED TO RESTART EMULATION AFTER CHANGING THIS OPTION"
 

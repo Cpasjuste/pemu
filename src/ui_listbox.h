@@ -5,7 +5,7 @@
 #ifndef C2DUI_LISTBOX_H
 #define C2DUI_LISTBOX_H
 
-namespace c2dui {
+namespace pemu {
 
     class UIListBoxLine : public c2d::RectangleShape {
 

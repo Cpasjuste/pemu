@@ -5,7 +5,7 @@
 #ifndef C2DUI_HIGHLIGHT_H
 #define C2DUI_HIGHLIGHT_H
 
-namespace c2dui {
+namespace pemu {
 
     class UIHighlight : public c2d::RectangleShape {
 

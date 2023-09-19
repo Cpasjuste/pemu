@@ -9,7 +9,7 @@ extern int nestopia_state_load(const char *path);
 
 extern int nestopia_state_save(const char *path);
 
-PNESUIStateMenu::PNESUIStateMenu(c2dui::UiMain *ui) : c2dui::UiMenuState(ui) {
+PNESUIStateMenu::PNESUIStateMenu(pemu::UiMain *ui) : pemu::UiMenuState(ui) {
 
 }
 

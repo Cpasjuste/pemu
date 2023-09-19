@@ -2,8 +2,8 @@
 // Created by cpasjuste on 28/05/18.
 //
 
-#ifndef C2DUI_H
-#define C2DUI_H
+#ifndef PEMU_H
+#define PEMU_H
 
 #include "ss_api.h"
 #include "cross2d/c2d.h"
@@ -36,7 +36,7 @@
 #include "ui_help.h"
 
 using namespace c2d;
-using namespace c2dui;
+using namespace pemu;
 using namespace ss_api;
 
-#endif //C2DUI_H
+#endif //PEMU_H

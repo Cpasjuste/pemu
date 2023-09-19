@@ -5,12 +5,12 @@
 #ifndef PGEN_ROMLIST_H
 #define PGEN_ROMLIST_H
 
-class PGENRomList : public c2dui::RomList {
+class PGENRomList : public pemu::RomList {
 
 public:
 
-    PGENRomList(c2dui::UiMain *ui, const std::string &emuVersion, const std::vector<std::string> &filters)
-            : c2dui::RomList(ui, emuVersion, filters) {};
+    PGENRomList(pemu::UiMain *ui, const std::string &emuVersion, const std::vector<std::string> &filters)
+            : pemu::RomList(ui, emuVersion, filters) {};
 
     void build(bool addArcadeSystem = false, const ss_api::System &system = {}) override;
 };

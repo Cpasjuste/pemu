@@ -7,7 +7,7 @@
 #include "burner.h"
 
 using namespace c2d;
-using namespace c2dui;
+using namespace pemu;
 
 PFBAVideo::PFBAVideo(UiMain *ui, uint8_t **_pixels, int *_pitch, const c2d::Vector2i &size, const c2d::Vector2i &aspect)
         : C2DUIVideo(ui, _pixels, _pitch, size, aspect) {

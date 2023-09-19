@@ -6,7 +6,7 @@
 #include "psnes_config.h"
 
 using namespace c2d;
-using namespace c2dui;
+using namespace pemu;
 
 PSNESConfig::PSNESConfig(c2d::Io *io, int version) : PEMUConfig(io, "PSNES", version) {
     printf("PSNESConfig(%s, v%i)\n", getPath().c_str(), version);

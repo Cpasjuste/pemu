@@ -7,11 +7,11 @@
 
 #include <string>
 
-class PSNESUiEmu : public c2dui::UiEmu {
+class PSNESUiEmu : public pemu::UiEmu {
 
 public:
 
-    explicit PSNESUiEmu(c2dui::UiMain *ui);
+    explicit PSNESUiEmu(pemu::UiMain *ui);
 
     int load(const ss_api::Game &game) override;
 

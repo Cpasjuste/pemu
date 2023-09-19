@@ -11,7 +11,7 @@
 #include "retro_input_wrapper.h"
 
 using namespace c2d;
-using namespace c2dui;
+using namespace pemu;
 
 int nVidFullscreen = 0;
 INT32 bVidUseHardwareGamma = 1;

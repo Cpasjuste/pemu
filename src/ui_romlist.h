@@ -7,7 +7,7 @@
 
 class UIRomInfo;
 
-namespace c2dui {
+namespace pemu {
 
     class UIRomList : public SkinnedRectangle {
 

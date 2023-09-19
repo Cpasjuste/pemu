@@ -7,7 +7,7 @@
 
 #define C2D_CONFIG_RESTART_NEEDED "YOU NEED TO RESTART THE APPLICATION AFTER CHANGING THIS OPTION"
 
-namespace c2dui {
+namespace pemu {
     class PEMUConfig : public c2d::config::Config {
     public:
         enum Flags {

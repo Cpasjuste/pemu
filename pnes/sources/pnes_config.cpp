@@ -6,7 +6,7 @@
 #include "pnes_config.h"
 
 using namespace c2d;
-using namespace c2dui;
+using namespace pemu;
 
 PNESConfig::PNESConfig(c2d::Io *io, int version) : PEMUConfig(io, "PNES", version) {
     printf("PNESConfig(%s, v%i)\n", getPath().c_str(), version);

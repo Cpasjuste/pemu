@@ -7,7 +7,7 @@
 
 #define INPUT_DELAY 200
 
-namespace c2dui {
+namespace pemu {
 
     class UiMain : public c2d::C2DRenderer {
 

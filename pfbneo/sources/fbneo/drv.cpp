@@ -4,7 +4,7 @@
 #include "burner.h"
 #include "retro_input.h"
 
-using namespace c2dui;
+using namespace pemu;
 
 extern UiMain *ui;
 
