@@ -10,6 +10,8 @@
 class PFBAConfig : public pemu::PEMUConfig {
 public:
     PFBAConfig(c2d::Io *io, int version);
+
+    std::string getCoreVersion() override;
 };
 
 #endif //PFBA_CONFIG_H

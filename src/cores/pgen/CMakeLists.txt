@@ -19,7 +19,7 @@ set(GENESIS_INC
         ${CMAKE_SOURCE_DIR}/external/cores/Genesis-Plus-GX/core/ntsc
         ${CMAKE_SOURCE_DIR}/external/cores/Genesis-Plus-GX/core/sound
         ${CMAKE_SOURCE_DIR}/external/cores/Genesis-Plus-GX/core/z80
-        )
+)
 
 file(GLOB GENESIS_SRC
         ${CMAKE_SOURCE_DIR}/external/cores/Genesis-Plus-GX/core/*c*
@@ -32,21 +32,21 @@ file(GLOB GENESIS_SRC
         ${CMAKE_SOURCE_DIR}/external/cores/Genesis-Plus-GX/core/ntsc/*c*
         ${CMAKE_SOURCE_DIR}/external/cores/Genesis-Plus-GX/core/sound/*c*
         ${CMAKE_SOURCE_DIR}/external/cores/Genesis-Plus-GX/core/z80/*c*
-        )
+)
 
 set(GENESIS_CFLAGS
         -DUSE_16BPP_RENDERING
         -DHAVE_YM3438_CORE -DHAVE_OPLL_CORE
         -DLSB_FIRST -DMAXROMSIZE=33554432
-        -D__PGEN__ -D__PGEN_VERSION_MAJOR__=${VERSION_MAJOR} -D__PGEN_VERSION_MINOR__=${VERSION_MINOR}
-        )
+        -D__PGEN__ -D__PEMU_VERSION_MAJOR__=${VERSION_MAJOR} -D__PEMU_VERSION_MINOR__=${VERSION_MINOR}
+)
 
 if (OPTION_CHD)
     list(APPEND GENESIS_INC
             ${CMAKE_SOURCE_DIR}/external/cores/Genesis-Plus-GX/core/cd_hw/libchdr/src
             ${CMAKE_SOURCE_DIR}/external/cores/Genesis-Plus-GX/core/cd_hw/libchdr/deps/libFLAC/include
             ${CMAKE_SOURCE_DIR}/external/cores/Genesis-Plus-GX/core/cd_hw/libchdr/deps/lzma
-            )
+    )
     file(GLOB CHD_SRC ${CMAKE_SOURCE_DIR}/external/cores/Genesis-Plus-GX/core/cd_hw/libchdr/src/*.c)
     file(GLOB FLAC_SRC ${CMAKE_SOURCE_DIR}/external/cores/Genesis-Plus-GX/core/cd_hw/libchdr/deps/libFLAC/*.c)
     file(GLOB LZMA_SRC ${CMAKE_SOURCE_DIR}/external/cores/Genesis-Plus-GX/core/cd_hw/libchdr/deps/lzma/*.c)
@@ -62,6 +62,7 @@ endif ()
 ##############
 set(PGEN_INC sources)
 file(GLOB PGEN_SRC sources/*.c*)
+list(APPEND PGEN_SRC ../main.cpp)
 
 #####################
 # PLATORM SPECIFIC
@@ -117,10 +118,10 @@ include(${CMAKE_SOURCE_DIR}/external/libcross2d/cmake/targets.cmake)
 
 # add common skin data
 add_custom_target(${PROJECT_NAME}.data.skin
-        COMMAND ${CMAKE_COMMAND} -D SRC=${CMAKE_CURRENT_SOURCE_DIR}/../data/common/datadir -D DST=${CMAKE_CURRENT_BINARY_DIR}/data_datadir -P ${CMAKE_SOURCE_DIR}/external/libcross2d/cmake/copy_custom.cmake
-        COMMAND ${CMAKE_COMMAND} -D SRC=${CMAKE_CURRENT_SOURCE_DIR}/../data/${TARGET_PLATFORM}/datadir -D DST=${CMAKE_CURRENT_BINARY_DIR}/data_datadir -P ${CMAKE_SOURCE_DIR}/external/libcross2d/cmake/copy_custom.cmake
-        COMMAND ${CMAKE_COMMAND} -D SRC=${CMAKE_CURRENT_SOURCE_DIR}/../data/common/romfs -D DST=${CMAKE_CURRENT_BINARY_DIR}/data_romfs -P ${CMAKE_SOURCE_DIR}/external/libcross2d/cmake/copy_custom.cmake
-        COMMAND ${CMAKE_COMMAND} -D SRC=${CMAKE_CURRENT_SOURCE_DIR}/../data/${TARGET_PLATFORM}/romfs -D DST=${CMAKE_CURRENT_BINARY_DIR}/data_romfs -P ${CMAKE_SOURCE_DIR}/external/libcross2d/cmake/copy_custom.cmake
-        )
+        COMMAND ${CMAKE_COMMAND} -D SRC=${CMAKE_SOURCE_DIR}/data/common/datadir -D DST=${CMAKE_CURRENT_BINARY_DIR}/data_datadir -P ${CMAKE_SOURCE_DIR}/external/libcross2d/cmake/copy_custom.cmake
+        COMMAND ${CMAKE_COMMAND} -D SRC=${CMAKE_SOURCE_DIR}/data/${TARGET_PLATFORM}/datadir -D DST=${CMAKE_CURRENT_BINARY_DIR}/data_datadir -P ${CMAKE_SOURCE_DIR}/external/libcross2d/cmake/copy_custom.cmake
+        COMMAND ${CMAKE_COMMAND} -D SRC=${CMAKE_SOURCE_DIR}/data/common/romfs -D DST=${CMAKE_CURRENT_BINARY_DIR}/data_romfs -P ${CMAKE_SOURCE_DIR}/external/libcross2d/cmake/copy_custom.cmake
+        COMMAND ${CMAKE_COMMAND} -D SRC=${CMAKE_SOURCE_DIR}/data/${TARGET_PLATFORM}/romfs -D DST=${CMAKE_CURRENT_BINARY_DIR}/data_romfs -P ${CMAKE_SOURCE_DIR}/external/libcross2d/cmake/copy_custom.cmake
+)
 add_dependencies(${PROJECT_NAME}.data.skin ${PROJECT_NAME}.data)
 add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}.data.skin)

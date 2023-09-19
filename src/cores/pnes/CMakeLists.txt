@@ -38,7 +38,7 @@ set(NESTOPIA_CFLAGS
         -DVERSION="1.51.1+"
         -D_MINGW # for nst_sample_load_archive
         -DNST_NO_2XSAI -DNST_NO_HQ2X -DNST_NO_SCALEX -DNO_NTSC -DNST_NO_XBR
-        -D__PNES__ -D__PNES_VERSION_MAJOR__=${VERSION_MAJOR} -D__PNES_VERSION_MINOR__=${VERSION_MINOR}
+        -D__PNES__ -D__PEMU_VERSION_MAJOR__=${VERSION_MAJOR} -D__PEMU_VERSION_MINOR__=${VERSION_MINOR}
         -Wno-unused-definition -Wno-unused-local-typedefs
         -Wno-sign-compare -Wno-unused-variable
         -Wno-delete-non-virtual-dtor -Wno-reorder
@@ -52,6 +52,7 @@ set(NESTOPIA_CFLAGS
 ##############
 set(PNES_INC sources)
 file(GLOB PNES_SRC sources/*.c*)
+list(APPEND PNES_SRC ../main.cpp)
 
 ##############
 # deps
@@ -120,10 +121,10 @@ include(${CMAKE_SOURCE_DIR}/external/libcross2d/cmake/targets.cmake)
 
 # add common skin data
 add_custom_target(${PROJECT_NAME}.data.skin
-        COMMAND ${CMAKE_COMMAND} -D SRC=${CMAKE_CURRENT_SOURCE_DIR}/../data/common/datadir -D DST=${CMAKE_CURRENT_BINARY_DIR}/data_datadir -P ${CMAKE_SOURCE_DIR}/external/libcross2d/cmake/copy_custom.cmake
-        COMMAND ${CMAKE_COMMAND} -D SRC=${CMAKE_CURRENT_SOURCE_DIR}/../data/${TARGET_PLATFORM}/datadir -D DST=${CMAKE_CURRENT_BINARY_DIR}/data_datadir -P ${CMAKE_SOURCE_DIR}/external/libcross2d/cmake/copy_custom.cmake
-        COMMAND ${CMAKE_COMMAND} -D SRC=${CMAKE_CURRENT_SOURCE_DIR}/../data/common/romfs -D DST=${CMAKE_CURRENT_BINARY_DIR}/data_romfs -P ${CMAKE_SOURCE_DIR}/external/libcross2d/cmake/copy_custom.cmake
-        COMMAND ${CMAKE_COMMAND} -D SRC=${CMAKE_CURRENT_SOURCE_DIR}/../data/${TARGET_PLATFORM}/romfs -D DST=${CMAKE_CURRENT_BINARY_DIR}/data_romfs -P ${CMAKE_SOURCE_DIR}/external/libcross2d/cmake/copy_custom.cmake
+        COMMAND ${CMAKE_COMMAND} -D SRC=${CMAKE_SOURCE_DIR}/data/common/datadir -D DST=${CMAKE_CURRENT_BINARY_DIR}/data_datadir -P ${CMAKE_SOURCE_DIR}/external/libcross2d/cmake/copy_custom.cmake
+        COMMAND ${CMAKE_COMMAND} -D SRC=${CMAKE_SOURCE_DIR}/data/${TARGET_PLATFORM}/datadir -D DST=${CMAKE_CURRENT_BINARY_DIR}/data_datadir -P ${CMAKE_SOURCE_DIR}/external/libcross2d/cmake/copy_custom.cmake
+        COMMAND ${CMAKE_COMMAND} -D SRC=${CMAKE_SOURCE_DIR}/data/common/romfs -D DST=${CMAKE_CURRENT_BINARY_DIR}/data_romfs -P ${CMAKE_SOURCE_DIR}/external/libcross2d/cmake/copy_custom.cmake
+        COMMAND ${CMAKE_COMMAND} -D SRC=${CMAKE_SOURCE_DIR}/data/${TARGET_PLATFORM}/romfs -D DST=${CMAKE_CURRENT_BINARY_DIR}/data_romfs -P ${CMAKE_SOURCE_DIR}/external/libcross2d/cmake/copy_custom.cmake
 )
 add_dependencies(${PROJECT_NAME}.data.skin ${PROJECT_NAME}.data)
 add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}.data.skin)

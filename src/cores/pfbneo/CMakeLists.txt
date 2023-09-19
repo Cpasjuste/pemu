@@ -239,6 +239,7 @@ file(GLOB SRC_7Z
 ##############
 set(PFBA_DIRS sources sources/fbneo)
 file(GLOB SRC_PFBA sources/*.c* sources/fbneo/*.c*)
+list(APPEND SRC_PFBA ../main.cpp)
 
 # includes
 set(INC ${PFBA_DIRS}
@@ -254,8 +255,8 @@ set(INC ${PFBA_DIRS}
 # flags
 set(FLAGS
         -D__PFBA__
-        -D__PFBA_VERSION_MAJOR__=${VERSION_MAJOR}
-        -D__PFBA_VERSION_MINOR__=${VERSION_MINOR}
+        -D__PEMU_VERSION_MAJOR__=${VERSION_MAJOR}
+        -D__PEMU_VERSION_MINOR__=${VERSION_MINOR}
         -DLSB_FIRST
         -DINCLUDE_7Z_SUPPORT -DMINIZIP_LIB
         -DBUILD_SDL2 -DBUILD_M68K
@@ -363,10 +364,10 @@ include(${CMAKE_SOURCE_DIR}/external/libcross2d/cmake/targets.cmake)
 
 # add common skin data
 add_custom_target(${PROJECT_NAME}.data.skin
-        COMMAND ${CMAKE_COMMAND} -D SRC=${CMAKE_CURRENT_SOURCE_DIR}/../data/common/datadir -D DST=${CMAKE_CURRENT_BINARY_DIR}/data_datadir -P ${CMAKE_SOURCE_DIR}/external/libcross2d/cmake/copy_custom.cmake
-        COMMAND ${CMAKE_COMMAND} -D SRC=${CMAKE_CURRENT_SOURCE_DIR}/../data/${TARGET_PLATFORM}/datadir -D DST=${CMAKE_CURRENT_BINARY_DIR}/data_datadir -P ${CMAKE_SOURCE_DIR}/external/libcross2d/cmake/copy_custom.cmake
-        COMMAND ${CMAKE_COMMAND} -D SRC=${CMAKE_CURRENT_SOURCE_DIR}/../data/common/romfs -D DST=${CMAKE_CURRENT_BINARY_DIR}/data_romfs -P ${CMAKE_SOURCE_DIR}/external/libcross2d/cmake/copy_custom.cmake
-        COMMAND ${CMAKE_COMMAND} -D SRC=${CMAKE_CURRENT_SOURCE_DIR}/../data/${TARGET_PLATFORM}/romfs -D DST=${CMAKE_CURRENT_BINARY_DIR}/data_romfs -P ${CMAKE_SOURCE_DIR}/external/libcross2d/cmake/copy_custom.cmake
+        COMMAND ${CMAKE_COMMAND} -D SRC=${CMAKE_SOURCE_DIR}/data/common/datadir -D DST=${CMAKE_CURRENT_BINARY_DIR}/data_datadir -P ${CMAKE_SOURCE_DIR}/external/libcross2d/cmake/copy_custom.cmake
+        COMMAND ${CMAKE_COMMAND} -D SRC=${CMAKE_SOURCE_DIR}/data/${TARGET_PLATFORM}/datadir -D DST=${CMAKE_CURRENT_BINARY_DIR}/data_datadir -P ${CMAKE_SOURCE_DIR}/external/libcross2d/cmake/copy_custom.cmake
+        COMMAND ${CMAKE_COMMAND} -D SRC=${CMAKE_SOURCE_DIR}/data/common/romfs -D DST=${CMAKE_CURRENT_BINARY_DIR}/data_romfs -P ${CMAKE_SOURCE_DIR}/external/libcross2d/cmake/copy_custom.cmake
+        COMMAND ${CMAKE_COMMAND} -D SRC=${CMAKE_SOURCE_DIR}/data/${TARGET_PLATFORM}/romfs -D DST=${CMAKE_CURRENT_BINARY_DIR}/data_romfs -P ${CMAKE_SOURCE_DIR}/external/libcross2d/cmake/copy_custom.cmake
 )
 add_dependencies(${PROJECT_NAME}.data.skin ${PROJECT_NAME}.data)
 if (OPTION_LIGHT)

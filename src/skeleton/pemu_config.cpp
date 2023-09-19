@@ -277,5 +277,6 @@ int PEMUConfig::getJoystickDeadZone(int player, bool isGame) {
 }
 
 PEMUConfig::~PEMUConfig() {
+    printf("PEMUConfig::~PEMUConfig()\n");
     delete (p_game_config);
 }

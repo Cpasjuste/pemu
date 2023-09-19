@@ -8,14 +8,18 @@
 namespace c2d {
 
     class PNESIo : public c2d::C2DIo {
-
     public:
-#ifdef __PSP2__
+        PNESIo() : C2DIo() {
+            C2DIo::create(C2DIo::getDataPath());
+            C2DIo::create(C2DIo::getDataPath() + "roms");
+            C2DIo::create(C2DIo::getDataPath() + "configs");
+            C2DIo::create(C2DIo::getDataPath() + "saves");
+        }
 
+#ifdef __PSP2__
         std::string getDataPath() override {
             return "ux0:/data/pnes/";
         }
-
 #elif __PS4__
         std::string getDataPath() override {
             return "/data/pnes/";

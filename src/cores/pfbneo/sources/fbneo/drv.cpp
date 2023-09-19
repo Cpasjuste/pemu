@@ -6,7 +6,7 @@
 
 using namespace pemu;
 
-extern UiMain *ui;
+extern UiMain *pemu_ui;
 
 extern UINT8 NeoSystem;
 int bDrvOkay = 0;
@@ -78,7 +78,7 @@ static int DoLibInit() {
         return 1;
     }
 
-    NeoSystem = NeoSystemList[ui->getConfig()->get(PEMUConfig::Id::ROM_NEOBIOS, true)->getArrayIndex()];
+    NeoSystem = NeoSystemList[pemu_ui->getConfig()->get(PEMUConfig::Id::ROM_NEOBIOS, true)->getArrayIndex()];
 
     nRet = BurnDrvInit();
     printf("DoLibInit: BurnDrvInit = %i\n", nRet);
@@ -107,7 +107,7 @@ static int DrvLoadRom(unsigned char *Dest, int *pnWrote, int i) {
         sprintf(szText, "Error loading %s for %s.\nEmulation will likely have problems.",
                 pszFilename, BurnDrvGetTextA(DRV_NAME));
         printf("DrvLoadRom: %s\n", szText);
-        ui->getUiMessageBox()->show("ERROR", szText, "OK");
+        pemu_ui->getUiMessageBox()->show("ERROR", szText, "OK");
     }
 
     BzipClose();
@@ -181,23 +181,23 @@ static double nProgressPosBurn = 0;
 
 static int ProgressCreate() {
     nProgressPosBurn = 0;
-    ui->getUiProgressBox()->setVisibility(c2d::Visibility::Visible);
-    ui->getUiProgressBox()->setLayer(1000);
+    pemu_ui->getUiProgressBox()->setVisibility(c2d::Visibility::Visible);
+    pemu_ui->getUiProgressBox()->setLayer(1000);
     return 0;
 }
 
 int ProgressUpdateBurner(double dProgress, const TCHAR *pszText, bool bAbs) {
-    ui->getUiProgressBox()->setTitle(BurnDrvGetTextA(DRV_FULLNAME));
+    pemu_ui->getUiProgressBox()->setTitle(BurnDrvGetTextA(DRV_FULLNAME));
 
     if (pszText) {
         nProgressPosBurn += dProgress;
-        ui->getUiProgressBox()->setMessage(pszText);
-        ui->getUiProgressBox()->setProgress((float) nProgressPosBurn);
+        pemu_ui->getUiProgressBox()->setMessage(pszText);
+        pemu_ui->getUiProgressBox()->setProgress((float) nProgressPosBurn);
     } else {
-        ui->getUiProgressBox()->setMessage("Please wait...");
+        pemu_ui->getUiProgressBox()->setMessage("Please wait...");
     }
 
-    ui->flip();
+    pemu_ui->flip();
 
     return 0;
 }

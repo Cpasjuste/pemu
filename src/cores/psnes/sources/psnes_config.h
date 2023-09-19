@@ -12,6 +12,9 @@ class PSNESConfig : public pemu::PEMUConfig {
 public:
     PSNESConfig(c2d::Io *io, int version);
 
+    std::string getCoreVersion() override;
+
+    std::vector<std::string> getCoreSupportedExt() override;
 };
 
 #endif //PSNES_CONFIG_H

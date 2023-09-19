@@ -108,7 +108,7 @@ namespace pemu {
 
         PEMUConfig(c2d::Io *io, const std::string &name, int version = 1);
 
-        ~PEMUConfig();
+        virtual ~PEMUConfig();
 
         bool loadGame(const ss_api::Game &game);
 
@@ -129,6 +129,10 @@ namespace pemu {
         c2d::Vector2i getJoystickAxisRightMapping(int player, bool isGame = false);
 
         int getJoystickDeadZone(int player, bool isGame = false);
+
+        virtual std::string getCoreVersion() { return "UNKNOWN"; }
+
+        virtual std::vector<std::string> getCoreSupportedExt() { return {".zip"}; }
 
     private:
         c2d::config::Config *p_game_config = nullptr;

@@ -10,6 +10,14 @@
 class PGENConfig : public pemu::PEMUConfig {
 public:
     PGENConfig(c2d::Io *io, int version);
+
+    ~PGENConfig() override {
+        printf("PGENConfig::~PGENConfig()\n");
+    }
+
+    std::string getCoreVersion() override;
+
+    std::vector<std::string> getCoreSupportedExt() override;
 };
 
 #endif //PGEN_CONFIG_H

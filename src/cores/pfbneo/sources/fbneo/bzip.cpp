@@ -23,7 +23,7 @@ static int nZipsFound = 0;
 StringSet BzipText;                                                // Text which describes any problems with loading the zip
 StringSet BzipDetail;                                            // Text which describes in detail any problems with loading the zip
 
-extern pemu::UiMain *ui;
+extern pemu::UiMain *pemu_ui;
 
 void BzipListFree() {
     if (List) {
@@ -358,7 +358,7 @@ int BzipOpen(bool bootApp) {
 
         free(szBzipName[z]);
         szBzipName[z] = (TCHAR *) malloc(MAX_PATH * sizeof(TCHAR));
-        std::string rom_path = ui->getUiEmu()->getCurrentGame().romsPath;
+        std::string rom_path = pemu_ui->getUiEmu()->getCurrentGame().romsPath;
         _stprintf(szBzipName[z], _T("%s%s"), rom_path.c_str(), szName);
         printf("zipOpen: %s\n", szBzipName[z]);
 

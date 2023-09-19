@@ -5,11 +5,26 @@
 #ifndef PEMU_PFBNEO_IO_H
 #define PEMU_PFBNEO_IO_H
 
+#include "burner.h"
+
+extern void BurnPathsInit(C2DIo *io);
+
 namespace c2d {
-
     class PFBAIo : public c2d::C2DIo {
-
     public:
+        PFBAIo() : C2DIo() {
+            C2DIo::create(C2DIo::getDataPath());
+            C2DIo::create(C2DIo::getDataPath() + "configs");
+            C2DIo::create(C2DIo::getDataPath() + "saves");
+            BurnPathsInit(this);
+            BurnLibInit();
+        }
+
+        ~PFBAIo() override {
+            printf("~PFBAIo()\n");
+            BurnLibExit();
+        }
+
 #ifdef __PSP2__
         std::string getDataPath() override {
             return "ux0:/data/pfba/";

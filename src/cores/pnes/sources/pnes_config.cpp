@@ -23,3 +23,11 @@ PNESConfig::PNESConfig(c2d::Io *io, int version) : PEMUConfig(io, "PNES", versio
     // "c2dui_romlist" will also reload config, but we need new roms paths
     load();
 }
+
+std::string PNESConfig::getCoreVersion() {
+    return "Nestopia 1.52.0";
+}
+
+std::vector<std::string> PNESConfig::getCoreSupportedExt() {
+    return {".zip", ".nes", ".nez", ".unf", ".unif"};
+}

@@ -10,6 +10,10 @@
 class PNESConfig : public pemu::PEMUConfig {
 public:
     PNESConfig(c2d::Io *io, int version);
+
+    std::string getCoreVersion() override;
+
+    std::vector<std::string> getCoreSupportedExt() override;
 };
 
 #endif //PNES_CONFIG_H

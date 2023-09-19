@@ -4,6 +4,7 @@
 
 #include "skeleton/pemu.h"
 #include "pgen_config.h"
+#include "osd.h"
 
 using namespace c2d;
 using namespace pemu;
@@ -23,4 +24,13 @@ PGENConfig::PGENConfig(c2d::Io *io, int version) : PEMUConfig(io, "PGEN", versio
 
     // "c2dui_romlist" will also reload config, but we need new roms paths
     load();
+}
+
+std::string PGENConfig::getCoreVersion() {
+    return VERSION;
+}
+
+std::vector<std::string> PGENConfig::getCoreSupportedExt() {
+    return {".zip", ".md", ".smd", ".gen", ".bin",
+            ".mdx", ".sms", ".gg", ".sg", ".68k"};
 }

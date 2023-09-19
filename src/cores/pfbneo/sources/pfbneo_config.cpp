@@ -5,6 +5,7 @@
 #include <string>
 #include "skeleton/pemu.h"
 #include "pfbneo_config.h"
+#include "burner.h"
 
 using namespace c2d;
 using namespace pemu;
@@ -84,4 +85,8 @@ PFBAConfig::PFBAConfig(c2d::Io *io, int version) : PEMUConfig(io, "PFBNEO", vers
 
     // "c2dui_romlist" will also reload config, but we need new roms paths
     load();
+}
+
+std::string PFBAConfig::getCoreVersion() {
+    return "fbneo: " + std::string(szAppBurnVer);
 }

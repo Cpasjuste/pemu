@@ -13,7 +13,7 @@
 #include "skeleton/pemu.h"
 #include "pnes_ui_emu.h"
 
-extern PNESUiEmu *uiEmu;
+PNESUiEmu *uiEmu;
 
 /// NESTOPIA
 settings_t conf;
@@ -29,6 +29,7 @@ extern Emulator emulator;
 
 PNESUiEmu::PNESUiEmu(UiMain *ui) : UiEmu(ui) {
     printf("PNESGuiEmu()\n");
+    uiEmu = this;
 }
 
 int PNESUiEmu::load(const ss_api::Game &game) {

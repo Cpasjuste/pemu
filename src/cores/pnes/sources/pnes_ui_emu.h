@@ -8,9 +8,7 @@
 #include <string>
 
 class PNESUiEmu : public pemu::UiEmu {
-
 public:
-
     explicit PNESUiEmu(pemu::UiMain *ui);
 
     int load(const ss_api::Game &game) override;
