@@ -9,11 +9,10 @@
 #ifdef __SWITCH__
 UiMain::UiMain(c2d::Io *io, const c2d::Vector2f &size) : C2DRenderer({1280, 720}) {
 #else
-
 UiMain::UiMain(c2d::Io *io, const c2d::Vector2f &size) : C2DRenderer(size) {
 #endif
     printf("UiMain(%ix%i)\n", (int) UiMain::getSize().x, (int) UiMain::getSize().y);
-    setIo(io);
+    UiMain::setIo(io);
 }
 
 void UiMain::init(UIRomList *romList, UiMenu *menu, UiEmu *emu, UiMenuState *state) {
@@ -58,10 +57,6 @@ void UiMain::init(UIRomList *romList, UiMenu *menu, UiEmu *emu, UiMenuState *sta
     getInput()->setRepeatDelay(INPUT_DELAY);
 }
 
-void UiMain::setSkin(Skin *s) {
-    pSkin = s;
-}
-
 void UiMain::onUpdate() {
     unsigned int buttons = getInput()->getButtons();
     if (buttons & Input::Button::Quit) {
@@ -91,10 +86,6 @@ void UiMain::onUpdate() {
     C2DRenderer::onUpdate();
 }
 
-Skin *UiMain::getSkin() {
-    return pSkin;
-}
-
 void UiMain::setConfig(PEMUConfig *cfg) {
     pConfig = cfg;
 
@@ -107,50 +98,6 @@ void UiMain::setConfig(PEMUConfig *cfg) {
         pConfig->getGroup(PEMUConfig::Id::MENU_ROM_OPTIONS)->addOption(
                 {"EFFECT", {"NONE"}, 0, PEMUConfig::Id::ROM_SHADER})->setFlags(PEMUConfig::Flags::HIDDEN);
     }
-}
-
-PEMUConfig *UiMain::getConfig() {
-    return pConfig;
-}
-
-UIHighlight *UiMain::getUiHighlight() {
-    return pHighlight;
-}
-
-UIRomList *UiMain::getUiRomList() {
-    return pRomList;
-}
-
-UiEmu *UiMain::getUiEmu() {
-    return pEmu;
-}
-
-UiMenu *UiMain::getUiMenu() {
-    return pMenu;
-}
-
-UiMenuState *UiMain::getUiStateMenu() {
-    return pState;
-}
-
-UIProgressBox *UiMain::getUiProgressBox() {
-    return pProgressBox;
-}
-
-UiStatusBox *UiMain::getUiStatusBox() {
-    return pStatusBox;
-}
-
-c2d::MessageBox *UiMain::getUiMessageBox() {
-    return pMessageBox;
-}
-
-int UiMain::getFontSize() {
-    return (int) ((float) C2D_DEFAULT_CHAR_SIZE * pSkin->getScaling().y);
-}
-
-Vector2f UiMain::getScaling() {
-    return pSkin->getScaling();
 }
 
 void UiMain::updateInputMapping(bool isRomConfig) {

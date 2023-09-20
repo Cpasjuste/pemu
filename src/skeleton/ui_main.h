@@ -18,35 +18,35 @@ namespace pemu {
 
         void setConfig(PEMUConfig *cfg);
 
-        void setSkin(Skin *skin);
-
         void onUpdate() override;
 
         void updateInputMapping(bool isRomCfg);
 
-        Skin *getSkin();
+        Skin *getSkin() { return pSkin; }
 
-        PEMUConfig *getConfig();
+        void setSkin(Skin *s) { pSkin = s; }
 
-        UIHighlight *getUiHighlight();
+        PEMUConfig *getConfig() { return pConfig; }
 
-        UIRomList *getUiRomList();
+        UIHighlight *getUiHighlight() { return pHighlight; }
 
-        UiEmu *getUiEmu();
+        UIRomList *getUiRomList() { return pRomList; }
 
-        UiMenu *getUiMenu();
+        UiEmu *getUiEmu() { return pEmu; }
 
-        UiMenuState *getUiStateMenu();
+        UiMenu *getUiMenu() { return pMenu; }
 
-        UiStatusBox *getUiStatusBox();
+        UiMenuState *getUiStateMenu() { return pState; }
 
-        UIProgressBox *getUiProgressBox();
+        UiStatusBox *getUiStatusBox() { return pStatusBox; }
 
-        c2d::MessageBox *getUiMessageBox();
+        UIProgressBox *getUiProgressBox() { return pProgressBox; }
 
-        int getFontSize();
+        c2d::MessageBox *getUiMessageBox() { return pMessageBox; }
 
-        c2d::Vector2f getScaling();
+        int getFontSize() { return (int) ((float) C2D_DEFAULT_CHAR_SIZE * pSkin->getScaling().y); }
+
+        c2d::Vector2f getScaling() { return pSkin->getScaling(); }
 
         bool done = false;
 
