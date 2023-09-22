@@ -19,7 +19,7 @@ namespace pemu {
 
         virtual ~RomList();
 
-        virtual void build(bool addArcadeSystem = false, const ss_api::System &system = {});
+        virtual void build(const ss_api::System &system = {});
 
         void addFav(const ss_api::Game &game);
 

@@ -6,27 +6,28 @@
 #include "pfbneo_romlist.h"
 
 struct GameListInfo {
+    ss_api::System system;
     std::string name;
     std::string path;
 };
 
-void PFBARomList::build(bool addArcadeSystem, const ss_api::System &system) {
+void PFBARomList::build(const ss_api::System &system) {
 #ifndef __PFBN_LIGHT__
     std::vector<GameListInfo> gameLists = {
-            {"CHANNELF",  "gamelist_channelf.xml"},
-            {"COLECO",    "gamelist_coleco.xml"},
-            {"FDS",       "gamelist_fds.xml"},
-            {"GAMEGEAR",  "gamelist_gamegear.xml"},
-            {"MEGADRIVE", "gamelist_megadrive.xml"},
-            {"MSX",       "gamelist_msx.xml"},
-            {"NES",       "gamelist_nes.xml"},
-            {"NGP",       "gamelist_ngp.xml"},
-            {"PCE",       "gamelist_pce.xml"},
-            {"SG1000",    "gamelist_sg1000.xml"},
-            {"SGX",       "gamelist_sgx.xml"},
-            {"SMS",       "gamelist_sms.xml"},
-            {"SPECTRUM",  "gamelist_spectrum.xml"},
-            {"TG16",      "gamelist_tg16.xml"}
+            {{80,  0,  "Channel F"},                   "CHANNELF",  "gamelist_channelf.xml"},
+            {{48,  0,  "Colecovision"},                "COLECO",    "gamelist_coleco.xml"},
+            {{106, 3,  "Family Computer Disk System"}, "FDS",       "gamelist_fds.xml"},
+            {{21,  0,  "Game Gear"},                   "GAMEGEAR",  "gamelist_gamegear.xml"},
+            {{1,   0,  "Megadrive"},                   "MEGADRIVE", "gamelist_megadrive.xml"},
+            {{113, 0,  "MSX"},                         "MSX",       "gamelist_msx.xml"},
+            {{3,   0,  "NES"},                         "NES",       "gamelist_nes.xml"},
+            {{82,  0,  "Neo-Geo Pocket Color"},        "NGP",       "gamelist_ngp.xml"},
+            {{31,  0,  "PC Engine"},                   "PCE",       "gamelist_pce.xml"},
+            {{109, 2,  "SG-1000"},                     "SG1000",    "gamelist_sg1000.xml"},
+            {{105, 31, "PC Engine SuperGrafx"},        "SGX",       "gamelist_sgx.xml"},
+            {{2,   0,  "Master System"},               "SMS",       "gamelist_sms.xml"},
+            {{76,  0,  "ZX Spectrum"},                 "SPECTRUM",  "gamelist_spectrum.xml"},
+            {{758, 31, "PC Engine TurboGrafx"},        "TG16",      "gamelist_tg16.xml"}
     };
 
     //bool showAvailableOnly = ui->getConfig()->get(PEMUConfig::Id::GUI_SHOW_AVAILABLE)->getInteger();
@@ -45,7 +46,7 @@ void PFBARomList::build(bool addArcadeSystem, const ss_api::System &system) {
     }
 #endif
 
-    RomList::build(addArcadeSystem);
+    RomList::build({75, 0, "Mame"});
 
     // remove hidden flags for pfbneo
     ui->getConfig()->get(PEMUConfig::Id::GUI_FILTER_CLONES)->setFlags(0);

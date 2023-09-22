@@ -51,9 +51,10 @@ extern "C" int sceSystemServiceLoadExec(const char *path, const char *args[]);
 #include "pnes_ui_menu_state.h"
 #include "pnes_config.h"
 #include "pnes_io.h"
+#include "pnes_romlist.h"
 #define PEMUIo PNESIo
 #define PEMUConfig PNESConfig
-#define PEMURomList RomList
+#define PEMURomList PNESRomList
 #define PEMUSkin Skin
 #define PEMUUiMain UiMain
 #define PEMUUiEmu PNESUiEmu
@@ -65,9 +66,10 @@ extern "C" int sceSystemServiceLoadExec(const char *path, const char *args[]);
 #include "psnes_ui_menu_state.h"
 #include "psnes_config.h"
 #include "psnes_io.h"
+#include "psnes_romlist.h"
 #define PEMUIo PSNESIo
 #define PEMUConfig PSNESConfig
-#define PEMURomList RomList
+#define PEMURomList PSNESRomList
 #define PEMUSkin Skin
 #define PEMUUiMain UiMain
 #define PEMUUiEmu PSNESUiEmu

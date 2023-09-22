@@ -160,13 +160,7 @@ void UIRomList::filterRomList() {
     ss_api::GameList *list = cfg->get(PEMUConfig::Id::GUI_SHOW_FAVORITES)->getInteger() ?
                              pRomList->gameListFav : pRomList->gameList;
     std::string system = cfg->get(PEMUConfig::Id::GUI_FILTER_SYSTEM)->getString();
-    int systemId;
-    // custom arcade system (mame sscrap id 75)
-    if (system == "ARCADE") {
-        systemId = 9999;
-    } else {
-        systemId = system == "ALL" ? -1 : list->systemList.findByName(system).id;
-    }
+    int systemId = system == "ALL" ? -1 : list->systemList.findByName(system).id;
     std::string editor = cfg->get(PEMUConfig::Id::GUI_FILTER_EDITOR)->getString();
     int editorId = editor == "ALL" ? -1 : list->findEditorByName(editor).id;
     std::string dev = cfg->get(PEMUConfig::Id::GUI_FILTER_DEVELOPER)->getString();
@@ -188,11 +182,6 @@ void UIRomList::filterRomList() {
             cfg->get(PEMUConfig::Id::GUI_FILTER_DATE)->getString()
     );
 
-    /*
-    if (addArcadeSystem && !gameList->findGamesBySystem(75).empty()) {
-        gameList->systemList.systems.insert(gameList->systemList.systems.begin(), {9999, 0, "ARCADE"});
-    }
-    */
     cfg->get(PEMUConfig::Id::GUI_FILTER_SYSTEM)->setArray(mGameList.systemList.getNames());
     cfg->get(PEMUConfig::Id::GUI_FILTER_GENRE)->setArray(mGameList.getGenreNames());
     cfg->get(PEMUConfig::Id::GUI_FILTER_DATE)->setArray(mGameList.getDates());

@@ -56,18 +56,7 @@ RomList::RomList(UiMain *_ui, const std::string &emuVersion, const std::vector<s
     printf("RomList()\n");
 }
 
-void RomList::setLoadingText(const char *format, ...) {
-    char buffer[512];
-    va_list arg;
-    va_start(arg, format);
-    vsnprintf(buffer, 512, format, arg);
-    va_end(arg);
-
-    text->setString(buffer);
-    ui->flip();
-}
-
-void RomList::build(bool addArcadeSystem, const ss_api::System &system) {
+void RomList::build(const ss_api::System &system) {
     std::string romPath = ui->getConfig()->getRomPath();
 
     // look for a "gamelist.xml" file inside rom folder, if none found use embedded (romfs) "gamelist.xml"
@@ -75,10 +64,7 @@ void RomList::build(bool addArcadeSystem, const ss_api::System &system) {
     if (!ui->getIo()->exist(gameListPath)) {
         gameListPath = ui->getIo()->getRomFsPath() + "gamelist.xml";
     }
-
-    //bool showAvailableOnly = ui->getConfig()->get(PEMUConfig::Id::GUI_SHOW_AVAILABLE)->getArrayIndex();
     gameList->append(gameListPath, romPath, false, filters, system);
-
     setLoadingText("Games: %li / %li", gameList->getAvailableCount(), gameList->games.size());
     printf("RomList::build: %s, games found: %zu / %zu\n",
            gameListPath.c_str(), gameList->getAvailableCount(), gameList->games.size());
@@ -94,10 +80,7 @@ void RomList::build(bool addArcadeSystem, const ss_api::System &system) {
     std::sort(gameList->resolutions.begin(), gameList->resolutions.end(), Api::sortByName);
     std::sort(gameList->dates.begin(), gameList->dates.end(), Api::sortByName);
 
-    if (addArcadeSystem && !gameList->findGamesBySystem(75).empty()) {
-        gameList->systemList.systems.insert(gameList->systemList.systems.begin(), {9999, 0, "ARCADE"});
-    }
-
+    // add filtering options
     ui->getConfig()->getGroup(PEMUConfig::Id::MENU_MAIN)->addOption(
             {"FILTER_SYSTEM", gameList->systemList.getNames(), 0, PEMUConfig::Id::GUI_FILTER_SYSTEM})->setFlags(
             PEMUConfig::Flags::HIDDEN);
@@ -123,6 +106,7 @@ void RomList::build(bool addArcadeSystem, const ss_api::System &system) {
     // we need to reload config to update new options we just added
     ui->getConfig()->load();
 
+    // load favorites
     gameListFav->append(ui->getIo()->getDataPath() + "favorites.xml");
     for (size_t i = 0; i < gameListFav->games.size(); i++) {
         Game game = gameList->findGameByPathAndSystem(gameListFav->games[i].path, gameListFav->games[i].system.id);
@@ -152,6 +136,17 @@ void RomList::removeFav(const Game &game) {
     if (gameListFav->remove(game.id)) {
         gameListFav->save(ui->getIo()->getDataPath() + "favorites.xml", "mixrbv2", "", "video");
     }
+}
+
+void RomList::setLoadingText(const char *format, ...) {
+    char buffer[512];
+    va_list arg;
+    va_start(arg, format);
+    vsnprintf(buffer, 512, format, arg);
+    va_end(arg);
+
+    text->setString(buffer);
+    ui->flip();
 }
 
 RomList::~RomList() {
