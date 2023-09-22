@@ -86,30 +86,8 @@ UIRomList::UIRomList(UiMain *main, RomList *romList, const c2d::Vector2f &size)
     int delay = pMain->getConfig()->get(PEMUConfig::Id::GUI_VIDEO_SNAP_DELAY)->getInteger();
     UIRomList::setVideoSnapDelay(delay);
 
-    // filter roms
-    UIRomList::updateRomList();
-}
-
-void UIRomList::updateRomList() {
-    filterRomList();
-    sortRomList();
-
-    if (pTitleText && pTitleText->available) {
-        std::string sys = pMain->getConfig()->get(PEMUConfig::Id::GUI_FILTER_SYSTEM)->getString();
-        pTitleText->setString(sys);
-    }
-
-    if (pListBox) {
-        pListBox->setGames(mGameList.games);
-    }
-
-    if (pRomInfo) {
-        pRomInfo->load(Game());
-        mTimerLoadInfoDone = 0;
-        mTimerLoadInfo.restart();
-        mTimerLoadVideoDone = 0;
-        mTimerLoadVideo.restart();
-    }
+    // filter roms (done in UiMain::init)
+    //UIRomList::updateRomList();
 }
 
 std::string UIRomList::getPreview(const Game &game, UIRomList::PreviewType type) {
@@ -155,12 +133,33 @@ std::string UIRomList::getPreview(const Game &game, UIRomList::PreviewType type)
     return {};
 }
 
+void UIRomList::updateRomList() {
+    filterRomList();
+    sortRomList();
+
+    if (pTitleText && pTitleText->available) {
+        std::string sys = pMain->getConfig()->get(PEMUConfig::Id::GUI_FILTER_SYSTEM)->getString();
+        pTitleText->setString(sys);
+    }
+
+    if (pListBox) {
+        pListBox->setGames(mGameList.games);
+    }
+
+    if (pRomInfo) {
+        pRomInfo->load(Game());
+        mTimerLoadInfoDone = 0;
+        mTimerLoadInfo.restart();
+        mTimerLoadVideoDone = 0;
+        mTimerLoadVideo.restart();
+    }
+}
+
 void UIRomList::filterRomList() {
-    printf("UIRomList::filterRomList\n");
-    ss_api::GameList *list = pMain->getConfig()->get(PEMUConfig::Id::GUI_SHOW_FAVORITES)->getInteger() ?
+    auto cfg = pMain->getConfig();
+    ss_api::GameList *list = cfg->get(PEMUConfig::Id::GUI_SHOW_FAVORITES)->getInteger() ?
                              pRomList->gameListFav : pRomList->gameList;
-    bool showClones = pMain->getConfig()->get(PEMUConfig::Id::GUI_FILTER_CLONES)->getInteger();
-    std::string system = pMain->getConfig()->get(PEMUConfig::Id::GUI_FILTER_SYSTEM)->getString();
+    std::string system = cfg->get(PEMUConfig::Id::GUI_FILTER_SYSTEM)->getString();
     int systemId;
     // custom arcade system (mame sscrap id 75)
     if (system == "ARCADE") {
@@ -168,22 +167,41 @@ void UIRomList::filterRomList() {
     } else {
         systemId = system == "ALL" ? -1 : list->systemList.findByName(system).id;
     }
-    std::string editor = pMain->getConfig()->get(PEMUConfig::Id::GUI_FILTER_EDITOR)->getString();
+    std::string editor = cfg->get(PEMUConfig::Id::GUI_FILTER_EDITOR)->getString();
     int editorId = editor == "ALL" ? -1 : list->findEditorByName(editor).id;
-    std::string dev = pMain->getConfig()->get(PEMUConfig::Id::GUI_FILTER_DEVELOPER)->getString();
+    std::string dev = cfg->get(PEMUConfig::Id::GUI_FILTER_DEVELOPER)->getString();
     int devId = dev == "ALL" ? -1 : list->findDeveloperByName(dev).id;
-    int players = Utility::parseInt(pMain->getConfig()->get(PEMUConfig::Id::GUI_FILTER_PLAYERS)->getString(), -1);
-    int rating = Utility::parseInt(pMain->getConfig()->get(PEMUConfig::Id::GUI_FILTER_RATING)->getString(), -1);
-    int rotation = Utility::parseInt(pMain->getConfig()->get(PEMUConfig::Id::GUI_FILTER_ROTATION)->getString(), -1);
-    std::string genre = pMain->getConfig()->get(PEMUConfig::Id::GUI_FILTER_GENRE)->getString();
+    int players = Utility::parseInt(cfg->get(PEMUConfig::Id::GUI_FILTER_PLAYERS)->getString(), -1);
+    int rating = Utility::parseInt(cfg->get(PEMUConfig::Id::GUI_FILTER_RATING)->getString(), -1);
+    int rotation = Utility::parseInt(cfg->get(PEMUConfig::Id::GUI_FILTER_ROTATION)->getString(), -1);
+    std::string genre = cfg->get(PEMUConfig::Id::GUI_FILTER_GENRE)->getString();
     int genreId = genre == "ALL" ? -1 : list->findGenreByName(genre).id;
 
+    printf("UIRomList::filterRomList: system: %s (%i)\n", system.c_str(), systemId);
+
     mGameList = list->filter(
-            false, showClones, systemId == 9999 ? -1 : systemId, systemId == 9999 ? 75 : -1,
+            cfg->get(PEMUConfig::Id::GUI_SHOW_AVAILABLE)->getInteger(),
+            cfg->get(PEMUConfig::Id::GUI_FILTER_CLONES)->getInteger(),
+            systemId == 9999 ? -1 : systemId, systemId == 9999 ? 75 : -1,
             editorId, devId, players, rating, rotation, genreId,
-            pMain->getConfig()->get(PEMUConfig::Id::GUI_FILTER_RESOLUTION)->getString(),
-            pMain->getConfig()->get(PEMUConfig::Id::GUI_FILTER_DATE)->getString()
+            cfg->get(PEMUConfig::Id::GUI_FILTER_RESOLUTION)->getString(),
+            cfg->get(PEMUConfig::Id::GUI_FILTER_DATE)->getString()
     );
+
+    /*
+    if (addArcadeSystem && !gameList->findGamesBySystem(75).empty()) {
+        gameList->systemList.systems.insert(gameList->systemList.systems.begin(), {9999, 0, "ARCADE"});
+    }
+    */
+    cfg->get(PEMUConfig::Id::GUI_FILTER_SYSTEM)->setArray(mGameList.systemList.getNames());
+    cfg->get(PEMUConfig::Id::GUI_FILTER_GENRE)->setArray(mGameList.getGenreNames());
+    cfg->get(PEMUConfig::Id::GUI_FILTER_DATE)->setArray(mGameList.getDates());
+    cfg->get(PEMUConfig::Id::GUI_FILTER_EDITOR)->setArray(mGameList.getEditorNames());
+    cfg->get(PEMUConfig::Id::GUI_FILTER_DEVELOPER)->setArray(mGameList.getDeveloperNames());
+    cfg->get(PEMUConfig::Id::GUI_FILTER_PLAYERS)->setArray(mGameList.getPlayersNames());
+    cfg->get(PEMUConfig::Id::GUI_FILTER_RATING)->setArray(mGameList.getRatingNames());
+    cfg->get(PEMUConfig::Id::GUI_FILTER_ROTATION)->setArray(mGameList.getRotationNames());
+    cfg->get(PEMUConfig::Id::GUI_FILTER_RESOLUTION)->setArray(mGameList.getResolutions());
 }
 
 void UIRomList::sortRomList() {

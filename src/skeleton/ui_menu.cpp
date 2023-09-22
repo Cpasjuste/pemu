@@ -292,8 +292,6 @@ bool UiMenu::onInput(c2d::Input::Player *players) {
         } else {
             option->setArrayMoveNext();
         }
-
-        lines.at(highlightIndex)->refresh();
         if (!option->getComment().empty()) {
             ui->getUiStatusBox()->show(option->getComment());
         }
@@ -316,6 +314,10 @@ bool UiMenu::onInput(c2d::Input::Player *players) {
                 std::string value = Utility::toUpper(option->getString());
                 if (option->getComment().empty()) {
                     ui->getUiStatusBox()->show("%s: %s", name.c_str(), value.c_str());
+                }
+                // if we want to show only available games, be sure we revert back to "ALL" system filter
+                if (option->getId() == PEMUConfig::Id::GUI_SHOW_AVAILABLE) {
+                    ui->getConfig()->get(PEMUConfig::Id::GUI_FILTER_SYSTEM)->setArrayIndex("ALL");
                 }
                 ui->getUiRomList()->updateRomList();
                 break;
@@ -366,11 +368,11 @@ bool UiMenu::onInput(c2d::Input::Player *players) {
                 }
                 break;
 #ifdef __VITA__
-            case PEMUConfig::Id::ROM_WAIT_RENDERING:
-                if (isEmuRunning) {
-                    ((PSP2Renderer *) ui)->setWaitRendering(option->getInteger());
-                }
-                break;
+                case PEMUConfig::Id::ROM_WAIT_RENDERING:
+                    if (isEmuRunning) {
+                        ((PSP2Renderer *) ui)->setWaitRendering(option->getInteger());
+                    }
+                    break;
 #endif
             case PEMUConfig::Id::GUI_VIDEO_SNAP_DELAY:
                 ui->getUiRomList()->setVideoSnapDelay(option->getInteger());
@@ -379,6 +381,10 @@ bool UiMenu::onInput(c2d::Input::Player *players) {
             default:
                 break;
         }
+
+        // TODO: should i just refresh changed options/lines?
+        //lines.at(highlightIndex)->refresh();
+        updateLines();
     }
 
     // FIRE1 (ENTER)

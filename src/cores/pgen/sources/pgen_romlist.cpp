@@ -20,7 +20,7 @@ void PGENRomList::build(bool addArcadeSystem, const ss_api::System &system) {
 #endif
     };
 
-    bool showAvailableOnly = ui->getConfig()->get(PEMUConfig::Id::GUI_SHOW_AVAILABLE)->getInteger();
+    //bool showAvailableOnly = ui->getConfig()->get(PEMUConfig::Id::GUI_SHOW_AVAILABLE)->getInteger();
     for (size_t i = 0; i < gameLists.size(); i++) {
         // look for a "gamelist.xml" file inside rom folder, if none found use embedded (romfs) "gamelist.xml"
         std::string gameListPath = ui->getConfig()->getRomPath(gameLists[i].name) + "gamelist.xml";
@@ -28,8 +28,7 @@ void PGENRomList::build(bool addArcadeSystem, const ss_api::System &system) {
             gameListPath = ui->getIo()->getRomFsPath() + gameLists[i].path;
             if (!ui->getIo()->exist(gameListPath)) continue;
         }
-        gameList->append(gameListPath, ui->getConfig()->getRomPath(gameLists[i].name),
-                         false, filters, system, showAvailableOnly);
+        gameList->append(gameListPath, ui->getConfig()->getRomPath(gameLists[i].name), false, filters, system);
         setLoadingText("Games: %li / %li", gameList->getAvailableCount(), gameList->games.size());
         printf("RomList::build: %s, games found: %zu / %zu\n",
                gameListPath.c_str(), gameList->getAvailableCount(), gameList->games.size());

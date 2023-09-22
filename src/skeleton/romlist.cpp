@@ -76,8 +76,8 @@ void RomList::build(bool addArcadeSystem, const ss_api::System &system) {
         gameListPath = ui->getIo()->getRomFsPath() + "gamelist.xml";
     }
 
-    bool showAvailableOnly = ui->getConfig()->get(PEMUConfig::Id::GUI_SHOW_AVAILABLE)->getArrayIndex();
-    gameList->append(gameListPath, romPath, false, filters, system, showAvailableOnly);
+    //bool showAvailableOnly = ui->getConfig()->get(PEMUConfig::Id::GUI_SHOW_AVAILABLE)->getArrayIndex();
+    gameList->append(gameListPath, romPath, false, filters, system);
 
     setLoadingText("Games: %li / %li", gameList->getAvailableCount(), gameList->games.size());
     printf("RomList::build: %s, games found: %zu / %zu\n",
@@ -94,8 +94,6 @@ void RomList::build(bool addArcadeSystem, const ss_api::System &system) {
     std::sort(gameList->resolutions.begin(), gameList->resolutions.end(), Api::sortByName);
     std::sort(gameList->dates.begin(), gameList->dates.end(), Api::sortByName);
 
-    gameList->resolutions.insert(gameList->resolutions.begin(), "ALL");
-    gameList->dates.insert(gameList->dates.begin(), "ALL");
     if (addArcadeSystem && !gameList->findGamesBySystem(75).empty()) {
         gameList->systemList.systems.insert(gameList->systemList.systems.begin(), {9999, 0, "ARCADE"});
     }
@@ -106,7 +104,7 @@ void RomList::build(bool addArcadeSystem, const ss_api::System &system) {
     ui->getConfig()->getGroup(PEMUConfig::Id::MENU_MAIN)->addOption(
             {"FILTER_GENRE", gameList->getGenreNames(), 0, PEMUConfig::Id::GUI_FILTER_GENRE});
     ui->getConfig()->getGroup(PEMUConfig::Id::MENU_MAIN)->addOption(
-            {"FILTER_DATE", gameList->dates, 0, PEMUConfig::Id::GUI_FILTER_DATE});
+            {"FILTER_DATE", gameList->getDates(), 0, PEMUConfig::Id::GUI_FILTER_DATE});
     ui->getConfig()->getGroup(PEMUConfig::Id::MENU_MAIN)->addOption(
             {"FILTER_EDITOR", gameList->getEditorNames(), 0, PEMUConfig::Id::GUI_FILTER_EDITOR});
     ui->getConfig()->getGroup(PEMUConfig::Id::MENU_MAIN)->addOption(
@@ -119,7 +117,7 @@ void RomList::build(bool addArcadeSystem, const ss_api::System &system) {
             {"FILTER_ROTATION", gameList->getRotationNames(), 0, PEMUConfig::Id::GUI_FILTER_ROTATION})->setFlags(
             PEMUConfig::Flags::HIDDEN);
     ui->getConfig()->getGroup(PEMUConfig::Id::MENU_MAIN)->addOption(
-            {"FILTER_RESOLUTION", gameList->resolutions, 0, PEMUConfig::Id::GUI_FILTER_RESOLUTION})->setFlags(
+            {"FILTER_RESOLUTION", gameList->getResolutions(), 0, PEMUConfig::Id::GUI_FILTER_RESOLUTION})->setFlags(
             PEMUConfig::Flags::HIDDEN);
 
     // we need to reload config to update new options we just added

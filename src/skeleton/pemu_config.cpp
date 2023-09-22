@@ -24,7 +24,7 @@ PEMUConfig::PEMUConfig(c2d::Io *io, const std::string &name, int version)
      */
     Group main("UI", Id::MENU_MAIN);
     main.addOption({"SHOW_FAVORITES", {"OFF", "ON"}, 0, Id::GUI_SHOW_FAVORITES});
-    main.addOption({"SHOW_AVAILABLE", {"OFF", "ON"}, 0, Id::GUI_SHOW_AVAILABLE, C2D_CONFIG_RESTART_NEEDED});
+    main.addOption({"SHOW_AVAILABLE", {"OFF", "ON"}, 0, Id::GUI_SHOW_AVAILABLE});
     main.addOption({"SHOW_CLONES", {"OFF", "ON"}, 0, Id::GUI_FILTER_CLONES})->setFlags(Flags::HIDDEN);
     main.addOption({"SHOW_ZIP_NAMES", {"OFF", "ON"}, 1, Id::GUI_SHOW_ZIP_NAMES});
 #ifdef __FULLSCREEN__
