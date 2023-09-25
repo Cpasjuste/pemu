@@ -16,7 +16,6 @@ PEMUConfig::PEMUConfig(c2d::Io *io, const std::string &name, int version)
      * ROMS PATHS
      */
     Group roms("ROMS", CFG_ID_ROMS);
-    roms.addOption({"PATH", io->getDataPath() + "roms/"});
     addGroup(roms);
 
     /*

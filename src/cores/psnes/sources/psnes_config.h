@@ -15,7 +15,7 @@ public:
 
     std::vector<GameListInfo> getCoreGameListInfo() override {
         return {
-                {{4, 0, "Super Nintendo"}, "PATH", "gamelist.xml"}
+                {{4, 0, "Super Nintendo"}, "SNES", "roms", "gamelist.xml"}
         };
     }
 

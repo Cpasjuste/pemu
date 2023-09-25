@@ -59,14 +59,14 @@ RomList::RomList(UiMain *_ui, const std::string &emuVersion, const std::vector<s
 void RomList::build(const ss_api::System &system) {
     for (const auto &gamelist: ui->getConfig()->getCoreGameListInfo()) {
         // look for a "gamelist.xml" file inside rom folder, if none found use embedded (romfs) "gamelist.xml"
-        std::string gameListPath = ui->getConfig()->getRomPath(gamelist.name) + "gamelist.xml";
+        std::string gameListPath = ui->getConfig()->getRomPath(gamelist.cfg_name) + "gamelist.xml";
         if (!ui->getIo()->exist(gameListPath)) {
             printf("RomList::build: %s not found\n", gameListPath.c_str());
             // try embedded (romfs)
-            gameListPath = ui->getIo()->getRomFsPath() + gamelist.path;
+            gameListPath = ui->getIo()->getRomFsPath() + gamelist.xml_path;
             if (!ui->getIo()->exist(gameListPath)) continue;
         }
-        gameList->append(gameListPath, ui->getConfig()->getRomPath(gamelist.name),
+        gameList->append(gameListPath, ui->getConfig()->getRomPath(gamelist.cfg_name),
                          false, filters, gamelist.system);
         setLoadingText("Games: %li / %li", gameList->getAvailableCount(), gameList->games.size());
         printf("RomList::build: %s, games found: %zu / %zu\n",

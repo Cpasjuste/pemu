@@ -11,6 +11,11 @@ using namespace pemu;
 PSNESConfig::PSNESConfig(c2d::Io *io, int version) : PEMUConfig(io, "PSNES", version) {
     printf("PSNESConfig(%s, v%i)\n", getPath().c_str(), version);
 
+    // add custom roms paths to config
+    for (const auto &gl: getCoreGameListInfo()) {
+        getGroup(CFG_ID_ROMS)->addOption({gl.cfg_name, io->getDataPath() + gl.rom_path + "/"});
+    }
+
     auto group = getGroup(PEMUConfig::Id::MENU_ROM_OPTIONS);
     if (!group) {
         printf("PSNESConfig: error, group not found (MENU_ROM_OPTIONS)\n");

@@ -5,7 +5,6 @@
 #include <string>
 #include "skeleton/pemu.h"
 #include "pfbneo_config.h"
-#include "burner.h"
 
 using namespace c2d;
 using namespace pemu;
@@ -15,30 +14,10 @@ using namespace pemu;
 PFBAConfig::PFBAConfig(c2d::Io *io, int version) : PEMUConfig(io, "PFBNEO", version) {
     printf("PFBNConfig(%s, v%i)\n", getPath().c_str(), version);
 
-    // change default rom path name in config file
-    getGroup(CFG_ID_ROMS)->getOptions()->at(0).setName("ARCADE");
-    getGroup(CFG_ID_ROMS)->getOptions()->at(0).setString(io->getDataPath() + "arcade/");
-#ifndef __PFBN_LIGHT__
-    // add fbneo consoles paths
-    getGroup(CFG_ID_ROMS)->addOption({"CHANNELF", io->getDataPath() + "channelf/"});
-    getGroup(CFG_ID_ROMS)->addOption({"COLECO", io->getDataPath() + "coleco/"});
-    getGroup(CFG_ID_ROMS)->addOption({"FDS", io->getDataPath() + "fds/"});
-    getGroup(CFG_ID_ROMS)->addOption({"GAMEGEAR", io->getDataPath() + "gamegear/"});
-    getGroup(CFG_ID_ROMS)->addOption({"MEGADRIVE", io->getDataPath() + "megadrive/"});
-    getGroup(CFG_ID_ROMS)->addOption({"MSX", io->getDataPath() + "msx/"});
-    getGroup(CFG_ID_ROMS)->addOption({"NES", io->getDataPath() + "nes/"});
-    getGroup(CFG_ID_ROMS)->addOption({"NGP", io->getDataPath() + "ngp/"});
-    getGroup(CFG_ID_ROMS)->addOption({"PCE", io->getDataPath() + "pce/"});
-    getGroup(CFG_ID_ROMS)->addOption({"SG1000", io->getDataPath() + "sg1000/"});
-    getGroup(CFG_ID_ROMS)->addOption({"SGX", io->getDataPath() + "sgx/"});
-    getGroup(CFG_ID_ROMS)->addOption({"SMS", io->getDataPath() + "sms/"});
-    getGroup(CFG_ID_ROMS)->addOption({"SPECTRUM", io->getDataPath() + "spectrum/"});
-    getGroup(CFG_ID_ROMS)->addOption({"TG16", io->getDataPath() + "tg16/"});
-#endif
-
-    ////////////////////////////////////////////////////////////
-    /// pfbneo custom config
-    ////////////////////////////////////////////////////////////
+    /// add custom roms paths to config
+    for (const auto &gl: getCoreGameListInfo()) {
+        getGroup(CFG_ID_ROMS)->addOption({gl.cfg_name, io->getDataPath() + gl.rom_path + "/"});
+    }
 
     /// MAIN OPTIONS
     get(PEMUConfig::Id::GUI_SHOW_ZIP_NAMES)->setArrayIndex(0);
@@ -85,8 +64,4 @@ PFBAConfig::PFBAConfig(c2d::Io *io, int version) : PEMUConfig(io, "PFBNEO", vers
 
     // "c2dui_romlist" will also reload config, but we need new roms paths
     load();
-}
-
-std::string PFBAConfig::getCoreVersion() {
-    return "fbneo: " + std::string(szAppBurnVer);
 }

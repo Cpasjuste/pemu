@@ -11,6 +11,11 @@ using namespace pemu;
 PNESConfig::PNESConfig(c2d::Io *io, int version) : PEMUConfig(io, "PNES", version) {
     printf("PNESConfig(%s, v%i)\n", getPath().c_str(), version);
 
+    // add custom roms paths to config
+    for (const auto &gl: getCoreGameListInfo()) {
+        getGroup(CFG_ID_ROMS)->addOption({gl.cfg_name, io->getDataPath() + gl.rom_path + "/"});
+    }
+
     // no need for auto-scaling mode on pnes
     getOption(PEMUConfig::Id::ROM_SCALING_MODE)->setArray({"ASPECT", "INTEGER"}, 0);
 
