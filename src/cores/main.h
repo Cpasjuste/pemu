@@ -32,14 +32,14 @@ extern "C" int sceSystemServiceLoadExec(const char *path, const char *args[]);
 #define PEMUUiMenuState PFBAUIStateMenu
 #define PEMUUiRomList UIRomList
 #elif __PGEN__
-#include "pgen_ui_emu.h"
 #include "pgen_io.h"
 #include "pgen_config.h"
-#include "pgen_romlist.h"
+//#include "pgen_romlist.h"
+#include "pgen_ui_emu.h"
 #include "pgen_ui_menu_state.h"
 #define PEMUIo PGENIo
 #define PEMUConfig PGENConfig
-#define PEMURomList PGENRomList
+#define PEMURomList RomList
 #define PEMUSkin pemu::Skin
 #define PEMUUiMain pemu::UiMain
 #define PEMUUiEmu PGENUiEmu

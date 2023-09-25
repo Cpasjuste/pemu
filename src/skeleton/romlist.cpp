@@ -57,17 +57,20 @@ RomList::RomList(UiMain *_ui, const std::string &emuVersion, const std::vector<s
 }
 
 void RomList::build(const ss_api::System &system) {
-    std::string romPath = ui->getConfig()->getRomPath();
-
-    // look for a "gamelist.xml" file inside rom folder, if none found use embedded (romfs) "gamelist.xml"
-    std::string gameListPath = romPath + "gamelist.xml";
-    if (!ui->getIo()->exist(gameListPath)) {
-        gameListPath = ui->getIo()->getRomFsPath() + "gamelist.xml";
+    for (const auto &gamelist: ui->getConfig()->getCoreGameListInfo()) {
+        // look for a "gamelist.xml" file inside rom folder, if none found use embedded (romfs) "gamelist.xml"
+        std::string gameListPath = ui->getConfig()->getRomPath(gamelist.name) + "gamelist.xml";
+        if (!ui->getIo()->exist(gameListPath)) {
+            // try embedded (romfs)
+            gameListPath = ui->getIo()->getRomFsPath() + gamelist.path;
+            if (!ui->getIo()->exist(gameListPath)) continue;
+        }
+        gameList->append(gameListPath, ui->getConfig()->getRomPath(gamelist.name),
+                         false, filters, gamelist.system);
+        setLoadingText("Games: %li / %li", gameList->getAvailableCount(), gameList->games.size());
+        printf("RomList::build: %s, games found: %zu / %zu\n",
+               gameListPath.c_str(), gameList->getAvailableCount(), gameList->games.size());
     }
-    gameList->append(gameListPath, romPath, false, filters, system);
-    setLoadingText("Games: %li / %li", gameList->getAvailableCount(), gameList->games.size());
-    printf("RomList::build: %s, games found: %zu / %zu\n",
-           gameListPath.c_str(), gameList->getAvailableCount(), gameList->games.size());
 
     // sort lists
     std::sort(gameList->systemList.systems.begin(), gameList->systemList.systems.end(), Api::sortSystemByName);
@@ -102,6 +105,12 @@ void RomList::build(const ss_api::System &system) {
     ui->getConfig()->getGroup(PEMUConfig::Id::MENU_MAIN)->addOption(
             {"FILTER_RESOLUTION", gameList->getResolutions(), 0, PEMUConfig::Id::GUI_FILTER_RESOLUTION})->setFlags(
             PEMUConfig::Flags::HIDDEN);
+
+    // custom core hide/show flags
+    auto ids = ui->getConfig()->getCoreHiddenOptionToEnable();
+    for (const auto &id: ids) {
+        ui->getConfig()->get(id)->setFlags(0);
+    }
 
     // we need to reload config to update new options we just added
     ui->getConfig()->load();
