@@ -2,8 +2,8 @@
 // Created by cpasjuste on 03/04/2020.
 //
 
-#ifndef PEMU_PNESIO_H
-#define PEMU_PNESIO_H
+#ifndef PEMU_PNES_IO_H
+#define PEMU_PNES_IO_H
 
 namespace c2d {
 
@@ -45,4 +45,4 @@ namespace c2d {
     };
 }
 
-#endif //PEMU_PNESIO_H
+#endif //PEMU_PNES_IO_H
