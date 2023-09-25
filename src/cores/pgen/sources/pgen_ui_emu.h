@@ -8,20 +8,18 @@
 #include <string>
 
 class PGENUiEmu : public pemu::UiEmu {
-
 public:
-
     explicit PGENUiEmu(pemu::UiMain *ui);
 
     int load(const ss_api::Game &game) override;
 
+private:
     void stop() override;
 
     void onUpdate() override;
 
     void resizeVideo(bool isGameGear = false);
 
-private:
     void loadBios();
 
     void loadBram();

@@ -15,10 +15,10 @@ namespace c2d {
             C2DIo::create(C2DIo::getDataPath() + "configs");
             C2DIo::create(C2DIo::getDataPath() + "saves");
             C2DIo::create(C2DIo::getDataPath() + "megadrive");
-            C2DIo::create(C2DIo::getDataPath() + "sms");
+            C2DIo::create(C2DIo::getDataPath() + "mastersystem");
             C2DIo::create(C2DIo::getDataPath() + "gamegear");
             C2DIo::create(C2DIo::getDataPath() + "megacd");
-            //C2DIo::create(C2DIo::getDataPath() + "sg1000");
+            C2DIo::create(C2DIo::getDataPath() + "sg1000");
         }
 
 #ifdef __PSP2__
