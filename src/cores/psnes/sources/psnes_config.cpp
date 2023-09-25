@@ -4,7 +4,6 @@
 
 #include "skeleton/pemu.h"
 #include "psnes_config.h"
-#include "snes9x.h"
 
 using namespace c2d;
 using namespace pemu;
@@ -41,12 +40,4 @@ PSNESConfig::PSNESConfig(c2d::Io *io, int version) : PEMUConfig(io, "PSNES", ver
 
     // "c2dui_romlist" will also reload config, but we need new roms paths
     load();
-}
-
-std::string PSNESConfig::getCoreVersion() {
-    return "snes9x: " + std::string(VERSION);
-}
-
-std::vector<std::string> PSNESConfig::getCoreSupportedExt() {
-    return {".zip", ".sfc", ".smc", ".swc", ".fig"};
 }

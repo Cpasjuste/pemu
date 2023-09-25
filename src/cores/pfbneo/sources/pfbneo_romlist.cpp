@@ -5,6 +5,8 @@
 #include "skeleton/pemu.h"
 #include "pfbneo_romlist.h"
 
+#error "TODO: update for latest changes"
+
 struct GameListInfo {
     ss_api::System system;
     std::string name;

@@ -61,6 +61,7 @@ void RomList::build(const ss_api::System &system) {
         // look for a "gamelist.xml" file inside rom folder, if none found use embedded (romfs) "gamelist.xml"
         std::string gameListPath = ui->getConfig()->getRomPath(gamelist.name) + "gamelist.xml";
         if (!ui->getIo()->exist(gameListPath)) {
+            printf("RomList::build: %s not found\n", gameListPath.c_str());
             // try embedded (romfs)
             gameListPath = ui->getIo()->getRomFsPath() + gamelist.path;
             if (!ui->getIo()->exist(gameListPath)) continue;
