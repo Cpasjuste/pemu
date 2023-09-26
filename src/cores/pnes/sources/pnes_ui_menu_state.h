@@ -12,9 +12,9 @@ class PNESUIStateMenu : public pemu::UiMenuState {
 public:
     explicit PNESUIStateMenu(pemu::UiMain *ui) : pemu::UiMenuState(ui) {};
 
-    bool loadStateCore(const char *path, void *data = nullptr) override;
+    bool loadStateCore(const char *path) override;
 
-    bool saveStateCore(const char *path, void *data = nullptr) override;
+    bool saveStateCore(const char *path) override;
 
 };
 
