@@ -6,14 +6,10 @@
 #include "psnes_ui_menu_state.h"
 #include "snapshot.h"
 
-PSNESUIStateMenu::PSNESUIStateMenu(pemu::UiMain *ui) : pemu::UiMenuState(ui) {
-
-}
-
-bool PSNESUIStateMenu::loadStateCore(const char *path) {
+bool PSNESUIStateMenu::loadStateCore(const char *path, void *data) {
     return S9xUnfreezeGame(path) == TRUE;
 }
 
-bool PSNESUIStateMenu::saveStateCore(const char *path) {
+bool PSNESUIStateMenu::saveStateCore(const char *path, void *data) {
     return S9xFreezeGame(path) == TRUE;
 }

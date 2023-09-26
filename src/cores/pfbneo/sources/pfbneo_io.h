@@ -13,9 +13,9 @@ namespace c2d {
     class PFBAIo : public c2d::C2DIo {
     public:
         PFBAIo() : C2DIo() {
-            C2DIo::create(C2DIo::getDataPath());
-            C2DIo::create(C2DIo::getDataPath() + "configs");
-            C2DIo::create(C2DIo::getDataPath() + "saves");
+            C2DIo::create(PFBAIo::getDataPath());
+            C2DIo::create(PFBAIo::getDataPath() + "configs");
+            C2DIo::create(PFBAIo::getDataPath() + "saves");
             BurnPathsInit(this);
             BurnLibInit();
         }

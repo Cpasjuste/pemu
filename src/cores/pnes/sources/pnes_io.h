@@ -10,10 +10,10 @@ namespace c2d {
     class PNESIo : public c2d::C2DIo {
     public:
         PNESIo() : C2DIo() {
-            C2DIo::create(C2DIo::getDataPath());
-            C2DIo::create(C2DIo::getDataPath() + "roms");
-            C2DIo::create(C2DIo::getDataPath() + "configs");
-            C2DIo::create(C2DIo::getDataPath() + "saves");
+            C2DIo::create(PNESIo::getDataPath());
+            C2DIo::create(PNESIo::getDataPath() + "roms");
+            C2DIo::create(PNESIo::getDataPath() + "configs");
+            C2DIo::create(PNESIo::getDataPath() + "saves");
         }
 
 #ifdef __PSP2__

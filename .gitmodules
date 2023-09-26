@@ -16,3 +16,6 @@
 [submodule "cores/genesis"]
 	path = external/cores/Genesis-Plus-GX
 	url = https://github.com/ekeeke/Genesis-Plus-GX.git
+[submodule "external/cores/mgba"]
+	path = external/cores/mgba
+	url = https://github.com/mgba-emu/mgba.git

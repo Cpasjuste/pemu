@@ -9,7 +9,7 @@ extern "C" {
 #include "shared.h"
 }
 
-bool PGENUIStateMenu::loadStateCore(const char *path) {
+bool PGENUIStateMenu::loadStateCore(const char *path, void *data) {
     unsigned char *buf = nullptr;
     bool success = getUi()->getIo()->read(path, (char **) &buf, STATE_SIZE);
     if (buf && success) {
@@ -23,7 +23,7 @@ bool PGENUIStateMenu::loadStateCore(const char *path) {
     return success;
 }
 
-bool PGENUIStateMenu::saveStateCore(const char *path) {
+bool PGENUIStateMenu::saveStateCore(const char *path, void *data) {
     auto buf = (uint8 *) malloc(STATE_SIZE);
     bool ret = false;
     if (buf) {

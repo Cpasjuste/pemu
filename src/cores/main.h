@@ -33,7 +33,6 @@ extern "C" int sceSystemServiceLoadExec(const char *path, const char *args[]);
 #elif __PGEN__
 #include "pgen_io.h"
 #include "pgen_config.h"
-//#include "pgen_romlist.h"
 #include "pgen_ui_emu.h"
 #include "pgen_ui_menu_state.h"
 #define PEMUIo PGENIo
@@ -73,6 +72,20 @@ extern "C" int sceSystemServiceLoadExec(const char *path, const char *args[]);
 #define PEMUUiMenu UiMenu
 #define PEMUUiMenuState PSNESUIStateMenu
 #define PEMUUiRomList UIRomList
+#elif __PGBA__
+#include "pgba_io.h"
+#include "pgba_config.h"
+#include "pgba_ui_emu.h"
+#include "pgba_ui_menu_state.h"
+#define PEMUIo PGBAIo
+#define PEMUConfig PGBAConfig
+#define PEMURomList pemu::RomList
+#define PEMUSkin pemu::Skin
+#define PEMUUiMain pemu::UiMain
+#define PEMUUiEmu PGBAUiEmu
+#define PEMUUiMenu pemu::UiMenu
+#define PEMUUiMenuState PGBAUIStateMenu
+#define PEMUUiRomList pemu::UIRomList
 #endif
 
 #endif //PEMU_MAIN_H

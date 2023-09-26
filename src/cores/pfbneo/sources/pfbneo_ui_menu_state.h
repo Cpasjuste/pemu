@@ -11,11 +11,11 @@
 class PFBAUIStateMenu : public pemu::UiMenuState {
 
 public:
-    PFBAUIStateMenu(pemu::UiMain *ui);
+    explicit PFBAUIStateMenu(pemu::UiMain *ui);
 
-    bool loadStateCore(const char *path);
+    bool loadStateCore(const char *path, void *data = nullptr) override;
 
-    bool saveStateCore(const char *path);
+    bool saveStateCore(const char *path, void *data = nullptr) override;
 
 };
 

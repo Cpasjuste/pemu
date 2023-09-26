@@ -9,16 +9,16 @@ namespace c2d {
     class PGENIo : public c2d::C2DIo {
     public:
         PGENIo() : C2DIo() {
-            C2DIo::create(C2DIo::getDataPath());
-            C2DIo::create(C2DIo::getDataPath() + "bios");
-            C2DIo::create(C2DIo::getDataPath() + "rams");
-            C2DIo::create(C2DIo::getDataPath() + "configs");
-            C2DIo::create(C2DIo::getDataPath() + "saves");
-            C2DIo::create(C2DIo::getDataPath() + "megadrive");
-            C2DIo::create(C2DIo::getDataPath() + "mastersystem");
-            C2DIo::create(C2DIo::getDataPath() + "gamegear");
-            C2DIo::create(C2DIo::getDataPath() + "megacd");
-            C2DIo::create(C2DIo::getDataPath() + "sg1000");
+            C2DIo::create(PGENIo::getDataPath());
+            C2DIo::create(PGENIo::getDataPath() + "bios");
+            C2DIo::create(PGENIo::getDataPath() + "rams");
+            C2DIo::create(PGENIo::getDataPath() + "configs");
+            C2DIo::create(PGENIo::getDataPath() + "saves");
+            C2DIo::create(PGENIo::getDataPath() + "megadrive");
+            C2DIo::create(PGENIo::getDataPath() + "mastersystem");
+            C2DIo::create(PGENIo::getDataPath() + "gamegear");
+            C2DIo::create(PGENIo::getDataPath() + "megacd");
+            C2DIo::create(PGENIo::getDataPath() + "sg1000");
         }
 
 #ifdef __PSP2__

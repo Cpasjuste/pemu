@@ -15,10 +15,10 @@ PFBAUIStateMenu::PFBAUIStateMenu(pemu::UiMain *ui) : pemu::UiMenuState(ui) {
 
 }
 
-bool PFBAUIStateMenu::loadStateCore(const char *path) {
+bool PFBAUIStateMenu::loadStateCore(const char *path, void *data) {
     return BurnStateLoad((char *) path, 1, &DrvInitCallback) == 0;
 }
 
-bool PFBAUIStateMenu::saveStateCore(const char *path) {
+bool PFBAUIStateMenu::saveStateCore(const char *path, void *data) {
     return BurnStateSave((char *) path, 1) == 0;
 }

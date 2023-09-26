@@ -2,21 +2,20 @@
 // Created by cpasjuste on 28/09/18.
 //
 
-#ifndef PEMU_PNESUISTATEMENU_H
-#define PEMU_PNESUISTATEMENU_H
+#ifndef PEMU_PNES_UI_STATE_MENU_H
+#define PEMU_PNES_UI_STATE_MENU_H
 
 #include "skeleton/ui_main.h"
 #include "skeleton/ui_menu_state.h"
 
 class PNESUIStateMenu : public pemu::UiMenuState {
-
 public:
-    PNESUIStateMenu(pemu::UiMain *ui);
+    explicit PNESUIStateMenu(pemu::UiMain *ui) : pemu::UiMenuState(ui) {};
 
-    bool loadStateCore(const char *path);
+    bool loadStateCore(const char *path, void *data = nullptr) override;
 
-    bool saveStateCore(const char *path);
+    bool saveStateCore(const char *path, void *data = nullptr) override;
 
 };
 
-#endif //PEMU_PNESUISTATEMENU_H
+#endif //PEMU_PNES_UI_STATE_MENU_H

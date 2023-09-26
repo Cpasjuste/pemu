@@ -36,22 +36,13 @@ set(VERSION_MINOR 7)
 # pemu (ui)
 add_subdirectory(src/skeleton)
 
-# emulator selection
-if (OPTION_EMU STREQUAL "src/cores/pnes")
-    # pnes
-    add_subdirectory(src/cores/pnes)
-elseif (OPTION_EMU STREQUAL "src/cores/psnes")
-    # psnes
-    add_subdirectory(src/cores/psnes)
-elseif (OPTION_EMU STREQUAL "src/cores/pgen")
-    # pgen
-    add_subdirectory(src/cores/pgen)
-elseif (OPTION_EMU STREQUAL "src/cores/pfbneo")
-    # pfbneo
-    add_subdirectory(src/cores/pfbneo)
+# cores
+add_subdirectory(src/cores/pfbneo)
+add_subdirectory(src/cores/pgen)
+add_subdirectory(src/cores/pnes)
+add_subdirectory(src/cores/psnes)
+if (PLATFORM_LINUX OR PLATFORM_WINDOWS OR PLATFORM_SWITCH)
+    add_subdirectory(src/cores/pgba)
 else ()
-    add_subdirectory(src/cores/pfbneo)
-    add_subdirectory(src/cores/pgen)
-    add_subdirectory(src/cores/pnes)
-    add_subdirectory(src/cores/psnes)
+    message(WARNING "skipping pgba build, not supported on this platform yet...")
 endif ()
