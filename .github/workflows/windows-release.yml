@@ -29,33 +29,41 @@ jobs:
         with:
           submodules: recursive
 
+      - name: Configure
+        run: |
+          cd $GITHUB_WORKSPACE
+          mkdir cmake-build && cd cmake-build
+          cmake -G "MSYS Makefiles" -DPLATFORM_WINDOWS=ON -DCMAKE_BUILD_TYPE=Release ..
+
       - name: Build pfbneo
         run: |
-          mkdir cmake-build-pfbneo && cd cmake-build-pfbneo
-          cmake -G "MSYS Makefiles" -DPLATFORM_WINDOWS=ON -DOPTION_EMU=pfbneo -DCMAKE_BUILD_TYPE=Release ..
+          cd $GITHUB_WORKSPACE/cmake-build
           make pfbneo.deps
           make pfbneo_windows_release
           mv *.zip $GITHUB_WORKSPACE
 
       - name: Build pgen
         run: |
-          mkdir cmake-build-pgen && cd cmake-build-pgen
-          cmake -G "MSYS Makefiles" -DPLATFORM_WINDOWS=ON -DOPTION_EMU=pgen -DCMAKE_BUILD_TYPE=Release ..
+          cd $GITHUB_WORKSPACE/cmake-build
           make pgen_windows_release
           mv *.zip $GITHUB_WORKSPACE
 
       - name: Build pnes
         run: |
-          mkdir cmake-build-pnes && cd cmake-build-pnes
-          cmake -G "MSYS Makefiles" -DPLATFORM_WINDOWS=ON -DOPTION_EMU=pnes -DCMAKE_BUILD_TYPE=Release ..
+          cd $GITHUB_WORKSPACE/cmake-build
           make pnes_windows_release
           mv *.zip $GITHUB_WORKSPACE
 
       - name: Build psnes
         run: |
-          mkdir cmake-build-psnes && cd cmake-build-psnes
-          cmake -G "MSYS Makefiles" -DPLATFORM_WINDOWS=ON -DOPTION_EMU=psnes -DCMAKE_BUILD_TYPE=Release ..
+          cd $GITHUB_WORKSPACE/cmake-build
           make psnes_windows_release
+          mv *.zip $GITHUB_WORKSPACE
+
+      - name: Build pgba
+        run: |
+          cd $GITHUB_WORKSPACE/cmake-build
+          make pgba_windows_release
           mv *.zip $GITHUB_WORKSPACE
 
       - name: Release

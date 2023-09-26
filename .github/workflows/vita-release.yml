@@ -29,46 +29,38 @@ jobs:
           export PATH=$VITASDK/bin:$PATH
           ./install-all.sh
 
+      - name: Configure
+        run: |
+          cd $GITHUB_WORKSPACE
+          export VITASDK=/usr/local/vitasdk
+          mkdir cmake-build && cd cmake-build
+          cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release .. \
+            -DPLATFORM_VITA=ON -DOPTION_LIGHT=ON -DOPTION_BUILTIN_MINIZIP=ON -DOPTION_MPV_PLAYER=OFF
+
       - name: Build pfbneo
         run: |
-          mkdir cmake-build-pfbneo && cd cmake-build-pfbneo
-          export VITASDK=/usr/local/vitasdk
-          cmake -G "Unix Makefiles" -DPLATFORM_VITA=ON \
-            -DOPTION_LIGHT=ON -DOPTION_BUILTIN_MINIZIP=ON -DOPTION_MPV_PLAYER=OFF \
-            -DOPTION_EMU=pfbneo -DCMAKE_BUILD_TYPE=Release ..
+          cd $GITHUB_WORKSPACE/cmake-build
           make pfbneo.deps
-          make -j $(getconf _NPROCESSORS_ONLN) pfbneo.vpk
-          mv pfbneo/pfbneo.vpk $GITHUB_WORKSPACE
+          make -j pfbneo.vpk
+          mv src/cores/pfbneo/pfbneo.vpk $GITHUB_WORKSPACE
 
       - name: Build pgen
         run: |
-          mkdir cmake-build-pgen && cd cmake-build-pgen
-          export VITASDK=/usr/local/vitasdk
-          cmake -G "Unix Makefiles" -DPLATFORM_VITA=ON \
-            -DOPTION_BUILTIN_MINIZIP=ON -DOPTION_MPV_PLAYER=OFF \
-            -DOPTION_EMU=pgen -DCMAKE_BUILD_TYPE=Release ..
-          make -j $(getconf _NPROCESSORS_ONLN) pgen.vpk
-          mv pgen/pgen.vpk $GITHUB_WORKSPACE
+          cd $GITHUB_WORKSPACE/cmake-build
+          make pgen.vpk
+          mv src/cores/pgen/pgen.vpk $GITHUB_WORKSPACE
 
       - name: Build pnes
         run: |
-          mkdir cmake-build-pnes && cd cmake-build-pnes
-          export VITASDK=/usr/local/vitasdk
-          cmake -G "Unix Makefiles" -DPLATFORM_VITA=ON \
-            -DOPTION_BUILTIN_MINIZIP=ON -DOPTION_MPV_PLAYER=OFF \
-            -DOPTION_EMU=pnes -DCMAKE_BUILD_TYPE=Release ..
-          make -j $(getconf _NPROCESSORS_ONLN) pnes.vpk
-          mv pnes/pnes.vpk $GITHUB_WORKSPACE
+          cd $GITHUB_WORKSPACE/cmake-build
+          make pnes.vpk
+          mv src/cores/pnes/pnes.vpk $GITHUB_WORKSPACE
 
       - name: Build psnes
         run: |
-          mkdir cmake-build-psnes && cd cmake-build-psnes
-          export VITASDK=/usr/local/vitasdk
-          cmake -G "Unix Makefiles" -DPLATFORM_VITA=ON \
-            -DOPTION_BUILTIN_MINIZIP=ON -DOPTION_MPV_PLAYER=OFF \
-            -DOPTION_EMU=psnes -DCMAKE_BUILD_TYPE=Release ..
-          make -j $(getconf _NPROCESSORS_ONLN) psnes.vpk
-          mv psnes/psnes.vpk $GITHUB_WORKSPACE
+          cd $GITHUB_WORKSPACE/cmake-build
+          make psnes.vpk
+          mv src/cores/psnes/psnes.vpk $GITHUB_WORKSPACE
 
       - name: Release
         uses: softprops/action-gh-release@v1

@@ -24,38 +24,42 @@ jobs:
           sudo apt -yq update
           sudo apt -yq install git build-essential cmake zip
 
+      - name: Configure
+        run: |
+          cd $GITHUB_WORKSPACE
+          mkdir cmake-build && cd cmake-build
+          cmake -G "Unix Makefiles" -DPLATFORM_SWITCH=ON -DCMAKE_BUILD_TYPE=Release ..
+
       - name: Build pfbneo
         run: |
-          mkdir cmake-build-pfbneo && cd cmake-build-pfbneo
-          source /etc/profile.d/devkit-env.sh
-          cmake -G "Unix Makefiles" -DPLATFORM_SWITCH=ON -DOPTION_EMU=pfbneo -DCMAKE_BUILD_TYPE=Release ..
+          cd $GITHUB_WORKSPACE/cmake-build
           make pfbneo.deps
-          make -j $(getconf _NPROCESSORS_ONLN) pfbneo.nro
-          mv pfbneo/pfbneo.nro $GITHUB_WORKSPACE
+          make pfbneo.nro
+          mv src/cores/pfbneo/pfbneo.nro $GITHUB_WORKSPACE
 
       - name: Build pgen
         run: |
-          mkdir cmake-build-pgen && cd cmake-build-pgen
-          source /etc/profile.d/devkit-env.sh
-          cmake -G "Unix Makefiles" -DPLATFORM_SWITCH=ON -DOPTION_EMU=pgen -DCMAKE_BUILD_TYPE=Release ..
-          make -j $(getconf _NPROCESSORS_ONLN) pgen.nro
-          mv pgen/pgen.nro $GITHUB_WORKSPACE
+          cd $GITHUB_WORKSPACE/cmake-build
+          make pgen.nro
+          mv src/cores/pgen/pgen.nro $GITHUB_WORKSPACE
 
       - name: Build pnes
         run: |
-          mkdir cmake-build-pnes && cd cmake-build-pnes
-          source /etc/profile.d/devkit-env.sh
-          cmake -G "Unix Makefiles" -DPLATFORM_SWITCH=ON -DOPTION_EMU=pnes -DCMAKE_BUILD_TYPE=Release ..
-          make -j $(getconf _NPROCESSORS_ONLN) pnes.nro
-          mv pnes/pnes.nro $GITHUB_WORKSPACE
+          cd $GITHUB_WORKSPACE/cmake-build
+          make pnes.nro
+          mv src/cores/pnes/pnes.nro $GITHUB_WORKSPACE
 
       - name: Build psnes
         run: |
-          mkdir cmake-build-psnes && cd cmake-build-psnes
-          source /etc/profile.d/devkit-env.sh
-          cmake -G "Unix Makefiles" -DPLATFORM_SWITCH=ON -DOPTION_EMU=psnes -DCMAKE_BUILD_TYPE=Release ..
-          make -j $(getconf _NPROCESSORS_ONLN) psnes.nro
-          mv psnes/psnes.nro $GITHUB_WORKSPACE
+          cd $GITHUB_WORKSPACE/cmake-build
+          make psnes.nro
+          mv src/cores/psnes/psnes.nro $GITHUB_WORKSPACE
+
+      - name: Build pgba
+        run: |
+          cd $GITHUB_WORKSPACE/cmake-build
+          make pgba.nro
+          mv src/cores/psnes/pgba.nro $GITHUB_WORKSPACE
 
       - name: Release
         uses: softprops/action-gh-release@v1

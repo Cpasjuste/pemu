@@ -24,43 +24,15 @@ jobs:
           sudo apt -yq update
           sudo apt -yq install git build-essential cmake zip
 
-      - name: Build pfbneo
+      - name: Configure
         run: |
-          mkdir cmake-build-pfbneo && cd cmake-build-pfbneo
+          cd $GITHUB_WORKSPACE
           source /etc/profile.d/devkit-env.sh
-          cmake -G "Unix Makefiles" -DPLATFORM_3DS=ON -DOPTION_EMU=pfbneo \
-            -DOPTION_LIGHT=ON -DOPTION_MPV_PLAYER=OFF -DCMAKE_BUILD_TYPE=Release ..
-          make pfbneo.deps
-          make -j $(getconf _NPROCESSORS_ONLN) pfbneo.3dsx
+          mkdir cmake-build && cd cmake-build
+          cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release .. \
+            -DPLATFORM_3DS=ON -DOPTION_LIGHT=ON -DOPTION_MPV_PLAYER=OFF
 
       - name: Build pgen
         run: |
-          mkdir cmake-build-pgen && cd cmake-build-pgen
-          source /etc/profile.d/devkit-env.sh
-          cmake -G "Unix Makefiles" -DPLATFORM_3DS=ON -DOPTION_EMU=pgen \
-            -DOPTION_MPV_PLAYER=OFF -DCMAKE_BUILD_TYPE=Release ..
-          make -j $(getconf _NPROCESSORS_ONLN) pgen.3dsx
-
-      - name: Build pnes
-        run: |
-          mkdir cmake-build-pnes && cd cmake-build-pnes
-          source /etc/profile.d/devkit-env.sh
-          cmake -G "Unix Makefiles" -DPLATFORM_3DS=ON -DOPTION_EMU=pnes \
-            -DOPTION_MPV_PLAYER=OFF -DCMAKE_BUILD_TYPE=Release ..
-          make -j $(getconf _NPROCESSORS_ONLN) pnes.3dsx
-
-      # too slow for 3ds for now...
-      #- name: Build psnes
-        #run: |
-          #mkdir cmake-build-psnes && cd cmake-build-psnes
-          #source /etc/profile.d/devkit-env.sh
-          #cmake -G "Unix Makefiles" -DPLATFORM_3DS=ON -DOPTION_MPV_PLAYER=OFF -DOPTION_EMU=psnes -DCMAKE_BUILD_TYPE=Release ..
-          #make -j $(getconf _NPROCESSORS_ONLN) psnes.3dsx
-
-      # not ready at all...
-      #- name: Release
-      #  uses: softprops/action-gh-release@v1
-      #  if: startsWith(github.ref, 'refs/tags/')
-      #  with:
-      #    files: '*.3dsx'
-      #    token: ${{ secrets.GITHUB_TOKEN }}
+          cd $GITHUB_WORKSPACE/cmake-build
+          make pgen.3dsx
