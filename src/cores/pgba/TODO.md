@@ -1,1 +1,0 @@
-- enable zip support (VDirOpenArchive)

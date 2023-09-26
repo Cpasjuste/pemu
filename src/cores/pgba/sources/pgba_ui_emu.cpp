@@ -4,8 +4,8 @@
 
 #include "skeleton/pemu.h"
 #include "pgba_ui_emu.h"
-#include "mgba/core/blip_buf.h"
 extern "C" {
+#include "mgba/core/blip_buf.h"
 #include "mgba-util/vfs.h"
 #include "mgba/core/log.h"
 }
@@ -15,6 +15,8 @@ extern "C" {
 #define SAMPLE_RATE 32768
 
 mCore *s_core = nullptr;
+static VDir *s_vDir;
+static VFile *s_vFile;
 static int16_t *audioSampleBuffer = nullptr;
 static float audioSamplesPerFrameAvg = 0;
 static size_t audioSampleBufferSize = 0;
@@ -35,10 +37,29 @@ int PGBAUiEmu::load(const ss_api::Game &game) {
 
     // mgba int
     auto path = game.romsPath + game.path;
-    auto rom = VFileOpen(path.c_str(), O_RDONLY);
-    s_core = mCoreFindVF(rom);
+    if (Utility::endsWith(game.path, ".gba")) {
+        s_vFile = VFileOpen(path.c_str(), O_RDONLY);
+    } else if (Utility::endsWith(game.path, ".zip")) {
+        s_vDir = VDirOpenArchive(path.c_str());
+        if (!s_vDir) {
+            getUi()->getUiProgressBox()->setVisibility(Visibility::Hidden);
+            getUi()->getUiMessageBox()->show("ERROR", "INVALID ROM FILE...", "OK");
+            return -1;
+        }
+        s_vFile = s_vDir->openFile(s_vDir, std::string(Utility::removeExt(game.path) + ".gba").c_str(), O_RDONLY);
+    }
+
+    if (!s_vFile) {
+        getUi()->getUiProgressBox()->setVisibility(Visibility::Hidden);
+        getUi()->getUiMessageBox()->show("ERROR", "INVALID ROM FILE...", "OK");
+        s_vDir->close(s_vDir);
+        return -1;
+    }
+
+    s_core = mCoreFindVF(s_vFile);
     if (!s_core) {
-        rom->close(rom);
+        s_vFile->close(s_vFile);
+        s_vDir->close(s_vDir);
         getUi()->getUiProgressBox()->setVisibility(Visibility::Hidden);
         getUi()->getUiMessageBox()->show("ERROR", "INVALID FILE OR MISSING BIOS...", "OK");
         return -1;
@@ -76,7 +97,7 @@ int PGBAUiEmu::load(const ss_api::Game &game) {
     mCoreLoadConfig(s_core);
 
     // load rom
-    if (!s_core->loadROM(s_core, rom)) {
+    if (!s_core->loadROM(s_core, s_vFile)) {
         stop();
         getUi()->getUiProgressBox()->setVisibility(Visibility::Hidden);
         getUi()->getUiMessageBox()->show("ERROR", "INVALID FILE OR MISSING BIOS...", "OK");
@@ -111,6 +132,14 @@ void PGBAUiEmu::stop() {
     if (s_core) {
         mCoreConfigDeinit(&s_core->config);
         s_core->deinit(s_core);
+    }
+
+    if (s_vDir) {
+        s_vDir->close(s_vDir);
+        s_vDir = nullptr;
+    } else if (s_vFile) {
+        s_vFile->close(s_vFile);
+        s_vFile = nullptr;
     }
 
     if (audioSampleBuffer) {
