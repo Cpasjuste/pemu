@@ -8,6 +8,7 @@ extern "C" {
 #include "mgba/core/blip_buf.h"
 #include "mgba-util/vfs.h"
 #include "mgba/core/log.h"
+#include "mgba/internal/gba/input.h"
 }
 
 #define VIDEO_WIDTH_MAX  240
@@ -21,6 +22,8 @@ static int16_t *audioSampleBuffer = nullptr;
 static float audioSamplesPerFrameAvg = 0;
 static size_t audioSampleBufferSize = 0;
 #define SAMPLES_PER_FRAME_MOVING_AVG_ALPHA (1.0f / 180.0f)
+
+#define PEMU_INPUT_BINDING 0x47434E31
 
 PGBAUiEmu::PGBAUiEmu(UiMain *ui) : UiEmu(ui) {
     printf("PGENUiEmu()\n");
@@ -67,6 +70,20 @@ int PGBAUiEmu::load(const ss_api::Game &game) {
     mCoreInitConfig(s_core, nullptr);
     s_core->init(s_core);
 
+    // inputs
+    mInputMapInit(&s_core->inputMap, &GBAInputInfo);
+    mInputBindKey(&s_core->inputMap, PEMU_INPUT_BINDING, __builtin_ctz(Input::Button::A), GBA_KEY_A);
+    mInputBindKey(&s_core->inputMap, PEMU_INPUT_BINDING, __builtin_ctz(Input::Button::B), GBA_KEY_B);
+    mInputBindKey(&s_core->inputMap, PEMU_INPUT_BINDING, __builtin_ctz(Input::Button::LB), GBA_KEY_L);
+    mInputBindKey(&s_core->inputMap, PEMU_INPUT_BINDING, __builtin_ctz(Input::Button::RB), GBA_KEY_R);
+    mInputBindKey(&s_core->inputMap, PEMU_INPUT_BINDING, __builtin_ctz(Input::Button::Start), GBA_KEY_START);
+    mInputBindKey(&s_core->inputMap, PEMU_INPUT_BINDING, __builtin_ctz(Input::Button::Select), GBA_KEY_SELECT);
+    mInputBindKey(&s_core->inputMap, PEMU_INPUT_BINDING, __builtin_ctz(Input::Button::Up), GBA_KEY_UP);
+    mInputBindKey(&s_core->inputMap, PEMU_INPUT_BINDING, __builtin_ctz(Input::Button::Down), GBA_KEY_DOWN);
+    mInputBindKey(&s_core->inputMap, PEMU_INPUT_BINDING, __builtin_ctz(Input::Button::Left), GBA_KEY_LEFT);
+    mInputBindKey(&s_core->inputMap, PEMU_INPUT_BINDING, __builtin_ctz(Input::Button::Right), GBA_KEY_RIGHT);
+    mInputMapLoad(&s_core->inputMap, PEMU_INPUT_BINDING, mCoreConfigGetInput(&s_core->config));
+
     // video output
     uint8_t *buffer;
     int pitch;
@@ -91,7 +108,14 @@ int PGBAUiEmu::load(const ss_api::Game &game) {
     // set core options
     struct mCoreOptions opts = {
             .useBios = true,
+            .logLevel = mLOG_WARN | mLOG_ERROR | mLOG_FATAL,
+            .rewindEnable = true,
+            .rewindBufferCapacity = 600,
+            .rewindBufferInterval = 1,
+            .audioBuffers = 1024,
             .volume = 0x100,
+            .videoSync = false,
+            .audioSync = true
     };
     mCoreConfigLoadDefaults(&s_core->config, &opts);
     mCoreLoadConfig(s_core);
@@ -130,7 +154,9 @@ int PGBAUiEmu::load(const ss_api::Game &game) {
 
 void PGBAUiEmu::stop() {
     if (s_core) {
+        mInputMapDeinit(&s_core->inputMap);
         mCoreConfigDeinit(&s_core->config);
+        s_core->unloadROM(s_core);
         s_core->deinit(s_core);
     }
 
@@ -153,11 +179,9 @@ void PGBAUiEmu::stop() {
 void PGBAUiEmu::onUpdate() {
     if (!isPaused()) {
         // inputs
-#if 0
-        for (int i = 0; i < PLAYER_MAX; i++) {
-            unsigned int buttons = getUi()->getInput()->getButtons(i);
-        }
-#endif
+        auto buttons = getUi()->getInput()->getButtons(0);
+        auto keys = mInputMapKeyBits(&s_core->inputMap, PEMU_INPUT_BINDING, buttons, 0);
+        s_core->setKeys(s_core, keys);
 
         // frame emulation
         s_core->runFrame(s_core);
