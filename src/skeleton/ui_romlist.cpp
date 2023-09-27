@@ -30,7 +30,7 @@ UIRomList::UIRomList(UiMain *main, RomList *romList, const c2d::Vector2f &size)
     UIRomList::add(pRomInfo);
 
     // add rom list title (system text)
-    if (!(pMain->getConfig()->getOption(PEMUConfig::Id::GUI_FILTER_SYSTEM)->getFlags() & PEMUConfig::Flags::HIDDEN)) {
+    if (!(pMain->getConfig()->getOption(PEMUConfig::OptId::UI_FILTER_SYSTEM)->getFlags() & PEMUConfig::Flags::HIDDEN)) {
         pTitleText = new SkinnedText(pMain, {"SKIN_CONFIG", "MAIN", "ROM_LIST", "SYSTEM_TEXT"});
         if (pTitleText->available) {
             UIRomList::add(pTitleText);
@@ -83,7 +83,7 @@ UIRomList::UIRomList(UiMain *main, RomList *romList, const c2d::Vector2f &size)
     pBlur->setVisibility(Visibility::Hidden);
     UIRomList::add(pBlur);
 
-    int delay = pMain->getConfig()->get(PEMUConfig::Id::GUI_VIDEO_SNAP_DELAY)->getInteger();
+    int delay = pMain->getConfig()->get(PEMUConfig::OptId::UI_VIDEO_SNAP_DELAY)->getInteger();
     UIRomList::setVideoSnapDelay(delay);
 
     // filter roms (done in UiMain::init)
@@ -138,7 +138,7 @@ void UIRomList::updateRomList() {
     sortRomList();
 
     if (pTitleText && pTitleText->available) {
-        std::string sys = pMain->getConfig()->get(PEMUConfig::Id::GUI_FILTER_SYSTEM)->getString();
+        std::string sys = pMain->getConfig()->get(PEMUConfig::OptId::UI_FILTER_SYSTEM)->getString();
         pTitleText->setString(sys);
     }
 
@@ -157,44 +157,44 @@ void UIRomList::updateRomList() {
 
 void UIRomList::filterRomList() {
     auto cfg = pMain->getConfig();
-    ss_api::GameList *list = cfg->get(PEMUConfig::Id::GUI_SHOW_FAVORITES)->getInteger() ?
+    ss_api::GameList *list = cfg->get(PEMUConfig::OptId::UI_FILTER_FAVORITES)->getInteger() ?
                              pRomList->gameListFav : pRomList->gameList;
-    std::string system = cfg->get(PEMUConfig::Id::GUI_FILTER_SYSTEM)->getString();
+    std::string system = cfg->get(PEMUConfig::OptId::UI_FILTER_SYSTEM)->getString();
     int systemId = system == "ALL" ? -1 : list->systemList.findByName(system).id;
-    std::string editor = cfg->get(PEMUConfig::Id::GUI_FILTER_EDITOR)->getString();
+    std::string editor = cfg->get(PEMUConfig::OptId::UI_FILTER_EDITOR)->getString();
     int editorId = editor == "ALL" ? -1 : list->findEditorByName(editor).id;
-    std::string dev = cfg->get(PEMUConfig::Id::GUI_FILTER_DEVELOPER)->getString();
+    std::string dev = cfg->get(PEMUConfig::OptId::UI_FILTER_DEVELOPER)->getString();
     int devId = dev == "ALL" ? -1 : list->findDeveloperByName(dev).id;
-    int players = Utility::parseInt(cfg->get(PEMUConfig::Id::GUI_FILTER_PLAYERS)->getString(), -1);
-    int rating = Utility::parseInt(cfg->get(PEMUConfig::Id::GUI_FILTER_RATING)->getString(), -1);
-    int rotation = Utility::parseInt(cfg->get(PEMUConfig::Id::GUI_FILTER_ROTATION)->getString(), -1);
-    std::string genre = cfg->get(PEMUConfig::Id::GUI_FILTER_GENRE)->getString();
+    int players = Utility::parseInt(cfg->get(PEMUConfig::OptId::UI_FILTER_PLAYERS)->getString(), -1);
+    int rating = Utility::parseInt(cfg->get(PEMUConfig::OptId::UI_FILTER_RATING)->getString(), -1);
+    int rotation = Utility::parseInt(cfg->get(PEMUConfig::OptId::UI_FILTER_ROTATION)->getString(), -1);
+    std::string genre = cfg->get(PEMUConfig::OptId::UI_FILTER_GENRE)->getString();
     int genreId = genre == "ALL" ? -1 : list->findGenreByName(genre).id;
 
     printf("UIRomList::filterRomList: system: %s (%i)\n", system.c_str(), systemId);
 
     mGameList = list->filter(
-            cfg->get(PEMUConfig::Id::GUI_SHOW_AVAILABLE)->getInteger(),
-            cfg->get(PEMUConfig::Id::GUI_FILTER_CLONES)->getInteger(),
+            cfg->get(PEMUConfig::OptId::UI_FILTER_AVAILABLE)->getInteger(),
+            !cfg->get(PEMUConfig::OptId::UI_FILTER_CLONES)->getInteger(),
             systemId == 9999 ? -1 : systemId, systemId == 9999 ? 75 : -1,
             editorId, devId, players, rating, rotation, genreId,
-            cfg->get(PEMUConfig::Id::GUI_FILTER_RESOLUTION)->getString(),
-            cfg->get(PEMUConfig::Id::GUI_FILTER_DATE)->getString()
+            cfg->get(PEMUConfig::OptId::UI_FILTER_RESOLUTION)->getString(),
+            cfg->get(PEMUConfig::OptId::UI_FILTER_DATE)->getString()
     );
 
-    cfg->get(PEMUConfig::Id::GUI_FILTER_SYSTEM)->setArray(mGameList.systemList.getNames());
-    cfg->get(PEMUConfig::Id::GUI_FILTER_GENRE)->setArray(mGameList.getGenreNames());
-    cfg->get(PEMUConfig::Id::GUI_FILTER_DATE)->setArray(mGameList.getDates());
-    cfg->get(PEMUConfig::Id::GUI_FILTER_EDITOR)->setArray(mGameList.getEditorNames());
-    cfg->get(PEMUConfig::Id::GUI_FILTER_DEVELOPER)->setArray(mGameList.getDeveloperNames());
-    cfg->get(PEMUConfig::Id::GUI_FILTER_PLAYERS)->setArray(mGameList.getPlayersNames());
-    cfg->get(PEMUConfig::Id::GUI_FILTER_RATING)->setArray(mGameList.getRatingNames());
-    cfg->get(PEMUConfig::Id::GUI_FILTER_ROTATION)->setArray(mGameList.getRotationNames());
-    cfg->get(PEMUConfig::Id::GUI_FILTER_RESOLUTION)->setArray(mGameList.getResolutions());
+    cfg->get(PEMUConfig::OptId::UI_FILTER_SYSTEM)->setArray(mGameList.systemList.getNames());
+    cfg->get(PEMUConfig::OptId::UI_FILTER_GENRE)->setArray(mGameList.getGenreNames());
+    cfg->get(PEMUConfig::OptId::UI_FILTER_DATE)->setArray(mGameList.getDates());
+    cfg->get(PEMUConfig::OptId::UI_FILTER_EDITOR)->setArray(mGameList.getEditorNames());
+    cfg->get(PEMUConfig::OptId::UI_FILTER_DEVELOPER)->setArray(mGameList.getDeveloperNames());
+    cfg->get(PEMUConfig::OptId::UI_FILTER_PLAYERS)->setArray(mGameList.getPlayersNames());
+    cfg->get(PEMUConfig::OptId::UI_FILTER_RATING)->setArray(mGameList.getRatingNames());
+    cfg->get(PEMUConfig::OptId::UI_FILTER_ROTATION)->setArray(mGameList.getRotationNames());
+    cfg->get(PEMUConfig::OptId::UI_FILTER_RESOLUTION)->setArray(mGameList.getResolutions());
 }
 
 void UIRomList::sortRomList() {
-    bool byZipName = pMain->getConfig()->get(PEMUConfig::Id::GUI_SHOW_ZIP_NAMES)->getInteger();
+    bool byZipName = pMain->getConfig()->get(PEMUConfig::OptId::UI_SHOW_ZIP_NAMES)->getInteger();
     mGameList.sortAlpha(byZipName);
 }
 
@@ -276,7 +276,7 @@ bool UIRomList::onInput(c2d::Input::Player *players) {
                     "FAVORITES", "Remove from favorites ?", "OK", "CANCEL");
             if (res == MessageBox::LEFT) {
                 pRomList->removeFav(game);
-                if (pMain->getConfig()->get(PEMUConfig::Id::GUI_SHOW_FAVORITES)->getInteger()) {
+                if (pMain->getConfig()->get(PEMUConfig::OptId::UI_FILTER_FAVORITES)->getInteger()) {
                     // update list if we are in favorites
                     updateRomList();
                 }
@@ -293,14 +293,14 @@ bool UIRomList::onInput(c2d::Input::Player *players) {
     // only allow system switch if skin contains romlist title
     if (pTitleText && pTitleText->available) {
         if (buttons & Input::Button::LT) {
-            Option *sysOpt = pMain->getConfig()->get(PEMUConfig::Id::GUI_FILTER_SYSTEM);
+            Option *sysOpt = pMain->getConfig()->get(PEMUConfig::OptId::UI_FILTER_SYSTEM);
             size_t sysCount = sysOpt->getArray().size();
             if (sysCount > 1) {
                 sysOpt->setArrayMovePrev();
                 updateRomList();
             }
         } else if (buttons & Input::Button::RT) {
-            Option *sysOpt = pMain->getConfig()->get(PEMUConfig::Id::GUI_FILTER_SYSTEM);
+            Option *sysOpt = pMain->getConfig()->get(PEMUConfig::OptId::UI_FILTER_SYSTEM);
             size_t sysCount = sysOpt->getArray().size();
             if (sysCount > 1) {
                 sysOpt->setArrayMoveNext();

@@ -27,7 +27,7 @@ public:
     }
 
     std::vector<int> getCoreHiddenOptionToEnable() override {
-        return {PEMUConfig::Id::GUI_FILTER_SYSTEM};
+        return {PEMUConfig::OptId::UI_FILTER_SYSTEM};
     }
 
     std::string getCoreVersion() override {

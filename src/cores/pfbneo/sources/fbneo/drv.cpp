@@ -78,7 +78,7 @@ static int DoLibInit() {
         return 1;
     }
 
-    NeoSystem = NeoSystemList[pemu_ui->getConfig()->get(PEMUConfig::Id::ROM_NEOBIOS, true)->getArrayIndex()];
+    NeoSystem = NeoSystemList[pemu_ui->getConfig()->get(PEMUConfig::OptId::EMU_NEOBIOS, true)->getArrayIndex()];
 
     nRet = BurnDrvInit();
     printf("DoLibInit: BurnDrvInit = %i\n", nRet);

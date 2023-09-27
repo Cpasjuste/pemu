@@ -17,7 +17,7 @@ PNESConfig::PNESConfig(c2d::Io *io, int version) : PEMUConfig(io, "PNES", versio
     }
 
     // no need for auto-scaling mode on pnes
-    getOption(PEMUConfig::Id::ROM_SCALING_MODE)->setArray({"ASPECT", "INTEGER"}, 0);
+    getOption(PEMUConfig::OptId::EMU_SCALING_MODE)->setArray({"ASPECT", "INTEGER"}, 0);
 
 #ifdef __SWITCH__
     // on nintendo switch invert A/B buttons

@@ -34,10 +34,10 @@ public:
 
     std::vector<int> getCoreHiddenOptionToEnable() override {
         return {
-                PEMUConfig::Id::GUI_FILTER_CLONES,
-                PEMUConfig::Id::GUI_FILTER_SYSTEM,
-                PEMUConfig::Id::GUI_FILTER_ROTATION,
-                PEMUConfig::Id::GUI_FILTER_RESOLUTION
+                PEMUConfig::OptId::UI_FILTER_CLONES,
+                PEMUConfig::OptId::UI_FILTER_SYSTEM,
+                PEMUConfig::OptId::UI_FILTER_ROTATION,
+                PEMUConfig::OptId::UI_FILTER_RESOLUTION
         };
     }
 

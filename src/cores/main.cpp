@@ -26,7 +26,7 @@ int main(int argc, char **argv) {
     auto cfg = new PEMUConfig(io, pemu_version);
 
     // create main ui/renderer
-    auto fs = cfg->get(PEMUConfig::Id::GUI_FULLSCREEN);
+    auto fs = cfg->get(PEMUConfig::OptId::UI_FULLSCREEN);
     pemu_ui = new PEMUUiMain(io, (fs && !fs->getInteger()) ? Vector2f{1280, 720} : Vector2f{0, 0});
     pemu_ui->setConfig(cfg);
 

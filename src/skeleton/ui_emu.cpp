@@ -35,8 +35,8 @@ void UiEmu::addAudio(int rate, int samples, Audio::C2DAudioCallback cb) {
 void UiEmu::addVideo(C2DUIVideo *v) {
     delete (video);
     video = v;
-    video->setShader(pMain->getConfig()->get(PEMUConfig::Id::ROM_SHADER, true)->getArrayIndex());
-    video->setFilter((Texture::Filter) pMain->getConfig()->get(PEMUConfig::Id::ROM_FILTER, true)->getArrayIndex());
+    video->setShader(pMain->getConfig()->get(PEMUConfig::OptId::EMU_SHADER, true)->getArrayIndex());
+    video->setFilter((Texture::Filter) pMain->getConfig()->get(PEMUConfig::OptId::EMU_FILTER, true)->getArrayIndex());
     video->updateScaling();
     add(video);
 }
@@ -144,7 +144,7 @@ void UiEmu::onUpdate() {
 
     if (!isPaused()) {
         // fps
-        bool showFps = pMain->getConfig()->get(PEMUConfig::Id::ROM_SHOW_FPS, true)->getInteger();
+        bool showFps = pMain->getConfig()->get(PEMUConfig::OptId::EMU_SHOW_FPS, true)->getInteger();
         if (showFps) {
             if (!fpsText->isVisible()) {
                 fpsText->setVisibility(c2d::Visibility::Visible);

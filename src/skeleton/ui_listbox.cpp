@@ -139,7 +139,7 @@ void UIListBox::init(Font *font, int fontSize) {
 }
 
 void UIListBox::updateLines() {
-    bool useZipName = ui->getConfig()->getOption(PEMUConfig::Id::GUI_SHOW_ZIP_NAMES)->getInteger();
+    bool useZipName = ui->getConfig()->getOption(PEMUConfig::OptId::UI_SHOW_ZIP_NAMES)->getInteger();
 
     for (unsigned int i = 0; i < (unsigned int) max_lines; i++) {
         if (file_index + i >= games.size()) {

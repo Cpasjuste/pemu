@@ -2,10 +2,10 @@
 // Created by cpasjuste on 13/09/23.
 //
 
-#ifndef C2DUI_CONFIG_NEW_H
-#define C2DUI_CONFIG_NEW_H
+#ifndef PEMU_CONFIG_H
+#define PEMU_CONFIG_H
 
-#define C2D_CONFIG_RESTART_NEEDED "YOU NEED TO RESTART THE APPLICATION AFTER CHANGING THIS OPTION"
+#define PEMU_CONFIG_RESTART_NEEDED "YOU NEED TO RESTART THE APPLICATION AFTER CHANGING THIS OPTION"
 
 namespace pemu {
     class PEMUConfig : public c2d::config::Config {
@@ -15,54 +15,56 @@ namespace pemu {
             HIDDEN = BIT(2)
         };
 
-        enum Id {
-            MENU_MAIN = 0,
-            GUI_SHOW_FAVORITES,
-            GUI_SHOW_AVAILABLE,
-            GUI_SHOW_ZIP_NAMES,
-            GUI_FILTER_CLONES,
-            GUI_FILTER_SYSTEM,
-            GUI_FILTER_EDITOR,
-            GUI_FILTER_DEVELOPER,
-            GUI_FILTER_PLAYERS,
-            GUI_FILTER_RATING,
-            GUI_FILTER_ROTATION,
-            GUI_FILTER_RESOLUTION,
-            GUI_FILTER_DATE,
-            GUI_FILTER_GENRE,
-            GUI_SHOW_ICONS,
-            GUI_SCREEN_WIDTH,
-            GUI_SCREEN_HEIGHT,
-            GUI_FULLSCREEN,
-            GUI_SKIN,
-            GUI_SKIN_ASPECT,
-            GUI_FONT_SCALING,
-            GUI_VIDEO_SNAP_DELAY,
-            MENU_ROM_OPTIONS,
-            ROM_SCALING,
-            ROM_SCALING_MODE,
-            ROM_FILTER,
-            ROM_SHADER,
+        enum GrpId {
+            UI_FILTERING = 0,
+            UI_OPTIONS,
+            EMULATION,
+            GAMEPAD,
+            KEYBOARD
+        };
+
+        enum OptId {
+            UI_SHOW_ZIP_NAMES = 0,
+            UI_FULLSCREEN,
+            UI_SKIN,
+            UI_SKIN_ASPECT,
+            UI_FONT_SCALING,
+            UI_VIDEO_SNAP_DELAY,
+            UI_FILTER_FAVORITES,
+            UI_FILTER_AVAILABLE,
+            UI_FILTER_CLONES,
+            UI_FILTER_SYSTEM,
+            UI_FILTER_EDITOR,
+            UI_FILTER_DEVELOPER,
+            UI_FILTER_PLAYERS,
+            UI_FILTER_RATING,
+            UI_FILTER_ROTATION,
+            UI_FILTER_RESOLUTION,
+            UI_FILTER_DATE,
+            UI_FILTER_GENRE,
+            EMU_SCALING,
+            EMU_SCALING_MODE,
+            EMU_FILTER,
+            EMU_SHADER,
 #ifdef __VITA__
-            ROM_WAIT_RENDERING,
+            EMU_WAIT_RENDERING,
 #endif
-            ROM_FORCE_60HZ,
-            ROM_AUDIO_SYNC,
-            ROM_AUDIO_FREQ,
-            ROM_AUDIO_INTERPOLATION,
-            ROM_AUDIO_FMINTERPOLATION,
-            ROM_ROTATION,
-            ROM_SHOW_FPS,
-            ROM_FRAMESKIP,
-            ROM_NEOBIOS,
-            ROM_PSNES_CHEATS,
-            ROM_PSNES_BLOCK_VRAM,
-            ROM_PSNES_TRANSPARENCY,
-            ROM_PSNES_DISPLAY_MESSAGES,
-            ROM_PSNES_FRAMESKIP,
-            ROM_PSNES_TURBO_MODE,
-            ROM_PSNES_TURBO_FRAMESKIP,
-            MENU_JOYPAD,
+            EMU_FORCE_60HZ,
+            EMU_AUDIO_SYNC,
+            EMU_AUDIO_FREQ,
+            EMU_AUDIO_INTERPOLATION,
+            EMU_AUDIO_FMINTERPOLATION,
+            EMU_ROTATION,
+            EMU_SHOW_FPS,
+            EMU_FRAMESKIP,
+            EMU_NEOBIOS,
+            EMU_PSNES_CHEATS,
+            EMU_PSNES_BLOCK_VRAM,
+            EMU_PSNES_TRANSPARENCY,
+            EMU_PSNES_DISPLAY_MESSAGES,
+            EMU_PSNES_FRAMESKIP,
+            EMU_PSNES_TURBO_MODE,
+            EMU_PSNES_TURBO_FRAMESKIP,
             JOY_UP,
             JOY_DOWN,
             JOY_LEFT,
@@ -85,7 +87,6 @@ namespace pemu {
             JOY_AXIS_RY,
             JOY_DEADZONE,
 #ifndef NO_KEYBOARD
-            MENU_KEYBOARD,
             KEY_UP,
             KEY_DOWN,
             KEY_LEFT,
@@ -152,6 +153,6 @@ namespace pemu {
     };
 }
 
-#define CFG_ID_ROMS (PEMUConfig::Id::END + 1)
+#define CFG_ID_ROMS (PEMUConfig::OptId::END + 1)
 
-#endif //C2DUI_CONFIG_NEW_H
+#endif //PEMU_CONFIG_H

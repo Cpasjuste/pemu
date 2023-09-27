@@ -85,26 +85,26 @@ void RomList::build(const ss_api::System &system) {
     std::sort(gameList->dates.begin(), gameList->dates.end(), Api::sortByName);
 
     // add filtering options
-    ui->getConfig()->getGroup(PEMUConfig::Id::MENU_MAIN)->addOption(
-            {"FILTER_SYSTEM", gameList->systemList.getNames(), 0, PEMUConfig::Id::GUI_FILTER_SYSTEM})->setFlags(
+    ui->getConfig()->getGroup(PEMUConfig::GrpId::UI_FILTERING)->addOption(
+            {"FILTER_SYSTEM", gameList->systemList.getNames(), 0, PEMUConfig::OptId::UI_FILTER_SYSTEM})->setFlags(
             PEMUConfig::Flags::HIDDEN);
-    ui->getConfig()->getGroup(PEMUConfig::Id::MENU_MAIN)->addOption(
-            {"FILTER_GENRE", gameList->getGenreNames(), 0, PEMUConfig::Id::GUI_FILTER_GENRE});
-    ui->getConfig()->getGroup(PEMUConfig::Id::MENU_MAIN)->addOption(
-            {"FILTER_DATE", gameList->getDates(), 0, PEMUConfig::Id::GUI_FILTER_DATE});
-    ui->getConfig()->getGroup(PEMUConfig::Id::MENU_MAIN)->addOption(
-            {"FILTER_EDITOR", gameList->getEditorNames(), 0, PEMUConfig::Id::GUI_FILTER_EDITOR});
-    ui->getConfig()->getGroup(PEMUConfig::Id::MENU_MAIN)->addOption(
-            {"FILTER_DEVELOPER", gameList->getDeveloperNames(), 0, PEMUConfig::Id::GUI_FILTER_DEVELOPER});
-    ui->getConfig()->getGroup(PEMUConfig::Id::MENU_MAIN)->addOption(
-            {"FILTER_PLAYERS", gameList->getPlayersNames(), 0, PEMUConfig::Id::GUI_FILTER_PLAYERS});
-    ui->getConfig()->getGroup(PEMUConfig::Id::MENU_MAIN)->addOption(
-            {"FILTER_RATING", gameList->getRatingNames(), 0, PEMUConfig::Id::GUI_FILTER_RATING});
-    ui->getConfig()->getGroup(PEMUConfig::Id::MENU_MAIN)->addOption(
-            {"FILTER_ROTATION", gameList->getRotationNames(), 0, PEMUConfig::Id::GUI_FILTER_ROTATION})->setFlags(
+    ui->getConfig()->getGroup(PEMUConfig::GrpId::UI_FILTERING)->addOption(
+            {"FILTER_GENRE", gameList->getGenreNames(), 0, PEMUConfig::OptId::UI_FILTER_GENRE});
+    ui->getConfig()->getGroup(PEMUConfig::GrpId::UI_FILTERING)->addOption(
+            {"FILTER_DATE", gameList->getDates(), 0, PEMUConfig::OptId::UI_FILTER_DATE});
+    ui->getConfig()->getGroup(PEMUConfig::GrpId::UI_FILTERING)->addOption(
+            {"FILTER_EDITOR", gameList->getEditorNames(), 0, PEMUConfig::OptId::UI_FILTER_EDITOR});
+    ui->getConfig()->getGroup(PEMUConfig::GrpId::UI_FILTERING)->addOption(
+            {"FILTER_DEVELOPER", gameList->getDeveloperNames(), 0, PEMUConfig::OptId::UI_FILTER_DEVELOPER});
+    ui->getConfig()->getGroup(PEMUConfig::GrpId::UI_FILTERING)->addOption(
+            {"FILTER_PLAYERS", gameList->getPlayersNames(), 0, PEMUConfig::OptId::UI_FILTER_PLAYERS});
+    ui->getConfig()->getGroup(PEMUConfig::GrpId::UI_FILTERING)->addOption(
+            {"FILTER_RATING", gameList->getRatingNames(), 0, PEMUConfig::OptId::UI_FILTER_RATING});
+    ui->getConfig()->getGroup(PEMUConfig::GrpId::UI_FILTERING)->addOption(
+            {"FILTER_ROTATION", gameList->getRotationNames(), 0, PEMUConfig::OptId::UI_FILTER_ROTATION})->setFlags(
             PEMUConfig::Flags::HIDDEN);
-    ui->getConfig()->getGroup(PEMUConfig::Id::MENU_MAIN)->addOption(
-            {"FILTER_RESOLUTION", gameList->getResolutions(), 0, PEMUConfig::Id::GUI_FILTER_RESOLUTION})->setFlags(
+    ui->getConfig()->getGroup(PEMUConfig::GrpId::UI_FILTERING)->addOption(
+            {"FILTER_RESOLUTION", gameList->getResolutions(), 0, PEMUConfig::OptId::UI_FILTER_RESOLUTION})->setFlags(
             PEMUConfig::Flags::HIDDEN);
 
     // custom core hide/show flags
