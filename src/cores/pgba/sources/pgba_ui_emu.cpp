@@ -5,9 +5,10 @@
 #include "skeleton/pemu.h"
 #include "pgba_ui_emu.h"
 extern "C" {
-#include "mgba/core/blip_buf.h"
 #include "mgba-util/vfs.h"
 #include "mgba/core/log.h"
+#include "mgba/core/blip_buf.h"
+#include "mgba/core/serialize.h"
 #include "mgba/internal/gba/input.h"
 }
 
@@ -106,10 +107,10 @@ int PGBAUiEmu::load(const ss_api::Game &game) {
     addAudio(SAMPLE_RATE, Audio::toSamples(SAMPLE_RATE, 60));
 
     // set core options
-    struct mCoreOptions opts = {
+    mCoreOptions opts = {
             .useBios = true,
             .logLevel = mLOG_WARN | mLOG_ERROR | mLOG_FATAL,
-            .rewindEnable = true,
+            .rewindEnable = false,
             .rewindBufferCapacity = 600,
             .rewindBufferInterval = 1,
             .audioBuffers = 1024,
@@ -149,11 +150,23 @@ int PGBAUiEmu::load(const ss_api::Game &game) {
     // let's go
     s_core->reset(s_core);
 
+    int autoload = false;
+    mCoreConfigGetIntValue(&s_core->config, "autoload", &autoload);
+    if (autoload) {
+        mCoreLoadState(s_core, 0, SAVESTATE_RTC);
+    }
+
     return UiEmu::load(game);
 }
 
 void PGBAUiEmu::stop() {
     if (s_core) {
+        int autosave = false;
+        mCoreConfigGetIntValue(&s_core->config, "autosave", &autosave);
+        if (autosave) {
+            mCoreSaveState(s_core, 0, SAVESTATE_SAVEDATA | SAVESTATE_RTC | SAVESTATE_METADATA);
+        }
+
         mInputMapDeinit(&s_core->inputMap);
         mCoreConfigDeinit(&s_core->config);
         s_core->unloadROM(s_core);

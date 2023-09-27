@@ -7,11 +7,8 @@
 #define STATES_COUNT 4
 
 class UiState : public SkinnedRectangle {
-
 public:
-
-    UiState(UiMain *ui, float x, int id)
-            : SkinnedRectangle(ui, {"STATES_MENU", "STATES_ITEM"}) {
+    UiState(UiMain *ui, float x, int id) : SkinnedRectangle(ui, {"STATES_MENU", "STATES_ITEM"}) {
         this->ui = ui;
         this->id = id;
 
@@ -76,20 +73,20 @@ public:
     void setRom(const ss_api::Game &game) {
         memset(path, 0, MAX_PATH);
         memset(shot, 0, MAX_PATH);
-        snprintf(path, 1023, "%ssaves/%s%i.sav",
+        snprintf(path, 1023, "%ssaves/%s-%i.sav",
                  ui->getIo()->getDataPath().c_str(), Utility::removeExt(game.path).c_str(), id);
-        snprintf(shot, 1023, "%ssaves/%s%i.png",
+        snprintf(shot, 1023, "%ssaves/%s-%i.png",
                  ui->getIo()->getDataPath().c_str(), Utility::removeExt(game.path).c_str(), id);
 
         loadTexture();
     }
 
-    void load() {
+    void loadState() {
         printf("StateLoad: %s\n", path);
         ui->getUiStateMenu()->loadStateCore(path);
     }
 
-    void save() {
+    void saveState() {
         printf("StateSave: %s\n", path);
         if (ui->getUiStateMenu()->saveStateCore(path)) {
             ui->getUiEmu()->getVideo()->save(shot);
@@ -105,16 +102,14 @@ public:
     Color outlineColor;
     Color outlineColorSelected;
 
-    char path[1024];
-    char shot[1024];
+    char path[1024]{};
+    char shot[1024]{};
     bool exist = false;
     int id = 0;
 };
 
 class UiStateList : public RectangleShape {
-
 public:
-
     UiStateList(UiMain *ui, const FloatRect &rect) : RectangleShape(rect) {
         UiStateList::setFillColor(Color::Transparent);
 
@@ -129,7 +124,7 @@ public:
         setSelection(0);
     }
 
-    ~UiStateList() {
+    ~UiStateList() override {
         for (auto &state: states) {
             delete state;
         }
@@ -170,7 +165,7 @@ public:
         setSelection(index);
     }
 
-    UiState *states[STATES_COUNT];
+    UiState *states[STATES_COUNT]{};
     int index = 0;
 };
 
@@ -236,16 +231,16 @@ bool UiMenuState::onInput(c2d::Input::Player *players) {
                         state->bottom_text->getString(),
                         "PRESS FIRE2 TO CANCEL", "LOAD", "SAVE");
                 if (res == MessageBox::LEFT) {
-                    state->load();
+                    state->loadState();
                     setVisibility(Visibility::Hidden);
                     ui->getUiEmu()->resume();
                 } else if (res == MessageBox::RIGHT) {
-                    state->save();
+                    state->saveState();
                     setVisibility(Visibility::Hidden);
                     ui->getUiEmu()->resume();
                 }
             } else {
-                state->save();
+                state->saveState();
                 setVisibility(Visibility::Hidden);
                 ui->getUiEmu()->resume();
             }
@@ -256,7 +251,7 @@ bool UiMenuState::onInput(c2d::Input::Player *players) {
                 if (state->exist) {
                     ui->getConfig()->loadGame(game);
                     ui->getUiEmu()->load(game);
-                    state->load();
+                    state->loadState();
                     setVisibility(Visibility::Hidden);
                     return true;
                 }

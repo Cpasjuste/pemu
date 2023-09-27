@@ -18,7 +18,7 @@ bool PGBAUIStateMenu::loadStateCore(const char *path) {
         return false;
     }
 
-    bool success = mCoreLoadStateNamed(s_core, vf, SAVESTATE_SAVEDATA | SAVESTATE_RTC | SAVESTATE_METADATA);
+    bool success = mCoreLoadStateNamed(s_core, vf, SAVESTATE_RTC);
     vf->close(vf);
 
     printf("PGBAUIStateMenu::loadStateCore: success = %i\n", success);
