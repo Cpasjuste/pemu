@@ -124,7 +124,7 @@ UiMenu::UiMenu(UiMain *uiMain) : SkinnedRectangle(uiMain, {"OPTIONS_MENU"}) {
     // add selection rectangle (highlight)
     highlight = new RectangleShape({16, 16});
     ui->getSkin()->loadRectangleShape(highlight, {"SKIN_CONFIG", "HIGHLIGHT"});
-    highlight->setSize(UiMenu::getSize().x - 2, lineHeight);
+    highlight->setSize(UiMenu::getSize().x - 2, lineHeight - (highlight->getOutlineThickness() * 2));
     highlight->move(1, 0);
     UiMenu::add(highlight);
 
@@ -208,7 +208,8 @@ void UiMenu::updateLines() {
         lines[i]->set(menuOption.name, menuOption.option);
         // set highlight position and color
         if ((int) i == highlightIndex) {
-            highlight->setPosition({highlight->getPosition().x, lines[i]->getPosition().y});
+            highlight->setPosition({highlight->getPosition().x,
+                                    lines[i]->getPosition().y + highlight->getOutlineThickness()});
             lines[i]->p_value->setOutlineColor(getOutlineColor());
         } else {
             lines[i]->p_value->setOutlineColor(textGroup.outlineColor);
