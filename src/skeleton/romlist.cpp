@@ -58,14 +58,8 @@ RomList::RomList(UiMain *_ui, const std::string &emuVersion, const std::vector<s
 
 void RomList::build(const ss_api::System &system) {
     for (const auto &gamelist: ui->getConfig()->getCoreGameListInfo()) {
-        // look for a "gamelist.xml" file inside rom folder, if none found use embedded (romfs) "gamelist.xml"
+        // try to load a "gamelist.xml" from roms folder
         std::string gameListPath = ui->getConfig()->getRomPath(gamelist.cfg_name) + "gamelist.xml";
-        if (!ui->getIo()->exist(gameListPath)) {
-            printf("RomList::build: %s not found\n", gameListPath.c_str());
-            // try embedded (romfs)
-            gameListPath = ui->getIo()->getRomFsPath() + gamelist.xml_path;
-            if (!ui->getIo()->exist(gameListPath)) continue;
-        }
         gameList->append(gameListPath, ui->getConfig()->getRomPath(gamelist.cfg_name),
                          false, filters, gamelist.system);
         setLoadingText("Games: %li / %li", gameList->getAvailableCount(), gameList->games.size());
@@ -85,27 +79,15 @@ void RomList::build(const ss_api::System &system) {
     std::sort(gameList->dates.begin(), gameList->dates.end(), Api::sortByName);
 
     // add filtering options
-    ui->getConfig()->getGroup(PEMUConfig::GrpId::UI_FILTERING)->addOption(
-            {"FILTER_SYSTEM", gameList->systemList.getNames(), 0, PEMUConfig::OptId::UI_FILTER_SYSTEM})->setFlags(
-            PEMUConfig::Flags::HIDDEN);
-    ui->getConfig()->getGroup(PEMUConfig::GrpId::UI_FILTERING)->addOption(
-            {"FILTER_GENRE", gameList->getGenreNames(), 0, PEMUConfig::OptId::UI_FILTER_GENRE});
-    ui->getConfig()->getGroup(PEMUConfig::GrpId::UI_FILTERING)->addOption(
-            {"FILTER_DATE", gameList->getDates(), 0, PEMUConfig::OptId::UI_FILTER_DATE});
-    ui->getConfig()->getGroup(PEMUConfig::GrpId::UI_FILTERING)->addOption(
-            {"FILTER_EDITOR", gameList->getEditorNames(), 0, PEMUConfig::OptId::UI_FILTER_EDITOR});
-    ui->getConfig()->getGroup(PEMUConfig::GrpId::UI_FILTERING)->addOption(
-            {"FILTER_DEVELOPER", gameList->getDeveloperNames(), 0, PEMUConfig::OptId::UI_FILTER_DEVELOPER});
-    ui->getConfig()->getGroup(PEMUConfig::GrpId::UI_FILTERING)->addOption(
-            {"FILTER_PLAYERS", gameList->getPlayersNames(), 0, PEMUConfig::OptId::UI_FILTER_PLAYERS});
-    ui->getConfig()->getGroup(PEMUConfig::GrpId::UI_FILTERING)->addOption(
-            {"FILTER_RATING", gameList->getRatingNames(), 0, PEMUConfig::OptId::UI_FILTER_RATING});
-    ui->getConfig()->getGroup(PEMUConfig::GrpId::UI_FILTERING)->addOption(
-            {"FILTER_ROTATION", gameList->getRotationNames(), 0, PEMUConfig::OptId::UI_FILTER_ROTATION})->setFlags(
-            PEMUConfig::Flags::HIDDEN);
-    ui->getConfig()->getGroup(PEMUConfig::GrpId::UI_FILTERING)->addOption(
-            {"FILTER_RESOLUTION", gameList->getResolutions(), 0, PEMUConfig::OptId::UI_FILTER_RESOLUTION})->setFlags(
-            PEMUConfig::Flags::HIDDEN);
+    auto grp = ui->getConfig()->getGroup(PEMUConfig::GrpId::UI_FILTERING);
+    grp->addOption({"FILTER_SYSTEM", gameList->systemList.getNames(), 0,
+                    PEMUConfig::OptId::UI_FILTER_SYSTEM})->setFlags(PEMUConfig::Flags::HIDDEN);
+    grp->addOption({"FILTER_GENRE", gameList->getGenreNames(), 0, PEMUConfig::OptId::UI_FILTER_GENRE});
+    grp->addOption({"FILTER_DATE", gameList->getDates(), 0, PEMUConfig::OptId::UI_FILTER_DATE});
+    grp->addOption({"FILTER_EDITOR", gameList->getEditorNames(), 0, PEMUConfig::OptId::UI_FILTER_EDITOR});
+    grp->addOption({"FILTER_DEVELOPER", gameList->getDeveloperNames(), 0, PEMUConfig::OptId::UI_FILTER_DEVELOPER});
+    grp->addOption({"FILTER_PLAYERS", gameList->getPlayersNames(), 0, PEMUConfig::OptId::UI_FILTER_PLAYERS});
+    grp->addOption({"FILTER_RATING", gameList->getRatingNames(), 0, PEMUConfig::OptId::UI_FILTER_RATING});
 
     // custom core hide/show flags
     auto ids = ui->getConfig()->getCoreHiddenOptionToEnable();
@@ -116,23 +98,27 @@ void RomList::build(const ss_api::System &system) {
     // we need to reload config to update new options we just added
     ui->getConfig()->load();
 
-    // load favorites
-    gameListFav->append(ui->getIo()->getDataPath() + "favorites.xml");
-    for (size_t i = 0; i < gameListFav->games.size(); i++) {
-        Game game = gameList->findGameByPathAndSystem(gameListFav->games[i].path, gameListFav->games[i].system.id);
-        if (!game.path.empty()) {
-            gameListFav->games[i].available = true;
-            gameListFav->games[i].romsPath = game.romsPath;
-        }
-    }
-    printf("RomList::build: %zu favorites\n", gameListFav->games.size());
-
     float time_spent = ui->getElapsedTime().asSeconds() - time_start;
     printf("RomList::build(): list built in %f\n", time_spent);
 
     // UI
     // remove ui widgets
     delete (rect);
+}
+
+void RomList::initFav() {
+    // load favorites
+    delete (gameListFav);
+    gameListFav = new GameList();
+    gameListFav->append(ui->getIo()->getDataPath() + "favorites.xml");
+    for (auto &g: gameListFav->games) {
+        auto game = gameList->findGameByPathAndSystem(g.path, g.system.id);
+        if (!game.path.empty()) {
+            g.available = true;
+            g.romsPath = game.romsPath;
+        }
+    }
+    printf("RomList::initFav: %zu favorites\n", gameListFav->games.size());
 }
 
 void RomList::addFav(const Game &game) {

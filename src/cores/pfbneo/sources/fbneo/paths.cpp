@@ -35,7 +35,7 @@ void BurnPathsInit(c2d::C2DIo *io) {
     snprintf(szAppHomePath, MAX_PATH - 1, "%s", io->getDataPath().c_str());
     io->create(szAppHomePath);
 
-    snprintf(szAppRomPath, MAX_PATH - 1, "%s%s/", szAppHomePath, "roms");
+    snprintf(szAppRomPath, MAX_PATH - 1, "%s%s/", szAppHomePath, "arcade");
     io->create(szAppRomPath);
 
     snprintf(szAppSavePath, MAX_PATH - 1, "%s%s/", szAppHomePath, "saves");

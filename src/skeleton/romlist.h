@@ -8,18 +8,17 @@
 #include <vector>
 
 namespace pemu {
-
     class UiMain;
 
     class RomList {
-
     public:
-
         RomList(UiMain *ui, const std::string &emuVersion, const std::vector<std::string> &filters);
 
         virtual ~RomList();
 
         virtual void build(const ss_api::System &system = {});
+
+        virtual void initFav();
 
         void addFav(const ss_api::Game &game);
 
@@ -32,8 +31,6 @@ namespace pemu {
         c2d::Text *text;
         ss_api::GameList *gameList = nullptr;
         ss_api::GameList *gameListFav = nullptr;
-        //std::vector<std::string> paths;
-        //char icon_path[1024];
         float time_start = 0;
 
     protected:

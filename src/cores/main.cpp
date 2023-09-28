@@ -37,6 +37,7 @@ int main(int argc, char **argv) {
     // ui
     auto romList = new PEMURomList(pemu_ui, cfg->getCoreVersion(), cfg->getCoreSupportedExt());
     romList->build();
+    romList->initFav();
     auto uiRomList = new PEMUUiRomList(pemu_ui, romList, pemu_ui->getSize());
     auto uiMenu = new PEMUUiMenu(pemu_ui);
     auto uiEmu = new PEMUUiEmu(pemu_ui);

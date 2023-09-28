@@ -21,9 +21,10 @@ extern "C" int sceSystemServiceLoadExec(const char *path, const char *args[]);
 #include "pfbneo_config.h"
 #include "pfbneo_ui_menu_state.h"
 #include "pfbneo_io.h"
+#include "pfbneo_romlist.h"
 #define PEMUIo PFBAIo
 #define PEMUConfig PFBAConfig
-#define PEMURomList RomList
+#define PEMURomList PFBNRomList
 #define PEMUSkin pemu::Skin
 #define PEMUUiMain pemu::UiMain
 #define PEMUUiEmu PFBAUiEmu

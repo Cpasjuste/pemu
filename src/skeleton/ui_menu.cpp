@@ -307,8 +307,6 @@ bool UiMenu::onInput(c2d::Input::Player *players) {
             case PEMUConfig::OptId::UI_FILTER_DEVELOPER:
             case PEMUConfig::OptId::UI_FILTER_PLAYERS:
             case PEMUConfig::OptId::UI_FILTER_RATING:
-            case PEMUConfig::OptId::UI_FILTER_ROTATION:
-            case PEMUConfig::OptId::UI_FILTER_RESOLUTION:
             case PEMUConfig::OptId::UI_FILTER_DATE:
             case PEMUConfig::OptId::UI_FILTER_GENRE: {
                 std::string name = Utility::toUpper(option->getName());

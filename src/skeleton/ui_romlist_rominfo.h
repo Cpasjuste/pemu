@@ -46,8 +46,6 @@ public:
     c2d::Text *genreText = nullptr;
     c2d::Text *playersText = nullptr;
     c2d::Text *ratingText = nullptr;
-    c2d::Text *rotationText = nullptr;
-    c2d::Text *resolutionText = nullptr;
     c2d::Text *cloneofText = nullptr;
     c2d::Text *filenameText = nullptr;
 #ifdef __MPV__

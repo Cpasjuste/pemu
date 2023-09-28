@@ -16,7 +16,9 @@ PFBAConfig::PFBAConfig(c2d::Io *io, int version) : PEMUConfig(io, "PFBNEO", vers
 
     /// add custom roms paths to config
     for (const auto &gl: PFBAConfig::getCoreGameListInfo()) {
-        getGroup(CFG_ID_ROMS)->addOption({gl.cfg_name, io->getDataPath() + gl.rom_path + "/"});
+        std::string path = io->getDataPath() + gl.rom_path + "/";
+        getGroup(CFG_ID_ROMS)->addOption({gl.cfg_name, path});
+        io->create(path);
     }
 
     /// MAIN OPTIONS

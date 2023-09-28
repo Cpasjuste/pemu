@@ -38,8 +38,6 @@ namespace pemu {
             UI_FILTER_DEVELOPER,
             UI_FILTER_PLAYERS,
             UI_FILTER_RATING,
-            UI_FILTER_ROTATION,
-            UI_FILTER_RESOLUTION,
             UI_FILTER_DATE,
             UI_FILTER_GENRE,
             EMU_SCALING,

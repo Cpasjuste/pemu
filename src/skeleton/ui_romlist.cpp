@@ -85,9 +85,6 @@ UIRomList::UIRomList(UiMain *main, RomList *romList, const c2d::Vector2f &size)
 
     int delay = pMain->getConfig()->get(PEMUConfig::OptId::UI_VIDEO_SNAP_DELAY)->getInteger();
     UIRomList::setVideoSnapDelay(delay);
-
-    // filter roms (done in UiMain::init)
-    //UIRomList::updateRomList();
 }
 
 std::string UIRomList::getPreview(const Game &game, UIRomList::PreviewType type) {
@@ -124,6 +121,12 @@ std::string UIRomList::getPreview(const Game &game, UIRomList::PreviewType type)
     if (game.isClone()) {
         Game parent = pRomList->gameList->findGameByPath(game.cloneOf);
         path = parent.romsPath + parent.getMedia(mediaType).url;
+        printf("getPreview(%s)\n", path.c_str());
+        if (pMain->getIo()->getFile(path).isFile()) {
+            return path;
+        }
+        // try from filename
+        path = parent.romsPath + "media/" + mediaType + "/" + Utility::removeExt(parent.path) + mediaExt;
         printf("getPreview(%s)\n", path.c_str());
         if (pMain->getIo()->getFile(path).isFile()) {
             return path;
@@ -167,7 +170,6 @@ void UIRomList::filterRomList() {
     int devId = dev == "ALL" ? -1 : list->findDeveloperByName(dev).id;
     int players = Utility::parseInt(cfg->get(PEMUConfig::OptId::UI_FILTER_PLAYERS)->getString(), -1);
     int rating = Utility::parseInt(cfg->get(PEMUConfig::OptId::UI_FILTER_RATING)->getString(), -1);
-    int rotation = Utility::parseInt(cfg->get(PEMUConfig::OptId::UI_FILTER_ROTATION)->getString(), -1);
     std::string genre = cfg->get(PEMUConfig::OptId::UI_FILTER_GENRE)->getString();
     int genreId = genre == "ALL" ? -1 : list->findGenreByName(genre).id;
 
@@ -177,8 +179,7 @@ void UIRomList::filterRomList() {
             cfg->get(PEMUConfig::OptId::UI_FILTER_AVAILABLE)->getInteger(),
             !cfg->get(PEMUConfig::OptId::UI_FILTER_CLONES)->getInteger(),
             systemId == 9999 ? -1 : systemId, systemId == 9999 ? 75 : -1,
-            editorId, devId, players, rating, rotation, genreId,
-            cfg->get(PEMUConfig::OptId::UI_FILTER_RESOLUTION)->getString(),
+            editorId, devId, players, rating, -1, genreId, "ALL",
             cfg->get(PEMUConfig::OptId::UI_FILTER_DATE)->getString()
     );
 
@@ -189,8 +190,6 @@ void UIRomList::filterRomList() {
     cfg->get(PEMUConfig::OptId::UI_FILTER_DEVELOPER)->setArray(mGameList.getDeveloperNames());
     cfg->get(PEMUConfig::OptId::UI_FILTER_PLAYERS)->setArray(mGameList.getPlayersNames());
     cfg->get(PEMUConfig::OptId::UI_FILTER_RATING)->setArray(mGameList.getRatingNames());
-    cfg->get(PEMUConfig::OptId::UI_FILTER_ROTATION)->setArray(mGameList.getRotationNames());
-    cfg->get(PEMUConfig::OptId::UI_FILTER_RESOLUTION)->setArray(mGameList.getResolutions());
 }
 
 void UIRomList::sortRomList() {

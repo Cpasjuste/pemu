@@ -7,7 +7,6 @@
 UIRomInfo::UIRomInfo(UiMain *u, UIRomList *uiRList, Font *fnt, int fntSize)
         : Rectangle(u->getSize()) {
     printf("UIRomInfo\n");
-
     main = u;
     uiRomList = uiRList;
     font = fnt;
@@ -34,8 +33,6 @@ UIRomInfo::UIRomInfo(UiMain *u, UIRomList *uiRList, Font *fnt, int fntSize)
         genreText = addInfoBoxText({"MAIN", "ROM_INFOS", "GENRE_TEXT"});
         playersText = addInfoBoxText({"MAIN", "ROM_INFOS", "PLAYERS_TEXT"});
         ratingText = addInfoBoxText({"MAIN", "ROM_INFOS", "RATING_TEXT"});
-        rotationText = addInfoBoxText({"MAIN", "ROM_INFOS", "ROTATION_TEXT"});
-        resolutionText = addInfoBoxText({"MAIN", "ROM_INFOS", "RESOLUTION_TEXT"});
         cloneofText = addInfoBoxText({"MAIN", "ROM_INFOS", "CLONEOF_TEXT"});
         filenameText = addInfoBoxText({"MAIN", "ROM_INFOS", "FILENAME_TEXT"});
         Rectangle::add(infoBox);
@@ -135,7 +132,6 @@ bool UIRomInfo::loadTexture(const Game &game) {
 }
 
 void UIRomInfo::load(const Game &game) {
-
     if (game.id <= 0) {
         // try to load title/preview texture even if game is not in DB
         loadTexture(game);
@@ -146,8 +142,6 @@ void UIRomInfo::load(const Game &game) {
         hideText(genreText);
         hideText(playersText);
         hideText(ratingText);
-        hideText(rotationText);
-        hideText(resolutionText);
         hideText(cloneofText);
         hideText(filenameText);
         hideText(synoText);
@@ -166,9 +160,6 @@ void UIRomInfo::load(const Game &game) {
         showText(genreText, "Genre: " + game.genre.name);
         showText(playersText, "Players: " + game.players);
         showText(ratingText, "Rating: " + std::to_string(game.rating));
-        showText(rotationText, "Rotation: " + std::to_string(game.rotation));
-        showText(resolutionText,
-                 "Resolution: " + (game.resolution.empty() ? "UNKNOWN" : game.resolution));
         showText(cloneofText, "Clone Of: " + (game.cloneOf.empty() ? "NONE" : game.cloneOf));
         showText(filenameText, "File: " + game.path);
         showText(synoText, game.synopsis);
