@@ -12,7 +12,7 @@ PNESConfig::PNESConfig(c2d::Io *io, int version) : PEMUConfig(io, "PNES", versio
     printf("PNESConfig(%s, v%i)\n", getPath().c_str(), version);
 
     // add custom roms paths to config
-    for (const auto &gl: getCoreGameListInfo()) {
+    for (const auto &gl: PNESConfig::getCoreGameListInfo()) {
         getGroup(CFG_ID_ROMS)->addOption({gl.cfg_name, io->getDataPath() + gl.rom_path + "/"});
     }
 
@@ -21,8 +21,8 @@ PNESConfig::PNESConfig(c2d::Io *io, int version) : PEMUConfig(io, "PNES", versio
 
 #ifdef __SWITCH__
     // on nintendo switch invert A/B buttons
-    getOption(PEMUConfig::Id::JOY_A)->setInteger(KEY_JOY_B_DEFAULT);
-    getOption(PEMUConfig::Id::JOY_B)->setInteger(KEY_JOY_A_DEFAULT);
+    getOption(PEMUConfig::OptId::JOY_A)->setInteger(KEY_JOY_B_DEFAULT);
+    getOption(PEMUConfig::OptId::JOY_B)->setInteger(KEY_JOY_A_DEFAULT);
 #endif
 
     // "c2dui_romlist" will also reload config, but we need new roms paths

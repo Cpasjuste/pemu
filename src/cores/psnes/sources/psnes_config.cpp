@@ -12,11 +12,11 @@ PSNESConfig::PSNESConfig(c2d::Io *io, int version) : PEMUConfig(io, "PSNES", ver
     printf("PSNESConfig(%s, v%i)\n", getPath().c_str(), version);
 
     // add custom roms paths to config
-    for (const auto &gl: getCoreGameListInfo()) {
+    for (const auto &gl: PSNESConfig::getCoreGameListInfo()) {
         getGroup(CFG_ID_ROMS)->addOption({gl.cfg_name, io->getDataPath() + gl.rom_path + "/"});
     }
 
-    auto group = getGroup(PEMUConfig::OptId::MENU_ROM_OPTIONS);
+    auto group = getGroup(PEMUConfig::GrpId::EMULATION);
     if (!group) {
         printf("PSNESConfig: error, group not found (MENU_ROM_OPTIONS)\n");
         return;
@@ -32,7 +32,7 @@ PSNESConfig::PSNESConfig(c2d::Io *io, int version) : PEMUConfig(io, "PSNES", ver
                       {"OFF", "AUTO", "1", "2", "3", "4", "5", "6", "7", "8", "9"},
                       0, PEMUConfig::OptId::EMU_PSNES_FRAMESKIP});
 #ifdef __VITA__
-    get(PEMUConfig::Id::ROM_PSNES_FRAMESKIP)->setArrayIndex(3);
+    get(PEMUConfig::OptId::EMU_PSNES_FRAMESKIP)->setArrayIndex(3);
 #endif
     group->addOption({"TURBO_MODE", {"OFF", "ON"}, 0, PEMUConfig::OptId::EMU_PSNES_TURBO_MODE});
     group->addOption({"TURBO_FRAMESKIP",

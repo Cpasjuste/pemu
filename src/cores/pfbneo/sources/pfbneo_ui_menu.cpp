@@ -18,7 +18,7 @@ bool PFBAGuiMenu::isOptionHidden(c2d::config::Option *option) {
     }
 
 #ifdef __SWITCH__
-    if (option->getId() == PEMUConfig::Id::ROM_FRAMESKIP) {
+    if (option->getId() == PEMUConfig::OptId::EMU_FRAMESKIP) {
         return true;
     }
 #endif

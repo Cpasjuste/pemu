@@ -87,7 +87,7 @@ void UiEmu::resume() {
     pMain->getInput()->setRepeatDelay(0);
 
 #ifdef __VITA__
-    config::Option *option = pMain->getConfig()->get(PEMUConfig::Id::ROM_WAIT_RENDERING, true);
+    config::Option *option = pMain->getConfig()->get(PEMUConfig::OptId::EMU_WAIT_RENDERING, true);
     if (option) {
         ((PSP2Renderer *) pMain)->setWaitRendering(option->getInteger());
     }
