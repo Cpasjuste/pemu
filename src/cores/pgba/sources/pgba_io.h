@@ -11,10 +11,11 @@ namespace c2d {
         PGBAIo() : C2DIo() {
             C2DIo::create(PGBAIo::getDataPath());
             C2DIo::create(PGBAIo::getDataPath() + "bios");
-            C2DIo::create(PGBAIo::getDataPath() + "rams");
             C2DIo::create(PGBAIo::getDataPath() + "configs");
             C2DIo::create(PGBAIo::getDataPath() + "saves");
             C2DIo::create(PGBAIo::getDataPath() + "roms");
+            C2DIo::create(PGBAIo::getDataPath() + "patches");
+            C2DIo::create(PGBAIo::getDataPath() + "cheats");
         }
 
 #ifdef __PSP2__

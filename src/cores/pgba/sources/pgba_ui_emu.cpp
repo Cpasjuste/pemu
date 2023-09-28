@@ -41,33 +41,13 @@ int PGBAUiEmu::load(const ss_api::Game &game) {
 
     // mgba int
     auto path = game.romsPath + game.path;
-    if (Utility::endsWith(game.path, ".gba")) {
-        s_vFile = VFileOpen(path.c_str(), O_RDONLY);
-    } else if (Utility::endsWith(game.path, ".zip")) {
-        s_vDir = VDirOpenArchive(path.c_str());
-        if (!s_vDir) {
-            getUi()->getUiProgressBox()->setVisibility(Visibility::Hidden);
-            getUi()->getUiMessageBox()->show("ERROR", "INVALID ROM FILE...", "OK");
-            return -1;
-        }
-        s_vFile = s_vDir->openFile(s_vDir, std::string(Utility::removeExt(game.path) + ".gba").c_str(), O_RDONLY);
-    }
-
-    if (!s_vFile) {
-        getUi()->getUiProgressBox()->setVisibility(Visibility::Hidden);
-        getUi()->getUiMessageBox()->show("ERROR", "INVALID ROM FILE...", "OK");
-        s_vDir->close(s_vDir);
-        return -1;
-    }
-
-    s_core = mCoreFindVF(s_vFile);
+    s_core = mCoreFind(path.c_str());
     if (!s_core) {
-        s_vFile->close(s_vFile);
-        s_vDir->close(s_vDir);
         getUi()->getUiProgressBox()->setVisibility(Visibility::Hidden);
-        getUi()->getUiMessageBox()->show("ERROR", "INVALID FILE OR MISSING BIOS...", "OK");
+        getUi()->getUiMessageBox()->show("ERROR", "INVALID ROM FILE", "OK");
         return -1;
     }
+
     mCoreInitConfig(s_core, nullptr);
     s_core->init(s_core);
 
@@ -106,26 +86,44 @@ int PGBAUiEmu::load(const ss_api::Game &game) {
     blip_set_rates(s_core->getAudioChannel(s_core, 1), s_core->frequency(s_core), SAMPLE_RATE);
     addAudio(SAMPLE_RATE, Audio::toSamples(SAMPLE_RATE, 60));
 
-    // set core options
-    mCoreOptions opts = {
+    // core options
+    //auto dataPath = getUi()->getIo()->getDataPath();
+    //char savePath[512];
+    //strncpy(savePath, "/home/cpasjuste/dev/multi/pemu/cmake-build-debug/src/cores/pgba/saves", 511);
+    mCoreOptions core_options = {
             .useBios = true,
             .logLevel = mLOG_WARN | mLOG_ERROR | mLOG_FATAL,
             .rewindEnable = false,
             .rewindBufferCapacity = 600,
             .rewindBufferInterval = 1,
             .audioBuffers = 1024,
+            //.savestatePath = savePath,
+            //.screenshotPath = (char *) std::string(dataPath + "screenshots").c_str(),
+            //.patchPath = (char *) std::string(dataPath + "patches").c_str(),
+            //.cheatsPath = (char *) std::string(dataPath + "cheats").c_str(),
             .volume = 0x100,
             .videoSync = false,
             .audioSync = true
     };
-    mCoreConfigLoadDefaults(&s_core->config, &opts);
+    mCoreConfigLoadDefaults(&s_core->config, &core_options);
     mCoreLoadConfig(s_core);
 
+    // set custom paths
+    auto dataPath = getUi()->getIo()->getDataPath();
+    std::string savePath = dataPath + "saves";
+    std::string patchPath = dataPath + "patches";
+    std::string cheatPath = dataPath + "cheats";
+    mCoreOptions opts = {
+            .savegamePath =  (char *) savePath.c_str(),
+            .patchPath = (char *) patchPath.c_str(),
+            .cheatsPath = (char *) cheatPath.c_str()
+    };
+    mDirectorySetMapOptions(&s_core->dirs, &opts);
+
     // load rom
-    if (!s_core->loadROM(s_core, s_vFile)) {
-        stop();
+    if (!mCoreLoadFile(s_core, path.c_str())) {
         getUi()->getUiProgressBox()->setVisibility(Visibility::Hidden);
-        getUi()->getUiMessageBox()->show("ERROR", "INVALID FILE OR MISSING BIOS...", "OK");
+        getUi()->getUiMessageBox()->show("ERROR", "INVALID ROM FILE", "OK");
         return -1;
     }
 
@@ -150,23 +148,31 @@ int PGBAUiEmu::load(const ss_api::Game &game) {
     // let's go
     s_core->reset(s_core);
 
+    // load save if any
+    mCoreAutoloadSave(s_core);
+    mCoreAutoloadCheats(s_core);
+    mCoreAutoloadPatch(s_core);
+
+#if 0
     int autoload = false;
     mCoreConfigGetIntValue(&s_core->config, "autoload", &autoload);
     if (autoload) {
         mCoreLoadState(s_core, 0, SAVESTATE_RTC);
     }
+#endif
 
     return UiEmu::load(game);
 }
 
 void PGBAUiEmu::stop() {
     if (s_core) {
+#if 0
         int autosave = false;
         mCoreConfigGetIntValue(&s_core->config, "autosave", &autosave);
         if (autosave) {
             mCoreSaveState(s_core, 0, SAVESTATE_SAVEDATA | SAVESTATE_RTC | SAVESTATE_METADATA);
         }
-
+#endif
         mInputMapDeinit(&s_core->inputMap);
         mCoreConfigDeinit(&s_core->config);
         s_core->unloadROM(s_core);
