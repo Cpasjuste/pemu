@@ -16,7 +16,7 @@ namespace pemu {
 
         virtual ~RomList();
 
-        virtual void build(const ss_api::System &system = {});
+        virtual void build();
 
         virtual void initFav();
 

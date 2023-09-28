@@ -109,7 +109,6 @@ namespace pemu {
             ss_api::System system{};
             std::string cfg_name{};
             std::string rom_path{};
-            std::string xml_path{};
         };
 
         PEMUConfig(c2d::Io *io, const std::string &name, int version = 1);

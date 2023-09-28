@@ -6,6 +6,7 @@
 #define PFBN_CONFIG_H
 
 #include "skeleton/pemu_config.h"
+#include "pfbneo_utility.h"
 #include "burner.h"
 
 class PFBAConfig : public pemu::PEMUConfig {
@@ -14,21 +15,21 @@ public:
 
     std::vector<GameListInfo> getCoreGameListInfo() override {
         return {
-                {{75,                  0,  "Arcade"},                      "ARCADE",       "arcade",    "gamelist.xml"},
-                {{SYSTEM_ID_CHANNELF,  0,  "Channel F"},                   "CHANNELF",     "channelf",  "gamelist_channelf.xml"},
-                {{SYSTEM_ID_COLECO,    0,  "Colecovision"},                "COLECO",       "coleco",    "gamelist_coleco.xml"},
-                {{SYSTEM_ID_NES_FDS,   3,  "Family Computer Disk System"}, "FDS",          "fds",       "gamelist_fds.xml"},
-                {{SYSTEM_ID_GAMEGEAR,  0,  "Game Gear"},                   "GAMEGEAR",     "gamegear",  "gamelist_gamegear.xml"},
-                {{SYSTEM_ID_MEGADRIVE, 0,  "Megadrive"},                   "MEGADRIVE",    "megadrive", "gamelist_megadrive.xml"},
-                {{SYSTEM_ID_MSX,       0,  "MSX"},                         "MSX",          "msx",       "gamelist_msx.xml"},
-                {{SYSTEM_ID_NES,       0,  "NES"},                         "NES",          "nes",       "gamelist_nes.xml"},
-                {{SYSTEM_ID_NGP,       0,  "Neo-Geo Pocket"},              "NGP",          "ngp",       "gamelist_ngp.xml"},
-                {{SYSTEM_ID_PCE,       0,  "PC Engine"},                   "PCE",          "pce",       "gamelist_pce.xml"},
-                {{SYSTEM_ID_SG1000,    2,  "SG-1000"},                     "SG1000",       "sg1000",    "gamelist_sg1000.xml"},
-                {{SYSTEM_ID_SGX,       31, "PC Engine SuperGrafx"},        "SGX",          "sgx",       "gamelist_sgx.xml"},
-                {{SYSTEM_ID_SMS,       0,  "Master System"},               "MASTERSYSTEM", "sms",       "gamelist_sms.xml"},
-                {{SYSTEM_ID_ZX3,       0,  "ZX Spectrum"},                 "SPECTRUM",     "spectrum",  "gamelist_spectrum.xml"},
-                {{SYSTEM_ID_TG16,      31, "PC Engine TurboGrafx"},        "TG16",         "tg16",      "gamelist_tg16.xml"}
+                {{HARDWARE_PREFIX_ARCADE,             0, "Arcade"},             "ARCADE",       "arcade"},
+                {{HARDWARE_PREFIX_CHANNELF,           0, "Channel F"},          "CHANNELF",     "channelf"},
+                {{HARDWARE_PREFIX_COLECO,             0, "ColecoVision"},       "COLECO",       "coleco"},
+                {{HARDWARE_PREFIX_FDS,                0, "NES FDS"},            "FDS",          "fds"},
+                {{HARDWARE_PREFIX_SEGA_GAME_GEAR,     0, "Sega Game Gear"},     "GAMEGEAR",     "gamegear"},
+                {{HARDWARE_PREFIX_SEGA_MEGADRIVE,     0, "Sega Megadrive"},     "MEGADRIVE",    "megadrive"},
+                {{HARDWARE_PREFIX_MSX,                0, "MSX"},                "MSX",          "msx"},
+                {{HARDWARE_PREFIX_NES,                0, "NES"},                "NES",          "nes"},
+                {{HARDWARE_PREFIX_NGP,                0, "NeoGeo Pocket"},      "NGP",          "ngp"},
+                {{HARDWARE_PCENGINE_PCENGINE,         0, "PC Engine"},          "PCE",          "pce"},
+                {{HARDWARE_PREFIX_SEGA_SG1000,        0, "Sega SG-1000"},       "SG1000",       "sg1000"},
+                {{HARDWARE_PCENGINE_SGX,              0, "PC Engine SGX"},      "SGX",          "sgx"},
+                {{HARDWARE_PREFIX_SEGA_MASTER_SYSTEM, 0, "Sega Master System"}, "MASTERSYSTEM", "sms"},
+                {{HARDWARE_PREFIX_SPECTRUM,           0, "ZX Spectrum"},        "SPECTRUM",     "spectrum"},
+                {{HARDWARE_PCENGINE_TG16,             0, "PC Engine TG16"},     "TG16",         "tg16"}
         };
     }
 
