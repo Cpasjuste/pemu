@@ -376,9 +376,8 @@ bool UiMenu::onInput(c2d::Input::Player *players) {
                 break;
         }
 
-        // TODO: should i just refresh changed options/lines?
-        //lines.at(highlightIndex)->refresh();
-        updateLines();
+        // update option line
+        lines.at(highlightIndex)->refresh();
     }
 
     // FIRE1 (ENTER)

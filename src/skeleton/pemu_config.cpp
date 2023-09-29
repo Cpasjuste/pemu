@@ -21,7 +21,7 @@ PEMUConfig::PEMUConfig(c2d::Io *io, const std::string &name, int version)
     /// UI_FILTERING
     Group ui_filtering("UI_FILTERING", GrpId::UI_FILTERING);
     ui_filtering.addOption({"FILTER_FAVORITES", {"OFF", "ON"}, 0, OptId::UI_FILTER_FAVORITES});
-    ui_filtering.addOption({"FILTER_AVAILABLE", {"OFF", "ON"}, 1, OptId::UI_FILTER_AVAILABLE});
+    ui_filtering.addOption({"FILTER_MISSING", {"OFF", "ON"}, 1, OptId::UI_FILTER_AVAILABLE});
     ui_filtering.addOption({"FILTER_CLONES", {"OFF", "ON"}, 1, OptId::UI_FILTER_CLONES})->setFlags(Flags::HIDDEN);
     addGroup(ui_filtering);
 
