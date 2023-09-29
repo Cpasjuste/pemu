@@ -52,9 +52,10 @@ RomList::RomList(UiMain *_ui, const std::string &emuVersion, const std::vector<s
 }
 
 void RomList::build(const ss_api::GameList::GameAddedCb &cb) {
-    p_cb = cb;
     float time_start = ui->getElapsedTime().asSeconds();
     auto cfg = ui->getConfig();
+    p_cb = cb;
+    m_count = 0;
 
     for (const auto &gamelist: cfg->getCoreGameListInfo()) {
         // try to load a "gamelist.xml" from roms folder
@@ -62,8 +63,9 @@ void RomList::build(const ss_api::GameList::GameAddedCb &cb) {
         gameList->append(gameListPath, cfg->getRomPath(gamelist.cfg_name),
                          false, filters, gamelist.system, false, [this](Game *game) {
                     if (p_cb) p_cb(game);
-                    if (!(gameList->getAvailableCount() % 100)) {
-                        setLoadingText("Games: %li / %li", gameList->getAvailableCount(), gameList->games.size());
+                    m_count++;
+                    if (!(m_count % 200)) {
+                        setLoadingText("Games: %li / %li", m_count, gameList->games.size());
                     }
                 });
         setLoadingText("Games: %li / %li", gameList->getAvailableCount(), gameList->games.size());

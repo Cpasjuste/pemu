@@ -35,6 +35,7 @@ namespace pemu {
 
     protected:
         std::vector<std::string> filters;
+        size_t m_count = 0;
     };
 }
 
