@@ -228,7 +228,6 @@ void UiMenu::onKeyUp() {
     }
 
     if (highlightIndex < 0) {
-        highlightIndex = maxLines - 1;
         highlightIndex = (int) menu_options.size() < maxLines - 1 ? (int) menu_options.size() - 1 : maxLines - 1;
         optionIndex = ((int) menu_options.size() - 1) - highlightIndex;
     }
@@ -313,10 +312,6 @@ bool UiMenu::onInput(c2d::Input::Player *players) {
                 std::string value = Utility::toUpper(option->getString());
                 if (option->getComment().empty()) {
                     ui->getUiStatusBox()->show("%s: %s", name.c_str(), value.c_str());
-                }
-                // if we want to show only available games, be sure we revert back to "ALL" system filter
-                if (option->getId() == PEMUConfig::OptId::UI_FILTER_AVAILABLE) {
-                    ui->getConfig()->get(PEMUConfig::OptId::UI_FILTER_SYSTEM)->setArrayIndex("ALL");
                 }
                 ui->getUiRomList()->updateRomList();
                 break;
