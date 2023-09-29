@@ -76,8 +76,10 @@ cpu_core_config SekConfig =
                 SekRun,
                 SekRunEnd,
                 SekReset,
+                SekScan,
+                SekExit,
                 0x1000000,
-                0
+                1
         };
 
 // ----------------------------------------------------------------------------
@@ -686,6 +688,25 @@ void SekNewFrame()
     nSekCyclesTotal = 0;
 }
 
+void SekCyclesBurnRun(INT32 nCycles)
+{
+#if defined FBNEO_DEBUG
+    if (!DebugCPU_SekInitted) bprintf(PRINT_ERROR, _T("SekSetCyclesBurnRun called without init\n"));
+	if (nSekActive == -1) bprintf(PRINT_ERROR, _T("SekSetCyclesBurnRun called when no CPU open\n"));
+#endif
+#ifdef EMU_C68K
+    if ((nSekCpuCore == SEK_CORE_C68K) && nSekCPUType[nSekActive] == 0x68000) {
+        c68k[nSekActive].cycles -= nCycles;
+    } else {
+#endif
+#ifdef EMU_M68K
+        m68k_ICount -= nCycles;
+#endif
+#ifdef EMU_C68K
+    }
+#endif
+}
+
 void SekSetCyclesScanline(INT32 nCycles)
 {
 #if defined FBNEO_DEBUG
@@ -862,13 +883,13 @@ static void SekCPUExitM68K(INT32 i)
 }
 #endif
 
-INT32 SekExit()
+void SekExit()
 {
 #if defined FBNEO_DEBUG
     if (!DebugCPU_SekInitted) bprintf(PRINT_ERROR, _T("SekExit called without init\n"));
 #endif
 
-    if (!DebugCPU_SekInitted) return 1;
+    if (!DebugCPU_SekInitted) return;
 
     // Deallocate cpu extenal data (memory map etc)
     for (INT32 i = 0; i <= nSekCount; i++) {
@@ -899,8 +920,6 @@ INT32 SekExit()
     nSekCount = -1;
 
     DebugCPU_SekInitted = 0;
-
-    return 0;
 }
 
 void SekReset()
@@ -1424,6 +1443,21 @@ INT32 SekRun(INT32 nCPU, INT32 nCycles)
     SekCPUPush(nCPU);
 
     INT32 nRet = SekRun(nCycles);
+
+    SekCPUPop();
+
+    return nRet;
+}
+
+INT32 SekIdle(INT32 nCPU, INT32 nCycles)
+{
+#if defined FBNEO_DEBUG
+    if (!DebugCPU_SekInitted) bprintf(PRINT_ERROR, _T("SekIdle called without init\n"));
+#endif
+
+    SekCPUPush(nCPU);
+
+    INT32 nRet = SekIdle(nCycles);
 
     SekCPUPop();
 
