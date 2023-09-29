@@ -6,7 +6,7 @@
 #include "pgba_ui_emu.h"
 extern "C" {
 #include "mgba-util/vfs.h"
-#include "mgba/core/log.h"
+//#include "mgba/core/log.h" // PS4: error
 #include "mgba/core/blip_buf.h"
 #include "mgba/core/serialize.h"
 #include "mgba/internal/gba/input.h"
@@ -92,15 +92,11 @@ int PGBAUiEmu::load(const ss_api::Game &game) {
     //strncpy(savePath, "/home/cpasjuste/dev/multi/pemu/cmake-build-debug/src/cores/pgba/saves", 511);
     mCoreOptions core_options = {
             .useBios = true,
-            .logLevel = mLOG_WARN | mLOG_ERROR | mLOG_FATAL,
+            .logLevel = 0x01 | 0x02 | 0x04,
             .rewindEnable = false,
             .rewindBufferCapacity = 600,
             .rewindBufferInterval = 1,
             .audioBuffers = 1024,
-            //.savestatePath = savePath,
-            //.screenshotPath = (char *) std::string(dataPath + "screenshots").c_str(),
-            //.patchPath = (char *) std::string(dataPath + "patches").c_str(),
-            //.cheatsPath = (char *) std::string(dataPath + "cheats").c_str(),
             .volume = 0x100,
             .videoSync = false,
             .audioSync = true
