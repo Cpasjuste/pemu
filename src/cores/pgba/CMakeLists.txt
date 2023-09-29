@@ -12,6 +12,9 @@ add_subdirectory(${CMAKE_SOURCE_DIR}/external/cores/mgba build)
 set_property(TARGET mgba APPEND PROPERTY COMPILE_DEFINITIONS
         "_GNU_SOURCE;IOAPI_NO_64;USE_LIBZIP;HAVE_CRC32;COLOR_16_BIT;COLOR_5_6_5;DISABLE_THREADING"
 )
+if (PLATFORM_VITA)
+    set_property(TARGET mgba APPEND PROPERTY COMPILE_DEFINITIONS "PSP2")
+endif ()
 
 ##############
 # pgba
@@ -37,8 +40,9 @@ if (PLATFORM_VITA)
     #####################
     set(TITLE_ID "PGBA00001" CACHE STRING "" FORCE)
     list(APPEND PGBA_INC)
-    list(APPEND PGBA_SRC)
-    list(APPEND PGBA_CFLAGS)
+    list(REMOVE_ITEM PGBA_SRC ${CMAKE_SOURCE_DIR}/external/cores/mgba/src/util/vfs/vfs-dirent.c)
+    list(APPEND PGBA_SRC ${CMAKE_SOURCE_DIR}/external/cores/mgba/src/platform/psp2/sce-vfs.c)
+    list(APPEND PGBA_CFLAGS -DPSP2 -D__HAIKU__)
     list(APPEND PGBA_LDFLAGS)
 elseif (PLATFORM_PS4)
     set(PS4_PKG_TITLE "pGBA - Portable GameBoy Advance")

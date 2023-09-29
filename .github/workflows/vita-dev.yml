@@ -57,3 +57,8 @@ jobs:
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
           make psnes.vpk
+
+      - name: Build pgba
+        run: |
+          cd $GITHUB_WORKSPACE/cmake-build
+          make pgba.vpk

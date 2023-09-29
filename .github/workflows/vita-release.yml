@@ -62,6 +62,12 @@ jobs:
           make psnes.vpk
           mv src/cores/psnes/psnes.vpk $GITHUB_WORKSPACE
 
+      - name: Build pgba
+        run: |
+          cd $GITHUB_WORKSPACE/cmake-build
+          make pgba.vpk
+          mv src/cores/pgba/pgba.vpk $GITHUB_WORKSPACE
+
       - name: Release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
