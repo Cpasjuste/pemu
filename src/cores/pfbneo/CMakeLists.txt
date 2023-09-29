@@ -37,6 +37,10 @@ file(GLOB SRC_BURNER
         ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/burner/*.c*
         ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/burner/sdl/neocdlist.cpp
         ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/burner/sdl/stringset.cpp
+        ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/burner/sdl/ips_manager.cpp
+        ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/burner/sdl/romdata.cpp
+        ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/burner/sdl/localise_gamelist.cpp
+        ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/burner/sdl/replay.cpp
 )
 list(REMOVE_ITEM SRC_BURNER
         ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/burner/conc.cpp
@@ -128,34 +132,35 @@ list(REMOVE_ITEM SRC_INTF
 set(CPU_DIRS
         ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/cpu
         #${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/cpu/a68k
+        ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/cpu/adsp2100
         ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/cpu/arm
         ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/cpu/arm7
         ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/cpu/e132xs
         ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/cpu/f8
         ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/cpu/h6280
         ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/cpu/hd6309
+        ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/cpu/i8x41
         ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/cpu/i386
         ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/cpu/i8039
-        ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/cpu/i8x41
         ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/cpu/i8051
-        ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/cpu/adsp2100
         ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/cpu/konami
-        ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/cpu/m377
-        ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/cpu/mips3
         ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/cpu/m68k
+        ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/cpu/m377
         ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/cpu/m6502
         ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/cpu/m6800
         ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/cpu/m6805
         ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/cpu/m6809
+        ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/cpu/mips3
         ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/cpu/nec
         ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/cpu/pic16c5x
         ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/cpu/s2650
-        ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/cpu/tlcs90
-        ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/cpu/tlcs900
         ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/cpu/sh2
         ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/cpu/sh4
-        ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/cpu/tms32010
+        ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/cpu/tlcs90
+        ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/cpu/tlcs900
         ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/cpu/tms34
+        ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/cpu/tms32010
+        #${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/cpu/tms34010
         ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/cpu/upd7725
         ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/cpu/upd7810
         ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/cpu/v60

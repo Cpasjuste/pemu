@@ -11,32 +11,8 @@ extern UiMain *pemu_ui;
 extern UINT8 NeoSystem;
 int bDrvOkay = 0;
 int kNetGame = 0;
-int nIpsMaxFileLen = 0;
 INT32 nInputIntfMouseDivider = 1;
-
-INT32 GetIpsesMaxLen(char *) { return 0; }
-UINT32 GetIpsDrvDefine() { return 0; }
-
-bool GetIpsDrvProtection() { return false; }
-
-// replaces ips_manager.cpp
-bool bDoIpsPatch = false;
-
-void IpsApplyPatches(UINT8 *base, char *rom_name) {}
-
 bool bRunPause;
-
-// burner/state.cpp
-bool bReplayReadOnly;
-INT32 nReplayStatus = 0;
-INT32 nReplayUndoCount = 0;
-UINT32 nReplayCurrentFrame = 0;
-UINT32 nStartFrame = 0;
-
-INT32 FreezeInput(UINT8 **buf, INT32 *size) { return 0; }
-
-INT32 UnfreezeInput(const UINT8 *buf, INT32 size) { return 0; }
-// burner/state.cpp
 
 bool is_netgame_or_recording() {
     return false;
