@@ -16,7 +16,7 @@ namespace pemu {
 
         virtual ~RomList();
 
-        virtual void build();
+        virtual void build(const ss_api::GameList::GameAddedCb &cb = nullptr);
 
         virtual void initFav();
 
@@ -31,7 +31,7 @@ namespace pemu {
         c2d::Text *text;
         ss_api::GameList *gameList = nullptr;
         ss_api::GameList *gameListFav = nullptr;
-        float time_start = 0;
+        ss_api::GameList::GameAddedCb p_cb = nullptr;
 
     protected:
         std::vector<std::string> filters;

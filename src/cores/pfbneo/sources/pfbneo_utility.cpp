@@ -58,20 +58,77 @@ PFBNEOUtility::GameInfo PFBNEOUtility::getGameInfo(const Game &game) {
         unsigned int id = BurnDrvGetHardwareCode();
         unsigned int prefix = ((id | HARDWARE_PREFIX_CARTRIDGE) ^ HARDWARE_PREFIX_CARTRIDGE) & 0xff000000;
         if (prefix == HARDWARE_PREFIX_SNK) {
-            gameInfo.systemId = (int) prefix;
-            gameInfo.system = "Neo Geo";
+            gameInfo.sysId = (int) prefix;
+            gameInfo.sysName = "Neo Geo";
         } else if (prefix == HARDWARE_PREFIX_CPS2) {
-            gameInfo.systemId = (int) prefix;
-            gameInfo.system = "CPS2";
+            gameInfo.sysId = (int) prefix;
+            gameInfo.sysName = "CPS-2";
         } else if (prefix == HARDWARE_PREFIX_CPS3) {
-            gameInfo.systemId = (int) prefix;
-            gameInfo.system = "CPS3";
+            gameInfo.sysId = (int) prefix;
+            gameInfo.sysName = "CPS-3";
         } else if (prefix == HARDWARE_PREFIX_CAPCOM) {
-            gameInfo.systemId = (int) prefix;
-            gameInfo.system = "CPS1";
+            gameInfo.sysId = (int) prefix;
+            gameInfo.sysName = "CPS-1";
         } else {
-            gameInfo.system = BurnDrvGetTextA(DRV_SYSTEM) ? BurnDrvGetTextA(DRV_SYSTEM) : "";
-            gameInfo.systemId = BurnDrvGetHardwareCode();
+            gameInfo.sysId = (int) prefix;
+            switch (prefix) {
+                case HARDWARE_PREFIX_MISC_PRE90S:
+                    gameInfo.sysName = "PRE-90S (MISC)";
+                    break;
+                case HARDWARE_PREFIX_SEGA:
+                    gameInfo.sysName = "SEGA (ARCADE)";
+                    break;
+                case HARDWARE_PREFIX_KONAMI:
+                    gameInfo.sysName = "KONAMI";
+                    break;
+                case HARDWARE_PREFIX_TOAPLAN:
+                    gameInfo.sysName = "TOAPLAN";
+                    break;
+                case HARDWARE_PREFIX_CAVE:
+                    gameInfo.sysName = "CAVE";
+                    break;
+                case HARDWARE_PREFIX_IGS_PGM:
+                    gameInfo.sysName = "IGS PGM";
+                    break;
+                case HARDWARE_PREFIX_MISC_POST90S:
+                    gameInfo.sysName = "POST-90S (MISC)";
+                    break;
+                case HARDWARE_PREFIX_TAITO:
+                    gameInfo.sysName = "TAITO";
+                    break;
+                case HARDWARE_PREFIX_PSIKYO:
+                    gameInfo.sysName = "PSIKYO";
+                    break;
+                case HARDWARE_PREFIX_KANEKO:
+                    gameInfo.sysName = "KANEKO";
+                    break;
+                case HARDWARE_PREFIX_PACMAN:
+                    gameInfo.sysName = "PACMAN";
+                    break;
+                case HARDWARE_PREFIX_GALAXIAN:
+                    gameInfo.sysName = "GALAXIAN";
+                    break;
+                case HARDWARE_PREFIX_IREM:
+                    gameInfo.sysName = "IREM";
+                    break;
+                case HARDWARE_PREFIX_DATAEAST:
+                    gameInfo.sysName = "DATAEAST";
+                    break;
+                case HARDWARE_PREFIX_CAPCOM_MISC:
+                    gameInfo.sysName = "CAPCOM (MISC)";
+                    break;
+                case HARDWARE_PREFIX_SETA:
+                    gameInfo.sysName = "SETA";
+                    break;
+                case HARDWARE_PREFIX_TECHNOS:
+                    gameInfo.sysName = "TECHNOS";
+                    break;
+                case HARDWARE_PREFIX_MIDWAY:
+                    gameInfo.sysName = "MIDWAY";
+                    break;
+                default:
+                    break;
+            }
         }
 
         return gameInfo;

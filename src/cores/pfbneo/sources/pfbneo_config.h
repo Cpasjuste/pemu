@@ -23,7 +23,7 @@ public:
                 {{HARDWARE_PREFIX_SEGA_MEGADRIVE,     0, "Sega Megadrive"},     "MEGADRIVE",    "megadrive"},
                 {{HARDWARE_PREFIX_MSX,                0, "MSX"},                "MSX",          "msx"},
                 {{HARDWARE_PREFIX_NES,                0, "NES"},                "NES",          "nes"},
-                {{HARDWARE_PREFIX_NGP,                0, "NeoGeo Pocket"},      "NGP",          "ngp"},
+                {{HARDWARE_PREFIX_NGP,                0, "Neo Geo Pocket"},      "NGP",          "ngp"},
                 {{HARDWARE_PCENGINE_PCENGINE,         0, "PC Engine"},          "PCE",          "pce"},
                 {{HARDWARE_PREFIX_SEGA_SG1000,        0, "Sega SG-1000"},       "SG1000",       "sg1000"},
                 {{HARDWARE_PCENGINE_SGX,              0, "PC Engine SGX"},      "SGX",          "sgx"},

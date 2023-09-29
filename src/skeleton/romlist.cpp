@@ -47,24 +47,29 @@ RomList::RomList(UiMain *_ui, const std::string &emuVersion, const std::vector<s
     ui->flip();
     // UI
 
-    printf("RomList: building list...\n");
-    time_start = ui->getElapsedTime().asSeconds();
-
     gameList = new GameList();
     gameListFav = new GameList();
-
-    printf("RomList()\n");
 }
 
-void RomList::build() {
-    for (const auto &gamelist: ui->getConfig()->getCoreGameListInfo()) {
+void RomList::build(const ss_api::GameList::GameAddedCb &cb) {
+    p_cb = cb;
+    float time_start = ui->getElapsedTime().asSeconds();
+    auto cfg = ui->getConfig();
+
+    for (const auto &gamelist: cfg->getCoreGameListInfo()) {
         // try to load a "gamelist.xml" from roms folder
-        std::string gameListPath = ui->getConfig()->getRomPath(gamelist.cfg_name) + "gamelist.xml";
-        gameList->append(gameListPath, ui->getConfig()->getRomPath(gamelist.cfg_name),
-                         false, filters, gamelist.system);
+        std::string gameListPath = cfg->getRomPath(gamelist.cfg_name) + "gamelist.xml";
+        gameList->append(gameListPath, cfg->getRomPath(gamelist.cfg_name),
+                         false, filters, gamelist.system, false, [this](Game *game) {
+                    if (p_cb) p_cb(game);
+                    if (!(gameList->getAvailableCount() % 100)) {
+                        setLoadingText("Games: %li / %li", gameList->getAvailableCount(), gameList->games.size());
+                    }
+                });
         setLoadingText("Games: %li / %li", gameList->getAvailableCount(), gameList->games.size());
-        printf("RomList::build: %s, games found: %zu / %zu (system: %s)\n",
-               gameListPath.c_str(), gameList->getAvailableCount(), gameList->games.size(), gamelist.system.name.c_str());
+        printf("RomList::build: %s, games found: %zu / %zu (system: %s (0x%08x))\n",
+               gameListPath.c_str(), gameList->getAvailableCount(),
+               gameList->games.size(), gamelist.system.name.c_str(), gamelist.system.id);
     }
 
     // sort lists
@@ -79,7 +84,7 @@ void RomList::build() {
     std::sort(gameList->dates.begin(), gameList->dates.end(), Api::sortByName);
 
     // add filtering options
-    auto grp = ui->getConfig()->getGroup(PEMUConfig::GrpId::UI_FILTERING);
+    auto grp = cfg->getGroup(PEMUConfig::GrpId::UI_FILTERING);
     grp->addOption({"FILTER_SYSTEM", gameList->systemList.getNames(), 0,
                     PEMUConfig::OptId::UI_FILTER_SYSTEM})->setFlags(PEMUConfig::Flags::HIDDEN);
     grp->addOption({"FILTER_GENRE", gameList->getGenreNames(), 0, PEMUConfig::OptId::UI_FILTER_GENRE});
@@ -90,18 +95,16 @@ void RomList::build() {
     grp->addOption({"FILTER_RATING", gameList->getRatingNames(), 0, PEMUConfig::OptId::UI_FILTER_RATING});
 
     // custom core hide/show flags
-    auto ids = ui->getConfig()->getCoreHiddenOptionToEnable();
+    auto ids = cfg->getCoreHiddenOptionToEnable();
     for (const auto &id: ids) {
-        ui->getConfig()->get(id)->setFlags(0);
+        cfg->get(id)->setFlags(0);
     }
 
     // we need to reload config to update new options we just added
-    ui->getConfig()->load();
+    cfg->load();
 
-    float time_spent = ui->getElapsedTime().asSeconds() - time_start;
-    printf("RomList::build(): list built in %f\n", time_spent);
+    printf("RomList::build(): list built in %f\n", ui->getElapsedTime().asSeconds() - time_start);
 
-    // UI
     // remove ui widgets
     delete (rect);
 }
@@ -118,6 +121,7 @@ void RomList::initFav() {
             g.romsPath = game.romsPath;
         }
     }
+
     printf("RomList::initFav: %zu favorites\n", gameListFav->games.size());
 }
 

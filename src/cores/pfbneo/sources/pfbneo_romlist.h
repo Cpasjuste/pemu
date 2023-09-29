@@ -10,7 +10,7 @@ public:
     PFBNRomList(UiMain *ui, const std::string &emuVersion, const std::vector<std::string> &filters)
             : RomList(ui, emuVersion, filters) {};
 
-    void build() override;
+    void build(const ss_api::GameList::GameAddedCb &cb = nullptr) override;
 };
 
 #endif //PEMU_PFBNEO_ROMLIST_H

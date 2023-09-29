@@ -14,8 +14,8 @@ public:
     struct GameInfo {
         std::string name;
         std::string parent;
-        std::string system;
-        int systemId;
+        std::string sysName;
+        int sysId;
     };
 
     static int setDriverActive(const Game &game);

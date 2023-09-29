@@ -173,13 +173,12 @@ void UIRomList::filterRomList() {
     std::string genre = cfg->get(PEMUConfig::OptId::UI_FILTER_GENRE)->getString();
     int genreId = genre == "ALL" ? -1 : list->findGenreByName(genre).id;
 
-    printf("UIRomList::filterRomList: system: %s (%i)\n", system.c_str(), systemId);
+    printf("UIRomList::filterRomList: system: %s (0x%08x)\n", system.c_str(), systemId);
 
     mGameList = list->filter(
             cfg->get(PEMUConfig::OptId::UI_FILTER_AVAILABLE)->getInteger(),
             !cfg->get(PEMUConfig::OptId::UI_FILTER_CLONES)->getInteger(),
-            systemId == 9999 ? -1 : systemId, systemId == 9999 ? 75 : -1,
-            editorId, devId, players, rating, -1, genreId, "ALL",
+            systemId, -1, editorId, devId, players, rating, -1, genreId, "ALL",
             cfg->get(PEMUConfig::OptId::UI_FILTER_DATE)->getString()
     );
 
