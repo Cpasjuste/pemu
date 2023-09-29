@@ -180,16 +180,14 @@ void UIListBox::updateLines() {
 void UIListBox::up() {
     int index = file_index + highlight_index;
     int middle = max_lines / 2;
-
     if (highlight_index <= middle && index - middle > 0) {
         file_index--;
     } else {
         highlight_index--;
     }
-
     if (highlight_index < 0) {
-        highlight_index = (int) games.size() < max_lines - 1 ? (int) games.size() - 1 : max_lines - 1;
-        file_index = ((int) games.size() - 1) - highlight_index;
+        highlight_index = (int) games.size() < max_lines ? (int) games.size() - 1 : max_lines - 1;
+        file_index = (int) games.size() - 1 - highlight_index;
     }
 
     updateLines();
@@ -198,13 +196,11 @@ void UIListBox::up() {
 void UIListBox::down() {
     int index = file_index + highlight_index;
     int middle = max_lines / 2;
-
-    if (highlight_index >= middle && index + (max_lines - middle) < (int) games.size()) {
+    if (highlight_index >= middle && index + middle < (int) games.size()) {
         file_index++;
     } else {
         highlight_index++;
     }
-
     if (highlight_index >= max_lines || file_index + highlight_index >= (int) games.size()) {
         file_index = 0;
         highlight_index = 0;
@@ -214,11 +210,13 @@ void UIListBox::down() {
 }
 
 void UIListBox::setSelection(int new_index) {
+    if (new_index < 0) new_index = 0;
+    if (new_index > (int) games.size()) new_index = (int) games.size() - 1;
     if (new_index < max_lines / 2) {
         file_index = 0;
         highlight_index = 0;
     } else if (new_index > (int) games.size() - max_lines / 2) {
-        highlight_index = max_lines / 2;
+        highlight_index = max_lines - 1;
         file_index = (int) games.size() - 1 - highlight_index;
         if (highlight_index >= (int) games.size()) {
             highlight_index = (int) games.size() - 1;
