@@ -58,6 +58,9 @@ elseif (PLATFORM_SWITCH)
     list(APPEND PGBA_CFLAGS)
 elseif (PLATFORM_3DS)
 elseif (PLATFORM_LINUX OR PLATFORM_WINDOWS)
+    if (PLATFORM_WINDOWS)
+        list(APPEND PGBA_INC ${CMAKE_CURRENT_SOURCE_DIR}/sources/windows) # for vfs-dirent.c (mkdir)
+    endif ()
     #####################
     # SDL2 PLATFORM
     #####################
