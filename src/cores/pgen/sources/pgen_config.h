@@ -18,11 +18,11 @@ public:
 
     std::vector<GameListInfo> getCoreGameListInfo() override {
         return {
-                {{1,   0, "Megadrive"},     "MEGADRIVE",    "megadrive",    "gamelist.xml"},
-                {{2,   0, "Master System"}, "MASTERSYSTEM", "mastersystem", "gamelist_sms.xml"},
-                {{21,  0, "Game Gear"},     "GAMEGEAR",     "gamegear",     "gamelist_gamegear.xml"},
-                {{20,  0, "Mega-CD"},       "MEGACD",       "megacd",       "gamelist_megacd.xml"},
-                {{109, 2, "SG-1000"},       "SG1000",       "sg1000",       "gamelist_sg1000.xml"}
+                {{1,   0, "Megadrive"},     "MEGADRIVE",    "megadrive"},
+                {{2,   0, "Master System"}, "MASTERSYSTEM", "mastersystem"},
+                {{21,  0, "Game Gear"},     "GAMEGEAR",     "gamegear"},
+                {{20,  0, "Mega-CD"},       "MEGACD",       "megacd"},
+                {{109, 2, "SG-1000"},       "SG1000",       "sg1000"}
         };
     }
 

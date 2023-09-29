@@ -16,7 +16,7 @@ public:
 
     std::vector<GameListInfo> getCoreGameListInfo() override {
         return {
-                {{12, 0, "Game Boy Advance"}, "GBA", "roms", "gamelist.xml"}
+                {{12, 0, "Game Boy Advance"}, "GBA", "roms"}
         };
     }
 

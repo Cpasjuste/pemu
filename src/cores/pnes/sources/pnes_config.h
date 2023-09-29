@@ -13,7 +13,7 @@ public:
 
     std::vector<GameListInfo> getCoreGameListInfo() override {
         return {
-                {{3, 0, "NES"}, "NES", "roms", "gamelist.xml"}
+                {{3, 0, "NES"}, "NES", "roms"}
         };
     }
 

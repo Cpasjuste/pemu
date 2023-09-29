@@ -14,7 +14,7 @@ extern "C" {
 
 #define VIDEO_WIDTH_MAX  240
 #define VIDEO_HEIGHT_MAX 160
-#define SAMPLE_RATE 32768
+#define SAMPLE_RATE 44100
 
 mCore *s_core = nullptr;
 static VDir *s_vDir;
