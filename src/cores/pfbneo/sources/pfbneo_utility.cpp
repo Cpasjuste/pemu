@@ -127,6 +127,7 @@ PFBNEOUtility::GameInfo PFBNEOUtility::getGameInfo(const Game &game) {
                     gameInfo.sysName = "MIDWAY";
                     break;
                 default:
+                    // consoles games
                     break;
             }
         }

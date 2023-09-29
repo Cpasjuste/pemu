@@ -46,11 +46,7 @@ void PFBNRomList::build(const ss_api::GameList::GameAddedCb &cb) {
     });
 
     // remove custom "ARCADE" system added from "getCoreGameListInfo"
-    auto it = std::remove_if(gameList->systemList.systems.begin(), gameList->systemList.systems.end(),
-                             [](const System &sys) { return sys.id == HARDWARE_PREFIX_ARCADE; });
-    if (it != gameList->systemList.systems.end()) {
-        gameList->systemList.systems.erase(it, gameList->systemList.systems.end());
-    }
+    gameList->systemList.remove(HARDWARE_PREFIX_ARCADE);
 
     // sort systems
     std::sort(gameList->systemList.systems.begin(), gameList->systemList.systems.end(), Api::sortSystemByName);
