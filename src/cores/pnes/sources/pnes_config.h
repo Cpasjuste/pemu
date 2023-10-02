@@ -11,12 +11,6 @@ class PNESConfig : public pemu::PEMUConfig {
 public:
     PNESConfig(c2d::Io *io, int version);
 
-    std::vector<GameListInfo> getCoreGameListInfo() override {
-        return {
-                {{3, 0, "NES"}, "NES", "roms"}
-        };
-    }
-
     std::string getCoreVersion() override {
         return "Nestopia 1.52.0";
     }

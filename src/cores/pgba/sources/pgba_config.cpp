@@ -9,14 +9,19 @@ using namespace c2d;
 using namespace pemu;
 
 PGBAConfig::PGBAConfig(c2d::Io *io, int version) : PEMUConfig(io, "PGBA", version) {
-    // add custom roms paths to config
-    for (const auto &gl: PGBAConfig::getCoreGameListInfo()) {
-        getGroup(CFG_ID_ROMS)->addOption({gl.cfg_name, io->getDataPath() + gl.rom_path + "/"});
-    }
-
     // no need for auto-scaling mode
     getOption(PEMUConfig::OptId::EMU_SCALING_MODE)->setArray({"ASPECT", "INTEGER"}, 0);
 
-    // "c2dui_romlist" will also reload config, but we need new roms paths
-    load();
+    // "romlist.cpp" (RomList::build) will also reload config, but we need new roms paths
+    PEMUConfig::load();
+
+    // add custom rom path
+    PEMUConfig::addRomPath("GBA", io->getDataPath() + "roms/", {12, 0, "Game Boy Advance"});
+    PEMUConfig::save();
+
+    // create roms paths if needed
+    auto paths = getRomPaths();
+    for (const auto &path: paths) {
+        io->create(path.path);
+    }
 }

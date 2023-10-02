@@ -14,12 +14,6 @@ class PGBAConfig : public pemu::PEMUConfig {
 public:
     PGBAConfig(c2d::Io *io, int version);
 
-    std::vector<GameListInfo> getCoreGameListInfo() override {
-        return {
-                {{12, 0, "Game Boy Advance"}, "GBA", "roms"}
-        };
-    }
-
     std::string getCoreVersion() override {
         return std::string(projectName) + projectVersion;
     }

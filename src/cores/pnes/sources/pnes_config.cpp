@@ -11,11 +11,6 @@ using namespace pemu;
 PNESConfig::PNESConfig(c2d::Io *io, int version) : PEMUConfig(io, "PNES", version) {
     printf("PNESConfig(%s, v%i)\n", getPath().c_str(), version);
 
-    // add custom roms paths to config
-    for (const auto &gl: PNESConfig::getCoreGameListInfo()) {
-        getGroup(CFG_ID_ROMS)->addOption({gl.cfg_name, io->getDataPath() + gl.rom_path + "/"});
-    }
-
     // no need for auto-scaling mode on pnes
     getOption(PEMUConfig::OptId::EMU_SCALING_MODE)->setArray({"ASPECT", "INTEGER"}, 0);
 
@@ -25,6 +20,16 @@ PNESConfig::PNESConfig(c2d::Io *io, int version) : PEMUConfig(io, "PNES", versio
     getOption(PEMUConfig::OptId::JOY_B)->setInteger(KEY_JOY_A_DEFAULT);
 #endif
 
-    // "c2dui_romlist" will also reload config, but we need new roms paths
-    load();
+    // "romlist.cpp" (RomList::build) will also reload config, but we need new roms paths
+    PEMUConfig::load();
+
+    // add custom rom path
+    PEMUConfig::addRomPath("NES", io->getDataPath() + "roms/", {3, 0, "NES"});
+    PEMUConfig::save();
+
+    // create roms paths if needed
+    auto paths = getRomPaths();
+    for (const auto &path: paths) {
+        io->create(path.path);
+    }
 }

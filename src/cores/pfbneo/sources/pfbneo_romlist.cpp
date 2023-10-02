@@ -45,11 +45,13 @@ void PFBNRomList::build(const ss_api::GameList::GameAddedCb &cb) {
         }
     });
 
-    // remove custom "ARCADE" system added from "getCoreGameListInfo"
+    // remove custom "ARCADE" system added from "RomList::build"
     gameList->systemList.remove(HARDWARE_PREFIX_ARCADE);
-
     // sort systems
     std::sort(gameList->systemList.systems.begin(), gameList->systemList.systems.end(), Api::sortSystemByName);
+    // update system filtering option
+    auto opt = ui->getConfig()->get(PEMUConfig::OptId::UI_FILTER_SYSTEM);
+    opt->setArray(gameList->systemList.getNames());
 
     // update config
     ui->getConfig()->load();

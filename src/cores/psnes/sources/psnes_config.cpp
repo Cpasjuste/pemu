@@ -11,11 +11,6 @@ using namespace pemu;
 PSNESConfig::PSNESConfig(c2d::Io *io, int version) : PEMUConfig(io, "PSNES", version) {
     printf("PSNESConfig(%s, v%i)\n", getPath().c_str(), version);
 
-    // add custom roms paths to config
-    for (const auto &gl: PSNESConfig::getCoreGameListInfo()) {
-        getGroup(CFG_ID_ROMS)->addOption({gl.cfg_name, io->getDataPath() + gl.rom_path + "/"});
-    }
-
     auto group = getGroup(PEMUConfig::GrpId::EMULATION);
     if (!group) {
         printf("PSNESConfig: error, group not found (MENU_ROM_OPTIONS)\n");
@@ -43,6 +38,16 @@ PSNESConfig::PSNESConfig(c2d::Io *io, int version) : PEMUConfig(io, "PSNES", ver
     // no need for auto-scaling mode
     getOption(PEMUConfig::OptId::EMU_SCALING_MODE)->setArray({"ASPECT", "INTEGER"}, 0);
 
-    // "c2dui_romlist" will also reload config, but we need new roms paths
-    load();
+    // "romlist.cpp" (RomList::build) will also reload config, but we need new roms paths
+    PEMUConfig::load();
+
+    // add custom rom path
+    PEMUConfig::addRomPath("SNES", io->getDataPath() + "roms/", {4, 0, "Super Nintendo"});
+    PEMUConfig::save();
+
+    // create roms paths if needed
+    auto paths = getRomPaths();
+    for (const auto &path: paths) {
+        io->create(path.path);
+    }
 }

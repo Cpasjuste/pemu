@@ -402,7 +402,8 @@ bool UiMenu::onInput(c2d::Input::Player *players) {
                 ui->getInput()->clear();
             } else {
                 // be sure options are saved before exiting
-                ui->getConfig()->save(isRomMenu);
+                if (isRomMenu) ui->getConfig()->saveGame();
+                else ui->getConfig()->save();
                 needSave = false;
                 ui->done = true;
             }
@@ -426,7 +427,8 @@ void UiMenu::setVisibility(Visibility visibility, bool tweenPlay) {
     }
 
     if (visibility == Visibility::Hidden && needSave) {
-        ui->getConfig()->save(isRomMenu);
+        if (isRomMenu) ui->getConfig()->saveGame();
+        else ui->getConfig()->save();
         needSave = false;
     }
 

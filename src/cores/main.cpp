@@ -44,9 +44,6 @@ int main(int argc, char **argv) {
     auto uiState = new PEMUUiMenuState(pemu_ui);
     pemu_ui->init(uiRomList, uiMenu, uiEmu, uiState);
 
-    // save/update config
-    cfg->save();
-
     while (!pemu_ui->done) {
         pemu_ui->flip();
     }

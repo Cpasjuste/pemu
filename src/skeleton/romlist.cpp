@@ -57,21 +57,20 @@ void RomList::build(const ss_api::GameList::GameAddedCb &cb) {
     p_cb = cb;
     m_count = 0;
 
-    for (const auto &gamelist: cfg->getCoreGameListInfo()) {
-        // try to load a "gamelist.xml" from roms folder
-        std::string gameListPath = cfg->getRomPath(gamelist.cfg_name) + "gamelist.xml";
-        gameList->append(gameListPath, cfg->getRomPath(gamelist.cfg_name),
-                         false, filters, gamelist.system, false, [this](Game *game) {
-                    if (p_cb) p_cb(game);
-                    m_count++;
-                    if (!(m_count % 200)) {
-                        setLoadingText("Games: %li / %li", m_count, gameList->games.size());
-                    }
-                });
+    auto romPaths = cfg->getRomPaths();
+    for (const auto &p: romPaths) {
+        std::string gameListPath = p.path + "gamelist.xml";
+        gameList->append(gameListPath, p.path, false, filters, p.system, false, [this](Game *game) {
+            if (p_cb) p_cb(game);
+            m_count++;
+            if (!(m_count % 200)) {
+                setLoadingText("Games: %li / %li", m_count, gameList->games.size());
+            }
+        });
         setLoadingText("Games: %li / %li", gameList->getAvailableCount(), gameList->games.size());
         printf("RomList::build: %s, games found: %zu / %zu (system: %s (0x%08x))\n",
                gameListPath.c_str(), gameList->getAvailableCount(),
-               gameList->games.size(), gamelist.system.name.c_str(), gamelist.system.id);
+               gameList->games.size(), p.system.name.c_str(), p.system.id);
     }
 
     // sort lists

@@ -14,13 +14,6 @@ using namespace pemu;
 PFBAConfig::PFBAConfig(c2d::Io *io, int version) : PEMUConfig(io, "PFBNEO", version) {
     printf("PFBNConfig(%s, v%i)\n", getPath().c_str(), version);
 
-    /// add custom roms paths to config
-    for (const auto &gl: PFBAConfig::getCoreGameListInfo()) {
-        std::string path = io->getDataPath() + gl.rom_path + "/";
-        getGroup(CFG_ID_ROMS)->addOption({gl.cfg_name, path});
-        io->create(path);
-    }
-
     /// MAIN OPTIONS
     get(PEMUConfig::OptId::UI_SHOW_ZIP_NAMES)->setArrayIndex(0);
 
@@ -65,6 +58,35 @@ PFBAConfig::PFBAConfig(c2d::Io *io, int version) : PEMUConfig(io, "PFBNEO", vers
     get(PEMUConfig::OptId::EMU_AUDIO_FREQ)->setFlags(PEMUConfig::Flags::HIDDEN);
 #endif
 
-    // "c2dui_romlist" will also reload config, but we need new roms paths
-    load();
+    // "romlist.cpp" (RomList::build) will also reload config, but we need new roms paths
+    PEMUConfig::load();
+
+    // add custom rom path
+    PEMUConfig::addRomPath("ARCADE", io->getDataPath() + "arcade/", {HARDWARE_PREFIX_ARCADE, 0, "Arcade"});
+    PEMUConfig::addRomPath("CHANNELF", io->getDataPath() + "channelf/", {HARDWARE_PREFIX_CHANNELF, 0, "Channel F"});
+    PEMUConfig::addRomPath("COLECO", io->getDataPath() + "coleco/", {HARDWARE_PREFIX_COLECO, 0, "ColecoVision"});
+    PEMUConfig::addRomPath("FDS", io->getDataPath() + "fds/", {HARDWARE_PREFIX_FDS, 0, "NES FDS"});
+    PEMUConfig::addRomPath("GAMEGEAR", io->getDataPath() + "gamegear/",
+                           {HARDWARE_PREFIX_SEGA_GAME_GEAR, 0, "Sega Game Gear"});
+    PEMUConfig::addRomPath("MEGADRIVE", io->getDataPath() + "megadrive/",
+                           {HARDWARE_PREFIX_SEGA_MEGADRIVE, 0, "Sega Megadrive"});
+    PEMUConfig::addRomPath("MSX", io->getDataPath() + "msx/", {HARDWARE_PREFIX_MSX, 0, "MSX"});
+    PEMUConfig::addRomPath("NES", io->getDataPath() + "nes/", {HARDWARE_PREFIX_NES, 0, "NES"});
+    PEMUConfig::addRomPath("NGP", io->getDataPath() + "ngp/", {HARDWARE_PREFIX_NGP, 0, "Neo Geo Pocket"});
+    PEMUConfig::addRomPath("PCE", io->getDataPath() + "pce/", {HARDWARE_PCENGINE_PCENGINE, 0, "PC Engine"});
+    PEMUConfig::addRomPath("SG1000", io->getDataPath() + "sg1000/", {HARDWARE_PREFIX_SEGA_SG1000, 0, "Sega SG-1000"});
+    PEMUConfig::addRomPath("SGX", io->getDataPath() + "sgx/", {HARDWARE_PCENGINE_SGX, 0, "PC Engine SGX"});
+    PEMUConfig::addRomPath("MASTERSYSTEM", io->getDataPath() + "sms/",
+                           {HARDWARE_PREFIX_SEGA_MASTER_SYSTEM, 0, "Sega Master System"});
+    PEMUConfig::addRomPath("SPECTRUM", io->getDataPath() + "spectrum/", {HARDWARE_PREFIX_SPECTRUM, 0, "ZX Spectrum"});
+    PEMUConfig::addRomPath("TG16", io->getDataPath() + "tg16/", {HARDWARE_PCENGINE_TG16, 0, "PC Engine TG16"});
+
+    // save newly added roms paths
+    PEMUConfig::save();
+
+    // create roms paths if needed
+    auto paths = getRomPaths();
+    for (const auto &path: paths) {
+        io->create(path.path);
+    }
 }

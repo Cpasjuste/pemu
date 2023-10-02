@@ -73,6 +73,7 @@ PFBNEOUtility::GameInfo PFBNEOUtility::getGameInfo(const Game &game) {
             gameInfo.sysId = (int) prefix;
             switch (prefix) {
                 case HARDWARE_PREFIX_MISC_PRE90S:
+                    gameInfo.sysId = 0x43214321;
                     gameInfo.sysName = "PRE-90S (MISC)";
                     break;
                 case HARDWARE_PREFIX_SEGA:
@@ -88,7 +89,7 @@ PFBNEOUtility::GameInfo PFBNEOUtility::getGameInfo(const Game &game) {
                     gameInfo.sysName = "CAVE";
                     break;
                 case HARDWARE_PREFIX_IGS_PGM:
-                    gameInfo.sysName = "IGS PGM";
+                    gameInfo.sysName = "PGM (IGS)";
                     break;
                 case HARDWARE_PREFIX_MISC_POST90S:
                     gameInfo.sysName = "POST-90S (MISC)";

@@ -183,13 +183,62 @@ bool PEMUConfig::loadGame(const Game &game) {
     return true;
 }
 
-bool PEMUConfig::save(bool isGame) {
-    if (isGame) {
-        if (!p_game_config) return false;
-        return p_game_config->save();
+bool PEMUConfig::saveGame() {
+    if (!p_game_config) return false;
+    return p_game_config->save();
+}
+
+bool PEMUConfig::addRomPath(const std::string &name, const std::string &path, const ss_api::System &system) {
+    printf("PEMUConfig::addRomPath: %s (system: %s, path: %s)\n",
+           name.c_str(), system.name.c_str(), path.c_str());
+    auto roms = config_lookup(libConfigGetInstance(), std::string(getName() + ".ROMS").c_str());
+    if (config_setting_get_member(roms, name.c_str())) {
+        printf("PEMUConfig::addRomPath: %s found in config file, skipping\n", name.c_str());
+        return false;
     }
 
-    return Config::save();
+    auto setting = config_setting_add(roms, name.c_str(), CONFIG_TYPE_LIST);
+    if (setting) {
+        // add system name
+        auto opt = config_setting_add(setting, "SYSTEM_NAME", CONFIG_TYPE_STRING);
+        config_setting_set_string(opt, system.name.c_str());
+        // add system id
+        char sys[32];
+        snprintf(sys, 31, "0x%08x", system.id);
+        opt = config_setting_add(setting, "SYSTEM_ID", CONFIG_TYPE_STRING);
+        config_setting_set_string(opt, sys);
+        // add roms path
+        opt = config_setting_add(setting, "PATH", CONFIG_TYPE_STRING);
+        config_setting_set_string(opt, path.c_str());
+        return true;
+    }
+
+    return false;
+}
+
+std::vector<PEMUConfig::RomPath> PEMUConfig::getRomPaths() {
+    std::vector<PEMUConfig::RomPath> romPaths;
+    auto roms = config_lookup(libConfigGetInstance(), std::string(getName() + ".ROMS").c_str());
+    if (!roms) {
+        printf("PEMUConfig::getRomPaths: config_lookup failed\n");
+        return romPaths;
+    }
+
+    int count = config_setting_length(roms);
+    for (int i = 0; i < count; ++i) {
+        auto setting = config_setting_get_elem(roms, i);
+        auto sysName = config_setting_get_elem(setting, 0);
+        auto sysId = config_setting_get_elem(setting, 1);
+        auto path = config_setting_get_elem(setting, 2);
+        if (sysName && sysId && path) {
+            std::string p = config_setting_get_string(path);
+            if (!Utility::endsWith(p, "/")) p += "/";
+            auto id = Utility::parseHex(config_setting_get_string(sysId));
+            romPaths.push_back({p, {(int) id, 0, config_setting_get_string(sysName)}});
+        }
+    }
+
+    return romPaths;
 }
 
 c2d::config::Option *PEMUConfig::getOption(int id, bool isGame) {
@@ -202,15 +251,6 @@ c2d::config::Option *PEMUConfig::getOption(int id, bool isGame) {
 
 c2d::config::Option *PEMUConfig::get(int id, bool isGame) {
     return getOption(id, isGame);
-}
-
-std::string PEMUConfig::getRomPath(const std::string &name) {
-    auto group = getGroup(CFG_ID_ROMS);
-    if (!group) return "";
-
-    auto option = name.empty() ? &group->getOptions()->at(0) : group->getOption(name);
-    if (!option) return "";
-    return option->getString();
 }
 
 std::vector<c2d::Input::ButtonMapping> PEMUConfig::getKeyboardMapping(int player, bool isGame) {

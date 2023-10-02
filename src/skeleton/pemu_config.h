@@ -105,25 +105,26 @@ namespace pemu {
             END
         };
 
-        struct GameListInfo {
-            ss_api::System system{};
-            std::string cfg_name{};
-            std::string rom_path{};
+        struct RomPath {
+            std::string path;
+            ss_api::System system;
         };
 
         PEMUConfig(c2d::Io *io, const std::string &name, int version = 1);
 
-        virtual ~PEMUConfig();
+        ~PEMUConfig() override;
 
         bool loadGame(const ss_api::Game &game);
 
-        bool save(bool isGame = false);
+        bool saveGame();
 
         c2d::config::Option *get(int id, bool isGame = false);
 
         c2d::config::Option *getOption(int id, bool isGame = false);
 
-        std::string getRomPath(const std::string &name = "");
+        bool addRomPath(const std::string &name, const std::string &path, const ss_api::System &system);
+
+        std::vector<RomPath> getRomPaths();
 
         std::vector<c2d::Input::ButtonMapping> getKeyboardMapping(int player, bool isGame = false);
 
@@ -139,8 +140,6 @@ namespace pemu {
         virtual std::string getCoreVersion() { return "UNKNOWN"; }
 
         virtual std::vector<std::string> getCoreSupportedExt() { return {".zip"}; }
-
-        virtual std::vector<GameListInfo> getCoreGameListInfo() { return {}; }
 
         virtual std::vector<int> getCoreHiddenOptionToEnable() { return {}; }
 

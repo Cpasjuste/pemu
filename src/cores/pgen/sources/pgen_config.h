@@ -12,20 +12,6 @@ class PGENConfig : public pemu::PEMUConfig {
 public:
     PGENConfig(c2d::Io *io, int version);
 
-    ~PGENConfig() override {
-        printf("PGENConfig::~PGENConfig()\n");
-    }
-
-    std::vector<GameListInfo> getCoreGameListInfo() override {
-        return {
-                {{1,   0, "Megadrive"},     "MEGADRIVE",    "megadrive"},
-                {{2,   0, "Master System"}, "MASTERSYSTEM", "mastersystem"},
-                {{21,  0, "Game Gear"},     "GAMEGEAR",     "gamegear"},
-                {{20,  0, "Mega-CD"},       "MEGACD",       "megacd"},
-                {{109, 2, "SG-1000"},       "SG1000",       "sg1000"}
-        };
-    }
-
     std::vector<int> getCoreHiddenOptionToEnable() override {
         return {PEMUConfig::OptId::UI_FILTER_SYSTEM};
     }
