@@ -24,15 +24,6 @@ pNES: Portable NES
 - Support hardware filtering (shaders)
 - Support shaders effects
 
-### Romset
-- The pNES database is built against the no-intro romset "No-Intro - Nintendo - Nintendo Entertainment System (2017-06-18).zip".
-
-### Preview images and videos
-- pNES support preview images and videos (put files in roms media folder: png files goes in "roms/media/mixrbv2", mp4 files in "roms/media/video"). Please note that the vita port doesn't support video previews.
-You can download a near fullset mixrbv2 and video package (either in high quality or low quality format) here:
-    - preview images: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pnes/pnes_mixrbv2.zip) (959 MB)
-    - preview videos: [video](http://files.mydedibox.fr/files/dev/pemu/pnes/pnes_video.zip) (6.2GB)
-
 ### Installation (switch)
 - copy "pnes" directory to "/switch/" directory on sdcard
 - copy roms to "/switch/pnes/roms/" directory on sdcard

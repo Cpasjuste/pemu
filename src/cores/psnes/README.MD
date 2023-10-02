@@ -6,7 +6,7 @@ pSNES: Portable Snes9x
 
 ### The main goals of this [snes9x](https://github.com/snes9xgit/snes9x) port are:
 
-- have a basic but user friendly user interface on non windows devices
+- have a basic but user-friendly user interface on non windows devices
 - use a recent rendering interface for speed and effects support
 - cross-platform and code portability
 - easy updates of snes9x core (no modifications to the original sources)
@@ -23,15 +23,6 @@ pSNES: Portable Snes9x
 - Support cheats (put a "rom_name.cht"  file with game genie codes in cheat folder)
 - Support 2x, 3x, fit, fit 4/3 and fullscreen hardware linear scaling
 - Support shaders effects
-
-### Romset
-- The pSNES database is built against the no-intro romset "Nintendo - Super Nintendo Entertainment System (2017-05-29).zip". The best is to use this romset with pSNES.
-
-### Preview images and videos
-- pSNES support preview images and videos (put files in roms media folder: png files goes in "roms/media/mixrbv2", mp4 files in "roms/media/video"). Please note that the vita port doesn't support video previews.
-You can download a near fullset mixrbv2 and video package here:
-    - preview images: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/psnes/psnes_mixrbv2.zip) (1.3GB)
-    - preview videos: [video](http://files.mydedibox.fr/files/dev/pemu/psnes/psnes_video.zip) (9.2GB)
 
 ### Cheat format
 - Example for "Super Mario World (USA).cht" game genie codes

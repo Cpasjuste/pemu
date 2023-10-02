@@ -7,7 +7,7 @@ pFBN: Portable FinalBurn Neo
 
 #### The main goals of this [fbneo](https://github.com/finalburnneo/FBNeo) port are:
 
-- have a basic but user friendly user interface
+- have a basic but user-friendly user interface
 - use a recent rendering interface for speed and effect support
 - cross-platform and code portability
 - easy updates of fbneo core (no modifications to the original sources)
@@ -27,44 +27,29 @@ pFBN: Portable FinalBurn Neo
 
 #### GENERAL INFORMATION'S
 
-- pFBN current DATs files are located [here](https://github.com/libretro/FBNeo/tree/ae96b110c5938a48a9d712e04ce3a542e74ee186/dats).
+- pFBN current DATs files are located [here](https://github.com/libretro/FBNeo/tree/e8694e1806d56061554b7a80f3601caeb085dedc/dats).
 
-- pFBN, as fbneo, support consoles roms. Here is the corresponding folders where roms should be located (as fbneo):
+- pFBN, as fbneo, support consoles roms. Here is the default configuration for your roms paths:
     ```
-    Arcade              : "roms"
-    Channel F           : "channelf"
-    Coleco              : "coleco"
-    Nintendo NES FDS    : "fds"
-    Sega GameGear       : "gamegear"
-    Sega MegaDrive      : "megadrive"
-    MSX                 : "msx"
-    Nintendo NES        : "nes"
-    Neo Geo Pocket      : "ngp"
-    Nec PC-Engine       : "pce"
-    SG-1000             : "sg1000"
-    Nec SuperGraFX      : "sgx"
-    Sega Master System  : "sms"
-    Spectrum            : "spectrum"
-    Nec TurboGraFX-16   : "tg16"
+    NAME       SYSTEM    SYSTEM_ID     PATH
+    ARCADE = ( "Arcade", "0x12341234", "/media/cpasjuste/Data/emulation/01_roms/fbneo-1.0.0.03-full/arcade/" );
+    CHANNELF = ( "Channel F", "0x21000000", "/home/cpasjuste/dev/multi/pemu/cmake-build-debug/src/cores/pfbneo/channelf/" );
+    COLECO = ( "ColecoVision", "0x1a000000", "/home/cpasjuste/dev/multi/pemu/cmake-build-debug/src/cores/pfbneo/coleco/" );
+    FDS = ( "NES FDS", "0x1f000000", "/home/cpasjuste/dev/multi/pemu/cmake-build-debug/src/cores/pfbneo/fds/" );
+    GAMEGEAR = ( "Sega Game Gear", "0x12000000", "/home/cpasjuste/dev/multi/pemu/cmake-build-debug/src/cores/pfbneo/gamegear/" );
+    MEGADRIVE = ( "Sega Megadrive", "0x0c000000", "/home/cpasjuste/dev/multi/pemu/cmake-build-debug/src/cores/pfbneo/megadrive/" );
+    MSX = ( "MSX", "0x1c000000", "/home/cpasjuste/dev/multi/pemu/cmake-build-debug/src/cores/pfbneo/msx/" );
+    NES = ( "NES", "0x1e000000", "/home/cpasjuste/dev/multi/pemu/cmake-build-debug/src/cores/pfbneo/nes/" );
+    NGP = ( "Neo Geo Pocket", "0x20000000", "/home/cpasjuste/dev/multi/pemu/cmake-build-debug/src/cores/pfbneo/ngp/" );
+    PCE = ( "PC Engine", "0x17010000", "/home/cpasjuste/dev/multi/pemu/cmake-build-debug/src/cores/pfbneo/pce/" );
+    SG1000 = ( "Sega SG-1000", "0x19000000", "/home/cpasjuste/dev/multi/pemu/cmake-build-debug/src/cores/pfbneo/sg1000/" );
+    SGX = ( "PC Engine SGX", "0x17030000", "/home/cpasjuste/dev/multi/pemu/cmake-build-debug/src/cores/pfbneo/sgx/" );
+    MASTERSYSTEM = ( "Sega Master System", "0x18000000", "/home/cpasjuste/dev/multi/pemu/cmake-build-debug/src/cores/pfbneo/sms/" );
+    SPECTRUM = ( "ZX Spectrum", "0x1d000000", "/home/cpasjuste/dev/multi/pemu/cmake-build-debug/src/cores/pfbneo/spectrum/" );
+    TG16 = ( "PC Engine TG16", "0x17020000", "/home/cpasjuste/dev/multi/pemu/cmake-build-debug/src/cores/pfbneo/tg16/" );
     ```
-  
-- pFBN support preview images and videos (put files in corresponding media folder. For arcade roms, for example: png files goes in "roms/media/mixrbv2", mp4 files in "roms/media/video"). Please note that the vita port doesn't support video previews.
-You can download a near fullset mixrbv2 and video package for each platform here:
-    - Arcade: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/arcade_mixrbv2.zip) (1.5GB), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/arcade_video.zip) (7.1GB)
-    - Channel F: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/channelf_mixrbv2.zip) (16MB), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/channelf_video.zip) (11MB)
-    - Colecovision: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/coleco_mixrbv2.zip) (128MB), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/coleco_video.zip) (248MB)
-    - MSX: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/msx_mixrbv2.zip) (77MB), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/msx_video.zip) (417MB)
-    - Nec PC-Engine: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/pce_mixrbv2.zip) (200MB), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/pce_video.zip) (1.2GB)
-    - Nec SuperGraFX: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/sgx_mixrbv2.zip) (3MB), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/sgx_video.zip) (60MB)
-    - Nec TurboGraFX-16: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/tg16_mixrbv2.zip) (61MB), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/tg16_video.zip) (713MB)
-    - Neo Geo Pocket: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/ngp_mixrbv2.zip) (47MB), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/ngp_video.zip) (280MB)
-    - Nintendo NES: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/nes_mixrbv2.zip) (667MB), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/nes_video.zip) (5.3GB)
-    - Nintendo NES FDS: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/fds_mixrbv2.zip) (71MB), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/fds_video.zip) (543MB)
-    - Sega GameGear: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/gamegear_mixrbv2.zip) (178MB), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/gamegear_video.zip) (1.9GB)
-    - Sega Master System: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/sms_mixrbv2.zip) (219MB), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/sms_video.zip) (2.2GB)
-    - Sega MegaDrive: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/megadrive_mixrbv2.zip) (878MB), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/megadrive_video.zip) (9.5GB)
-    - SG-1000: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/sg1000_mixrbv2.zip) (49MB), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/sg1000_video.zip) (132MB)
-    - Spectrum: [mixrbv2](http://files.mydedibox.fr/files/dev/pemu/pfbneo/spectrum_mixrbv2.zip) (110MB), [video](http://files.mydedibox.fr/files/dev/pemu/pfbneo/spectrum_video.zip) (1.1GB)
+  Please note that, unlike other pEMU emulators, **you need to use [a specific system id (HARDWARE_XXX)](https://github.com/finalburnneo/FBNeo/blob/36092078ac2ba48acf2105d2cad8310ab2236224/src/burn/burn.h#L494) for each system**.
+The "Arcade" system id "0x12341234" is a special case, arcade roms found in this path will get their system/id from fbneo internal drivers database.
 -----
 
 ### NINTENDO SWITCH INFORMATION
