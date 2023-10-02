@@ -13,9 +13,11 @@ class PFBNEOUtility {
 public:
     struct GameInfo {
         std::string name;
+        std::string manufacturer;
         std::string parent;
         std::string sysName;
         int sysId;
+        int players;
     };
 
     static int setDriverActive(const Game &game);

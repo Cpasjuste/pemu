@@ -52,6 +52,7 @@ namespace pemu {
         RectangleShape *pBlur = nullptr;
         SkinnedText *pTitleText = nullptr;
         ss_api::GameList mGameList;
+        bool mShowSystemText = false;
 
         c2d::C2DClock mTimerLoadInfo;
 #ifdef __3DS__

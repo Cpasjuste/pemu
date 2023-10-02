@@ -26,6 +26,25 @@ void PFBNRomList::build(const ss_api::GameList::GameAddedCb &cb) {
             game->name = gameInfo.name;
         }
 
+        // replace editor/developer
+        if ((game->editor.name.empty() || game->editor.name == "UNKNOWN")
+            && !game->developer.name.empty() && game->developer.name != "UNKNOWN") {
+            game->editor.name = game->developer.name;
+            game->editor.id = game->developer.id;
+        } else if ((game->developer.name.empty() || game->developer.name == "UNKNOWN")
+                   && !game->editor.name.empty() && game->editor.name != "UNKNOWN") {
+            game->developer.name = game->editor.name;
+            game->developer.id = game->editor.id;
+        }
+        if (!gameInfo.manufacturer.empty() && gameInfo.manufacturer != "<unknown>") {
+            if (game->editor.name.empty() || game->editor.name == "UNKNOWN") {
+                game->editor.name = gameInfo.manufacturer;
+            }
+            if (game->developer.name.empty() || game->developer.name == "UNKNOWN") {
+                game->developer.name = gameInfo.manufacturer;
+            }
+        }
+
         // replace system for arcade roms
         if (cfgSys.id == HARDWARE_PREFIX_ARCADE // is an arcade rom (located in arcade roms folder)
             && !gameInfo.sysName.empty() // system was found in fbneo database

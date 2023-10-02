@@ -54,6 +54,9 @@ PFBNEOUtility::GameInfo PFBNEOUtility::getGameInfo(const Game &game) {
         GameInfo gameInfo;
         gameInfo.name = BurnDrvGetTextA(DRV_FULLNAME) ? BurnDrvGetTextA(DRV_FULLNAME) : "";
         gameInfo.parent = BurnDrvGetTextA(DRV_PARENT) ? BurnDrvGetTextA(DRV_PARENT) : "";
+        gameInfo.manufacturer = BurnDrvGetTextA(DRV_MANUFACTURER) ? BurnDrvGetTextA(DRV_MANUFACTURER) : "";
+        gameInfo.players = BurnDrvGetMaxPlayers();
+
         //
         unsigned int id = BurnDrvGetHardwareCode();
         unsigned int prefix = ((id | HARDWARE_PREFIX_CARTRIDGE) ^ HARDWARE_PREFIX_CARTRIDGE) & 0xff000000;

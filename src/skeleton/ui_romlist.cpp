@@ -29,15 +29,15 @@ UIRomList::UIRomList(UiMain *main, RomList *romList, const c2d::Vector2f &size)
     pRomInfo = new UIRomInfo(pMain, this, skin->getFont(), pMain->getFontSize());
     UIRomList::add(pRomInfo);
 
-    // add rom list title (system text)
-    if (!(pMain->getConfig()->getOption(PEMUConfig::OptId::UI_FILTER_SYSTEM)->getFlags() & PEMUConfig::Flags::HIDDEN)) {
-        pTitleText = new SkinnedText(pMain, {"SKIN_CONFIG", "MAIN", "ROM_LIST", "SYSTEM_TEXT"});
-        if (pTitleText->available) {
-            UIRomList::add(pTitleText);
-        } else {
-            delete (pTitleText);
-        }
+    // add rom list title (system text + rom count)
+    pTitleText = new SkinnedText(pMain, {"SKIN_CONFIG", "MAIN", "ROM_LIST", "SYSTEM_TEXT"});
+    if (pTitleText->available) {
+        UIRomList::add(pTitleText);
+    } else {
+        delete (pTitleText);
     }
+    mShowSystemText = !(pMain->getConfig()->getOption(PEMUConfig::OptId::UI_FILTER_SYSTEM)->getFlags()
+                        & PEMUConfig::Flags::HIDDEN);
 
     // add rom listing ui
     Skin::TextGroup textGroup = skin->getText({"SKIN_CONFIG", "MAIN", "ROM_LIST", "TEXT"});
@@ -140,9 +140,15 @@ void UIRomList::updateRomList() {
     filterRomList();
     sortRomList();
 
-    if (pTitleText && pTitleText->available) {
-        std::string sys = pMain->getConfig()->get(PEMUConfig::OptId::UI_FILTER_SYSTEM)->getString();
-        pTitleText->setString(sys);
+    std::string sys = pMain->getConfig()->get(PEMUConfig::OptId::UI_FILTER_SYSTEM)->getString();
+    int systemId = sys == "ALL" ? -1 : pRomList->gameList->systemList.findByName(sys).id;
+    if (mShowSystemText && pTitleText) {
+        pTitleText->setString(sys + " - " +
+                              std::to_string(mGameList.getAvailableCount()) + "/" +
+                              std::to_string(pRomList->gameList->getCount(systemId)));
+    } else if (pTitleText) {
+        pTitleText->setString(std::to_string(mGameList.getAvailableCount()) + "/" +
+                              std::to_string(pRomList->gameList->getCount(systemId)));
     }
 
     if (pListBox) {
@@ -280,7 +286,7 @@ bool UIRomList::onInput(c2d::Input::Player *players) {
     }
 
     // only allow system switch if skin contains romlist title
-    if (pTitleText && pTitleText->available) {
+    if (pTitleText && mShowSystemText) {
         if (buttons & Input::Button::LT) {
             Option *sysOpt = pMain->getConfig()->get(PEMUConfig::OptId::UI_FILTER_SYSTEM);
             size_t sysCount = sysOpt->getArray().size();
