@@ -113,6 +113,8 @@ int PFBAUiEmu::load(const ss_api::Game &game) {
     PFBNEOUtility::setDriverActive(game);
     if (nBurnDrvActive >= nBurnDrvCount) {
         printf("PFBAUiEmu::load: driver not found\n");
+        pMain->getUiProgressBox()->setVisibility(Visibility::Hidden);
+        pMain->getUiMessageBox()->show("ERROR", "THIS GAME IS NOT SUPPORTED BY FBNEO...", "OK");
         return -1;
     }
 

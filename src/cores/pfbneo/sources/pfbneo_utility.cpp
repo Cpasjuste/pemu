@@ -38,8 +38,9 @@ int PFBNEOUtility::setDriverActive(const Game &game) {
         zipName = "ngp_" + zipName;
     }
 
-    for (unsigned int i = 0; i < nBurnDrvCount; i++) {
+    for (unsigned int i = 0; i < nBurnDrvCount + 1; i++) {
         nBurnDrvActive = i;
+        if (nBurnDrvActive >= nBurnDrvCount) break;
         if (zipName == BurnDrvGetTextA(DRV_NAME)) {
             break;
         }
