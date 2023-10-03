@@ -7,10 +7,7 @@
 
 #include "skeleton/pemu.h"
 
-#ifdef __PSP2__
-#include <psp2/power.h>
-#include <psp2/io/dirent.h>
-#elif __PS4__
+#ifdef __PS4__
 extern "C" int sceSystemServiceLoadExec(const char *path, const char *args[]);
 #endif
 

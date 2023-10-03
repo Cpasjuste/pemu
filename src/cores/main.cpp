@@ -10,14 +10,6 @@ using namespace pemu;
 PEMUUiMain *pemu_ui;
 
 int main(int argc, char **argv) {
-#ifdef __PSP2__
-    // set max cpu speed
-    scePowerSetArmClockFrequency(444);
-    scePowerSetBusClockFrequency(222);
-    scePowerSetGpuClockFrequency(222);
-    scePowerSetGpuXbarClockFrequency(166);
-#endif
-
     // custom io
     auto io = new PEMUIo();
 
@@ -52,12 +44,7 @@ int main(int argc, char **argv) {
     delete (cfg);
     delete (pemu_ui);
 
-#ifdef __PSP2__
-    scePowerSetArmClockFrequency(266);
-    scePowerSetBusClockFrequency(166);
-    scePowerSetGpuClockFrequency(166);
-    scePowerSetGpuXbarClockFrequency(111);
-#elif __PS4__
+#ifdef  __PS4__
     sceSystemServiceLoadExec((char *) "exit", nullptr);
     while (true) {}
 #endif
