@@ -30,15 +30,11 @@ static Option *optionAudioSync = nullptr;
 
 static void *audio_buffer = nullptr;
 
-static const char *s9x_base_dir = nullptr;
-
-static char default_dir[PATH_MAX + 1];
-
 static const char dirNames[13][32] = {
         "",             // DEFAULT_DIR
         "",             // HOME_DIR
         "",             // ROMFILENAME_DIR
-        "roms",          // ROM_DIR
+        "roms",         // ROM_DIR
         "sram",         // SRAM_DIR
         "saves",        // SNAPSHOT_DIR
         "screenshots",  // SCREENSHOT_DIR
@@ -47,7 +43,7 @@ static const char dirNames[13][32] = {
         "patch",        // PATCH_DIR
         "bios",         // BIOS_DIR
         "log",          // LOG_DIR
-        ""
+        ""              // LAST_DIR
 };
 
 static int S9xCreateDirectory();
@@ -69,8 +65,8 @@ int PSNESUiEmu::load(const ss_api::Game &game) {
     pMain->getUiProgressBox()->setLayer(1000);
     pMain->flip();
 
-    strncpy(default_dir, pMain->getIo()->getDataPath().c_str(), PATH_MAX);
-    s9x_base_dir = default_dir;
+    //strncpy(default_dir, pMain->getIo()->getDataPath().c_str(), PATH_MAX);
+    //s9x_base_dir = default_dir;
 
     memset(&Settings, 0, sizeof(Settings));
     S9xLoadConfigFiles(nullptr, 0);
@@ -309,26 +305,20 @@ bool8 S9xDeinitUpdate(int width, int height) {
     return TRUE;
 }
 
-bool8 S9xContinueUpdate(int width, int height) {
-    S9xDeinitUpdate(width, height);
-    return TRUE;
-}
-
 static int S9xCreateDirectory() {
-    if (strlen(s9x_base_dir) + 1 + sizeof(dirNames[0]) > PATH_MAX + 1)
-        return (-1);
-
-    m_ui->getIo()->create(s9x_base_dir);
-
-    for (int i = 0; i < LAST_DIR; i++) {
-        if (dirNames[i][0]) {
-            char s[PATH_MAX + 1];
-            snprintf(s, PATH_MAX + 1, "%s%s%s", s9x_base_dir, SLASH_STR, dirNames[i]);
-            m_ui->getIo()->create(s);
+    m_ui->getIo()->create(m_ui->getIo()->getDataPath());
+    for (const auto &dirName: dirNames) {
+        if (dirName[0]) {
+            m_ui->getIo()->create(m_ui->getIo()->getDataPath() + dirName);
         }
     }
 
     return (0);
+}
+
+bool8 S9xContinueUpdate(int width, int height) {
+    S9xDeinitUpdate(width, height);
+    return TRUE;
 }
 
 std::string S9xGetDirectory(s9x_getdirtype type) {
@@ -336,7 +326,7 @@ std::string S9xGetDirectory(s9x_getdirtype type) {
         case ROMFILENAME_DIR:
             return Memory.ROMFilename;
         default:
-            return s9x_base_dir;
+            return m_ui->getIo()->getDataPath() + dirNames[type];
     }
 }
 
@@ -370,8 +360,6 @@ std::string S9xGetFilenameInc(std::string in, s9x_getdirtype) { return ""; }
 
 const char *S9xStringInput(const char *message) { return nullptr; }
 
-void S9xSetPalette() {}
-
 bool8 S9xOpenSoundDevice() { return TRUE; }
 
 void S9xToggleSoundChannel(int c) {}
@@ -389,7 +377,3 @@ bool S9xPollButton(uint32 id, bool *pressed) { return false; }
 bool S9xPollAxis(uint32 id, int16 *value) { return false; }
 
 bool S9xPollPointer(uint32 id, int16 *x, int16 *y) { return false; }
-
-const char *S9xChooseFilename(bool8 read_only) { return nullptr; }
-
-const char *S9xChooseMovieFilename(bool8 read_only) { return nullptr; }

@@ -233,8 +233,11 @@ std::vector<PEMUConfig::RomPath> PEMUConfig::getRomPaths() {
         if (sysName && sysId && path) {
             std::string p = config_setting_get_string(path);
             if (!Utility::endsWith(p, "/")) p += "/";
-            auto id = Utility::parseHex(config_setting_get_string(sysId));
-            romPaths.push_back({p, {(int) id, 0, config_setting_get_string(sysName)}});
+            const char *s = config_setting_get_string(sysId);
+            if (s) {
+                auto id = Utility::parseHex(s);
+                romPaths.push_back({p, {(int) id, 0, config_setting_get_string(sysName)}});
+            }
         }
     }
 

@@ -16,8 +16,8 @@ SKIN_CONFIG :
     color11 = [ 193, 18, 28, 255 ];     // MAIN > HELP > outline_color
     color12 = [ 0, 10, 50, 255 ];      // MAIN > ROM_LIST > color
     color13 = [ 193, 18, 28, 255 ];    // MAIN > ROM_LIST > outline_color
-    color14 = [ 40, 40, 40, 255 ];      // MAIN > ROM_LIST > TITLE_TEXT > color
-    color15 = [ 153, 255, 51, 255 ];    // MAIN > ROM_LIST > TITLE_TEXT > outline_color
+    color14 = [ 180, 180, 180, 255 ];      // MAIN > ROM_LIST > TITLE_TEXT > color
+    color15 = [ 193, 18, 28, 255 ];    // MAIN > ROM_LIST > TITLE_TEXT > outline_color
     color16 = [ 180, 180, 180, 255 ];    // MAIN > ROM_LIST > TEXT > color
     color17 = [ 220, 18, 28, 255 ];     // MAIN > ROM_LIST > TEXT > color_missing
     color18 = [ 0, 0, 0, 255 ];         // MAIN > ROM_LIST > TEXT > outline_color
