@@ -4,6 +4,7 @@ on:
   push:
     tags:
       - "v*.*"
+  workflow_dispatch:
 
 jobs:
 
@@ -27,37 +28,42 @@ jobs:
           sudo pacbrew-pacman -Syu
           sudo pacbrew-pacman --noconfirm -S ps4-openorbis ps4-openorbis-portlibs
 
+      - name: Configure
+        run: |
+          cd $GITHUB_WORKSPACE
+          mkdir cmake-build && cd cmake-build
+          export OPENORBIS=/opt/pacbrew/ps4/openorbis
+          cmake -G "Unix Makefiles" -DPLATFORM_PS4=ON -DCMAKE_BUILD_TYPE=Release ..
+
       - name: Build pfbneo
         run: |
-          mkdir cmake-build-pfbneo && cd cmake-build-pfbneo
-          export OPENORBIS=/opt/pacbrew/ps4/openorbis
-          cmake -G "Unix Makefiles" -DPLATFORM_PS4=ON -DOPTION_EMU=pfbneo -DCMAKE_BUILD_TYPE=Release ..
+          cd $GITHUB_WORKSPACE/cmake-build
           make pfbneo.deps
-          make -j $(getconf _NPROCESSORS_ONLN) pfbneo_pkg
+          make pfbneo_pkg
           mv *.pkg $GITHUB_WORKSPACE
 
       - name: Build pgen
         run: |
-          mkdir cmake-build-pgen && cd cmake-build-pgen
-          export OPENORBIS=/opt/pacbrew/ps4/openorbis
-          cmake -G "Unix Makefiles" -DPLATFORM_PS4=ON -DOPTION_EMU=pgen -DCMAKE_BUILD_TYPE=Release ..
-          make -j $(getconf _NPROCESSORS_ONLN) pgen_pkg
+          cd $GITHUB_WORKSPACE/cmake-build
+          make pgen_pkg
           mv *.pkg $GITHUB_WORKSPACE
 
       - name: Build pnes
         run: |
-          mkdir cmake-build-pnes && cd cmake-build-pnes
-          export OPENORBIS=/opt/pacbrew/ps4/openorbis
-          cmake -G "Unix Makefiles" -DPLATFORM_PS4=ON -DOPTION_EMU=pnes -DCMAKE_BUILD_TYPE=Release ..
-          make -j $(getconf _NPROCESSORS_ONLN) pnes_pkg
+          cd $GITHUB_WORKSPACE/cmake-build
+          make pnes_pkg
           mv *.pkg $GITHUB_WORKSPACE
 
       - name: Build psnes
         run: |
-          mkdir cmake-build-psnes && cd cmake-build-psnes
-          export OPENORBIS=/opt/pacbrew/ps4/openorbis
-          cmake -G "Unix Makefiles" -DPLATFORM_PS4=ON -DOPTION_EMU=psnes -DCMAKE_BUILD_TYPE=Release ..
-          make -j $(getconf _NPROCESSORS_ONLN) psnes_pkg
+          cd $GITHUB_WORKSPACE/cmake-build
+          make psnes_pkg
+          mv *.pkg $GITHUB_WORKSPACE
+
+      - name: Build pgba
+        run: |
+          cd $GITHUB_WORKSPACE/cmake-build
+          make pgba_pkg
           mv *.pkg $GITHUB_WORKSPACE
 
       - name: Release

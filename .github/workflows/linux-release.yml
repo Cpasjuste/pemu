@@ -4,6 +4,7 @@ on:
   push:
     tags:
       - "v*.*"
+  workflow_dispatch:
 
 jobs:
 
@@ -24,40 +25,48 @@ jobs:
               libconfig-dev libglm-dev libfreetype6-dev libpng-dev libminizip-dev zlib1g-dev \
               libvdpau-dev libva-dev libavcodec-dev libavfilter-dev libavformat-dev libavutil-dev \
               libpostproc-dev libswresample-dev libswscale-dev libmpv-dev libass-dev libbz2-dev \
-              libfribidi-dev libzip-dev libarchive-dev libfuse-dev
+              libfribidi-dev libzip-dev libarchive-dev
+
+      - name: Configure
+        run: |
+          cd $GITHUB_WORKSPACE
+          mkdir cmake-build && cd cmake-build
+          cmake -G "Unix Makefiles" -DPLATFORM_LINUX=ON -DCMAKE_BUILD_TYPE=Release ..
 
       - name: Build pfbneo
         run: |
-          mkdir cmake-build-pfbneo && cd cmake-build-pfbneo
-          cmake -G "Unix Makefiles" -DPLATFORM_LINUX=ON -DOPTION_EMU=pfbneo -DCMAKE_BUILD_TYPE=Release ..
+          cd $GITHUB_WORKSPACE/cmake-build
           make pfbneo.deps
-          make -j $(getconf _NPROCESSORS_ONLN) pfbneo
-          mv pfbneo/pfbneo $GITHUB_WORKSPACE/pfbneo-linux
+          make pfbneo_linux_release
+          mv *.zip $GITHUB_WORKSPACE
 
       - name: Build pgen
         run: |
-          mkdir cmake-build-pgen && cd cmake-build-pgen
-          cmake -G "Unix Makefiles" -DPLATFORM_LINUX=ON -DOPTION_EMU=pgen -DCMAKE_BUILD_TYPE=Release ..
-          make -j $(getconf _NPROCESSORS_ONLN) pgen
-          mv pgen/pgen $GITHUB_WORKSPACE/pgen-linux
+          cd $GITHUB_WORKSPACE/cmake-build
+          make pgen_linux_release
+          mv *.zip $GITHUB_WORKSPACE
 
       - name: Build pnes
         run: |
-          mkdir cmake-build-pnes && cd cmake-build-pnes
-          cmake -G "Unix Makefiles" -DPLATFORM_LINUX=ON -DOPTION_EMU=pnes -DCMAKE_BUILD_TYPE=Release ..
-          make -j $(getconf _NPROCESSORS_ONLN) pnes
-          mv pnes/pnes $GITHUB_WORKSPACE/pnes-linux
+          cd $GITHUB_WORKSPACE/cmake-build
+          make pnes_linux_release
+          mv *.zip $GITHUB_WORKSPACE
 
       - name: Build psnes
         run: |
-          mkdir cmake-build-psnes && cd cmake-build-psnes
-          cmake -G "Unix Makefiles" -DPLATFORM_LINUX=ON -DOPTION_EMU=psnes -DCMAKE_BUILD_TYPE=Release ..
-          make -j $(getconf _NPROCESSORS_ONLN) psnes
-          mv psnes/psnes $GITHUB_WORKSPACE/psnes-linux
+          cd $GITHUB_WORKSPACE/cmake-build
+          make psnes_linux_release
+          mv *.zip $GITHUB_WORKSPACE
+
+      - name: Build pgba
+        run: |
+          cd $GITHUB_WORKSPACE/cmake-build
+          make pgba_linux_release
+          mv *.zip $GITHUB_WORKSPACE
 
       - name: Release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
-          files: '*-linux'
+          files: '*.zip'
           token: ${{ secrets.GITHUB_TOKEN }}

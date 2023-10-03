@@ -24,33 +24,36 @@ jobs:
               libconfig-dev libglm-dev libfreetype6-dev libpng-dev libminizip-dev zlib1g-dev \
               libvdpau-dev libva-dev libavcodec-dev libavfilter-dev libavformat-dev libavutil-dev \
               libpostproc-dev libswresample-dev libswscale-dev libmpv-dev libass-dev libbz2-dev \
-              libfribidi-dev libzip-dev libarchive-dev libfuse-dev
+              libfribidi-dev libzip-dev libarchive-dev
+
+      - name: Configure
+        run: |
+          cd $GITHUB_WORKSPACE
+          mkdir cmake-build && cd cmake-build
+          cmake -G "Unix Makefiles" -DPLATFORM_LINUX=ON -DCMAKE_BUILD_TYPE=Debug ..
 
       - name: Build pfbneo
         run: |
-          cd $GITHUB_WORKSPACE
-          mkdir cmake-build-pfbneo && cd cmake-build-pfbneo
-          cmake -G "Unix Makefiles" -DPLATFORM_LINUX=ON -DOPTION_EMU=pfbneo -DCMAKE_BUILD_TYPE=Debug ..
+          cd $GITHUB_WORKSPACE/cmake-build
           make pfbneo.deps
-          make -j $(getconf _NPROCESSORS_ONLN) pfbneo
+          make pfbneo
 
       - name: Build pgen
         run: |
-          cd $GITHUB_WORKSPACE
-          mkdir cmake-build-pgen && cd cmake-build-pgen
-          cmake -G "Unix Makefiles" -DPLATFORM_LINUX=ON -DOPTION_EMU=pgen -DCMAKE_BUILD_TYPE=Debug ..
-          make -j $(getconf _NPROCESSORS_ONLN) pgen
+          cd $GITHUB_WORKSPACE/cmake-build
+          make pgen
 
       - name: Build pnes
         run: |
-          cd $GITHUB_WORKSPACE
-          mkdir cmake-build-pnes && cd cmake-build-pnes
-          cmake -G "Unix Makefiles" -DPLATFORM_LINUX=ON -DOPTION_EMU=pnes -DCMAKE_BUILD_TYPE=Debug ..
-          make -j $(getconf _NPROCESSORS_ONLN) pnes
+          cd $GITHUB_WORKSPACE/cmake-build
+          make pnes
 
       - name: Build psnes
         run: |
-          cd $GITHUB_WORKSPACE
-          mkdir cmake-build-psnes && cd cmake-build-psnes
-          cmake -G "Unix Makefiles" -DPLATFORM_LINUX=ON -DOPTION_EMU=psnes -DCMAKE_BUILD_TYPE=Debug ..
-          make -j $(getconf _NPROCESSORS_ONLN) psnes
+          cd $GITHUB_WORKSPACE/cmake-build
+          make psnes
+
+      - name: Build pgba
+        run: |
+          cd $GITHUB_WORKSPACE/cmake-build
+          make pgba
