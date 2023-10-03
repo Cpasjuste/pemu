@@ -60,7 +60,7 @@ jobs:
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
           make pgba.nro
-          mv src/cores/psnes/pgba.nro $GITHUB_WORKSPACE
+          mv src/cores/pgba/pgba.nro $GITHUB_WORKSPACE
 
       - name: Release
         uses: softprops/action-gh-release@v1
