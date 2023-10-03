@@ -1,7 +1,7 @@
 pGEN: Portable Genesis
 ===========================
 
-![](https://github.com/Cpasjuste/pemu/raw/master/pgen/data/screenshot.png)
+![](https://github.com/Cpasjuste/pemu/raw/master/src/cores/pgen/data/screenshot.png)
 
 ### The main goals of this [Genesis-Plus-GX](https://github.com/ekeeke/Genesis-Plus-GX) port are:
 - have a basic but user-friendly user interface on non Windows devices
