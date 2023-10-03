@@ -121,6 +121,11 @@ void UiEmu::stop() {
 
     pMain->updateInputMapping(false);
     setVisibility(Visibility::Hidden);
+
+    if (mExitOnStop) {
+        pMain->setVisibility(Visibility::Hidden);
+        getUi()->done = true;
+    }
 }
 
 bool UiEmu::onInput(c2d::Input::Player *players) {

@@ -23,6 +23,13 @@ PEMUConfig::PEMUConfig(c2d::Io *io, const std::string &name, int version)
     ui_filtering.addOption({"FILTER_FAVORITES", {"OFF", "ON"}, 0, OptId::UI_FILTER_FAVORITES});
     ui_filtering.addOption({"FILTER_MISSING", {"OFF", "ON"}, 1, OptId::UI_FILTER_AVAILABLE});
     ui_filtering.addOption({"FILTER_CLONES", {"OFF", "ON"}, 1, OptId::UI_FILTER_CLONES})->setFlags(Flags::HIDDEN);
+    ui_filtering.addOption({"FILTER_SYSTEM", {"ALL"}, 0, OptId::UI_FILTER_SYSTEM})->setFlags(PEMUConfig::Flags::HIDDEN);
+    ui_filtering.addOption({"FILTER_GENRE", {"ALL"}, 0, OptId::UI_FILTER_GENRE});
+    ui_filtering.addOption({"FILTER_DATE", {"ALL"}, 0, OptId::UI_FILTER_DATE});
+    ui_filtering.addOption({"FILTER_EDITOR", {"ALL"}, 0, OptId::UI_FILTER_EDITOR});
+    ui_filtering.addOption({"FILTER_DEVELOPER", {"ALL"}, 0, OptId::UI_FILTER_DEVELOPER});
+    ui_filtering.addOption({"FILTER_PLAYERS", {"ALL"}, 0, OptId::UI_FILTER_PLAYERS});
+    ui_filtering.addOption({"FILTER_RATING", {"ALL"}, 0, OptId::UI_FILTER_RATING});
     addGroup(ui_filtering);
 
     /// UI_OPTIONS

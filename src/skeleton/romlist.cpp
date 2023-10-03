@@ -44,7 +44,7 @@ RomList::RomList(UiMain *_ui, const std::string &emuVersion, const std::vector<s
     rect->add(version);
 
     ui->add(rect);
-    ui->flip();
+    //ui->flip();
     // UI
 
     gameList = new GameList();
@@ -56,6 +56,8 @@ void RomList::build(const ss_api::GameList::GameAddedCb &cb) {
     auto cfg = ui->getConfig();
     p_cb = cb;
     m_count = 0;
+
+    ui->flip();
 
     auto romPaths = cfg->getRomPaths();
     for (const auto &p: romPaths) {
@@ -86,14 +88,13 @@ void RomList::build(const ss_api::GameList::GameAddedCb &cb) {
 
     // add filtering options
     auto grp = cfg->getGroup(PEMUConfig::GrpId::UI_FILTERING);
-    grp->addOption({"FILTER_SYSTEM", gameList->systemList.getNames(), 0,
-                    PEMUConfig::OptId::UI_FILTER_SYSTEM})->setFlags(PEMUConfig::Flags::HIDDEN);
-    grp->addOption({"FILTER_GENRE", gameList->getGenreNames(), 0, PEMUConfig::OptId::UI_FILTER_GENRE});
-    grp->addOption({"FILTER_DATE", gameList->getDates(), 0, PEMUConfig::OptId::UI_FILTER_DATE});
-    grp->addOption({"FILTER_EDITOR", gameList->getEditorNames(), 0, PEMUConfig::OptId::UI_FILTER_EDITOR});
-    grp->addOption({"FILTER_DEVELOPER", gameList->getDeveloperNames(), 0, PEMUConfig::OptId::UI_FILTER_DEVELOPER});
-    grp->addOption({"FILTER_PLAYERS", gameList->getPlayersNames(), 0, PEMUConfig::OptId::UI_FILTER_PLAYERS});
-    grp->addOption({"FILTER_RATING", gameList->getRatingNames(), 0, PEMUConfig::OptId::UI_FILTER_RATING});
+    grp->getOption(PEMUConfig::OptId::UI_FILTER_SYSTEM)->setArray(gameList->systemList.getNames(), 0);
+    grp->getOption(PEMUConfig::OptId::UI_FILTER_GENRE)->setArray(gameList->getGenreNames(), 0);
+    grp->getOption(PEMUConfig::OptId::UI_FILTER_DATE)->setArray(gameList->getDates(), 0);
+    grp->getOption(PEMUConfig::OptId::UI_FILTER_EDITOR)->setArray(gameList->getEditorNames(), 0);
+    grp->getOption(PEMUConfig::OptId::UI_FILTER_DEVELOPER)->setArray(gameList->getDeveloperNames(), 0);
+    grp->getOption(PEMUConfig::OptId::UI_FILTER_PLAYERS)->setArray(gameList->getPlayersNames(), 0);
+    grp->getOption(PEMUConfig::OptId::UI_FILTER_RATING)->setArray(gameList->getRatingNames(), 0);
 
     // custom core hide/show flags
     auto ids = cfg->getCoreHiddenOptionToEnable();

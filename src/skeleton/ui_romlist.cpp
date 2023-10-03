@@ -205,6 +205,10 @@ RomList *UIRomList::getRomList() {
     return pRomList;
 }
 
+void UIRomList::setGames(const std::vector<ss_api::Game> &games) {
+    pListBox->setGames(games);
+}
+
 void UIRomList::setVisibility(c2d::Visibility visibility, bool tweenPlay) {
     if (visibility == c2d::Visibility::Hidden) {
         pRomInfo->load();
