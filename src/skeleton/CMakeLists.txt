@@ -6,10 +6,13 @@ project(cross2dui)
 #################
 # libcross2dui
 #################
-set(CROSS2DUI_INCLUDE ..)
+set(CROSS2DUI_INCLUDE
+        ${CMAKE_CURRENT_SOURCE_DIR}/..
+)
 file(GLOB CROSS2DUI_SOURCE
         ${CMAKE_CURRENT_SOURCE_DIR}/*.c*
         ${CMAKE_CURRENT_SOURCE_DIR}/skin/*.c*
+        ${CMAKE_CURRENT_SOURCE_DIR}/skin_new/*.c*
 )
 
 set(FLAGS -D__SSCRAP__)

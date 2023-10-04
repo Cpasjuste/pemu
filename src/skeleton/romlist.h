@@ -6,13 +6,21 @@
 #define C2DUI_ROMLIST_H
 
 #include <vector>
+#include "pemu_config.h"
 
 namespace pemu {
     class UiMain;
 
     class RomList {
     public:
+        enum PreviewType {
+            Tex,
+            Vid
+        };
+
         RomList(UiMain *ui, const std::string &emuVersion, const std::vector<std::string> &filters);
+
+        RomList(PEMUConfig *cfg, const std::string &emuVersion, const std::vector<std::string> &filters);
 
         virtual ~RomList();
 
@@ -26,9 +34,9 @@ namespace pemu {
 
         void setLoadingText(const char *format, ...);
 
-        UiMain *ui;
-        c2d::RectangleShape *rect;
-        c2d::Text *text;
+        UiMain *ui = nullptr;
+        c2d::Text *text = nullptr;
+        c2d::RectangleShape *rect = nullptr;
         ss_api::GameList *gameList = nullptr;
         ss_api::GameList *gameListFav = nullptr;
         ss_api::GameList::GameAddedCb p_cb = nullptr;
@@ -36,6 +44,7 @@ namespace pemu {
     protected:
         std::vector<std::string> filters;
         size_t m_count = 0;
+        PEMUConfig *mConfig = nullptr;
     };
 }
 

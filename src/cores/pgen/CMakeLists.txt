@@ -62,7 +62,7 @@ endif ()
 ##############
 set(PGEN_INC sources)
 file(GLOB PGEN_SRC sources/*.c*)
-list(APPEND PGEN_SRC ../main.cpp)
+list(APPEND PGEN_SRC ../main.cpp ../app.cpp)
 
 #####################
 # PLATORM SPECIFIC

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    rectangle x: x position in pixels ("100") or percent relative to parent ("100%")
+    rectangle y: y position in pixels ("100") or percent relative to parent ("100%")
+    rectangle w: width in pixels ("100"), percent relative to parent ("100%") or parent width minus value ("-100")
+    rectangle h: height in pixels ("100"), percent relative to parent ("100%") or parent height minus value ("-100")
+    rectangle origin: left, top_left, top, top_right, right, bottom_right, bottom, bottom_left, center
+-->
+<!--
+    texture x: x position in pixels ("100") or percent relative to parent ("100%")
+    texture y: y position in pixels ("100") or percent relative to parent ("100%")
+    texture w: width in pixels ("100"), percent relative to parent ("100%") or parent width minus value ("-100")
+    texture h: height in pixels ("100"), percent relative to parent ("100%") or parent height minus value ("-100")
+    texture origin: left, top_left, top, top_right, right, bottom_right, bottom, bottom_left, center
+    texture path: path to image file
+-->
+<!--
+    tween: tween_position, tween_scale, tween_rotation, tween_color, tween_alpha
+    tween loop: none, loop, pingpong
+-->
+
+<skin name="RetroRoot">
+    <rect x="0" y="0" w="1280" h="720"/>
+    <color r="0" g="0" b="0" a="255"/>
+
+    <!-- colors -->
+    <colors>
+        <red r="239" g="71" b="111" a="255"/>
+        <green r="6" g="214" b="160" a="255"/>
+        <blue r="17" g="138" b="178" a="255"/>
+        <yellow r="255" g="209" b="102" a="255"/>
+        <gray r="45" g="45" b="45" a="255"/>
+        <gray_alpha r="45" g="45" b="45" a="220"/>
+        <gray_light r="55" g="55" b="55" a="255"/>
+        <black r="30" g="30" b="30" a="255"/>
+        <white r="255" g="255" b="255" a="255"/>
+        <green_alpha r="6" g="214" b="160" a="50"/>
+    </colors>
+
+    <!-- fonts -->
+    <fonts>
+        <font name="default" path="fonts/default.ttf" offset="-4"/>
+        <font name="roboto" path="fonts/Roboto-Condensed.ttf" offset="-4"/>
+    </fonts>
+
+    <!-- textures -->
+    <textures>
+        <texture name="apps" path="sprites/menu/apps.png"/>
+        <texture name="games" path="sprites/menu/games.png"/>
+        <texture name="emulation" path="sprites/menu/emulation.png"/>
+        <texture name="packages" path="sprites/menu/packages.png"/>
+        <texture name="settings" path="sprites/menu/settings.png"/>
+        <texture name="quit" path="sprites/menu/quit.png"/>
+        <texture name="preview" path="powermanga.png"/>
+    </textures>
+
+    <!-- widgets -->
+    <widgets>
+        <widget name="main_menu" path="widgets/main_menu.xml"/>
+        <widget name="main_menu_item" path="widgets/main_menu_item.xml"/>
+        <widget name="gamelist_listbox" path="widgets/gamelist_listbox.xml"/>
+        <widget name="gamelist_preview" path="widgets/gamelist_preview.xml"/>
+    </widgets>
+
+    <!-- main screen -->
+    <rectangle name="home">
+        <rect x="2" y="2" w="-4" h="-4"/>
+        <color colors="gray_light"/>
+        <outline colors="red" size="2"/>
+        <process_inputs>true</process_inputs>
+
+        <!-- events -->
+        <event type="button_pressed">
+            <button name="left"/>
+            <target name="main_menu"/>
+            <visibility>visible</visibility>
+            <process_inputs>true</process_inputs>
+        </event>
+        <event type="button_pressed">
+            <button name="left"/>
+            <target name="home_shade"/>
+            <visibility>visible</visibility>
+        </event>
+        <event type="button_pressed">
+            <button name="left"/>
+            <target name="home"/>
+            <target name="gamelist_listbox"/>
+            <process_inputs>false</process_inputs>
+        </event>
+        <!-- events -->
+
+        <!-- main listbox widgets -->
+        <widget name="gamelist_listbox"/>
+        <widget name="gamelist_preview"/>
+        <!-- main listbox widgets -->
+
+        <text name="version_text">
+            <rect x="99%" y="99%" w="100%" h="15"/>
+            <origin>bottom_right</origin>
+            <color r="255" g="255" b="0" a="255"/>
+            <outline r="255" g="51" b="51" a="255" size="1"/>
+            <font fonts="default"/>
+            <string>${APP_NAME} - ${APP_VERSION}</string>
+        </text>
+    </rectangle>
+
+    <rectangle name="home_shade">
+        <rect x="2" y="2" w="-4" h="-4"/>
+        <color colors="gray_alpha"/>
+        <visibility>hidden</visibility>
+        <tween_alpha from="0" to="180" duration="0.1" loop="none"/>
+    </rectangle>
+
+    <!-- main menu widget -->
+    <widget name="main_menu"/>
+
+</skin>

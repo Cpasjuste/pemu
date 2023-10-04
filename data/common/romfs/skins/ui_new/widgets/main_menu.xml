@@ -1,0 +1,103 @@
+<listbox name="main_menu" rows="6">
+    <origin>left</origin>
+    <rect x="-35%" y="50%" w="32%" h="60%" radius="10"/>
+    <color colors="gray"/>
+    <outline colors="red" size="2"/>
+    <visibility>hidden</visibility>
+    <tween_position from.x="-34%" from.y="85%" to.x="-4%" to.y="85%" duration="0.1" loop="none"/>
+    <!-- events -->
+    <event type="button_pressed">
+        <button name="right"/>
+        <target name="main_menu"/>
+        <target name="home_shade"/>
+        <visibility>hidden</visibility>
+        <process_inputs>false</process_inputs>
+    </event>
+    <event type="button_pressed">
+        <button name="right"/>
+        <target name="home"/>
+        <process_inputs>true</process_inputs>
+    </event>
+    <event type="selection_changed">
+        <condition target="main_menu_item_text" equal="APPS"/>
+        <target name="gamelist_listbox"/>
+        <data name="games" filter="app"/>
+        <visibility>visible</visibility>
+        <process_inputs>true</process_inputs>
+    </event>
+    <event type="selection_changed">
+        <condition target="main_menu_item_text" equal="EMULATION"/>
+        <target name="gamelist_listbox"/>
+        <data name="games" filter="emulator"/>
+        <visibility>visible</visibility>
+        <process_inputs>true</process_inputs>
+    </event>
+    <event type="selection_changed">
+        <condition target="main_menu_item_text" equal="GAMES"/>
+        <target name="gamelist_listbox"/>
+        <data name="games" filter="game"/>
+        <visibility>visible</visibility>
+        <process_inputs>true</process_inputs>
+    </event>
+    <event type="selection_changed">
+        <condition target="main_menu_item_text" equal="PACKAGES"/>
+        <target name="packages_listbox"/>
+        <data name="games" filter=""/>
+        <visibility>visible</visibility>
+        <process_inputs>true</process_inputs>
+    </event>
+    <!-- events -->
+    <highlight name="main_menu_items_highlight">
+        <rect radius="10"/>
+        <color colors="green"/>
+        <tween_alpha from="40" to="70" duration="1" loop="pingpong"/>
+    </highlight>
+    <widget name="main_menu_item">
+        <sprite name="main_menu_item_icon">
+            <texture textures="apps"/>
+        </sprite>
+        <text name="main_menu_item_text">
+            <string>APPS</string>
+        </text>
+    </widget>
+    <widget name="main_menu_item">
+        <sprite name="main_menu_item_icon">
+            <texture textures="emulation"/>
+        </sprite>
+        <text name="main_menu_item_text">
+            <string>EMULATION</string>
+        </text>
+    </widget>
+    <widget name="main_menu_item">
+        <sprite name="main_menu_item_icon">
+            <texture textures="games"/>
+        </sprite>
+        <text name="main_menu_item_text">
+            <string>GAMES</string>
+        </text>
+    </widget>
+    <widget name="main_menu_item">
+        <sprite name="main_menu_item_icon">
+            <texture textures="packages"/>
+        </sprite>
+        <text name="main_menu_item_text">
+            <string>PACKAGES</string>
+        </text>
+    </widget>
+    <widget name="main_menu_item">
+        <sprite name="main_menu_item_icon">
+            <texture textures="settings"/>
+        </sprite>
+        <text name="main_menu_item_text">
+            <string>SETTINGS</string>
+        </text>
+    </widget>
+    <widget name="main_menu_item">
+        <sprite name="main_menu_item_icon">
+            <texture textures="quit"/>
+        </sprite>
+        <text name="main_menu_item_text">
+            <string>QUIT</string>
+        </text>
+    </widget>
+</listbox>

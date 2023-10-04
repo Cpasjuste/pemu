@@ -1,0 +1,28 @@
+<rectangle>
+    <rect x="53%" y="10%" w="45%" h="80%"/>
+    <rectangle name="gamelist_preview_image">
+        <rect x="0" y="0" w="100%" h="60%" radius="8"/>
+        <color colors="gray"/>
+        <outline colors="green" size="1"/>
+        <sprite name="gamelist_preview">
+            <data name="games"/>
+            <rect x="50%" y="50%" w="98%" h="98%"/>
+            <origin>center</origin>
+            <color colors="white"/>
+            <texture path="${TEXTURE}"/>
+        </sprite>
+    </rectangle>
+    <rectangle name="gamelist_preview_desc">
+        <rect x="0%" y="63%" w="100%" h="36%" radius="8"/>
+        <color colors="gray"/>
+        <outline colors="yellow" size="1"/>
+        <text>
+            <data name="games"/>
+            <rect x="2%" y="6%" w="96%" h="90%"/>
+            <color colors="white"/>
+            <font fonts="roboto"/>
+            <options overflow="newline" size="11%" spacing="2%"/>
+            <string>${DESCRIPTION}</string>
+        </text>
+    </rectangle>
+</rectangle>

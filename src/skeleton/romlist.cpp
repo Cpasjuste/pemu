@@ -6,58 +6,68 @@
 #include <string>
 #include <algorithm>
 #include "pemu.h"
+#include "romlist.h"
+
 
 RomList::RomList(UiMain *_ui, const std::string &emuVersion, const std::vector<std::string> &_filters) {
     printf("RomList()\n");
-    ui = _ui;
     filters = _filters;
+    ui = _ui;
 
-    // UI
-    rect = new C2DRectangle(
-            Vector2f(ui->getSize().x - 8, ui->getSize().y - 8));
-    ui->getSkin()->loadRectangleShape(rect, {"MAIN"});
+    if (ui) {
+        // UI
+        rect = new C2DRectangle(
+                Vector2f(ui->getSize().x - 8, ui->getSize().y - 8));
+        ui->getSkin()->loadRectangleShape(rect, {"MAIN"});
 
-    auto *title = new RectangleShape({16, 16});
-    if (ui->getSkin()->loadRectangleShape(title, {"MAIN", "TITLE"})) {
-        title->setOrigin(Origin::Center);
-        title->setPosition(Vector2f(rect->getSize().x / 2, rect->getSize().y / 2));
-        float scaling = std::min(
-                (rect->getSize().x * 0.8f) / title->getSize().x,
-                (rect->getSize().y * 0.8f) / title->getSize().y);
-        title->setScale(scaling, scaling);
-        rect->add(title);
-    } else {
-        delete (title);
+        auto *title = new RectangleShape({16, 16});
+        if (ui->getSkin()->loadRectangleShape(title, {"MAIN", "TITLE"})) {
+            title->setOrigin(Origin::Center);
+            title->setPosition(Vector2f(rect->getSize().x / 2, rect->getSize().y / 2));
+            float scaling = std::min(
+                    (rect->getSize().x * 0.8f) / title->getSize().x,
+                    (rect->getSize().y * 0.8f) / title->getSize().y);
+            title->setScale(scaling, scaling);
+            rect->add(title);
+        } else {
+            delete (title);
+        }
+
+        text = new Text();
+        ui->getSkin()->loadText(text, {"ROM_LIST", "TEXT"});
+        text->setOrigin(Origin::BottomLeft);
+        text->setPosition(8, rect->getSize().y - 8);
+        rect->add(text);
+
+        auto *version = new Text();
+        ui->getSkin()->loadText(version, {"ROM_LIST", "TEXT"});
+        version->setOrigin(Origin::BottomRight);
+        version->setPosition(rect->getSize().x - 8, rect->getSize().y - 8);
+        version->setString(emuVersion);
+        rect->add(version);
+
+        ui->add(rect);
     }
-
-    text = new Text();
-    ui->getSkin()->loadText(text, {"ROM_LIST", "TEXT"});
-    text->setOrigin(Origin::BottomLeft);
-    text->setPosition(8, rect->getSize().y - 8);
-    rect->add(text);
-
-    auto *version = new Text();
-    ui->getSkin()->loadText(version, {"ROM_LIST", "TEXT"});
-    version->setOrigin(Origin::BottomRight);
-    version->setPosition(rect->getSize().x - 8, rect->getSize().y - 8);
-    version->setString(emuVersion);
-    rect->add(version);
-
-    ui->add(rect);
-    //ui->flip();
-    // UI
 
     gameList = new GameList();
     gameListFav = new GameList();
 }
 
+RomList::RomList(PEMUConfig *cfg, const std::string &emuVersion, const std::vector<std::string> &_filters) {
+    printf("RomList(cfg)\n");
+    mConfig = cfg;
+    filters = _filters;
+    gameList = new GameList();
+    gameListFav = new GameList();
+}
+
 void RomList::build(const ss_api::GameList::GameAddedCb &cb) {
-    float time_start = ui->getElapsedTime().asSeconds();
-    auto cfg = ui->getConfig();
+    float time_start = ui ? ui->getElapsedTime().asSeconds() : 0;
+    auto cfg = mConfig ? mConfig : ui->getConfig();
     p_cb = cb;
     m_count = 0;
 
-    ui->flip();
+    if (ui) ui->flip();
 
     auto romPaths = cfg->getRomPaths();
     for (const auto &p: romPaths) {
@@ -105,10 +115,10 @@ void RomList::build(const ss_api::GameList::GameAddedCb &cb) {
     // we need to reload config to update new options we just added
     cfg->load();
 
-    printf("RomList::build(): list built in %f\n", ui->getElapsedTime().asSeconds() - time_start);
+    if (ui) printf("RomList::build(): list built in %f\n", ui->getElapsedTime().asSeconds() - time_start);
 
     // remove ui widgets
-    delete (rect);
+    if (rect) delete (rect);
 }
 
 void RomList::initFav() {
@@ -141,6 +151,8 @@ void RomList::removeFav(const Game &game) {
 }
 
 void RomList::setLoadingText(const char *format, ...) {
+    if (!ui) return;
+
     char buffer[512];
     va_list arg;
     va_start(arg, format);

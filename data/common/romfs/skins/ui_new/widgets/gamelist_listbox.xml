@@ -1,0 +1,60 @@
+<listbox name="gamelist_listbox" rows="7">
+    <data name="games"/>
+    <rect x="1%" y="10%" w="51%" h="80%" radius="10"/>
+    <visibility>visible</visibility>
+    <event type="selection_changed">
+        <target name="gamelist_preview"/>
+        <texture path="${TEXTURE}"/>
+    </event>
+    <highlight name="gamelist_listbox_highlight">
+        <rect radius="10"/>
+        <color colors="green"/>
+        <outline colors="red" size="1"/>
+        <tween_alpha from="50" to="200" duration="0.5" loop="pingpong"/>
+    </highlight>
+    <item>
+        <rectangle>
+            <rect x="50%" y="50%" w="98%" h="92%" radius="8"/>
+            <origin>center</origin>
+            <color colors="gray_alpha"/>
+            <outline colors="blue" size="1"/>
+            <progressbar name="item_download_progress">
+                <rect x="0" y="0" w="100%" h="100%" radius="6"/>
+                <color colors="green_alpha"/>
+                <options direction="right" value="DOWNLOADED_SIZE" value_max="PKG_SIZE" autohide="true"/>
+            </progressbar>
+            <sprite name="item_icon">
+                <rect x="2%" y="50%" w="13%" h="90%"/>
+                <origin>left</origin>
+                <color colors="white"/>
+                <texture textures="games"/>
+            </sprite>
+            <text name="item_text">
+                <rect x="17%" y="33%" w="80%" h="40%"/>
+                <origin>left</origin>
+                <color colors="yellow"/>
+                <outline colors="red" size="1"/>
+                <font fonts="default"/>
+                <string>${NAME}</string>
+            </text>
+            <text name="item_group">
+                <rect x="17%" y="75%" w="80%" h="35%"/>
+                <origin>left</origin>
+                <color colors="white"/>
+                <outline colors="black" size="1"/>
+                <font fonts="default"/>
+                <string>GENRE: ${GENRE}, RATING: ${RATING}</string>
+            </text>
+            <!--
+            <text name="item_info">
+                <rect x="98%" y="75%" w="80%" h="25%"/>
+                <origin>right</origin>
+                <color colors="white"/>
+                <outline colors="black" size="1"/>
+                <font fonts="default"/>
+                <string>${DOWNLOADED_SIZE} / ${PKG_SIZE}</string>
+            </text>
+            -->
+        </rectangle>
+    </item>
+</listbox>

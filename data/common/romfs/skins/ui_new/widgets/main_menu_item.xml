@@ -1,0 +1,15 @@
+<item>
+    <sprite name="main_menu_item_icon">
+        <rect x="6%" y="50%" w="75%" h="75%"/>
+        <origin>left</origin>
+        <texture textures="games"/>
+    </sprite>
+    <text name="main_menu_item_text">
+        <rect x="28%" y="50%" w="100%" h="80%"/>
+        <origin>left</origin>
+        <color colors="yellow"/>
+        <outline colors="red" size="1"/>
+        <font fonts="default"/>
+        <string>TEMPLATE</string>
+    </text>
+</item>
