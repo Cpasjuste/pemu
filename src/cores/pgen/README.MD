@@ -21,7 +21,7 @@ pGEN: Portable Genesis
 - Support hardware filtering (shaders)
 
 ### Installation (switch)
-- copy "pgen.nro" directory to "/switch/pgen/" directory on sdcard
+- copy "pgen.nro" file to "/switch/pgen/" directory on sdcard
 - copy gamegear roms to "/switch/pgen/gamegear/" directory on sdcard
 - copy megadrive roms to "/switch/pgen/megadrive/" directory on sdcard
 - copy master system roms to "/switch/pgen/mastersystem/" directory on sdcard

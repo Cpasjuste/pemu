@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.5)
 #set(CMAKE_VERBOSE_MAKEFILE ON)
 
+SET(CMAKE_CXX_USE_RESPONSE_FILE_FOR_OBJECTS 1)
+SET(CMAKE_CXX_RESPONSE_FILE_LINK_FLAG "@")
+
 # add libcross2d library. If you want to port pfba to another platform,
 # you should (may) only need to port libcross2d library.
 add_subdirectory(external/libcross2d)
