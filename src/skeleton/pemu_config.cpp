@@ -161,6 +161,12 @@ PEMUConfig::PEMUConfig(c2d::Io *io, const std::string &name, int version)
 #endif
 }
 
+bool PEMUConfig::load(const std::string &overridePath) {
+    bool res = Config::load(overridePath);
+    if (res) buildConfigItems(false);
+    return res;
+}
+
 bool PEMUConfig::loadGame(const Game &game) {
     Group group;
 
@@ -186,6 +192,8 @@ bool PEMUConfig::loadGame(const Game &game) {
 #endif
 
     p_game_config->load();
+
+    buildConfigItems(true);
 
     return true;
 }
@@ -249,6 +257,26 @@ std::vector<PEMUConfig::RomPath> PEMUConfig::getRomPaths() {
     }
 
     return romPaths;
+}
+
+void PEMUConfig::buildConfigItems(bool isGame) {
+    if (isGame && !p_game_config) return;
+
+    auto groups = isGame ? p_game_config->getGroups() : getGroups();
+    std::vector<ConfigItem> *items = isGame ? &m_config_items_games : &m_config_items;
+    items->clear();
+    for (Group &group: *groups) {
+        if (group.getId() == CFG_ID_ROMS) continue;
+        items->push_back({(Group *) &group, nullptr});
+        for (Option &option: *group.getOptions()) {
+            items->push_back({nullptr, (Option *) &option});
+        }
+    }
+}
+
+std::vector<PEMUConfig::ConfigItem> *PEMUConfig::getConfigItems(bool isGame) {
+    if (isGame) return &m_config_items_games;
+    return &m_config_items;
 }
 
 c2d::config::Option *PEMUConfig::getOption(int id, bool isGame) {

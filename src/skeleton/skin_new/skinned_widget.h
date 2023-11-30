@@ -12,19 +12,19 @@ namespace RRLauncher {
     public:
         class Condition {
         public:
-            enum Type {
+            enum class Type {
                 Equal,
                 NotEqual,
                 Unknown
             };
-            Type type = Unknown;
+            Type type = Type::Unknown;
             std::string target;
             std::string value;
         };
 
         class Event {
         public:
-            enum Type {
+            enum class Type {
                 ButtonPressed,
                 SelectionChanged,
                 Unknown

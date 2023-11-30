@@ -19,23 +19,25 @@ namespace RRLauncher {
 
         bool onInput(c2d::Input::Player *players) override;
 
-        void addItem(tinyxml2::XMLElement *element);
+        virtual void addItem(tinyxml2::XMLElement *element);
 
-        void updateItems();
+        virtual void updateItems();
 
-        void prev();
+        virtual void prev();
 
-        void next();
+        virtual void next();
 
         int m_data_size = 0;
         int m_rows = 0;
         int m_item_index = 0;
         int m_highlight_index = 0;
         std::vector<c2d::C2DObject *> m_items;
+        std::vector<c2d::C2DObject *> m_items_options;
         std::string m_filter;
         // highlight
         c2d::C2DObject *m_highlight = nullptr;
         c2d::Vector2f m_highlight_pos;
+        bool m_is_menu = false;
     };
 }
 

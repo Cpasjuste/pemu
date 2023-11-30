@@ -45,7 +45,7 @@ void SkinnedWidget::load() {
         } else if (value == "text") {
             auto w = new SkinnedText(m_skin, node, object);
             object->add(w);
-        } else if (value == "listbox") {
+        } else if (value == "listbox" || value == "listbox_options") {
             auto w = new SkinnedListBox(m_skin, node, object);
             object->add(w);
         } else if (value == "progressbar") {
@@ -232,30 +232,30 @@ void SkinnedWidget::processEvent(Event *event) {
 void SkinnedWidget::addTween(tinyxml2::XMLNode *node, c2d::C2DObject *object) {
     std::string value = node->Value();
     tinyxml2::XMLElement *element = node->ToElement();
-    auto parent = toObject();
 
     if (value == "tween_position") {
-        auto tween = XmlHelper::getTweenPosition(element, ((C2DObject *) parent)->getSize());
+        Vector2f size = m_parent ? m_parent->getSize() : toObject()->getSize();
+        auto tween = XmlHelper::getTweenPosition(element, size);
         if (tween) {
             object->add(tween);
         }
     } else if (value == "tween_rotation") {
-        auto tween = XmlHelper::getTweenRotation(element, ((C2DObject *) parent)->getSize());
+        auto tween = XmlHelper::getTweenRotation(element);
         if (tween) {
             object->add(tween);
         }
     } else if (value == "tween_scale") {
-        auto tween = XmlHelper::getTweenScale(element, ((C2DObject *) parent)->getSize());
+        auto tween = XmlHelper::getTweenScale(element);
         if (tween) {
             object->add(tween);
         }
     } else if (value == "tween_color") {
-        auto tween = XmlHelper::getTweenColor(element, ((C2DObject *) parent)->getSize());
+        auto tween = XmlHelper::getTweenColor(element);
         if (tween) {
             object->add(tween);
         }
     } else if (value == "tween_alpha") {
-        auto tween = XmlHelper::getTweenAlpha(element, ((C2DObject *) parent)->getSize());
+        auto tween = XmlHelper::getTweenAlpha(element);
         if (tween) {
             object->add(tween);
         }

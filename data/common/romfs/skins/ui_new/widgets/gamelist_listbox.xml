@@ -14,7 +14,7 @@
     </highlight>
     <item>
         <rectangle>
-            <rect x="50%" y="50%" w="98%" h="92%" radius="8"/>
+            <rect x="50%" y="50%" w="99%" h="92%" radius="8"/>
             <origin>center</origin>
             <color colors="gray_alpha"/>
             <outline colors="blue" size="1"/>

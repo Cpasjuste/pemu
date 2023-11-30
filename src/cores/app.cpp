@@ -60,11 +60,29 @@ std::string App::getVar(const std::string &var, const std::string &data, int ind
                     return game.romsPath;
                 } else if (var == "TEXTURE") {
                     return game.romsPath + game.getMedia("mixrbv2").url;
-                    //return mRomList->getPreview(m_io, game, RomList::PreviewType::Tex);
                 }
             } else {
                 rr_error("var: %s, data: %s, index: %zu is greater than games count (%zu)",
                          var.c_str(), data.c_str(), i, mRomList->gameList->games.size());
+            }
+        } else if (data == "main_options") {
+            size_t i = index < 0 ? mOptionIndex : (size_t) index;
+            if (i < mConfig->getConfigItems(false)->size()) {
+                auto item = mConfig->getConfigItems(false)->at(i);
+                if (var == "NAME") {
+                    if (item.group) {
+                        std::string s = item.group->getName();
+                        std::replace(s.begin(), s.end(), '_', ' ');
+                        return s;
+                    }
+                    else return item.option->getName();
+                } else if (var == "VALUE") {
+                    if (item.option) return item.option->getString();
+                    else return {};
+                }
+            } else {
+                rr_error("var: %s, data: %s, index: %zu is greater than main_options count (%zu)",
+                         var.c_str(), data.c_str(), i, mConfig->getConfigItems(false)->size());
             }
         }
     } else if (var == "APP_NAME") {
@@ -98,6 +116,8 @@ size_t App::getDataCount(const std::string &name) {
     //rr_debug("App::getDataCount(%s)\n", name.c_str());
     if (name == "games") {
         return mRomList ? mRomList->gameList->games.size() : 0;
+    } else if (name == "main_options") {
+        return mConfig->getConfigItems(false)->size();
     }
 
     return 0;
@@ -108,6 +128,11 @@ void App::setDataIndex(const std::string &name, size_t index) {
     if (name == "games") {
         if (mRomList && index < mRomList->gameList->games.size()) {
             mRomListIndex = index;
+            rr_debug("%s: index set to %zu", name.c_str(), index);
+        }
+    } else if (name == "main_options") {
+        if (mConfig && index < mConfig->getConfigItems(false)->size()) {
+            mOptionIndex = index;
             rr_debug("%s: index set to %zu", name.c_str(), index);
         }
     }
@@ -129,7 +154,7 @@ bool App::onInput(c2d::Input::Player *players) {
     unsigned int buttons = players[0].buttons;
 
     // quit app (enter and space on a keyboard)
-    if (buttons & Input::Button::Start || buttons & Input::Button::Quit) {
+    if (buttons & Input::Button::Quit) {
         quit = true;
     } else if (buttons & Input::Button::Select) {
         // m_pacman->install({"powermanga", "opentyrian", "rawgl"});

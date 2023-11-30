@@ -12,6 +12,9 @@ SkinnedListBox::SkinnedListBox(Skin *skin, tinyxml2::XMLNode *node, c2d::C2DObje
         : SkinnedRectangle(skin, node, parent, false) {
     rr_debug("%s (%p): parent: %s (%p)", node->Value(), this, m_parent->getName().c_str(), m_parent);
 
+    // are we a standard listbox or an options listbox
+    m_is_menu = node->Value() == std::string("listbox_options");
+
     // get listbox rows count attribute
     m_rows = XmlHelper::getXmlAttributeInt(node->ToElement(), "rows");
 
@@ -26,7 +29,7 @@ SkinnedListBox::SkinnedListBox(Skin *skin, tinyxml2::XMLNode *node, c2d::C2DObje
     if (load) SkinnedListBox::load();
 
     // finally, update listbox items
-    updateItems();
+    SkinnedListBox::updateItems();
 }
 
 void SkinnedListBox::load() {
@@ -92,6 +95,21 @@ void SkinnedListBox::addItem(tinyxml2::XMLElement *element) {
     item->setData(m_data_name, (int) m_items.size());
     add(item);
     m_items.emplace_back(item);
+
+    // duplicate item with "group"
+    if (m_is_menu) {
+        auto el = element->Parent()->ToElement()->FirstChildElement("group");
+        item = new SkinnedRectangle(m_skin, el, this, false);
+        height = getSize().y / (float) m_rows;
+        item->setPosition(0, height * (float) m_items_options.size());
+        item->setSize(getSize().x, height); // TODO: fix this
+        item->load();
+        item->setSize(getSize().x, height - item->getOutlineThickness()); // TODO: fix this
+        item->setData(m_data_name, (int) m_items_options.size());
+        item->setVisibility(Visibility::Hidden);
+        add(item);
+        m_items_options.emplace_back(item);
+    }
 }
 
 void SkinnedListBox::updateItems() {
@@ -105,40 +123,49 @@ void SkinnedListBox::updateItems() {
         if (m_item_index + i >= m_data_size) {
             if ((int) m_items.size() > i) {
                 m_items.at(i)->setVisibility(Visibility::Hidden);
+                if (m_is_menu) m_items_options.at(i)->setVisibility(Visibility::Hidden);
                 rr_error("%s: m_items[%i]->setVisibility(Hidden)",
                          getName().c_str(), i);
             }
-        } else {
-            m_items.at(i)->setVisibility(Visibility::Visible);
-            auto widget = dynamic_cast<SkinnedWidget *>(m_items.at(i));
-            widget->setDataIndex(m_item_index + i);
-            if (i == m_highlight_index) {
-                m_skin->setDataIndex(m_data_name, m_item_index + i);
-                if (m_highlight) {
-                    m_highlight->setPosition(m_highlight_pos + m_items.at(i)->getPosition());
-                }
-                // handle "selection_changed" event
-                for (auto &event: m_events) {
-                    if (event.type != Event::Type::SelectionChanged) continue;
-                    // check for condition
-                    if (!event.condition.target.empty() && event.condition.type != Condition::Type::Unknown) {
-                        auto target = m_items.at(i)->getChild(event.condition.target);
-                        if (target) {
-                            std::string text = ((c2d::Text *) target)->getString();
-                            if (event.condition.type == Condition::Type::Equal) {
-                                if (text == event.condition.value) {
-                                    processEvent(&event);
-                                }
-                            } else if (event.condition.type == Condition::Type::NotEqual) {
-                                if (text != event.condition.value) {
-                                    processEvent(&event);
-                                }
-                            }
-                        }
-                    } else {
+            continue;
+        }
+
+        // check if we want a group shape
+        auto items = &m_items;
+        if (m_is_menu) {
+            auto str = m_skin->getVar("VALUE", "main_options", m_item_index + i);
+            if (str.empty()) {
+                items = &m_items_options;
+                m_items.at(i)->setVisibility(Visibility::Hidden);
+            } else {
+                m_items_options.at(i)->setVisibility(Visibility::Hidden);
+            }
+        }
+
+        items->at(i)->setVisibility(Visibility::Visible);
+        auto widget = dynamic_cast<SkinnedWidget *>(items->at(i));
+        widget->setDataIndex(m_item_index + i);
+        if (i != m_highlight_index) continue;
+        m_skin->setDataIndex(m_data_name, m_item_index + i);
+        if (m_highlight) {
+            m_highlight->setPosition(m_highlight_pos + items->at(i)->getPosition());
+        }
+
+        // handle "selection_changed" event
+        for (auto &event: m_events) {
+            if (event.type != Event::Type::SelectionChanged) continue;
+            // check for condition
+            if (!event.condition.target.empty() && event.condition.type != Condition::Type::Unknown) {
+                auto target = m_items.at(i)->getChild(event.condition.target);
+                if (target) {
+                    std::string text = ((c2d::Text *) target)->getString();
+                    if ((event.condition.type == Condition::Type::Equal && text == event.condition.value)
+                        || (event.condition.type == Condition::Type::NotEqual && text != event.condition.value)) {
                         processEvent(&event);
                     }
                 }
+            } else {
+                processEvent(&event);
             }
         }
     }

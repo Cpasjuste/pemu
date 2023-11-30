@@ -5,13 +5,14 @@
 #ifndef RR_LAUNCHER_SKIN_H
 #define RR_LAUNCHER_SKIN_H
 
-#include <tinyxml2.h>
 #include "cross2d/c2d.h"
+#include "xml_helper.h"
 #include "skinned_widget.h"
 #include "skinned_rectangle.h"
 #include "skinned_text.h"
 #include "skinned_sprite.h"
 #include "skinned_listbox.h"
+#include "skinned_menu.h"
 #include "skinned_progress_bar.h"
 
 #ifndef NDEBUG

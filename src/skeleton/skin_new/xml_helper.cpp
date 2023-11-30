@@ -140,7 +140,7 @@ c2d::TweenPosition *XmlHelper::getTweenPosition(tinyxml2::XMLElement *element, c
     return new TweenPosition(from, to, duration, loop, TweenState::Playing);
 }
 
-c2d::TweenRotation *XmlHelper::getTweenRotation(tinyxml2::XMLElement *element, const c2d::Vector2f &parentSize) {
+c2d::TweenRotation *XmlHelper::getTweenRotation(tinyxml2::XMLElement *element) {
     if (!element) {
         return nullptr;
     }
@@ -160,7 +160,7 @@ c2d::TweenRotation *XmlHelper::getTweenRotation(tinyxml2::XMLElement *element, c
     return tween;
 }
 
-c2d::TweenScale *XmlHelper::getTweenScale(tinyxml2::XMLElement *element, const c2d::Vector2f &parentSize) {
+c2d::TweenScale *XmlHelper::getTweenScale(tinyxml2::XMLElement *element) {
     if (!element) {
         return nullptr;
     }
@@ -187,7 +187,7 @@ c2d::TweenScale *XmlHelper::getTweenScale(tinyxml2::XMLElement *element, const c
     return tween;
 }
 
-c2d::TweenColor *XmlHelper::getTweenColor(tinyxml2::XMLElement *element, const c2d::Vector2f &parentSize) {
+c2d::TweenColor *XmlHelper::getTweenColor(tinyxml2::XMLElement *element) {
     if (!element) {
         return nullptr;
     }
@@ -213,7 +213,7 @@ c2d::TweenColor *XmlHelper::getTweenColor(tinyxml2::XMLElement *element, const c
     return tween;
 }
 
-c2d::TweenAlpha *XmlHelper::getTweenAlpha(tinyxml2::XMLElement *element, const c2d::Vector2f &parentSize) {
+c2d::TweenAlpha *XmlHelper::getTweenAlpha(tinyxml2::XMLElement *element) {
     if (!element) {
         return nullptr;
     }

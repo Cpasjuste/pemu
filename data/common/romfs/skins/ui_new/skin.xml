@@ -20,7 +20,7 @@
     tween loop: none, loop, pingpong
 -->
 
-<skin name="RetroRoot">
+<skin name="Default">
     <rect x="0" y="0" w="1280" h="720"/>
     <color r="0" g="0" b="0" a="255"/>
 
@@ -72,18 +72,18 @@
 
         <!-- events -->
         <event type="button_pressed">
-            <button name="left"/>
+            <button name="start"/>
             <target name="main_menu"/>
             <visibility>visible</visibility>
             <process_inputs>true</process_inputs>
         </event>
         <event type="button_pressed">
-            <button name="left"/>
+            <button name="start"/>
             <target name="home_shade"/>
             <visibility>visible</visibility>
         </event>
         <event type="button_pressed">
-            <button name="left"/>
+            <button name="start"/>
             <target name="home"/>
             <target name="gamelist_listbox"/>
             <process_inputs>false</process_inputs>

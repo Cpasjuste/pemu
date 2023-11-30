@@ -32,13 +32,13 @@ namespace RRLauncher {
 
         static c2d::TweenPosition *getTweenPosition(tinyxml2::XMLElement *element, const c2d::Vector2f &parentSize);
 
-        static c2d::TweenRotation *getTweenRotation(tinyxml2::XMLElement *element, const c2d::Vector2f &parentSize);
+        static c2d::TweenRotation *getTweenRotation(tinyxml2::XMLElement *element);
 
-        static c2d::TweenScale *getTweenScale(tinyxml2::XMLElement *element, const c2d::Vector2f &parentSize);
+        static c2d::TweenScale *getTweenScale(tinyxml2::XMLElement *element);
 
-        static c2d::TweenColor *getTweenColor(tinyxml2::XMLElement *element, const c2d::Vector2f &parentSize);
+        static c2d::TweenColor *getTweenColor(tinyxml2::XMLElement *element);
 
-        static c2d::TweenAlpha *getTweenAlpha(tinyxml2::XMLElement *element, const c2d::Vector2f &parentSize);
+        static c2d::TweenAlpha *getTweenAlpha(tinyxml2::XMLElement *element);
 
         //
 

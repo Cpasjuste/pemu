@@ -38,6 +38,7 @@ namespace RRLauncher {
         PEMUConfig *mConfig = nullptr;
         RomList *mRomList = nullptr;
         size_t mRomListIndex = 0;
+        size_t mOptionIndex = 0;
     };
 }
 

@@ -106,13 +106,20 @@ namespace pemu {
         };
 
         struct RomPath {
-            std::string path;
-            ss_api::System system;
+            std::string path{};
+            ss_api::System system{};
+        };
+
+        struct ConfigItem {
+            c2d::config::Group *group = nullptr;
+            c2d::config::Option *option = nullptr;
         };
 
         PEMUConfig(c2d::Io *io, const std::string &name, int version = 1);
 
         ~PEMUConfig() override;
+
+        bool load(const std::string &overridePath = {}) override;
 
         bool loadGame(const ss_api::Game &game);
 
@@ -125,6 +132,8 @@ namespace pemu {
         bool addRomPath(const std::string &name, const std::string &path, const ss_api::System &system);
 
         std::vector<RomPath> getRomPaths();
+
+        std::vector<ConfigItem> *getConfigItems(bool isGame);
 
         std::vector<c2d::Input::ButtonMapping> getKeyboardMapping(int player, bool isGame = false);
 
@@ -144,7 +153,11 @@ namespace pemu {
         virtual std::vector<int> getCoreHiddenOptionToEnable() { return {}; }
 
     private:
+        void buildConfigItems(bool isGame);
+
         c2d::config::Config *p_game_config = nullptr;
+        std::vector<ConfigItem> m_config_items{};
+        std::vector<ConfigItem> m_config_items_games{};
         c2d::Io *p_io = nullptr;
     };
 }
