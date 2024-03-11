@@ -60,3 +60,5 @@
 - [pnes](https://github.com/Cpasjuste/pemu/tree/master/src/cores/pnes)
 - [psnes](https://github.com/Cpasjuste/pemu/tree/master/src/cores/psnes)
 - [pgba](https://github.com/Cpasjuste/pemu/tree/master/src/cores/pgba)
+
+I use [JetBrains CLion](https://www.jetbrains.com/clion/) IDE for all my open sources projects, thanks to the support !
