@@ -44,6 +44,11 @@ Mpv::Mpv(const std::string &configPath, bool initRender) {
         mpv_set_option_string(handle, "vo", "null");
         mpv_set_option_string(handle, "ao", "null");
     }
+#if MPV_CLIENT_API_VERSION >= 131075 // >= v0.38.0
+    else {
+        mpv_set_option_string(handle, "vo", "libmpv");
+    }
+#endif
 
     int res = mpv_initialize(handle);
     if (res != 0) {
@@ -86,7 +91,11 @@ int Mpv::load(const std::string &file, LoadType loadType, const std::string &opt
         } else if (loadType == LoadType::AppendPlay) {
             type = "append-play";
         }
+#if MPV_CLIENT_API_VERSION >= 131075 // >= v0.38.0
+        const char *cmd[] = {"loadfile", file.c_str(), type.c_str(), nullptr, options.c_str()};
+#else
         const char *cmd[] = {"loadfile", file.c_str(), type.c_str(), options.c_str(), nullptr};
+#endif
         return mpv_command(handle, cmd);
     }
 

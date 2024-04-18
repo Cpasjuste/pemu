@@ -199,7 +199,7 @@ bool PEMUConfig::addRomPath(const std::string &name, const std::string &path, co
     printf("PEMUConfig::addRomPath: %s (system: %s, path: %s)\n",
            name.c_str(), system.name.c_str(), path.c_str());
     auto roms = config_lookup(libConfigGetInstance(), std::string(getName() + ".ROMS").c_str());
-    if (config_setting_get_member(roms, name.c_str())) {
+    if (roms && config_setting_get_member(roms, name.c_str())) {
         printf("PEMUConfig::addRomPath: %s found in config file, skipping\n", name.c_str());
         return false;
     }
