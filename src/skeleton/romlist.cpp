@@ -55,7 +55,7 @@ void RomList::build(const ss_api::GameList::GameAddedCb &cb) {
     float time_start = ui->getElapsedTime().asSeconds();
     auto cfg = ui->getConfig();
     p_cb = cb;
-    m_count = 0;
+    m_games_count = m_games_available_count = 0;
 
     ui->flip();
 
@@ -64,18 +64,20 @@ void RomList::build(const ss_api::GameList::GameAddedCb &cb) {
         std::string gameListPath = p.path + "gamelist.xml";
         gameList->append(gameListPath, p.path, false, filters, p.system, false, [this](Game *game) {
             if (p_cb) p_cb(game);
-            m_count++;
-            if (!(m_count % 200)) {
-                setLoadingText("Games: %li / %li", m_count, gameList->games.size());
+            m_games_count++;
+            if (game->available) m_games_available_count++;
+            if (!(m_games_count % 200)) {
+                setLoadingText("Games: %li / %li", m_games_available_count, m_games_count);
             }
         });
-        setLoadingText("Games: %li / %li", gameList->getAvailableCount(), gameList->games.size());
+        setLoadingText("Games: %li / %li", m_games_available_count, m_games_count);
         printf("RomList::build: %s, games found: %zu / %zu (system: %s (0x%08x))\n",
                gameListPath.c_str(), gameList->getAvailableCount(),
                gameList->games.size(), p.system.name.c_str(), p.system.id);
     }
 
-    // sort lists
+    // sort games
+    printf("RomList::build: sorting games...\n");
     std::sort(gameList->systemList.systems.begin(), gameList->systemList.systems.end(), Api::sortSystemByName);
     std::sort(gameList->editors.begin(), gameList->editors.end(), Api::sortEditorByName);
     std::sort(gameList->developers.begin(), gameList->developers.end(), Api::sortDeveloperByName);
@@ -87,6 +89,7 @@ void RomList::build(const ss_api::GameList::GameAddedCb &cb) {
     std::sort(gameList->dates.begin(), gameList->dates.end(), Api::sortByName);
 
     // add filtering options
+    printf("RomList::build: add filtering options...\n");
     auto grp = cfg->getGroup(PEMUConfig::GrpId::UI_FILTERING);
     grp->getOption(PEMUConfig::OptId::UI_FILTER_SYSTEM)->setArray(gameList->systemList.getNames(), 0);
     grp->getOption(PEMUConfig::OptId::UI_FILTER_GENRE)->setArray(gameList->getGenreNames(), 0);
@@ -103,6 +106,7 @@ void RomList::build(const ss_api::GameList::GameAddedCb &cb) {
     }
 
     // we need to reload config to update new options we just added
+    printf("RomList::build: reloading config...\n");
     cfg->load();
 
     printf("RomList::build(): list built in %f\n", ui->getElapsedTime().asSeconds() - time_start);

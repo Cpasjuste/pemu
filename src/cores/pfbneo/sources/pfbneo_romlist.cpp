@@ -64,17 +64,29 @@ void PFBNRomList::build(const ss_api::GameList::GameAddedCb &cb) {
         }
     });
 
+    printf("PFBNRomList::build: removing HARDWARE_PREFIX_ARCADE...\n");
     // remove custom "ARCADE" system added from "RomList::build"
     gameList->systemList.remove(HARDWARE_PREFIX_ARCADE);
+
+    printf("PFBNRomList::build: sorting systems...\n");
     // sort systems
     std::sort(gameList->systemList.systems.begin(), gameList->systemList.systems.end(), Api::sortSystemByName);
+
     // update system filtering option
+    printf("PFBNRomList::build: updating UI_FILTER_SYSTEM...\n");
     auto opt = ui->getConfig()->get(PEMUConfig::OptId::UI_FILTER_SYSTEM);
-    opt->setArray(gameList->systemList.getNames());
+    if (opt != nullptr) {
+        opt->setArray(gameList->systemList.getNames());
+    } else {
+        printf("PFBNRomList::build: updating UI_FILTER_SYSTEM... FAILED !\n");
+    }
 
     // update config
+    printf("PFBNRomList::build: updating config again...\n");
     ui->getConfig()->load();
 
+#ifndef __VITA__ // TODO: verify why this make release build crashing in vita
     float time_spent = ui->getElapsedTime().asSeconds() - time_start;
     printf("PFBNRomList::build(): list built in %f\n", time_spent);
+#endif
 }

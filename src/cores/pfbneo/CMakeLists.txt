@@ -265,8 +265,9 @@ set(FLAGS
         -DLSB_FIRST
         -DINCLUDE_7Z_SUPPORT -DMINIZIP_LIB
         -DBUILD_SDL2 -DBUILD_M68K
-        -fomit-frame-pointer -Wno-write-strings
-        -Wall -Wno-long-long -Wno-sign-compare -Wno-uninitialized -Wno-unused
+        #-fomit-frame-pointer
+        -Wno-strict-aliasing -Wno-long-long
+        -Wno-write-strings -Wno-sign-compare -Wno-uninitialized -Wno-unused
         -Wno-conversion -Wno-attributes -Wno-unused-parameter -Wno-unused-value
         -Wno-format-truncation -Wno-parentheses -Wno-sequence-point -Wno-format
         -Wno-misleading-indentation -Wno-restrict -Wno-unused-result

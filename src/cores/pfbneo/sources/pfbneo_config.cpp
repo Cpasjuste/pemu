@@ -63,6 +63,7 @@ PFBAConfig::PFBAConfig(c2d::Io *io, int version) : PEMUConfig(io, "PFBNEO", vers
 
     // add custom rom path
     PEMUConfig::addRomPath("ARCADE", io->getDataPath() + "arcade/", {HARDWARE_PREFIX_ARCADE, 0, "Arcade"});
+#ifndef __PFBN_LIGHT__
     PEMUConfig::addRomPath("CHANNELF", io->getDataPath() + "channelf/", {HARDWARE_PREFIX_CHANNELF, 0, "Channel F"});
     PEMUConfig::addRomPath("COLECO", io->getDataPath() + "coleco/", {HARDWARE_PREFIX_COLECO, 0, "ColecoVision"});
     PEMUConfig::addRomPath("FDS", io->getDataPath() + "fds/", {HARDWARE_PREFIX_FDS, 0, "NES FDS"});
@@ -80,6 +81,7 @@ PFBAConfig::PFBAConfig(c2d::Io *io, int version) : PEMUConfig(io, "PFBNEO", vers
                            {HARDWARE_PREFIX_SEGA_MASTER_SYSTEM, 0, "Sega Master System"});
     PEMUConfig::addRomPath("SPECTRUM", io->getDataPath() + "spectrum/", {HARDWARE_PREFIX_SPECTRUM, 0, "ZX Spectrum"});
     PEMUConfig::addRomPath("TG16", io->getDataPath() + "tg16/", {HARDWARE_PCENGINE_TG16, 0, "PC Engine TG16"});
+#endif
 
     // save newly added roms paths
     PEMUConfig::save();
