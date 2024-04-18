@@ -9,7 +9,7 @@ on:
 jobs:
 
   build-vita-release:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
 
     steps:
       - uses: actions/checkout@v2
@@ -36,7 +36,7 @@ jobs:
           export VITASDK=/usr/local/vitasdk
           mkdir cmake-build && cd cmake-build
           cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release .. \
-            -DPLATFORM_VITA=ON -DOPTION_LIGHT=ON -DOPTION_BUILTIN_MINIZIP=ON -DOPTION_MPV_PLAYER=OFF
+            -DPLATFORM_VITA=ON -DOPTION_BUILTIN_MINIZIP=ON -DOPTION_BOX2D=OFF -DOPTION_MPV_PLAYER=OFF
 
       - name: Build pfbneo
         run: |
