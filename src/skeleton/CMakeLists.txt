@@ -6,6 +6,8 @@ project(cross2dui)
 #################
 # libcross2dui
 #################
+include(FindPkgConfig)
+
 set(CROSS2DUI_INCLUDE ..)
 file(GLOB CROSS2DUI_SOURCE
         ${CMAKE_CURRENT_SOURCE_DIR}/*.c*
@@ -26,7 +28,6 @@ if (OPTION_MPV_PLAYER)
     if (PLATFORM_WINDOWS)
         list(APPEND LDFLAGS mpv.dll.a)
     else ()
-        include(FindPkgConfig)
         pkg_search_module(MPV REQUIRED mpv)
         list(APPEND CROSS2DUI_INCLUDE ${MPV_INCLUDE_DIRS})
         list(APPEND LDFLAGS ${MPV_LIBRARIES})
@@ -34,17 +35,19 @@ if (OPTION_MPV_PLAYER)
     list(APPEND FLAGS -D__MPV__)
 endif ()
 
-if (OPTION_BUILTIN_MINIZIP)
+# minizip
+pkg_search_module(MINIZIP minizip)
+if (MINIZIP_FOUND)
+    list(APPEND CROSS2DUI_INCLUDE ${MINIZIP_INCLUDE_DIRS})
+    list(APPEND LDFLAGS ${MINIZIP_LIBRARIES})
+else ()
+    message(WARNING "minizip not found, using embedded one...")
     list(APPEND CROSS2DUI_INCLUDE ${CMAKE_CURRENT_SOURCE_DIR}/external)
     list(APPEND CROSS2DUI_SOURCE
             ${CMAKE_CURRENT_SOURCE_DIR}/external/minizip/ioapi.c
             ${CMAKE_CURRENT_SOURCE_DIR}/external/minizip/zip.c
             ${CMAKE_CURRENT_SOURCE_DIR}/external/minizip/unzip.c)
     list(APPEND FLAGS -DIOAPI_NO_64 -DUSE_FILE32API)
-else ()
-    pkg_search_module(MINIZIP REQUIRED minizip)
-    list(APPEND CROSS2DUI_INCLUDE ${MINIZIP_INCLUDE_DIRS})
-    list(APPEND LDFLAGS ${MINIZIP_LIBRARIES})
 endif ()
 
 if (PLATFORM_LINUX OR PLATFORM_WINDOWS)
