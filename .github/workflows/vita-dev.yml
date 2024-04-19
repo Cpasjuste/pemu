@@ -18,7 +18,7 @@ jobs:
       - name: Install build dependencies
         run: |
           sudo apt -yq update
-          sudo apt -yq install build-essential cmake git zip curl python
+          sudo apt -yq install build-essential cmake git zip curl
 
       - name: Install vita toolchain
         run: |
