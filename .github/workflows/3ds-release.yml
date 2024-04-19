@@ -9,7 +9,7 @@ on:
 jobs:
 
   build-3ds-release:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-22.04
     container: devkitpro/devkitarm:latest
     defaults:
       run:
