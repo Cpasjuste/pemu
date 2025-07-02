@@ -8,7 +8,7 @@ on:
 jobs:
 
   build-vita-dev:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
 
     steps:
       - uses: actions/checkout@v2
@@ -35,30 +35,30 @@ jobs:
           export VITASDK=/usr/local/vitasdk
           mkdir cmake-build && cd cmake-build
           cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug .. \
-            -DPLATFORM_VITA=ON -DOPTION_BUILTIN_MINIZIP=ON -DOPTION_BOX2D=OFF -DOPTION_MPV_PLAYER=OFF
+            -DPLATFORM_VITA=ON -DOPTION_MPV_PLAYER=OFF
 
       - name: Build pfbneo
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
           make pfbneo.deps
-          make pfbneo.vpk
+          make -j"$(nproc)" pfbneo.vpk
 
       - name: Build pgen
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
-          make pgen.vpk
+          make -j"$(nproc)" pgen.vpk
 
       - name: Build pnes
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
-          make pnes.vpk
+          make -j"$(nproc)" pnes.vpk
 
       - name: Build psnes
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
-          make psnes.vpk
+          make -j"$(nproc)" psnes.vpk
 
       - name: Build pgba
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
-          make pgba.vpk
+          make -j"$(nproc)" pgba.vpk

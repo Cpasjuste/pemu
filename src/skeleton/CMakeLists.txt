@@ -41,7 +41,7 @@ endif ()
 
 # minizip
 pkg_search_module(MINIZIP minizip)
-if (MINIZIP_FOUND)
+if (MINIZIP_FOUND AND NOT PLATFORM_VITA) # vita minizip not built with "zip.h" support
     list(APPEND CROSS2DUI_INCLUDE ${MINIZIP_INCLUDE_DIRS})
     list(APPEND LDFLAGS ${MINIZIP_LIBRARIES})
 else ()
