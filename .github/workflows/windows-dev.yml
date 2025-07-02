@@ -33,7 +33,9 @@ jobs:
         run: |
           cd $GITHUB_WORKSPACE
           mkdir cmake-build && cd cmake-build
-          cmake -G "MSYS Makefiles" -DPLATFORM_WINDOWS=ON -DCMAKE_BUILD_TYPE=Debug ..
+          cmake -G "MSYS Makefiles" -DPLATFORM_WINDOWS=ON \
+            -DCMAKE_POLICY_VERSION_MINIMUM=3.3 \
+            -DCMAKE_BUILD_TYPE=Debug ..
 
       - name: Build pfbneo
         run: |
