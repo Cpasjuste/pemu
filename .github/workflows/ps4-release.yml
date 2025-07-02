@@ -9,7 +9,7 @@ on:
 jobs:
 
   build-ps4-release:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
 
     steps:
       - uses: actions/checkout@v2
@@ -19,14 +19,19 @@ jobs:
       - name: Install build dependencies
         run: |
           sudo apt -yq update
-          sudo apt -yq install git build-essential cmake zip libgpgme11
+          sudo apt -yq install git build-essential cmake zip \
+            pacman-package-manager makepkg libarchive-tools autoconf libtool \
+            cmake nasm git curl
 
       - name: Install ps4 toolchain
         run: |
-          wget https://github.com/PacBrew/pacbrew-pacman/releases/download/pacbrew-release-1.0/pacbrew-pacman-1.0.deb
-          sudo dpkg -i pacbrew-pacman-1.0.deb
-          sudo pacbrew-pacman -Syu
-          sudo pacbrew-pacman --noconfirm -S ps4-openorbis ps4-openorbis-portlibs
+          sudo cat <<EOF > /etc/pacman.conf
+          [pacbrew]
+          SigLevel = Optional TrustAll
+          Server = https://pacman.mydedibox.fr/pacbrew/packages/
+          EOF
+          sudo pacman -Syu
+          sudo pacman --noconfirm -S ps4-openorbis ps4-openorbis-portlibs
 
       - name: Configure
         run: |
@@ -39,31 +44,31 @@ jobs:
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
           make pfbneo.deps
-          make pfbneo_pkg
+          make -j"$(nproc)" pfbneo_pkg
           mv *.pkg $GITHUB_WORKSPACE
 
       - name: Build pgen
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
-          make pgen_pkg
+          make -j"$(nproc)" pgen_pkg
           mv *.pkg $GITHUB_WORKSPACE
 
       - name: Build pnes
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
-          make pnes_pkg
+          make -j"$(nproc)" pnes_pkg
           mv *.pkg $GITHUB_WORKSPACE
 
       - name: Build psnes
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
-          make psnes_pkg
+          make -j"$(nproc)" psnes_pkg
           mv *.pkg $GITHUB_WORKSPACE
 
       - name: Build pgba
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
-          make pgba_pkg
+          make -j"$(nproc)" pgba_pkg
           mv *.pkg $GITHUB_WORKSPACE
 
       - name: Release

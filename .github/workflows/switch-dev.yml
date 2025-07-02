@@ -34,24 +34,24 @@ jobs:
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
           make pfbneo.deps
-          make pfbneo.nro
+          make -j"$(nproc)" pfbneo.nro
 
       - name: Build pgen
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
-          make pgen.nro
+          make -j"$(nproc)" pgen.nro
 
       - name: Build pnes
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
-          make pnes.nro
+          make -j"$(nproc)" pnes.nro
 
       - name: Build psnes
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
-          make psnes.nro
+          make -j"$(nproc)" psnes.nro
 
       - name: Build pgba
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
-          make pgba.nro
+          make -j"$(nproc)" pgba.nro

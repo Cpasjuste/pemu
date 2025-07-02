@@ -9,7 +9,7 @@ on:
 jobs:
 
   build-switch-release:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     container: devkitpro/devkita64:latest
     defaults:
       run:
