@@ -61,11 +61,11 @@ jobs:
           make psnes_windows_release
           mv *.zip $GITHUB_WORKSPACE
 
-      - name: Build pgba
-        run: |
-          cd $GITHUB_WORKSPACE/cmake-build
-          make pgba_windows_release
-          mv *.zip $GITHUB_WORKSPACE
+      #- name: Build pgba
+      #  run: |
+      #    cd $GITHUB_WORKSPACE/cmake-build
+      #    make pgba_windows_release
+      #    mv *.zip $GITHUB_WORKSPACE
 
       - name: Release
         uses: softprops/action-gh-release@v1

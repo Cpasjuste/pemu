@@ -56,7 +56,7 @@ jobs:
           cd $GITHUB_WORKSPACE/cmake-build
           make psnes
 
-      - name: Build pgba
-        run: |
-          cd $GITHUB_WORKSPACE/cmake-build
-          make pgba
+      #- name: Build pgba
+      #  run: |
+      #    cd $GITHUB_WORKSPACE/cmake-build
+      #    make pgba
