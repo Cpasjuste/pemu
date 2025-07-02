@@ -1,14 +1,14 @@
 name: switch-dev
 
 on:
-  push:
-    branches: [ dev ]
+  #push:
+  #  branches: [ dev ]
   workflow_dispatch:
 
 jobs:
 
   build-switch-dev:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     container: devkitpro/devkita64:latest
     defaults:
       run:

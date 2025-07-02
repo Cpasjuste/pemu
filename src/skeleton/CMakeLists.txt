@@ -32,6 +32,10 @@ if (OPTION_MPV_PLAYER)
         list(APPEND CROSS2DUI_INCLUDE ${MPV_INCLUDE_DIRS})
         list(APPEND LDFLAGS ${MPV_LIBRARIES})
     endif ()
+    # TODO: fix mpv.pc ?
+    if (PLATFORM_SWITCH)
+        list(APPEND LDFLAGS drm_nouveau)
+    endif ()
     list(APPEND FLAGS -D__MPV__)
 endif ()
 

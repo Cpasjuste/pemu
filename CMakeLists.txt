@@ -32,7 +32,7 @@ add_subdirectory(external/sscrap)
 project(pemu)
 set(PROJECT_AUTHOR cpasjuste)
 set(VERSION_MAJOR 6)
-set(VERSION_MINOR 7)
+set(VERSION_MINOR 8)
 
 # pemu (ui)
 add_subdirectory(src/skeleton)

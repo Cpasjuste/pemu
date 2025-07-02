@@ -1,14 +1,14 @@
 name: 3ds-dev
 
 on:
-  push:
-    branches: [ dev ]
+  #push:
+  #  branches: [ dev ]
   workflow_dispatch:
 
 jobs:
 
   build-3ds-dev:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     container: devkitpro/devkitarm:latest
     defaults:
       run:

@@ -1,8 +1,8 @@
 name: windows-dev
 
 on:
-  push:
-    branches: [ dev ]
+  #push:
+  #  branches: [ dev ]
   workflow_dispatch:
 
 jobs:
