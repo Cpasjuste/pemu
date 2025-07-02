@@ -24,7 +24,7 @@ jobs:
 
       - name: Install ps4 toolchain
         run: |
-          sudo cat <<EOF > /etc/pacman.conf
+          sudo tee -a /etc/pacman.conf > /dev/null <<EOF
           [pacbrew]
           SigLevel = Optional TrustAll
           Server = https://pacman.mydedibox.fr/pacbrew/packages/
