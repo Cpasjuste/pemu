@@ -8,6 +8,7 @@ project(pgba)
 ##################
 set(LIBMGBA_ONLY ON CACHE BOOL "")
 set(M_CORE_GB OFF CACHE BOOL "") # TODO
+set(CMAKE_POLICY_VERSION_MINIMUM 3.5) # TODO: bump mgba core
 add_subdirectory(${CMAKE_SOURCE_DIR}/external/cores/mgba build)
 set_property(TARGET mgba APPEND PROPERTY COMPILE_DEFINITIONS
         "_GNU_SOURCE;IOAPI_NO_64;USE_LIBZIP;HAVE_CRC32;COLOR_16_BIT;COLOR_5_6_5;DISABLE_THREADING"
