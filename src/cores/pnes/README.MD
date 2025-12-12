@@ -1,7 +1,7 @@
 pNES: Portable NES
 ===========================
 
-![](https://github.com/Cpasjuste/pemu/raw/master/pnes/data/screenshot.png)
+![](https://github.com/Cpasjuste/pemu/raw/master/src/cores/pnes/data/screenshot.png)
 
 
 ### The main goals of this [nestopia](https://github.com/0ldsk00l/nestopia) port are:

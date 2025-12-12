@@ -6,12 +6,9 @@
 #define C2DUI_UI_EMU_H
 
 namespace pemu {
-
     class UiEmu : public c2d::RectangleShape {
-
     public:
-
-        UiEmu(UiMain *ui);
+        explicit UiEmu(UiMain *ui);
 
         virtual int load(const ss_api::Game &game);
 
@@ -47,8 +44,11 @@ namespace pemu {
             return currentGame;
         }
 
-    protected:
+        void setExitOnStop(bool value) { mExitOnStop = value; }
 
+        bool getExitOnStop() { return mExitOnStop; }
+
+    protected:
         void onUpdate() override;
 
         ss_api::Game currentGame;
@@ -59,6 +59,7 @@ namespace pemu {
         char fpsString[32];
         float targetFps = 60;
         bool paused = true;
+        bool mExitOnStop = false;
     };
 }
 

@@ -10,13 +10,8 @@ using namespace pemu;
 PEMUUiMain *pemu_ui;
 
 int main(int argc, char **argv) {
-#ifdef __PSP2__
-    // set max cpu speed
-    scePowerSetArmClockFrequency(444);
-    scePowerSetBusClockFrequency(222);
-    scePowerSetGpuClockFrequency(222);
-    scePowerSetGpuXbarClockFrequency(166);
-#endif
+    // command line game info
+    Game game;
 
     // custom io
     auto io = new PEMUIo();
@@ -34,15 +29,43 @@ int main(int argc, char **argv) {
     auto skin = new PEMUSkin(pemu_ui);
     pemu_ui->setSkin(skin);
 
+    // parse command line
+    if (argc > 1) {
+        if (io->exist(argv[1])) {
+            game.path = Utility::baseName(argv[1]);
+            game.name = Utility::removeExt(game.path);
+            game.romsPath = Utility::remove(argv[1], game.path);
+        } else {
+            printf("main: file provided as console argument does not exist (%s)\n", argv[1]);
+            delete (skin);
+            delete (cfg);
+            delete (pemu_ui);
+            return 1;
+        }
+    }
+
     // ui
     auto romList = new PEMURomList(pemu_ui, cfg->getCoreVersion(), cfg->getCoreSupportedExt());
-    romList->build();
-    romList->initFav();
+    if (game.path.empty()) {
+        romList->build();
+        romList->initFav();
+    } else {
+        delete (romList->rect);
+    }
     auto uiRomList = new PEMUUiRomList(pemu_ui, romList, pemu_ui->getSize());
     auto uiMenu = new PEMUUiMenu(pemu_ui);
     auto uiEmu = new PEMUUiEmu(pemu_ui);
     auto uiState = new PEMUUiMenuState(pemu_ui);
     pemu_ui->init(uiRomList, uiMenu, uiEmu, uiState);
+
+    // load specified game from command line if requested
+    if (!game.path.empty()) {
+        uiRomList->setVisibility(Visibility::Hidden);
+        uiRomList->setGames({game});
+        cfg->loadGame(game);
+        uiEmu->setExitOnStop(true);
+        uiEmu->load(game);
+    }
 
     while (!pemu_ui->done) {
         pemu_ui->flip();
@@ -52,12 +75,7 @@ int main(int argc, char **argv) {
     delete (cfg);
     delete (pemu_ui);
 
-#ifdef __PSP2__
-    scePowerSetArmClockFrequency(266);
-    scePowerSetBusClockFrequency(166);
-    scePowerSetGpuClockFrequency(166);
-    scePowerSetGpuXbarClockFrequency(111);
-#elif __PS4__
+#ifdef  __PS4__
     sceSystemServiceLoadExec((char *) "exit", nullptr);
     while (true) {}
 #endif

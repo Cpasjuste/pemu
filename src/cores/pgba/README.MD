@@ -25,12 +25,8 @@ pGBA: Portable GameBoy Advance
 
 ### Installation (switch)
 
-- copy "pgen.nro" directory to "/switch/pgen/" directory on sdcard
-- copy gamegear roms to "/switch/pgen/gamegear/" directory on sdcard
-- copy megadrive roms to "/switch/pgen/megadrive/" directory on sdcard
-- copy master system roms to "/switch/pgen/mastersystem/" directory on sdcard
-- copy sg-1000 roms to "/switch/pgen/sg1000/" directory on sdcard
-- copy mega-cd roms (unzipped cue/bin) to "/switch/pgen/megacd/" directory on sdcard
+- copy "pgba.nro" file to "/switch/pgba/" directory on sdcard
+- copy roms to "/switch/pgba/roms/" directory on sdcard
 
 ### Bios
 

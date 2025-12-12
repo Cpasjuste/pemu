@@ -95,7 +95,7 @@ int PGBAUiEmu::load(const ss_api::Game &game) {
             .logLevel = 0x01 | 0x02 | 0x04,
             .rewindEnable = false,
             .rewindBufferCapacity = 600,
-            .rewindBufferInterval = 1,
+            //.rewindBufferInterval = 1,
             .audioBuffers = 1024,
             .volume = 0x100,
             .videoSync = false,

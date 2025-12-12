@@ -1,4 +1,5 @@
 // Zip module
+#include <zlib.h>
 #include "burner.h"
 #ifdef MINIZIP_LIB
 // minizip from fba not working on windows

@@ -1,14 +1,14 @@
 name: linux-dev
 
 on:
-  push:
-    branches: [ dev ]
+  #push:
+  #  branches: [ dev ]
   workflow_dispatch:
 
 jobs:
 
   build-linux-dev:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
 
     steps:
       - uses: actions/checkout@v2
