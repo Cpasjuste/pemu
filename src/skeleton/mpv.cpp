@@ -37,6 +37,12 @@ Mpv::Mpv(const std::string &configPath, bool initRender) {
     mpv_set_option_string(handle, "audio-channels", "stereo");
     mpv_set_option_string(handle, "video-sync", "audio");
 
+    // misc options
+    mpv_set_option_string(handle, "load-stats-overlay", "no");
+    mpv_set_option_string(handle, "video-osd", "no");
+    mpv_set_option_string(handle, "osc", "no");
+    mpv_set_option_string(handle, "load-scripts", "no");
+
     if (!initRender) {
         mpv_set_option_string(handle, "vid", "no");
         mpv_set_option_string(handle, "aid", "no");
@@ -47,6 +53,7 @@ Mpv::Mpv(const std::string &configPath, bool initRender) {
 #if MPV_CLIENT_API_VERSION >= 131075 // >= v0.38.0
     else {
         mpv_set_option_string(handle, "vo", "libmpv");
+        mpv_set_option_string(handle, "ao", "hos");
     }
 #endif
 
@@ -61,9 +68,9 @@ Mpv::Mpv(const std::string &configPath, bool initRender) {
     if (initRender) {
         mpv_opengl_init_params gl_init_params{get_proc_address_mpv};
         mpv_render_param params[]{
-                {MPV_RENDER_PARAM_API_TYPE,           (void *) MPV_RENDER_API_TYPE_OPENGL},
-                {MPV_RENDER_PARAM_OPENGL_INIT_PARAMS, &gl_init_params},
-                {MPV_RENDER_PARAM_INVALID,            nullptr}
+            {MPV_RENDER_PARAM_API_TYPE, (void *) MPV_RENDER_API_TYPE_OPENGL},
+            {MPV_RENDER_PARAM_OPENGL_INIT_PARAMS, &gl_init_params},
+            {MPV_RENDER_PARAM_INVALID, nullptr}
         };
 
         if (mpv_render_context_create(&context, handle, params) < 0) {
@@ -75,10 +82,13 @@ Mpv::Mpv(const std::string &configPath, bool initRender) {
 }
 
 Mpv::~Mpv() {
+    printf("Mpv::~Mpv()\n");
     if (context != nullptr) {
+        printf("Mpv::~Mpv: mpv_render_context_free(%p)\n", context);
         mpv_render_context_free(context);
     }
     if (handle != nullptr) {
+        printf("Mpv::~Mpv: mpv_terminate_destroy(%p)\n", handle);
         mpv_terminate_destroy(handle);
     }
 }
@@ -92,7 +102,7 @@ int Mpv::load(const std::string &file, LoadType loadType, const std::string &opt
             type = "append-play";
         }
 #if MPV_CLIENT_API_VERSION >= 131075 // >= v0.38.0
-        const char *cmd[] = {"loadfile", file.c_str(), type.c_str(), nullptr, options.c_str()};
+        const char *cmd[] = {"loadfile", file.c_str(), type.c_str(), "-1", options.c_str(), nullptr};
 #else
         const char *cmd[] = {"loadfile", file.c_str(), type.c_str(), options.c_str(), nullptr};
 #endif
@@ -177,7 +187,7 @@ long Mpv::getPosition() {
 }
 
 bool Mpv::isAvailable() {
-    return handle != nullptr;
+    return handle != nullptr && context != nullptr;
 }
 
 bool Mpv::isStopped() {
