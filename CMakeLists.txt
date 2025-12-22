@@ -31,8 +31,8 @@ add_subdirectory(external/sscrap)
 # required for cmake toolchain setup
 project(pemu)
 set(PROJECT_AUTHOR cpasjuste)
-set(VERSION_MAJOR 6)
-set(VERSION_MINOR 8)
+set(VERSION_MAJOR 7)
+set(VERSION_MINOR 0)
 
 # pemu (ui)
 add_subdirectory(src/skeleton)
@@ -42,7 +42,7 @@ add_subdirectory(src/cores/pfbneo)
 add_subdirectory(src/cores/pgen)
 add_subdirectory(src/cores/pnes)
 add_subdirectory(src/cores/psnes)
-# TODO: bump mpga core for windows
+# TODO: bump mgba core for windows
 if (PLATFORM_LINUX OR PLATFORM_SWITCH OR PLATFORM_PS4 OR PLATFORM_VITA)
     add_subdirectory(src/cores/pgba)
 else ()
