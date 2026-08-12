@@ -1,0 +1,46 @@
+name: Build pNES Switch
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-pnes:
+    runs-on: ubuntu-24.04
+    container: devkitpro/devkita64:latest
+
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+
+      - name: Install build dependencies
+        run: |
+          sudo apt -yq update
+          sudo apt -yq install git build-essential cmake zip
+
+      - name: Install "fixed" libmpv
+        run: |
+          wget https://github.com/Cpasjuste/pacman-packages/releases/download/switch-libmpv-lua-fix/switch-libmpv-0.39.0-3-any.pkg.tar.zst
+          sudo dkp-pacman -U --noconfirm switch-libmpv-0.39.0-3-any.pkg.tar.zst
+
+      - name: Configure
+        run: |
+          cd $GITHUB_WORKSPACE
+          mkdir cmake-build && cd cmake-build
+          cmake -G "Unix Makefiles" -DPLATFORM_SWITCH=ON -DCMAKE_BUILD_TYPE=Release ..
+
+      - name: Build pNES
+        run: |
+          cd $GITHUB_WORKSPACE/cmake-build
+          make pnes.nro
+          mv src/cores/pnes/pnes.nro $GITHUB_WORKSPACE
+
+      - name: Upload pNES
+        uses: actions/upload-artifact@v4
+        with:
+          name: pNES-Switch
+          path: pnes.nro
