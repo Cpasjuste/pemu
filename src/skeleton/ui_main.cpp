@@ -93,8 +93,12 @@ void UiMain::setConfig(PEMUConfig *cfg) {
     // add shaders, if any
     auto shaderList = getShaderList();
     if (shaderList) {
-        pConfig->get(PEMUConfig::OptId::EMU_SHADER)->setArray(shaderList->getNames(), 0);
-        pConfig->get(PEMUConfig::OptId::EMU_SHADER)->setFlags(0);
+        auto effect = pConfig->get(PEMUConfig::OptId::EMU_SHADER);
+        // Preserve the shader name loaded while EFFECT is still a string,
+        // then turn it into an array-backed menu option.
+        effect->setArray(shaderList->getNames(), -1);
+        effect->setType(c2d::config::Option::Type::Array);
+        effect->setFlags(0);
     }
 }
 

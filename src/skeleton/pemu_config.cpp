@@ -110,7 +110,9 @@ PEMUConfig::PEMUConfig(c2d::Io *io, const std::string &name, int version)
 
     emu_grp.addOption({"SCALING_MODE", {"AUTO", "ASPECT", "INTEGER"}, 1, EMU_SCALING_MODE});
     emu_grp.addOption({"FILTER", {std::string("POINT"), std::string("LINEAR")}, 1, EMU_FILTER});
-    emu_grp.addOption({"EFFECT", {"NONE"}, 0, EMU_SHADER})->setFlags(HIDDEN);
+    // Keep the configured shader name intact until the renderer supplies the
+    // platform-specific shader list in UiMain::setConfig().
+    emu_grp.addOption({"EFFECT", std::string("c2d-texture"), EMU_SHADER})->setFlags(HIDDEN);
 #ifdef __VITA__
     emu_grp.addOption({"WAIT_RENDERING", {"OFF", "ON"}, 1, EMU_WAIT_RENDERING});
 #endif
