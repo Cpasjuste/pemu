@@ -49,6 +49,7 @@ elseif (PLATFORM_PS4)
     set(PS4_PKG_TITLE_ID "PGBA00001")
     set(PS4_PKG_VERSION "${VERSION_MAJOR}.${VERSION_MINOR}")
     list(APPEND GBA_CFLAGS -DHAVE_SYS_PARAM_H)
+    list(APPEND PGBA_CFLAGS -DNDEBUG) # fix log.h:66:18: error: expected ')' (printf redefine in c2d.h)
 elseif (PLATFORM_SWITCH)
     #####################
     # SWITCH PLATFORM

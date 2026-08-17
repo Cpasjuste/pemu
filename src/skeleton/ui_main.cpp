@@ -7,7 +7,7 @@
 #include "ui_main.h"
 
 #ifdef __SWITCH__
-UiMain::UiMain(c2d::Io *io, const Vector2f &size) : C2DRenderer({1280, 720}) {
+UiMain::UiMain(const Vector2f &size) : C2DRenderer({1280, 720}) {
 #else
 UiMain::UiMain(const Vector2f &size) : C2DRenderer(size) {
 #endif

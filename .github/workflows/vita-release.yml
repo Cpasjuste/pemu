@@ -36,7 +36,8 @@ jobs:
           export VITASDK=/usr/local/vitasdk
           mkdir cmake-build && cd cmake-build
           cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release .. \
-            -DPLATFORM_VITA=ON -DOPTION_MPV_PLAYER=OFF
+            -DPLATFORM_VITA=ON -DOPTION_MPV_PLAYER=OFF \
+            -DOPTION_BUILTIN_LIBCONFIG=ON
 
       - name: Build pfbneo
         run: |
