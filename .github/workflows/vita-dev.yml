@@ -6,60 +6,48 @@ on:
   workflow_dispatch:
 
 jobs:
-
   build-vita-dev:
-    runs-on: ubuntu-24.04
-
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
           submodules: recursive
-
       - name: Install build dependencies
         run: |
           sudo apt -yq update
           sudo apt -yq install build-essential cmake git zip curl
-
       - name: Install vita toolchain
         run: |
-          git clone https://github.com/vitasdk/vdpm
-          cd vdpm
-          ./bootstrap-vitasdk.sh
           export VITASDK=/usr/local/vitasdk
           export PATH=$VITASDK/bin:$PATH
-          ./install-all.sh
-
+          wget -q https://github.com/vitasdk/autobuilds/releases/download/master-linux-v2.540/vitasdk-x86_64-linux-gnu-2026-05-24_12-05-02.tar.bz2
+          sudo tar -xjf vitasdk-x86_64-linux-gnu-2026-05-24_12-05-02.tar.bz2 -C /usr/local/
+          vdpm libvita2d freetype bzip2 libpng libconfig zlib sdl2 curl openssl tinyxml2 libarchive minizip zstd xz
       - name: Configure
         run: |
           cd $GITHUB_WORKSPACE
           export VITASDK=/usr/local/vitasdk
           mkdir cmake-build && cd cmake-build
           cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug .. \
-            -DPLATFORM_VITA=ON -DOPTION_MPV_PLAYER=OFF \
-            -DOPTION_BUILTIN_LIBCONFIG=ON
-
+            -DPLATFORM_VITA=ON -DOPTION_MPV_PLAYER=OFF
       - name: Build pfbneo
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
           make pfbneo.deps
-          make -j"$(nproc)" pfbneo.vpk
-
+          make -j$(( ($(nproc) + 1) / 2 )) pfbneo.vpk
       - name: Build pgen
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
-          make -j"$(nproc)" pgen.vpk
-
+          make -j$(( ($(nproc) + 1) / 2 )) pgen.vpk
       - name: Build pnes
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
-          make -j"$(nproc)" pnes.vpk
-
+          make -j$(( ($(nproc) + 1) / 2 )) pnes.vpk
       - name: Build psnes
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
-          make -j"$(nproc)" psnes.vpk
-
+          make -j$(( ($(nproc) + 1) / 2 )) psnes.vpk
       - name: Build pgba
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
-          make -j"$(nproc)" pgba.vpk
+          make -j$(( ($(nproc) + 1) / 2 )) pgba.vpk
