@@ -109,25 +109,45 @@ void PGENUiEmu::stop() {
 void PGENUiEmu::onUpdate() {
     if (!isPaused()) {
         // inputs
-        for (int i = 0; i < PLAYER_MAX; i++) {
-            unsigned int buttons = getUi()->getInput()->getButtons(i);
-            input.pad[i] = 0;
-            switch (input.dev[i]) {
+        //
+        // NOTE: Genesis-Plus-GX's input.dev[]/input.pad[] arrays are NOT indexed by
+        // simple player number (0-3). They're indexed by physical device "slot", per
+        // core/input_hw/input.c (input_init()):
+        //   slot 0     = port A, controller 1  (player 1)
+        //   slot 1-3   = port A extra devices  (4-Way Play / Team Player on port A only)
+        //   slot 4     = port B, controller 1  (player 2)
+        //   slot 5-6   = the two extra J-CART gamepads (player 3 & player 4), which the
+        //                core auto-enables when it detects a J-CART game at ROM load
+        //                (cart.special & HW_J_CART) - no extra setup needed here beyond
+        //                routing input to the right slot
+        //   slot 7     = port B extra device (Justifier 2P)
+        //
+        // The old code fed physical controller index i (0..PLAYER_MAX-1) straight into
+        // input.dev[i]/input.pad[i], which only lined up for player 1 (slot 0). Slots
+        // 1-3 are never populated for a plain 2-controller/J-CART setup, so every other
+        // physical controller was silently ignored - hence only 1 player worked, even
+        // in native 2-player Mega Drive games, let alone 4-player J-CART ones.
+        static const int genesisDeviceSlot[4] = {0, 4, 5, 6};
+        for (int p = 0; p < 4; p++) {
+            int dev = genesisDeviceSlot[p];
+            unsigned int buttons = getUi()->getInput()->getButtons(p);
+            input.pad[dev] = 0;
+            switch (input.dev[dev]) {
                 case DEVICE_PAD6B:
                 case DEVICE_PAD3B:
                 case DEVICE_PAD2B:
-                    if (buttons & Input::Button::Up) input.pad[i] |= INPUT_UP;
-                    if (buttons & Input::Button::Down) input.pad[i] |= INPUT_DOWN;
-                    if (buttons & Input::Button::Left) input.pad[i] |= INPUT_LEFT;
-                    if (buttons & Input::Button::Right) input.pad[i] |= INPUT_RIGHT;
-                    if (buttons & Input::Button::A) input.pad[i] |= INPUT_A;
-                    if (buttons & Input::Button::B) input.pad[i] |= INPUT_B;
-                    if (buttons & Input::Button::X) input.pad[i] |= INPUT_C;
-                    if (buttons & Input::Button::Y) input.pad[i] |= INPUT_X;
-                    if (buttons & Input::Button::LT) input.pad[i] |= INPUT_Y;
-                    if (buttons & Input::Button::RT) input.pad[i] |= INPUT_Z;
-                    if (buttons & Input::Button::Select) input.pad[i] |= INPUT_MODE;
-                    if (buttons & Input::Button::Start) input.pad[i] |= INPUT_START;
+                    if (buttons & Input::Button::Up) input.pad[dev] |= INPUT_UP;
+                    if (buttons & Input::Button::Down) input.pad[dev] |= INPUT_DOWN;
+                    if (buttons & Input::Button::Left) input.pad[dev] |= INPUT_LEFT;
+                    if (buttons & Input::Button::Right) input.pad[dev] |= INPUT_RIGHT;
+                    if (buttons & Input::Button::A) input.pad[dev] |= INPUT_A;
+                    if (buttons & Input::Button::B) input.pad[dev] |= INPUT_B;
+                    if (buttons & Input::Button::X) input.pad[dev] |= INPUT_C;
+                    if (buttons & Input::Button::Y) input.pad[dev] |= INPUT_X;
+                    if (buttons & Input::Button::LT) input.pad[dev] |= INPUT_Y;
+                    if (buttons & Input::Button::RT) input.pad[dev] |= INPUT_Z;
+                    if (buttons & Input::Button::Select) input.pad[dev] |= INPUT_MODE;
+                    if (buttons & Input::Button::Start) input.pad[dev] |= INPUT_START;
                     break;
                 default:
                     break;
