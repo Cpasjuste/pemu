@@ -66,9 +66,6 @@ int PGBAUiEmu::load(const ss_api::Game &game) {
     mInputMapLoad(&s_core->inputMap, PEMU_INPUT_BINDING, mCoreConfigGetInput(&s_core->config));
 
     // core options
-    //auto dataPath = getUi()->getIo()->getDataPath();
-    //char savePath[512];
-    //strncpy(savePath, "/home/cpasjuste/dev/multi/pemu/cmake-build-debug/src/cores/pgba/saves", 511);
     mCoreOptions core_options = {
         .useBios = true,
         .logLevel = 0x01 | 0x02 | 0x04,
