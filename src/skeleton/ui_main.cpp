@@ -6,11 +6,7 @@
 #include "pemu.h"
 #include "ui_main.h"
 
-#ifdef __SWITCH__
-UiMain::UiMain(const Vector2f &size) : C2DRenderer({1280, 720}) {
-#else
 UiMain::UiMain(const Vector2f &size) : C2DRenderer(size) {
-#endif
     printf("UiMain(%ix%i)\n", (int) UiMain::getSize().x, (int) UiMain::getSize().y);
 }
 
@@ -31,7 +27,7 @@ void UiMain::init(UIRomList *romList, UiMenu *menu, UiEmu *emu, UiMenuState *sta
 
     // message box
     Skin::TextGroup textGroup = pSkin->getText(
-            {"MAIN", "ROM_LIST", "TEXT"}); // use rom list text size for message box font size
+        {"MAIN", "ROM_LIST", "TEXT"}); // use rom list text size for message box font size
     Skin::RectangleShapeGroup shape = pSkin->getRectangleShape({"SKIN_CONFIG", "MESSAGEBOX"});
     pMessageBox = new c2d::MessageBox(shape.rect, getInput(), pSkin->getFont(), (int) textGroup.size);
     pSkin->loadRectangleShape(pMessageBox, {"SKIN_CONFIG", "MESSAGEBOX"});
@@ -100,10 +96,10 @@ void UiMain::updateInputMapping(bool isRomConfig) {
 #ifndef NO_KEYBOARD
         getInput()->setKeyboardMapping(pConfig->getKeyboardMapping(0, true));
 #endif
-        int dz = pConfig->getJoystickDeadZone(0, true);
+        const int dz = pConfig->getJoystickDeadZone(0, true);
         std::vector<Input::ButtonMapping> joyMapping = pConfig->getJoystickMapping(0, true);
-        Vector2i leftAxisMapping = pConfig->getJoystickAxisLeftMapping(0, true);
-        Vector2i rightAxisMapping = pConfig->getJoystickAxisRightMapping(0, true);
+        const Vector2i leftAxisMapping = pConfig->getJoystickAxisLeftMapping(0, true);
+        const Vector2i rightAxisMapping = pConfig->getJoystickAxisRightMapping(0, true);
         for (int i = 0; i < PLAYER_MAX; i++) {
             getInput()->setJoystickMapping(i, joyMapping, leftAxisMapping, rightAxisMapping, dz);
         }
