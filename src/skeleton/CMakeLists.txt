@@ -26,7 +26,7 @@ endif ()
 
 if (OPTION_MPV_PLAYER)
     if (PLATFORM_WINDOWS)
-        list(APPEND LDFLAGS mpv.dll.a)
+        list(APPEND LDFLAGS mpv)
     else ()
         pkg_search_module(MPV REQUIRED mpv)
         list(APPEND CROSS2DUI_INCLUDE ${MPV_INCLUDE_DIRS})
