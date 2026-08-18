@@ -7,22 +7,18 @@ on:
   workflow_dispatch:
 
 jobs:
-
   build-ps4-release:
-    runs-on: ubuntu-24.04
-
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
           submodules: recursive
-
       - name: Install build dependencies
         run: |
           sudo apt -yq update
           sudo apt -yq install git build-essential cmake zip \
             pacman-package-manager makepkg libarchive-tools autoconf libtool \
             cmake nasm git curl
-
       - name: Install ps4 toolchain
         run: |
           sudo tee -a /etc/pacman.conf > /dev/null <<EOF
@@ -32,48 +28,41 @@ jobs:
           EOF
           sudo pacman -Syu
           sudo pacman --noconfirm -S ps4-openorbis ps4-openorbis-portlibs
-
       - name: Configure
         run: |
           cd $GITHUB_WORKSPACE
           mkdir cmake-build && cd cmake-build
           export OPENORBIS=/opt/pacbrew/ps4/openorbis
           cmake -G "Unix Makefiles" -DPLATFORM_PS4=ON -DCMAKE_BUILD_TYPE=Release ..
-
       - name: Build pfbneo
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
           make pfbneo.deps
-          make -j"$(nproc)" pfbneo_pkg
+          make pfbneo_pkg
           mv *.pkg $GITHUB_WORKSPACE
-
       - name: Build pgen
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
-          make -j"$(nproc)" pgen_pkg
+          make pgen_pkg
           mv *.pkg $GITHUB_WORKSPACE
-
       - name: Build pnes
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
-          make -j"$(nproc)" pnes_pkg
+          make pnes_pkg
           mv *.pkg $GITHUB_WORKSPACE
-
       - name: Build psnes
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
-          make -j"$(nproc)" psnes_pkg
+          make psnes_pkg
           mv *.pkg $GITHUB_WORKSPACE
-
       - name: Build pgba
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
-          make -j"$(nproc)" pgba_pkg
+          make pgba_pkg
           mv *.pkg $GITHUB_WORKSPACE
-
       - name: Release
         uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
+        if: ${{ startsWith(github.ref, 'refs/tags/') && !env.ACT }}
         with:
           files: '*.pkg'
           token: ${{ secrets.GITHUB_TOKEN }}
