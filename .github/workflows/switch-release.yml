@@ -7,69 +7,54 @@ on:
   workflow_dispatch:
 
 jobs:
-
   build-switch-release:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     container: devkitpro/devkita64:latest
     defaults:
       run:
         shell: bash
-
     steps:
       - uses: actions/checkout@v2
         with:
           submodules: recursive
-
       - name: Install build dependencies
         run: |
           sudo apt -yq update
           sudo apt -yq install git build-essential cmake zip
-
-      - name: Install "fixed" libmpv
-        run: |
-          wget https://github.com/Cpasjuste/pacman-packages/releases/download/switch-libmpv-lua-fix/switch-libmpv-0.39.0-3-any.pkg.tar.zst
-          sudo dkp-pacman -U --noconfirm switch-libmpv-0.39.0-3-any.pkg.tar.zst
-
       - name: Configure
         run: |
           cd $GITHUB_WORKSPACE
           mkdir cmake-build && cd cmake-build
           cmake -G "Unix Makefiles" -DPLATFORM_SWITCH=ON -DCMAKE_BUILD_TYPE=Release ..
-
       - name: Build pfbneo
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
           make pfbneo.deps
           make pfbneo.nro
           mv src/cores/pfbneo/pfbneo.nro $GITHUB_WORKSPACE
-
       - name: Build pgen
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
           make pgen.nro
           mv src/cores/pgen/pgen.nro $GITHUB_WORKSPACE
-
       - name: Build pnes
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
           make pnes.nro
           mv src/cores/pnes/pnes.nro $GITHUB_WORKSPACE
-
       - name: Build psnes
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
           make psnes.nro
           mv src/cores/psnes/psnes.nro $GITHUB_WORKSPACE
-
       - name: Build pgba
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
           make pgba.nro
           mv src/cores/pgba/pgba.nro $GITHUB_WORKSPACE
-
       - name: Release
         uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
+        if: ${{ startsWith(github.ref, 'refs/tags/') && !env.ACT }}
         with:
           files: '*.nro'
           token: ${{ secrets.GITHUB_TOKEN }}
