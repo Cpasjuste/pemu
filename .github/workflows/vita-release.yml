@@ -35,27 +35,27 @@ jobs:
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
           make pfbneo.deps
-          make -j$(( ($(nproc) + 1) / 2 )) pfbneo.vpk
+          make pfbneo.vpk
           mv src/cores/pfbneo/pfbneo.vpk $GITHUB_WORKSPACE
       - name: Build pgen
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
-          make -j$(( ($(nproc) + 1) / 2 )) pgen.vpk
+          make pgen.vpk
           mv src/cores/pgen/pgen.vpk $GITHUB_WORKSPACE
       - name: Build pnes
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
-          make -j$(( ($(nproc) + 1) / 2 )) pnes.vpk
+          make pnes.vpk
           mv src/cores/pnes/pnes.vpk $GITHUB_WORKSPACE
       - name: Build psnes
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
-          make -j$(( ($(nproc) + 1) / 2 )) psnes.vpk
+          make psnes.vpk
           mv src/cores/psnes/psnes.vpk $GITHUB_WORKSPACE
       - name: Build pgba
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
-          make -j$(( ($(nproc) + 1) / 2 )) pgba.vpk
+          make pgba.vpk
           mv src/cores/pgba/pgba.vpk $GITHUB_WORKSPACE
       - name: Release
         uses: softprops/action-gh-release@v1

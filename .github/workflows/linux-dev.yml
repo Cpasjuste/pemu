@@ -6,15 +6,12 @@ on:
   workflow_dispatch:
 
 jobs:
-
   build-linux-dev:
-    runs-on: ubuntu-22.04
-
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
           submodules: recursive
-
       - name: Install build dependencies
         run: |
           sudo apt -yq update
@@ -25,34 +22,28 @@ jobs:
               libvdpau-dev libva-dev libavcodec-dev libavfilter-dev libavformat-dev libavutil-dev \
               libpostproc-dev libswresample-dev libswscale-dev libmpv-dev libass-dev libbz2-dev \
               libfribidi-dev libzip-dev libarchive-dev
-
       - name: Configure
         run: |
           cd $GITHUB_WORKSPACE
           mkdir cmake-build && cd cmake-build
           cmake -G "Unix Makefiles" -DPLATFORM_LINUX=ON -DCMAKE_BUILD_TYPE=Debug ..
-
       - name: Build pfbneo
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
           make pfbneo.deps
           make pfbneo
-
       - name: Build pgen
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
           make pgen
-
       - name: Build pnes
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
           make pnes
-
       - name: Build psnes
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
           make psnes
-
       - name: Build pgba
         run: |
           cd $GITHUB_WORKSPACE/cmake-build

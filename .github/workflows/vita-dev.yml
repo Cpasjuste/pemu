@@ -34,20 +34,20 @@ jobs:
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
           make pfbneo.deps
-          make -j$(( ($(nproc) + 1) / 2 )) pfbneo.vpk
+          make pfbneo.vpk
       - name: Build pgen
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
-          make -j$(( ($(nproc) + 1) / 2 )) pgen.vpk
+          make pgen.vpk
       - name: Build pnes
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
-          make -j$(( ($(nproc) + 1) / 2 )) pnes.vpk
+          make pnes.vpk
       - name: Build psnes
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
-          make -j$(( ($(nproc) + 1) / 2 )) psnes.vpk
+          make psnes.vpk
       - name: Build pgba
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
-          make -j$(( ($(nproc) + 1) / 2 )) pgba.vpk
+          make pgba.vpk
