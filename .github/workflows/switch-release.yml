@@ -21,37 +21,44 @@ jobs:
         run: |
           sudo apt -yq update
           sudo apt -yq install git build-essential cmake zip
+
       - name: Configure
         run: |
           cd $GITHUB_WORKSPACE
           mkdir cmake-build && cd cmake-build
           cmake -G "Unix Makefiles" -DPLATFORM_SWITCH=ON -DCMAKE_BUILD_TYPE=Release ..
+
       - name: Build pfbneo
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
           make pfbneo.deps
           make pfbneo.nro
           mv src/cores/pfbneo/pfbneo.nro $GITHUB_WORKSPACE
+
       - name: Build pgen
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
           make pgen.nro
           mv src/cores/pgen/pgen.nro $GITHUB_WORKSPACE
+
       - name: Build pnes
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
           make pnes.nro
           mv src/cores/pnes/pnes.nro $GITHUB_WORKSPACE
+
       - name: Build psnes
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
           make psnes.nro
           mv src/cores/psnes/psnes.nro $GITHUB_WORKSPACE
+
       - name: Build pgba
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
           make pgba.nro
           mv src/cores/pgba/pgba.nro $GITHUB_WORKSPACE
+
       - name: Release
         uses: softprops/action-gh-release@v1
         if: ${{ startsWith(github.ref, 'refs/tags/') && !env.ACT }}

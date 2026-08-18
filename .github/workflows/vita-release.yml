@@ -17,6 +17,7 @@ jobs:
         run: |
           sudo apt -yq update
           sudo apt -yq install build-essential cmake git zip curl
+
       - name: Install vita toolchain
         run: |
           export VITASDK=/usr/local/vitasdk
@@ -24,6 +25,7 @@ jobs:
           wget -q https://github.com/vitasdk/autobuilds/releases/download/master-linux-v2.540/vitasdk-x86_64-linux-gnu-2026-05-24_12-05-02.tar.bz2
           sudo tar -xjf vitasdk-x86_64-linux-gnu-2026-05-24_12-05-02.tar.bz2 -C /usr/local/
           vdpm libvita2d freetype bzip2 libpng libconfig zlib sdl2 curl openssl tinyxml2 libarchive minizip zstd xz
+
       - name: Configure
         run: |
           cd $GITHUB_WORKSPACE
@@ -31,32 +33,38 @@ jobs:
           mkdir cmake-build && cd cmake-build
           cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release .. \
             -DPLATFORM_VITA=ON -DOPTION_MPV_PLAYER=OFF
+
       - name: Build pfbneo
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
           make pfbneo.deps
           make pfbneo.vpk
           mv src/cores/pfbneo/pfbneo.vpk $GITHUB_WORKSPACE
+
       - name: Build pgen
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
           make pgen.vpk
           mv src/cores/pgen/pgen.vpk $GITHUB_WORKSPACE
+
       - name: Build pnes
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
           make pnes.vpk
           mv src/cores/pnes/pnes.vpk $GITHUB_WORKSPACE
+
       - name: Build psnes
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
           make psnes.vpk
           mv src/cores/psnes/psnes.vpk $GITHUB_WORKSPACE
+
       - name: Build pgba
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
           make pgba.vpk
           mv src/cores/pgba/pgba.vpk $GITHUB_WORKSPACE
+
       - name: Release
         uses: softprops/action-gh-release@v1
         if: ${{ startsWith(github.ref, 'refs/tags/') && !env.ACT }}

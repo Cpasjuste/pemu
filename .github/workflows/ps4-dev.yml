@@ -18,6 +18,7 @@ jobs:
           sudo apt -yq install git build-essential cmake zip \
             pacman-package-manager makepkg libarchive-tools autoconf libtool \
             cmake nasm git curl
+
       - name: Install ps4 toolchain
         run: |
           sudo tee -a /etc/pacman.conf > /dev/null <<EOF
@@ -27,29 +28,35 @@ jobs:
           EOF
           sudo pacman -Syu
           sudo pacman --noconfirm -S ps4-openorbis ps4-openorbis-portlibs
+
       - name: Configure
         run: |
           cd $GITHUB_WORKSPACE
           mkdir cmake-build && cd cmake-build
           export OPENORBIS=/opt/pacbrew/ps4/openorbis
           cmake -G "Unix Makefiles" -DPLATFORM_PS4=ON -DCMAKE_BUILD_TYPE=Debug ..
+
       - name: Build pfbneo
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
           make pfbneo.deps
           make pfbneo_pkg
+
       - name: Build pgen
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
           make pgen_pkg
+
       - name: Build pnes
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
           make pnes_pkg
+
       - name: Build psnes
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
           make psnes_pkg
+
       - name: Build pgba
         run: |
           cd $GITHUB_WORKSPACE/cmake-build

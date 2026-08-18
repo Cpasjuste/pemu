@@ -20,28 +20,34 @@ jobs:
         run: |
           sudo apt -yq update
           sudo apt -yq install git build-essential cmake zip
+
       - name: Configure
         run: |
           cd $GITHUB_WORKSPACE
           mkdir cmake-build && cd cmake-build
           cmake -G "Unix Makefiles" -DPLATFORM_SWITCH=ON -DCMAKE_BUILD_TYPE=Debug ..
+
       - name: Build pfbneo
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
           make pfbneo.deps
           make pfbneo.nro
+
       - name: Build pgen
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
           make pgen.nro
+
       - name: Build pnes
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
           make pnes.nro
+
       - name: Build psnes
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
           make psnes.nro
+
       - name: Build pgba
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
