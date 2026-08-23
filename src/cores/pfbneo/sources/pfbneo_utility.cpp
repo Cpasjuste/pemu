@@ -95,6 +95,9 @@ PFBNEOUtility::GameInfo PFBNEOUtility::getGameInfo(const Game &game) {
                 case HARDWARE_PREFIX_IGS_PGM:
                     gameInfo.sysName = "PGM (IGS)";
                     break;
+                case HARDWARE_PREFIX_IGS_PGM2:
+                    gameInfo.sysName = "PGM2 (IGS)";
+                    break;
                 case HARDWARE_PREFIX_MISC_POST90S:
                     gameInfo.sysName = "POST-90S (MISC)";
                     break;
