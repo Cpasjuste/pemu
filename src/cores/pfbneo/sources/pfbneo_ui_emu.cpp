@@ -211,6 +211,12 @@ void Reinitialise(void) {
            size.x, size.y, aspect.x, aspect.y);
 }
 
+// FBNeo compatibility: newer drivers request a video-only reinitialisation.
+// pEMU handles this through the existing Reinitialise() path.
+void ReinitialiseVideo() {
+    Reinitialise();
+}
+
 void PFBAUiEmu::stop() {
     DrvExit();
     if (pBurnSoundOut) {
