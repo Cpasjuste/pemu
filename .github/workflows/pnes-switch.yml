@@ -20,8 +20,8 @@ jobs:
       - name: Update FBNeo core for PGM2
         run: |
           cd "$GITHUB_WORKSPACE/external/cores/FBNeo"
-          git fetch --depth=1 origin 736ee616622d7b4e84c90d852ed26f2b3bcbbf32
-          git checkout --detach 736ee616622d7b4e84c90d852ed26f2b3bcbbf32
+          git fetch --depth=1 origin 5bb235d2f582d2cc7e59d8dfb1cbaaca4d146f3d
+          git checkout --detach 5bb235d2f582d2cc7e59d8dfb1cbaaca4d146f3d
           test -f src/burn/drv/pgm2/d_pgm2.cpp
           grep -q "HARDWARE_IGS_PGM2" src/burn/burn.h
 
