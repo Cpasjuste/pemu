@@ -13,9 +13,17 @@ jobs:
         shell: bash
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           submodules: recursive
+
+      - name: Update FBNeo core for PGM2
+        run: |
+          cd "$GITHUB_WORKSPACE/external/cores/FBNeo"
+          git fetch --depth=1 origin 736ee616622d7b4e84c90d852ed26f2b3bcbbf32
+          git checkout --detach 736ee616622d7b4e84c90d852ed26f2b3bcbbf32
+          test -f src/burn/drv/pgm2/d_pgm2.cpp
+          grep -q "HARDWARE_IGS_PGM2" src/burn/burn.h
 
       - name: Install build dependencies
         run: |
