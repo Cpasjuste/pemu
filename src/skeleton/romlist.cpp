@@ -121,10 +121,19 @@ void RomList::initFav() {
     gameListFav = new GameList();
     gameListFav->append(ui->getIo()->getDataPath() + "favorites.xml");
     for (auto &g: gameListFav->games) {
+        // Prefer the original path + system match. Hardware/system ids can
+        // change when the embedded FBNeo database is updated (for example,
+        // PGM2 used to fall back to ARCADE), so retry by ROM path alone.
         auto game = gameList->findGameByPathAndSystem(g.path, g.system.id);
+        if (game.path.empty()) {
+            game = gameList->findGameByPath(g.path);
+        }
+
+        // Favorites are references to the main list. Refresh the complete
+        // entry so availability, ROM directory and the current system id
+        // cannot remain stale after a core/database upgrade.
         if (!game.path.empty()) {
-            g.available = true;
-            g.romsPath = game.romsPath;
+            g = game;
         }
     }
 
