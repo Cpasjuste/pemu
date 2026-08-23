@@ -133,7 +133,13 @@ void RomList::initFav() {
         // entry so availability, ROM directory and the current system id
         // cannot remain stale after a core/database upgrade.
         if (!game.path.empty()) {
+            // Keep the custom display name stored in favorites.xml while
+            // refreshing runtime fields from the current main game list.
+            const std::string favoriteName = g.name;
             g = game;
+            if (!favoriteName.empty()) {
+                g.name = favoriteName;
+            }
         }
     }
 
