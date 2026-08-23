@@ -75,6 +75,7 @@ set(DRV_DIRS
         ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/burn/drv/pre90s
         ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/burn/drv/neogeo
         ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/burn/drv/pgm
+        ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/burn/drv/pgm2
         ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/burn/drv/psikyo
         ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/burn/drv/sega
         ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/burn/drv/taito
