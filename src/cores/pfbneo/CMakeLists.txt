@@ -136,6 +136,12 @@ set(CPU_DIRS
         ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/cpu/adsp2100
         ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/cpu/arm
         ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/cpu/arm7
+        ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/cpu/arm9
+        ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/cpu/hmcs40
+        ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/cpu/i8085
+        ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/cpu/mb88xx
+        ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/cpu/t11
+        ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/cpu/xa
         ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/cpu/e132xs
         ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/cpu/f8
         ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/cpu/h6280
