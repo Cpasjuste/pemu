@@ -1,10 +1,10 @@
-name: Build pNES Switch
+name: Build pNES + pFBNeo Switch
 
 on:
   workflow_dispatch:
 
 jobs:
-  build-pnes:
+  build-switch:
     runs-on: ubuntu-24.04
     container: devkitpro/devkita64:latest
 
@@ -30,17 +30,38 @@ jobs:
       - name: Configure
         run: |
           cd $GITHUB_WORKSPACE
-          mkdir cmake-build && cd cmake-build
-          cmake -G "Unix Makefiles" -DPLATFORM_SWITCH=ON -DCMAKE_BUILD_TYPE=Release ..
+          mkdir cmake-build
+          cd cmake-build
+          cmake -G "Unix Makefiles" \
+            -DPLATFORM_SWITCH=ON \
+            -DCMAKE_BUILD_TYPE=Release \
+            ..
 
       - name: Build pNES
         run: |
           cd $GITHUB_WORKSPACE/cmake-build
           make pnes.nro
-          mv src/cores/pnes/pnes.nro $GITHUB_WORKSPACE
+          mv src/cores/pnes/pnes.nro $GITHUB_WORKSPACE/pnes.nro
+
+      - name: Build pFBNeo dependencies
+        run: |
+          cd $GITHUB_WORKSPACE/cmake-build
+          make pfbneo.deps
+
+      - name: Build pFBNeo
+        run: |
+          cd $GITHUB_WORKSPACE/cmake-build
+          make pfbneo.nro
+          mv src/cores/pfbneo/pfbneo.nro $GITHUB_WORKSPACE/pfbneo.nro
 
       - name: Upload pNES
         uses: actions/upload-artifact@v4
         with:
           name: pNES-Switch
           path: pnes.nro
+
+      - name: Upload pFBNeo
+        uses: actions/upload-artifact@v4
+        with:
+          name: pFBNeo-Switch
+          path: pfbneo.nro
