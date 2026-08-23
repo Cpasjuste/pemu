@@ -177,6 +177,7 @@ list(REMOVE_ITEM SRC_CPU
         ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/cpu/tms34010/tms34010_newdasm.cpp
         ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/cpu/tms34010/tms34010_dasm.cpp
         ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/cpu/mips3/x64/mips3_x64.cpp
+        ${CMAKE_SOURCE_DIR}/external/cores/FBNeo/src/cpu/hmcs40/hmcs40op.cpp
 )
 
 if (OPTION_LIGHT)
